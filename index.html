@@ -717,3 +717,620 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoChuchuro — Solutions Section Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnightEmerald: '#0D1515',
+            deepCharcoal:    '#111111',
+            deepForest:      '#2A3D2B',
+            forestOlive:     '#3D5A3E',
+            mountainSage:    '#6B8C52',
+            antiqueGold:     '#D4AF37',
+            brightGold:      '#E5C158',
+            auroraTeal:      '#00B5C8',
+            coolSilver:      '#C8CDD6',
+            steelSilver:     '#9AA3B0',
+            platinum:        '#F5F6F8',
+            deepGarnet:      '#7D2E3A',
+            warmMaroon:      '#9E3D4A',
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body:    ['Nunito Sans', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * { font-family: 'Nunito Sans', sans-serif; box-sizing: border-box; }
+    .font-display { font-family: 'Cormorant Garamond', serif; }
+
+    /* ── Section: clean platinum ground, dark accents ── */
+    .solutions-bg {
+      background-color: #F5F6F8;
+      background-image:
+        radial-gradient(circle at 15% 20%, rgba(0,181,200,0.04) 0%, transparent 50%),
+        radial-gradient(circle at 85% 80%, rgba(212,175,55,0.05) 0%, transparent 50%);
+    }
+
+    /* ── Section top accent ── */
+    .teal-border-top { border-top: 3px solid #00B5C8; }
+
+    /* ── Browser mock frame ── */
+    .browser-frame {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #C8CDD655;
+      box-shadow:
+        0 4px 6px rgba(0,0,0,0.04),
+        0 12px 32px rgba(13,21,21,0.08),
+        0 0 0 1px rgba(0,181,200,0.06);
+      background: #fff;
+      transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1),
+                  box-shadow 0.35s ease;
+    }
+    .browser-frame:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 8px 12px rgba(0,0,0,0.06),
+        0 24px 48px rgba(13,21,21,0.12),
+        0 0 0 1.5px rgba(212,175,55,0.3);
+    }
+
+    /* ── Browser top bar ── */
+    .browser-bar {
+      background: #F5F6F8;
+      border-bottom: 1px solid #E0E2E6;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .b-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .b-url {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #E0E2E6;
+      border-radius: 6px;
+      font-size: 9px;
+      color: #9AA3B0;
+      padding: 3px 8px;
+      text-align: center;
+      font-family: 'Nunito Sans', sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Browser scroll content ── */
+    .browser-scroll {
+      height: 220px;
+      overflow-y: auto;
+      padding: 16px;
+      background: #fff;
+      scrollbar-width: thin;
+      scrollbar-color: #C8CDD6 transparent;
+    }
+    .browser-scroll::-webkit-scrollbar { width: 4px; }
+    .browser-scroll::-webkit-scrollbar-track { background: transparent; }
+    .browser-scroll::-webkit-scrollbar-thumb { background: #C8CDD6; border-radius: 4px; }
+
+    /* ── Browser footer label ── */
+    .browser-footer {
+      padding: 14px 16px;
+      border-top: 1px solid #F0F1F3;
+      background: #fff;
+    }
+
+    /* ── Feature engineering cards ── */
+    .eng-card {
+      background: #fff;
+      border: 1px solid #E8EAED;
+      border-radius: 16px;
+      padding: 24px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .eng-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .eng-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(13,21,21,0.1);
+    }
+    .eng-card:hover::before { opacity: 1; }
+    .eng-card.card-teal:hover  { border-color: #00B5C844; }
+    .eng-card.card-gold:hover  { border-color: #D4AF3744; }
+    .eng-card.card-dark:hover  { border-color: #0D151544; }
+    .eng-card.card-garnet:hover{ border-color: #7D2E3A44; }
+    .eng-card.card-teal::before  { background: linear-gradient(90deg, #00B5C8, #6B8C52); }
+    .eng-card.card-gold::before  { background: linear-gradient(90deg, #D4AF37, #E5C158); }
+    .eng-card.card-dark::before  { background: linear-gradient(90deg, #0D1515, #3D5A3E); }
+    .eng-card.card-garnet::before{ background: linear-gradient(90deg, #7D2E3A, #9E3D4A); }
+
+    /* ── Icon containers ── */
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+    .icon-box-teal   { background: #00B5C810; border: 1.5px solid #00B5C833; }
+    .icon-box-gold   { background: #D4AF3710; border: 1.5px solid #D4AF3733; }
+    .icon-box-dark   { background: #0D151510; border: 1.5px solid #0D151533; }
+    .icon-box-garnet { background: #7D2E3A10; border: 1.5px solid #7D2E3A33; }
+
+    /* ── Chat bubble animations ── */
+    @keyframes bubbleIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .bubble-1 { animation: bubbleIn 0.5s ease 0.2s both; }
+    .bubble-2 { animation: bubbleIn 0.5s ease 0.8s both; }
+    .bubble-3 { animation: bubbleIn 0.5s ease 1.4s both; }
+
+    /* ── Typing indicator ── */
+    @keyframes typingDot {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30%            { transform: translateY(-4px); opacity: 1; }
+    }
+    .typing-dot { animation: typingDot 1.2s ease infinite; }
+    .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.30s; }
+
+    /* ── Pulse dot ── */
+    @keyframes pDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.3; transform: scale(1.6); }
+    }
+    .p-dot { animation: pDot 1.8s ease-in-out infinite; }
+
+    /* ── Fade up on scroll ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.10s; }
+    .d2 { transition-delay: 0.20s; }
+    .d3 { transition-delay: 0.30s; }
+    .d4 { transition-delay: 0.15s; }
+    .d5 { transition-delay: 0.25s; }
+    .d6 { transition-delay: 0.35s; }
+    .d7 { transition-delay: 0.45s; }
+
+    /* ── Gold shimmer tag ── */
+    .gold-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0D1515;
+      color: #D4AF37;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #D4AF3733;
+    }
+
+    /* ── Star rating display ── */
+    .star { color: #D4AF37; font-size: 13px; }
+
+    /* ── Live status dot ── */
+    .live-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: inline-block;
+      margin-right: 4px;
+    }
+    @keyframes livePulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+    }
+    .live-dot { animation: livePulse 2s ease infinite; }
+
+    /* ── Map pin SVG animation ── */
+    @keyframes pinDrop {
+      0%   { transform: translateY(-8px); opacity: 0; }
+      60%  { transform: translateY(2px); opacity: 1; }
+      100% { transform: translateY(0); }
+    }
+    .pin-drop { animation: pinDrop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.5s both; }
+
+    /* ── Progress bar animation ── */
+    @keyframes barGrow {
+      from { width: 0%; }
+    }
+    .bar-grow { animation: barGrow 1.5s ease 0.8s both; }
+  </style>
+</head>
+
+<body class="solutions-bg min-h-screen">
+
+<!-- ════════════════════════════════════════════
+     SECTION 2: SOLUTIONS  (#solutions)
+════════════════════════════════════════════ -->
+<section id="solutions" class="solutions-bg teal-border-top py-24 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- ── Section header ── -->
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 fade-up">
+      <div class="max-w-2xl">
+        <span class="gold-tag mb-4 inline-flex">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <circle cx="5" cy="5" r="4" stroke="#D4AF37" stroke-width="1.2"/>
+            <text x="5" y="7.5" text-anchor="middle" font-size="5" fill="#D4AF37" font-weight="700">2</text>
+          </svg>
+          How It All Works
+        </span>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-midnightEmerald leading-tight mb-4">
+          See your business<br/>running on autopilot.
+        </h2>
+        <p class="text-steelSilver text-base leading-relaxed max-w-xl">
+          No guesswork. No tech training. Below is exactly what your customers will see and experience — and exactly what you will never have to do manually again.
+        </p>
+      </div>
+      <!-- Live status badge -->
+      <div class="flex items-center gap-2 bg-white border border-coolSilver/40 rounded-full px-4 py-2 self-start md:self-auto shadow-sm flex-shrink-0">
+        <span class="live-dot"></span>
+        <span class="text-xs font-semibold text-midnightEmerald">System live 24/7</span>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════
+         THREE BROWSER MOCK FRAMES
+    ════════════════════════════════════ -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-7 mb-20">
+
+      <!-- FRAME 1: Local Visibility -->
+      <div class="browser-frame fade-up d1 flex flex-col">
+        <div class="browser-bar">
+          <div class="b-dot" style="background:#FF5F57;"></div>
+          <div class="b-dot" style="background:#FEBC2E;"></div>
+          <div class="b-dot" style="background:#28C840;"></div>
+          <div class="b-url">gochuchuro.com/your-website</div>
+        </div>
+        <div class="browser-scroll space-y-3">
+          <!-- Simulated website header -->
+          <div class="h-10 rounded-lg flex items-center px-3 gap-2" style="background: linear-gradient(90deg, #0D1515, #2A3D2B);">
+            <div class="w-4 h-4 rounded" style="background:#D4AF37;"></div>
+            <div class="h-2 w-20 rounded" style="background:#9AA3B0;"></div>
+            <div class="ml-auto h-2 w-12 rounded" style="background:#D4AF3766;"></div>
+          </div>
+          <!-- Hero text lines -->
+          <div class="h-3 bg-midnightEmerald/80 rounded w-4/5"></div>
+          <div class="h-2 bg-steelSilver/30 rounded w-full"></div>
+          <div class="h-2 bg-steelSilver/30 rounded w-5/6"></div>
+          <div class="h-2 bg-steelSilver/30 rounded w-3/4"></div>
+          <!-- CTA button mock -->
+          <div class="h-8 rounded-md flex items-center justify-center gap-1" style="background:#D4AF37; width: 120px;">
+            <div class="h-2 w-16 rounded" style="background:#0D1515;"></div>
+          </div>
+          <!-- SEO badge -->
+          <div class="border rounded-lg p-3 flex items-center gap-2" style="border-color:#00B5C833; background:#00B5C808;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <circle cx="7" cy="7" r="5.5" stroke="#00B5C8" stroke-width="1.2"/>
+              <polyline points="4,7 6,9 10,5" stroke="#00B5C8" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-xs font-semibold" style="color:#00B5C8;">Local SEO Active</span>
+          </div>
+          <!-- Map pin simulation -->
+          <div class="rounded-lg overflow-hidden border" style="border-color:#E0E2E6; height:70px; background: linear-gradient(135deg, #e8f4f8 0%, #dbeafe 100%); position:relative; display:flex; align-items:center; justify-content:center;">
+            <svg class="pin-drop" width="20" height="26" viewBox="0 0 20 26" fill="none">
+              <path d="M10 0C4.477 0 0 4.477 0 10c0 7.5 10 16 10 16s10-8.5 10-16C20 4.477 15.523 0 10 0z" fill="#D4AF37"/>
+              <circle cx="10" cy="10" r="4" fill="#0D1515"/>
+            </svg>
+            <span class="absolute bottom-2 right-2 text-xs font-semibold" style="color:#0D1515; opacity:0.5;">Google Maps</span>
+          </div>
+          <!-- Star rating -->
+          <div class="flex items-center gap-1">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            <span class="text-xs font-semibold text-midnightEmerald ml-1">4.9</span>
+            <span class="text-xs text-steelSilver">(47 reviews)</span>
+          </div>
+        </div>
+        <div class="browser-footer">
+          <h4 class="font-bold text-midnightEmerald text-sm mb-1">Local Visibility Layout</h4>
+          <p class="text-xs text-steelSilver leading-relaxed">Clean, fast, and built to rank on Google right where your customers are searching.</p>
+          <div class="mt-2 flex gap-1 flex-wrap">
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#00B5C810; color:#00B5C8; border:1px solid #00B5C833;">SEO</span>
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#D4AF3710; color:#D4AF37; border:1px solid #D4AF3733;">Google Maps</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRAME 2: Lead Capture Quiz -->
+      <div class="browser-frame fade-up d2 flex flex-col">
+        <div class="browser-bar">
+          <div class="b-dot" style="background:#FF5F57;"></div>
+          <div class="b-dot" style="background:#FEBC2E;"></div>
+          <div class="b-dot" style="background:#28C840;"></div>
+          <div class="b-url">gochuchuro.com/get-a-quote</div>
+        </div>
+        <div class="browser-scroll space-y-3">
+          <!-- Progress bar -->
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-midnightEmerald">Step 1 of 3</span>
+            <span class="text-xs text-steelSilver">33% done</span>
+          </div>
+          <div class="h-1.5 rounded-full" style="background:#E8EAED;">
+            <div class="h-1.5 rounded-full bar-grow" style="width:33%; background: linear-gradient(90deg, #00B5C8, #D4AF37);"></div>
+          </div>
+          <!-- Quiz card -->
+          <div class="border rounded-xl p-4 space-y-3 shadow-sm" style="border-color:#E0E2E6;">
+            <p class="text-xs font-bold text-midnightEmerald">What service do you need today?</p>
+            <!-- Option pills -->
+            <div class="space-y-2">
+              <div class="border rounded-lg px-3 py-2 text-xs font-medium cursor-pointer transition" style="border-color:#D4AF37; background:#D4AF3710; color:#0D1515;">✓ &nbsp;Plumbing / Gas work</div>
+              <div class="border rounded-lg px-3 py-2 text-xs font-medium" style="border-color:#E0E2E6; color:#9AA3B0;">Electrical</div>
+              <div class="border rounded-lg px-3 py-2 text-xs font-medium" style="border-color:#E0E2E6; color:#9AA3B0;">Roofing</div>
+              <div class="border rounded-lg px-3 py-2 text-xs font-medium" style="border-color:#E0E2E6; color:#9AA3B0;">Other</div>
+            </div>
+            <div class="h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style="background:#0D1515;">
+              Next Step &nbsp;›
+            </div>
+          </div>
+          <!-- Auto-notification badge -->
+          <div class="rounded-lg p-3 flex items-start gap-2" style="background:#D4AF3708; border:1px solid #D4AF3730;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0; margin-top:1px;">
+              <path d="M7 1L8.5 5H13L9.5 7.5L11 11.5L7 9L3 11.5L4.5 7.5L1 5H5.5L7 1Z" stroke="#D4AF37" stroke-width="1.2" fill="#D4AF3720" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-xs text-steelSilver leading-relaxed"><strong style="color:#0D1515;">Auto-fires instantly:</strong> When submitted, you get a text alert and the customer receives a confirmation email — all automatic.</span>
+          </div>
+        </div>
+        <div class="browser-footer">
+          <h4 class="font-bold text-midnightEmerald text-sm mb-1">Capture and Nurture Engine</h4>
+          <p class="text-xs text-steelSilver leading-relaxed">Qualifies leads automatically, hooks their data, and notifies you instantly.</p>
+          <div class="mt-2 flex gap-1 flex-wrap">
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#D4AF3710; color:#D4AF37; border:1px solid #D4AF3733;">Auto-Notify</span>
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#0D151510; color:#0D1515; border:1px solid #0D151533;">Lead Capture</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FRAME 3: AI Receptionist -->
+      <div class="browser-frame fade-up d3 flex flex-col">
+        <div class="browser-bar">
+          <div class="b-dot" style="background:#FF5F57;"></div>
+          <div class="b-dot" style="background:#FEBC2E;"></div>
+          <div class="b-dot" style="background:#28C840;"></div>
+          <div class="b-url">gochuchuro.com/ai-assistant</div>
+        </div>
+        <div class="browser-scroll" style="background:#F8F9FA;">
+          <!-- Chat header -->
+          <div class="flex items-center gap-2 mb-4 pb-3" style="border-bottom:1px solid #E8EAED;">
+            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #0D1515, #2A3D2B);">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="3" stroke="#00B5C8" stroke-width="1.2" fill="#00B5C820"/>
+                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(0 7 7)"/>
+                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(90 7 7)"/>
+                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(180 7 7)"/>
+                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(270 7 7)"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-xs font-bold text-midnightEmerald">GoChuchuro Assistant</p>
+              <p class="text-xs text-steelSilver flex items-center gap-1">
+                <span class="live-dot" style="width:5px;height:5px;"></span>Online now
+              </p>
+            </div>
+          </div>
+          <!-- Chat bubbles -->
+          <div class="space-y-3">
+            <div class="bubble-1 max-w-[85%]">
+              <div class="bg-white rounded-2xl rounded-tl-sm px-3 py-2.5 shadow-sm" style="border:1px solid #E8EAED;">
+                <p class="text-xs text-midnightEmerald leading-relaxed">Hi there! 👋 I can help you book, get a quote, or check availability. What do you need?</p>
+              </div>
+            </div>
+            <div class="bubble-2 max-w-[80%] ml-auto">
+              <div class="rounded-2xl rounded-tr-sm px-3 py-2.5" style="background:#0D1515;">
+                <p class="text-xs text-white leading-relaxed">I need a plumber Tuesday morning please</p>
+              </div>
+            </div>
+            <div class="bubble-3 max-w-[85%]">
+              <div class="rounded-2xl rounded-tl-sm px-3 py-2.5 shadow-sm" style="background:#00B5C808; border:1px solid #00B5C833;">
+                <p class="text-xs text-midnightEmerald leading-relaxed">Great! I have <strong>9:00 AM Tuesday</strong> available. Can I take your name and number to lock that in?</p>
+              </div>
+            </div>
+            <!-- Typing indicator -->
+            <div class="max-w-[60px]">
+              <div class="bg-white rounded-2xl rounded-tl-sm px-3 py-2.5 shadow-sm flex gap-1 items-center" style="border:1px solid #E8EAED;">
+                <span class="typing-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#9AA3B0;"></span>
+                <span class="typing-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#9AA3B0;"></span>
+                <span class="typing-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#9AA3B0;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="browser-footer">
+          <h4 class="font-bold text-midnightEmerald text-sm mb-1">Autonomous AI Receptionist</h4>
+          <p class="text-xs text-steelSilver leading-relaxed">Answers questions, qualifies leads, and books appointments — every hour of every day.</p>
+          <div class="mt-2 flex gap-1 flex-wrap">
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#00B5C810; color:#00B5C8; border:1px solid #00B5C833;">AI Chat</span>
+            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#D4AF3710; color:#D4AF37; border:1px solid #D4AF3733;">Auto-Book</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /browser grid -->
+
+    <!-- ════════════════════════════════════
+         FOUR ENGINEERING FEATURE CARDS
+    ════════════════════════════════════ -->
+    <div class="mb-6 fade-up">
+      <p class="text-xs font-bold tracking-widest uppercase text-steelSilver mb-6 flex items-center gap-3">
+        <span class="h-px flex-1" style="background: linear-gradient(90deg, transparent, #C8CDD6);"></span>
+        Built-in features included in every plan
+        <span class="h-px flex-1" style="background: linear-gradient(90deg, #C8CDD6, transparent);"></span>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <!-- CARD 1: Local Maps & SEO -->
+      <div class="eng-card card-teal fade-up d4">
+        <div class="icon-box icon-box-teal">
+          <!-- Map pin + signal rings SVG -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 3C10.134 3 7 6.134 7 10c0 5.25 7 15 7 15s7-9.75 7-15c0-3.866-3.134-7-7-7z" stroke="#00B5C8" stroke-width="1.6" fill="#00B5C815"/>
+            <circle cx="14" cy="10" r="2.5" fill="#00B5C8"/>
+            <!-- Signal arcs -->
+            <path d="M18 6.5 C19.5 8 20 10 19.5 12" stroke="#00B5C8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <path d="M10 6.5 C8.5 8 8 10 8.5 12"   stroke="#00B5C8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <path d="M20.5 4.5 C23 7 23.5 11 22 14"  stroke="#00B5C8" stroke-width="1"   stroke-linecap="round" fill="none" opacity="0.25"/>
+            <path d="M7.5 4.5 C5 7 4.5 11 6 14"      stroke="#00B5C8" stroke-width="1"   stroke-linecap="round" fill="none" opacity="0.25"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-midnightEmerald text-sm mb-2">Local Maps &amp; SEO</h4>
+        <p class="text-xs text-steelSilver leading-relaxed">Your business shows up clearly when local customers search on Google. We handle the technical setup so you rank higher than your competitors.</p>
+        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-steelSilver">Average ranking lift</span>
+            <span class="font-bold" style="color:#00B5C8;">Top 3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: Trust Engine -->
+      <div class="eng-card card-gold fade-up d5">
+        <div class="icon-box icon-box-gold">
+          <!-- Star + review request arrow SVG -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M14 3l2.5 7H23l-5.5 4 2 7L14 17l-5.5 4 2-7L5 10h6.5L14 3z" stroke="#D4AF37" stroke-width="1.5" fill="#D4AF3720" stroke-linejoin="round"/>
+            <!-- Auto-send arrow -->
+            <line x1="20" y1="22" x2="26" y2="22" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round"/>
+            <polyline points="23,19 26,22 23,25" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-midnightEmerald text-sm mb-2">Automated Trust Engine</h4>
+        <p class="text-xs text-steelSilver leading-relaxed">The moment a job is marked done, a polite review request goes straight to your customer's phone. More five-star reviews, less effort from you.</p>
+        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-steelSilver">Review open rate</span>
+            <span class="font-bold" style="color:#D4AF37;">98% SMS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Smart Reminders -->
+      <div class="eng-card card-dark fade-up d6">
+        <div class="icon-box icon-box-dark">
+          <!-- Bell + clock SVG -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <!-- Bell -->
+            <path d="M14 4C10.686 4 8 6.686 8 10v5l-2 3h16l-2-3v-5c0-3.314-2.686-6-6-6z" stroke="#0D1515" stroke-width="1.5" fill="#0D151515"/>
+            <path d="M12 22c0 1.105.895 2 2 2s2-.895 2-2" stroke="#0D1515" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <!-- Clock face overlay -->
+            <circle cx="21" cy="8" r="4.5" fill="white" stroke="#0D1515" stroke-width="1.2"/>
+            <line x1="21" y1="6" x2="21" y2="8.5" stroke="#0D1515" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="21" y1="8.5" x2="23" y2="8.5" stroke="#D4AF37" stroke-width="1.2" stroke-linecap="round"/>
+            <circle cx="21" cy="8.5" r="0.7" fill="#0D1515"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-midnightEmerald text-sm mb-2">Smart Reminders</h4>
+        <p class="text-xs text-steelSilver leading-relaxed">No-shows cost you money. Customers receive friendly automated reminders the day before and two hours before every appointment. No chasing needed.</p>
+        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-steelSilver">No-show reduction</span>
+            <span class="font-bold text-midnightEmerald">Up to 60%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: All-in-One Messaging -->
+      <div class="eng-card card-garnet fade-up d7">
+        <div class="icon-box icon-box-garnet">
+          <!-- Multi-channel message hub SVG -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <!-- Central hub circle -->
+            <circle cx="14" cy="14" r="3.5" stroke="#7D2E3A" stroke-width="1.5" fill="#7D2E3A20"/>
+            <!-- Connection spokes -->
+            <line x1="14" y1="10.5" x2="14" y2="5"   stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="14" y1="17.5" x2="14" y2="23"  stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="10.5" y1="14" x2="5" y2="14"   stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+            <line x1="17.5" y1="14" x2="23" y2="14"  stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+            <!-- Channel dots -->
+            <!-- Facebook (top) -->
+            <circle cx="14" cy="4" r="2.2" fill="#7D2E3A" opacity="0.9"/>
+            <text x="14" y="5.2" text-anchor="middle" font-size="2.8" fill="white" font-weight="bold">f</text>
+            <!-- Email (bottom) -->
+            <circle cx="14" cy="24" r="2.2" fill="#7D2E3A" opacity="0.9"/>
+            <rect x="11.5" y="22.8" width="5" height="3.2" rx="0.5" fill="white" opacity="0.3"/>
+            <!-- Instagram (left) -->
+            <circle cx="4" cy="14" r="2.2" fill="#7D2E3A" opacity="0.9"/>
+            <circle cx="4" cy="14" r="1.2" stroke="white" stroke-width="0.7" fill="none"/>
+            <!-- SMS (right) -->
+            <circle cx="24" cy="14" r="2.2" fill="#D4AF37"/>
+            <text x="24" y="15.1" text-anchor="middle" font-size="2.5" fill="#0D1515" font-weight="bold">sms</text>
+          </svg>
+        </div>
+        <h4 class="font-bold text-midnightEmerald text-sm mb-2">All-in-One Messaging</h4>
+        <p class="text-xs text-steelSilver leading-relaxed">Facebook, Instagram, email, and SMS — all in one screen on your phone. Every message, every customer, every conversation in one place.</p>
+        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-steelSilver">Channels connected</span>
+            <span class="font-bold" style="color:#7D2E3A;">6 platforms</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /eng cards grid -->
+
+    <!-- ── Bottom trust strip ── -->
+    <div class="mt-14 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 fade-up" style="background:#0D1515; border:1px solid #3D5A3E44;">
+      <div>
+        <p class="font-display text-xl font-bold text-antiqueGold mb-1">Ready to see this working for your business?</p>
+        <p class="text-sm text-steelSilver">No tech knowledge needed. We build it all for you in under five working days.</p>
+      </div>
+      <div class="flex gap-3 flex-shrink-0">
+        <a href="#crisis" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold text-midnightEmerald transition" style="background:#D4AF37;">
+          Get Started
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3,7 11,7" stroke="#0D1515" stroke-width="1.5" stroke-linecap="round"/><polyline points="8,4 11,7 8,10" stroke="#0D1515" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        </a>
+        <a href="#products" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold transition" style="border:1px solid #3D5A3E; color:#9AA3B0;">
+          See Plans
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /max-w-6xl -->
+</section>
+
+<!-- ── Scroll observer ── -->
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
