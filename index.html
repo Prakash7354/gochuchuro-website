@@ -1334,3 +1334,389 @@
 
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoChuchuro — Crisis Section Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnightEmerald: '#0D1515',
+            deepCharcoal:    '#111111',
+            deepForest:      '#2A3D2B',
+            forestOlive:     '#3D5A3E',
+            mountainSage:    '#6B8C52',
+            antiqueGold:     '#D4AF37',
+            brightGold:      '#E5C158',
+            auroraTeal:      '#00B5C8',
+            coolSilver:      '#C8CDD6',
+            steelSilver:     '#9AA3B0',
+            platinum:        '#F5F6F8',
+            deepGarnet:      '#7D2E3A',
+            warmMaroon:      '#9E3D4A',
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body:    ['Nunito Sans', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Nunito Sans', sans-serif; box-sizing: border-box; }
+    .font-display { font-family: 'Cormorant Garamond', serif; }
+
+    .crisis-bg {
+      background-color: #F5F6F8;
+      background-image:
+        radial-gradient(ellipse at 50% 0%, rgba(125,46,58,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 0% 100%, rgba(13,21,21,0.03) 0%, transparent 50%);
+    }
+    .garnet-top { border-top: 3px solid #7D2E3A; }
+
+    @keyframes crisispulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(125,46,58,0.55); }
+      60%      { box-shadow: 0 0 0 12px rgba(125,46,58,0); }
+    }
+    .crisis-badge { animation: crisispulse 2.2s ease infinite; }
+
+    .contact-card {
+      background: #fff;
+      border: 1px solid #E8EAED;
+      border-radius: 20px;
+      transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.32s ease, border-color 0.32s ease;
+      position: relative; overflow: hidden;
+    }
+    .contact-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:opacity 0.3s ease;
+    }
+    .contact-card:hover { transform: translateY(-6px); }
+    .contact-card:hover::before { opacity:1; }
+    .card-email:hover  { border-color:#7D2E3A55; box-shadow:0 20px 48px rgba(125,46,58,0.12); }
+    .card-email::before { background:linear-gradient(90deg,#7D2E3A,#9E3D4A); }
+    .card-whatsapp:hover { border-color:#22c55e55; box-shadow:0 20px 48px rgba(34,197,94,0.10); }
+    .card-whatsapp::before { background:linear-gradient(90deg,#16a34a,#22c55e); }
+
+    .contact-icon {
+      width:64px; height:64px; border-radius:18px;
+      display:flex; align-items:center; justify-content:center; margin-bottom:20px;
+      transition:transform 0.3s ease;
+    }
+    .contact-card:hover .contact-icon { transform:scale(1.08); }
+    .icon-garnet { background:#7D2E3A0d; border:1.5px solid #7D2E3A30; }
+    .icon-green  { background:#22c55e0d; border:1.5px solid #22c55e30; }
+
+    .philosophy-strip {
+      background:#0D1515; border-radius:20px; border:1px solid #3D5A3E44; position:relative; overflow:hidden;
+    }
+    .philosophy-strip::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:linear-gradient(90deg,#2A3D2B,#D4AF37,#E5C158,#00B5C8,#D4AF37,#2A3D2B);
+    }
+
+    .faq-item {
+      background:#fff; border:1px solid #E8EAED; border-radius:14px; overflow:hidden;
+      transition:border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .faq-item[open] { border-color:#D4AF3744; box-shadow:0 4px 20px rgba(212,175,55,0.08); }
+    .faq-item summary {
+      list-style:none; cursor:pointer; padding:18px 20px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px; user-select:none;
+    }
+    .faq-item summary::-webkit-details-marker { display:none; }
+    .faq-item summary .chevron {
+      width:28px; height:28px; border-radius:50%;
+      background:#F5F6F8; border:1px solid #E8EAED;
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      transition:background 0.25s ease, transform 0.3s ease, border-color 0.25s ease;
+    }
+    .faq-item[open] summary .chevron {
+      background:#D4AF3712; border-color:#D4AF3744; transform:rotate(180deg);
+    }
+    .faq-item[open] summary { border-bottom:1px solid #F0F1F3; }
+    .faq-body { padding:16px 20px 20px; background:#FAFAFA; }
+    .faq-number {
+      width:26px; height:26px; border-radius:8px;
+      background:#F5F6F8; border:1px solid #E8EAED;
+      display:flex; align-items:center; justify-content:center;
+      font-size:11px; font-weight:800; color:#9AA3B0; flex-shrink:0;
+      transition:background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+    .faq-item[open] .faq-number { background:#D4AF3712; border-color:#D4AF3744; color:#D4AF37; }
+
+    .step-node {
+      width:32px; height:32px; border-radius:50%;
+      background:#0D1515; border:2px solid #D4AF37;
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; font-weight:800; color:#D4AF37; flex-shrink:0;
+    }
+    .step-line {
+      width:2px; height:28px;
+      background:repeating-linear-gradient(to bottom,#D4AF3766 0px,#D4AF3766 5px,transparent 5px,transparent 10px);
+      margin:0 auto;
+    }
+
+    .reassure-pill {
+      display:inline-flex; align-items:center; gap:6px;
+      background:#fff; border:1px solid #E8EAED; border-radius:20px;
+      padding:6px 14px; font-size:12px; font-weight:600; color:#9AA3B0;
+    }
+    .reassure-dot { width:7px; height:7px; border-radius:50%; }
+
+    .fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.65s ease,transform 0.65s ease; }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:0.10s} .d2{transition-delay:0.20s} .d3{transition-delay:0.15s}
+    .d4{transition-delay:0.25s} .d5{transition-delay:0.35s} .d6{transition-delay:0.45s}
+  </style>
+</head>
+
+<body class="crisis-bg min-h-screen">
+
+<section id="crisis" class="crisis-bg garnet-top py-24 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Header -->
+    <div class="text-center mb-14 fade-up">
+      <div class="inline-flex items-center gap-2.5 crisis-badge bg-deepGarnet text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1.5L12.5 11.5H1.5L7 1.5Z" stroke="white" stroke-width="1.4" fill="rgba(255,255,255,0.15)" stroke-linejoin="round"/>
+          <line x1="7" y1="5.5" x2="7" y2="8.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="7" cy="10.2" r="0.8" fill="white"/>
+        </svg>
+        Need Help Now?
+      </div>
+
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-midnightEmerald leading-tight mb-4">
+        Business feeling overwhelming?<br/>
+        <span class="text-deepGarnet">Let's fix that together.</span>
+      </h2>
+      <p class="text-steelSilver text-base max-w-xl mx-auto leading-relaxed mb-7">
+        Running dry on leads? Buried in admin? Not sure where to start? Reach out below in any language. A real person will reply with an actual plan — not a sales pitch.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <div class="reassure-pill"><span class="reassure-dot" style="background:#22c55e;"></span>Real human replies</div>
+        <div class="reassure-pill"><span class="reassure-dot" style="background:#D4AF37;"></span>Any language welcome</div>
+        <div class="reassure-pill"><span class="reassure-dot" style="background:#00B5C8;"></span>No sales pressure</div>
+      </div>
+    </div>
+
+    <!-- Contact cards -->
+    <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-14">
+
+      <a href="mailto:hello@gochuchuro.com" class="contact-card card-email p-8 block group fade-up d1">
+        <div class="contact-icon icon-garnet">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <rect x="3" y="7" width="24" height="16" rx="3" stroke="#7D2E3A" stroke-width="1.8" fill="#7D2E3A08"/>
+            <polyline points="3,9.5 15,18 27,9.5" stroke="#7D2E3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="8" y1="20" x2="14" y2="20" stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+            <line x1="8" y1="22" x2="12" y2="22" stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+            <circle cx="23" cy="22" r="4.5" fill="#7D2E3A"/>
+            <line x1="21.5" y1="22" x2="24.5" y2="22" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
+            <polyline points="23,20.5 24.5,22 23,23.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-midnightEmerald mb-2">Send an Email</h3>
+        <p class="text-sm text-steelSilver leading-relaxed mb-5">Write in your own words and any language. Tell us your exact business worry and we will come back with a real, practical plan.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-midnightEmerald bg-platinum border border-coolSilver/50 px-3 py-1.5 rounded-lg">hello@gochuchuro.com</span>
+          <span class="text-xs font-bold text-deepGarnet flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+            Write to us
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 10,6" stroke="#7D2E3A" stroke-width="1.5" stroke-linecap="round"/><polyline points="7,3 10,6 7,9" stroke="#7D2E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="https://wa.me/447474080809" target="_blank" rel="noopener noreferrer" class="contact-card card-whatsapp p-8 block group fade-up d2">
+        <div class="contact-icon icon-green">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M15 3.5C8.6 3.5 3.5 8.6 3.5 15c0 2.3.63 4.46 1.72 6.32L3.5 26.5l5.32-1.7A11.44 11.44 0 0015 26.5c6.4 0 11.5-5.1 11.5-11.5S21.4 3.5 15 3.5Z" stroke="#16a34a" stroke-width="1.8" fill="#16a34a0d"/>
+            <path d="M11.2 11.8c0-.6.5-1.1 1.1-1.1h.4c.28 0 .5.2.54.48l.55 2.2a.5.5 0 01-.14.48l-.9.9a6.8 6.8 0 003.47 3.47l.9-.9a.5.5 0 01.48-.14l2.2.55c.28.04.48.26.48.54v.4c0 .6-.5 1.1-1.1 1.1C14.3 19.8 11.2 16.7 11.2 11.8Z" stroke="#16a34a" stroke-width="1.4" fill="#16a34a18" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-midnightEmerald mb-2">WhatsApp Message</h3>
+        <p class="text-sm text-steelSilver leading-relaxed mb-5">Prefer a quick chat? Tap to open WhatsApp and type your question. Text-only line — a real person reads and replies personally.</p>
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-midnightEmerald bg-platinum border border-coolSilver/50 px-3 py-1.5 rounded-lg">07474 080 809</span>
+          <span class="text-xs font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-200" style="color:#16a34a;">
+            Start chat
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 10,6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><polyline points="7,3 10,6 7,9" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Philosophy strip with 4-step journey -->
+    <div class="philosophy-strip p-8 mb-14 fade-up">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+
+        <div>
+          <p class="text-xs font-bold tracking-widest uppercase text-auroraTeal mb-6">From first message to live system</p>
+          <div>
+            <div class="flex gap-4 items-start">
+              <div class="flex flex-col items-center"><div class="step-node">1</div><div class="step-line"></div></div>
+              <div class="pb-5">
+                <p class="text-sm font-bold text-platinum mb-0.5">You reach out</p>
+                <p class="text-xs text-steelSilver">Email or WhatsApp — any language, any format.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="flex flex-col items-center"><div class="step-node">2</div><div class="step-line"></div></div>
+              <div class="pb-5">
+                <p class="text-sm font-bold text-platinum mb-0.5">We understand your problem</p>
+                <p class="text-xs text-steelSilver">A real person reviews your situation and builds a clear plan.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="flex flex-col items-center"><div class="step-node">3</div><div class="step-line"></div></div>
+              <div class="pb-5">
+                <p class="text-sm font-bold text-platinum mb-0.5">One short call to align</p>
+                <p class="text-xs text-steelSilver">We match the tools to your business and your lifestyle.</p>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="flex flex-col items-center"><div class="step-node">4</div></div>
+              <div class="pb-2">
+                <p class="text-sm font-bold text-antiqueGold mb-0.5">Your system goes live</p>
+                <p class="text-xs text-steelSilver">Built and handed over within five working days.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:border-l md:pl-8" style="border-color:#3D5A3E55;">
+          <p class="text-xs font-bold tracking-widest uppercase text-antiqueGold mb-3">Our Founding Principle</p>
+          <p class="font-display text-2xl font-bold text-platinum leading-snug mb-4">
+            "Technology follows.<br/>Coaching leads."
+          </p>
+          <p class="text-xs text-steelSilver leading-relaxed mb-5">
+            A piece of software cannot fix a stressful business on its own. Every system we build is surrounded by direct one-to-one guidance and a welcoming community of fellow business owners. We solve the human problem first.
+          </p>
+          <div class="inline-flex items-center gap-2 bg-antiqueGold/10 border border-antiqueGold/25 rounded-full px-4 py-2">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M5.5 1L6.9 4.2H10.3L7.6 6.1L8.8 9.5L5.5 7.5L2.2 9.5L3.4 6.1L0.7 4.2H4.1L5.5 1Z" stroke="#D4AF37" stroke-width="1" fill="#D4AF3720" stroke-linejoin="round"/>
+            </svg>
+            <span class="text-xs font-bold text-antiqueGold italic">Calm to thrive. Love to spark.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="max-w-3xl mx-auto fade-up">
+      <div class="text-center mb-8">
+        <p class="text-xs font-bold tracking-widest uppercase text-steelSilver mb-2">Common Questions</p>
+        <h3 class="font-display text-3xl font-bold text-midnightEmerald">You probably want to know...</h3>
+      </div>
+
+      <div class="space-y-3">
+
+        <details class="faq-item">
+          <summary>
+            <div class="flex items-center gap-3">
+              <div class="faq-number">1</div>
+              <span class="text-sm font-bold text-midnightEmerald">Who is behind GoChuchuro?</span>
+            </div>
+            <div class="chevron">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </summary>
+          <div class="faq-body">
+            <p class="text-sm text-steelSilver leading-relaxed">GoChuchuro is a value-first automation and coaching practice built for small business owners who are working hard but not yet working smart. We are rooted in the Nepali and South Asian community in the UK but we serve every hardworking business owner who deserves a simpler, smarter way to grow.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <div class="flex items-center gap-3">
+              <div class="faq-number">2</div>
+              <span class="text-sm font-bold text-midnightEmerald">Why GoChuchuro instead of a normal marketing agency?</span>
+            </div>
+            <div class="chevron">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </summary>
+          <div class="faq-body">
+            <p class="text-sm text-steelSilver leading-relaxed">Standard agencies lock you into expensive retainers where you never truly own your assets. GoChuchuro works on a wholesale model. We build premium infrastructure at straightforward prices and train you to run it yourself — so your growth machine belongs to you permanently and you never feel trapped.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <div class="flex items-center gap-3">
+              <div class="faq-number">3</div>
+              <span class="text-sm font-bold text-midnightEmerald">What exactly do you set up for my business?</span>
+            </div>
+            <div class="chevron">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </summary>
+          <div class="faq-body">
+            <p class="text-sm text-steelSilver leading-relaxed">A single easy-to-use dashboard built for your trade — professional website, automated text and email follow-ups, a Google review collector, a 24/7 booking calendar, and on our top plan an AI receptionist that answers calls and books work while you sleep.</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>
+            <div class="flex items-center gap-3">
+              <div class="faq-number">4</div>
+              <span class="text-sm font-bold text-midnightEmerald">How quickly can I go from enquiry to live system?</span>
+            </div>
+            <div class="chevron">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </summary>
+          <div class="faq-body">
+            <p class="text-sm text-steelSilver leading-relaxed mb-3">Most businesses are live within five working days. The process is simple and clear:</p>
+            <ol class="space-y-2.5">
+              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
+                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">1</span>
+                You contact us and describe your main business headache.
+              </li>
+              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
+                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">2</span>
+                We send you a clear, jargon-free plan.
+              </li>
+              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
+                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">3</span>
+                One short call to agree the setup together.
+              </li>
+              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
+                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">4</span>
+                Your system goes live. You get trained. We stay in touch.
+              </li>
+            </ol>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- Bottom email nudge -->
+      <div class="mt-8 text-center">
+        <p class="text-xs text-steelSilver mb-3">Still not sure? Just say hello. No commitment. No pressure.</p>
+        <a href="mailto:hello@gochuchuro.com" class="inline-flex items-center gap-2 text-sm font-bold text-midnightEmerald border border-midnightEmerald/20 hover:border-antiqueGold/50 hover:text-antiqueGold bg-white rounded-full px-6 py-2.5 transition duration-200 shadow-sm">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3.5" width="11" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/><polyline points="1.5,4.5 7,8.5 12.5,4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          hello@gochuchuro.com
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const io = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
