@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoChuchuro — Products Section Preview</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="GoChuchuro — Automated growth systems for UK small businesses. Website, booking, AI receptionist. Plans from £97/month."/>
+  <title>GoChuchuro | Reach Your Peak. Automate Your Growth.</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap" rel="stylesheet"/>
   <script>
     tailwind.config = {
       theme: {
@@ -29,427 +29,489 @@
             warmMaroon:      '#9E3D4A',
           },
           fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            body:    ['Nunito Sans', 'sans-serif'],
+            display: ['Cormorant Garamond','serif'],
+            body:    ['Nunito Sans','sans-serif'],
           },
         }
       }
     }
   </script>
-
   <style>
-    * { font-family: 'Nunito Sans', sans-serif; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Nunito Sans', sans-serif; -webkit-font-smoothing: antialiased; color: #111111; }
     .font-display { font-family: 'Cormorant Garamond', serif; }
 
-    /* ── Section background: deep forest grid texture ── */
-    .products-bg {
-      background-color: #0D1515;
-      background-image:
-        linear-gradient(rgba(0,181,200,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,181,200,0.03) 1px, transparent 1px);
-      background-size: 48px 48px;
+    /* ── TYPOGRAPHY: Freshworks-style clear text ── */
+    .body-text   { color: #1F2937; }   /* near-black for all body copy */
+    .label-text  { color: #374151; }   /* slightly lighter for supporting text */
+    .caption-text{ color: #6B7280; }   /* small captions only */
+
+    /* ── SCROLL FADE ── */
+    .fade-up { opacity:0; transform:translateY(26px); transition:opacity 0.65s ease,transform 0.65s ease; }
+    .fade-up.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+    .d4{transition-delay:.12s} .d5{transition-delay:.20s} .d6{transition-delay:.28s}
+    .d7{transition-delay:.36s} .d8{transition-delay:.44s}
+
+    /* ── STAR PULSE ── */
+    @keyframes starPulse {
+      0%,100%{filter:drop-shadow(0 0 4px #E5C158);}
+      50%{filter:drop-shadow(0 0 16px #E5C158) drop-shadow(0 0 32px #D4AF3766);}
+    }
+    .star-pulse { animation: starPulse 2.8s ease-in-out infinite; }
+
+    /* ── CRISIS BUTTON PULSE ── */
+    @keyframes crisisPulse {
+      0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,0.7);}
+      60%{box-shadow:0 0 0 14px rgba(220,38,38,0);}
+    }
+    .crisis-pulse { animation: crisisPulse 1.8s ease infinite; }
+
+    /* ── HERO DOT GRID ── */
+    .hero-grid {
+      background-image: radial-gradient(rgba(0,181,200,0.2) 1px, transparent 1px);
+      background-size: 22px 22px;
     }
 
-    /* ── Gold top border accent ── */
-    .gold-border-top {
-      border-top: 2px solid transparent;
-      background-clip: padding-box;
-      position: relative;
+    /* ── GOLD SHIMMER ── */
+    @keyframes shimmer {
+      0%{background-position:-400% center;}
+      100%{background-position:400% center;}
     }
-    .gold-border-top::before {
-      content: '';
-      position: absolute;
-      top: -2px; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #D4AF37, #E5C158, #D4AF37, transparent);
-    }
-
-    /* ── Journey step cards ── */
-    .step-card {
-      background: linear-gradient(145deg, #1a2e1a 0%, #0D1515 100%);
-      border: 1px solid #3D5A3E44;
-      border-radius: 16px;
-      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
-                  box-shadow 0.35s ease,
-                  border-color 0.35s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .step-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(0,181,200,0.06) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.35s ease;
-      pointer-events: none;
-      border-radius: 16px;
-    }
-    .step-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow:
-        0 24px 48px rgba(0,0,0,0.5),
-        0 0 0 1px #D4AF3744,
-        0 0 32px rgba(212,175,55,0.08);
-      border-color: #D4AF3766;
-    }
-    .step-card:hover::after { opacity: 1; }
-
-    /* ── SVG icon container ── */
-    .icon-ring {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      flex-shrink: 0;
-    }
-    .icon-ring-gold {
-      background: radial-gradient(circle, #D4AF3722 0%, #D4AF3708 100%);
-      border: 1.5px solid #D4AF3766;
-      box-shadow: 0 0 20px #D4AF3722, inset 0 0 12px #D4AF3711;
-    }
-    .icon-ring-teal {
-      background: radial-gradient(circle, #00B5C822 0%, #00B5C808 100%);
-      border: 1.5px solid #00B5C866;
-      box-shadow: 0 0 20px #00B5C822, inset 0 0 12px #00B5C811;
-    }
-    .icon-ring-sage {
-      background: radial-gradient(circle, #6B8C5222 0%, #6B8C5208 100%);
-      border: 1.5px solid #6B8C5266;
-      box-shadow: 0 0 20px #6B8C5222, inset 0 0 12px #6B8C5211;
+    .gold-shimmer {
+      background:linear-gradient(90deg,#D4AF37 20%,#E5C158 38%,#fffbe0 50%,#E5C158 62%,#D4AF37 80%);
+      background-size:300% auto;
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+      animation:shimmer 5s linear infinite;
     }
 
-    /* ── Step number badge ── */
-    .step-badge {
-      position: absolute;
-      top: -6px;
-      right: -6px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #D4AF37;
-      color: #0D1515;
-      font-size: 11px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      letter-spacing: 0;
+    /* ── ANIMATED FLOW LINES (pipeline) ── */
+    @keyframes flowPulse {
+      0%{stroke-dashoffset:200;opacity:.2;}
+      50%{opacity:1;}
+      100%{stroke-dashoffset:0;opacity:.2;}
     }
+    .flow-line{ stroke-dasharray:8 6;stroke-dashoffset:200;animation:flowPulse 2.4s linear infinite; }
+    .flow-slow{ animation-duration:3.4s; }
+    .flow-fast{ animation-duration:1.5s; }
 
-    /* ── Connector arrow between steps ── */
-    .connector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #D4AF3766;
-      flex-shrink: 0;
+    /* ── NODE PING ── */
+    @keyframes nodePing {
+      0%,100%{transform:scale(1);opacity:1;}
+      50%{transform:scale(1.9);opacity:0;}
     }
+    .np1{animation:nodePing 2s ease-in-out infinite;}
+    .np2{animation:nodePing 2s ease-in-out .65s infinite;}
+    .np3{animation:nodePing 2s ease-in-out 1.3s infinite;}
 
-    /* ── Feature pill tags ── */
-    .feature-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      border: 1px solid;
-    }
-    .pill-teal  { background: #00B5C811; border-color: #00B5C844; color: #00B5C8; }
-    .pill-gold  { background: #D4AF3711; border-color: #D4AF3744; color: #D4AF37; }
-    .pill-sage  { background: #6B8C5211; border-color: #6B8C5244; color: #6B8C52; }
-
-    /* ── Wholesale pricing box ── */
-    .pricing-matrix {
-      background: linear-gradient(135deg, #1a2e1a 0%, #111a11 50%, #0D1515 100%);
-      border: 1px solid #D4AF3733;
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-    }
-    .pricing-matrix::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #2A3D2B, #D4AF37, #E5C158, #00B5C8, #D4AF37, #2A3D2B);
-    }
-
-    /* ── Pricing plan cards ── */
-    .plan-pill {
-      background: #0D1515;
-      border: 1px solid #3D5A3E55;
-      border-radius: 14px;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .plan-pill:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-    }
-    .plan-pill.plan-a:hover { border-color: #6B8C5299; box-shadow: 0 12px 32px rgba(107,140,82,0.15); }
-    .plan-pill.plan-b:hover { border-color: #D4AF3799; box-shadow: 0 12px 32px rgba(212,175,55,0.15); }
-    .plan-pill.plan-c:hover { border-color: #00B5C899; box-shadow: 0 12px 32px rgba(0,181,200,0.15); }
-
-    .plan-pill.plan-b {
-      border-color: #D4AF3755;
-      background: linear-gradient(145deg, #1e2e10 0%, #0D1515 100%);
-    }
-    .plan-pill.plan-b::after {
-      content: 'MOST POPULAR';
-      position: absolute;
-      top: 12px; right: -22px;
-      background: #D4AF37;
-      color: #0D1515;
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      padding: 3px 28px;
-      transform: rotate(45deg);
-    }
-
-    /* ── Price number glow ── */
-    .price-glow {
-      text-shadow: 0 0 20px rgba(212,175,55,0.4);
-    }
-
-    /* ── Margin bar visual ── */
-    .margin-bar {
-      height: 6px;
-      border-radius: 3px;
-      background: #1a2a1a;
-      overflow: hidden;
-    }
-    .margin-fill {
-      height: 100%;
-      border-radius: 3px;
-      background: linear-gradient(90deg, #3D5A3E, #D4AF37);
-      transition: width 1s ease;
-    }
-
-    /* ── Fade up on scroll ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .delay-1 { transition-delay: 0.15s; }
-    .delay-2 { transition-delay: 0.30s; }
-    .delay-3 { transition-delay: 0.45s; }
-    .delay-4 { transition-delay: 0.55s; }
-
-    /* ── Glow dot pulse ── */
+    /* ── DOT PULSE ── */
     @keyframes dotPulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.4; transform: scale(1.5); }
+      0%,100%{opacity:1;transform:scale(1);}
+      50%{opacity:.3;transform:scale(1.6);}
     }
-    .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
+    .dp0{animation:dotPulse 2s ease-in-out infinite;}
+    .dp1{animation:dotPulse 2s ease-in-out .4s infinite;}
+    .dp2{animation:dotPulse 2s ease-in-out .8s infinite;}
 
-    /* ── Vertical dashed connector line ── */
-    .v-connector {
-      width: 1px;
-      background: repeating-linear-gradient(
-        to bottom,
-        #D4AF3755 0px, #D4AF3755 6px,
-        transparent 6px, transparent 12px
-      );
-      margin: 0 auto;
+    /* ── CHAOS FLICKER ── */
+    @keyframes chaos {
+      0%,100%{opacity:1;}33%{opacity:.4;}66%{opacity:.8;}
     }
+    .chaos{animation:chaos 1.8s ease-in-out infinite;}
+
+    /* ── STEP CARDS ── */
+    .step-card {
+      background:#fff; border:1.5px solid #E5E7EB;
+      border-radius:20px;
+      transition:transform .32s cubic-bezier(.34,1.4,.64,1),box-shadow .32s ease,border-color .32s ease;
+      position:relative; overflow:hidden;
+    }
+    .step-card::before{ content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s ease; }
+    .step-card:hover{ transform:translateY(-7px); }
+    .step-card:hover::before{ opacity:1; }
+    .card-sage:hover{ border-color:#6B8C5266;box-shadow:0 20px 48px rgba(107,140,82,.10); }
+    .card-sage::before{ background:linear-gradient(90deg,#6B8C52,#3D5A3E); }
+    .card-gold:hover{ border-color:#D4AF3766;box-shadow:0 20px 48px rgba(212,175,55,.10); }
+    .card-gold::before{ background:linear-gradient(90deg,#D4AF37,#E5C158); }
+    .card-teal:hover{ border-color:#00B5C866;box-shadow:0 20px 48px rgba(0,181,200,.10); }
+    .card-teal::before{ background:linear-gradient(90deg,#00B5C8,#6B8C52); }
+
+    /* ── ICON RINGS ── */
+    .icon-ring{ width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0; }
+    .ring-sage{background:#6B8C5215;border:1.5px solid #6B8C5250;}
+    .ring-gold{background:#D4AF3715;border:1.5px solid #D4AF3750;}
+    .ring-teal{background:#00B5C815;border:1.5px solid #00B5C850;}
+    .step-badge{position:absolute;top:-5px;right:-5px;width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:900;display:flex;align-items:center;justify-content:center;color:#fff;}
+
+    /* ── FEATURE PILLS ── */
+    .pill{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.04em;border:1.5px solid;}
+    .pill-sage{background:#6B8C5212;border-color:#6B8C5250;color:#3D5A3E;}
+    .pill-gold{background:#D4AF3712;border-color:#D4AF3750;color:#92730A;}
+    .pill-teal{background:#00B5C812;border-color:#00B5C850;color:#007A8A;}
+
+    /* ── CHECK ICON ── */
+    .check-item{display:flex;align-items:flex-start;gap:10px;}
+    .check-icon{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+    /* ── PRICING MATRIX ── */
+    .pricing-matrix{
+      background:linear-gradient(135deg,#1a2e1a 0%,#111a11 60%,#0D1515 100%);
+      border:1.5px solid #D4AF3740;border-radius:24px;position:relative;overflow:hidden;
+    }
+    .pricing-matrix::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2A3D2B,#D4AF37,#E5C158,#00B5C8,#D4AF37,#2A3D2B);}
+
+    .plan-card{background:#0D1515;border:1.5px solid #3D5A3E55;border-radius:18px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;position:relative;overflow:hidden;}
+    .plan-card:hover{transform:translateY(-5px);}
+    .plan-a:hover{border-color:#6B8C5280;box-shadow:0 16px 40px rgba(107,140,82,.15);}
+    .plan-b:hover{border-color:#D4AF3780;box-shadow:0 16px 40px rgba(212,175,55,.18);}
+    .plan-c:hover{border-color:#00B5C880;box-shadow:0 16px 40px rgba(0,181,200,.15);}
+    .plan-b{border-color:#D4AF3750;background:linear-gradient(145deg,#1e300e,#0D1515);}
+    .plan-b::after{content:'BEST VALUE';position:absolute;top:14px;right:-24px;background:#D4AF37;color:#0D1515;font-size:9px;font-weight:900;letter-spacing:.08em;padding:3px 32px;transform:rotate(45deg);}
+
+    .margin-bar{height:6px;border-radius:3px;background:#1a2a1a;overflow:hidden;}
+    .margin-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#3D5A3E,#D4AF37);transition:width 1.3s ease;}
+
+    /* ── BROWSER FRAMES ── */
+    .browser-frame{border-radius:14px;overflow:hidden;border:1.5px solid #E5E7EB;box-shadow:0 4px 6px rgba(0,0,0,.04),0 12px 32px rgba(0,0,0,.08);background:#fff;transition:transform .32s cubic-bezier(.34,1.3,.64,1),box-shadow .32s ease;}
+    .browser-frame:hover{transform:translateY(-6px);box-shadow:0 8px 12px rgba(0,0,0,.06),0 24px 48px rgba(0,0,0,.12),0 0 0 1.5px rgba(212,175,55,.35);}
+
+    /* ── ENG CARDS ── */
+    .eng-card{background:#fff;border:1.5px solid #E5E7EB;border-radius:18px;padding:24px;transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;position:relative;overflow:hidden;}
+    .eng-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .3s ease;}
+    .eng-card:hover{transform:translateY(-4px);}
+    .eng-card:hover::before{opacity:1;}
+    .ec-teal:hover{border-color:#00B5C850;box-shadow:0 12px 32px rgba(0,181,200,.10);}
+    .ec-teal::before{background:linear-gradient(90deg,#00B5C8,#6B8C52);}
+    .ec-gold:hover{border-color:#D4AF3750;box-shadow:0 12px 32px rgba(212,175,55,.10);}
+    .ec-gold::before{background:linear-gradient(90deg,#D4AF37,#E5C158);}
+    .ec-dark:hover{border-color:#0D151550;box-shadow:0 12px 32px rgba(13,21,21,.10);}
+    .ec-dark::before{background:linear-gradient(90deg,#0D1515,#3D5A3E);}
+    .ec-garnet:hover{border-color:#7D2E3A50;box-shadow:0 12px 32px rgba(125,46,58,.10);}
+    .ec-garnet::before{background:linear-gradient(90deg,#7D2E3A,#9E3D4A);}
+
+    /* ── CONTACT CARDS ── */
+    .contact-card{background:#fff;border:1.5px solid #E5E7EB;border-radius:20px;transition:transform .32s cubic-bezier(.34,1.4,.64,1),box-shadow .32s ease,border-top-color .3s ease;}
+    .contact-card:hover{transform:translateY(-6px);}
+
+    /* ── FAQ ACCORDION ── */
+    .faq-item{background:#fff;border:1.5px solid #E5E7EB;border-radius:14px;overflow:hidden;transition:border-color .25s ease,box-shadow .25s ease;}
+    .faq-item[open]{border-color:#D4AF3755;box-shadow:0 4px 20px rgba(212,175,55,.08);}
+    .faq-item summary{list-style:none;cursor:pointer;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none;}
+    .faq-item summary::-webkit-details-marker{display:none;}
+    .faq-chevron{width:28px;height:28px;border-radius:50%;background:#F9FAFB;border:1.5px solid #E5E7EB;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .25s ease,transform .3s ease,border-color .25s ease;}
+    .faq-item[open] summary .faq-chevron{background:#D4AF3715;border-color:#D4AF3750;transform:rotate(180deg);}
+    .faq-item[open] summary{border-bottom:1.5px solid #F3F4F6;}
+    .faq-body{padding:18px 22px 22px;background:#FAFAFA;}
+    .faq-num{width:28px;height:28px;border-radius:8px;background:#F3F4F6;border:1.5px solid #E5E7EB;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#6B7280;flex-shrink:0;transition:background .25s,border-color .25s,color .25s;}
+    .faq-item[open] .faq-num{background:#D4AF3715;border-color:#D4AF3750;color:#92730A;}
+
+    /* ── SCROLLBAR ── */
+    .custom-scroll::-webkit-scrollbar{width:4px;}
+    .custom-scroll::-webkit-scrollbar-track{background:transparent;}
+    .custom-scroll::-webkit-scrollbar-thumb{background:#D1D5DB;border-radius:4px;}
+
+    /* ── TRUST STRIP SCROLL ── */
+    @keyframes scrollLeft{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+    .trust-scroll{animation:scrollLeft 24s linear infinite;display:flex;gap:48px;white-space:nowrap;}
+    .trust-scroll:hover{animation-play-state:paused;}
+
+    /* ── STEP JOURNEY LINE ── */
+    .step-vline{width:2px;height:28px;background:repeating-linear-gradient(to bottom,#D4AF3766 0px,#D4AF3766 5px,transparent 5px,transparent 10px);margin:0 auto;}
+
+    /* ── SECTION SEPARATORS ── */
+    .section-dark{background:#0D1515;}
+    .section-light{background:#FFFFFF;}
+    .section-pale{background:#F8FAFC;}
   </style>
 </head>
 
-<body class="products-bg min-h-screen">
+<body class="antialiased overflow-x-hidden">
 
-<!-- ════════════════════════════════════════════
-     SECTION: PRODUCTS  (#products)
-════════════════════════════════════════════ -->
-<section id="products" class="products-bg gold-border-top py-24 px-6">
+<!-- ══════════════════════════════════════════════
+     HEADER
+══════════════════════════════════════════════ -->
+<header class="sticky top-0 z-50 bg-midnightEmerald/97 backdrop-blur-md border-b border-white/10">
+  <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 group flex-shrink-0">
+      <img src="logo.png" alt="GoChuchuro logo" class="h-9 w-auto" onerror="this.style.display='none';document.getElementById('svg-logo').style.display='block'"/>
+      <svg id="svg-logo" style="display:none;" width="42" height="36" viewBox="0 0 42 36" fill="none" aria-hidden="true">
+        <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <line x1="20" y1="31" x2="20" y2="16" stroke="url(#hG)" stroke-width="1.8" stroke-linecap="round"/>
+        <polygon points="20,12 17.5,18 22.5,18" fill="#E5C158"/>
+        <g class="star-pulse"><line x1="20" y1="7" x2="20" y2="1" stroke="#E5C158" stroke-width="1.4" stroke-linecap="round"/><line x1="20" y1="17" x2="20" y2="23" stroke="#E5C158" stroke-width="1.4" stroke-linecap="round"/><line x1="15" y1="12" x2="9" y2="12" stroke="#E5C158" stroke-width="1.4" stroke-linecap="round"/><line x1="25" y1="12" x2="31" y2="12" stroke="#E5C158" stroke-width="1.4" stroke-linecap="round"/><circle cx="20" cy="12" r="2" fill="#E5C158"/></g>
+        <defs><linearGradient id="hG" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#2A3D2B"/><stop offset="50%" stop-color="#00B5C8"/><stop offset="100%" stop-color="#E5C158"/></linearGradient></defs>
+      </svg>
+      <span class="font-display text-lg font-bold tracking-widest text-coolSilver group-hover:text-antiqueGold transition duration-300 hidden sm:block">GOCHUCHURO</span>
+    </a>
+
+    <!-- Nav -->
+    <nav class="hidden md:flex items-center gap-7 text-sm font-bold tracking-wide">
+      <a href="#products"  class="text-coolSilver hover:text-brightGold transition duration-200 py-1 border-b-2 border-transparent hover:border-brightGold">Solutions</a>
+      <a href="#solutions" class="text-coolSilver hover:text-brightGold transition duration-200 py-1 border-b-2 border-transparent hover:border-brightGold">How It Works</a>
+      <a href="#crisis"    class="text-coolSilver hover:text-brightGold transition duration-200 py-1 border-b-2 border-transparent hover:border-brightGold">Support</a>
+    </nav>
+
+    <!-- Crisis CTA — bright red, high urgency -->
+    <a href="#crisis" class="crisis-pulse inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-white text-xs font-black tracking-wide uppercase transition duration-200 flex-shrink-0" style="background:#DC2626; hover:background:#B91C1C;">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M6.5 1L12 11.5H1L6.5 1Z" stroke="white" stroke-width="1.4" fill="rgba(255,255,255,0.2)" stroke-linejoin="round"/><line x1="6.5" y1="5" x2="6.5" y2="8" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="6.5" cy="9.8" r=".75" fill="white"/></svg>
+      Crisis? Get Help Now
+    </a>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════ -->
+<section class="relative section-dark text-white py-28 md:py-36 px-6 overflow-hidden border-b border-forestOlive/20">
+  <div class="absolute inset-0 hero-grid pointer-events-none opacity-100"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 70% 55% at 50% 60%,rgba(0,181,200,0.08) 0%,transparent 70%);"></div>
+
+  <!-- Animated circuit lines -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <svg class="absolute w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+      <path d="M0 200 Q300 180 600 200 Q900 220 1200 200" stroke="#00B5C8" stroke-width="1" class="flow-line flow-slow" opacity=".45"/>
+      <path d="M0 350 Q400 330 700 350 Q1000 370 1200 350" stroke="#D4AF37" stroke-width="1" class="flow-line" opacity=".35"/>
+      <path d="M0 480 Q200 460 500 480 Q800 500 1200 480" stroke="#3D5A3E" stroke-width="1" class="flow-line flow-fast" opacity=".3"/>
+      <line x1="300" y1="0" x2="300" y2="600" stroke="#00B5C8" stroke-width=".5" stroke-dasharray="4 10" opacity=".12"/>
+      <line x1="900" y1="0" x2="900" y2="600" stroke="#D4AF37" stroke-width=".5" stroke-dasharray="4 10" opacity=".10"/>
+      <circle cx="300" cy="200" r="3" fill="#00B5C8" class="np1" opacity=".8"/>
+      <circle cx="600" cy="200" r="3" fill="#E5C158" class="np2" opacity=".8"/>
+      <circle cx="900" cy="200" r="3" fill="#00B5C8" class="np3" opacity=".8"/>
+      <circle cx="400" cy="350" r="2.5" fill="#D4AF37" class="np1" opacity=".7"/>
+      <circle cx="800" cy="350" r="2.5" fill="#D4AF37" class="np2" opacity=".7"/>
+    </svg>
+  </div>
+
+  <div class="max-w-4xl mx-auto text-center space-y-7 relative z-10 fade-up">
+    <div class="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-brightGold uppercase bg-white/5 px-4 py-2 rounded-full border border-white/15">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1L6.3 3.8H9.5L6.9 5.6L8 8.5L5 6.8L2 8.5L3.1 5.6L.5 3.8H3.7L5 1Z" fill="#E5C158"/></svg>
+      Reach Your Peak. Automate Your Growth.
+    </div>
+
+    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight">
+      Stop losing customers<br class="hidden md:block"/>
+      <span class="gold-shimmer">to missed calls and chaos.</span>
+    </h1>
+
+    <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed font-normal">
+      You work hard every day. But calls go unanswered, customers book elsewhere, and admin piles up after hours. We fix that — with a smart system that runs your business backend <strong class="text-brightGold">while you sleep.</strong>
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-5 pt-1">
+      <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-green-400 dp0"></span>System runs 24/7</div>
+      <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-brightGold dp1"></span>No tech knowledge needed</div>
+      <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-auroraTeal dp2"></span>Live in 5 working days</div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
+      <a href="#solutions" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-midnightEmerald bg-brightGold hover:bg-white transition duration-200 shadow-lg">
+        See How It Works
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><polyline points="3,8 13,8" stroke="#0D1515" stroke-width="2" stroke-linecap="round"/><polyline points="9,4 13,8 9,12" stroke="#0D1515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </a>
+      <a href="#products" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-white border-2 border-white/30 hover:border-brightGold hover:text-brightGold transition duration-200">
+        View Plans &amp; Pricing
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Trust strip -->
+<div class="section-dark border-b border-white/10 py-6 overflow-hidden">
+  <p class="text-center text-xs font-black tracking-widest uppercase text-steelSilver mb-4">Trusted by UK small businesses — trades, salons, restaurants, finance advisors</p>
+  <div class="flex items-center justify-center gap-8 flex-wrap px-6">
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#6B8C52;">🔧</span> Plumbers</span>
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#D4AF37;">⚡</span> Electricians</span>
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#00B5C8;">✂️</span> Hair Salons</span>
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#9E3D4A;">🍽️</span> Restaurants</span>
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#D4AF37;">🏠</span> Roofers</span>
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#6B8C52;">🌿</span> Landscapers</span>
+    <span class="text-sm font-bold text-coolSilver/70 flex items-center gap-2"><span style="color:#00B5C8;">💰</span> Finance Advisors</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SECTION 1 — SOLUTIONS / PRODUCTS (#products)
+══════════════════════════════════════════════ -->
+<section id="products" class="section-light py-24 px-6 border-b border-gray-100">
   <div class="max-w-6xl mx-auto">
 
-    <!-- ── Section header ── -->
-    <div class="text-center mb-16 fade-up">
-      <span class="inline-block text-xs font-bold tracking-widest uppercase text-auroraTeal border border-auroraTeal/30 bg-auroraTeal/5 px-4 py-1.5 rounded-full mb-4">
-        How GoChuchuro Works
-      </span>
-      <h2 class="font-display text-4xl md:text-5xl font-bold text-antiqueGold mb-4 leading-tight">
-        Three Steps.<br class="md:hidden"/> One Simple System.
+    <!-- Header -->
+    <div class="max-w-2xl mb-16 fade-up">
+      <span class="inline-block text-sm font-black tracking-widest uppercase text-auroraTeal border-2 border-auroraTeal/40 bg-auroraTeal/8 px-4 py-1.5 rounded-full mb-4">01 / Three Simple Plans</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-deepCharcoal leading-tight mb-5">
+        Built for every stage<br/>of your business.
       </h2>
-      <p class="text-steelSilver text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-        No tech headaches. No agency jargon. Just a clear path from where you are today to a business that works while you sleep.
+      <p class="text-lg text-gray-700 leading-relaxed">
+        Whether you are just starting out or ready to hand the admin over to a machine entirely — we have the exact plan for where you are right now.
       </p>
     </div>
 
-    <!-- ── Journey Step Cards ── -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- CHAOS vs SYSTEM -->
+    <div class="grid md:grid-cols-2 gap-6 mb-16">
 
-      <!-- STEP 1: Digital Foundation -->
-      <div class="step-card p-7 fade-up delay-1">
-        <div class="flex items-start gap-5 mb-6">
-          <!-- Database SVG icon -->
-          <div class="icon-ring icon-ring-sage relative">
-            <div class="step-badge">1</div>
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Database cylinders -->
-              <ellipse cx="17" cy="9" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5218"/>
-              <rect x="7" y="9" width="20" height="7" fill="#6B8C5210" stroke="none"/>
-              <line x1="7" y1="9"  x2="7"  y2="16" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/>
-              <line x1="27" y1="9" x2="27" y2="16" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/>
-              <ellipse cx="17" cy="16" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5218"/>
-              <rect x="7" y="16" width="20" height="7" fill="#6B8C5210" stroke="none"/>
+      <!-- Without GC -->
+      <div class="rounded-2xl border-2 border-red-200 bg-red-50 p-7 relative overflow-hidden fade-up d1">
+        <div class="absolute top-5 right-5 w-3 h-3 rounded-full bg-red-500 chaos"></div>
+        <p class="text-sm font-black tracking-widest uppercase text-red-600 mb-5">Without GoChuchuro — Sound familiar?</p>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="text-base font-bold text-red-800">Phone rings — you cannot answer — lead gone</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="text-base font-bold text-red-800">"How do I find new customers?" — no system</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="text-base font-bold text-red-800">Customer enquiries piling up unanswered</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="text-base font-bold text-red-800">Customer booked — then did not show up</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span class="text-base font-bold text-red-800">Paying separately for website, email, booking tools</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- With GC — animated pipeline -->
+      <div class="rounded-2xl border-2 border-auroraTeal/40 bg-midnightEmerald p-7 relative overflow-hidden fade-up d2">
+        <div class="absolute top-5 right-5 w-3 h-3 rounded-full bg-green-400 dp0"></div>
+        <p class="text-sm font-black tracking-widest uppercase text-auroraTeal mb-4">With GoChuchuro — Everything connected</p>
+
+        <!-- Animated pipeline -->
+        <div class="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
+          <svg viewBox="0 0 320 100" fill="none" class="w-full" aria-label="Automated lead pipeline diagram">
+            <rect x="2"   y="36" width="54" height="28" rx="7" fill="#2A3D2B" stroke="#3D5A3E" stroke-width="1.2"/>
+            <text x="29"  y="53" text-anchor="middle" font-size="7.5" fill="#6B8C52" font-weight="800" font-family="Nunito Sans,sans-serif">LEAD IN</text>
+            <path d="M56 50 Q72 50 82 50" stroke="#00B5C8" stroke-width="2" class="flow-line" stroke-linecap="round"/>
+            <circle cx="69" cy="50" r="3" fill="#00B5C8" class="np1"/>
+            <rect x="82"  y="36" width="54" height="28" rx="7" fill="#0D1515" stroke="#D4AF3760" stroke-width="1.2"/>
+            <text x="109" y="50" text-anchor="middle" font-size="7" fill="#D4AF37" font-weight="800" font-family="Nunito Sans,sans-serif">CRM</text>
+            <text x="109" y="59" text-anchor="middle" font-size="5.5" fill="#9AA3B0" font-family="Nunito Sans,sans-serif">auto-saved</text>
+            <path d="M136 50 Q152 50 162 50" stroke="#D4AF37" stroke-width="2" class="flow-line flow-fast" stroke-linecap="round"/>
+            <circle cx="149" cy="50" r="3" fill="#D4AF37" class="np2"/>
+            <rect x="162" y="36" width="54" height="28" rx="7" fill="#0D1515" stroke="#00B5C860" stroke-width="1.2"/>
+            <text x="189" y="50" text-anchor="middle" font-size="7" fill="#00B5C8" font-weight="800" font-family="Nunito Sans,sans-serif">TEXT</text>
+            <text x="189" y="59" text-anchor="middle" font-size="5.5" fill="#9AA3B0" font-family="Nunito Sans,sans-serif">auto-sent</text>
+            <path d="M216 50 Q232 50 242 50" stroke="#6B8C52" stroke-width="2" class="flow-line flow-slow" stroke-linecap="round"/>
+            <circle cx="229" cy="50" r="3" fill="#6B8C52" class="np3"/>
+            <rect x="242" y="36" width="68" height="28" rx="7" fill="#D4AF37" stroke="#E5C158" stroke-width="1.2"/>
+            <text x="276" y="50" text-anchor="middle" font-size="7.5" fill="#0D1515" font-weight="900" font-family="Nunito Sans,sans-serif">BOOKED</text>
+            <text x="276" y="59" text-anchor="middle" font-size="5.5" fill="#0D1515" opacity=".7" font-family="Nunito Sans,sans-serif">confirmed</text>
+            <text x="160" y="20" text-anchor="middle" font-size="7" fill="#9AA3B0" font-family="Nunito Sans,sans-serif">Your automated pipeline — running every hour of every day</text>
+            <text x="160" y="88" text-anchor="middle" font-size="6.5" fill="#6B8C52" font-weight="700" font-family="Nunito Sans,sans-serif">Zero missed leads · Zero manual chasing · Zero stress</text>
+          </svg>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3 border border-white/10">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#22C55E" stroke-width="1.5"/><polyline points="5,9 8,12 13,6" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <span class="text-base font-bold text-white">Every message. Every lead. One app on your phone.</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3 border border-white/10">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#22C55E" stroke-width="1.5"/><polyline points="5,9 8,12 13,6" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <span class="text-base font-bold text-white">Missed a call? Customer gets a text back in 30 seconds.</span>
+          </div>
+          <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3 border border-white/10">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#22C55E" stroke-width="1.5"/><polyline points="5,9 8,12 13,6" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            <span class="text-base font-bold text-white">Automatic reminders cut no-shows by up to 60%.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREE STEP CARDS -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+      <!-- Step 1 -->
+      <div class="step-card card-sage p-7 fade-up d1">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="icon-ring ring-sage relative">
+            <div class="step-badge" style="background:#6B8C52;">1</div>
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <ellipse cx="17" cy="9"  rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5215"/>
+              <line x1="7"  y1="9"  x2="7"  y2="16" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/>
+              <line x1="27" y1="9"  x2="27" y2="16" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/>
+              <ellipse cx="17" cy="16" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5215"/>
               <line x1="7"  y1="16" x2="7"  y2="23" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/>
               <line x1="27" y1="16" x2="27" y2="23" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/>
-              <ellipse cx="17" cy="23" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5218"/>
-              <!-- Data dots -->
-              <circle cx="12" cy="12.5" r="1.2" fill="#6B8C52" class="dot-pulse"/>
-              <circle cx="17" cy="12.5" r="1.2" fill="#6B8C52" style="animation-delay:0.4s" class="dot-pulse"/>
-              <circle cx="22" cy="12.5" r="1.2" fill="#6B8C52" style="animation-delay:0.8s" class="dot-pulse"/>
+              <ellipse cx="17" cy="23" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5215"/>
+              <circle cx="12" cy="12.5" r="1.3" fill="#6B8C52" class="dp0"/>
+              <circle cx="17" cy="12.5" r="1.3" fill="#6B8C52" class="dp1"/>
+              <circle cx="22" cy="12.5" r="1.3" fill="#6B8C52" class="dp2"/>
             </svg>
           </div>
           <div>
-            <p class="text-xs font-bold tracking-widest uppercase text-mountainSage mb-1">Step 1</p>
-            <h3 class="font-display text-2xl font-bold text-antiqueGold leading-tight">Digital Foundation</h3>
+            <p class="text-xs font-black tracking-widest uppercase text-mountainSage mb-1">Plan A — Essential</p>
+            <h3 class="font-display text-2xl font-bold text-deepCharcoal">Digital Foundation</h3>
           </div>
         </div>
-
-        <p class="text-steelSilver text-sm leading-relaxed mb-5">
-          We build your digital home. A clean website, your customer database, and booking system — all connected and ready on day one.
-        </p>
-
-        <!-- Feature list -->
+        <p class="text-base text-gray-700 leading-relaxed mb-5">Your professional website, customer database, and 24/7 booking system — all connected and live in five days.</p>
         <ul class="space-y-2.5 mb-6">
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-mountainSage/20 border border-mountainSage/40 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            5-page professional website
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-mountainSage/20 border border-mountainSage/40 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Customer database (CRM)
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-mountainSage/20 border border-mountainSage/40 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            24/7 online booking calendar
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-mountainSage/20 border border-mountainSage/40 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Missed call text-back (instant)
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-mountainSage/20 border border-mountainSage/40 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Google review booster
-          </li>
+          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">5-page professional website</span></li>
+          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Customer database (CRM)</span></li>
+          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">24/7 online booking calendar</span></li>
+          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Missed call text-back — instant</span></li>
+          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Google review booster</span></li>
         </ul>
-
-        <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-forestOlive/30">
-          <span class="feature-pill pill-sage">Website</span>
-          <span class="feature-pill pill-sage">Booking</span>
-          <span class="feature-pill pill-sage">Reviews</span>
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+          <span class="pill pill-sage">Website</span><span class="pill pill-sage">Booking</span><span class="pill pill-sage">Reviews</span>
         </div>
       </div>
 
-      <!-- STEP 2: Growth Autopilot -->
-      <div class="step-card p-7 fade-up delay-2">
-        <div class="flex items-start gap-5 mb-6">
-          <!-- Text reminder / SMS arrow SVG icon -->
-          <div class="icon-ring icon-ring-gold relative">
-            <div class="step-badge">2</div>
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Phone outline -->
+      <!-- Step 2 -->
+      <div class="step-card card-gold p-7 fade-up d2">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="icon-ring ring-gold relative">
+            <div class="step-badge" style="background:#D4AF37;">2</div>
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
               <rect x="8" y="4" width="14" height="22" rx="3" stroke="#D4AF37" stroke-width="1.8" fill="#D4AF3710"/>
-              <!-- Screen lines -->
-              <line x1="11" y1="10" x2="19" y2="10" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity="0.6"/>
-              <line x1="11" y1="14" x2="19" y2="14" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity="0.4"/>
-              <line x1="11" y1="18" x2="16" y2="18" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity="0.3"/>
-              <!-- Upward arrow burst from phone -->
-              <line x1="24" y1="20" x2="24" y2="8"  stroke="#E5C158" stroke-width="2" stroke-linecap="round"/>
+              <line x1="11" y1="10" x2="19" y2="10" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity=".6"/>
+              <line x1="11" y1="14" x2="19" y2="14" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity=".4"/>
+              <line x1="11" y1="18" x2="16" y2="18" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity=".3"/>
+              <line x1="24" y1="20" x2="24" y2="8" stroke="#E5C158" stroke-width="2" stroke-linecap="round"/>
               <polyline points="20,12 24,8 28,12" stroke="#E5C158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <!-- Signal dots -->
-              <circle cx="24" cy="24" r="1.2" fill="#E5C158" class="dot-pulse"/>
-              <circle cx="24" cy="27" r="1"   fill="#E5C158" style="animation-delay:0.3s" class="dot-pulse" opacity="0.6"/>
-              <circle cx="24" cy="30" r="0.8" fill="#E5C158" style="animation-delay:0.6s" class="dot-pulse" opacity="0.3"/>
+              <circle cx="24" cy="24" r="1.3" fill="#E5C158" class="dp0"/>
+              <circle cx="24" cy="27.5" r="1" fill="#E5C158" class="dp1" opacity=".6"/>
+              <circle cx="24" cy="30.5" r=".7" fill="#E5C158" class="dp2" opacity=".3"/>
             </svg>
           </div>
           <div>
-            <p class="text-xs font-bold tracking-widest uppercase text-antiqueGold mb-1">Step 2</p>
-            <h3 class="font-display text-2xl font-bold text-antiqueGold leading-tight">Growth Autopilot</h3>
+            <p class="text-xs font-black tracking-widest uppercase text-antiqueGold mb-1">Plan B — Growth</p>
+            <h3 class="font-display text-2xl font-bold text-deepCharcoal">Growth Autopilot</h3>
           </div>
         </div>
-
-        <p class="text-steelSilver text-sm leading-relaxed mb-5">
-          The system follows up, reminds, and re-engages your customers automatically. Save 10+ hours every week without lifting a finger.
-        </p>
-
+        <p class="text-base text-gray-700 leading-relaxed mb-5">Save 10+ hours every week. The system follows up, reminds, and brings customers back — automatically, without you lifting a finger.</p>
         <ul class="space-y-2.5 mb-6">
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-antiqueGold/10 border border-antiqueGold/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Automated follow-up messages
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-antiqueGold/10 border border-antiqueGold/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Email and SMS campaigns
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-antiqueGold/10 border border-antiqueGold/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            No-show appointment reminders
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-antiqueGold/10 border border-antiqueGold/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Social media planner (all platforms)
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-antiqueGold/10 border border-antiqueGold/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Reports: see exactly what works
-          </li>
+          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Everything in Plan A</span></li>
+          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Automated follow-up sequences</span></li>
+          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Email and SMS campaigns</span></li>
+          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Appointment reminder system</span></li>
+          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Social media planner — all platforms</span></li>
         </ul>
-
-        <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-forestOlive/30">
-          <span class="feature-pill pill-gold">SMS</span>
-          <span class="feature-pill pill-gold">Email</span>
-          <span class="feature-pill pill-gold">Social</span>
-          <span class="feature-pill pill-gold">Reports</span>
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+          <span class="pill pill-gold">SMS</span><span class="pill pill-gold">Email</span><span class="pill pill-gold">Social</span><span class="pill pill-gold">Reports</span>
         </div>
       </div>
 
-      <!-- STEP 3: Elite AI -->
-      <div class="step-card p-7 fade-up delay-3">
-        <div class="flex items-start gap-5 mb-6">
-          <!-- AI/Gear automation SVG icon -->
-          <div class="icon-ring icon-ring-teal relative">
+      <!-- Step 3 -->
+      <div class="step-card card-teal p-7 fade-up d3">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="icon-ring ring-teal relative">
             <div class="step-badge" style="background:#00B5C8;">3</div>
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Outer gear -->
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
               <circle cx="17" cy="17" r="7" stroke="#00B5C8" stroke-width="1.8" fill="#00B5C810"/>
-              <!-- Gear teeth (8 teeth) -->
               <rect x="15.5" y="4"  width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(0   17 17)"/>
               <rect x="15.5" y="4"  width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(45  17 17)"/>
               <rect x="15.5" y="4"  width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(90  17 17)"/>
@@ -458,1154 +520,465 @@
               <rect x="15.5" y="4"  width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(225 17 17)"/>
               <rect x="15.5" y="4"  width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(270 17 17)"/>
               <rect x="15.5" y="4"  width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(315 17 17)"/>
-              <!-- Inner circle (robot eye) -->
-              <circle cx="17" cy="17" r="3.5" fill="#00B5C8" opacity="0.9"/>
-              <!-- AI spark lines -->
-              <line x1="27" y1="9"  x2="29" y2="7"  stroke="#E5C158" stroke-width="1.2" stroke-linecap="round"/>
-              <line x1="28" y1="7"  x2="30" y2="9"  stroke="#E5C158" stroke-width="1.2" stroke-linecap="round"/>
-              <circle cx="28" cy="8" r="1.5" fill="#E5C158" opacity="0.7" class="dot-pulse"/>
+              <circle cx="17" cy="17" r="3.5" fill="#00B5C8"/>
+              <circle cx="27" cy="9"  r="2"   fill="#E5C158" class="dp0" opacity=".9"/>
             </svg>
           </div>
           <div>
-            <p class="text-xs font-bold tracking-widest uppercase text-auroraTeal mb-1">Step 3</p>
-            <h3 class="font-display text-2xl font-bold text-antiqueGold leading-tight">Elite AI Staff</h3>
+            <p class="text-xs font-black tracking-widest uppercase text-auroraTeal mb-1">Plan C — Elite AI</p>
+            <h3 class="font-display text-2xl font-bold text-deepCharcoal">Elite AI Staff</h3>
           </div>
         </div>
-
-        <p class="text-steelSilver text-sm leading-relaxed mb-5">
-          Your 24/7 AI receptionist answers calls, chats with customers, and books appointments — even at midnight on a bank holiday.
-        </p>
-
+        <p class="text-base text-gray-700 leading-relaxed mb-5">Your 24/7 AI receptionist answers calls, chats with customers, and books appointments — even at midnight on a bank holiday.</p>
         <ul class="space-y-2.5 mb-6">
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-auroraTeal/10 border border-auroraTeal/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            AI chatbot (answers questions 24/7)
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-auroraTeal/10 border border-auroraTeal/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            AI voice receptionist (answers phone)
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-auroraTeal/10 border border-auroraTeal/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            AI content writer (posts and emails)
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-auroraTeal/10 border border-auroraTeal/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            GDPR-secure data vault
-          </li>
-          <li class="flex items-center gap-3 text-sm text-coolSilver">
-            <span class="w-5 h-5 rounded-full bg-auroraTeal/10 border border-auroraTeal/30 flex items-center justify-center flex-shrink-0">
-              <svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            Referral programme (auto reward)
-          </li>
+          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Everything in Plans A &amp; B</span></li>
+          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">AI chatbot — answers 24/7</span></li>
+          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">AI voice receptionist — answers phone</span></li>
+          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">AI content writer for posts and emails</span></li>
+          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">GDPR-secure vault + referral system</span></li>
         </ul>
-
-        <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-forestOlive/30">
-          <span class="feature-pill pill-teal">AI Chat</span>
-          <span class="feature-pill pill-teal">AI Voice</span>
-          <span class="feature-pill pill-teal">GDPR</span>
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+          <span class="pill pill-teal">AI Chat</span><span class="pill pill-teal">AI Voice</span><span class="pill pill-teal">GDPR</span>
         </div>
       </div>
     </div>
 
-    <!-- ── Visual connector ── -->
-    <div class="flex items-center justify-center gap-3 my-8 fade-up delay-4">
-      <div class="h-px flex-1 bg-gradient-to-r from-transparent via-forestOlive/50 to-transparent"></div>
-      <div class="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-steelSilver">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="2,5 7,10 12,5" stroke="#9AA3B0" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Wholesale Pricing Below
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="2,5 7,10 12,5" stroke="#9AA3B0" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
-      <div class="h-px flex-1 bg-gradient-to-r from-transparent via-forestOlive/50 to-transparent"></div>
+    <!-- Divider -->
+    <div class="flex items-center gap-4 my-10 fade-up">
+      <div class="h-px flex-1" style="background:linear-gradient(90deg,transparent,#D1D5DB,transparent);"></div>
+      <p class="text-sm font-black tracking-widest uppercase text-gray-500 flex items-center gap-2">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><polyline points="2,4 6,8 10,4" stroke="#9CA3AF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Transparent Pricing
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><polyline points="2,4 6,8 10,4" stroke="#9CA3AF" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </p>
+      <div class="h-px flex-1" style="background:linear-gradient(90deg,transparent,#D1D5DB,transparent);"></div>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         WHOLESALE PRICING MATRIX
-    ══════════════════════════════════════════ -->
-    <div class="pricing-matrix p-8 md:p-10 fade-up delay-4">
-
-      <!-- Header row -->
+    <!-- PRICING MATRIX -->
+    <div class="pricing-matrix p-8 md:p-10 fade-up">
       <div class="text-center mb-10">
-        <span class="inline-block text-xs font-bold tracking-widest uppercase text-antiqueGold border border-antiqueGold/30 bg-antiqueGold/5 px-4 py-1.5 rounded-full mb-3">
-          Transparent Wholesale Pricing
-        </span>
-        <h3 class="font-display text-3xl md:text-4xl font-bold text-platinum mb-2">
-          What You Pay. What You Get.
-        </h3>
-        <p class="text-steelSilver text-sm max-w-lg mx-auto">
-          No hidden fees. No contracts to trap you. Every plan includes setup, training, and ongoing support from a real person.
-        </p>
+        <span class="inline-block text-sm font-black tracking-widest uppercase text-antiqueGold border-2 border-antiqueGold/40 bg-antiqueGold/8 px-4 py-1.5 rounded-full mb-4">Launch Offer — Wholesale Pricing</span>
+        <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">What You Pay. What You Get.</h3>
+        <p class="text-lg text-coolSilver max-w-lg mx-auto">No hidden fees. No long contracts. Every plan includes setup, training, and support from a real person.</p>
       </div>
 
-      <!-- Plan cards grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
 
-        <!-- PLAN A -->
-        <div class="plan-pill plan-a p-6">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <span class="text-xs font-bold tracking-widest uppercase text-mountainSage">Plan A</span>
-              <h4 class="font-display text-xl font-bold text-platinum mt-0.5">Digital Foundation</h4>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-mountainSage/15 border border-mountainSage/30 flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <rect x="2" y="2" width="14" height="10" rx="2" stroke="#6B8C52" stroke-width="1.5" fill="none"/>
-                <line x1="5" y1="16" x2="13" y2="16" stroke="#6B8C52" stroke-width="1.5" stroke-linecap="round"/>
-                <line x1="9"  y1="12" x2="9"  y2="16" stroke="#6B8C52" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-            </span>
+        <!-- Plan A -->
+        <div class="plan-card plan-a p-6">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black tracking-widest uppercase text-mountainSage">Plan A — Essential</span>
           </div>
-          <div class="mb-4">
-            <span class="font-display text-4xl font-bold text-antiqueGold price-glow">£99</span>
-            <span class="text-steelSilver text-sm">/month</span>
+          <h4 class="font-display text-xl font-bold text-white mb-4">Digital Foundation</h4>
+
+          <!-- Strike-through launch pricing -->
+          <div class="mb-1">
+            <span class="text-base font-bold line-through" style="color:#7D2E3A;">Was £149/mo</span>
+            <span class="ml-2 text-xs font-black uppercase px-2 py-0.5 rounded-full" style="background:#7D2E3A22;color:#E5A0A8;border:1px solid #7D2E3A44;">SAVE £52</span>
           </div>
-          <p class="text-steelSilver text-xs mb-4 leading-relaxed">Perfect for sole traders and new businesses who need a professional online presence fast.</p>
-          <!-- Margin bar -->
-          <div class="mb-1 flex justify-between text-xs text-steelSilver">
-            <span>Our cost</span><span class="text-mountainSage font-semibold">~£77/mo</span>
+          <div class="flex items-end gap-1 mb-4">
+            <span class="font-display text-5xl font-bold text-antiqueGold" style="text-shadow:0 0 20px rgba(212,175,55,.4);">£97</span>
+            <span class="text-coolSilver text-base mb-1">/month</span>
           </div>
-          <div class="margin-bar mb-3">
-            <div class="margin-fill" style="width: 22%"></div>
-          </div>
-          <p class="text-xs text-steelSilver/60 italic">~£22/mo margin per client</p>
-          <div class="mt-4 pt-4 border-t border-forestOlive/30">
-            <a href="#crisis" class="block text-center text-sm font-bold text-mountainSage border border-mountainSage/40 hover:bg-mountainSage/10 rounded-lg py-2.5 transition duration-200">
-              Start Here →
-            </a>
-          </div>
+
+          <p class="text-base text-steelSilver mb-4 leading-relaxed">Perfect for sole traders — plumbers, cleaners, beauticians — who need a professional presence fast.</p>
+          <div class="mb-1 flex justify-between text-sm text-steelSilver font-semibold"><span>Platform cost</span><span class="text-mountainSage font-bold">~£77/mo</span></div>
+          <div class="margin-bar mb-5"><div class="margin-fill" style="width:22%"></div></div>
+          <a href="#crisis" class="block text-center text-base font-black text-mountainSage border-2 border-mountainSage/50 hover:bg-mountainSage/12 rounded-xl py-3 transition duration-200">Get Started →</a>
         </div>
 
-        <!-- PLAN B (popular) -->
-        <div class="plan-pill plan-b p-6">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <span class="text-xs font-bold tracking-widest uppercase text-antiqueGold">Plan B</span>
-              <h4 class="font-display text-xl font-bold text-platinum mt-0.5">Growth Autopilot</h4>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <polyline points="3,12 7,7 10,10 15,4" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                <polyline points="12,4 15,4 15,7" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
+        <!-- Plan B -->
+        <div class="plan-card plan-b p-6">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black tracking-widest uppercase text-brightGold">Plan B — Growth</span>
           </div>
-          <div class="mb-4">
-            <span class="font-display text-4xl font-bold text-brightGold price-glow">£199</span>
-            <span class="text-steelSilver text-sm">/month</span>
+          <h4 class="font-display text-xl font-bold text-white mb-4">Growth Autopilot</h4>
+
+          <div class="mb-1">
+            <span class="text-base font-bold line-through" style="color:#7D2E3A;">Was £249/mo</span>
+            <span class="ml-2 text-xs font-black uppercase px-2 py-0.5 rounded-full" style="background:#7D2E3A22;color:#E5A0A8;border:1px solid #7D2E3A44;">SAVE £62</span>
           </div>
-          <p class="text-steelSilver text-xs mb-4 leading-relaxed">For growing businesses ready to save 10+ hours a week and fill quiet days automatically.</p>
-          <div class="mb-1 flex justify-between text-xs text-steelSilver">
-            <span>Our cost</span><span class="text-antiqueGold font-semibold">~£77/mo</span>
+          <div class="flex items-end gap-1 mb-4">
+            <span class="font-display text-5xl font-bold text-brightGold" style="text-shadow:0 0 20px rgba(229,193,88,.4);">£187</span>
+            <span class="text-coolSilver text-base mb-1">/month</span>
           </div>
-          <div class="margin-bar mb-3">
-            <div class="margin-fill" style="width: 60%"></div>
-          </div>
-          <p class="text-xs text-steelSilver/60 italic">~£120/mo margin per client</p>
-          <div class="mt-4 pt-4 border-t border-antiqueGold/20">
-            <a href="#crisis" class="block text-center text-sm font-bold text-midnightEmerald bg-antiqueGold hover:bg-brightGold rounded-lg py-2.5 transition duration-200">
-              Most Popular →
-            </a>
-          </div>
+
+          <p class="text-base text-steelSilver mb-4 leading-relaxed">For growing salons, restaurants, and trade teams ready to save 10+ hours a week automatically.</p>
+          <div class="mb-1 flex justify-between text-sm text-steelSilver font-semibold"><span>Platform cost</span><span class="text-brightGold font-bold">~£77/mo</span></div>
+          <div class="margin-bar mb-5"><div class="margin-fill" style="width:65%"></div></div>
+          <a href="#crisis" class="block text-center text-base font-black text-midnightEmerald bg-antiqueGold hover:bg-brightGold rounded-xl py-3 transition duration-200">Most Popular →</a>
         </div>
 
-        <!-- PLAN C -->
-        <div class="plan-pill plan-c p-6">
-          <div class="flex items-center justify-between mb-4">
-            <div>
-              <span class="text-xs font-bold tracking-widest uppercase text-auroraTeal">Plan C</span>
-              <h4 class="font-display text-xl font-bold text-platinum mt-0.5">Elite AI</h4>
-            </div>
-            <span class="w-10 h-10 rounded-full bg-auroraTeal/15 border border-auroraTeal/30 flex items-center justify-center">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <circle cx="9" cy="9" r="4" stroke="#00B5C8" stroke-width="1.5" fill="none"/>
-                <rect x="7.5" y="2"  width="3" height="3" rx="0.8" fill="#00B5C8" transform="rotate(0   9 9)"/>
-                <rect x="7.5" y="2"  width="3" height="3" rx="0.8" fill="#00B5C8" transform="rotate(90  9 9)"/>
-                <rect x="7.5" y="2"  width="3" height="3" rx="0.8" fill="#00B5C8" transform="rotate(180 9 9)"/>
-                <rect x="7.5" y="2"  width="3" height="3" rx="0.8" fill="#00B5C8" transform="rotate(270 9 9)"/>
-                <circle cx="9" cy="9" r="1.5" fill="#00B5C8"/>
-              </svg>
-            </span>
+        <!-- Plan C -->
+        <div class="plan-card plan-c p-6">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-black tracking-widest uppercase text-auroraTeal">Plan C — Elite AI</span>
           </div>
-          <div class="mb-4">
-            <span class="font-display text-4xl font-bold text-auroraTeal price-glow" style="text-shadow: 0 0 20px rgba(0,181,200,0.4);">£399</span>
-            <span class="text-steelSilver text-sm">/month</span>
+          <h4 class="font-display text-xl font-bold text-white mb-4">Elite AI</h4>
+
+          <div class="mb-1">
+            <span class="text-base font-bold line-through" style="color:#7D2E3A;">Was £449/mo</span>
+            <span class="ml-2 text-xs font-black uppercase px-2 py-0.5 rounded-full" style="background:#7D2E3A22;color:#E5A0A8;border:1px solid #7D2E3A44;">SAVE £72</span>
           </div>
-          <p class="text-steelSilver text-xs mb-4 leading-relaxed">For high-volume businesses who need a 24/7 AI staff member handling calls and bookings.</p>
-          <div class="mb-1 flex justify-between text-xs text-steelSilver">
-            <span>Our cost</span><span class="text-auroraTeal font-semibold">~£154/mo</span>
+          <div class="flex items-end gap-1 mb-4">
+            <span class="font-display text-5xl font-bold text-auroraTeal" style="text-shadow:0 0 20px rgba(0,181,200,.4);">£377</span>
+            <span class="text-coolSilver text-base mb-1">/month</span>
           </div>
-          <div class="margin-bar mb-3">
-            <div class="margin-fill" style="width: 78%; background: linear-gradient(90deg, #3D5A3E, #00B5C8);"></div>
-          </div>
-          <p class="text-xs text-steelSilver/60 italic">~£245/mo margin per client</p>
-          <div class="mt-4 pt-4 border-t border-auroraTeal/20">
-            <a href="#crisis" class="block text-center text-sm font-bold text-auroraTeal border border-auroraTeal/40 hover:bg-auroraTeal/10 rounded-lg py-2.5 transition duration-200">
-              Talk to Us →
-            </a>
-          </div>
+
+          <p class="text-base text-steelSilver mb-4 leading-relaxed">For finance advisors, mortgage brokers, and high-volume businesses needing 24/7 AI staff.</p>
+          <div class="mb-1 flex justify-between text-sm text-steelSilver font-semibold"><span>Platform cost</span><span class="text-auroraTeal font-bold">~£154/mo</span></div>
+          <div class="margin-bar mb-5"><div class="margin-fill" style="width:80%;background:linear-gradient(90deg,#3D5A3E,#00B5C8);"></div></div>
+          <a href="#crisis" class="block text-center text-base font-black text-auroraTeal border-2 border-auroraTeal/50 hover:bg-auroraTeal/12 rounded-xl py-3 transition duration-200">Talk to Us →</a>
         </div>
       </div>
 
-      <!-- ── Value comparison row ── -->
-      <div class="bg-midnightEmerald/60 border border-forestOlive/30 rounded-2xl p-6">
-        <p class="text-center text-xs font-bold tracking-widest uppercase text-steelSilver mb-5">What This Replaces — And What It Saves You</p>
+      <!-- Value row -->
+      <div class="rounded-2xl p-6 border border-forestOlive/40" style="background:rgba(13,21,21,.6);">
+        <p class="text-center text-sm font-black tracking-widest uppercase text-steelSilver mb-5">What GoChuchuro Replaces — And What It Saves You</p>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-          <div class="space-y-1">
-            <p class="font-display text-2xl font-bold text-deepGarnet line-through opacity-70">£300–£1,000</p>
-            <p class="text-xs text-steelSilver leading-tight">Buying all tools separately per month</p>
-          </div>
-          <div class="space-y-1">
-            <p class="font-display text-2xl font-bold text-antiqueGold">10+ hrs</p>
-            <p class="text-xs text-steelSilver leading-tight">Saved every week on admin tasks</p>
-          </div>
-          <div class="space-y-1">
-            <p class="font-display text-2xl font-bold text-auroraTeal">24/7</p>
-            <p class="text-xs text-steelSilver leading-tight">Your system works while you sleep</p>
-          </div>
-          <div class="space-y-1">
-            <p class="font-display text-2xl font-bold text-mountainSage">£0</p>
-            <p class="text-xs text-steelSilver leading-tight">Setup cost on our 3-month starter deal</p>
-          </div>
+          <div><p class="font-display text-3xl font-bold text-deepGarnet line-through opacity-75">£1k+</p><p class="text-base text-coolSilver mt-1 leading-tight font-semibold">Buying all tools separately</p></div>
+          <div><p class="font-display text-3xl font-bold text-antiqueGold">10 hrs</p><p class="text-base text-coolSilver mt-1 leading-tight font-semibold">Saved every week on admin</p></div>
+          <div><p class="font-display text-3xl font-bold text-auroraTeal">24/7</p><p class="text-base text-coolSilver mt-1 leading-tight font-semibold">Your system works while you sleep</p></div>
+          <div><p class="font-display text-3xl font-bold text-mountainSage">5 days</p><p class="text-base text-coolSilver mt-1 leading-tight font-semibold">From sign-up to live system</p></div>
         </div>
       </div>
-
-      <!-- ── Bottom trust line ── -->
-      <p class="text-center text-xs text-steelSilver/60 mt-6 italic">
-        All plans include onboarding support, training, and a real human you can WhatsApp when you need help.
-      </p>
+      <p class="text-center text-base text-steelSilver mt-5 italic">All plans include personal onboarding, training, and a real human you can WhatsApp when you need help.</p>
     </div>
 
-  </div><!-- /max-w-6xl -->
+  </div>
 </section>
 
-<!-- ── Scroll fade-up observer ── -->
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // Animate margin bars when visible
-  const barObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('.margin-fill').forEach(bar => {
-          const w = bar.style.width;
-          bar.style.width = '0%';
-          setTimeout(() => { bar.style.width = w; }, 200);
-        });
-      }
-    });
-  }, { threshold: 0.3 });
-
-  document.querySelectorAll('.pricing-matrix').forEach(el => barObserver.observe(el));
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoChuchuro — Solutions Section Preview</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            midnightEmerald: '#0D1515',
-            deepCharcoal:    '#111111',
-            deepForest:      '#2A3D2B',
-            forestOlive:     '#3D5A3E',
-            mountainSage:    '#6B8C52',
-            antiqueGold:     '#D4AF37',
-            brightGold:      '#E5C158',
-            auroraTeal:      '#00B5C8',
-            coolSilver:      '#C8CDD6',
-            steelSilver:     '#9AA3B0',
-            platinum:        '#F5F6F8',
-            deepGarnet:      '#7D2E3A',
-            warmMaroon:      '#9E3D4A',
-          },
-          fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            body:    ['Nunito Sans', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-
-  <style>
-    * { font-family: 'Nunito Sans', sans-serif; box-sizing: border-box; }
-    .font-display { font-family: 'Cormorant Garamond', serif; }
-
-    /* ── Section: clean platinum ground, dark accents ── */
-    .solutions-bg {
-      background-color: #F5F6F8;
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(0,181,200,0.04) 0%, transparent 50%),
-        radial-gradient(circle at 85% 80%, rgba(212,175,55,0.05) 0%, transparent 50%);
-    }
-
-    /* ── Section top accent ── */
-    .teal-border-top { border-top: 3px solid #00B5C8; }
-
-    /* ── Browser mock frame ── */
-    .browser-frame {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid #C8CDD655;
-      box-shadow:
-        0 4px 6px rgba(0,0,0,0.04),
-        0 12px 32px rgba(13,21,21,0.08),
-        0 0 0 1px rgba(0,181,200,0.06);
-      background: #fff;
-      transition: transform 0.35s cubic-bezier(0.34,1.4,0.64,1),
-                  box-shadow 0.35s ease;
-    }
-    .browser-frame:hover {
-      transform: translateY(-6px);
-      box-shadow:
-        0 8px 12px rgba(0,0,0,0.06),
-        0 24px 48px rgba(13,21,21,0.12),
-        0 0 0 1.5px rgba(212,175,55,0.3);
-    }
-
-    /* ── Browser top bar ── */
-    .browser-bar {
-      background: #F5F6F8;
-      border-bottom: 1px solid #E0E2E6;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .b-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .b-url {
-      flex: 1;
-      background: #fff;
-      border: 1px solid #E0E2E6;
-      border-radius: 6px;
-      font-size: 9px;
-      color: #9AA3B0;
-      padding: 3px 8px;
-      text-align: center;
-      font-family: 'Nunito Sans', sans-serif;
-      letter-spacing: 0.01em;
-    }
-
-    /* ── Browser scroll content ── */
-    .browser-scroll {
-      height: 220px;
-      overflow-y: auto;
-      padding: 16px;
-      background: #fff;
-      scrollbar-width: thin;
-      scrollbar-color: #C8CDD6 transparent;
-    }
-    .browser-scroll::-webkit-scrollbar { width: 4px; }
-    .browser-scroll::-webkit-scrollbar-track { background: transparent; }
-    .browser-scroll::-webkit-scrollbar-thumb { background: #C8CDD6; border-radius: 4px; }
-
-    /* ── Browser footer label ── */
-    .browser-footer {
-      padding: 14px 16px;
-      border-top: 1px solid #F0F1F3;
-      background: #fff;
-    }
-
-    /* ── Feature engineering cards ── */
-    .eng-card {
-      background: #fff;
-      border: 1px solid #E8EAED;
-      border-radius: 16px;
-      padding: 24px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .eng-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .eng-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(13,21,21,0.1);
-    }
-    .eng-card:hover::before { opacity: 1; }
-    .eng-card.card-teal:hover  { border-color: #00B5C844; }
-    .eng-card.card-gold:hover  { border-color: #D4AF3744; }
-    .eng-card.card-dark:hover  { border-color: #0D151544; }
-    .eng-card.card-garnet:hover{ border-color: #7D2E3A44; }
-    .eng-card.card-teal::before  { background: linear-gradient(90deg, #00B5C8, #6B8C52); }
-    .eng-card.card-gold::before  { background: linear-gradient(90deg, #D4AF37, #E5C158); }
-    .eng-card.card-dark::before  { background: linear-gradient(90deg, #0D1515, #3D5A3E); }
-    .eng-card.card-garnet::before{ background: linear-gradient(90deg, #7D2E3A, #9E3D4A); }
-
-    /* ── Icon containers ── */
-    .icon-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      flex-shrink: 0;
-    }
-    .icon-box-teal   { background: #00B5C810; border: 1.5px solid #00B5C833; }
-    .icon-box-gold   { background: #D4AF3710; border: 1.5px solid #D4AF3733; }
-    .icon-box-dark   { background: #0D151510; border: 1.5px solid #0D151533; }
-    .icon-box-garnet { background: #7D2E3A10; border: 1.5px solid #7D2E3A33; }
-
-    /* ── Chat bubble animations ── */
-    @keyframes bubbleIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .bubble-1 { animation: bubbleIn 0.5s ease 0.2s both; }
-    .bubble-2 { animation: bubbleIn 0.5s ease 0.8s both; }
-    .bubble-3 { animation: bubbleIn 0.5s ease 1.4s both; }
-
-    /* ── Typing indicator ── */
-    @keyframes typingDot {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30%            { transform: translateY(-4px); opacity: 1; }
-    }
-    .typing-dot { animation: typingDot 1.2s ease infinite; }
-    .typing-dot:nth-child(2) { animation-delay: 0.15s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.30s; }
-
-    /* ── Pulse dot ── */
-    @keyframes pDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.3; transform: scale(1.6); }
-    }
-    .p-dot { animation: pDot 1.8s ease-in-out infinite; }
-
-    /* ── Fade up on scroll ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    .d1 { transition-delay: 0.10s; }
-    .d2 { transition-delay: 0.20s; }
-    .d3 { transition-delay: 0.30s; }
-    .d4 { transition-delay: 0.15s; }
-    .d5 { transition-delay: 0.25s; }
-    .d6 { transition-delay: 0.35s; }
-    .d7 { transition-delay: 0.45s; }
-
-    /* ── Gold shimmer tag ── */
-    .gold-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #0D1515;
-      color: #D4AF37;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #D4AF3733;
-    }
-
-    /* ── Star rating display ── */
-    .star { color: #D4AF37; font-size: 13px; }
-
-    /* ── Live status dot ── */
-    .live-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: #22c55e;
-      display: inline-block;
-      margin-right: 4px;
-    }
-    @keyframes livePulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
-      50%      { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
-    }
-    .live-dot { animation: livePulse 2s ease infinite; }
-
-    /* ── Map pin SVG animation ── */
-    @keyframes pinDrop {
-      0%   { transform: translateY(-8px); opacity: 0; }
-      60%  { transform: translateY(2px); opacity: 1; }
-      100% { transform: translateY(0); }
-    }
-    .pin-drop { animation: pinDrop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.5s both; }
-
-    /* ── Progress bar animation ── */
-    @keyframes barGrow {
-      from { width: 0%; }
-    }
-    .bar-grow { animation: barGrow 1.5s ease 0.8s both; }
-  </style>
-</head>
-
-<body class="solutions-bg min-h-screen">
-
-<!-- ════════════════════════════════════════════
-     SECTION 2: SOLUTIONS  (#solutions)
-════════════════════════════════════════════ -->
-<section id="solutions" class="solutions-bg teal-border-top py-24 px-6">
+<!-- ══════════════════════════════════════════════
+     SECTION 2 — HOW IT WORKS (#solutions)
+══════════════════════════════════════════════ -->
+<section id="solutions" class="section-pale py-24 px-6 border-b border-gray-100" style="border-top:3px solid #00B5C8;">
   <div class="max-w-6xl mx-auto">
 
-    <!-- ── Section header ── -->
+    <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 fade-up">
       <div class="max-w-2xl">
-        <span class="gold-tag mb-4 inline-flex">
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-            <circle cx="5" cy="5" r="4" stroke="#D4AF37" stroke-width="1.2"/>
-            <text x="5" y="7.5" text-anchor="middle" font-size="5" fill="#D4AF37" font-weight="700">2</text>
-          </svg>
-          How It All Works
-        </span>
-        <h2 class="font-display text-4xl md:text-5xl font-bold text-midnightEmerald leading-tight mb-4">
-          See your business<br/>running on autopilot.
-        </h2>
-        <p class="text-steelSilver text-base leading-relaxed max-w-xl">
-          No guesswork. No tech training. Below is exactly what your customers will see and experience — and exactly what you will never have to do manually again.
-        </p>
+        <span class="inline-block text-sm font-black tracking-widest uppercase text-midnightEmerald border-2 border-midnightEmerald/20 bg-midnightEmerald/5 px-4 py-1.5 rounded-full mb-4">02 / How It Works</span>
+        <h2 class="font-display text-4xl md:text-5xl font-bold text-deepCharcoal leading-tight mb-4">See your business<br/>running on autopilot.</h2>
+        <p class="text-lg text-gray-700 leading-relaxed">No guesswork. No tech training needed. Below is exactly what your customers experience — and what you will never do manually again.</p>
       </div>
-      <!-- Live status badge -->
-      <div class="flex items-center gap-2 bg-white border border-coolSilver/40 rounded-full px-4 py-2 self-start md:self-auto shadow-sm flex-shrink-0">
-        <span class="live-dot"></span>
-        <span class="text-xs font-semibold text-midnightEmerald">System live 24/7</span>
+      <div class="flex items-center gap-2 bg-white border-2 border-gray-200 rounded-full px-5 py-2.5 self-start md:self-auto shadow-sm flex-shrink-0">
+        <span class="w-2.5 h-2.5 rounded-full bg-green-500 dp0"></span>
+        <span class="text-base font-black text-deepCharcoal">Live 24 hours a day</span>
       </div>
     </div>
 
-    <!-- ════════════════════════════════════
-         THREE BROWSER MOCK FRAMES
-    ════════════════════════════════════ -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-7 mb-20">
+    <!-- Three browser frames -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
 
-      <!-- FRAME 1: Local Visibility -->
-      <div class="browser-frame fade-up d1 flex flex-col">
-        <div class="browser-bar">
-          <div class="b-dot" style="background:#FF5F57;"></div>
-          <div class="b-dot" style="background:#FEBC2E;"></div>
-          <div class="b-dot" style="background:#28C840;"></div>
-          <div class="b-url">gochuchuro.com/your-website</div>
+      <!-- Frame 1 -->
+      <div class="browser-frame flex flex-col fade-up d1">
+        <div class="flex items-center gap-1.5 px-4 py-3 border-b border-gray-100" style="background:#F9FAFB;">
+          <div class="w-3 h-3 rounded-full" style="background:#FF5F57;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#FEBC2E;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#28C840;"></div>
+          <div class="flex-1 bg-white border border-gray-200 rounded-md text-center text-xs text-gray-400 px-2 py-1 ml-1 truncate">your-business.co.uk</div>
         </div>
-        <div class="browser-scroll space-y-3">
-          <!-- Simulated website header -->
-          <div class="h-10 rounded-lg flex items-center px-3 gap-2" style="background: linear-gradient(90deg, #0D1515, #2A3D2B);">
-            <div class="w-4 h-4 rounded" style="background:#D4AF37;"></div>
-            <div class="h-2 w-20 rounded" style="background:#9AA3B0;"></div>
+        <div class="p-5 overflow-y-auto custom-scroll space-y-3" style="height:230px;">
+          <div class="h-10 rounded-lg flex items-center px-3 gap-2" style="background:linear-gradient(90deg,#0D1515,#2A3D2B);">
+            <div class="w-3 h-3 rounded" style="background:#D4AF37;"></div>
+            <div class="h-2 w-20 rounded bg-gray-400 opacity-50"></div>
             <div class="ml-auto h-2 w-12 rounded" style="background:#D4AF3766;"></div>
           </div>
-          <!-- Hero text lines -->
-          <div class="h-3 bg-midnightEmerald/80 rounded w-4/5"></div>
-          <div class="h-2 bg-steelSilver/30 rounded w-full"></div>
-          <div class="h-2 bg-steelSilver/30 rounded w-5/6"></div>
-          <div class="h-2 bg-steelSilver/30 rounded w-3/4"></div>
-          <!-- CTA button mock -->
-          <div class="h-8 rounded-md flex items-center justify-center gap-1" style="background:#D4AF37; width: 120px;">
-            <div class="h-2 w-16 rounded" style="background:#0D1515;"></div>
+          <div class="h-3 rounded w-4/5" style="background:#1F2937;"></div>
+          <div class="h-2.5 rounded w-full bg-gray-200"></div>
+          <div class="h-2.5 rounded w-5/6 bg-gray-200"></div>
+          <div class="h-9 rounded-lg flex items-center justify-center font-bold text-xs text-midnightEmerald" style="background:#D4AF37; width:120px;">Book Now</div>
+          <div class="border-2 rounded-xl p-3 flex items-center gap-2" style="border-color:#00B5C840;background:#00B5C808;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#00B5C8" stroke-width="1.3"/><polyline points="4,7 6.5,9.5 10.5,5" stroke="#00B5C8" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="text-xs font-black text-auroraTeal">Google SEO Active</span>
           </div>
-          <!-- SEO badge -->
-          <div class="border rounded-lg p-3 flex items-center gap-2" style="border-color:#00B5C833; background:#00B5C808;">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <circle cx="7" cy="7" r="5.5" stroke="#00B5C8" stroke-width="1.2"/>
-              <polyline points="4,7 6,9 10,5" stroke="#00B5C8" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-xs font-semibold" style="color:#00B5C8;">Local SEO Active</span>
+          <div class="rounded-xl flex items-center justify-center relative" style="height:65px;background:linear-gradient(135deg,#dbeafe,#e0f2fe);border:1.5px solid #BFDBFE;">
+            <svg width="18" height="24" viewBox="0 0 18 24" fill="none" aria-hidden="true"><path d="M9 0C4 0 0 4 0 9c0 6.75 9 15 9 15s9-8.25 9-15c0-5-4-9-9-9Z" fill="#D4AF37"/><circle cx="9" cy="9" r="3.5" fill="#0D1515"/></svg>
+            <span class="absolute bottom-1 right-2 text-xs font-semibold text-gray-400">Google Maps</span>
           </div>
-          <!-- Map pin simulation -->
-          <div class="rounded-lg overflow-hidden border" style="border-color:#E0E2E6; height:70px; background: linear-gradient(135deg, #e8f4f8 0%, #dbeafe 100%); position:relative; display:flex; align-items:center; justify-content:center;">
-            <svg class="pin-drop" width="20" height="26" viewBox="0 0 20 26" fill="none">
-              <path d="M10 0C4.477 0 0 4.477 0 10c0 7.5 10 16 10 16s10-8.5 10-16C20 4.477 15.523 0 10 0z" fill="#D4AF37"/>
-              <circle cx="10" cy="10" r="4" fill="#0D1515"/>
-            </svg>
-            <span class="absolute bottom-2 right-2 text-xs font-semibold" style="color:#0D1515; opacity:0.5;">Google Maps</span>
-          </div>
-          <!-- Star rating -->
           <div class="flex items-center gap-1">
-            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-            <span class="text-xs font-semibold text-midnightEmerald ml-1">4.9</span>
-            <span class="text-xs text-steelSilver">(47 reviews)</span>
+            <span class="text-base" style="color:#D4AF37;">★★★★★</span>
+            <span class="text-sm font-black text-deepCharcoal ml-1">4.9</span>
+            <span class="text-sm text-gray-500">(47 reviews)</span>
           </div>
         </div>
-        <div class="browser-footer">
-          <h4 class="font-bold text-midnightEmerald text-sm mb-1">Local Visibility Layout</h4>
-          <p class="text-xs text-steelSilver leading-relaxed">Clean, fast, and built to rank on Google right where your customers are searching.</p>
-          <div class="mt-2 flex gap-1 flex-wrap">
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#00B5C810; color:#00B5C8; border:1px solid #00B5C833;">SEO</span>
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#D4AF3710; color:#D4AF37; border:1px solid #D4AF3733;">Google Maps</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- FRAME 2: Lead Capture Quiz -->
-      <div class="browser-frame fade-up d2 flex flex-col">
-        <div class="browser-bar">
-          <div class="b-dot" style="background:#FF5F57;"></div>
-          <div class="b-dot" style="background:#FEBC2E;"></div>
-          <div class="b-dot" style="background:#28C840;"></div>
-          <div class="b-url">gochuchuro.com/get-a-quote</div>
-        </div>
-        <div class="browser-scroll space-y-3">
-          <!-- Progress bar -->
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-xs font-bold text-midnightEmerald">Step 1 of 3</span>
-            <span class="text-xs text-steelSilver">33% done</span>
-          </div>
-          <div class="h-1.5 rounded-full" style="background:#E8EAED;">
-            <div class="h-1.5 rounded-full bar-grow" style="width:33%; background: linear-gradient(90deg, #00B5C8, #D4AF37);"></div>
-          </div>
-          <!-- Quiz card -->
-          <div class="border rounded-xl p-4 space-y-3 shadow-sm" style="border-color:#E0E2E6;">
-            <p class="text-xs font-bold text-midnightEmerald">What service do you need today?</p>
-            <!-- Option pills -->
-            <div class="space-y-2">
-              <div class="border rounded-lg px-3 py-2 text-xs font-medium cursor-pointer transition" style="border-color:#D4AF37; background:#D4AF3710; color:#0D1515;">✓ &nbsp;Plumbing / Gas work</div>
-              <div class="border rounded-lg px-3 py-2 text-xs font-medium" style="border-color:#E0E2E6; color:#9AA3B0;">Electrical</div>
-              <div class="border rounded-lg px-3 py-2 text-xs font-medium" style="border-color:#E0E2E6; color:#9AA3B0;">Roofing</div>
-              <div class="border rounded-lg px-3 py-2 text-xs font-medium" style="border-color:#E0E2E6; color:#9AA3B0;">Other</div>
-            </div>
-            <div class="h-8 rounded-lg flex items-center justify-center text-xs font-bold text-white" style="background:#0D1515;">
-              Next Step &nbsp;›
-            </div>
-          </div>
-          <!-- Auto-notification badge -->
-          <div class="rounded-lg p-3 flex items-start gap-2" style="background:#D4AF3708; border:1px solid #D4AF3730;">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0; margin-top:1px;">
-              <path d="M7 1L8.5 5H13L9.5 7.5L11 11.5L7 9L3 11.5L4.5 7.5L1 5H5.5L7 1Z" stroke="#D4AF37" stroke-width="1.2" fill="#D4AF3720" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-xs text-steelSilver leading-relaxed"><strong style="color:#0D1515;">Auto-fires instantly:</strong> When submitted, you get a text alert and the customer receives a confirmation email — all automatic.</span>
-          </div>
-        </div>
-        <div class="browser-footer">
-          <h4 class="font-bold text-midnightEmerald text-sm mb-1">Capture and Nurture Engine</h4>
-          <p class="text-xs text-steelSilver leading-relaxed">Qualifies leads automatically, hooks their data, and notifies you instantly.</p>
-          <div class="mt-2 flex gap-1 flex-wrap">
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#D4AF3710; color:#D4AF37; border:1px solid #D4AF3733;">Auto-Notify</span>
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#0D151510; color:#0D1515; border:1px solid #0D151533;">Lead Capture</span>
+        <div class="p-5 border-t border-gray-100 bg-white">
+          <h4 class="font-bold text-deepCharcoal text-base mb-1">Local Visibility Layout</h4>
+          <p class="text-sm text-gray-700 leading-relaxed">Clean, fast, and built to rank on Google exactly where your customers are searching.</p>
+          <div class="mt-2 flex gap-1.5">
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold" style="background:#00B5C812;color:#007A8A;border:1.5px solid #00B5C840;">SEO</span>
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold" style="background:#D4AF3712;color:#92730A;border:1.5px solid #D4AF3740;">Google Maps</span>
           </div>
         </div>
       </div>
 
-      <!-- FRAME 3: AI Receptionist -->
-      <div class="browser-frame fade-up d3 flex flex-col">
-        <div class="browser-bar">
-          <div class="b-dot" style="background:#FF5F57;"></div>
-          <div class="b-dot" style="background:#FEBC2E;"></div>
-          <div class="b-dot" style="background:#28C840;"></div>
-          <div class="b-url">gochuchuro.com/ai-assistant</div>
+      <!-- Frame 2 -->
+      <div class="browser-frame flex flex-col fade-up d2">
+        <div class="flex items-center gap-1.5 px-4 py-3 border-b border-gray-100" style="background:#F9FAFB;">
+          <div class="w-3 h-3 rounded-full" style="background:#FF5F57;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#FEBC2E;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#28C840;"></div>
+          <div class="flex-1 bg-white border border-gray-200 rounded-md text-center text-xs text-gray-400 px-2 py-1 ml-1 truncate">your-business.co.uk/quote</div>
         </div>
-        <div class="browser-scroll" style="background:#F8F9FA;">
-          <!-- Chat header -->
-          <div class="flex items-center gap-2 mb-4 pb-3" style="border-bottom:1px solid #E8EAED;">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #0D1515, #2A3D2B);">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <circle cx="7" cy="7" r="3" stroke="#00B5C8" stroke-width="1.2" fill="#00B5C820"/>
-                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(0 7 7)"/>
-                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(90 7 7)"/>
-                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(180 7 7)"/>
-                <rect x="5.5" y="2" width="3" height="3" rx="0.6" fill="#00B5C8" transform="rotate(270 7 7)"/>
-              </svg>
+        <div class="p-5 overflow-y-auto custom-scroll space-y-3" style="height:230px;">
+          <div class="flex justify-between items-center">
+            <span class="text-sm font-black text-deepCharcoal">Step 1 of 3</span>
+            <span class="text-sm font-semibold text-gray-500">33% complete</span>
+          </div>
+          <div style="height:6px;background:#E5E7EB;border-radius:3px;overflow:hidden;">
+            <div style="width:33%;height:100%;background:linear-gradient(90deg,#00B5C8,#D4AF37);border-radius:3px;"></div>
+          </div>
+          <div class="border-2 border-gray-200 rounded-2xl p-4 space-y-2.5">
+            <p class="text-sm font-black text-deepCharcoal">What service do you need?</p>
+            <div class="rounded-xl px-3 py-2.5 text-sm font-bold text-deepCharcoal cursor-pointer" style="border:2px solid #D4AF37;background:#D4AF3712;">✓ &nbsp;Plumbing / Gas</div>
+            <div class="rounded-xl px-3 py-2.5 text-sm font-semibold text-gray-400 cursor-pointer border-2 border-gray-200">Electrical</div>
+            <div class="rounded-xl px-3 py-2.5 text-sm font-semibold text-gray-400 cursor-pointer border-2 border-gray-200">Roofing / Construction</div>
+            <div class="rounded-xl px-3 py-2.5 flex items-center justify-center text-sm font-black text-white cursor-pointer" style="background:#0D1515;">Next Step &rsaquo;</div>
+          </div>
+          <div class="rounded-xl p-3 flex items-start gap-2" style="background:#D4AF3710;border:1.5px solid #D4AF3740;">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;margin-top:2px;" aria-hidden="true"><path d="M7 1L8.5 4.5H12.5L9 6.5L10.5 10.5L7 8.5L3.5 10.5L5 6.5L1.5 4.5H5.5L7 1Z" stroke="#D4AF37" stroke-width="1" fill="#D4AF3720" stroke-linejoin="round"/></svg>
+            <span class="text-sm text-gray-700 leading-relaxed"><strong class="text-deepCharcoal">Auto-fires instantly:</strong> You get a text. Customer gets a confirmation. No action needed from you.</span>
+          </div>
+        </div>
+        <div class="p-5 border-t border-gray-100 bg-white">
+          <h4 class="font-bold text-deepCharcoal text-base mb-1">Lead Capture Engine</h4>
+          <p class="text-sm text-gray-700 leading-relaxed">Qualifies leads automatically and notifies you instantly when someone enquires.</p>
+          <div class="mt-2 flex gap-1.5">
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold" style="background:#D4AF3712;color:#92730A;border:1.5px solid #D4AF3740;">Auto-Notify</span>
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold" style="background:#0D151512;color:#0D1515;border:1.5px solid #0D151530;">Lead Capture</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Frame 3 -->
+      <div class="browser-frame flex flex-col fade-up d3">
+        <div class="flex items-center gap-1.5 px-4 py-3 border-b border-gray-100" style="background:#F9FAFB;">
+          <div class="w-3 h-3 rounded-full" style="background:#FF5F57;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#FEBC2E;"></div>
+          <div class="w-3 h-3 rounded-full" style="background:#28C840;"></div>
+          <div class="flex-1 bg-white border border-gray-200 rounded-md text-center text-xs text-gray-400 px-2 py-1 ml-1 truncate">your-business.co.uk — AI Chat</div>
+        </div>
+        <div class="p-5 overflow-y-auto custom-scroll" style="height:230px;background:#F8FAFC;">
+          <div class="flex items-center gap-2 mb-4 pb-3 border-b border-gray-100">
+            <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#0D1515,#2A3D2B);">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="3" stroke="#00B5C8" stroke-width="1.2" fill="#00B5C820"/><rect x="5.5" y="1.5" width="3" height="3" rx=".6" fill="#00B5C8" transform="rotate(0 7 7)"/><rect x="5.5" y="1.5" width="3" height="3" rx=".6" fill="#00B5C8" transform="rotate(90 7 7)"/><rect x="5.5" y="1.5" width="3" height="3" rx=".6" fill="#00B5C8" transform="rotate(180 7 7)"/><rect x="5.5" y="1.5" width="3" height="3" rx=".6" fill="#00B5C8" transform="rotate(270 7 7)"/></svg>
             </div>
             <div>
-              <p class="text-xs font-bold text-midnightEmerald">GoChuchuro Assistant</p>
-              <p class="text-xs text-steelSilver flex items-center gap-1">
-                <span class="live-dot" style="width:5px;height:5px;"></span>Online now
-              </p>
+              <p class="text-sm font-black text-deepCharcoal">GoChuchuro AI</p>
+              <p class="text-xs font-semibold text-gray-500 flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500 inline-block dp0"></span>Online now — always</p>
             </div>
           </div>
-          <!-- Chat bubbles -->
           <div class="space-y-3">
-            <div class="bubble-1 max-w-[85%]">
-              <div class="bg-white rounded-2xl rounded-tl-sm px-3 py-2.5 shadow-sm" style="border:1px solid #E8EAED;">
-                <p class="text-xs text-midnightEmerald leading-relaxed">Hi there! 👋 I can help you book, get a quote, or check availability. What do you need?</p>
-              </div>
+            <div class="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-gray-100 max-w-85p">
+              <p class="text-sm text-gray-800 leading-relaxed font-medium">Hi! 👋 I can help you book, get a quote, or check our availability. What do you need today?</p>
             </div>
-            <div class="bubble-2 max-w-[80%] ml-auto">
-              <div class="rounded-2xl rounded-tr-sm px-3 py-2.5" style="background:#0D1515;">
-                <p class="text-xs text-white leading-relaxed">I need a plumber Tuesday morning please</p>
-              </div>
+            <div class="rounded-2xl rounded-tr-sm px-4 py-3 ml-auto max-w-80p" style="background:#0D1515;">
+              <p class="text-sm text-white font-medium">I need a plumber Tuesday morning please</p>
             </div>
-            <div class="bubble-3 max-w-[85%]">
-              <div class="rounded-2xl rounded-tl-sm px-3 py-2.5 shadow-sm" style="background:#00B5C808; border:1px solid #00B5C833;">
-                <p class="text-xs text-midnightEmerald leading-relaxed">Great! I have <strong>9:00 AM Tuesday</strong> available. Can I take your name and number to lock that in?</p>
-              </div>
+            <div class="rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm max-w-85p" style="background:#00B5C810;border:1.5px solid #00B5C840;">
+              <p class="text-sm text-gray-800 leading-relaxed font-medium">Great! I have <strong class="text-deepCharcoal">9:00 AM Tuesday</strong> free. Can I take your name and number to lock that in?</p>
             </div>
-            <!-- Typing indicator -->
-            <div class="max-w-[60px]">
-              <div class="bg-white rounded-2xl rounded-tl-sm px-3 py-2.5 shadow-sm flex gap-1 items-center" style="border:1px solid #E8EAED;">
-                <span class="typing-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#9AA3B0;"></span>
-                <span class="typing-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#9AA3B0;"></span>
-                <span class="typing-dot w-1.5 h-1.5 rounded-full inline-block" style="background:#9AA3B0;"></span>
-              </div>
+            <div class="flex items-center gap-1.5 bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-gray-100 w-16">
+              <span class="w-2 h-2 rounded-full dp0" style="background:#9CA3AF;display:inline-block;"></span>
+              <span class="w-2 h-2 rounded-full dp1" style="background:#9CA3AF;display:inline-block;"></span>
+              <span class="w-2 h-2 rounded-full dp2" style="background:#9CA3AF;display:inline-block;"></span>
             </div>
           </div>
         </div>
-        <div class="browser-footer">
-          <h4 class="font-bold text-midnightEmerald text-sm mb-1">Autonomous AI Receptionist</h4>
-          <p class="text-xs text-steelSilver leading-relaxed">Answers questions, qualifies leads, and books appointments — every hour of every day.</p>
-          <div class="mt-2 flex gap-1 flex-wrap">
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#00B5C810; color:#00B5C8; border:1px solid #00B5C833;">AI Chat</span>
-            <span class="text-xs px-2 py-0.5 rounded-full font-semibold" style="background:#D4AF3710; color:#D4AF37; border:1px solid #D4AF3733;">Auto-Book</span>
+        <div class="p-5 border-t border-gray-100 bg-white">
+          <h4 class="font-bold text-deepCharcoal text-base mb-1">AI Receptionist</h4>
+          <p class="text-sm text-gray-700 leading-relaxed">Answers questions and books appointments — every hour of every day. Never sleeps.</p>
+          <div class="mt-2 flex gap-1.5">
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold" style="background:#00B5C812;color:#007A8A;border:1.5px solid #00B5C840;">AI Chat</span>
+            <span class="text-xs px-2.5 py-1 rounded-full font-bold" style="background:#D4AF3712;color:#92730A;border:1.5px solid #D4AF3740;">Auto-Book</span>
           </div>
         </div>
       </div>
+    </div>
 
-    </div><!-- /browser grid -->
-
-    <!-- ════════════════════════════════════
-         FOUR ENGINEERING FEATURE CARDS
-    ════════════════════════════════════ -->
-    <div class="mb-6 fade-up">
-      <p class="text-xs font-bold tracking-widest uppercase text-steelSilver mb-6 flex items-center gap-3">
-        <span class="h-px flex-1" style="background: linear-gradient(90deg, transparent, #C8CDD6);"></span>
-        Built-in features included in every plan
-        <span class="h-px flex-1" style="background: linear-gradient(90deg, #C8CDD6, transparent);"></span>
+    <!-- Four engineering cards -->
+    <div class="mb-8 fade-up">
+      <p class="text-sm font-black tracking-widest uppercase text-gray-400 mb-6 flex items-center gap-3">
+        <span class="h-px flex-1" style="background:linear-gradient(90deg,transparent,#D1D5DB);"></span>
+        Included in every plan
+        <span class="h-px flex-1" style="background:linear-gradient(90deg,#D1D5DB,transparent);"></span>
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-14">
 
-      <!-- CARD 1: Local Maps & SEO -->
-      <div class="eng-card card-teal fade-up d4">
-        <div class="icon-box icon-box-teal">
-          <!-- Map pin + signal rings SVG -->
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M14 3C10.134 3 7 6.134 7 10c0 5.25 7 15 7 15s7-9.75 7-15c0-3.866-3.134-7-7-7z" stroke="#00B5C8" stroke-width="1.6" fill="#00B5C815"/>
-            <circle cx="14" cy="10" r="2.5" fill="#00B5C8"/>
-            <!-- Signal arcs -->
-            <path d="M18 6.5 C19.5 8 20 10 19.5 12" stroke="#00B5C8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.5"/>
-            <path d="M10 6.5 C8.5 8 8 10 8.5 12"   stroke="#00B5C8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.5"/>
-            <path d="M20.5 4.5 C23 7 23.5 11 22 14"  stroke="#00B5C8" stroke-width="1"   stroke-linecap="round" fill="none" opacity="0.25"/>
-            <path d="M7.5 4.5 C5 7 4.5 11 6 14"      stroke="#00B5C8" stroke-width="1"   stroke-linecap="round" fill="none" opacity="0.25"/>
-          </svg>
+      <div class="eng-card ec-teal fade-up d4">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style="background:#00B5C812;border:2px solid #00B5C840;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 2C9.58 2 6 5.58 6 10c0 6 8 16 8 16s8-10 8-16c0-4.42-3.58-8-8-8Z" stroke="#00B5C8" stroke-width="1.8" fill="#00B5C815"/><circle cx="14" cy="10" r="3" fill="#00B5C8"/><path d="M18.5 5.5C20 7 20.5 9 20 11" stroke="#00B5C8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".5"/><path d="M9.5 5.5C8 7 7.5 9 8 11" stroke="#00B5C8" stroke-width="1.2" stroke-linecap="round" fill="none" opacity=".5"/></svg>
         </div>
-        <h4 class="font-bold text-midnightEmerald text-sm mb-2">Local Maps &amp; SEO</h4>
-        <p class="text-xs text-steelSilver leading-relaxed">Your business shows up clearly when local customers search on Google. We handle the technical setup so you rank higher than your competitors.</p>
-        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-steelSilver">Average ranking lift</span>
-            <span class="font-bold" style="color:#00B5C8;">Top 3</span>
-          </div>
-        </div>
+        <h4 class="font-black text-deepCharcoal text-base mb-2">Local Maps &amp; SEO</h4>
+        <p class="text-base text-gray-700 leading-relaxed">Your business shows up first when local customers search on Google. We handle all the technical setup so you do not have to.</p>
+        <p class="text-sm font-black text-auroraTeal mt-4">Average result: Top 3 on Google</p>
       </div>
 
-      <!-- CARD 2: Trust Engine -->
-      <div class="eng-card card-gold fade-up d5">
-        <div class="icon-box icon-box-gold">
-          <!-- Star + review request arrow SVG -->
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M14 3l2.5 7H23l-5.5 4 2 7L14 17l-5.5 4 2-7L5 10h6.5L14 3z" stroke="#D4AF37" stroke-width="1.5" fill="#D4AF3720" stroke-linejoin="round"/>
-            <!-- Auto-send arrow -->
-            <line x1="20" y1="22" x2="26" y2="22" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round"/>
-            <polyline points="23,19 26,22 23,25" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
+      <div class="eng-card ec-gold fade-up d5">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style="background:#D4AF3712;border:2px solid #D4AF3740;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 2l3 8H23l-6 4.5 2.5 8L14 18.5l-5.5 4 2.5-8L5 10h6L14 2Z" stroke="#D4AF37" stroke-width="1.8" fill="#D4AF3720" stroke-linejoin="round"/><line x1="22" y1="22" x2="27" y2="22" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/><polyline points="24.5,19.5 27,22 24.5,24.5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
-        <h4 class="font-bold text-midnightEmerald text-sm mb-2">Automated Trust Engine</h4>
-        <p class="text-xs text-steelSilver leading-relaxed">The moment a job is marked done, a polite review request goes straight to your customer's phone. More five-star reviews, less effort from you.</p>
-        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-steelSilver">Review open rate</span>
-            <span class="font-bold" style="color:#D4AF37;">98% SMS</span>
-          </div>
-        </div>
+        <h4 class="font-black text-deepCharcoal text-base mb-2">Automated Reviews</h4>
+        <p class="text-base text-gray-700 leading-relaxed">The moment a job is done, a polite review request goes straight to your customer's phone. More five-star reviews. Zero effort from you.</p>
+        <p class="text-sm font-black text-antiqueGold mt-4">SMS open rate: 98%</p>
       </div>
 
-      <!-- CARD 3: Smart Reminders -->
-      <div class="eng-card card-dark fade-up d6">
-        <div class="icon-box icon-box-dark">
-          <!-- Bell + clock SVG -->
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <!-- Bell -->
-            <path d="M14 4C10.686 4 8 6.686 8 10v5l-2 3h16l-2-3v-5c0-3.314-2.686-6-6-6z" stroke="#0D1515" stroke-width="1.5" fill="#0D151515"/>
-            <path d="M12 22c0 1.105.895 2 2 2s2-.895 2-2" stroke="#0D1515" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <!-- Clock face overlay -->
-            <circle cx="21" cy="8" r="4.5" fill="white" stroke="#0D1515" stroke-width="1.2"/>
-            <line x1="21" y1="6" x2="21" y2="8.5" stroke="#0D1515" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="21" y1="8.5" x2="23" y2="8.5" stroke="#D4AF37" stroke-width="1.2" stroke-linecap="round"/>
-            <circle cx="21" cy="8.5" r="0.7" fill="#0D1515"/>
-          </svg>
+      <div class="eng-card ec-dark fade-up d6">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style="background:#0D151512;border:2px solid #0D151530;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><path d="M14 3C10.13 3 7 6.13 7 10v5l-2.5 3.5h19L21 15v-5c0-3.87-3.13-7-7-7Z" stroke="#0D1515" stroke-width="1.8" fill="#0D151512"/><path d="M12 22.5c0 1.1.9 2 2 2s2-.9 2-2" stroke="#0D1515" stroke-width="1.8" stroke-linecap="round" fill="none"/><circle cx="21" cy="8.5" r="4" fill="white" stroke="#0D1515" stroke-width="1.4"/><line x1="21" y1="6.5" x2="21" y2="8.5" stroke="#0D1515" stroke-width="1.3" stroke-linecap="round"/><line x1="21" y1="8.5" x2="23" y2="8.5" stroke="#D4AF37" stroke-width="1.3" stroke-linecap="round"/></svg>
         </div>
-        <h4 class="font-bold text-midnightEmerald text-sm mb-2">Smart Reminders</h4>
-        <p class="text-xs text-steelSilver leading-relaxed">No-shows cost you money. Customers receive friendly automated reminders the day before and two hours before every appointment. No chasing needed.</p>
-        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-steelSilver">No-show reduction</span>
-            <span class="font-bold text-midnightEmerald">Up to 60%</span>
-          </div>
-        </div>
+        <h4 class="font-black text-deepCharcoal text-base mb-2">Smart Reminders</h4>
+        <p class="text-base text-gray-700 leading-relaxed">Customers get a friendly reminder the day before and two hours before every appointment. No-shows drop dramatically — guaranteed.</p>
+        <p class="text-sm font-black text-deepCharcoal mt-4">No-show drop: up to 60%</p>
       </div>
 
-      <!-- CARD 4: All-in-One Messaging -->
-      <div class="eng-card card-garnet fade-up d7">
-        <div class="icon-box icon-box-garnet">
-          <!-- Multi-channel message hub SVG -->
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <!-- Central hub circle -->
-            <circle cx="14" cy="14" r="3.5" stroke="#7D2E3A" stroke-width="1.5" fill="#7D2E3A20"/>
-            <!-- Connection spokes -->
-            <line x1="14" y1="10.5" x2="14" y2="5"   stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-            <line x1="14" y1="17.5" x2="14" y2="23"  stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-            <line x1="10.5" y1="14" x2="5" y2="14"   stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-            <line x1="17.5" y1="14" x2="23" y2="14"  stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
-            <!-- Channel dots -->
-            <!-- Facebook (top) -->
-            <circle cx="14" cy="4" r="2.2" fill="#7D2E3A" opacity="0.9"/>
-            <text x="14" y="5.2" text-anchor="middle" font-size="2.8" fill="white" font-weight="bold">f</text>
-            <!-- Email (bottom) -->
-            <circle cx="14" cy="24" r="2.2" fill="#7D2E3A" opacity="0.9"/>
-            <rect x="11.5" y="22.8" width="5" height="3.2" rx="0.5" fill="white" opacity="0.3"/>
-            <!-- Instagram (left) -->
-            <circle cx="4" cy="14" r="2.2" fill="#7D2E3A" opacity="0.9"/>
-            <circle cx="4" cy="14" r="1.2" stroke="white" stroke-width="0.7" fill="none"/>
-            <!-- SMS (right) -->
+      <div class="eng-card ec-garnet fade-up d7">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-4" style="background:#7D2E3A12;border:2px solid #7D2E3A35;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <circle cx="14" cy="14" r="3.5" stroke="#7D2E3A" stroke-width="1.8" fill="#7D2E3A15"/>
+            <line x1="14" y1="10.5" x2="14" y2="5"   stroke="#7D2E3A" stroke-width="1.3" stroke-linecap="round" opacity=".7"/>
+            <line x1="14" y1="17.5" x2="14" y2="23"  stroke="#7D2E3A" stroke-width="1.3" stroke-linecap="round" opacity=".7"/>
+            <line x1="10.5" y1="14" x2="5"   y2="14" stroke="#7D2E3A" stroke-width="1.3" stroke-linecap="round" opacity=".7"/>
+            <line x1="17.5" y1="14" x2="23"  y2="14" stroke="#7D2E3A" stroke-width="1.3" stroke-linecap="round" opacity=".7"/>
+            <circle cx="14" cy="4"  r="2.2" fill="#7D2E3A" opacity=".9"/>
+            <circle cx="14" cy="24" r="2.2" fill="#7D2E3A" opacity=".9"/>
+            <circle cx="4"  cy="14" r="2.2" fill="#7D2E3A" opacity=".9"/>
             <circle cx="24" cy="14" r="2.2" fill="#D4AF37"/>
-            <text x="24" y="15.1" text-anchor="middle" font-size="2.5" fill="#0D1515" font-weight="bold">sms</text>
           </svg>
         </div>
-        <h4 class="font-bold text-midnightEmerald text-sm mb-2">All-in-One Messaging</h4>
-        <p class="text-xs text-steelSilver leading-relaxed">Facebook, Instagram, email, and SMS — all in one screen on your phone. Every message, every customer, every conversation in one place.</p>
-        <div class="mt-4 pt-4" style="border-top:1px solid #E8EAED;">
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-steelSilver">Channels connected</span>
-            <span class="font-bold" style="color:#7D2E3A;">6 platforms</span>
-          </div>
-        </div>
+        <h4 class="font-black text-deepCharcoal text-base mb-2">All-in-One Inbox</h4>
+        <p class="text-base text-gray-700 leading-relaxed">Facebook, Instagram, email, and SMS — all in one screen on your phone. Never miss a customer message again from any platform.</p>
+        <p class="text-sm font-black text-deepGarnet mt-4">6 platforms connected in one view</p>
       </div>
 
-    </div><!-- /eng cards grid -->
+    </div>
 
-    <!-- ── Bottom trust strip ── -->
-    <div class="mt-14 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 fade-up" style="background:#0D1515; border:1px solid #3D5A3E44;">
+    <!-- Solutions bottom CTA -->
+    <div class="rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 fade-up" style="background:#0D1515;border:1.5px solid #3D5A3E55;">
       <div>
-        <p class="font-display text-xl font-bold text-antiqueGold mb-1">Ready to see this working for your business?</p>
-        <p class="text-sm text-steelSilver">No tech knowledge needed. We build it all for you in under five working days.</p>
+        <p class="font-display text-2xl font-bold text-antiqueGold mb-1">Ready to see this running for your business?</p>
+        <p class="text-base text-coolSilver font-semibold">No tech knowledge needed. Built and handed over in under five working days.</p>
       </div>
-      <div class="flex gap-3 flex-shrink-0">
-        <a href="#crisis" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold text-midnightEmerald transition" style="background:#D4AF37;">
-          Get Started
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3,7 11,7" stroke="#0D1515" stroke-width="1.5" stroke-linecap="round"/><polyline points="8,4 11,7 8,10" stroke="#0D1515" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <div class="flex gap-3 flex-shrink-0 flex-wrap">
+        <a href="#crisis" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-base font-black text-midnightEmerald transition duration-200 shadow-md" style="background:#D4AF37;">
+          Get Started <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><polyline points="3,7 11,7" stroke="#0D1515" stroke-width="1.6" stroke-linecap="round"/><polyline points="8,4 11,7 8,10" stroke="#0D1515" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </a>
-        <a href="#products" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold transition" style="border:1px solid #3D5A3E; color:#9AA3B0;">
-          See Plans
-        </a>
+        <a href="#products" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl text-base font-black text-steelSilver border-2 border-forestOlive hover:border-antiqueGold hover:text-antiqueGold transition duration-200">See Plans</a>
       </div>
     </div>
 
-  </div><!-- /max-w-6xl -->
+  </div>
 </section>
 
-<!-- ── Scroll observer ── -->
-<script>
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
-</script>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GoChuchuro — Crisis Section Preview</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            midnightEmerald: '#0D1515',
-            deepCharcoal:    '#111111',
-            deepForest:      '#2A3D2B',
-            forestOlive:     '#3D5A3E',
-            mountainSage:    '#6B8C52',
-            antiqueGold:     '#D4AF37',
-            brightGold:      '#E5C158',
-            auroraTeal:      '#00B5C8',
-            coolSilver:      '#C8CDD6',
-            steelSilver:     '#9AA3B0',
-            platinum:        '#F5F6F8',
-            deepGarnet:      '#7D2E3A',
-            warmMaroon:      '#9E3D4A',
-          },
-          fontFamily: {
-            display: ['Cormorant Garamond', 'serif'],
-            body:    ['Nunito Sans', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    * { font-family: 'Nunito Sans', sans-serif; box-sizing: border-box; }
-    .font-display { font-family: 'Cormorant Garamond', serif; }
-
-    .crisis-bg {
-      background-color: #F5F6F8;
-      background-image:
-        radial-gradient(ellipse at 50% 0%, rgba(125,46,58,0.06) 0%, transparent 55%),
-        radial-gradient(ellipse at 0% 100%, rgba(13,21,21,0.03) 0%, transparent 50%);
-    }
-    .garnet-top { border-top: 3px solid #7D2E3A; }
-
-    @keyframes crisispulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(125,46,58,0.55); }
-      60%      { box-shadow: 0 0 0 12px rgba(125,46,58,0); }
-    }
-    .crisis-badge { animation: crisispulse 2.2s ease infinite; }
-
-    .contact-card {
-      background: #fff;
-      border: 1px solid #E8EAED;
-      border-radius: 20px;
-      transition: transform 0.32s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.32s ease, border-color 0.32s ease;
-      position: relative; overflow: hidden;
-    }
-    .contact-card::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:3px; opacity:0; transition:opacity 0.3s ease;
-    }
-    .contact-card:hover { transform: translateY(-6px); }
-    .contact-card:hover::before { opacity:1; }
-    .card-email:hover  { border-color:#7D2E3A55; box-shadow:0 20px 48px rgba(125,46,58,0.12); }
-    .card-email::before { background:linear-gradient(90deg,#7D2E3A,#9E3D4A); }
-    .card-whatsapp:hover { border-color:#22c55e55; box-shadow:0 20px 48px rgba(34,197,94,0.10); }
-    .card-whatsapp::before { background:linear-gradient(90deg,#16a34a,#22c55e); }
-
-    .contact-icon {
-      width:64px; height:64px; border-radius:18px;
-      display:flex; align-items:center; justify-content:center; margin-bottom:20px;
-      transition:transform 0.3s ease;
-    }
-    .contact-card:hover .contact-icon { transform:scale(1.08); }
-    .icon-garnet { background:#7D2E3A0d; border:1.5px solid #7D2E3A30; }
-    .icon-green  { background:#22c55e0d; border:1.5px solid #22c55e30; }
-
-    .philosophy-strip {
-      background:#0D1515; border-radius:20px; border:1px solid #3D5A3E44; position:relative; overflow:hidden;
-    }
-    .philosophy-strip::before {
-      content:''; position:absolute; top:0; left:0; right:0; height:2px;
-      background:linear-gradient(90deg,#2A3D2B,#D4AF37,#E5C158,#00B5C8,#D4AF37,#2A3D2B);
-    }
-
-    .faq-item {
-      background:#fff; border:1px solid #E8EAED; border-radius:14px; overflow:hidden;
-      transition:border-color 0.25s ease, box-shadow 0.25s ease;
-    }
-    .faq-item[open] { border-color:#D4AF3744; box-shadow:0 4px 20px rgba(212,175,55,0.08); }
-    .faq-item summary {
-      list-style:none; cursor:pointer; padding:18px 20px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px; user-select:none;
-    }
-    .faq-item summary::-webkit-details-marker { display:none; }
-    .faq-item summary .chevron {
-      width:28px; height:28px; border-radius:50%;
-      background:#F5F6F8; border:1px solid #E8EAED;
-      display:flex; align-items:center; justify-content:center; flex-shrink:0;
-      transition:background 0.25s ease, transform 0.3s ease, border-color 0.25s ease;
-    }
-    .faq-item[open] summary .chevron {
-      background:#D4AF3712; border-color:#D4AF3744; transform:rotate(180deg);
-    }
-    .faq-item[open] summary { border-bottom:1px solid #F0F1F3; }
-    .faq-body { padding:16px 20px 20px; background:#FAFAFA; }
-    .faq-number {
-      width:26px; height:26px; border-radius:8px;
-      background:#F5F6F8; border:1px solid #E8EAED;
-      display:flex; align-items:center; justify-content:center;
-      font-size:11px; font-weight:800; color:#9AA3B0; flex-shrink:0;
-      transition:background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    }
-    .faq-item[open] .faq-number { background:#D4AF3712; border-color:#D4AF3744; color:#D4AF37; }
-
-    .step-node {
-      width:32px; height:32px; border-radius:50%;
-      background:#0D1515; border:2px solid #D4AF37;
-      display:flex; align-items:center; justify-content:center;
-      font-size:12px; font-weight:800; color:#D4AF37; flex-shrink:0;
-    }
-    .step-line {
-      width:2px; height:28px;
-      background:repeating-linear-gradient(to bottom,#D4AF3766 0px,#D4AF3766 5px,transparent 5px,transparent 10px);
-      margin:0 auto;
-    }
-
-    .reassure-pill {
-      display:inline-flex; align-items:center; gap:6px;
-      background:#fff; border:1px solid #E8EAED; border-radius:20px;
-      padding:6px 14px; font-size:12px; font-weight:600; color:#9AA3B0;
-    }
-    .reassure-dot { width:7px; height:7px; border-radius:50%; }
-
-    .fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.65s ease,transform 0.65s ease; }
-    .fade-up.visible { opacity:1; transform:translateY(0); }
-    .d1{transition-delay:0.10s} .d2{transition-delay:0.20s} .d3{transition-delay:0.15s}
-    .d4{transition-delay:0.25s} .d5{transition-delay:0.35s} .d6{transition-delay:0.45s}
-  </style>
-</head>
-
-<body class="crisis-bg min-h-screen">
-
-<section id="crisis" class="crisis-bg garnet-top py-24 px-6">
+<!-- ══════════════════════════════════════════════
+     SECTION 3 — SUPPORT / CRISIS (#crisis)
+══════════════════════════════════════════════ -->
+<section id="crisis" class="section-light py-24 px-6" style="border-top:3px solid #DC2626;">
   <div class="max-w-5xl mx-auto">
 
     <!-- Header -->
     <div class="text-center mb-14 fade-up">
-      <div class="inline-flex items-center gap-2.5 crisis-badge bg-deepGarnet text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M7 1.5L12.5 11.5H1.5L7 1.5Z" stroke="white" stroke-width="1.4" fill="rgba(255,255,255,0.15)" stroke-linejoin="round"/>
-          <line x1="7" y1="5.5" x2="7" y2="8.5" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
-          <circle cx="7" cy="10.2" r="0.8" fill="white"/>
-        </svg>
-        Need Help Now?
+      <div class="inline-flex items-center gap-2.5 text-white text-sm font-black tracking-wide uppercase px-5 py-2.5 rounded-full mb-6 crisis-pulse" style="background:#DC2626;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1L13 12H1L7 1Z" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" stroke-linejoin="round"/><line x1="7" y1="5" x2="7" y2="8.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="10.2" r=".8" fill="white"/></svg>
+        Crisis? Get Help Now
       </div>
 
-      <h2 class="font-display text-4xl md:text-5xl font-bold text-midnightEmerald leading-tight mb-4">
-        Business feeling overwhelming?<br/>
-        <span class="text-deepGarnet">Let's fix that together.</span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-deepCharcoal leading-tight mb-5">
+        Business feeling overwhelming?<br/><span style="color:#DC2626;">We can fix that.</span>
       </h2>
-      <p class="text-steelSilver text-base max-w-xl mx-auto leading-relaxed mb-7">
-        Running dry on leads? Buried in admin? Not sure where to start? Reach out below in any language. A real person will reply with an actual plan — not a sales pitch.
+      <p class="text-lg md:text-xl text-gray-700 max-w-xl mx-auto leading-relaxed mb-7">
+        Running dry on leads? Buried under admin? Not sure where to start? Reach out right now in any language. A real human will reply with a practical plan — not a sales pitch.
       </p>
       <div class="flex flex-wrap items-center justify-center gap-3">
-        <div class="reassure-pill"><span class="reassure-dot" style="background:#22c55e;"></span>Real human replies</div>
-        <div class="reassure-pill"><span class="reassure-dot" style="background:#D4AF37;"></span>Any language welcome</div>
-        <div class="reassure-pill"><span class="reassure-dot" style="background:#00B5C8;"></span>No sales pressure</div>
+        <div class="inline-flex items-center gap-2 bg-gray-50 border-2 border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700"><span class="w-2.5 h-2.5 rounded-full bg-green-500 dp0"></span>Real human replies</div>
+        <div class="inline-flex items-center gap-2 bg-gray-50 border-2 border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700"><span class="w-2.5 h-2.5 rounded-full bg-antiqueGold dp1"></span>Any language welcome</div>
+        <div class="inline-flex items-center gap-2 bg-gray-50 border-2 border-gray-200 rounded-full px-4 py-2 text-sm font-bold text-gray-700"><span class="w-2.5 h-2.5 rounded-full bg-auroraTeal dp2"></span>No sales pressure</div>
       </div>
     </div>
 
-    <!-- Contact cards -->
+    <!-- Two contact cards -->
     <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-14">
 
-      <a href="mailto:hello@gochuchuro.com" class="contact-card card-email p-8 block group fade-up d1">
-        <div class="contact-icon icon-garnet">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <rect x="3" y="7" width="24" height="16" rx="3" stroke="#7D2E3A" stroke-width="1.8" fill="#7D2E3A08"/>
-            <polyline points="3,9.5 15,18 27,9.5" stroke="#7D2E3A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <line x1="8" y1="20" x2="14" y2="20" stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
-            <line x1="8" y1="22" x2="12" y2="22" stroke="#7D2E3A" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
-            <circle cx="23" cy="22" r="4.5" fill="#7D2E3A"/>
-            <line x1="21.5" y1="22" x2="24.5" y2="22" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
-            <polyline points="23,20.5 24.5,22 23,23.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- Email -->
+      <a href="mailto:hello@gochuchuro.com" class="contact-card p-8 block group fade-up d1" style="border-top:3px solid #DC2626;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 48px rgba(220,38,38,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition duration-300" style="background:#DC262610;border:2px solid #DC262630;">
+          <svg width="32" height="30" viewBox="0 0 32 30" fill="none" aria-hidden="true">
+            <rect x="2" y="5" width="28" height="20" rx="3.5" stroke="#DC2626" stroke-width="2" fill="#DC262608"/>
+            <polyline points="2,8.5 16,19 30,8.5" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <line x1="8" y1="21" x2="15" y2="21" stroke="#DC2626" stroke-width="1.3" stroke-linecap="round" opacity=".4"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-midnightEmerald mb-2">Send an Email</h3>
-        <p class="text-sm text-steelSilver leading-relaxed mb-5">Write in your own words and any language. Tell us your exact business worry and we will come back with a real, practical plan.</p>
+        <h3 class="text-xl font-black text-deepCharcoal mb-3">Send an Email</h3>
+        <p class="text-base text-gray-700 leading-relaxed mb-6">Write in your own words. Any language. Tell us your exact business worry and we will come back with a real, practical plan — not a template.</p>
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-midnightEmerald bg-platinum border border-coolSilver/50 px-3 py-1.5 rounded-lg">hello@gochuchuro.com</span>
-          <span class="text-xs font-bold text-deepGarnet flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
-            Write to us
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 10,6" stroke="#7D2E3A" stroke-width="1.5" stroke-linecap="round"/><polyline points="7,3 10,6 7,9" stroke="#7D2E3A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <span class="inline-flex items-center gap-2 text-base font-black rounded-xl px-5 py-3 transition duration-200" style="background:#DC262610;border:2px solid #DC262635;color:#DC2626;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="3" width="13" height="10" rx="2" stroke="#DC2626" stroke-width="1.5" fill="none"/><polyline points="1.5,5 8,10 14.5,5" stroke="#DC2626" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+            Tap to Email Us
           </span>
+          <svg class="group-hover:translate-x-1 transition duration-200" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><polyline points="3,9 15,9" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"/><polyline points="10,4.5 15,9 10,13.5" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
+        <p class="text-sm text-gray-400 font-semibold mt-2">hello@gochuchuro.com</p>
       </a>
 
-      <a href="https://wa.me/447474080809" target="_blank" rel="noopener noreferrer" class="contact-card card-whatsapp p-8 block group fade-up d2">
-        <div class="contact-icon icon-green">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <path d="M15 3.5C8.6 3.5 3.5 8.6 3.5 15c0 2.3.63 4.46 1.72 6.32L3.5 26.5l5.32-1.7A11.44 11.44 0 0015 26.5c6.4 0 11.5-5.1 11.5-11.5S21.4 3.5 15 3.5Z" stroke="#16a34a" stroke-width="1.8" fill="#16a34a0d"/>
-            <path d="M11.2 11.8c0-.6.5-1.1 1.1-1.1h.4c.28 0 .5.2.54.48l.55 2.2a.5.5 0 01-.14.48l-.9.9a6.8 6.8 0 003.47 3.47l.9-.9a.5.5 0 01.48-.14l2.2.55c.28.04.48.26.48.54v.4c0 .6-.5 1.1-1.1 1.1C14.3 19.8 11.2 16.7 11.2 11.8Z" stroke="#16a34a" stroke-width="1.4" fill="#16a34a18" stroke-linejoin="round"/>
+      <!-- WhatsApp -->
+      <a href="https://wa.me/447474080809" target="_blank" rel="noopener noreferrer" class="contact-card p-8 block group fade-up d2" style="border-top:3px solid #16A34A;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 48px rgba(22,163,74,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-5 transition duration-300" style="background:#16A34A12;border:2px solid #16A34A35;">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M16 3C8.82 3 3 8.82 3 16c0 2.52.68 4.88 1.87 6.9L3 29l6.28-1.85A13 13 0 1016 3Z" stroke="#16A34A" stroke-width="2" fill="#16A34A0d"/>
+            <path d="M12 12c0-.65.54-1.18 1.18-1.18h.43c.3 0 .55.22.6.52l.6 2.38a.54.54 0 01-.15.52l-.96.96a7.4 7.4 0 003.78 3.78l.96-.96a.54.54 0 01.52-.15l2.38.6c.3.05.52.3.52.6v.43A1.18 1.18 0 0120 20.5C14.96 20.5 12 17.54 12 12Z" stroke="#16A34A" stroke-width="1.6" fill="#16A34A18" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="text-lg font-bold text-midnightEmerald mb-2">WhatsApp Message</h3>
-        <p class="text-sm text-steelSilver leading-relaxed mb-5">Prefer a quick chat? Tap to open WhatsApp and type your question. Text-only line — a real person reads and replies personally.</p>
+        <h3 class="text-xl font-black text-deepCharcoal mb-3">WhatsApp Message</h3>
+        <p class="text-base text-gray-700 leading-relaxed mb-6">Prefer a quick chat? One tap opens WhatsApp directly. Text-only line — a real person reads every message and replies personally.</p>
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-midnightEmerald bg-platinum border border-coolSilver/50 px-3 py-1.5 rounded-lg">07474 080 809</span>
-          <span class="text-xs font-bold flex items-center gap-1 group-hover:gap-2 transition-all duration-200" style="color:#16a34a;">
-            Start chat
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 10,6" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><polyline points="7,3 10,6 7,9" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+          <span class="inline-flex items-center gap-2 text-base font-black rounded-xl px-5 py-3 transition duration-200" style="background:#16A34A12;border:2px solid #16A34A35;color:#16A34A;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8c0 1.26.34 2.44.94 3.46L1.5 14.5l3.1-.92A6.5 6.5 0 108 1.5Z" stroke="#16A34A" stroke-width="1.5" fill="none"/><path d="M6 6.2c0-.31.26-.56.56-.56h.2c.14 0 .26.1.28.24l.28 1.12a.26.26 0 01-.07.24l-.46.46a3.5 3.5 0 001.79 1.79l.46-.46a.26.26 0 01.24-.07l1.12.28c.14.02.24.14.24.28v.2A.56.56 0 0110.1 10C7.63 10 6 8.37 6 6.2Z" stroke="#16A34A" stroke-width="1.3" fill="none"/></svg>
+            Tap to Text Us
           </span>
+          <svg class="group-hover:translate-x-1 transition duration-200" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><polyline points="3,9 15,9" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round"/><polyline points="10,4.5 15,9 10,13.5" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
         </div>
+        <p class="text-sm text-gray-400 font-semibold mt-2">Text-only · private · answered by a real person</p>
       </a>
     </div>
 
-    <!-- Philosophy strip with 4-step journey -->
-    <div class="philosophy-strip p-8 mb-14 fade-up">
+    <!-- Philosophy strip (dark) -->
+    <div class="rounded-2xl p-8 mb-14 fade-up relative overflow-hidden" style="background:#0D1515;border:1.5px solid #3D5A3E55;">
+      <div class="absolute top-0 left-0 right-0 h-0.5" style="background:linear-gradient(90deg,#2A3D2B,#D4AF37,#E5C158,#00B5C8,#D4AF37,#2A3D2B);"></div>
       <div class="grid md:grid-cols-2 gap-8 items-center">
 
+        <!-- 4-step journey -->
         <div>
-          <p class="text-xs font-bold tracking-widest uppercase text-auroraTeal mb-6">From first message to live system</p>
+          <p class="text-sm font-black tracking-widest uppercase text-auroraTeal mb-6">From first message to live system</p>
           <div>
             <div class="flex gap-4 items-start">
-              <div class="flex flex-col items-center"><div class="step-node">1</div><div class="step-line"></div></div>
-              <div class="pb-5">
-                <p class="text-sm font-bold text-platinum mb-0.5">You reach out</p>
-                <p class="text-xs text-steelSilver">Email or WhatsApp — any language, any format.</p>
-              </div>
+              <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0" style="background:#0D1515;border:2px solid #D4AF37;color:#D4AF37;">1</div><div class="step-vline"></div></div>
+              <div class="pb-5"><p class="text-base font-black text-white mb-0.5">You reach out</p><p class="text-base text-coolSilver font-semibold">Email or WhatsApp — any language, any format.</p></div>
             </div>
             <div class="flex gap-4 items-start">
-              <div class="flex flex-col items-center"><div class="step-node">2</div><div class="step-line"></div></div>
-              <div class="pb-5">
-                <p class="text-sm font-bold text-platinum mb-0.5">We understand your problem</p>
-                <p class="text-xs text-steelSilver">A real person reviews your situation and builds a clear plan.</p>
-              </div>
+              <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0" style="background:#0D1515;border:2px solid #D4AF37;color:#D4AF37;">2</div><div class="step-vline"></div></div>
+              <div class="pb-5"><p class="text-base font-black text-white mb-0.5">We understand your problem</p><p class="text-base text-coolSilver font-semibold">A real person reviews your situation and builds a clear plan.</p></div>
             </div>
             <div class="flex gap-4 items-start">
-              <div class="flex flex-col items-center"><div class="step-node">3</div><div class="step-line"></div></div>
-              <div class="pb-5">
-                <p class="text-sm font-bold text-platinum mb-0.5">One short call to align</p>
-                <p class="text-xs text-steelSilver">We match the tools to your business and your lifestyle.</p>
-              </div>
+              <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0" style="background:#0D1515;border:2px solid #D4AF37;color:#D4AF37;">3</div><div class="step-vline"></div></div>
+              <div class="pb-5"><p class="text-base font-black text-white mb-0.5">One short call to align</p><p class="text-base text-coolSilver font-semibold">We match the tools exactly to your business and your life.</p></div>
             </div>
             <div class="flex gap-4 items-start">
-              <div class="flex flex-col items-center"><div class="step-node">4</div></div>
-              <div class="pb-2">
-                <p class="text-sm font-bold text-antiqueGold mb-0.5">Your system goes live</p>
-                <p class="text-xs text-steelSilver">Built and handed over within five working days.</p>
-              </div>
+              <div class="flex flex-col items-center"><div class="w-9 h-9 rounded-full flex items-center justify-center text-sm font-black flex-shrink-0" style="background:#0D1515;border:2px solid #D4AF37;color:#D4AF37;">4</div></div>
+              <div class="pb-2"><p class="text-base font-black text-antiqueGold mb-0.5">Your system goes live</p><p class="text-base text-coolSilver font-semibold">Built and handed over within five working days.</p></div>
             </div>
           </div>
         </div>
 
-        <div class="md:border-l md:pl-8" style="border-color:#3D5A3E55;">
-          <p class="text-xs font-bold tracking-widest uppercase text-antiqueGold mb-3">Our Founding Principle</p>
-          <p class="font-display text-2xl font-bold text-platinum leading-snug mb-4">
-            "Technology follows.<br/>Coaching leads."
-          </p>
-          <p class="text-xs text-steelSilver leading-relaxed mb-5">
-            A piece of software cannot fix a stressful business on its own. Every system we build is surrounded by direct one-to-one guidance and a welcoming community of fellow business owners. We solve the human problem first.
-          </p>
-          <div class="inline-flex items-center gap-2 bg-antiqueGold/10 border border-antiqueGold/25 rounded-full px-4 py-2">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M5.5 1L6.9 4.2H10.3L7.6 6.1L8.8 9.5L5.5 7.5L2.2 9.5L3.4 6.1L0.7 4.2H4.1L5.5 1Z" stroke="#D4AF37" stroke-width="1" fill="#D4AF3720" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-xs font-bold text-antiqueGold italic">Calm to thrive. Love to spark.</span>
+        <!-- Philosophy quote -->
+        <div class="md:border-l md:pl-8" style="border-color:#3D5A3E66;">
+          <p class="text-sm font-black tracking-widest uppercase text-antiqueGold mb-3">Our Founding Principle</p>
+          <p class="font-display text-3xl font-bold text-white leading-snug mb-4">"Technology follows.<br/>Coaching leads."</p>
+          <p class="text-base text-coolSilver leading-relaxed mb-5 font-semibold">A piece of software cannot fix a stressful business on its own. We solve the human problem first — then we automate the rest. Every client gets a real conversation before any system is touched.</p>
+          <div class="inline-flex items-center gap-2 rounded-full px-5 py-2.5" style="background:#D4AF3712;border:2px solid #D4AF3730;">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M6 1L7.4 4.2H10.8L8.1 6.1L9.3 9.5L6 7.5L2.7 9.5L3.9 6.1L1.2 4.2H4.6L6 1Z" stroke="#D4AF37" stroke-width="1" fill="#D4AF3720" stroke-linejoin="round"/></svg>
+            <span class="text-sm font-black text-antiqueGold italic">Calm to thrive. Love to spark.</span>
           </div>
         </div>
       </div>
@@ -1614,97 +987,46 @@
     <!-- FAQ -->
     <div class="max-w-3xl mx-auto fade-up">
       <div class="text-center mb-8">
-        <p class="text-xs font-bold tracking-widest uppercase text-steelSilver mb-2">Common Questions</p>
-        <h3 class="font-display text-3xl font-bold text-midnightEmerald">You probably want to know...</h3>
+        <p class="text-sm font-black tracking-widest uppercase text-gray-400 mb-2">Frequently Asked Questions</p>
+        <h3 class="font-display text-3xl font-bold text-deepCharcoal">You probably want to know...</h3>
       </div>
 
       <div class="space-y-3">
 
         <details class="faq-item">
-          <summary>
-            <div class="flex items-center gap-3">
-              <div class="faq-number">1</div>
-              <span class="text-sm font-bold text-midnightEmerald">Who is behind GoChuchuro?</span>
-            </div>
-            <div class="chevron">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </summary>
-          <div class="faq-body">
-            <p class="text-sm text-steelSilver leading-relaxed">GoChuchuro is a value-first automation and coaching practice built for small business owners who are working hard but not yet working smart. We are rooted in the Nepali and South Asian community in the UK but we serve every hardworking business owner who deserves a simpler, smarter way to grow.</p>
-          </div>
+          <summary><div class="flex items-center gap-3"><div class="faq-num">1</div><span class="text-base font-black text-deepCharcoal">Who is GoChuchuro for?</span></div><div class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4.5 6,8 10,4.5" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></summary>
+          <div class="faq-body"><p class="text-base text-gray-700 leading-relaxed">GoChuchuro is built for small business owners and sole traders across the UK — plumbers, electricians, roofers, gas engineers, hair and beauty salons, restaurants, cafes, takeaways, mortgage and finance advisors, cleaning companies, landscapers, and therapists. If you run a business where customers call, book, or enquire — and you are struggling to keep up — this is for you.</p></div>
         </details>
 
         <details class="faq-item">
-          <summary>
-            <div class="flex items-center gap-3">
-              <div class="faq-number">2</div>
-              <span class="text-sm font-bold text-midnightEmerald">Why GoChuchuro instead of a normal marketing agency?</span>
-            </div>
-            <div class="chevron">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </summary>
-          <div class="faq-body">
-            <p class="text-sm text-steelSilver leading-relaxed">Standard agencies lock you into expensive retainers where you never truly own your assets. GoChuchuro works on a wholesale model. We build premium infrastructure at straightforward prices and train you to run it yourself — so your growth machine belongs to you permanently and you never feel trapped.</p>
-          </div>
+          <summary><div class="flex items-center gap-3"><div class="faq-num">2</div><span class="text-base font-black text-deepCharcoal">Why GoChuchuro instead of a normal marketing agency?</span></div><div class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4.5 6,8 10,4.5" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></summary>
+          <div class="faq-body"><p class="text-base text-gray-700 leading-relaxed">Standard agencies lock you into expensive monthly retainers where you never truly own your assets. A plumber in Leeds or a salon owner in Birmingham should not have to pay £500 a month just to have a professional online presence. GoChuchuro works on a wholesale model — we build premium infrastructure at straightforward prices and train you to run it yourself, so your growth machine belongs to you permanently and you never feel trapped.</p></div>
         </details>
 
         <details class="faq-item">
-          <summary>
-            <div class="flex items-center gap-3">
-              <div class="faq-number">3</div>
-              <span class="text-sm font-bold text-midnightEmerald">What exactly do you set up for my business?</span>
-            </div>
-            <div class="chevron">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </summary>
-          <div class="faq-body">
-            <p class="text-sm text-steelSilver leading-relaxed">A single easy-to-use dashboard built for your trade — professional website, automated text and email follow-ups, a Google review collector, a 24/7 booking calendar, and on our top plan an AI receptionist that answers calls and books work while you sleep.</p>
-          </div>
+          <summary><div class="flex items-center gap-3"><div class="faq-num">3</div><span class="text-base font-black text-deepCharcoal">What exactly do you set up for my business?</span></div><div class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4.5 6,8 10,4.5" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></summary>
+          <div class="faq-body"><p class="text-base text-gray-700 leading-relaxed">A professional website, an automated text and email follow-up system, a Google review collector, a 24/7 booking calendar, and — on our top plan — an AI receptionist that answers calls and books work while you sleep. One dashboard on your phone. Everything connected. Nothing for you to figure out technically.</p></div>
         </details>
 
         <details class="faq-item">
-          <summary>
-            <div class="flex items-center gap-3">
-              <div class="faq-number">4</div>
-              <span class="text-sm font-bold text-midnightEmerald">How quickly can I go from enquiry to live system?</span>
-            </div>
-            <div class="chevron">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4 6,8 10,4" stroke="#9AA3B0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </summary>
+          <summary><div class="flex items-center gap-3"><div class="faq-num">4</div><span class="text-base font-black text-deepCharcoal">How quickly can I go from enquiry to a live system?</span></div><div class="faq-chevron"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,4.5 6,8 10,4.5" stroke="#9CA3AF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></summary>
           <div class="faq-body">
-            <p class="text-sm text-steelSilver leading-relaxed mb-3">Most businesses are live within five working days. The process is simple and clear:</p>
-            <ol class="space-y-2.5">
-              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
-                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">1</span>
-                You contact us and describe your main business headache.
-              </li>
-              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
-                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">2</span>
-                We send you a clear, jargon-free plan.
-              </li>
-              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
-                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">3</span>
-                One short call to agree the setup together.
-              </li>
-              <li class="flex items-start gap-2.5 text-sm text-steelSilver">
-                <span class="w-5 h-5 rounded-full bg-antiqueGold/15 border border-antiqueGold/30 flex items-center justify-center text-xs font-bold text-antiqueGold flex-shrink-0 mt-0.5">4</span>
-                Your system goes live. You get trained. We stay in touch.
-              </li>
+            <p class="text-base text-gray-700 leading-relaxed mb-4">Most businesses are live within five working days. The process is clear and simple:</p>
+            <ol class="space-y-3">
+              <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5" style="background:#D4AF3718;border:1.5px solid #D4AF3750;color:#92730A;">1</span><span class="text-base text-gray-700 font-semibold">You contact us and describe your main business headache.</span></li>
+              <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5" style="background:#D4AF3718;border:1.5px solid #D4AF3750;color:#92730A;">2</span><span class="text-base text-gray-700 font-semibold">We send you a clear, jargon-free plan within 24 hours.</span></li>
+              <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5" style="background:#D4AF3718;border:1.5px solid #D4AF3750;color:#92730A;">3</span><span class="text-base text-gray-700 font-semibold">One short call to agree the setup together.</span></li>
+              <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black flex-shrink-0 mt-0.5" style="background:#D4AF3718;border:1.5px solid #D4AF3750;color:#92730A;">4</span><span class="text-base text-gray-700 font-semibold">Your system goes live. You get trained. We stay in touch.</span></li>
             </ol>
           </div>
         </details>
 
       </div>
 
-      <!-- Bottom email nudge -->
       <div class="mt-8 text-center">
-        <p class="text-xs text-steelSilver mb-3">Still not sure? Just say hello. No commitment. No pressure.</p>
-        <a href="mailto:hello@gochuchuro.com" class="inline-flex items-center gap-2 text-sm font-bold text-midnightEmerald border border-midnightEmerald/20 hover:border-antiqueGold/50 hover:text-antiqueGold bg-white rounded-full px-6 py-2.5 transition duration-200 shadow-sm">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1.5" y="3.5" width="11" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3" fill="none"/><polyline points="1.5,4.5 7,8.5 12.5,4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <p class="text-base text-gray-500 font-semibold mb-3">Still not sure? Just say hello. No commitment. No pressure.</p>
+        <a href="mailto:hello@gochuchuro.com" class="inline-flex items-center gap-2 text-base font-black text-deepCharcoal bg-white border-2 border-gray-200 hover:border-antiqueGold hover:text-antiqueGold rounded-full px-7 py-3 transition duration-200 shadow-sm">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.5" y="3.5" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><polyline points="1.5,5 8,9.5 14.5,5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
           hello@gochuchuro.com
         </a>
       </div>
@@ -1713,10 +1035,111 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer style="background:#111111;border-top:1px solid rgba(255,255,255,0.06);">
+  <div class="max-w-7xl mx-auto px-6 py-14">
+    <div class="grid md:grid-cols-3 gap-10 items-start mb-10">
+
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="logo.png" alt="GoChuchuro" class="h-9 w-auto" onerror="this.style.display='none';document.getElementById('foot-svg').style.display='block'"/>
+          <svg id="foot-svg" style="display:none;" width="36" height="30" viewBox="0 0 42 36" fill="none" aria-hidden="true">
+            <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="20" cy="12" r="2.5" fill="#E5C158" class="star-pulse"/>
+          </svg>
+          <span class="font-display text-lg font-bold tracking-widest text-coolSilver">GOCHUCHURO</span>
+        </div>
+        <p class="text-base text-steelSilver leading-relaxed max-w-xs font-semibold">Building smart, automated systems for small businesses across the UK. Human-led. Technology-powered.</p>
+      </div>
+
+      <!-- Social -->
+      <div class="flex flex-col items-center gap-5">
+        <p class="text-sm font-black tracking-widest uppercase text-steelSilver">Find Us Online</p>
+        <div class="flex items-center gap-4">
+          <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl flex items-center justify-center transition duration-200 hover:-translate-y-1" style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.10);" onmouseover="this.style.background='rgba(212,175,55,0.18)';this.style.borderColor='rgba(212,175,55,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.10)'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" stroke="#D4AF37" stroke-width="1.8"/><line x1="8" y1="11" x2="8" y2="17" stroke="#D4AF37" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="8" r="1.2" fill="#D4AF37"/><path d="M12 11v6" stroke="#D4AF37" stroke-width="1.8" stroke-linecap="round"/><path d="M12 14c0-3 6-3 6 0v3" stroke="#D4AF37" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl flex items-center justify-center transition duration-200 hover:-translate-y-1" style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.10);" onmouseover="this.style.background='rgba(0,181,200,0.18)';this.style.borderColor='rgba(0,181,200,0.4)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.10)'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="#00B5C8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.instagram.com/gochuchuro/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-xl flex items-center justify-center transition duration-200 hover:-translate-y-1" style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.10);" onmouseover="this.style.background='rgba(125,46,58,0.22)';this.style.borderColor='rgba(125,46,58,0.45)'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.10)'">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="#7D2E3A" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" stroke="#7D2E3A" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#7D2E3A"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Soul tagline + copyright -->
+      <div class="md:text-right">
+        <p class="font-display text-xl font-bold text-antiqueGold italic mb-2">"Calm to thrive. Love to spark."</p>
+        <p class="text-base text-steelSilver font-semibold">© 2026 GoChuchuro. All rights reserved.</p>
+        <p class="text-sm text-steelSilver/60 mt-1 font-semibold">Built with care in the United Kingdom.</p>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-white/6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-steelSilver/60 font-semibold">
+        <div class="flex items-center gap-5">
+          <a href="mailto:hello@gochuchuro.com" class="hover:text-antiqueGold transition duration-200">hello@gochuchuro.com</a>
+          <span>·</span>
+          <a href="privacy.html" class="hover:text-coolSilver transition duration-200">Privacy Policy</a>
+          <span>·</span>
+          <a href="terms.html" class="hover:text-coolSilver transition duration-200">Terms &amp; Conditions</a>
+        </div>
+        <p class="text-sm text-steelSilver/40 font-semibold italic">Chuchuro — Peak, Summit. Reach yours.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
 <script>
-  const io = new IntersectionObserver(e => { e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  // Scroll fade observer
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+  // Margin bar animate
+  const barIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.margin-fill').forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => { bar.style.width = w; }, 200);
+        });
+        barIO.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.pricing-matrix').forEach(el => barIO.observe(el));
+
+  // FAQ chevron
+  document.querySelectorAll('details.faq-item').forEach(d => {
+    d.addEventListener('toggle', () => {
+      const ch = d.querySelector('.faq-chevron');
+      if (ch) ch.style.transform = d.open ? 'rotate(180deg)' : 'rotate(0)';
+    });
+  });
+
+  // Mobile nav: collapse on link tap (future hamburger support)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => {});
+  });
 </script>
 
 </body>
 </html>
+ENDOFFILE
+echo "Done"
