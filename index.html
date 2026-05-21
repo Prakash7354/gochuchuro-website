@@ -1381,19 +1381,31 @@
 
 <script type="text/javascript">
   (function(d, t) {
-    var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-    v.onload = function() {
-      window.voiceflow.chat.load({
-        verify: { projectID: '6a0b7847ea0cd638a0e28920' },
-        url: 'https://general-runtime.voiceflow.com',
-        voice: { url: "https://runtime-api.voiceflow.com" }
-      });
-    }
-    v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-    v.type = "text/javascript";
-    s.parentNode.insertBefore(v, s);
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6a0b7847ea0cd638a0e28920' },
+          url: 'https://general-runtime.voiceflow.com',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
   })(document, 'script');
 </script>
 
+<div class="gtranslate_wrapper"></div>
+<script>
+  window.gtranslateSettings = {
+    "default_language": "en",
+    "native_language_names": true,
+    "languages": ["en", "ne", "hi", "it", "pl", "ro", "es", "zh-CN", "ar", "tl", "ur", "pt", "id", "ms", "th", "sw", "ha", "yo", "zu", "am", "fr", "de", "ja", "ko", "vi"],
+    "wrapper_selector": ".gtranslate_wrapper",
+    "flag_style": "2d"
+  }
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" defer></script>  
+  
 </body>
 </html>
