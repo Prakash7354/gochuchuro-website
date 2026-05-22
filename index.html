@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="/favicon.png" />
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="GoChuchuro — Value-first coaching and automated growth systems for UK small businesses. Plans from £97/month. Book a free 30-min session."/>
+  <meta name="description" content="GoChuchuro — Value-first coaching and automated growth systems for UK small businesses. Plans from £29/month. Book a free 30-min session."/>
   <title>GoChuchuro | Reach Your Peak. Automate Your Growth.</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -196,8 +196,8 @@
     .letter-text {
       font-family: 'Cormorant Garamond', serif;
       color: #2C1810;
-      line-height: 1.9;
-      font-size: 1.05rem;
+      line-height: 1.8;
+      font-size: 1.1rem;
     }
     .letter-greeting {
       font-family: 'Dancing Script', cursive;
@@ -318,7 +318,7 @@
     .c-plan-c:hover { border-color: #7D2E3A80; box-shadow: 0 16px 40px rgba(125,46,58,.15); }
     .c-plan-b { border-color: #D4AF3750; background: linear-gradient(145deg,#1e300e,#0D1515); }
     .c-plan-b::after {
-      content:'BEST VALUE'; position:absolute; top:14px; right:-24px;
+      content:'GROWTH'; position:absolute; top:14px; right:-24px;
       background:#D4AF37; color:#0D1515; font-size:9px; font-weight:900;
       letter-spacing:.08em; padding:3px 32px; transform:rotate(45deg);
     }
@@ -337,6 +337,20 @@
     .coaching-label {
       font-size: 10px; font-weight: 900; letter-spacing: 0.1em;
       text-transform: uppercase; margin-bottom: 8px;
+    }
+
+    /* ── ADD ON SECTION ── */
+    .addon-card {
+      background: #FAFAFA;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.2s ease;
+    }
+    .addon-card:hover {
+      background: #FFF;
+      border-color: #D4AF3750;
+      box-shadow: 0 4px 12px rgba(212,175,55,0.08);
     }
 
     /* ── FFV CALENDAR SECTION ── */
@@ -511,29 +525,22 @@
 
     <div class="letter-card p-10 md:p-14 fade-up">
       <div class="letter-watermark" aria-hidden="true">GC</div>
-
       <div class="absolute top-4 left-5 text-antiqueGold opacity-40 text-xl" aria-hidden="true">✦</div>
 
       <p class="letter-greeting mb-6">Dear Fellow Entrepreneur,</p>
 
       <div class="letter-text space-y-5">
         <p>
-          Thank you for landing here. If you are reading this, I already sense that you are not simply looking for another piece of software. You are looking for something more honest than that — a breakthrough that actually fits your life.
+          Thank you for landing here. If you are reading this, I sense you are looking for more than just another piece of software — you are looking for a breakthrough that actually fits your life.
         </p>
         <p>
-          The entrepreneurial journey is a beautiful, unpredictable wave. Massive highs, deeply challenging lows, and everything in between. It is not just a business venture — it is a chapter of your life. And we all step into it with a genuine vision of freedom. Yet so often, that vision quietly fades beneath the weight of unanswered calls, late-night admin, and the relentless feeling that the business is running <em>you</em>, rather than the other way around.
+          The entrepreneurial journey is a beautiful wave, but so often the vision of freedom fades beneath unanswered calls, late-night admin, and chaos. As a certified life coach and business advisor, I have sat across from founders exactly like you. I know what you are capable of when the right structure is in place.
         </p>
         <p>
-          The reason I am writing to you directly is this: I have walked those same roads. As a certified life coach and business advisor, I have sat across from founders exactly like you — passionate, capable people who are simply buried under systems that were never built for them. That reality moves me deeply. Because I know what you are capable of when the right structure is in place.
+          I developed the <strong style="color:#92730A; font-family:'Cormorant Garamond',serif; font-size:1.1em;">U.D.D.E. Framework</strong> (Understand, Demonstrate, Deliver, Elevate) to fix this. We listen first, show you the solution, build it completely for you, and stay by your side as you grow.
         </p>
         <p>
-          Over years of coaching and building systems for real businesses, I developed a framework I call <strong style="color:#92730A; font-family:'Cormorant Garamond',serif; font-size:1.1em;">U.D.D.E.</strong> — Understand, Demonstrate, Deliver, Elevate. It is not a sales script. It is a commitment. I talk with you first. I listen to what you actually need. I show you the solution clearly before anything is bought or built. Then we deliver it — done for you — and we do not disappear. We stay beside you as you grow.
-        </p>
-        <p>
-          Running a business has never been easy. But when the right tools are placed wisely in the right hands at the right time, they give you your life back. This is what GoChuchuro exists to do.
-        </p>
-        <p>
-          Nothing changes until the next step is taken. So I warmly invite you to join me for a complimentary 30-minute <strong style="color:#92730A;">"Free For Value" (FFV) Session</strong> — where we map out your exact automation blueprint together. No commitment. No pitch. Pure, focused strategy for your business.
+          Let's map out your exact automation blueprint together. Join me for a complimentary 30-minute <strong style="color:#92730A;">Free For Value (FFV) Session</strong>. No pitch. Pure strategy.
         </p>
       </div>
 
@@ -560,7 +567,6 @@
           </div>
         </div>
       </div>
-
       <div class="absolute bottom-4 right-5 text-antiqueGold opacity-30 text-xl" aria-hidden="true">✦</div>
     </div>
 
@@ -641,27 +647,21 @@
           <div class="grid grid-cols-3 gap-3">
             <div class="text-center p-4 rounded-xl" style="background:#7D2E3A10; border:1.5px solid #7D2E3A30;">
               <p class="text-xs font-black uppercase tracking-wide text-deepGarnet mb-1">Essential</p>
-              <p class="text-sm font-bold text-gray-700 leading-tight">Monthly report + Group coaching seminar</p>
+              <p class="text-sm font-bold text-gray-700 leading-tight">Monthly report</p>
             </div>
             <div class="text-center p-4 rounded-xl" style="background:#D4AF3712; border:1.5px solid #D4AF3740;">
               <p class="text-xs font-black uppercase tracking-wide text-antiqueGold mb-1">Growth</p>
-              <p class="text-sm font-bold text-gray-700 leading-tight">Report + Group seminar + 30-min 1:1 monthly</p>
+              <p class="text-sm font-bold text-gray-700 leading-tight">Report + Group seminar + 30-min 1:1</p>
             </div>
             <div class="text-center p-4 rounded-xl" style="background:#0D151512; border:1.5px solid #0D151530;">
               <p class="text-xs font-black uppercase tracking-wide text-midnightEmerald mb-1">Elite</p>
-              <p class="text-sm font-bold text-gray-700 leading-tight">Report + Group + 2-hr 1:1 + Priority access</p>
+              <p class="text-sm font-bold text-gray-700 leading-tight">Report + Group + 2-hr 1:1 + Priority line</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="text-center mt-10 fade-up">
-      <p class="text-base text-gray-600 font-semibold mb-4">Ready to experience the U.D.D.E. framework for your business?</p>
-      <a href="#booking" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-midnightEmerald bg-brightGold hover:bg-antiqueGold transition duration-200 shadow-md">
-        Start With a Free 30-Min Session →
-      </a>
-    </div>
   </div>
 </section>
 
@@ -678,189 +678,40 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-6 mb-16">
-      <div class="rounded-2xl border-2 border-red-200 bg-red-50 p-7 relative overflow-hidden fade-up d1">
-        <div class="absolute top-5 right-5 w-3 h-3 rounded-full bg-red-500 chaos"></div>
-        <p class="text-sm font-black tracking-widest uppercase text-red-600 mb-5">Without GoChuchuro — Sound familiar?</p>
-        <div class="space-y-3">
-          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="text-base font-bold text-red-800">Phone rings — you cannot answer — lead gone</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="text-base font-bold text-red-800">"How do I find new customers?" — no system</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="text-base font-bold text-red-800">Customer enquiries piling up unanswered</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="text-base font-bold text-red-800">Customer booked — then did not show up</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-5 py-3.5 border border-red-100 shadow-sm">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#EF4444" stroke-width="1.5"/><line x1="6" y1="6" x2="14" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="6" x2="6" y2="14" stroke="#EF4444" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <span class="text-base font-bold text-red-800">Paying separately for website, email, booking tools</span>
-          </div>
-        </div>
-      </div>
-      <div class="rounded-2xl border-2 border-auroraTeal/40 bg-midnightEmerald p-7 relative overflow-hidden fade-up d2">
-        <div class="absolute top-5 right-5 w-3 h-3 rounded-full bg-green-400 dp0"></div>
-        <p class="text-sm font-black tracking-widest uppercase text-auroraTeal mb-4">With GoChuchuro — Everything connected</p>
-        <div class="rounded-xl border border-white/10 bg-white/5 p-4 mb-5">
-          <svg viewBox="0 0 320 100" fill="none" class="w-full" aria-label="Automated lead pipeline diagram">
-            <rect x="2" y="36" width="54" height="28" rx="7" fill="#2A3D2B" stroke="#3D5A3E" stroke-width="1.2"/>
-            <text x="29" y="53" text-anchor="middle" font-size="7.5" fill="#6B8C52" font-weight="800" font-family="Nunito Sans,sans-serif">LEAD IN</text>
-            <path d="M56 50 Q72 50 82 50" stroke="#00B5C8" stroke-width="2" class="flow-line" stroke-linecap="round"/>
-            <circle cx="69" cy="50" r="3" fill="#00B5C8" class="np1"/>
-            <rect x="82" y="36" width="54" height="28" rx="7" fill="#0D1515" stroke="#D4AF3760" stroke-width="1.2"/>
-            <text x="109" y="50" text-anchor="middle" font-size="7" fill="#D4AF37" font-weight="800" font-family="Nunito Sans,sans-serif">CRM</text>
-            <text x="109" y="59" text-anchor="middle" font-size="5.5" fill="#9AA3B0" font-family="Nunito Sans,sans-serif">auto-saved</text>
-            <path d="M136 50 Q152 50 162 50" stroke="#D4AF37" stroke-width="2" class="flow-line flow-fast" stroke-linecap="round"/>
-            <circle cx="149" cy="50" r="3" fill="#D4AF37" class="np2"/>
-            <rect x="162" y="36" width="54" height="28" rx="7" fill="#0D1515" stroke="#00B5C860" stroke-width="1.2"/>
-            <text x="189" y="50" text-anchor="middle" font-size="7" fill="#00B5C8" font-weight="800" font-family="Nunito Sans,sans-serif">TEXT</text>
-            <text x="189" y="59" text-anchor="middle" font-size="5.5" fill="#9AA3B0" font-family="Nunito Sans,sans-serif">auto-sent</text>
-            <path d="M216 50 Q232 50 242 50" stroke="#6B8C52" stroke-width="2" class="flow-line flow-slow" stroke-linecap="round"/>
-            <circle cx="229" cy="50" r="3" fill="#6B8C52" class="np3"/>
-            <rect x="242" y="36" width="68" height="28" rx="7" fill="#D4AF37" stroke="#E5C158" stroke-width="1.2"/>
-            <text x="276" y="50" text-anchor="middle" font-size="7.5" fill="#0D1515" font-weight="900" font-family="Nunito Sans,sans-serif">BOOKED</text>
-            <text x="276" y="59" text-anchor="middle" font-size="5.5" fill="#0D1515" opacity=".7" font-family="Nunito Sans,sans-serif">confirmed</text>
-            <text x="160" y="20" text-anchor="middle" font-size="7" fill="#9AA3B0" font-family="Nunito Sans,sans-serif">Your automated pipeline — running every hour of every day</text>
-            <text x="160" y="88" text-anchor="middle" font-size="6.5" fill="#6B8C52" font-weight="700" font-family="Nunito Sans,sans-serif">Zero missed leads · Zero chasing · Zero stress</text>
-          </svg>
-        </div>
-        <div class="space-y-2.5">
-          <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3 border border-white/10"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#22C55E" stroke-width="1.5"/><polyline points="5,9 8,12 13,6" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="text-base font-bold text-white">Every message. Every lead. One app on your phone.</span></div>
-          <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3 border border-white/10"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#22C55E" stroke-width="1.5"/><polyline points="5,9 8,12 13,6" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="text-base font-bold text-white">Missed a call? Customer gets a text back in 30 seconds.</span></div>
-          <div class="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3 border border-white/10"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#22C55E" stroke-width="1.5"/><polyline points="5,9 8,12 13,6" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><span class="text-base font-bold text-white">Automatic reminders cut no-shows by up to 60%.</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-      <div class="step-card card-sage p-7 fade-up d1">
-        <div class="flex items-start gap-4 mb-6">
-          <div class="icon-ring ring-sage relative">
-            <div class="step-badge" style="background:#6B8C52;">1</div>
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><ellipse cx="17" cy="9" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5215"/><line x1="7" y1="9" x2="7" y2="16" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/><line x1="27" y1="9" x2="27" y2="16" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="17" cy="16" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5215"/><line x1="7" y1="16" x2="7" y2="23" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/><line x1="27" y1="16" x2="27" y2="23" stroke="#6B8C52" stroke-width="1.8" stroke-linecap="round"/><ellipse cx="17" cy="23" rx="10" ry="3.5" stroke="#6B8C52" stroke-width="1.8" fill="#6B8C5215"/><circle cx="12" cy="12.5" r="1.3" fill="#6B8C52" class="dp0"/><circle cx="17" cy="12.5" r="1.3" fill="#6B8C52" class="dp1"/><circle cx="22" cy="12.5" r="1.3" fill="#6B8C52" class="dp2"/></svg>
-          </div>
-          <div>
-            <p class="text-xs font-black tracking-widest uppercase text-mountainSage mb-1">Plan A — Essential</p>
-            <h3 class="font-display text-2xl font-bold text-deepCharcoal">Digital Foundation</h3>
-          </div>
-        </div>
-        <p class="text-base text-gray-700 leading-relaxed mb-5">Your professional website, customer database, and 24/7 booking system — all connected and live in five days.</p>
-        <ul class="space-y-2.5 mb-5">
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">5-page professional website</span></li>
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Customer database (CRM)</span></li>
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">24/7 online booking calendar</span></li>
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Missed call text-back — instant</span></li>
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <div>
-              <span class="text-base font-semibold text-gray-800">Google review booster</span>
-              <div class="star-badge"><span class="s">★★★★★</span> More 5-star reviews, automatically</div>
-            </div>
-          </li>
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800 text-antiqueGold" style="color:#92730A;">Monthly automated progress report</span></li>
-          <li class="check-item"><span class="check-icon bg-mountainSage/15 border-2 border-mountainSage/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#6B8C52" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800" style="color:#92730A;">Monthly group coaching seminar</span></li>
-        </ul>
-        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
-          <span class="pill pill-sage">Website</span><span class="pill pill-sage">Booking</span><span class="pill pill-sage">Reviews</span><span class="pill pill-gold">Group Coaching</span>
-        </div>
-      </div>
-
-      <div class="step-card card-gold p-7 fade-up d2">
-        <div class="flex items-start gap-4 mb-6">
-          <div class="icon-ring ring-gold relative">
-            <div class="step-badge" style="background:#D4AF37;">2</div>
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><rect x="8" y="4" width="14" height="22" rx="3" stroke="#D4AF37" stroke-width="1.8" fill="#D4AF3710"/><line x1="11" y1="10" x2="19" y2="10" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity=".6"/><line x1="11" y1="14" x2="19" y2="14" stroke="#D4AF37" stroke-width="1.4" stroke-linecap="round" opacity=".4"/><line x1="24" y1="20" x2="24" y2="8" stroke="#E5C158" stroke-width="2" stroke-linecap="round"/><polyline points="20,12 24,8 28,12" stroke="#E5C158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="24" cy="24" r="1.3" fill="#E5C158" class="dp0"/><circle cx="24" cy="27.5" r="1" fill="#E5C158" class="dp1" opacity=".6"/></svg>
-          </div>
-          <div>
-            <p class="text-xs font-black tracking-widest uppercase text-antiqueGold mb-1">Plan B — Growth</p>
-            <h3 class="font-display text-2xl font-bold text-deepCharcoal">Growth Autopilot</h3>
-          </div>
-        </div>
-        <p class="text-base text-gray-700 leading-relaxed mb-5">Save 10+ hours every week. The system follows up, reminds, and brings customers back — automatically. Plus monthly 1:1 coaching to keep your strategy sharp.</p>
-        <ul class="space-y-2.5 mb-5">
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Everything in Plan A</span></li>
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Automated follow-up sequences</span></li>
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Email and SMS campaigns</span></li>
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Social media planner — all platforms</span></li>
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Appointment reminder system</span></li>
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold" style="color:#92730A;">Monthly report + group seminar</span></li>
-          <li class="check-item"><span class="check-icon bg-antiqueGold/12 border-2 border-antiqueGold/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#D4AF37" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-bold" style="color:#92730A;">1:1 monthly coaching session (30 mins)</span></li>
-        </ul>
-        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
-          <span class="pill pill-gold">SMS</span><span class="pill pill-gold">Email</span><span class="pill pill-gold">Social</span><span class="pill pill-garnet">1:1 Coaching</span>
-        </div>
-      </div>
-
-      <div class="step-card card-teal p-7 fade-up d3">
-        <div class="flex items-start gap-4 mb-6">
-          <div class="icon-ring ring-teal relative">
-            <div class="step-badge" style="background:#00B5C8;">3</div>
-            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true"><circle cx="17" cy="17" r="7" stroke="#00B5C8" stroke-width="1.8" fill="#00B5C810"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(0 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(45 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(90 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(135 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(180 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(225 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(270 17 17)"/><rect x="15.5" y="4" width="3" height="5" rx="1" fill="#00B5C8" transform="rotate(315 17 17)"/><circle cx="17" cy="17" r="3.5" fill="#00B5C8"/><circle cx="27" cy="9" r="2" fill="#E5C158" class="dp0" opacity=".9"/></svg>
-          </div>
-          <div>
-            <p class="text-xs font-black tracking-widest uppercase text-auroraTeal mb-1">Plan C — Elite SaaS</p>
-            <h3 class="font-display text-2xl font-bold text-deepCharcoal">Elite AI + SaaS</h3>
-          </div>
-        </div>
-        <p class="text-base text-gray-700 leading-relaxed mb-5">Your 24/7 AI receptionist, full SaaS automation suite, and extended personal coaching access. For high-growth businesses ready to truly scale.</p>
-        <ul class="space-y-2.5 mb-5">
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Everything in Plans A &amp; B</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">AI chatbot — answers 24/7</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">AI voice receptionist — answers phone</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">White-label SaaS dashboard (your brand)</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">Automated invoicing and Stripe billing</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-semibold text-gray-800">GDPR vault + referral programme</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-bold" style="color:#92730A;">Monthly 1:1 coaching up to 2 hours</span></li>
-          <li class="check-item"><span class="check-icon bg-auroraTeal/12 border-2 border-auroraTeal/40"><svg width="10" height="10" viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3" stroke="#00B5C8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-base font-bold" style="color:#92730A;">Priority WhatsApp support access</span></li>
-        </ul>
-        <div class="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
-          <span class="pill pill-teal">AI Chat</span><span class="pill pill-teal">SaaS Mode</span><span class="pill pill-teal">Auto-Invoice</span><span class="pill pill-garnet">Priority 1:1</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-4 my-10 fade-up">
-      <div class="h-px flex-1" style="background:linear-gradient(90deg,transparent,#D1D5DB,transparent);"></div>
-      <p class="text-sm font-black tracking-widest uppercase text-gray-500">Transparent Pricing</p>
-      <div class="h-px flex-1" style="background:linear-gradient(90deg,transparent,#D1D5DB,transparent);"></div>
-    </div>
-
-    <div class="coaching-matrix p-8 md:p-10 fade-up">
+    <div class="coaching-matrix p-8 md:p-10 fade-up mb-12">
       <div class="text-center mb-10">
         <span class="inline-block text-sm font-black tracking-widest uppercase text-antiqueGold border-2 border-antiqueGold/40 bg-antiqueGold/8 px-4 py-1.5 rounded-full mb-4">Launch Offer — Coaching + Automation Bundles</span>
         <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">Closer to the Coach. Better the Value.</h3>
         <p class="text-lg text-coolSilver max-w-xl mx-auto">Each plan brings you closer to Prakash personally. The software is the engine. The coaching is the strategy that makes it fly.</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
         <div class="c-plan c-plan-a p-6">
           <p class="text-xs font-black tracking-widest uppercase text-mountainSage mb-1">Plan A — Essential</p>
           <h4 class="font-display text-xl font-bold text-white mb-4">Digital Foundation</h4>
-          <div class="mb-1">
-            <span class="text-base font-bold line-through" style="color:#7D2E3A;">Was £149/mo</span>
-            <span class="ml-2 text-xs font-black uppercase px-2 py-0.5 rounded-full" style="background:#7D2E3A22;color:#E5A0A8;border:1px solid #7D2E3A44;">SAVE £52</span>
+          <div class="mb-2 pb-2 border-b border-white/10">
+            <span class="text-sm font-semibold text-steelSilver">One-Off Setup Build: <span class="text-white font-bold">£129</span></span>
           </div>
           <div class="flex items-end gap-1 mb-5">
-            <span class="font-display text-5xl font-bold text-antiqueGold" style="text-shadow:0 0 20px rgba(212,175,55,.4);">£97</span>
+            <span class="font-display text-5xl font-bold text-antiqueGold" style="text-shadow:0 0 20px rgba(212,175,55,.4);">£29</span>
             <span class="text-coolSilver text-base mb-1">/month</span>
           </div>
           <hr class="coaching-divider"/>
           <p class="coaching-label text-mountainSage">🖥️ Automation Engine</p>
           <ul class="space-y-1.5 mb-4">
-            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Website, CRM, booking, missed-call text-back, reviews</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Custom designed 5-page website</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Secure cloud hosting &amp; SSL included</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Google Maps &amp; Search profile sync</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Unified Inbox App (FB, IG, Google)</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">WhatsApp chat link &amp; Contact forms</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-mountainSage/20 border border-mountainSage/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#6B8C52" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Social media post scheduler dashboard</span></li>
           </ul>
           <hr class="coaching-divider"/>
           <p class="coaching-label text-antiqueGold">🎓 Coaching &amp; Support</p>
           <ul class="space-y-1.5 mb-5">
             <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Automated monthly progress report</span></li>
-            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Monthly group coaching seminar</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Standard technical email support</span></li>
           </ul>
           <div class="mt-auto">
             <a href="#booking" class="block text-center text-base font-black text-mountainSage border-2 border-mountainSage/50 hover:bg-mountainSage/12 rounded-xl py-3 transition duration-200">Get Started →</a>
@@ -870,24 +721,25 @@
         <div class="c-plan c-plan-b p-6">
           <p class="text-xs font-black tracking-widest uppercase text-brightGold mb-1">Plan B — Growth</p>
           <h4 class="font-display text-xl font-bold text-white mb-4">Growth Autopilot</h4>
-          <div class="mb-1">
-            <span class="text-base font-bold line-through" style="color:#7D2E3A;">Was £299/mo</span>
-            <span class="ml-2 text-xs font-black uppercase px-2 py-0.5 rounded-full" style="background:#7D2E3A22;color:#E5A0A8;border:1px solid #7D2E3A44;">SAVE £52</span>
+          <div class="mb-2 pb-2 border-b border-white/10">
+            <span class="text-sm font-semibold text-steelSilver">One-Off Setup Build: <span class="text-white font-bold">£199</span></span>
           </div>
           <div class="flex items-end gap-1 mb-5">
-            <span class="font-display text-5xl font-bold text-brightGold" style="text-shadow:0 0 20px rgba(229,193,88,.4);">£247</span>
+            <span class="font-display text-5xl font-bold text-brightGold" style="text-shadow:0 0 20px rgba(229,193,88,.4);">£149</span>
             <span class="text-coolSilver text-base mb-1">/month</span>
           </div>
           <hr class="coaching-divider"/>
           <p class="coaching-label text-brightGold">🖥️ Automation Engine</p>
           <ul class="space-y-1.5 mb-4">
-            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Everything in Plan A + automation, social, SMS, email</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Everything in Plan A + CRM database</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Missed-call instant text-back</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Automated customer booking calendar</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Automated Google review booster</span></li>
           </ul>
           <hr class="coaching-divider"/>
           <p class="coaching-label text-brightGold">🎓 Coaching &amp; Support</p>
           <ul class="space-y-1.5 mb-5">
-            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Automated monthly progress report</span></li>
-            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Monthly group coaching seminar</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Monthly report + Group coaching seminar</span></li>
             <li class="coaching-check"><span class="cc-icon bg-antiqueGold/15 border border-antiqueGold/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#D4AF37" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-white font-bold">1:1 monthly coaching session (30 mins)</span></li>
           </ul>
           <div class="mt-auto">
@@ -898,32 +750,89 @@
         <div class="c-plan c-plan-c p-6">
           <p class="text-xs font-black tracking-widest uppercase text-auroraTeal mb-1">Plan C — Elite SaaS</p>
           <h4 class="font-display text-xl font-bold text-white mb-4">Elite AI + SaaS</h4>
-          <div class="mb-1">
-            <span class="text-base font-bold line-through" style="color:#7D2E3A;">Was £499/mo</span>
-            <span class="ml-2 text-xs font-black uppercase px-2 py-0.5 rounded-full" style="background:#7D2E3A22;color:#E5A0A8;border:1px solid #7D2E3A44;">SAVE £102</span>
+          <div class="mb-2 pb-2 border-b border-white/10">
+            <span class="text-sm font-semibold text-steelSilver">One-Off AI Training Build: <span class="text-white font-bold">£499</span></span>
           </div>
           <div class="flex items-end gap-1 mb-5">
-            <span class="font-display text-5xl font-bold text-white" style="text-shadow:0 0 20px rgba(255,255,255,.2);">£397</span>
+            <span class="font-display text-5xl font-bold text-white" style="text-shadow:0 0 20px rgba(255,255,255,.2);">£297</span>
             <span class="text-coolSilver text-base mb-1">/month</span>
           </div>
           <hr class="coaching-divider"/>
           <p class="coaching-label text-auroraTeal">🖥️ Automation Engine</p>
           <ul class="space-y-1.5 mb-4">
-            <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Everything in Plan B + AI Chatbot, Voice AI, White-label SaaS, Billing</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Everything in Plan B</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Gemini AI 24/7 Chatbot receptionist</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">Smart Text-to-Book AI Voice Engine</span></li>
+            <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-steelSilver font-semibold">White-label SaaS &amp; Auto-Billing</span></li>
           </ul>
           <hr class="coaching-divider"/>
           <p class="coaching-label text-auroraTeal">🎓 Coaching &amp; Support</p>
           <ul class="space-y-1.5 mb-5">
-             <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-white font-bold">Monthly 1:1 coaching (Up to 2 hours)</span></li>
-             <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-white font-bold">Priority WhatsApp Access</span></li>
+             <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-white font-bold">1:1 coaching (Up to 2 hours / mo)</span></li>
+             <li class="coaching-check"><span class="cc-icon bg-auroraTeal/15 border border-auroraTeal/40"><svg width="8" height="8" viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2" stroke="#00B5C8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="text-sm text-white font-bold">Priority WhatsApp VIP Access</span></li>
           </ul>
           <div class="mt-auto">
             <a href="#booking" class="block text-center text-base font-black text-auroraTeal border-2 border-auroraTeal/50 hover:bg-auroraTeal/12 rounded-xl py-3 transition duration-200">Get Started →</a>
           </div>
         </div>
-
       </div>
     </div>
+
+    <div class="grid md:grid-cols-2 gap-8 mb-16 fade-up">
+      <div class="bg-white rounded-3xl p-8 border-2 border-gray-100 shadow-sm">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-2xl">⚙️</span>
+          <h4 class="font-display text-2xl font-bold text-deepCharcoal">On-Demand Power Add-Ons</h4>
+        </div>
+        <p class="text-sm text-gray-600 mb-6 font-semibold">Need more muscle? Scale your digital footprint with our enterprise-grade optional extras. Activate anytime.</p>
+        
+        <div class="space-y-4">
+          <div class="addon-card">
+            <div class="flex justify-between items-start mb-1">
+              <p class="text-base font-black text-deepCharcoal">Local SEO Citation Blaster</p>
+              <span class="text-sm font-bold text-antiqueGold">£49 / mo</span>
+            </div>
+            <p class="text-sm text-gray-600">We lock and broadcast your exact business details across 70+ elite search directories (Apple Maps, Yelp, Bing) to push your local map rankings skyward.</p>
+          </div>
+          
+          <div class="addon-card">
+            <div class="flex justify-between items-start mb-1">
+              <p class="text-base font-black text-deepCharcoal">WhatsApp Business Automations</p>
+              <span class="text-sm font-bold text-antiqueGold">£39 / mo</span>
+            </div>
+            <p class="text-sm text-gray-600">Move past basic SMS. Run your automated booking reminders and customer service directly into the world's most popular messaging app.</p>
+          </div>
+
+          <div class="addon-card">
+            <div class="flex justify-between items-start mb-1">
+              <p class="text-base font-black text-deepCharcoal">Managed Social Content Suite</p>
+              <span class="text-sm font-bold text-antiqueGold">£199 / mo</span>
+            </div>
+            <p class="text-sm text-gray-600">No time to write posts? Our system generates, designs, and schedules custom local industry content directly into your calendar 365 days a year.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl p-8 border-2 border-gray-100 shadow-sm flex flex-col">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="text-2xl">🤝</span>
+          <h4 class="font-display text-2xl font-bold text-deepCharcoal">Our Upgrader Fairness Promise</h4>
+        </div>
+        <div class="prose prose-sm text-gray-700 leading-relaxed flex-1">
+          <p class="font-bold text-base text-deepCharcoal mb-3">How we handle your transition as your business grows.</p>
+          <p class="mb-4">As your business scales, transitioning between our plans is seamless. When you upgrade, <strong>you never pay twice for what you have already built.</strong></p>
+          <div class="bg-gray-50 rounded-xl p-5 border border-gray-200 mb-4">
+            <p class="font-bold text-deepCharcoal mb-2">The Setup Fee Adjustment</p>
+            <p class="text-sm mb-0">We simply charge a one-off technical activation fee equal to the exact difference between the two setup tiers to configure your new automation pipelines.</p>
+          </div>
+          <div class="bg-gray-50 rounded-xl p-5 border border-gray-200">
+            <p class="font-bold text-deepCharcoal mb-2">Pro-Rata Subscription Swap</p>
+            <p class="text-sm mb-0">Your monthly subscription automatically calculates your unused days and adjusts pro-rata on your next billing cycle. Completely fair. Completely transparent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
