@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agency Showroom | Premium Business Blueprints</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --slate-dark: #0f172a;
+            --brand-teal: #0d9488;
+            --bg-slate: #f8fafc;
+            --text-muted: #64748b;
+            --border-line: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-slate);
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Dedicated Header for Showroom Page */
+        .showroom-header {
+            background-color: var(--slate-dark);
+            padding: 1.2rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--brand-teal);
+        }
+
+        .back-home-btn {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+
+        .back-home-btn:hover {
+            color: var(--brand-teal);
+        }
+
+        /* Top Intro Banner */
+        .intro-banner {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-banner span {
+            color: var(--brand-teal);
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .intro-banner h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--slate-dark);
+            margin-top: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* 5-Card Grid Framework */
+        .grid-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 6% 6rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .blueprint-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-line);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .blueprint-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+            border-color: var(--brand-teal);
+        }
+
+        .card-top {
+            padding: 3.5rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .card-top i {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-bottom {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-bottom p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .launch-btn {
+            display: block;
+            text-align: center;
+            color: white;
+            padding: 0.9rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        /* --- THE INDIVIDUAL SECTOR HIGHLIGHT COLORS --- */
+        .color-plumbing { background-color: #0f172a; } 
+        .color-plumbing-btn { background-color: #0d9488; }
+
+        .color-restaurant { background-color: #1e1b4b; } 
+        .color-restaurant-btn { background-color: #f59e0b; }
+
+        .color-salon { background-color: #4c0519; } 
+        .color-salon-btn { background-color: #f43f5e; }
+
+        .color-construction { background-color: #14532d; } 
+        .color-construction-btn { background-color: #16a34a; }
+
+        .color-cleaning { background-color: #0c4a6e; } 
+        .color-cleaning-btn { background-color: #0284c7; }
+
+        footer {
+            background-color: #020617;
+            color: #475569;
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.02);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="showroom-header">
+        <a href="index.html" class="back-home-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to GoChuchuro
+        </a>
+        <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Active Agency Portfolio</span>
+    </header>
+
+    <section class="intro-banner">
+        <span>Ready-To-Deploy Assets</span>
+        <h1>Premium Local Business Blueprints</h1>
+        <p>Select any industrial layout room framework below to demonstrate full mobile conversion infrastructure, booking pipelines, and native mapping engines live to your client.</p>
+    </section>
+
+    <main class="grid-container">
+
+        <div class="blueprint-card">
+            <div class="card-top color-plumbing">
+                <i class="fa-solid fa-faucet-drip" style="color: #2dd4bf;"></i>
+                <h3 style="font-size: 1.4rem; font-weight: 800;">Plumbing & Heating</h3>
+            </div>
+            <div class="card-bottom">
+                <p>Engineered with urgent click-to-dial elements, Gas Safe regulatory trust badges, and custom appointment submission systems optimized for local engineering fleets.</p>
+                <a href="plumbing/index.html" target="_blank" class="launch-btn color-plumbing-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+            </div>
+        </div>
+
+        <div class="blueprint-card">
+            <div class="card-top color-restaurant">
+                <i class="fa-solid fa-utensils" style="color: #fbbf24;"></i>
+                <h3 style="font-size: 1.4rem; font-weight: 800;">Dining & Takeaway</h3>
+            </div>
+            <div class="card-bottom">
+                <p>Designed specifically for modern local dining. Complete with interactive visual menu displays, reservation tables, and embedded location-based mapping.</p>
+                <a href="restaurant/index.html" target="_blank" class="launch-btn color-restaurant-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+            </div>
+        </div>
+
+        <div class="blueprint-card">
+            <div class="card-top color-salon">
+                <i class="fa-solid fa-scissors" style="color: #fca5a5;"></i>
+                <h3 style="font-size: 1.4rem; font-weight: 800;">Hair & Beauty Studio</h3>
+            </div>
+            <div class="card-bottom">
+                <p>A high-end design layout framework for local luxury salons. Features treatment pricing matrices, stylized staff showcases, and instant booking hooks.</p>
+                <a href="hair-salon/index.html" target="_blank" class="launch-btn color-salon-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+            </div>
+        </div>
+
+        <div class="blueprint-card">
+            <div class="card-top color-construction">
+                <i class="fa-solid fa-helmet-safety" style="color: #4ade80;"></i>
+                <h3 style="font-size: 1.4rem; font-weight: 800;">Building & Roofing</h3>
+            </div>
+            <div class="card-bottom">
+                <p>Heavy-duty corporate layout built for trade firms. Showcases project visual case study grids, structural safety credentials, and detailed quoting forms.</p>
+                <a href="construction/index.html" target="_blank" class="launch-btn color-construction-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+            </div>
+        </div>
+
+        <div class="blueprint-card">
+            <div class="card-top color-cleaning">
+                <i class="fa-solid fa-sparkles" style="color: #38bdf8;"></i>
+                <h3 style="font-size: 1.4rem; font-weight: 800;">Commercial Cleaning</h3>
+            </div>
+            <div class="card-bottom">
+                <p>Clean, spacious modern layout optimized for domestic and corporate cleaning contracts. Features frequency pricing models and satisfaction guarantees.</p>
+                <a href="cleaning/index.html" target="_blank" class="launch-btn color-cleaning-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 GoChuchuro Agency System. Decentralized Architecture Portfolio.</p>
+    </footer>
+
+</body>
+</html>
