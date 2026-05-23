@@ -418,6 +418,32 @@
       border: 1.5px solid #E5E7EB;
       box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     }
+/* --- SURGICAL MOBILE MENU OVERRIDE --- */
+@media (max-width: 768px) {
+    /* This targets your navigation bar and forces it to show on phones */
+    nav, .nav, .menu, .nav-menu {
+        display: flex !important;
+        overflow-x: auto !important; /* Allows horizontal swiping */
+        white-space: nowrap !important; /* Stops links from stacking on top of each other */
+        -webkit-overflow-scrolling: touch !important; /* Smooth swiping on iPhones */
+        padding: 10px 0 !important;
+        gap: 15px !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+    
+    /* Hides the ugly scrollbar but keeps the swipe function */
+    nav::-webkit-scrollbar, .nav::-webkit-scrollbar, .menu::-webkit-scrollbar, .nav-menu::-webkit-scrollbar {
+        display: none !important; 
+    }
+
+    /* Makes the links slightly smaller so they fit nicely on the phone screen */
+    nav a, .nav a, .menu a, .nav-menu a {
+        font-size: 0.9rem !important;
+        display: inline-block !important;
+    }
+}
+    
   </style>
 </head>
 
