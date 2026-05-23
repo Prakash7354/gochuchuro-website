@@ -21,7 +21,7 @@
             --text-dark: #334155;
             --text-light: #ffffff;
             --border-gray: #e2e8f0;
-            --tech-purple: #6366f1; /* For AI/Tech Highlights */
+            --tech-purple: #6366f1;
         }
 
         * {
@@ -148,6 +148,9 @@
             border-radius: 8px;
             font-weight: 700;
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
         .btn-primary:hover { background-color: #0f766e; }
 
@@ -171,7 +174,7 @@
         .section-header h2 { font-size: 2.5rem; color: var(--primary-dark); font-weight: 800; }
         .section-header p { color: #64748b; font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* --- TECH ROI SECTION (SMART INTEGRATIONS) --- */
+        /* --- TECH ROI SECTION --- */
         .roi-tech-section {
             background-color: var(--bg-white);
             border-radius: 20px;
@@ -187,32 +190,10 @@
             border: 1px solid var(--border-gray);
         }
 
-        .tech-text-block h3 {
-            font-size: 2rem;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
-        }
-        
+        .tech-text-block h3 { font-size: 2rem; color: var(--primary-dark); margin-bottom: 1rem; }
         .tech-text-block h3 span { color: var(--tech-purple); }
-
-        .tech-feature {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .tech-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--tech-purple);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
+        .tech-feature { display: flex; gap: 1.5rem; margin-top: 2rem; }
+        .tech-icon { width: 50px; height: 50px; background: rgba(99, 102, 241, 0.1); color: var(--tech-purple); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
 
         .ai-avatar-badge {
             display: flex;
@@ -224,14 +205,7 @@
             border: 1px solid var(--border-gray);
             margin-top: 2rem;
         }
-        
-        .ai-avatar-badge img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--tech-purple);
-        }
+        .ai-avatar-badge img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--tech-purple); }
 
         .calendar-mockup {
             background: var(--bg-light);
@@ -245,25 +219,15 @@
         .cal-slot { background: white; padding: 1rem; text-align: center; border-radius: 8px; border: 1px solid var(--border-gray); font-size: 0.9rem; font-weight: 600; color: var(--primary-dark); cursor: pointer; transition: 0.2s;}
         .cal-slot:hover, .cal-slot.active { background: var(--tech-purple); color: white; border-color: var(--tech-purple); }
 
-        /* --- ABOUT & TEAM SECTION --- */
+        /* --- ABOUT & TEAM --- */
         .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
         .team-image-stack { position: relative; }
         .team-main-img { width: 100%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .team-sub-img { position: absolute; bottom: -2rem; right: -2rem; width: 50%; border-radius: 16px; border: 8px solid var(--bg-light); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
-        /* --- SERVICES GRID --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        .service-card {
-            background: var(--bg-white);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-gray);
-            transition: 0.3s;
-        }
+        /* --- SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .service-card { background: var(--bg-white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-gray); transition: 0.3s; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
         .service-img { width: 100%; height: 220px; object-fit: cover; }
         .service-body { padding: 2rem; }
@@ -286,27 +250,26 @@
         .faq-box h4 { color: var(--primary-dark); margin-bottom: 0.5rem; font-size: 1.1rem; }
         .faq-box p { font-size: 0.95rem; color: #64748b; }
 
+        /* --- NEW CONTACT & MAP SECTION --- */
+        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start; }
+        .contact-form-box { background: var(--bg-white); padding: 3rem; border-radius: 16px; border: 1px solid var(--border-gray); box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); }
+        .input-group input, .input-group textarea { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-gray); border-radius: 8px; font-size: 0.95rem; outline: none; }
+        .input-group input:focus, .input-group textarea:focus { border-color: var(--accent-teal); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1); }
+        
+        .map-frame { width: 100%; height: 320px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-gray); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        
+        .info-strip { background: var(--bg-white); border: 1px solid var(--border-gray); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; }
+        .info-strip-icon { width: 48px; height: 48px; background: rgba(13, 148, 136, 0.1); color: var(--accent-teal); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; }
+        .info-strip.whatsapp { border-color: #25D366; }
+        .info-strip.whatsapp .info-strip-icon { background: rgba(37, 211, 102, 0.1); color: #25D366; }
+        .info-strip-text h5 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;}
+        .info-strip-text p { font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); }
+
         /* --- FLOATING CHATBOT --- */
-        .floating-chat {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 320px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-            border: 1px solid var(--border-gray);
-            z-index: 9999;
-            overflow: hidden;
-        }
-        .chat-header {
-            background: var(--tech-purple);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+        .floating-chat { position: fixed; bottom: 2rem; right: 2rem; width: 320px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.15); border: 1px solid var(--border-gray); z-index: 9999; overflow: hidden; }
+        .chat-header { background: var(--tech-purple); color: white; padding: 1rem; display: flex; align-items: center; gap: 1rem; }
         .chat-header img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white; }
         .chat-body { padding: 1.5rem; font-size: 0.9rem; color: var(--text-dark); background: #f8fafc; }
         .chat-msg { background: white; padding: 1rem; border-radius: 12px 12px 12px 0; border: 1px solid var(--border-gray); margin-bottom: 1rem; }
@@ -314,10 +277,15 @@
         .chat-input input { border: none; padding: 1rem; flex-grow: 1; outline: none; }
         .chat-input button { background: white; border: none; padding: 1rem; color: var(--tech-purple); font-weight: bold; cursor: pointer; }
 
+        /* Social Icons in Footer */
+        .social-circle-link { width: 44px; height: 44px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); margin: 0 0.5rem; }
+        .social-circle-link:hover { background: var(--accent-teal); color: white; transform: translateY(-3px); }
+
         @media (max-width: 900px) {
             .nav-menu { display: none; }
-            .roi-tech-section, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .roi-tech-section, .about-grid, .faq-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
             .team-sub-img { position: relative; width: 100%; bottom: 0; right: 0; margin-top: 1rem;}
+            .floating-chat { display: none; } /* Hide chat on mobile so it doesn't block screen */
         }
     </style>
 </head>
@@ -514,6 +482,64 @@
         </div>
     </section>
 
+    <section class="section-wrapper" id="contact" style="background-color: var(--bg-light); border-top: 1px solid var(--border-gray);">
+        <div class="section-header">
+            <h2>Get In Touch</h2>
+            <p>Ready to book or need an emergency call-out? Reach out to our team instantly.</p>
+        </div>
+        
+        <div class="contact-layout">
+            <div class="contact-form-box">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem; color: var(--primary-dark);">Send an Enquiry</h3>
+                <form onsubmit="event.preventDefault(); alert('Demo Notice: This form routes directly to the agency CRM!');">
+                    <div class="input-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="e.g. Prakash Rai" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" placeholder="e.g. 07123 456789" required>
+                    </div>
+                    <div class="input-group">
+                        <label>How can we help?</label>
+                        <textarea rows="4" placeholder="Briefly describe your plumbing issue..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Submit Request <i class="fa-solid fa-paper-plane" style="margin-left: 5px;"></i></button>
+                </form>
+            </div>
+
+            <div>
+                <div class="map-frame">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="info-strip whatsapp">
+                    <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="info-strip-text">
+                        <h5>Text Us 24/7</h5>
+                        <p>+44 7123 456 789</p>
+                    </div>
+                </div>
+
+                <div class="info-strip">
+                    <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="info-strip-text">
+                        <h5>Email Address</h5>
+                        <p>info@raiandsonsheating.co.uk</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <div class="floating-chat">
         <div class="chat-header">
             <img src="images/Emma-Richardson .png" alt="AI Emma">
@@ -534,9 +560,17 @@
         </div>
     </div>
 
-    <footer style="background-color: var(--primary-dark); padding: 3rem 5%; color: #94a3b8; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
-        <h3 style="color: white; margin-bottom: 1rem;"><i class="fa-solid fa-faucet-drip" style="color: var(--accent-teal);"></i> RAI & SONS</h3>
-        <p style="margin-bottom: 2rem;">Premium Gas & Plumbing Infrastructure for Hampshire.</p>
+    <footer style="background-color: var(--primary-dark); padding: 4rem 5% 2rem; color: #94a3b8; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
+        <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.5rem;"><i class="fa-solid fa-faucet-drip" style="color: var(--accent-teal);"></i> RAI & SONS</h3>
+        <p style="margin-bottom: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">Premium Gas & Plumbing Infrastructure serving the local Andover community.</p>
+        
+        <div style="margin-bottom: 3rem;">
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
+        </div>
+
         <p style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">© 2026 GoChuchuro Agency System. Demonstrating Next-Gen Web Capabilities.</p>
     </footer>
 
