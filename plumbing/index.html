@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agency Showroom | Premium Business Blueprints</title>
+    <title>Premium Plumbing & Heating Engineers | Local Experts</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* --- HIGH-END UI DESIGN SYSTEMS --- */
         :root {
-            --slate-dark: #0f172a;
-            --brand-teal: #0d9488;
-            --bg-slate: #f8fafc;
-            --text-muted: #64748b;
-            --border-line: #e2e8f0;
+            --primary-dark: #0f172a;    /* Premium Slate Midnight Blue */
+            --accent-teal: #0d9488;     /* Modern Core Brand Teal */
+            --emergency-orange: #ea580c; /* High-attention CTA Orange */
+            --stars-gold: #f59e0b;       /* Bright Google Review Gold */
+            --bg-light: #f8fafc;
+            --text-dark: #334155;
+            --text-light: #ffffff;
+            --border-gray: #e2e8f0;
         }
 
         * {
@@ -23,231 +27,746 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-slate);
-            color: #334155;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* Dedicated Header for Showroom Page */
-        .showroom-header {
-            background-color: var(--slate-dark);
+        /* --- STICKY TOP NAVIGATION --- */
+        header {
+            background-color: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1.2rem 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--brand-teal);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .back-home-btn {
-            color: #ffffff;
+        .brand-logo {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .brand-logo i {
+            color: var(--accent-teal);
+        }
+
+        .nav-contacts {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-light);
+        }
+
+        .cta-header-btn {
+            background-color: var(--emergency-orange);
+            color: var(--text-light);
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
+            transition: 0.3s;
+        }
+
+        .cta-header-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(234, 88, 12, 0.4);
+        }
+
+        /* --- HERO SELLING WORKSPACE --- */
+        .hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), url('images/hero-bg.jpg') no-repeat center center/cover;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-light);
+        }
+
+        .hero-badge {
+            background-color: rgba(13, 148, 136, 0.2);
+            border: 1px solid var(--accent-teal);
+            color: #2dd4bf;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            max-width: 900px;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero h1 span {
+            color: var(--accent-teal);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            color: #cbd5e1;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-teal);
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             transition: 0.3s;
         }
 
-        .back-home-btn:hover {
-            color: var(--brand-teal);
+        .btn-primary:hover {
+            background-color: #0f766e;
+            transform: translateY(-2px);
         }
 
-        /* Top Intro Banner */
-        .intro-banner {
-            text-align: center;
-            padding: 5rem 2rem 3rem;
-            max-width: 800px;
+        .btn-secondary {
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* --- TRUST BADGES BAR --- */
+        .trust-bar {
+            background-color: #1e293b;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-bottom: 4px solid var(--accent-teal);
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #f1f5f9;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .trust-item i {
+            color: var(--accent-teal);
+            font-size: 1.4rem;
+        }
+
+        /* --- PREMIUM SERVICES GRID --- */
+        .section-wrapper {
+            padding: 6rem 6%;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
-        .intro-banner span {
-            color: var(--brand-teal);
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
         }
 
-        .intro-banner h1 {
-            font-size: 2.6rem;
+        .section-header h2 {
+            font-size: 2.4rem;
             font-weight: 800;
-            color: var(--slate-dark);
-            margin-top: 0.5rem;
+            color: var(--primary-dark);
             letter-spacing: -0.5px;
         }
 
-        /* 5-Card Grid Framework */
-        .grid-container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 2rem 6% 6rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
+        .section-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
         }
 
-        .blueprint-card {
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
             background: #ffffff;
             border-radius: 16px;
             overflow: hidden;
+            border: 1px solid var(--border-gray);
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
-            border: 1px solid var(--border-line);
-            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.06);
+        }
+
+        .card-img-frame {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background-color: #cbd5e1;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-body h3 i {
+            color: var(--accent-teal);
+            font-size: 1.2rem;
+        }
+
+        .card-body p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-feature-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            gap: 0.5rem;
+            border-top: 1px solid var(--border-gray);
+            padding-top: 1rem;
         }
 
-        .blueprint-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
-            border-color: var(--brand-teal);
+        .card-feature-list li {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .card-top {
-            padding: 3.5rem 2rem;
-            text-align: center;
-            color: white;
+        .card-feature-list li i {
+            color: var(--accent-teal);
+        }
+
+        /* --- TESTIMONIALS WITH REAL HEADSHOT PLACEHOLDERS --- */
+        .testimonials-section {
+            background-color: #0f172a;
+            color: var(--text-light);
+            padding: 6rem 6%;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2.5rem;
+            border-radius: 16px;
             position: relative;
         }
 
-        .card-top i {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
+        .quote-icon {
+            position: absolute;
+            top: 2rem;
+            right: 2.5rem;
+            font-size: 2.5rem;
+            color: rgba(13, 148, 136, 0.15);
         }
 
-        .card-bottom {
-            padding: 2rem;
-            flex-grow: 1;
+        .stars-container {
+            color: var(--stars-gold);
+            margin-bottom: 1.2rem;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            gap: 0.2rem;
         }
 
-        .card-bottom p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .testimonial-card p {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            font-style: italic;
             margin-bottom: 2rem;
         }
 
-        .launch-btn {
-            display: block;
-            text-align: center;
-            color: white;
-            padding: 0.9rem;
-            border-radius: 8px;
-            text-decoration: none;
+        .client-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .client-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-teal);
+            background-color: #475569;
+        }
+
+        .client-info h4 {
+            font-size: 1rem;
             font-weight: 700;
+        }
+
+        .client-info span {
+            font-size: 0.85rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        /* --- CONTACT PIPELINE & INTERACTIVE NATIVE MAP --- */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .form-card {
+            background: #ffffff;
+            border: 1px solid var(--border-gray);
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.02);
+        }
+
+        .form-card h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-card p {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-dark);
+        }
+
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            outline: none;
             font-size: 0.95rem;
             transition: 0.3s;
         }
 
-        /* --- THE INDIVIDUAL SECTOR HIGHLIGHT COLORS --- */
-        .color-plumbing { background-color: #0f172a; } 
-        .color-plumbing-btn { background-color: #0d9488; }
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+        }
 
-        .color-restaurant { background-color: #1e1b4b; } 
-        .color-restaurant-btn { background-color: #f59e0b; }
+        .form-submit-btn {
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            width: 100%;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
 
-        .color-salon { background-color: #4c0519; } 
-        .color-salon-btn { background-color: #f43f5e; }
+        .form-submit-btn:hover {
+            background-color: var(--accent-teal);
+        }
 
-        .color-construction { background-color: #14532d; } 
-        .color-construction-btn { background-color: #16a34a; }
+        /* Right Column Map & Media Handles */
+        .map-details-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
 
-        .color-cleaning { background-color: #0c4a6e; } 
-        .color-cleaning-btn { background-color: #0284c7; }
+        .live-map-frame {
+            width: 100%;
+            height: 320px;
+            border-radius: 16px;
+            border: 1px solid var(--border-gray);
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+        }
 
+        .info-strip {
+            background: #ffffff;
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .info-strip-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(13, 148, 136, 0.1);
+            color: var(--accent-teal);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+        }
+
+        .info-strip-text h5 {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-strip-text p {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        /* --- FOOTER REGION --- */
         footer {
             background-color: #020617;
-            color: #475569;
+            padding: 4rem 6% 2rem;
+            color: #64748b;
             text-align: center;
-            padding: 2.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-social-hub {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-circle-link {
+            width: 44px;
+            height: 44px;
+            background-color: #0f172a;
+            color: #cbd5e1;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .social-circle-link:hover {
+            background-color: var(--accent-teal);
+            color: var(--text-light);
+            transform: translateY(-3px);
+        }
+
+        .footer-copyright {
             font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.02);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 2rem;
+        }
+
+        /* --- SMARTPHONE RESPONSIBILITY SYSTEM --- */
+        @media (max-width: 768px) {
+            header { padding: 1rem 4%; }
+            .nav-link { display: none; } /* Drops descriptive text links on mobile */
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .section-wrapper { padding: 4rem 4%; }
+            .form-card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <header class="showroom-header">
-        <a href="index.html" class="back-home-btn">
-            <i class="fa-solid fa-arrow-left"></i> Back to GoChuchuro
+    <header>
+        <a href="#" class="brand-logo">
+            <i class="fa-solid fa-faucet-drip"></i> RAI & SONS
         </a>
-        <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Active Agency Portfolio</span>
+        <div class="nav-contacts">
+            <a href="#services" class="nav-link">Our Services</a>
+            <a href="#contact" class="nav-link">Coverage Map</a>
+            <a href="tel:07123456789" class="cta-header-btn">
+                <i class="fa-solid fa-phone-volume"></i> 24/7 DISPATCH
+            </a>
+        </div>
     </header>
 
-    <section class="intro-banner">
-        <span>Ready-To-Deploy Assets</span>
-        <h1>Premium Local Business Blueprints</h1>
-        <p>Select any industrial layout room framework below to demonstrate full mobile conversion infrastructure, booking pipelines, and native mapping engines live to your client.</p>
+    <section class="hero">
+        <div class="hero-badge">
+            <i class="fa-solid fa-shield-halved"></i> Gas Safe Certified Engineers
+        </div>
+        <h1>Local Experts for <span>Boiler Installations</span> & Emergency Plumbing</h1>
+        <p>Trusted local family engineers serving Andover and surrounding villages. Rapid response times, transparent pricing, and zero hidden call-out fees.</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-primary">
+                Book Free Consultation <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="tel:07123456789" class="btn-secondary">Emergency Call-Out</a>
+        </div>
     </section>
 
-    <main class="grid-container">
+    <section class="trust-bar">
+        <div class="trust-item">
+            <i class="fa-solid fa-circle-check"></i> Fully Insured up to £5M
+        </div>
+        <div class="trust-item">
+            <i class="fa-solid fa-clock"></i> 45-Min Emergency Target
+        </div>
+        <div class="trust-item">
+            <i class="fa-solid fa-award"></i> 12-Month Workmanship Guarantee
+        </div>
+        <div class="trust-item">
+            <i class="fa-solid fa-star"></i> 5.0 Google Rated Local Firm
+        </div>
+    </section>
 
-        <div class="blueprint-card">
-            <div class="card-top color-plumbing">
-                <i class="fa-solid fa-faucet-drip" style="color: #2dd4bf;"></i>
-                <h3 style="font-size: 1.4rem; font-weight: 800;">Plumbing & Heating</h3>
+    <section class="section-wrapper" id="services">
+        <div class="section-header">
+            <h2>Our Specialized Technical Services</h2>
+            <p>Fully qualified engineering standards deployed safely right to your property doorstep.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="images/service-boiler.jpg" alt="Boiler Servicing Framework" class="card-img-frame">
+                <div class="card-body">
+                    <h3><i class="fa-solid fa-fire"></i> Boiler Installations</h3>
+                    <p>Premium energy-efficient system upgrades featuring up to 10-year manufacturer warranties. Comprehensive safety diagnostic inspections included.</p>
+                    <ul class="card-feature-list">
+                        <li><i class="fa-solid fa-check"></i> Full System Powerflushing</li>
+                        <li><i class="fa-solid fa-check"></i> Smart Thermostat Integrations</li>
+                    </ul>
+                </div>
             </div>
-            <div class="card-bottom">
-                <p>Engineered with urgent click-to-dial elements, Gas Safe regulatory trust badges, and custom appointment submission systems optimized for local engineering fleets.</p>
-                <a href="plumbing/index.html" target="_blank" class="launch-btn color-plumbing-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+
+            <div class="service-card">
+                <img src="images/service-emergency.jpg" alt="Emergency Plumbing Dispatch" class="card-img-frame">
+                <div class="card-body">
+                    <h3><i class="fa-solid fa-droplet"></i> Emergency Plumbing</h3>
+                    <p>Immediate tactical resolution for burst piping networks, toxic water leaks, blocked mainline blockages, and central heating radiator failures.</p>
+                    <ul class="card-feature-list">
+                        <li><i class="fa-solid fa-check"></i> Rapid Leak Isolation Repairs</li>
+                        <li><i class="fa-solid fa-check"></i> 24-Hour Active Dispatch Line</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <img src="images/service-landlord.jpg" alt="Landlord Safety Verification" class="card-img-frame">
+                <div class="card-body">
+                    <h3><i class="fa-solid fa-file-shield"></i> Landlord Gas Safety</h3>
+                    <p>Official legal property safety inspection compliance and rapid certification processing (CP12 paperwork) for local landlords and property agents.</p>
+                    <ul class="card-feature-list">
+                        <li><i class="fa-solid fa-check"></i> Full Flue Gas Appliance Analysis</li>
+                        <li><i class="fa-solid fa-check"></i> Digital Document Copies Sent Instantly</li>
+                    </ul>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="blueprint-card">
-            <div class="card-top color-restaurant">
-                <i class="fa-solid fa-utensils" style="color: #fbbf24;"></i>
-                <h3 style="font-size: 1.4rem; font-weight: 800;">Dining & Takeaway</h3>
-            </div>
-            <div class="card-bottom">
-                <p>Designed specifically for modern local dining. Complete with interactive visual menu displays, reservation tables, and embedded location-based mapping.</p>
-                <a href="restaurant/index.html" target="_blank" class="launch-btn color-restaurant-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
-            </div>
+    <section class="testimonials-section">
+        <div class="section-header">
+            <h2 style="color: var(--text-light);">What Your Neighbors Say</h2>
+            <p style="color: #94a3b8;">Real local feedback pulling directly from our 5-star Google Business identity.</p>
         </div>
 
-        <div class="blueprint-card">
-            <div class="card-top color-salon">
-                <i class="fa-solid fa-scissors" style="color: #fca5a5;"></i>
-                <h3 style="font-size: 1.4rem; font-weight: 800;">Hair & Beauty Studio</h3>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <i class="fa-solid fa-quote-right quote-icon"></i>
+                <div class="stars-container">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"Absolute lifesavers! Our boiler system completely shut down on a freezing winter night. Rai & Sons arrived in 35 minutes and fixed the core control issue on the spot. Highly professional local family business."</p>
+                <div class="client-profile">
+                    <img src="images/client-1.jpg" alt="Local Customer Profile" class="client-avatar">
+                    <div class="client-info">
+                        <h4>Gurung Family</h4>
+                        <span>Verified Homeowner, Andover</span>
+                    </div>
+                </div>
             </div>
-            <div class="card-bottom">
-                <p>A high-end design layout framework for local luxury salons. Features treatment pricing matrices, stylized staff showcases, and instant booking hooks.</p>
-                <a href="hair-salon/index.html" target="_blank" class="launch-btn color-salon-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+
+            <div class="testimonial-card">
+                <i class="fa-solid fa-quote-right quote-icon"></i>
+                <div class="stars-container">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p>"Managing 12 separate properties means I need an engineering firm that is fast and organized. They manage all my annual CP12 landlord certificates cleanly without me ever having to follow up."</p>
+                <div class="client-profile">
+                    <img src="images/client-2.jpg" alt="Local Client Profile" class="client-avatar">
+                    <div class="client-info">
+                        <h4>D. Sharma</h4>
+                        <span>Local Property Landlord</span>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="blueprint-card">
-            <div class="card-top color-construction">
-                <i class="fa-solid fa-helmet-safety" style="color: #4ade80;"></i>
-                <h3 style="font-size: 1.4rem; font-weight: 800;">Building & Roofing</h3>
+    <section class="section-wrapper" id="contact">
+        <div class="contact-layout">
+            
+            <div class="form-card">
+                <h3>Request Free Survey</h3>
+                <p>Fill out your basic project parameters below and an engineer will issue an evaluation call shortly.</p>
+                
+                <form onsubmit="event.preventDefault(); alert('Demo Notice: This interactive pipeline form is fully responsive and ready to connect to your database!');">
+                    <div class="input-group">
+                        <label>Contact Name</label>
+                        <input type="text" placeholder="e.g. Prakash Rai" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Phone Contact Number</label>
+                        <input type="tel" placeholder="e.g. 07123 456789" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Required Service Sector</label>
+                        <input type="text" placeholder="e.g. Emergency Leak / Boiler Quote">
+                    </div>
+                    <div class="input-group">
+                        <label>Project Overview Note</label>
+                        <textarea rows="4" placeholder="Briefly clarify your specific property problem..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit-btn">
+                        Submit Dispatch Ticket <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
             </div>
-            <div class="card-bottom">
-                <p>Heavy-duty corporate layout built for trade firms. Showcases project visual case study grids, structural safety credentials, and detailed quoting forms.</p>
-                <a href="construction/index.html" target="_blank" class="launch-btn color-construction-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
+
+            <div class="map-details-column">
+                
+                <div class="live-map-frame">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d40024.16874455855!2d-1.517374828131362!3d51.21061993211516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4874011fcd6dc6e1%3A0x6b7724263f350c38!2sAndover!5e0!3m2!1sen!2suk!4v1716500000000!5m2!1sen!2suk" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+                <div class="info-strip">
+                    <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
+                    <div class="info-strip-text">
+                        <h5>Direct Agency Email</h5>
+                        <p>info@raiandsonsheating.co.uk</p>
+                    </div>
+                </div>
+
+                <div class="info-strip">
+                    <div class="info-strip-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="info-strip-text">
+                        <h5>Local Service Hub</h5>
+                        <p>Andover, Hampshire, UK</p>
+                    </div>
+                </div>
             </div>
+
         </div>
-
-        <div class="blueprint-card">
-            <div class="card-top color-cleaning">
-                <i class="fa-solid fa-sparkles" style="color: #38bdf8;"></i>
-                <h3 style="font-size: 1.4rem; font-weight: 800;">Commercial Cleaning</h3>
-            </div>
-            <div class="card-bottom">
-                <p>Clean, spacious modern layout optimized for domestic and corporate cleaning contracts. Features frequency pricing models and satisfaction guarantees.</p>
-                <a href="cleaning/index.html" target="_blank" class="launch-btn color-cleaning-btn">Launch Framework <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; margin-left: 0.3rem;"></i></a>
-            </div>
-        </div>
-
-    </main>
+    </section>
 
     <footer>
-        <p>© 2026 GoChuchuro Agency System. Decentralized Architecture Portfolio.</p>
+        <div class="footer-social-hub">
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
+        </div>
+        <p>This layout operates as an active conceptual framework optimization display. All rights reserved.</p>
+        <p class="footer-copyright">&copy; 2026 Rai & Sons Engineering Group. Managed Agency Infrastructure.</p>
     </footer>
 
 </body>
