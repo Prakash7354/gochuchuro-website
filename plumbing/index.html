@@ -98,7 +98,8 @@
 
         /* --- HERO WORKSPACE --- */
         .hero {
-            background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.95)), url('images/gas-heating-1.png') no-repeat center center/cover;
+            /* Brightened the background overlay to 0.50 and 0.75 */
+            background: linear-gradient(rgba(15, 23, 42, 0.50), rgba(15, 23, 42, 0.75)), url('images/gas-heating-1.png') no-repeat center center/cover;
             min-height: 85vh;
             display: flex;
             flex-direction: column;
@@ -127,6 +128,7 @@
             max-width: 900px;
             line-height: 1.1;
             margin-bottom: 1.2rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.6); /* Added shadow for readability */
         }
 
         .hero h1 span { color: var(--accent-teal); }
@@ -136,6 +138,7 @@
             max-width: 650px;
             color: #cbd5e1;
             margin-bottom: 2.5rem;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.5); /* Added shadow for readability */
         }
 
         .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
@@ -277,6 +280,28 @@
         .chat-input input { border: none; padding: 1rem; flex-grow: 1; outline: none; }
         .chat-input button { background: white; border: none; padding: 1rem; color: var(--tech-purple); font-weight: bold; cursor: pointer; }
 
+        /* --- NEW FLOATING GOOGLE TRUST BADGE --- */
+        .floating-google-badge {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 999;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: 0.3s;
+        }
+        .floating-google-badge:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .badge-text { font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; }
+        .badge-stars { color: #fbbc04; font-size: 0.75rem; }
+
         /* Social Icons in Footer */
         .social-circle-link { width: 44px; height: 44px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); margin: 0 0.5rem; }
         .social-circle-link:hover { background: var(--accent-teal); color: white; transform: translateY(-3px); }
@@ -285,7 +310,7 @@
             .nav-menu { display: none; }
             .roi-tech-section, .about-grid, .faq-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
             .team-sub-img { position: relative; width: 100%; bottom: 0; right: 0; margin-top: 1rem;}
-            .floating-chat { display: none; } /* Hide chat on mobile so it doesn't block screen */
+            .floating-chat, .floating-google-badge { display: none; } /* Hide chat and badge on mobile so it doesn't block screen */
         }
     </style>
 </head>
@@ -539,6 +564,14 @@
             </div>
         </div>
     </section>
+
+    <a href="#testimonials" class="floating-google-badge">
+        <i class="fa-brands fa-google" style="color: #4285F4; font-size: 1.8rem; margin-right: 5px;"></i>
+        <div class="badge-text">
+            <span>5.0 <span class="badge-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
+            <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 120+ Reviews</span>
+        </div>
+    </a>
 
     <div class="floating-chat">
         <div class="chat-header">
