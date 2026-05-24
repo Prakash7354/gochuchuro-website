@@ -243,9 +243,49 @@
         .info-strip-text h5 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
         .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); }
 
-        /* --- FLOATING VIRTUAL RECEPTIONIST WIDGET --- */
-        .floating-chat-widget { position: fixed; bottom: 6.5rem; right: 2rem; width: 330px; background: white; border-radius: 16px; box-shadow: 0 15px 45px rgba(0,0,0,0.4); z-index: 999; overflow: hidden; color: var(--obsidian); border: 1px solid #e2e8f0; }
-        .widget-head { background: var(--charcoal-surface); color: white; padding: 1.2rem; display: flex; align-items: center; gap: 1rem; border-bottom: 2px solid var(--performance-red); }
+        /* --- NEW COLLAPSIBLE CHAT WIDGET --- */
+        .chat-toggle-btn {
+            position: fixed;
+            bottom: 6.5rem;
+            right: 2rem;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: var(--charcoal-surface);
+            border: 3px solid var(--performance-red);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 1000;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
+        }
+        .chat-toggle-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .chat-toggle-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4); }
+
+        .floating-chat-widget { 
+            position: fixed; 
+            bottom: 6.5rem; 
+            right: 2rem; 
+            width: 330px; 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.4); 
+            z-index: 1001; 
+            overflow: hidden; 
+            color: var(--obsidian); 
+            border: 1px solid #e2e8f0; 
+            display: none; /* Hidden by default */
+        }
+        .widget-head { background: var(--charcoal-surface); color: white; padding: 1.2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--performance-red); }
+        .widget-head .profile-info { display: flex; align-items: center; gap: 1rem; }
         .widget-head img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--tech-blue); }
         .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
         .widget-pane .msg { background: white; padding: 1.2rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 0.5rem; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
@@ -253,7 +293,7 @@
         /* --- FLOATING GOOGLE RATING BADGE --- */
         .floating-google-badge {
             position: fixed;
-            bottom: 2rem;
+            bottom: 6.5rem; /* Moved up to align with chat toggle */
             left: 2rem;
             background: white;
             border-radius: 50px;
@@ -282,7 +322,7 @@
             .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3.5rem; }
             .tech-roi-container { padding: 2.5rem; margin-top: 0; }
             .hero-banner h1 { font-size: 2.6rem; }
-            .floating-chat-widget, .floating-google-badge { display: none; } /* Kept clean for mobile users */
+            .chat-toggle-btn, .floating-google-badge { display: none; } /* Kept clean for mobile users */
             .about-grid-mobile { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
         }
     </style>
@@ -498,13 +538,22 @@
         </div>
     </section>
 
-    <div class="floating-chat-widget">
+    <button id="chatToggleBtn" class="chat-toggle-btn" onclick="document.getElementById('aiChatWidget').style.display = 'block'; this.style.display = 'none';">
+        <img src="ai-receptionist.png" alt="Sarah AI">
+    </button>
+
+    <div id="aiChatWidget" class="floating-chat-widget">
         <div class="widget-head">
-            <img src="ai-receptionist.png" alt="Sarah AI">
-            <div>
-                <h5 style="font-size:0.95rem; font-weight:700;">Sarah (Autotech Desk)</h5>
-                <span style="font-size:0.75rem; opacity:0.9;"><i class="fa-solid fa-circle" style="color: #4ade80; font-size: 0.45rem; margin-right: 4px;"></i> Active Assistant</span>
+            <div class="profile-info">
+                <img src="ai-receptionist.png" alt="Sarah AI">
+                <div>
+                    <h5 style="font-size:0.95rem; font-weight:700; margin: 0;">Sarah (Autotech Desk)</h5>
+                    <span style="font-size:0.75rem; opacity:0.9;"><i class="fa-solid fa-circle" style="color: #4ade80; font-size: 0.45rem; margin-right: 4px;"></i> Active Assistant</span>
+                </div>
             </div>
+            <button onclick="document.getElementById('aiChatWidget').style.display = 'none'; document.getElementById('chatToggleBtn').style.display = 'flex';" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 1.2rem;">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
         <div class="widget-pane">
             <div class="msg">
@@ -533,7 +582,7 @@
             <a href="https://google.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
         </div>
 
-        <p style="font-size:0.8rem; border-top: 1px solid var(--border-tint); padding-top:2rem;">&copy; 2026 GoChuchuro Systems. High-Performance Digital Showroom Assets.</p>
+        <p style="font-size:0.8rem; border-top: 1px solid var(--border-tint); padding-top:2rem;">© 2026 GoChuchuro Systems. High-Performance Digital Showroom Assets.</p>
     </footer>
 
 </body>
