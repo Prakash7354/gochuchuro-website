@@ -234,6 +234,29 @@
         .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
         .widget-pane .msg { background: white; padding: 1rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
 
+        /* --- NEW FLOATING GOOGLE TRUST BADGE --- */
+        .floating-google-badge {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: white;
+            border-radius: 50px;
+            padding: 0.6rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 999;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: 0.3s;
+        }
+        .floating-google-badge:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .google-g { width: 24px; height: 24px; }
+        .badge-text { font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; }
+        .badge-stars { color: #fbbc04; font-size: 0.75rem; }
+
         /* Social Icons Link Style */
         .social-circle-link { width: 44px; height: 44px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); margin: 0 0.5rem; }
         .social-circle-link:hover { background: var(--gold-glow); color: var(--obsidian); transform: translateY(-3px); }
@@ -243,7 +266,7 @@
             .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3rem; }
             .tech-roi-container { padding: 2rem; margin-top: 0; }
             .hero-banner h1 { font-size: 2.4rem; }
-            .floating-chat-widget { display: none; }
+            .floating-chat-widget, .floating-google-badge { display: none; } /* Hidden on mobile to keep screen clean */
             .about-grid-mobile { grid-template-columns: 1fr !important; gap: 2rem !important; }
         }
     </style>
@@ -469,6 +492,14 @@
         </div>
     </div>
 
+    <a href="#testimonials" class="floating-google-badge">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="google-g">
+        <div class="badge-text">
+            <span>5.0 <span class="badge-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
+            <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 120+ Reviews</span>
+        </div>
+    </a>
+
     <footer style="background-color: var(--primary-dark); padding: 6rem 5% 8rem; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border-tint);">
         <h3 class="serif-display" style="color: white; font-size:1.8rem; letter-spacing:2px; margin-bottom:1rem;">THE TIMUR</h3>
         <p style="max-width: 450px; margin: 0 auto 1.5rem;">Bespoke Culinary Infrastructure Engineering. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
@@ -476,7 +507,7 @@
         <div style="margin-bottom: 3rem;">
             <a href="https://facebook.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://instagram.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://tripadvisor.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tripadvisor"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tiktok"></i></a>
             <a href="https://google.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
         </div>
 
