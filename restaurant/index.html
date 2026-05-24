@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Timur | Fine Asian & Nepalese Dining</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- BRAND DESIGN SYSTEM --- */
+        :root {
+            --obsidian: #090d16;       /* Deep Luxury Midnight background */
+            --charcoal-surface: #131a2a; /* Card and Secondary backgrounds */
+            --gold-glow: #dfb743;      /* Core Accents & Icons */
+            --warm-crimson: #dc2626;   /* Order CTA Actions */
+            --text-creme: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-tint: rgba(255,255,255,0.08);
+            --tech-indigo: #818cf8;    /* Smart Tech Accents */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--text-creme);
+            line-height: 1.6;
+            padding-bottom: 70px; /* Prevents sticky mobile hotbar from covering footer content */
+        }
+
+        .serif-display {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: normal;
+        }
+
+        /* --- STICKY TOP NAVIGATION --- */
+        header {
+            background-color: rgba(9, 13, 22, 0.96);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-tint);
+        }
+
+        .brand-identity {
+            color: var(--text-creme);
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .brand-identity span { color: var(--gold-glow); }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-link-item { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .nav-link-item:hover { color: var(--gold-glow); }
+
+        /* --- STICKY PERSISTENT CTA ACTION HOT-BAR --- */
+        .sticky-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(19, 26, 42, 0.96);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid var(--gold-glow);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            z-index: 999;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+        }
+
+        .action-bar-btn {
+            flex: 1;
+            max-width: 260px;
+            padding: 0.85rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            transition: 0.3s;
+        }
+        .action-bar-btn:hover { transform: translateY(-3px); }
+        .btn-gold-cta { background-color: var(--gold-glow); color: var(--obsidian); }
+        .btn-crimson-cta { background-color: var(--warm-crimson); color: white; }
+
+        /* --- HERO BANNER --- */
+        .hero-banner {
+            background: linear-gradient(rgba(9, 13, 22, 0.75), rgba(9, 13, 22, 0.92)), url('images/hero-dining.jpg') no-repeat center center/cover;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero-banner h1 { font-size: 4rem; font-weight: 600; color: var(--text-creme); line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-banner h1 span { color: var(--gold-glow); font-style: italic; }
+        .hero-banner p { font-size: 1.25rem; max-width: 700px; color: var(--text-dim); margin-bottom: 2.5rem; }
+
+        /* --- DATA INSIGHTS / METRICS HUB --- */
+        .metrics-ribbon { background-color: var(--charcoal-surface); padding: 2rem 5%; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; border-bottom: 1px solid var(--border-tint); text-align: center; }
+        .metric-node h4 { font-size: 1.8rem; color: var(--gold-glow); font-weight: 700; }
+        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; }
+
+        /* --- SMART CONCIERGE TABLE LAYOUT --- */
+        .tech-roi-container {
+            background-color: var(--charcoal-surface);
+            border-radius: 20px;
+            border: 1px solid var(--border-tint);
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            margin: -4rem auto 4rem;
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+        }
+
+        .tech-pitch-content h3 { font-size: 2.2rem; margin-bottom: 1rem; color: var(--text-creme); }
+        .tech-pitch-content h3 span { color: var(--tech-indigo); }
+        
+        .ai-concierge-badge {
+            display: flex;
+            align-items: center;
+            background: rgba(9, 13, 22, 0.6);
+            padding: 1.2rem;
+            border-radius: 12px;
+            gap: 1.2rem;
+            border: 1px solid var(--border-tint);
+            margin: 2rem 0;
+        }
+        .ai-concierge-badge img { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--tech-indigo); object-fit: cover; }
+
+        .interactive-table-deck { background: var(--obsidian); border-radius: 16px; padding: 2.5rem; border: 1px solid var(--border-tint); }
+        .deck-header { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-tint); padding-bottom: 1rem; }
+        
+        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 1.5rem; }
+        .cover-bubble { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-tint); display: flex; align-items: center; justify-content: center; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .cover-bubble.selected, .cover-bubble:hover { background-color: var(--gold-glow); color: var(--obsidian); border-color: var(--gold-glow); }
+
+        /* --- SECTION STRUCTURES --- */
+        .section-layout { padding: 6rem 5%; max-width: 1300px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; }
+        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; }
+
+        /* --- SIGNATURE MENU CARDS --- */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+        .menu-card { background: var(--charcoal-surface); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-tint); transition: 0.3s; }
+        .menu-card:hover { transform: translateY(-6px); border-color: var(--gold-glow); }
+        .menu-card img { width: 100%; height: 240px; object-fit: cover; border-bottom: 1px solid var(--border-tint); }
+        .card-inner { padding: 2rem; }
+        .card-title-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+        .card-title-row h4 { font-size: 1.3rem; color: var(--text-creme); }
+        .card-price { color: var(--gold-glow); font-weight: 700; font-size: 1.2rem; }
+
+        /* --- VERIFIED REVIEW PLATFORM --- */
+        .review-sector { background-color: #05080f; padding: 6rem 5%; border-top: 1px solid var(--border-tint); border-bottom: 1px solid var(--border-tint); }
+        .testimonial-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .review-envelope { background: var(--charcoal-surface); border: 1px solid var(--border-tint); padding: 2.5rem; border-radius: 16px; }
+        .stars-row { color: var(--gold-glow); margin-bottom: 1rem; font-size: 0.9rem; }
+        .review-envelope p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; }
+        .client { display: flex; align-items: center; gap: 1rem; }
+        .client img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-glow); }
+
+        /* --- FAQS AREA --- */
+        .faq-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .faq-node { background: var(--charcoal-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-tint); }
+        .faq-node h4 { color: var(--gold-glow); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .faq-node p { color: var(--text-dim); font-size: 0.95rem; }
+
+        /* --- PIPELINE DISPATCH & GOOGLE AREA --- */
+        .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 4rem; align-items: start; }
+        .map-wrapper { width: 100%; height: 340px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-tint); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        
+        .info-strip { background: var(--charcoal-surface); border: 1px solid var(--border-tint); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; }
+        .info-strip-icon { width: 48px; height: 48px; background: rgba(223, 183, 67, 0.1); color: var(--gold-glow); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; }
+        .info-strip.whatsapp { border-color: #25D366; }
+        .info-strip.whatsapp .info-strip-icon { background: rgba(37, 211, 102, 0.1); color: #25D366; }
+        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;}
+        .info-strip-text p { font-size: 1.1rem; font-weight: 700; color: var(--text-creme); }
+
+        /* --- FLOATING CHATBOT PREVIEW --- */
+        .floating-chat-widget { position: fixed; bottom: 6rem; right: 2rem; width: 320px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 999; overflow: hidden; color: var(--obsidian); border: 1px solid #e2e8f0; }
+        .widget-head { background: var(--tech-indigo); color: white; padding: 1rem; display: flex; align-items: center; gap: 1rem; }
+        .widget-head img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid white; }
+        .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
+        .widget-pane .msg { background: white; padding: 1rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3rem; }
+            .tech-roi-container { padding: 2rem; margin-top: 0; }
+            .hero-banner h1 { font-size: 2.4rem; }
+            .floating-chat-widget { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-identity serif-display">THE <span>TIMUR</span></a>
+        <nav class="nav-links">
+            <a href="#about" class="nav-link-item">About</a>
+            <a href="#menu" class="nav-link-item">Menu Signature</a>
+            <a href="#testimonials" class="nav-link-item">Reviews</a>
+            <a href="#faqs" class="nav-link-item">FAQs</a>
+            <a href="#contact" class="nav-link-item">Location</a>
+        </nav>
+    </header>
+
+    <div class="sticky-action-bar" id="order">
+        <a href="#contact" class="action-bar-btn btn-crimson-cta"><i class="fa-solid fa-motorcycle"></i> Order Takeaway</a>
+        <a href="#reserve" class="action-bar-btn btn-gold-cta"><i class="fa-solid fa-chair"></i> Book A Table</a>
+    </div>
+
+    <section class="hero-banner">
+        <h1 class="serif-display">Savour Premium <span>Nepalese & Asian</span> Masterpieces</h1>
+        <p>An exquisite culinary journey deep into traditional Himalayan spice heritages, balanced elegantly within Andover's finest modern dining environment.</p>
+        <a href="#menu" class="action-bar-btn btn-gold-cta" style="max-width: 220px;">Explore Our Menu</a>
+    </section>
+
+    <section class="metrics-ribbon">
+        <div class="metric-node"><h4>4.9</h4><p>Google Rated Stars</p></div>
+        <div class="metric-node"><h4>100%</h4><p>Freshly Ground Spices</p></div>
+        <div class="metric-node"><h4>0%</h4><p>Commission On Direct Orders</p></div>
+    </section>
+
+    <section class="section-layout" style="padding-top: 0;">
+        <div class="tech-roi-container" id="reserve">
+            <div class="tech-pitch-content">
+                <h3 class="serif-display">Bespoke Table <span>Reservations.</span></h3>
+                <p>Avoid busy phone lines during peak service hours. Secure your table layout instantly with our real-time calendar syncing protocol engine.</p>
+                
+                <div class="ai-concierge-badge">
+                    <img src="images/ai-receptionist.png" alt="AI Concierge Maya">
+                    <div>
+                        <h4 style="color: var(--gold-glow); font-weight:700;">Meet Maya, AI Dining Concierge</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 2px;">On hand 24/7 to manage corporate group bookings, allocate dietary alterations, and verify seating options instantly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-table-deck">
+                <h4 class="deck-header serif-display">Select Number of Guests</h4>
+                <div class="covers-selector">
+                    <div class="cover-bubble">1</div>
+                    <div class="cover-bubble selected">2</div>
+                    <div class="cover-bubble">4</div>
+                    <div class="cover-bubble">6</div>
+                </div>
+                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem;">Select Dining Suite Mode:</p>
+                <select style="width: 100%; padding: 0.85rem; background: var(--charcoal-surface); border: 1px solid var(--border-tint); color: white; border-radius: 8px; outline: none; font-weight: 600;">
+                    <option>Standard Fine Dining Hall</option>
+                    <option>Private Himalayan VIP Suite</option>
+                </select>
+                <button style="width:100%; padding:1rem; background: var(--gold-glow); color: var(--obsidian); border:none; border-radius:8px; margin-top:1.5rem; font-weight:700; text-transform:uppercase; cursor:pointer;" onsubmit="event.preventDefault();">Secure My Table</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-layout" id="about" style="padding-top:0;">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items: center;">
+            <div>
+                <img src="images/about-interior.jpg" alt="Timur Restaurant Interior" style="width:100%; border-radius:16px; border:1px solid var(--border-tint); box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+            </div>
+            <div>
+                <span style="color:var(--gold-glow); font-size:0.85rem; text-transform:uppercase; font-weight:700; letter-spacing:1px;">Heritage & Craftsmanship</span>
+                <h2 class="serif-display" style="font-size: 2.8rem; margin:0.5rem 0 1rem; line-height:1.2;">Elevating Local Dining Expectations</h2>
+                <p style="color:var(--text-dim); margin-bottom:1.5rem;">The Timur merges the structural integrity of ancient Asian culinary arts with contemporary hospitality systems. Our signature slow-cooked lamb and hand-ground spice bases reflect generations of Nepalese family secrets, managed with modern efficiency.</p>
+                <p style="color:var(--text-dim);">Every single plate leaves our high-performance kitchen under strict parameters, ensuring deep depth of flavour and exceptional presentation for the local community.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-layout" id="menu" style="border-top:1px solid var(--border-tint); border-bottom:1px solid var(--border-tint); background-color: var(--charcoal-surface);">
+        <div class="section-header">
+            <h2 class="serif-display">Our Curated Masterpieces</h2>
+            <p>Savour an elite selection of our signature items compiled by our head chefs.</p>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="images/dish-momos.jpg" alt="Steamed Himalayan Momos">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4>Himalayan Momos</h4>
+                        <span class="card-price">£8.95</span>
+                    </div>
+                    <p style="color: var(--text-dim); font-size:0.9rem;">Spiced minced meat dumplings steamed cleanly, served alongside our traditional charred sesame and tomato chutney.</p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="images/dish-curry.jpg" alt="Signature Timur Lamb">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4>Signature Timur Lamb</h4>
+                        <span class="card-price">£16.95</span>
+                    </div>
+                    <p style="color: var(--text-dim); font-size:0.9rem;">Tender Welsh lamb slow-simmered over iron embers with wild Himalayan Timur peppercorns, crushed garlic, and dark coriander seeds.</p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="images/dish-dessert.jpg" alt="Mango Cardamom Infusion">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4>Cardamom Saffron Elixir</h4>
+                        <span class="card-price">£7.50</span>
+                    </div>
+                    <p style="color: var(--text-dim); font-size:0.9rem;">A light aromatic set custard infused with cracked green pods, real gold leaf flakes, and a fresh Alphonso mango glaze coating.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-sector" id="testimonials">
+        <div class="section-header">
+            <h2 class="serif-display" style="color: var(--text-creme);">Verified Guest Feedback</h2>
+            <p style="color: var(--text-dim);">Real streams pulling directly from our 5-star Google Business profiles.</p>
+        </div>
+        <div class="testimonial-matrix">
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The single best Nepalese food I have ever experienced outside of London. The Timur Lamb has an exceptional complexity of spice. Booking online took seconds on my smartphone."</p>
+                <div class="client">
+                    <img src="images/reviewer-1.jpg" alt="Local Guest Reviewer">
+                    <div><h4>Emma Richardson</h4><span style="font-size:0.8rem; color:var(--gold-glow);">Verified Diner, Andover</span></div>
+                </div>
+            </div>
+
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"We use their custom web link for takeaways every single Friday night. The checkout loop avoids third-party price markups completely. The food arrives piping hot every single time."</p>
+                <div class="client">
+                    <img src="images/reviewer-2.jpg" alt="Regular Takeaway Customer">
+                    <div><h4>Marcus Vance</h4><span style="font-size:0.8rem; color:var(--gold-glow);">Regular Direct Order Account</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-layout" id="faqs">
+        <div class="section-header">
+            <h2 class="serif-display">Frequently Asked Questions</h2>
+            <p>Clear operational answers regarding parking, logistics, and collections.</p>
+        </div>
+        <div class="faq-matrix">
+            <div class="faq-node">
+                <h4>Are your dishes halal and nut-free?</h4>
+                <p>All our chicken and lamb variations are strictly sourced from certified halal providers. Nut alternatives are prepared within isolated bays. Please flag severe criteria to our AI assistant before completing orders.</p>
+            </div>
+            <div class="faq-node">
+                <h4>What are your direct takeaway delivery windows?</h4>
+                <p>Our direct, commission-free delivery fleet functions across a 6-mile radius from central Andover with an average timeline of 45 minutes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-layout" id="contact" style="background-color: var(--charcoal-surface); border-top:1px solid var(--border-tint);">
+        <div class="contact-workspace">
+            <div class="map-wrapper">
+                <iframe 
+                    src="http://googleusercontent.com/maps.google.com/4" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div>
+                <h3 class="serif-display" style="font-size: 2.2rem; margin-bottom: 1rem;">Find Our Dining Room</h3>
+                <p style="color:var(--text-dim); margin-bottom: 2rem;">We are conveniently positioned inside central Andover, providing dedicated customer parking options right on the doorstep.</p>
+                
+                <div class="info-strip">
+                    <div class="info-strip-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="info-strip-text"><h5>Location Hub</h5><p>Andover, Hampshire, UK</p></div>
+                </div>
+                
+                <div class="info-strip whatsapp">
+                    <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                    <div class="info-strip-text"><h5>Direct WhatsApp Orders</h5><p>+44 7123 456 999</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="floating-chat-widget">
+        <div class="widget-head">
+            <img src="images/ai-receptionist.png" alt="AI Maya">
+            <div>
+                <h5 style="font-size:0.9rem; font-weight:700;">Maya (AI Concierge)</h5>
+                <span style="font-size:0.7rem; opacity:0.8;"><i class="fa-solid fa-circle" style="color: #4ade80; font-size: 0.4rem; margin-right: 4px;"></i> Online</span>
+            </div>
+        </div>
+        <div class="widget-pane">
+            <div class="msg">
+                <strong>Namaste! 👋</strong><br>
+                Welcome to The Timur. Would you like me to instantly check table space for tonight, or show you our vegan takeaway specials?
+            </div>
+        </div>
+    </div>
+
+    <footer style="padding: 6rem 5% 4rem; text-align: center; color: var(--text-dim);">
+        <h3 class="serif-display" style="color: white; font-size:1.8rem; letter-spacing:2px; margin-bottom:1rem;">THE TIMUR</h3>
+        <p style="max-width: 450px; margin: 0 auto 2rem;">Bespoke Culinary Infrastructure Engineering. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
+        <p style="font-size:0.8rem; border-top:1px solid var(--border-tint); padding-top:2rem;">© 2026 GoChuchuro Systems. High-Performance Digital Showroom Assets.</p>
+    </footer>
+
+</body>
+</html>
