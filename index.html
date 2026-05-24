@@ -5,7 +5,7 @@
 <link rel="icon" type="image/png" href="/favicon.png" />
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="GoChuchuro — Value-first coaching and automated growth systems for UK small businesses. "Done-For-You" plans from £29/month. Book a free 30-min session."/>
+  <meta name="description" content="GoChuchuro — Value-first coaching and automated growth systems for UK small businesses. 'Done-For-You' plans from £29/month. Book a free 30-min session."/>
   <title>GoChuchuro | Reach Your Peak. Automate Your Growth.</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -79,31 +79,12 @@
       animation:shimmer 5s linear infinite;
     }
 
-    @keyframes flowPulse {
-      0%{stroke-dashoffset:200;opacity:.2;}50%{opacity:1;}100%{stroke-dashoffset:0;opacity:.2;}
-    }
-    .flow-line{ stroke-dasharray:8 6;stroke-dashoffset:200;animation:flowPulse 2.4s linear infinite; }
-    .flow-slow{ animation-duration:3.4s; }
-    .flow-fast{ animation-duration:1.5s; }
-
-    @keyframes nodePing {
-      0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.9);opacity:0;}
-    }
-    .np1{animation:nodePing 2s ease-in-out infinite;}
-    .np2{animation:nodePing 2s ease-in-out .65s infinite;}
-    .np3{animation:nodePing 2s ease-in-out 1.3s infinite;}
-
     @keyframes dotPulse {
       0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(1.6);}
     }
     .dp0{animation:dotPulse 2s ease-in-out infinite;}
     .dp1{animation:dotPulse 2s ease-in-out .4s infinite;}
     .dp2{animation:dotPulse 2s ease-in-out .8s infinite;}
-
-    @keyframes chaos {
-      0%,100%{opacity:1;}33%{opacity:.4;}66%{opacity:.8;}
-    }
-    .chaos{animation:chaos 1.8s ease-in-out infinite;}
 
     /* ── STAR ENHANCEMENTS ── */
     @keyframes starPop {
@@ -144,7 +125,7 @@
 
     /* ── HERO GRID ── */
     .hero-grid {
-      background-image: radial-gradient(rgba(0,181,200,0.2) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(0,181,200,0.15) 1px, transparent 1px);
       background-size: 22px 22px;
     }
 
@@ -316,70 +297,48 @@
   </div>
 </header>
 
-<section class="relative section-dark text-white py-28 md:py-36 px-6 overflow-hidden border-b border-forestOlive/20">
-  <div class="absolute inset-0 hero-grid pointer-events-none"></div>
-  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse 70% 55% at 50% 60%,rgba(0,181,200,0.08) 0%,transparent 70%);"></div>
-  <div class="absolute inset-0 pointer-events-none overflow-hidden">
-    <svg class="absolute w-full h-full" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
-      <path d="M0 200 Q300 180 600 200 Q900 220 1200 200" stroke="#00B5C8" stroke-width="1" class="flow-line flow-slow" opacity=".45"/>
-      <path d="M0 350 Q400 330 700 350 Q1000 370 1200 350" stroke="#D4AF37" stroke-width="1" class="flow-line" opacity=".35"/>
-      <path d="M0 480 Q200 460 500 480 Q800 500 1200 480" stroke="#3D5A3E" stroke-width="1" class="flow-line flow-fast" opacity=".3"/>
-      <circle cx="300" cy="200" r="3" fill="#00B5C8" class="np1" opacity=".8"/>
-      <circle cx="600" cy="200" r="3" fill="#E5C158" class="np2" opacity=".8"/>
-      <circle cx="900" cy="200" r="3" fill="#00B5C8" class="np3" opacity=".8"/>
-      <circle cx="400" cy="350" r="2.5" fill="#D4AF37" class="np1" opacity=".7"/>
-      <circle cx="800" cy="350" r="2.5" fill="#D4AF37" class="np2" opacity=".7"/>
-    </svg>
+<section class="relative section-dark text-white py-28 md:py-40 px-6 overflow-hidden border-b border-white/10 flex flex-col justify-center items-center min-h-[85vh]">
+  
+  <div class="absolute inset-0 hero-grid pointer-events-none opacity-30 z-0"></div>
+
+  <div class="absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden">
+    <div class="absolute w-[800px] h-[400px] bg-auroraTeal/20 blur-[130px] rounded-full"></div>
+    <img src="gochuchuro-dashboard.png" alt="Software Dashboard" class="w-full min-w-[1000px] max-w-[1400px] h-auto opacity-15 transform translate-y-12 scale-105" style="-webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 75%); mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 75%);">
   </div>
+
+  <div class="absolute inset-0 bg-gradient-to-b from-[#0D1515] via-transparent to-[#0D1515] pointer-events-none z-0"></div>
+
   <div class="max-w-4xl mx-auto text-center space-y-7 relative z-10 fade-up">
-    <div class="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-brightGold uppercase bg-white/5 px-4 py-2 rounded-full border border-white/15">
+    <div class="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-brightGold uppercase bg-white/5 px-4 py-2 rounded-full border border-white/15 backdrop-blur-sm">
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M5 1L6.3 3.8H9.5L6.9 5.6L8 8.5L5 6.8L2 8.5L3.1 5.6L.5 3.8H3.7L5 1Z" fill="#E5C158"/></svg>
       Reach Your Peak. Automate Your Growth.
     </div>
-    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight">
+    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight drop-shadow-2xl">
       Stop losing customers<br class="hidden md:block"/>
       <span class="gold-shimmer">to missed calls and chaos.</span>
     </h1>
-    <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed font-normal">
+    <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed font-normal drop-shadow-lg">
       You started your business for freedom. But calls go unanswered, customers book elsewhere, and admin piles up after hours. We fix that — with a coaching-first approach and smart automation that runs your business backend <strong class="text-brightGold">while you sleep.</strong>
     </p>
-    <div class="flex flex-wrap items-center justify-center gap-5 pt-1">
+    <div class="flex flex-wrap items-center justify-center gap-5 pt-1 drop-shadow-md">
       <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-green-400 dp0"></span>Coaching first, technology second</div>
       <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-brightGold dp1"></span>No tech knowledge needed</div>
       <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-auroraTeal dp2"></span>Live in 5 working days</div>
     </div>
-    <div class="inline-flex items-center gap-3 bg-white/5 border border-white/15 rounded-full px-5 py-2.5">
+    <div class="inline-flex items-center gap-3 bg-white/5 border border-white/15 rounded-full px-5 py-2.5 backdrop-blur-sm">
       <span class="star-glow text-xl leading-none">★★★★★</span>
       <span class="text-sm font-bold text-coolSilver">Great service, great system, great results. Highly recommended!</span>
     </div>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-3">
-      <a href="#booking" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-midnightEmerald bg-brightGold hover:bg-white transition duration-200 shadow-lg">
+      <a href="#booking" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-midnightEmerald bg-brightGold hover:bg-white transition duration-200 shadow-xl">
         Book Free 30-Min Session
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><polyline points="3,8 13,8" stroke="#0D1515" stroke-width="2" stroke-linecap="round"/><polyline points="9,4 13,8 9,12" stroke="#0D1515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       </a>
-      <a href="#founder" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-white border-2 border-white/30 hover:border-brightGold hover:text-brightGold transition duration-200">
+      <a href="#founder" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-white border-2 border-white/30 hover:border-brightGold hover:text-brightGold transition duration-200 backdrop-blur-sm">
         Read Our Story
       </a>
     </div>
   </div>
-
-  <div class="relative z-10 mt-16 md:mt-24 max-w-5xl mx-auto px-2 sm:px-6 fade-up" style="transition-delay: 0.3s;">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-auroraTeal/20 blur-[100px] rounded-full pointer-events-none"></div>
-    
-    <div class="relative rounded-2xl md:rounded-3xl overflow-hidden border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-deepCharcoal/50 backdrop-blur-sm" style="transform: perspective(1200px) rotateX(2deg); transform-origin: top center;">
-      
-      <div class="absolute top-0 left-0 w-full h-8 bg-white/5 border-b border-white/10 flex items-center px-4 gap-1.5 z-20 backdrop-blur-md">
-        <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-[#FEBC2E]"></div>
-        <div class="w-2.5 h-2.5 rounded-full bg-[#28C840]"></div>
-      </div>
-      
-      <img src="gochuchuro-dashboard.png" alt="GoChuchuro Software Dashboard" class="w-full h-auto object-cover relative z-10 mt-8 rounded-b-2xl md:rounded-b-3xl">
-      
-      <div class="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-transparent pointer-events-none z-30"></div>
-    </div>
-  </div>
-  
 </section>
 
 <div class="section-dark border-b border-white/10 py-6 overflow-hidden">
