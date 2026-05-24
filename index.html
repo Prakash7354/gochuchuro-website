@@ -442,6 +442,22 @@
         font-size: 0.9rem !important;
         display: inline-block !important;
     }
+}/* --- FIX HEADER OVERLAP ON MOBILE --- */
+@media (max-width: 768px) {
+    /* 1. Allows the header to expand and elements to drop to a new line */
+    header, .header, .top-navbar {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        height: auto !important;
+        padding-bottom: 10px !important;
+    }
+
+    /* 2. Forces the navigation menu to drop to the bottom row */
+    nav, .nav, .menu, .nav-menu {
+        order: 3 !important; /* Pushes menu under the logo and button */
+        width: 100% !important; /* Makes it span the whole screen width */
+        margin-top: 15px !important; /* Adds breathing room above the links */
+    }
 }
     
   </style>
