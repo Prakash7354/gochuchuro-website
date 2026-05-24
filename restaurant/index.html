@@ -12,14 +12,18 @@
     <style>
         /* --- BRAND DESIGN SYSTEM --- */
         :root {
-            --obsidian: #090d16;       /* Deep Luxury Midnight background */
-            --charcoal-surface: #131a2a; /* Card and Secondary backgrounds */
+            --obsidian: #090d16;       /* Deep Luxury Midnight */
+            --charcoal-surface: #131a2a; /* Secondary Dark Surface */
+            --silver-light: #f1f5f9;   /* Premium Silver Background Section */
+            --white-pure: #ffffff;     /* Crisp White Section Surface */
             --gold-glow: #dfb743;      /* Core Accents & Icons */
             --warm-crimson: #dc2626;   /* Order CTA Actions */
             --text-creme: #f8fafc;
+            --text-dark: #1e293b;
             --text-dim: #94a3b8;
             --border-tint: rgba(255,255,255,0.08);
-            --tech-indigo: #818cf8;    /* Smart Tech Accents */
+            --border-dark: #cbd5e1;
+            --tech-indigo: #818cf8;    
         }
 
         * {
@@ -106,9 +110,9 @@
         .btn-gold-cta { background-color: var(--gold-glow); color: var(--obsidian); }
         .btn-crimson-cta { background-color: var(--warm-crimson); color: white; }
 
-        /* --- HERO BANNER --- */
+        /* --- HERO BANNER (BRIGHTENED & OPTIMISED) --- */
         .hero-banner {
-            background: linear-gradient(rgba(9, 13, 22, 0.75), rgba(9, 13, 22, 0.92)), url('images/hero-dining.jpg') no-repeat center center/cover;
+            background: linear-gradient(rgba(9, 13, 22, 0.45), rgba(9, 13, 22, 0.75)), url('images/hero-dining.jpg') no-repeat center center/cover;
             min-height: 80vh;
             display: flex;
             flex-direction: column;
@@ -118,9 +122,9 @@
             padding: 4rem 2rem;
         }
 
-        .hero-banner h1 { font-size: 4rem; font-weight: 600; color: var(--text-creme); line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-banner h1 { font-size: 4rem; font-weight: 600; color: var(--text-creme); line-height: 1.1; margin-bottom: 1.5rem; text-shadow: 0 4px 12px rgba(0,0,0,0.6); }
         .hero-banner h1 span { color: var(--gold-glow); font-style: italic; }
-        .hero-banner p { font-size: 1.25rem; max-width: 700px; color: var(--text-dim); margin-bottom: 2.5rem; }
+        .hero-banner p { font-size: 1.25rem; max-width: 700px; color: #e2e8f0; margin-bottom: 2.5rem; text-shadow: 0 2px 6px rgba(0,0,0,0.5); }
 
         /* --- DATA INSIGHTS / METRICS HUB --- */
         .metrics-ribbon { background-color: var(--charcoal-surface); padding: 2rem 5%; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; border-bottom: 1px solid var(--border-tint); text-align: center; }
@@ -170,7 +174,12 @@
         .section-layout { padding: 6rem 5%; max-width: 1300px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 4rem; }
         .section-header h2 { font-size: 2.5rem; font-weight: 700; }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; }
+        .section-header p { font-size: 1.1rem; margin-top: 0.5rem; }
+
+        /* --- STRATEGIC SILVER ABOUT BREAK --- */
+        .silver-break-bg { background-color: var(--silver-light); color: var(--text-dark); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+        .silver-break-bg h2 { color: var(--primary-dark); }
+        .silver-break-bg p { color: #475569; }
 
         /* --- SIGNATURE MENU CARDS --- */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
@@ -191,22 +200,32 @@
         .client { display: flex; align-items: center; gap: 1rem; }
         .client img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold-glow); }
 
-        /* --- FAQS AREA --- */
-        .faq-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .faq-node { background: var(--charcoal-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-tint); }
-        .faq-node h4 { color: var(--gold-glow); margin-bottom: 0.5rem; font-size: 1.1rem; }
-        .faq-node p { color: var(--text-dim); font-size: 0.95rem; }
-
-        /* --- PIPELINE DISPATCH & GOOGLE AREA --- */
-        .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 4rem; align-items: start; }
-        .map-wrapper { width: 100%; height: 340px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-tint); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        /* --- STRATEGIC WHITE FAQ & CONTACT BREAK --- */
+        .white-break-bg { background-color: var(--white-pure); color: var(--text-dark); border-top: 1px solid var(--border-dark); }
+        .white-break-bg h2 { color: var(--primary-dark); }
+        .white-break-bg p { color: #57657a; }
         
-        .info-strip { background: var(--charcoal-surface); border: 1px solid var(--border-tint); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; }
-        .info-strip-icon { width: 48px; height: 48px; background: rgba(223, 183, 67, 0.1); color: var(--gold-glow); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; }
-        .info-strip.whatsapp { border-color: #25D366; }
-        .info-strip.whatsapp .info-strip-icon { background: rgba(37, 211, 102, 0.1); color: #25D366; }
-        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px;}
-        .info-strip-text p { font-size: 1.1rem; font-weight: 700; color: var(--text-creme); }
+        .faq-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .faq-node { background: var(--silver-light); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-dark); }
+        .faq-node h4 { color: #0f172a; margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 700; }
+        .faq-node p { color: #475569; font-size: 0.95rem; }
+
+        /* --- PIPELINE DISPATCH & LIVE GOOGLE MAP --- */
+        .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 4rem; align-items: start; }
+        .map-frame { width: 100%; height: 340px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .info-strip { background: var(--silver-light); border: 1px solid var(--border-dark); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
+        .info-strip:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .info-strip-icon { width: 48px; height: 48px; background: #ffffff; color: var(--gold-glow); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; border: 1px solid var(--border-dark); }
+        
+        .info-strip.whatsapp { border-color: #25D366; background-color: #f0fdf4; }
+        .info-strip.whatsapp .info-strip-icon { color: #25D366; border-color: #bbf7d0; }
+        
+        .info-strip.email-feature { border-color: var(--tech-indigo); background-color: #f5f3ff; }
+        .info-strip.email-feature .info-strip-icon { color: var(--tech-indigo); border-color: #ddd6fe; }
+
+        .info-strip-text h5 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;}
+        .info-strip-text p { font-size: 1.1rem; font-weight: 700; color: var(--text-dark); }
 
         /* --- FLOATING CHATBOT PREVIEW --- */
         .floating-chat-widget { position: fixed; bottom: 6rem; right: 2rem; width: 320px; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 999; overflow: hidden; color: var(--obsidian); border: 1px solid #e2e8f0; }
@@ -215,12 +234,17 @@
         .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
         .widget-pane .msg { background: white; padding: 1rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 1rem; }
 
+        /* Social Icons Link Style */
+        .social-circle-link { width: 44px; height: 44px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); margin: 0 0.5rem; }
+        .social-circle-link:hover { background: var(--gold-glow); color: var(--obsidian); transform: translateY(-3px); }
+
         @media (max-width: 900px) {
             .nav-links { display: none; }
             .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3rem; }
             .tech-roi-container { padding: 2rem; margin-top: 0; }
             .hero-banner h1 { font-size: 2.4rem; }
             .floating-chat-widget { display: none; }
+            .about-grid-mobile { grid-template-columns: 1fr !important; gap: 2rem !important; }
         }
     </style>
 </head>
@@ -282,29 +306,31 @@
                     <option>Standard Fine Dining Hall</option>
                     <option>Private Himalayan VIP Suite</option>
                 </select>
-                <button style="width:100%; padding:1rem; background: var(--gold-glow); color: var(--obsidian); border:none; border-radius:8px; margin-top:1.5rem; font-weight:700; text-transform:uppercase; cursor:pointer;" onsubmit="event.preventDefault();">Secure My Table</button>
+                <button style="width:100%; padding:1rem; background: var(--gold-glow); color: var(--obsidian); border:none; border-radius:8px; margin-top:1.5rem; font-weight:700; text-transform:uppercase; cursor:pointer;">Secure My Table</button>
             </div>
         </div>
     </section>
 
-    <section class="section-layout" id="about" style="padding-top:0;">
-        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items: center;">
-            <div>
-                <img src="images/about-interior.jpg" alt="Timur Restaurant Interior" style="width:100%; border-radius:16px; border:1px solid var(--border-tint); box-shadow:0 20px 40px rgba(0,0,0,0.5);">
-            </div>
-            <div>
-                <span style="color:var(--gold-glow); font-size:0.85rem; text-transform:uppercase; font-weight:700; letter-spacing:1px;">Heritage & Craftsmanship</span>
-                <h2 class="serif-display" style="font-size: 2.8rem; margin:0.5rem 0 1rem; line-height:1.2;">Elevating Local Dining Expectations</h2>
-                <p style="color:var(--text-dim); margin-bottom:1.5rem;">The Timur merges the structural integrity of ancient Asian culinary arts with contemporary hospitality systems. Our signature slow-cooked lamb and hand-ground spice bases reflect generations of Nepalese family secrets, managed with modern efficiency.</p>
-                <p style="color:var(--text-dim);">Every single plate leaves our high-performance kitchen under strict parameters, ensuring deep depth of flavour and exceptional presentation for the local community.</p>
+    <section class="silver-break-bg" id="about">
+        <div class="section-layout">
+            <div class="about-grid-mobile" style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items: center;">
+                <div>
+                    <img src="images/about-interior.jpg" alt="Timur Restaurant Interior" style="width:100%; border-radius:16px; border:1px solid var(--border-dark); box-shadow:0 15px 30px rgba(0,0,0,0.08);">
+                </div>
+                <div>
+                    <span style="color:var(--gold-glow); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1px;">Heritage & Craftsmanship</span>
+                    <h2 class="serif-display" style="font-size: 2.8rem; margin:0.5rem 0 1rem; line-height:1.2;">Elevating Local Dining Expectations</h2>
+                    <p style="margin-bottom:1.5rem;">The Timur merges the structural integrity of ancient Asian culinary arts with contemporary hospitality systems. Our signature slow-cooked lamb and hand-ground spice bases reflect generations of Nepalese family secrets, managed with modern efficiency.</p>
+                    <p>Every single plate leaves our high-performance kitchen under strict parameters, ensuring deep depth of flavour and exceptional presentation for the local community.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="section-layout" id="menu" style="border-top:1px solid var(--border-tint); border-bottom:1px solid var(--border-tint); background-color: var(--charcoal-surface);">
+    <section class="section-layout" id="menu" style="background-color: var(--obsidian);">
         <div class="section-header">
             <h2 class="serif-display">Our Curated Masterpieces</h2>
-            <p>Savour an elite selection of our signature items compiled by our head chefs.</p>
+            <p style="color: var(--text-dim);">Savour an elite selection of our signature items compiled by our head chefs.</p>
         </div>
 
         <div class="menu-grid">
@@ -369,48 +395,59 @@
         </div>
     </section>
 
-    <section class="section-layout" id="faqs">
-        <div class="section-header">
-            <h2 class="serif-display">Frequently Asked Questions</h2>
-            <p>Clear operational answers regarding parking, logistics, and collections.</p>
-        </div>
-        <div class="faq-matrix">
-            <div class="faq-node">
-                <h4>Are your dishes halal and nut-free?</h4>
-                <p>All our chicken and lamb variations are strictly sourced from certified halal providers. Nut alternatives are prepared within isolated bays. Please flag severe criteria to our AI assistant before completing orders.</p>
+    <section class="white-break-bg">
+        
+        <div class="section-layout" id="faqs">
+            <div class="section-header">
+                <h2 class="serif-display">Frequently Asked Questions</h2>
+                <p>Clear operational answers regarding parking, logistics, and collections.</p>
             </div>
-            <div class="faq-node">
-                <h4>What are your direct takeaway delivery windows?</h4>
-                <p>Our direct, commission-free delivery fleet functions across a 6-mile radius from central Andover with an average timeline of 45 minutes.</p>
+            <div class="faq-matrix">
+                <div class="faq-node">
+                    <h4>Are your dishes halal and nut-free?</h4>
+                    <p>All our chicken and lamb variations are strictly sourced from certified halal providers. Nut alternatives are prepared within isolated bays. Please flag severe criteria to our AI assistant before completing orders.</p>
+                </div>
+                <div class="faq-node">
+                    <h4>What are your direct takeaway delivery windows?</h4>
+                    <p>Our direct, commission-free delivery fleet functions across a 6-mile radius from central Andover with an average timeline of 45 minutes.</p>
+                </div>
             </div>
         </div>
-    </section>
 
-    <section class="section-layout" id="contact" style="background-color: var(--charcoal-surface); border-top:1px solid var(--border-tint);">
-        <div class="contact-workspace">
-            <div class="map-wrapper">
-                <iframe 
-                    src="http://googleusercontent.com/maps.google.com/4" 
-                    width="100%" 
-                    height="100%" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-            <div>
-                <h3 class="serif-display" style="font-size: 2.2rem; margin-bottom: 1rem;">Find Our Dining Room</h3>
-                <p style="color:var(--text-dim); margin-bottom: 2rem;">We are conveniently positioned inside central Andover, providing dedicated customer parking options right on the doorstep.</p>
+        <div class="section-layout" id="contact" style="padding-top:0;">
+            <div class="contact-workspace">
                 
-                <div class="info-strip">
-                    <div class="info-strip-icon"><i class="fa-solid fa-location-dot"></i></div>
-                    <div class="info-strip-text"><h5>Location Hub</h5><p>Andover, Hampshire, UK</p></div>
+                <div class="map-frame">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
                 
-                <div class="info-strip whatsapp">
-                    <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <div class="info-strip-text"><h5>Direct WhatsApp Orders</h5><p>+44 7123 456 999</p></div>
+                <div>
+                    <h3 class="serif-display" style="font-size: 2.2rem; margin-bottom: 1rem; color: var(--text-dark);">Find Our Dining Room</h3>
+                    <p style="margin-bottom: 1.5rem;">We are conveniently positioned inside central Andover, providing dedicated customer parking options right on the doorstep.</p>
+                    
+                    <a href="https://wa.me/447123456999" target="_blank" class="info-strip whatsapp">
+                        <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="info-strip-text">
+                            <h5>Text Us Directly</h5>
+                            <p>+44 7123 456 999</p>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:info@raiandsonsheating.co.uk?subject=Table%20Enquiry" class="info-strip email-feature">
+                        <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="info-strip-text">
+                            <h5>Email Booking Desk</h5>
+                            <p>bookings@thetimurandover.co.uk</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -426,16 +463,24 @@
         </div>
         <div class="widget-pane">
             <div class="msg">
-                <strong>Namaste! 👋</strong><br>
+                <strong>Namaste! 🙏</strong><br>
                 Welcome to The Timur. Would you like me to instantly check table space for tonight, or show you our vegan takeaway specials?
             </div>
         </div>
     </div>
 
-    <footer style="padding: 6rem 5% 4rem; text-align: center; color: var(--text-dim);">
+    <footer style="background-color: var(--primary-dark); padding: 6rem 5% 8rem; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border-tint);">
         <h3 class="serif-display" style="color: white; font-size:1.8rem; letter-spacing:2px; margin-bottom:1rem;">THE TIMUR</h3>
-        <p style="max-width: 450px; margin: 0 auto 2rem;">Bespoke Culinary Infrastructure Engineering. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
-        <p style="font-size:0.8rem; border-top:1px solid var(--border-tint); padding-top:2rem;">© 2026 GoChuchuro Systems. High-Performance Digital Showroom Assets.</p>
+        <p style="max-width: 450px; margin: 0 auto 1.5rem;">Bespoke Culinary Infrastructure Engineering. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
+        
+        <div style="margin-bottom: 3rem;">
+            <a href="https://facebook.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tripadvisor.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tripadvisor"></i></a>
+            <a href="https://google.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
+        </div>
+
+        <p style="font-size:0.8rem; border-top: 1px solid var(--border-tint); padding-top:2rem;">© 2026 GoChuchuro Systems. High-Performance Digital Showroom Assets.</p>
     </footer>
 
 </body>
