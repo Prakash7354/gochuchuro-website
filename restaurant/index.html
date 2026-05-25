@@ -113,10 +113,9 @@
         .btn-dark-cta { background-color: transparent; color: var(--text-light); border: 1px solid var(--border-solid); }
         .btn-gold-cta { background-color: var(--accent-gold); color: var(--primary-dark); }
 
-        /* --- HERO WORKSPACE (Exactly 35% Indigo Shading) --- */
+        /* --- 2. HERO WORKSPACE (Exactly 35% Shading) --- */
         .hero {
             background-color: var(--primary-dark);
-            /* Look here: 0.35 values create the perfect 35% premium shading overlay */
             background: linear-gradient(rgba(30, 27, 75, 0.35), rgba(30, 27, 75, 0.35)), url('hero-dining.jpg') no-repeat center center/cover;
             min-height: 85vh;
             display: flex;
@@ -129,7 +128,7 @@
         }
 
         .hero h1 {
-            font-size: 4.8rem;
+            font-size: 4.5rem;
             max-width: 900px;
             line-height: 1.1;
             margin-bottom: 1.2rem;
@@ -138,8 +137,8 @@
         .hero h1 span { color: var(--accent-gold); font-style: italic; }
 
         .hero p {
-            font-size: 1.25rem;
-            max-width: 650px;
+            font-size: 1.2rem;
+            max-width: 680px;
             color: #e2e8f0;
             margin-bottom: 2.5rem;
             text-shadow: 0 2px 10px rgba(0,0,0,0.9);
@@ -148,7 +147,7 @@
 
         .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
-        /* --- TRUST BADGES / METRICS RIBBON --- */
+        /* --- 3. TRUST BADGES / METRICS RIBBON (Embedded Google Badge) --- */
         .metrics-ribbon {
             background-color: var(--bg-panel);
             padding: 2.5rem 5%;
@@ -161,7 +160,7 @@
             text-align: center;
         }
         
-        .metric-node h4 { font-size: 2.2rem; color: var(--accent-gold); }
+        .metric-node h4 { font-size: 2.2rem; color: var(--accent-gold); font-family: 'Plus Jakarta Sans', sans-serif;}
         .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; font-weight: 600;}
 
         .embedded-google-badge {
@@ -227,18 +226,19 @@
         /* --- ABOUT & STORY --- */
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
         .editorial-image-group { position: relative; }
-        .editorial-main { width: 100%; border-radius: 12px; border: 1px solid var(--border-solid); box-shadow: 20px 20px 0px var(--accent-gold); /* Premium solid shadow */ }
+        .editorial-main { width: 100%; border-radius: 12px; border: 1px solid var(--border-solid); box-shadow: 20px 20px 0px var(--accent-gold); }
         
         /* --- MENU / SERVICES MATRIX --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .service-card { background: var(--bg-panel); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-faint); transition: 0.3s; }
+        .service-card { background: var(--bg-panel); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-faint); transition: 0.3s; display: flex; flex-direction: column; }
         .service-card:hover { transform: translateY(-7px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-color: var(--accent-gold); }
-        .service-img { width: 100%; height: 260px; object-fit: cover; filter: grayscale(15%); transition: 0.4s;}
+        .service-img { width: 100%; height: 240px; object-fit: cover; filter: grayscale(15%); transition: 0.4s;}
         .service-card:hover .service-img { filter: grayscale(0%); }
-        .service-body { padding: 2.5rem; text-align: center; }
+        .service-body { padding: 2.5rem; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start;}
         .service-body h3 { color: var(--text-light); margin-bottom: 0.5rem; font-size: 1.6rem; }
-        .service-badge { display: inline-block; background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
-        .service-body p { font-size: 1rem; color: var(--text-dim); }
+        .service-badge { display: inline-block; background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; align-self: center; }
+        .service-body p { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 1.5rem; flex-grow: 1; }
+        .service-price { font-size: 1.4rem; color: var(--accent-gold); font-weight: 800; }
 
         /* --- VERIFIED REVIEWS --- */
         .review-sector { background-color: #06090e; padding: 7rem 5%; border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint); }
@@ -259,7 +259,7 @@
         .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
         .map-frame { width: 100%; height: 360px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-solid); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         
-        /* Premium Dark Contact Strips */
+        /* 6. Premium Color Cleanup - Dark Contact Strips */
         .info-strip { background: var(--bg-panel); border: 1px solid var(--border-faint); border-radius: 8px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none;}
         .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); border-color: var(--accent-gold); }
         .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--accent-gold); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-solid); }
@@ -267,7 +267,7 @@
         .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;}
         .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--text-light); }
 
-        /* --- MINI AI PILL --- */
+        /* --- 4. MINI AI PILL --- */
         .mini-ai-pill {
             position: fixed;
             bottom: 5.5rem; 
@@ -309,10 +309,9 @@
             .editorial-main { box-shadow: 10px 10px 0px var(--accent-gold); }
             .hero h1 { font-size: 3.2rem; }
             
-            /* Responsive gap for metrics ribbon on mobile */
             .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
             
-            /* Mobile Specific: Transform AI Pill into a Circle Avatar */
+            /* 5. Mobile Specific: Transform AI Pill into a Circle Avatar */
             .mini-ai-pill {
                 padding: 0; 
                 width: 56px;
@@ -340,11 +339,11 @@
             <i class="fa-solid fa-leaf"></i> THE TIMUR
         </a>
         <nav class="nav-menu">
-            <a href="#about" class="nav-link">Our Story</a>
-            <a href="#services" class="nav-link">Tasting Menu</a>
-            <a href="#booking" class="nav-link">Reservations</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#services" class="nav-link">Menu Signature</a>
             <a href="#reviews" class="nav-link">Reviews</a>
-            <a href="#location" class="nav-link">Find Us</a>
+            <a href="#faqs" class="nav-link">FAQs</a>
+            <a href="#location" class="nav-link">Location</a>
         </nav>
         <a href="tel:01234567890" class="cta-header-btn" style="display: none;">
             <i class="fa-solid fa-phone"></i> Call Direct
@@ -352,15 +351,15 @@
     </header>
 
     <div class="sticky-action-bar" id="actions">
-        <a href="tel:01234567890" class="action-bar-btn btn-dark-cta"><i class="fa-solid fa-phone"></i> Call Kitchen</a>
-        <a href="#booking" class="action-bar-btn btn-gold-cta"><i class="fa-solid fa-utensils"></i> Reserve Table</a>
+        <a href="#booking" class="action-bar-btn btn-dark-cta"><i class="fa-solid fa-bag-shopping"></i> Order Takeaway</a>
+        <a href="#booking" class="action-bar-btn btn-gold-cta"><i class="fa-solid fa-utensils"></i> Book A Table</a>
     </div>
 
     <section class="hero">
-        <h1 class="serif-display">Authentic Himalayan & <span>Indian Cuisine</span></h1>
-        <p>Experience the vibrant spices of Nepal and India, crafted with uncompromising quality. Secure your table or order direct commission-free takeaway online.</p>
+        <h1 class="serif-display">Savour Premium Nepalese & <span>Asian Masterpieces</span></h1>
+        <p>An exquisite culinary journey deep into traditional Himalayan spice heritages, balanced elegantly within Andover's finest modern dining environment.</p>
         <div class="hero-buttons">
-            <a href="#booking" class="action-bar-btn btn-gold-cta" style="padding: 1rem 2.5rem; font-size: 1rem; max-width: 300px;">Reserve Your Table</a>
+            <a href="#services" class="action-bar-btn btn-gold-cta" style="padding: 1rem 2.5rem; font-size: 1rem; max-width: 300px;">Explore Our Menu</a>
         </div>
     </section>
 
@@ -374,46 +373,44 @@
                 <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
             </svg>
             <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
-                <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
-                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 180+ Reviews</span>
+                <span>4.9 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
+                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">Google Rated Stars</span>
             </div>
         </a>
 
-        <div class="metric-node"><h4 class="serif-display">Award</h4><p>Winning Local Chef</p></div>
-        <div class="metric-node"><h4 class="serif-display">5-Star</h4><p>Food Hygiene Rated</p></div>
+        <div class="metric-node"><h4 class="serif-display">100%</h4><p>Freshly Ground Spices</p></div>
+        <div class="metric-node"><h4 class="serif-display">0%</h4><p>Commission On Direct Orders</p></div>
     </section>
 
     <section class="section-wrapper" style="padding-top: 0;">
         <div class="roi-tech-section" id="booking">
             <div class="tech-pitch-content">
-                <h3 class="serif-display">Instant Table <span>Reservations.</span></h3>
-                <p style="font-size: 1.05rem; color: var(--text-dim); margin-bottom: 1.5rem;">Secure your dining experience instantly. Our live seating matrix prevents double-bookings and ensures your table is perfectly prepared upon arrival.</p>
+                <h3 class="serif-display">Bespoke Table <span>Reservations.</span></h3>
+                <p style="font-size: 1.05rem; color: var(--text-dim); margin-bottom: 1.5rem;">Avoid busy phone lines during peak service hours. Secure your table layout instantly with our real-time calendar syncing protocol engine.</p>
                 
                 <div class="ai-avatar-badge">
-                    <img src="ai-receptionist.png" alt="AI Receptionist Arjun">
+                    <img src="ai-receptionist.png" alt="AI Receptionist Maya">
                     <div>
-                        <h4 style="color: var(--accent-gold); font-weight:700;">Meet Arjun, Virtual Maître D'</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 2px;">Available 24/7 to manage large party bookings, handle dietary requirements, and reserve your table.</p>
+                        <h4 style="color: var(--accent-gold); font-weight:700;">Meet Maya, AI Dining Concierge</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 2px;">On hand 24/7 to manage corporate group bookings, allocate dietary alterations, and verify seating options instantly.</p>
                     </div>
                 </div>
             </div>
 
             <div class="interactive-table-deck">
-                <h4 class="deck-header serif-display">Select Your Cover Size</h4>
+                <h4 class="deck-header serif-display">Select Number of Guests</h4>
                 <div class="covers-selector">
-                    <div class="cover-bubble selected">2 Guests</div>
-                    <div class="cover-bubble">4 Guests</div>
-                    <div class="cover-bubble">6 Guests</div>
-                    <div class="cover-bubble">8+ Group</div>
+                    <div class="cover-bubble selected">1</div>
+                    <div class="cover-bubble">2</div>
+                    <div class="cover-bubble">4</div>
+                    <div class="cover-bubble">6</div>
                 </div>
-                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;">Dining Preference:</p>
+                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;">Select Dining Suite Mode:</p>
                 <select style="width: 100%; padding: 0.9rem; background: var(--bg-slate); border: 1px solid var(--border-faint); color: white; border-radius: 4px; outline: none; font-weight: 600;">
-                    <option>Standard Dining Room</option>
-                    <option>Quiet Corner / Romantic</option>
-                    <option>Private Function Room</option>
-                    <option>Express Takeaway Collection</option>
+                    <option>Standard Fine Dining Hall</option>
+                    <option>Private Himalayan VIP Suite</option>
                 </select>
-                <button style="width:100%; padding: 1.1rem; background: var(--accent-gold); color: var(--primary-dark); border: none; border-radius: 4px; margin-top: 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--accent-gold)'" onclick="alert('System Ready: Connecting to Table Matrix.')">Check Availability</button>
+                <button style="width:100%; padding: 1.1rem; background: var(--accent-gold); color: var(--primary-dark); border: none; border-radius: 4px; margin-top: 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--accent-gold)'" onclick="alert('System Ready: Connecting to Table Matrix.')">Secure My Table</button>
             </div>
         </div>
     </section>
@@ -424,50 +421,48 @@
                 <img src="about-interior.jpg" alt="The Timur Dining Room" class="editorial-main">
             </div>
             <div>
-                <span style="color:var(--accent-gold); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">A Culinary Journey</span>
-                <h2 class="serif-display" style="font-size: 2.8rem; color: var(--text-light); margin: 0.5rem 0 1.2rem; line-height: 1.15;">The Timur Experience.</h2>
-                <p style="margin-bottom: 1.5rem; color: var(--text-dim); font-size: 1.05rem;">Named after the zesty, citrus-infused pepper grown in the high altitudes of the Himalayas, The Timur brings a refined, modern approach to traditional Nepalese and Indian dining.</p>
-                <p style="margin-bottom: 2rem; color: var(--text-dim); font-size: 1.05rem;">Every dish is meticulously constructed using locally sourced Hampshire ingredients alongside authentic spices imported directly from the Kathmandu valley.</p>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-weight: 600;">
-                    <li><i class="fa-solid fa-seedling" style="color: var(--accent-gold); margin-right: 12px; font-size: 1.2rem;"></i> Extensive Vegan & Gluten-Free Menus</li>
-                    <li><i class="fa-solid fa-fire-burner" style="color: var(--accent-gold); margin-right: 12px; font-size: 1.2rem;"></i> Traditional Clay Tandoor Ovens</li>
-                    <li><i class="fa-solid fa-wine-glass" style="color: var(--accent-gold); margin-right: 12px; font-size: 1.2rem;"></i> Curated Wine & Spice Pairings</li>
-                </ul>
+                <span style="color:var(--accent-gold); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">Heritage & Craftsmanship</span>
+                <h2 class="serif-display" style="font-size: 2.8rem; color: var(--text-light); margin: 0.5rem 0 1.2rem; line-height: 1.15;">Elevating Local Dining Expectations.</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-dim); font-size: 1.05rem;">The Timur merges the structural integrity of ancient Asian culinary arts with contemporary hospitality systems. Our signature slow-cooked lamb and hand-ground spice bases reflect generations of Nepalese family secrets, managed with modern efficiency.</p>
+                <p style="margin-bottom: 2rem; color: var(--text-dim); font-size: 1.05rem;">Every single plate leaves our high-performance kitchen under strict parameters, ensuring deep depth of flavour and exceptional presentation for the local community.</p>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="services" style="border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint);">
         <div class="section-header">
-            <h2 class="serif-display">A Taste of the Himalayas</h2>
-            <p>Explore our signature dishes, crafted with uncompromising quality and authentic spices.</p>
+            <h2 class="serif-display">Our Curated Masterpieces</h2>
+            <p>Savour an elite selection of our signature items compiled by our head chefs.</p>
         </div>
         
         <div class="services-grid">
             <div class="service-card">
-                <img src="dish-curry.jpg" alt="Signature Curries" class="service-img">
+                <img src="dish-momos.jpg" alt="Himalayan Momos" class="service-img">
                 <div class="service-body">
-                    <h3 class="serif-display">Heritage Curries</h3>
-                    <span class="service-badge">Slow-Cooked</span>
-                    <p>Deeply aromatic, rich curries crafted from generational recipes using hand-ground Himalayan spices and premium cuts of meat.</p>
+                    <h3 class="serif-display">Himalayan Momos</h3>
+                    <span class="service-badge">Starter</span>
+                    <p>Spiced minced meat dumplings steamed cleanly, served alongside our traditional charred sesame and tomato chutney.</p>
+                    <p class="service-price">£8.95</p>
                 </div>
             </div>
 
             <div class="service-card">
-                <img src="dish-momos.jpg" alt="Authentic Momos" class="service-img">
+                <img src="dish-curry.jpg" alt="Signature Timur Lamb" class="service-img">
                 <div class="service-body">
-                    <h3 class="serif-display">Authentic Momos</h3>
-                    <span class="service-badge">Hand-Pleated</span>
-                    <p>Delicate, hand-crafted Nepalese dumplings steamed to absolute perfection and served alongside our signature roasted tomato achar.</p>
+                    <h3 class="serif-display">Signature Timur Lamb</h3>
+                    <span class="service-badge">Main Course</span>
+                    <p>Tender Welsh lamb slow-simmered over iron embers with wild Himalayan Timur peppercorns, crushed garlic, and dark coriander seeds.</p>
+                    <p class="service-price">£16.95</p>
                 </div>
             </div>
 
             <div class="service-card">
-                <img src="dish-dessert.jpg" alt="Artisanal Desserts" class="service-img">
+                <img src="dish-dessert.jpg" alt="Cardamom Saffron Elixir" class="service-img">
                 <div class="service-body">
-                    <h3 class="serif-display">Artisanal Desserts</h3>
-                    <span class="service-badge">Sweet Finish</span>
-                    <p>A refined conclusion to your dining experience, elegantly blending classic subcontinental sweets with modern culinary artistry.</p>
+                    <h3 class="serif-display">Cardamom Saffron Elixir</h3>
+                    <span class="service-badge">Dessert</span>
+                    <p>A light aromatic set custard infused with cracked green pods, real gold leaf flakes, and a fresh Alphonso mango glaze coating.</p>
+                    <p class="service-price">£7.50</p>
                 </div>
             </div>
         </div>
@@ -475,17 +470,17 @@
 
     <section class="review-sector" id="reviews">
         <div class="section-header">
-            <h2 class="serif-display" style="color: white;">Guest Feedback</h2>
-            <p>Don't just take our word for it. Read our verified Google tracking streams.</p>
+            <h2 class="serif-display" style="color: white;">Verified Guest Feedback</h2>
+            <p>Real streams pulling directly from our 5-star Google Business profiles.</p>
         </div>
         <div class="testimonial-matrix">
             <div class="review-envelope">
                 <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"The single best curry house I have ever visited. The depth of flavor in their signature Timur Chicken is incredible. Booking online took seconds on my phone."</p>
+                <p>"The single best Nepalese food I have ever experienced outside of London. The Timur Lamb has an exceptional complexity of spice. Booking online took seconds on my smartphone."</p>
                 <div class="client">
-                    <img src="reviewer-1.jpg" alt="James Mitchell">
+                    <img src="reviewer-1.jpg" alt="Emma Richardson">
                     <div>
-                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">James Mitchell</h4>
+                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">Emma Richardson</h4>
                         <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Verified Diner, Andover</span>
                     </div>
                 </div>
@@ -493,12 +488,12 @@
 
             <div class="review-envelope">
                 <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"We order their direct takeaway every Friday. No delivery apps means the food arrives piping hot and much faster. Absolutely faultless service every time."</p>
+                <p>"We use their custom web link for takeaways every single Friday night. The checkout loop avoids third-party price markups completely. The food arrives piping hot every single time."</p>
                 <div class="client">
-                    <img src="reviewer-2.jpg" alt="Sarah Jenkins">
+                    <img src="reviewer-2.jpg" alt="Marcus Vance">
                     <div>
-                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">Sarah Jenkins</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Regular Takeaway Client</span>
+                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">Marcus Vance</h4>
+                        <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Regular Direct Order Account</span>
                     </div>
                 </div>
             </div>
@@ -507,33 +502,25 @@
 
     <section class="section-wrapper" id="faqs">
         <div class="section-header">
-            <h2 class="serif-display">Dining & Logistics FAQs</h2>
-            <p>Clear answers to ensure your dining experience is flawless.</p>
+            <h2 class="serif-display">Frequently Asked Questions</h2>
+            <p>Clear operational answers regarding parking, logistics, and collections.</p>
         </div>
         <div class="faq-grid">
             <div class="faq-box">
-                <h4>Do you cater to severe nut allergies?</h4>
-                <p>Yes. Please notify us during the booking process. We have strict cross-contamination protocols and can alter specific dishes to guarantee safety.</p>
+                <h4>Are your dishes halal and nut-free?</h4>
+                <p>All our chicken and lamb variations are strictly sourced from certified halal providers. Nut alternatives are prepared within isolated bays. Please flag severe criteria to our AI assistant before completing orders.</p>
             </div>
             <div class="faq-box">
-                <h4>What is your delivery radius?</h4>
-                <p>Our direct, commission-free delivery fleet operates within a 6-mile radius of central Andover to ensure the food remains at optimal temperature.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Is there a strict dress code?</h4>
-                <p>We embrace a smart-casual atmosphere. We simply ask that guests avoid sportswear or flip-flops during evening dinner service.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Can I alter the spice level of a dish?</h4>
-                <p>Absolutely. Because every dish is cooked fresh to order, our chefs can customize the heat intensity to your exact preference.</p>
+                <h4>What are your direct takeaway delivery windows?</h4>
+                <p>Our direct, commission-free delivery fleet functions across a 6-mile radius from central Andover with an average timeline of 45 minutes.</p>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="location" style="border-top: 1px solid var(--border-faint);">
         <div class="section-header">
-            <h2 class="serif-display">Find The Restaurant</h2>
-            <p>Secure a table or contact the kitchen directly for takeaway orders.</p>
+            <h2 class="serif-display">Find Our Dining Room</h2>
+            <p>We are conveniently positioned inside central Andover, providing dedicated customer parking options right on the doorstep.</p>
         </div>
         
         <div class="contact-layout">
@@ -550,22 +537,19 @@
             </div>
 
             <div>
-                <h3 class="serif-display" style="font-size: 2.3rem; margin-bottom: 1rem; color: var(--text-light);">Visit Us.</h3>
-                <p style="margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--text-dim);">Conveniently positioned in central Andover. Public parking is available immediately adjacent to the restaurant entrance.</p>
-
-                <a href="https://wa.me/441234567890" target="_blank" class="info-strip">
+                <a href="https://wa.me/447123456999" target="_blank" class="info-strip">
                     <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
                     <div class="info-strip-text">
-                        <h5>Direct Kitchen Line</h5>
-                        <p>+44 1234 567 890</p>
+                        <h5>TEXT US DIRECTLY</h5>
+                        <p>+44 7123 456 999</p>
                     </div>
                 </a>
 
-                <a href="mailto:reservations@thetimur.co.uk" class="info-strip">
+                <a href="mailto:bookings@thetimurandover.co.uk" class="info-strip">
                     <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
                     <div class="info-strip-text">
-                        <h5>Private Dining & Events</h5>
-                        <p>reservations@thetimur.co.uk</p>
+                        <h5>EMAIL BOOKING DESK</h5>
+                        <p>bookings@thetimurandover.co.uk</p>
                     </div>
                 </a>
             </div>
@@ -573,16 +557,16 @@
     </section>
 
     <a href="#booking" class="mini-ai-pill">
-        <img src="ai-receptionist.png" alt="Arjun AI">
+        <img src="ai-receptionist.png" alt="Maya AI">
         <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Arjun (Maître D')</p>
-            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #f59e0b; font-size: 0.45rem; margin-right: 4px;"></i> Tap to reserve table</p>
+            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Maya (AI Concierge)</p>
+            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #f59e0b; font-size: 0.45rem; margin-right: 4px;"></i> Online. Namaste! 🙏</p>
         </div>
     </a>
 
     <footer style="background-color: #06090e; padding: 5rem 5% 8rem; color: #94a3b8; text-align: center; border-top: 1px solid var(--border-faint);">
         <h3 class="serif-display" style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 800;"><i class="fa-solid fa-leaf" style="color: var(--accent-gold);"></i> THE TIMUR</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Premium Dining Experiences. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
+        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Bespoke Culinary Infrastructure Engineering. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
         
         <div class="social-circle-container">
             <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
@@ -591,7 +575,7 @@
             <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
         </div>
 
-        <p style="font-size: 0.85rem; border-top: 1px solid var(--border-faint); padding-top: 2rem;">© 2026 GoChuchuro Systems. Premium Hospitality Assets.</p>
+        <p style="font-size: 0.85rem; border-top: 1px solid var(--border-faint); padding-top: 2rem;">© 2026 GoChuchuro Systems. High-Performance Digital Showroom Assets.</p>
     </footer>
 
 </body>
