@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUMIÈRE | Premium Unisex Hair Architecture & Color</title>
     
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+    
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -37,7 +40,7 @@
             background-color: var(--obsidian);
             color: var(--text-silver);
             line-height: 1.6;
-            padding-bottom: 80px; 
+            padding-bottom: 70px; /* Clears sticky mobile hotbar */
         }
 
         .serif-display {
@@ -73,7 +76,7 @@
         .nav-link-item { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .nav-link-item:hover { color: var(--vip-gold); }
 
-        /* --- STICKY PERSISTENT ACTION HOT-BAR --- */
+        /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
         .sticky-action-bar {
             position: fixed;
             bottom: 0;
@@ -110,9 +113,10 @@
         .btn-silver-cta { background-color: transparent; color: var(--silver-premium); border: 1px solid var(--border-dark); }
         .btn-gold-cta { background-color: var(--vip-gold); color: var(--obsidian); }
 
-        /* --- HERO BANNER --- */
+        /* --- HERO BANNER W/ 35% SHADING --- */
         .hero-banner {
-            background: linear-gradient(rgba(8, 8, 10, 0.85), rgba(8, 8, 10, 0.5)), url('hero-salon.jpg') no-repeat center center/cover;
+            /* Exactly 35% dark overlay (0.35 opacity) applied over the hero image */
+            background: linear-gradient(rgba(8, 8, 10, 0.35), rgba(8, 8, 10, 0.35)), url('hero-salon-bg.jpg') no-repeat center center/cover;
             min-height: 85vh;
             display: flex;
             flex-direction: column;
@@ -122,14 +126,32 @@
             padding: 4rem 2rem;
         }
 
-        .hero-banner h1 { font-size: 4.8rem; line-height: 1.05; color: var(--white-pure); margin-bottom: 1.5rem; }
+        .hero-banner h1 { font-size: 4.8rem; line-height: 1.05; color: var(--white-pure); margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
         .hero-banner h1 span { color: var(--vip-gold); font-style: italic; }
-        .hero-banner p { font-size: 1.25rem; max-width: 700px; color: #e2e8f0; margin-bottom: 2.5rem; text-shadow: 0 2px 6px rgba(0,0,0,0.6); font-weight: 300; }
+        .hero-banner p { font-size: 1.25rem; max-width: 700px; color: #e2e8f0; margin-bottom: 2.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-weight: 500; }
 
-        /* --- METRICS RIBBON --- */
-        .metrics-ribbon { background-color: var(--charcoal-surface); padding: 3rem 5%; display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; border-bottom: 1px solid var(--border-faint); text-align: center; }
+        /* --- METRICS RIBBON WITH EMBEDDED GOOGLE BADGE --- */
+        .metrics-ribbon { background-color: var(--charcoal-surface); padding: 2.5rem 5%; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; border-bottom: 1px solid var(--border-faint); text-align: center; }
         .metric-node h4 { font-size: 2.2rem; color: var(--vip-gold); font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;}
-        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; }
+        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; font-weight: 600; }
+
+        .embedded-google-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: white;
+            padding: 0.8rem 1.6rem;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--obsidian);
+            border: 1px solid var(--border-faint);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .embedded-google-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+        }
 
         /* --- BOOKING HUB --- */
         .tech-roi-container {
@@ -141,7 +163,7 @@
             grid-template-columns: 1.1fr 0.9fr;
             gap: 4rem;
             align-items: center;
-            margin: 4rem auto; /* FIX: Removed negative margin to prevent overlapping */
+            margin: 5rem auto; 
             max-width: 1250px;
             position: relative;
             z-index: 10;
@@ -151,17 +173,8 @@
         .tech-pitch-content h3 { font-size: 2.4rem; margin-bottom: 1rem; color: var(--white-pure); }
         .tech-pitch-content h3 span { color: var(--vip-gold); }
         
-        .ai-concierge-badge {
-            display: flex;
-            align-items: center;
-            background: rgba(8, 8, 10, 0.7);
-            padding: 1.5rem;
-            border-radius: 10px;
-            gap: 1.5rem;
-            border: 1px solid var(--border-faint);
-            margin: 2.5rem 0 0;
-        }
-        .ai-concierge-badge img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--tech-white); object-fit: cover; }
+        .ai-concierge-badge { display: flex; align-items: center; background: rgba(8, 8, 10, 0.7); padding: 1.5rem; border-radius: 10px; gap: 1.5rem; border: 1px solid var(--border-faint); margin: 2.5rem 0 0; }
+        .ai-concierge-badge img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--vip-gold); object-fit: cover; }
 
         .interactive-table-deck { background: var(--obsidian); border-radius: 12px; padding: 2.5rem; border: 1px solid var(--border-faint); }
         .deck-header { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-faint); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;}
@@ -218,94 +231,64 @@
         .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
         .map-frame { width: 100%; height: 360px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         
-        .info-strip { background: var(--silver-premium); border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
-        .info-strip:hover { transform: scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .info-strip-icon { width: 48px; height: 48px; background: #ffffff; color: var(--vip-gold); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.3rem; border: 1px solid #cbd5e1; }
+        /* Cleaned up Contact Strips */
+        .info-strip { background: var(--charcoal-surface); border: 1px solid var(--border-faint); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
+        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.2); border-color: var(--vip-gold); }
+        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--white-pure); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-faint); }
         
-        .info-strip.whatsapp { border-color: #25D366; background-color: #f0fdf4; }
-        .info-strip.whatsapp .info-strip-icon { color: #25D366; border-color: #bbf7d0; }
-        
-        .info-strip.email-feature { border-color: var(--vip-gold); background-color: #f0f9ff; }
-        .info-strip.email-feature .info-strip-icon { color: var(--vip-gold); border-color: #ddd6fe; }
+        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--white-pure); }
 
-        .info-strip-text h5 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;}
-        .info-strip-text p { font-size: 1.15rem; font-weight: 800; color: var(--obsidian); }
-
-        /* --- COLLAPSIBLE CHAT WIDGET (FIXED) --- */
-        .chat-toggle-btn {
+        /* --- MINI AI PILL (Replaces floating box) --- */
+        .mini-ai-pill {
             position: fixed;
-            bottom: 6rem;
-            right: 2rem;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--vip-gold);
-            color: var(--obsidian);
-            border: none;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            font-size: 1.6rem;
-            z-index: 1000;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .chat-toggle-btn:hover { transform: scale(1.05); background: var(--white-pure); }
-        
-        .floating-chat-widget { 
-            position: fixed; 
-            bottom: 6rem; 
-            right: 2rem; 
-            width: 320px; 
-            background: white; 
-            border-radius: 12px; 
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5); 
-            z-index: 1001; 
-            overflow: hidden; 
-            color: var(--obsidian); 
-            border: 1px solid #e2e8f0;
-            display: none; /* Hidden by default */
-        }
-        .widget-head { background: var(--charcoal-surface); color: white; padding: 1.2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--vip-gold);}
-        .widget-head img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vip-gold-glow); margin-right: 1rem; }
-        .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
-        .widget-pane .msg { background: white; padding: 1.2rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 0.5rem; line-height: 1.5;}
-
-        /* --- FLOATING GOOGLE TRUST BADGE --- */
-        .floating-google-badge {
-            position: fixed;
-            bottom: 6rem; /* Moved up to clear the bottom action bar */
-            left: 2rem;
+            bottom: 5.5rem; /* Clears sticky mobile hotbar */
+            right: 1.5rem;
             background: white;
             border-radius: 50px;
-            padding: 0.6rem 1.4rem;
+            padding: 0.4rem 1.2rem 0.4rem 0.4rem;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            z-index: 990;
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-            z-index: 999;
-            border: 1px solid #e2e8f0;
             text-decoration: none;
-            color: var(--obsidian);
-            transition: 0.3s;
+            border: 1px solid #cbd5e1;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        .floating-google-badge:hover { transform: translateY(-3px); box-shadow: 0 18px 45px rgba(0,0,0,0.3); }
-        .badge-text { font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; }
-        .badge-stars { color: #fbbc04; font-size: 0.75rem; }
+        .mini-ai-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(198,160,111,0.35); /* VIP Gold Shadow */
+        }
+        .mini-ai-pill img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--vip-gold);
+            object-fit: cover;
+        }
 
-        /* Social Icons Link Style */
-        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.03); color: #cbd5e1; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.06); margin: 0 0.5rem; }
+        /* Social Icons Link Style (Fixed Mobile Centering) */
+        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.04); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.08); }
         .social-circle-link:hover { background: var(--vip-gold); color: var(--obsidian); transform: translateY(-4px); border-color: var(--vip-gold); }
 
+        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 950px) {
             .nav-links { display: none; }
             .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3rem; }
             .tech-roi-container { padding: 2rem; margin-top: 2rem; }
             .hero-banner h1 { font-size: 2.8rem; }
-            .chat-toggle-btn, .floating-google-badge { display: none; } /* Hidden for mobile simplicity */
             .about-grid-mobile { grid-template-columns: 1fr !important; gap: 4rem !important; }
             .editorial-portrait { right: 0; width: 60%; }
+
+            /* Responsive gap for metrics ribbon on mobile */
+            .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
+            
+            /* Keep AI Pill out of the way on small mobile screens */
+            .mini-ai-pill { right: 1rem; bottom: 5rem; padding: 0.3rem 1rem 0.3rem 0.3rem; }
+            .mini-ai-pill img { width: 40px; height: 40px; }
+            .mini-ai-pill p { font-size: 0.8rem !important; }
         }
     </style>
 </head>
@@ -335,7 +318,21 @@
     </section>
 
     <section class="metrics-ribbon">
-        <div class="metric-node"><h4>4.9</h4><p>Google Rated Stars</p></div>
+        
+        <a href="#reviews" class="embedded-google-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
+                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+            </svg>
+
+            <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
+                <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
+                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 120+ Reviews</span>
+            </div>
+        </a>
+
         <div class="metric-node"><h4>Master</h4><p>Level Stylists</p></div>
         <div class="metric-node"><h4>Bespoke</h4><p>Gender-Neutral Care</p></div>
     </section>
@@ -517,36 +514,11 @@
         </div>
     </section>
 
-    <button id="chatToggleBtn" class="chat-toggle-btn" onclick="document.getElementById('aiChatWidget').style.display = 'block'; this.style.display = 'none';">
-        <i class="fa-solid fa-message"></i>
-    </button>
-
-    <div id="aiChatWidget" class="floating-chat-widget">
-        <div class="widget-head">
-            <div style="display: flex; align-items: center;">
-                <img src="receptionist-ai.jpg" alt="Maya AI">
-                <div>
-                    <h5 style="font-size:0.95rem; font-weight:700; margin: 0;">Maya (Concierge)</h5>
-                    <span style="font-size:0.75rem; opacity:0.9;"><i class="fa-solid fa-circle" style="color: #4ade80; font-size: 0.45rem; margin-right: 4px;"></i> Active</span>
-                </div>
-            </div>
-            <button onclick="document.getElementById('aiChatWidget').style.display = 'none'; document.getElementById('chatToggleBtn').style.display = 'flex';" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 1.2rem;">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
-        <div class="widget-pane">
-            <div class="msg">
-                <strong>VIP Greetings! 🙏</strong><br>
-                Welcome to Lumière Hair Studio. Shall I instantly cross-reference chair availability for tonight, or show you our vegan color specials?
-            </div>
-        </div>
-    </div>
-
-    <a href="#reviews" class="floating-google-badge">
-       <i class="fa-brands fa-google" style="color: #4285F4; font-size: 1.8rem; margin-right: 5px;"></i>
-        <div class="badge-text">
-            <span>5.0 <span class="badge-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
-            <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 120+ Reviews</span>
+    <a href="#booking" class="mini-ai-pill">
+        <img src="receptionist-ai.jpg" alt="Maya AI">
+        <div style="display: flex; flex-direction: column; justify-content: center;">
+            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Maya (AI Desk)</p>
+            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #22c55e; font-size: 0.45rem; margin-right: 4px;"></i> Tap to check availability</p>
         </div>
     </a>
 
@@ -554,7 +526,7 @@
         <h3 class="serif-display" style="color: white; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">LUMIÈRE<span style="color:var(--vip-gold);">.</span></h3>
         <p style="max-width: 480px; margin: 0 auto 1.8rem; font-size: 0.95rem;">Bespoke Hair Architecture. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
         
-        <div style="margin-bottom: 3rem;">
+        <div class="social-circle-container">
             <a href="https://facebook.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://instagram.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://tiktok.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tiktok"></i></a>
