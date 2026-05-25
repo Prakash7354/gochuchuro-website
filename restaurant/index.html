@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Plumbing & Heating Engineers | Smart Local Experts</title>
+    <title>THE TIMUR | Premium Dining & Bespoke Takeaway</title>
     
     <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- HIGH-END UI DESIGN SYSTEMS --- */
+        /* --- RESTAURANT UI DESIGN SYSTEM --- */
         :root {
-            --primary-dark: #0f172a;    
-            --accent-teal: #0d9488;    
-            --emergency-orange: #ea580c; 
-            --stars-gold: #f59e0b;      
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --text-dark: #334155;
-            --text-light: #ffffff;
-            --border-gray: #e2e8f0;
-            --tech-purple: #6366f1;
+            --primary-dark: #1e1b4b;     /* Deep Indigo / Midnight */
+            --accent-gold: #f59e0b;      /* Saffron Amber / Gold */
+            --accent-gold-hover: #d97706;
+            --bg-slate: #0f172a;         /* Dark Slate Background */
+            --bg-panel: #1e293b;         /* Elevated Panel Background */
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-faint: rgba(255, 255, 255, 0.06);
+            --border-solid: #334155;
         }
 
         * {
@@ -35,16 +34,21 @@
         }
 
         body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: var(--bg-slate);
+            color: var(--text-light);
             line-height: 1.6;
             padding-bottom: 70px; /* Clears sticky mobile hotbar */
         }
 
+        .serif-display {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
         /* --- STICKY TOP NAVIGATION --- */
         header {
-            background-color: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(10px);
+            background-color: rgba(30, 27, 75, 0.98);
+            backdrop-filter: blur(12px);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
@@ -52,52 +56,24 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--border-faint);
         }
 
         .brand-logo {
             color: var(--text-light);
-            font-size: 1.4rem;
-            font-weight: 800;
+            font-size: 1.6rem;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
+        .brand-logo i { color: var(--accent-gold); }
 
-        .brand-logo i { color: var(--accent-teal); }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .nav-link:hover { color: var(--accent-teal); }
-
-        .cta-header-btn {
-            background-color: var(--emergency-orange);
-            color: var(--text-light);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
-            transition: 0.3s;
-        }
-
-        .cta-header-btn:hover { transform: translateY(-2px); }
+        .nav-menu { display: flex; gap: 2rem; }
+        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-link:hover { color: var(--accent-gold); }
 
         /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
         .sticky-action-bar {
@@ -105,9 +81,9 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(15, 23, 42, 0.98);
+            background: rgba(30, 27, 75, 0.98);
             backdrop-filter: blur(10px);
-            border-top: 2px solid var(--accent-teal);
+            border-top: 2px solid var(--accent-gold);
             padding: 1rem 5%;
             display: flex;
             justify-content: center;
@@ -131,16 +107,17 @@
             justify-content: center;
             gap: 0.6rem;
             transition: 0.3s;
+            border: none;
         }
-        .action-bar-btn:hover { transform: translateY(-3px); }
-        .btn-silver-cta { background-color: transparent; color: var(--border-gray); border: 1px solid var(--border-gray); }
-        .btn-teal-cta { background-color: var(--accent-teal); color: var(--text-light); }
+        .action-bar-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); }
+        .btn-dark-cta { background-color: transparent; color: var(--text-light); border: 1px solid var(--border-solid); }
+        .btn-gold-cta { background-color: var(--accent-gold); color: var(--primary-dark); }
 
-        /* --- HERO WORKSPACE (Exactly 35% Shading) --- */
+        /* --- HERO WORKSPACE (Exactly 35% Indigo Shading) --- */
         .hero {
-            background-color: var(--primary-dark); 
-            /* Look for the 0.35 values here to adjust shading in the future! */
-            background: linear-gradient(rgba(15, 23, 42, 0.35), rgba(15, 23, 42, 0.35)), url('images/gas-heating-1.png') no-repeat center center/cover;
+            background-color: var(--primary-dark);
+            /* Look here: 0.35 values create the perfect 35% premium shading overlay */
+            background: linear-gradient(rgba(30, 27, 75, 0.35), rgba(30, 27, 75, 0.35)), url('hero-dining.jpg') no-repeat center center/cover;
             min-height: 85vh;
             display: flex;
             flex-direction: column;
@@ -151,80 +128,41 @@
             color: var(--text-light);
         }
 
-        .hero-badge {
-            background-color: rgba(13, 148, 136, 0.9);
-            border: 1px solid var(--accent-teal);
-            color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-        }
-
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 4.8rem;
             max-width: 900px;
             line-height: 1.1;
             margin-bottom: 1.2rem;
             text-shadow: 0 4px 20px rgba(0,0,0,0.9);
         }
-
-        .hero h1 span { color: var(--accent-teal); }
+        .hero h1 span { color: var(--accent-gold); font-style: italic; }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             max-width: 650px;
-            color: #f8fafc;
+            color: #e2e8f0;
             margin-bottom: 2.5rem;
             text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
 
-        .btn-primary {
-            background-color: var(--accent-teal);
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.4);
-        }
-        .btn-primary:hover { background-color: #0f766e; transform: translateY(-2px); }
-
         /* --- TRUST BADGES / METRICS RIBBON --- */
-        .trust-bar {
-            background-color: #1e293b;
+        .metrics-ribbon {
+            background-color: var(--bg-panel);
             padding: 2.5rem 5%;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 40px;
             flex-wrap: wrap;
-            border-bottom: 4px solid var(--accent-teal);
-            color: #f1f5f9;
-            font-weight: 600;
+            border-bottom: 1px solid var(--border-faint);
             text-align: center;
         }
         
-        .trust-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .trust-item i { color: var(--accent-teal); font-size: 1.8rem; margin-bottom: 0.2rem; }
-        .trust-item span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .metric-node h4 { font-size: 2.2rem; color: var(--accent-gold); }
+        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; font-weight: 600;}
 
         .embedded-google-badge {
             display: flex;
@@ -234,115 +172,100 @@
             padding: 0.8rem 1.6rem;
             border-radius: 50px;
             text-decoration: none;
-            color: var(--primary-dark);
-            border: 1px solid var(--border-gray);
+            color: #0f172a;
+            border: 1px solid var(--border-faint);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .embedded-google-badge:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
         }
 
         /* --- SECTION WRAPPERS --- */
-        .section-wrapper { padding: 6rem 5%; max-width: 1300px; margin: 0 auto; }
+        .section-wrapper { padding: 6.5rem 5%; max-width: 1300px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.5rem; color: var(--primary-dark); font-weight: 800; }
-        .section-header p { color: #64748b; font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: 2.8rem; color: var(--text-light); }
+        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* --- TECH ROI SECTION --- */
+        /* --- TECH ROI SECTION (RESERVATION HUB) --- */
         .roi-tech-section {
-            background-color: var(--bg-white);
-            border-radius: 20px;
+            background-color: var(--bg-panel);
+            border-radius: 16px;
             padding: 4rem;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 4rem;
             align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
             margin: 5rem auto; 
-            position: relative;
-            max-width: 1200px;
-            border: 1px solid var(--border-gray);
+            border: 1px solid var(--border-faint);
         }
 
-        .tech-text-block h3 { font-size: 2.4rem; color: var(--primary-dark); margin-bottom: 1rem; }
-        .tech-text-block h3 span { color: var(--accent-teal); }
-        .tech-feature { display: flex; gap: 1.5rem; margin-top: 2rem; }
-        .tech-icon { width: 50px; height: 50px; background: rgba(13, 148, 136, 0.1); color: var(--accent-teal); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-
+        .tech-text-block h3 { font-size: 2.5rem; color: var(--text-light); margin-bottom: 1rem; }
+        .tech-text-block h3 span { color: var(--accent-gold); }
+        
         .ai-avatar-badge {
             display: flex;
             align-items: center;
-            background: var(--bg-light);
+            background: rgba(15, 23, 42, 0.5);
             padding: 1.5rem;
             border-radius: 12px;
             gap: 1.5rem;
-            border: 1px solid var(--border-gray);
+            border: 1px solid var(--border-faint);
             margin-top: 2.5rem;
         }
-        .ai-avatar-badge img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-teal); }
+        .ai-avatar-badge img { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold); }
 
-        .calendar-mockup {
-            background: var(--bg-light);
-            border-radius: 16px;
-            padding: 2.5rem;
-            border: 1px solid var(--border-gray);
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
-        }
-        .cal-header { display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-weight: 700; font-size: 1.1rem; color: var(--primary-dark);}
-        .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .cal-slot { background: white; padding: 1rem; text-align: center; border-radius: 8px; border: 1px solid var(--border-gray); font-size: 0.9rem; font-weight: 700; color: var(--primary-dark); cursor: pointer; transition: 0.2s;}
-        .cal-slot:hover, .cal-slot.active { background: var(--accent-teal); color: white; border-color: var(--accent-teal); box-shadow: 0 4px 12px rgba(13,148,136,0.2); }
+        .interactive-table-deck { background: var(--bg-slate); border-radius: 12px; padding: 2.5rem; border: 1px solid var(--border-faint); }
+        .deck-header { font-size: 1.1rem; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-faint); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light);}
+        
+        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 1.5rem; gap: 0.5rem; }
+        .cover-bubble { flex: 1; padding: 0.8rem 0; text-align: center; border-radius: 4px; border: 1px solid var(--border-faint); font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; background: rgba(255,255,255,0.02);}
+        .cover-bubble.selected, .cover-bubble:hover { background-color: var(--accent-gold); color: var(--primary-dark); border-color: var(--accent-gold); }
 
-        /* --- ABOUT & TEAM --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
-        .team-image-stack { position: relative; padding-bottom: 2rem;}
-        .team-main-img { width: 100%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .team-sub-img { position: absolute; bottom: 0; right: -2rem; width: 50%; border-radius: 16px; border: 8px solid var(--bg-light); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        /* --- ABOUT & STORY --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .editorial-image-group { position: relative; }
+        .editorial-main { width: 100%; border-radius: 12px; border: 1px solid var(--border-solid); box-shadow: 20px 20px 0px var(--accent-gold); /* Premium solid shadow */ }
+        
+        /* --- MENU / SERVICES MATRIX --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .service-card { background: var(--bg-panel); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-faint); transition: 0.3s; }
+        .service-card:hover { transform: translateY(-7px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-color: var(--accent-gold); }
+        .service-img { width: 100%; height: 260px; object-fit: cover; filter: grayscale(15%); transition: 0.4s;}
+        .service-card:hover .service-img { filter: grayscale(0%); }
+        .service-body { padding: 2.5rem; text-align: center; }
+        .service-body h3 { color: var(--text-light); margin-bottom: 0.5rem; font-size: 1.6rem; }
+        .service-badge { display: inline-block; background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; }
+        .service-body p { font-size: 1rem; color: var(--text-dim); }
 
-        /* --- SERVICES --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .service-card { background: var(--bg-white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-gray); transition: 0.3s; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--accent-teal); }
-        .service-img { width: 100%; height: 220px; object-fit: cover; }
-        .service-body { padding: 2rem; }
-        .service-body h3 { color: var(--primary-dark); margin-bottom: 1rem; font-size: 1.3rem; }
-        .service-body h3 i { color: var(--accent-teal); margin-right: 0.5rem; }
-        .service-body p { font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.5rem; }
-
-        /* --- TESTIMONIALS --- */
-        .testimonials { background-color: var(--primary-dark); color: white; padding: 6rem 5%; }
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .test-card { background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
-        .stars { color: var(--stars-gold); margin-bottom: 1.2rem; font-size: 0.95rem; }
-        .test-card p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6;}
+        /* --- VERIFIED REVIEWS --- */
+        .review-sector { background-color: #06090e; padding: 7rem 5%; border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint); }
+        .testimonial-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .review-envelope { background: var(--bg-panel); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-faint); }
+        .stars-row { color: #fbbc04; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .review-envelope p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6;}
         .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-teal); }
+        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold); }
 
         /* --- FAQS --- */
         .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .faq-box { background: var(--bg-white); padding: 2.2rem; border-radius: 12px; border: 1px solid var(--border-gray); }
-        .faq-box h4 { color: var(--primary-dark); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
-        .faq-box p { font-size: 0.95rem; color: #475569; line-height: 1.6;}
+        .faq-box { background: var(--bg-panel); padding: 2.2rem; border-radius: 8px; border: 1px solid var(--border-faint); }
+        .faq-box h4 { color: var(--text-light); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
+        .faq-box p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6;}
 
         /* --- CONTACT & MAP SECTION --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start; }
-        .contact-form-box { background: var(--bg-white); padding: 3rem; border-radius: 16px; border: 1px solid var(--border-gray); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .input-group { margin-bottom: 1.5rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); }
-        .input-group input, .input-group textarea { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-gray); border-radius: 8px; font-size: 0.95rem; outline: none; }
-        .input-group input:focus, .input-group textarea:focus { border-color: var(--accent-teal); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1); }
-        
-        .map-frame { width: 100%; height: 360px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-gray); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
+        .map-frame { width: 100%; height: 360px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-solid); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
         
         /* Premium Dark Contact Strips */
-        .info-strip { background: var(--primary-dark); border: 1px solid var(--accent-teal); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none;}
-        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.15); border-color: var(--stars-gold); }
-        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--accent-teal); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-gray); }
+        .info-strip { background: var(--bg-panel); border: 1px solid var(--border-faint); border-radius: 8px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none;}
+        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); border-color: var(--accent-gold); }
+        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--accent-gold); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-solid); }
         
         .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;}
-        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--white-pure); }
+        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--text-light); }
 
         /* --- MINI AI PILL --- */
         .mini-ai-pill {
@@ -352,40 +275,42 @@
             background: white;
             border-radius: 50px;
             padding: 0.4rem 1.2rem 0.4rem 0.4rem;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
             z-index: 990;
             display: flex;
             align-items: center;
             gap: 0.8rem;
             text-decoration: none;
-            border: 1px solid var(--border-gray);
+            border: 1px solid var(--border-solid);
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .mini-ai-pill:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(13,148,136,0.3); 
-            border-color: var(--accent-teal);
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4); /* Gold Shadow */
+            border-color: var(--accent-gold);
         }
         .mini-ai-pill img {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            border: 2px solid var(--accent-teal);
+            border: 2px solid var(--accent-gold);
             object-fit: cover;
         }
 
         /* Social Icons in Footer */
         .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
-        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
-        .social-circle-link:hover { background: var(--accent-teal); color: white; transform: translateY(-4px); border-color: var(--accent-teal); }
+        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.03); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.06); }
+        .social-circle-link:hover { background: var(--accent-gold); color: var(--primary-dark); transform: translateY(-4px); border-color: var(--accent-gold); }
 
-        @media (max-width: 900px) {
+        @media (max-width: 950px) {
             .nav-menu { display: none; }
             .roi-tech-section, .about-grid, .faq-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .roi-tech-section { padding: 2.5rem; margin-top: 2rem;}
-            .team-sub-img { position: relative; width: 100%; bottom: 0; right: 0; margin-top: 1rem;}
+            .roi-tech-section { padding: 2rem; margin-top: 2rem;}
+            .editorial-main { box-shadow: 10px 10px 0px var(--accent-gold); }
+            .hero h1 { font-size: 3.2rem; }
             
-            .trust-bar { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
+            /* Responsive gap for metrics ribbon on mobile */
+            .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
             
             /* Mobile Specific: Transform AI Pill into a Circle Avatar */
             .mini-ai-pill {
@@ -411,38 +336,37 @@
 <body>
 
     <header>
-        <a href="#" class="brand-logo">
-            <i class="fa-solid fa-faucet-drip"></i> RAI & SONS
+        <a href="#" class="brand-logo serif-display">
+            <i class="fa-solid fa-leaf"></i> THE TIMUR
         </a>
         <nav class="nav-menu">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#testimonials" class="nav-link">Testimonials</a>
-            <a href="#faqs" class="nav-link">FAQs</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#about" class="nav-link">Our Story</a>
+            <a href="#services" class="nav-link">Tasting Menu</a>
+            <a href="#booking" class="nav-link">Reservations</a>
+            <a href="#reviews" class="nav-link">Reviews</a>
+            <a href="#location" class="nav-link">Find Us</a>
         </nav>
-        <a href="tel:07123456789" class="cta-header-btn" style="display: none;">
-            <i class="fa-solid fa-phone-volume"></i> 24/7 Call-Out
+        <a href="tel:01234567890" class="cta-header-btn" style="display: none;">
+            <i class="fa-solid fa-phone"></i> Call Direct
         </a>
     </header>
 
     <div class="sticky-action-bar" id="actions">
-        <a href="tel:07123456789" class="action-bar-btn btn-silver-cta"><i class="fa-solid fa-phone-volume"></i> Call Team</a>
-        <a href="#booking" class="action-bar-btn btn-teal-cta"><i class="fa-solid fa-calendar-check"></i> Book Online</a>
+        <a href="tel:01234567890" class="action-bar-btn btn-dark-cta"><i class="fa-solid fa-phone"></i> Call Kitchen</a>
+        <a href="#booking" class="action-bar-btn btn-gold-cta"><i class="fa-solid fa-utensils"></i> Reserve Table</a>
     </div>
 
     <section class="hero">
-        <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Gas Safe Registered Professionals</div>
-        <h1>Next-Generation <span>Plumbing & Heating</span> Services</h1>
-        <p>Combining traditional British engineering standards with smart, frictionless booking technology. Serving Andover and Hampshire with bespoke boiler and plumbing solutions.</p>
+        <h1 class="serif-display">Authentic Himalayan & <span>Indian Cuisine</span></h1>
+        <p>Experience the vibrant spices of Nepal and India, crafted with uncompromising quality. Secure your table or order direct commission-free takeaway online.</p>
         <div class="hero-buttons">
-            <a href="#booking" class="btn-primary">View Live Availability <i class="fa-solid fa-calendar-check"></i></a>
+            <a href="#booking" class="action-bar-btn btn-gold-cta" style="padding: 1rem 2.5rem; font-size: 1rem; max-width: 300px;">Reserve Your Table</a>
         </div>
     </section>
 
-    <section class="trust-bar">
+    <section class="metrics-ribbon">
         
-        <a href="#testimonials" class="embedded-google-badge">
+        <a href="#reviews" class="embedded-google-badge">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
                 <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
                 <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
@@ -451,145 +375,130 @@
             </svg>
             <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
                 <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
-                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 200+ Reviews</span>
+                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 180+ Reviews</span>
             </div>
         </a>
 
-        <div class="trust-item"><i class="fa-solid fa-circle-check"></i> <span>£5M Liability</span></div>
-        <div class="trust-item"><i class="fa-solid fa-bolt"></i> <span>Rapid Dispatch</span></div>
-        <div class="trust-item"><i class="fa-solid fa-certificate"></i> <span>CP12 Certified</span></div>
+        <div class="metric-node"><h4 class="serif-display">Award</h4><p>Winning Local Chef</p></div>
+        <div class="metric-node"><h4 class="serif-display">5-Star</h4><p>Food Hygiene Rated</p></div>
     </section>
 
     <section class="section-wrapper" style="padding-top: 0;">
         <div class="roi-tech-section" id="booking">
-            <div class="tech-text-block">
-                <h3>Stop Waiting. <span>Start Booking.</span></h3>
-                <p style="font-size: 1.05rem; color: var(--text-dark); margin-bottom: 1.5rem;">We respect your time. Our infrastructure integrates AI and live calendar syncing so you can secure a certified engineer without the back-and-forth phone tag.</p>
+            <div class="tech-pitch-content">
+                <h3 class="serif-display">Instant Table <span>Reservations.</span></h3>
+                <p style="font-size: 1.05rem; color: var(--text-dim); margin-bottom: 1.5rem;">Secure your dining experience instantly. Our live seating matrix prevents double-bookings and ensures your table is perfectly prepared upon arrival.</p>
                 
                 <div class="ai-avatar-badge">
-                    <img src="images/Emma-Richardson .png" alt="AI Receptionist Emma">
+                    <img src="ai-receptionist.png" alt="AI Receptionist Arjun">
                     <div>
-                        <h4 style="color: var(--primary-dark);">Meet Emma, our AI Receptionist</h4>
-                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 2px;">Available 24/7 to answer FAQs, issue rough estimates, and book emergency slots instantly.</p>
-                    </div>
-                </div>
-
-                <div class="tech-feature">
-                    <div class="tech-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                    <div>
-                        <h4 style="color: var(--primary-dark);">Live Calendar Synchronisation</h4>
-                        <p style="font-size: 0.9rem; color: #64748b;">Tap a slot that works for you. Our dispatch system automatically assigns the nearest van.</p>
+                        <h4 style="color: var(--accent-gold); font-weight:700;">Meet Arjun, Virtual Maître D'</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 2px;">Available 24/7 to manage large party bookings, handle dietary requirements, and reserve your table.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="calendar-mockup">
-                <div class="cal-header">
-                    <span><i class="fa-solid fa-chevron-left" style="color: #94a3b8; cursor: pointer;"></i></span>
-                    <span>October 2026</span>
-                    <span><i class="fa-solid fa-chevron-right" style="color: var(--accent-teal); cursor: pointer;"></i></span>
+            <div class="interactive-table-deck">
+                <h4 class="deck-header serif-display">Select Your Cover Size</h4>
+                <div class="covers-selector">
+                    <div class="cover-bubble selected">2 Guests</div>
+                    <div class="cover-bubble">4 Guests</div>
+                    <div class="cover-bubble">6 Guests</div>
+                    <div class="cover-bubble">8+ Group</div>
                 </div>
-                <p style="font-size: 0.85rem; margin-bottom: 1rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Select an arrival window:</p>
-                <div class="cal-grid">
-                    <div class="cal-slot">08:00 AM</div>
-                    <div class="cal-slot">09:30 AM</div>
-                    <div class="cal-slot active">11:00 AM</div>
-                    <div class="cal-slot">13:00 PM</div>
-                    <div class="cal-slot">14:30 PM</div>
-                    <div class="cal-slot">16:00 PM</div>
-                </div>
-                <button style="width:100%; padding: 1.1rem; background: var(--primary-dark); color: white; border: none; border-radius: 8px; margin-top: 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;" onmouseover="this.style.background='var(--accent-teal)'" onmouseout="this.style.background='var(--primary-dark)'" onclick="alert('System Ready: Connecting to Dispatch Pipeline.')">Confirm Appointment</button>
+                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;">Dining Preference:</p>
+                <select style="width: 100%; padding: 0.9rem; background: var(--bg-slate); border: 1px solid var(--border-faint); color: white; border-radius: 4px; outline: none; font-weight: 600;">
+                    <option>Standard Dining Room</option>
+                    <option>Quiet Corner / Romantic</option>
+                    <option>Private Function Room</option>
+                    <option>Express Takeaway Collection</option>
+                </select>
+                <button style="width:100%; padding: 1.1rem; background: var(--accent-gold); color: var(--primary-dark); border: none; border-radius: 4px; margin-top: 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--accent-gold)'" onclick="alert('System Ready: Connecting to Table Matrix.')">Check Availability</button>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="about">
         <div class="about-grid">
-            <div class="team-image-stack">
-                <img src="images/blue-man.png" alt="Lead Engineer" class="team-main-img">
-                <img src="images/installation-maintenance.png" alt="Maintenance Team" class="team-sub-img">
+            <div class="editorial-image-group">
+                <img src="about-interior.jpg" alt="The Timur Dining Room" class="editorial-main">
             </div>
             <div>
-                <span style="color:var(--accent-teal); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">Your Local Specialists</span>
-                <h2 style="font-size: 2.8rem; color: var(--primary-dark); margin: 0.5rem 0 1.2rem; line-height: 1.15; font-weight: 800;">Uncompromising Standards.</h2>
-                <p style="margin-bottom: 1.5rem; color: var(--text-dark); font-size: 1.05rem;">At Rai & Sons, we believe that world-class engineering should be matched with world-class customer service. Our fleet of highly trained, Gas Safe registered engineers has been keeping Andover warm and safe for over a decade.</p>
-                <p style="margin-bottom: 2rem; color: var(--text-dark); font-size: 1.05rem;">Whether it's a routine bespoke boiler service programme or an emergency midnight call-out, our transparent quoting system ensures you never face hidden fees.</p>
+                <span style="color:var(--accent-gold); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">A Culinary Journey</span>
+                <h2 class="serif-display" style="font-size: 2.8rem; color: var(--text-light); margin: 0.5rem 0 1.2rem; line-height: 1.15;">The Timur Experience.</h2>
+                <p style="margin-bottom: 1.5rem; color: var(--text-dim); font-size: 1.05rem;">Named after the zesty, citrus-infused pepper grown in the high altitudes of the Himalayas, The Timur brings a refined, modern approach to traditional Nepalese and Indian dining.</p>
+                <p style="margin-bottom: 2rem; color: var(--text-dim); font-size: 1.05rem;">Every dish is meticulously constructed using locally sourced Hampshire ingredients alongside authentic spices imported directly from the Kathmandu valley.</p>
                 <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-weight: 600;">
-                    <li><i class="fa-solid fa-check" style="color: var(--accent-teal); margin-right: 12px; font-size: 1.2rem;"></i> Fully Vetted & Accredited Staff</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--accent-teal); margin-right: 12px; font-size: 1.2rem;"></i> Advanced Diagnostics & Powerflushing</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--accent-teal); margin-right: 12px; font-size: 1.2rem;"></i> Respectful of Your Property & Time</li>
+                    <li><i class="fa-solid fa-seedling" style="color: var(--accent-gold); margin-right: 12px; font-size: 1.2rem;"></i> Extensive Vegan & Gluten-Free Menus</li>
+                    <li><i class="fa-solid fa-fire-burner" style="color: var(--accent-gold); margin-right: 12px; font-size: 1.2rem;"></i> Traditional Clay Tandoor Ovens</li>
+                    <li><i class="fa-solid fa-wine-glass" style="color: var(--accent-gold); margin-right: 12px; font-size: 1.2rem;"></i> Curated Wine & Spice Pairings</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section class="section-wrapper" id="services" style="background-color: var(--bg-white); border-top: 1px solid var(--border-gray); border-bottom: 1px solid var(--border-gray);">
+    <section class="section-wrapper" id="services" style="border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint);">
         <div class="section-header">
-            <h2>Our Core Services</h2>
-            <p>Certified, compliant, and rapidly deployed solutions for domestic and commercial properties.</p>
+            <h2 class="serif-display">A Taste of the Himalayas</h2>
+            <p>Explore our signature dishes, crafted with uncompromising quality and authentic spices.</p>
         </div>
         
         <div class="services-grid">
             <div class="service-card">
-                <img src="images/working-kichen.png" alt="Boiler Installation & Certification" class="service-img">
+                <img src="dish-curry.jpg" alt="Signature Curries" class="service-img">
                 <div class="service-body">
-                    <h3><i class="fa-solid fa-fire"></i> Boiler Installations</h3>
-                    <p>Energy-efficient upgrades and bespoke heating systems with up to 10-year manufacturer warranties. Full system balancing included.</p>
+                    <h3 class="serif-display">Heritage Curries</h3>
+                    <span class="service-badge">Slow-Cooked</span>
+                    <p>Deeply aromatic, rich curries crafted from generational recipes using hand-ground Himalayan spices and premium cuts of meat.</p>
                 </div>
             </div>
 
             <div class="service-card">
-                <img src="images/water-pipe-underbasin.png" alt="Emergency Plumbing Repair" class="service-img">
+                <img src="dish-momos.jpg" alt="Authentic Momos" class="service-img">
                 <div class="service-body">
-                    <h3><i class="fa-solid fa-droplet"></i> Emergency Repairs</h3>
-                    <p>Rapid response for burst pipes, aggressive leaks, and drainage blockages. We carry extensive spare parts to ensure first-time fixes.</p>
+                    <h3 class="serif-display">Authentic Momos</h3>
+                    <span class="service-badge">Hand-Pleated</span>
+                    <p>Delicate, hand-crafted Nepalese dumplings steamed to absolute perfection and served alongside our signature roasted tomato achar.</p>
                 </div>
             </div>
 
             <div class="service-card">
-                <img src="images/working-heating-panel.png" alt="Radiator and Heating" class="service-img">
+                <img src="dish-dessert.jpg" alt="Artisanal Desserts" class="service-img">
                 <div class="service-body">
-                    <h3><i class="fa-solid fa-temperature-arrow-up"></i> Central Heating</h3>
-                    <p>Complete radiator installations, valve replacements, and thermodynamic powerflushing to eradicate cold spots and restore efficiency.</p>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <img src="images/landlord-gas-safety-certificate.png" alt="Gas Safety Checks" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-file-shield"></i> Landlord CP12s</h3>
-                    <p>Legally compliant Gas Safety Certificates issued digitally on-site for estate agents and private landlords. Automated annual reminders.</p>
+                    <h3 class="serif-display">Artisanal Desserts</h3>
+                    <span class="service-badge">Sweet Finish</span>
+                    <p>A refined conclusion to your dining experience, elegantly blending classic subcontinental sweets with modern culinary artistry.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="testimonials" id="testimonials">
+    <section class="review-sector" id="reviews">
         <div class="section-header">
-            <h2 style="color: white;">Trusted by the Community</h2>
-            <p style="color: #94a3b8;">Don't just take our word for it. Read our verified Google tracking streams.</p>
+            <h2 class="serif-display" style="color: white;">Guest Feedback</h2>
+            <p>Don't just take our word for it. Read our verified Google tracking streams.</p>
         </div>
-        <div class="test-grid">
-            <div class="test-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Absolutely brilliant. Booked a slot online through their smart calendar, the engineer arrived exactly on time, and sorted our boiler pressure issue within the hour. No hidden fees."</p>
+        <div class="testimonial-matrix">
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The single best curry house I have ever visited. The depth of flavor in their signature Timur Chicken is incredible. Booking online took seconds on my phone."</p>
                 <div class="client">
-                    <img src="images/James-Mitchell.png" alt="James Mitchell">
+                    <img src="reviewer-1.jpg" alt="James Mitchell">
                     <div>
-                        <h4 style="font-size: 1.1rem; color: white;">James Mitchell</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 600;">Homeowner, Andover</span>
+                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">James Mitchell</h4>
+                        <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Verified Diner, Andover</span>
                     </div>
                 </div>
             </div>
 
-            <div class="test-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Managing multiple lettings means I need a firm I can rely on. Rai & Sons handle all our CP12 certificates automatically. The digital reporting and instant invoicing is a game-changer."</p>
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"We order their direct takeaway every Friday. No delivery apps means the food arrives piping hot and much faster. Absolutely faultless service every time."</p>
                 <div class="client">
-                    <div style="width: 55px; height: 55px; border-radius: 50%; background: #334155; border: 2px solid var(--accent-teal); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; color: white;">S</div>
+                    <img src="reviewer-2.jpg" alt="Sarah Jenkins">
                     <div>
-                        <h4 style="font-size: 1.1rem; color: white;">Sarah Jenkins</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 600;">Local Lettings Agent</span>
+                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">Sarah Jenkins</h4>
+                        <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Regular Takeaway Client</span>
                     </div>
                 </div>
             </div>
@@ -598,81 +507,65 @@
 
     <section class="section-wrapper" id="faqs">
         <div class="section-header">
-            <h2>Operational FAQ Systems</h2>
-            <p>Clear, honest answers to common queries regarding pricing and dispatch logistics.</p>
+            <h2 class="serif-display">Dining & Logistics FAQs</h2>
+            <p>Clear answers to ensure your dining experience is flawless.</p>
         </div>
         <div class="faq-grid">
             <div class="faq-box">
-                <h4>Do you charge a call-out fee?</h4>
-                <p>During standard working hours, we do not charge a call-out fee. We provide a clear, upfront quote before any work commences. Out-of-hours emergency rates apply.</p>
+                <h4>Do you cater to severe nut allergies?</h4>
+                <p>Yes. Please notify us during the booking process. We have strict cross-contamination protocols and can alter specific dishes to guarantee safety.</p>
             </div>
             <div class="faq-box">
-                <h4>Are your engineers fully certified?</h4>
-                <p>Yes. Every engineer deployed is strictly Gas Safe registered and carries comprehensive public liability insurance up to £5,000,000.</p>
+                <h4>What is your delivery radius?</h4>
+                <p>Our direct, commission-free delivery fleet operates within a 6-mile radius of central Andover to ensure the food remains at optimal temperature.</p>
             </div>
             <div class="faq-box">
-                <h4>Can I book an exact time slot?</h4>
-                <p>Absolutely. Unlike traditional firms that give a vague "AM or PM" window, our smart scheduling system allows you to select a dedicated 90-minute arrival window.</p>
+                <h4>Is there a strict dress code?</h4>
+                <p>We embrace a smart-casual atmosphere. We simply ask that guests avoid sportswear or flip-flops during evening dinner service.</p>
             </div>
             <div class="faq-box">
-                <h4>Do you provide landlord certificates?</h4>
-                <p>Yes, we process digital CP12 Gas Safety Certificates on-site, instantly emailing copies to both the landlord and the managing agent.</p>
+                <h4>Can I alter the spice level of a dish?</h4>
+                <p>Absolutely. Because every dish is cooked fresh to order, our chefs can customize the heat intensity to your exact preference.</p>
             </div>
         </div>
     </section>
 
-    <section class="section-wrapper" id="contact" style="background-color: var(--bg-light); border-top: 1px solid var(--border-gray);">
+    <section class="section-wrapper" id="location" style="border-top: 1px solid var(--border-faint);">
         <div class="section-header">
-            <h2>Engineering Dispatch Desk</h2>
-            <p>Ready to book or need an emergency call-out? Reach out to our team instantly.</p>
+            <h2 class="serif-display">Find The Restaurant</h2>
+            <p>Secure a table or contact the kitchen directly for takeaway orders.</p>
         </div>
         
         <div class="contact-layout">
-            <div class="contact-form-box">
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem; color: var(--primary-dark); font-weight: 800;">Send an Enquiry</h3>
-                <form onsubmit="event.preventDefault(); alert('Demo Notice: This form routes directly to the agency CRM!');">
-                    <div class="input-group">
-                        <label>Your Name</label>
-                        <input type="text" placeholder="e.g. Prakash Rai" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Phone Number</label>
-                        <input type="tel" placeholder="e.g. 07123 456789" required>
-                    </div>
-                    <div class="input-group">
-                        <label>How can we help?</label>
-                        <textarea rows="4" placeholder="Briefly describe your plumbing issue..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; letter-spacing: 0.5px;">Submit Request <i class="fa-solid fa-paper-plane" style="margin-left: 5px;"></i></button>
-                </form>
+            <div class="map-frame">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
             </div>
 
             <div>
-                <div class="map-frame">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
+                <h3 class="serif-display" style="font-size: 2.3rem; margin-bottom: 1rem; color: var(--text-light);">Visit Us.</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--text-dim);">Conveniently positioned in central Andover. Public parking is available immediately adjacent to the restaurant entrance.</p>
 
-                <a href="https://wa.me/447123456789" target="_blank" class="info-strip">
+                <a href="https://wa.me/441234567890" target="_blank" class="info-strip">
                     <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
                     <div class="info-strip-text">
-                        <h5>Direct Digital Communication</h5>
-                        <p>+44 7123 456 789</p>
+                        <h5>Direct Kitchen Line</h5>
+                        <p>+44 1234 567 890</p>
                     </div>
                 </a>
 
-                <a href="mailto:info@raiandsonsheating.co.uk" class="info-strip">
+                <a href="mailto:reservations@thetimur.co.uk" class="info-strip">
                     <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
                     <div class="info-strip-text">
-                        <h5>Service Desk Pipeline</h5>
-                        <p>info@raiandsonsheating.co.uk</p>
+                        <h5>Private Dining & Events</h5>
+                        <p>reservations@thetimur.co.uk</p>
                     </div>
                 </a>
             </div>
@@ -680,16 +573,16 @@
     </section>
 
     <a href="#booking" class="mini-ai-pill">
-        <img src="images/Emma-Richardson .png" alt="Emma AI">
+        <img src="ai-receptionist.png" alt="Arjun AI">
         <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Emma (AI Desk)</p>
-            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: var(--accent-teal); font-size: 0.45rem; margin-right: 4px;"></i> Tap to check availability</p>
+            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Arjun (Maître D')</p>
+            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #f59e0b; font-size: 0.45rem; margin-right: 4px;"></i> Tap to reserve table</p>
         </div>
     </a>
 
-    <footer style="background-color: var(--primary-dark); padding: 5rem 5% 8rem; color: #94a3b8; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
-        <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 800;"><i class="fa-solid fa-faucet-drip" style="color: var(--accent-teal);"></i> RAI & SONS</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Premium Gas & Plumbing Infrastructure serving the local Andover community.</p>
+    <footer style="background-color: #06090e; padding: 5rem 5% 8rem; color: #94a3b8; text-align: center; border-top: 1px solid var(--border-faint);">
+        <h3 class="serif-display" style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 800;"><i class="fa-solid fa-leaf" style="color: var(--accent-gold);"></i> THE TIMUR</h3>
+        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Premium Dining Experiences. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
         
         <div class="social-circle-container">
             <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
@@ -698,7 +591,7 @@
             <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
         </div>
 
-        <p style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">© 2026 GoChuchuro Agency System. Premium Trade Assets.</p>
+        <p style="font-size: 0.85rem; border-top: 1px solid var(--border-faint); padding-top: 2rem;">© 2026 GoChuchuro Systems. Premium Hospitality Assets.</p>
     </footer>
 
 </body>
