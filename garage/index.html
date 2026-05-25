@@ -322,7 +322,11 @@
             .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3.5rem; }
             .tech-roi-container { padding: 2.5rem; margin-top: 0; }
             .hero-banner h1 { font-size: 2.6rem; }
-            .chat-toggle-btn, .floating-google-badge { display: none; } /* Kept clean for mobile users */
+            /* FIXED: Removed display:none; for mobile elements */
+            .chat-toggle-btn { bottom: 5.5rem; right: 1rem; width: 50px; height: 50px; }
+            .floating-chat-widget { bottom: 5.5rem; right: 1rem; width: calc(100vw - 2rem); }
+            .floating-google-badge { bottom: 5.5rem; left: 1rem; padding: 0.4rem 1rem; }
+            .floating-google-badge .badge-text { font-size: 0.75rem; }
             .about-grid-mobile { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
         }
     </style>
