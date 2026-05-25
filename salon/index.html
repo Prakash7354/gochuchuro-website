@@ -115,7 +115,6 @@
 
         /* --- HERO BANNER W/ 35% SHADING --- */
         .hero-banner {
-            /* Exactly 35% dark overlay (0.35 opacity) applied over the hero image */
             background: linear-gradient(rgba(8, 8, 10, 0.35), rgba(8, 8, 10, 0.35)), url('hero-salon-bg.jpg') no-repeat center center/cover;
             min-height: 85vh;
             display: flex;
@@ -174,7 +173,7 @@
         .tech-pitch-content h3 span { color: var(--vip-gold); }
         
         .ai-concierge-badge { display: flex; align-items: center; background: rgba(8, 8, 10, 0.7); padding: 1.5rem; border-radius: 10px; gap: 1.5rem; border: 1px solid var(--border-faint); margin: 2.5rem 0 0; }
-        .ai-concierge-badge img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--vip-gold); object-fit: cover; }
+        .ai-concierge-badge img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--tech-white); object-fit: cover; }
 
         .interactive-table-deck { background: var(--obsidian); border-radius: 12px; padding: 2.5rem; border: 1px solid var(--border-faint); }
         .deck-header { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-faint); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;}
@@ -239,10 +238,10 @@
         .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
         .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--white-pure); }
 
-        /* --- MINI AI PILL (Replaces floating box) --- */
+        /* --- MINI AI PILL (Desktop) --- */
         .mini-ai-pill {
             position: fixed;
-            bottom: 5.5rem; /* Clears sticky mobile hotbar */
+            bottom: 5.5rem;
             right: 1.5rem;
             background: white;
             border-radius: 50px;
@@ -285,10 +284,24 @@
             /* Responsive gap for metrics ribbon on mobile */
             .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
             
-            /* Keep AI Pill out of the way on small mobile screens */
-            .mini-ai-pill { right: 1rem; bottom: 5rem; padding: 0.3rem 1rem 0.3rem 0.3rem; }
-            .mini-ai-pill img { width: 40px; height: 40px; }
-            .mini-ai-pill p { font-size: 0.8rem !important; }
+            /* Mobile Specific: Transform AI Pill into a Circle Avatar */
+            .mini-ai-pill {
+                padding: 0; 
+                width: 56px;
+                height: 56px;
+                right: 1rem; 
+                bottom: 5.5rem; 
+                justify-content: center;
+                border-radius: 50%;
+            }
+            .mini-ai-pill img { 
+                width: 100%; 
+                height: 100%; 
+                margin: 0;
+            }
+            .ai-pill-text {
+                display: none !important; /* Hides the text container completely */
+            }
         }
     </style>
 </head>
@@ -516,7 +529,7 @@
 
     <a href="#booking" class="mini-ai-pill">
         <img src="receptionist-ai.jpg" alt="Maya AI">
-        <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
             <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Maya (AI Desk)</p>
             <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #22c55e; font-size: 0.45rem; margin-right: 4px;"></i> Tap to check availability</p>
         </div>
