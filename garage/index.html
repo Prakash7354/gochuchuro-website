@@ -26,7 +26,6 @@
             --text-dim: #94a3b8;
             --border-tint: rgba(255, 255, 255, 0.06);
             --border-dark: #cbd5e1;
-            --tech-blue: #38bdf8;        
         }
 
         * {
@@ -122,7 +121,6 @@
 
         /* --- HERO BANNER W/ 35% SHADING --- */
         .hero-banner {
-            /* Exactly 35% dark overlay (0.35 opacity) applied over the hero image */
             background: linear-gradient(rgba(9, 12, 18, 0.35), rgba(9, 12, 18, 0.35)), url('hero-autotech-bg.jpg') no-repeat center center/cover;
             min-height: 85vh;
             display: flex;
@@ -155,18 +153,15 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .embedded-google-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-        }
+        .embedded-google-badge:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
 
         /* --- INTERACTIVE CALIBRATION & BOOKING ENGINE --- */
         .tech-roi-container { background-color: var(--charcoal-surface); border-radius: 20px; border: 1px solid var(--border-tint); padding: 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; margin: 5rem auto; max-width: 1250px; position: relative; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
         .tech-pitch-content h3 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-creme); }
-        .tech-pitch-content h3 span { color: var(--tech-blue); }
+        .tech-pitch-content h3 span { color: var(--performance-red); }
         
         .ai-concierge-badge { display: flex; align-items: center; background: rgba(9, 12, 18, 0.7); padding: 1.5rem; border-radius: 16px; gap: 1.5rem; border: 1px solid var(--border-tint); margin: 2.5rem 0 0 0; }
-        .ai-concierge-badge img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--tech-blue); object-fit: cover; }
+        .ai-concierge-badge img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--performance-red); object-fit: cover; }
 
         .interactive-table-deck { background: var(--obsidian); border-radius: 16px; padding: 2.5rem; border: 1px solid var(--border-tint); }
         .deck-header { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-tint); padding-bottom: 1rem; letter-spacing: 0.5px; }
@@ -189,7 +184,8 @@
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         .menu-card { background: var(--charcoal-surface); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-tint); transition: 0.3s; display: flex; flex-direction: column; }
         .menu-card:hover { transform: translateY(-8px); border-color: var(--performance-red); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
-        .menu-card img { width: 100%; height: 240px; object-fit: cover; border-bottom: 1px solid var(--border-tint); }
+        .menu-card img { width: 100%; height: 240px; object-fit: cover; border-bottom: 1px solid var(--border-tint); filter: grayscale(20%); transition: 0.3s; }
+        .menu-card:hover img { filter: grayscale(0%); }
         .card-inner { padding: 2.2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .card-title-row { margin-bottom: 1rem; }
         .card-title-row h4 { font-size: 1.4rem; color: var(--text-creme); font-weight: 700; }
@@ -217,44 +213,62 @@
         /* --- LOGISTICS MAP & DIRECT CHANNELS --- */
         .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
         .map-frame { width: 100%; height: 360px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-dark); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
-        .info-strip { background: var(--silver-light); border: 1px solid var(--border-dark); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
-        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
-        .info-strip-icon { width: 50px; height: 50px; background: #ffffff; color: var(--performance-red); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-dark); }
-        .info-strip.whatsapp { border-color: #25D366; background-color: #f0fdf4; }
-        .info-strip.whatsapp .info-strip-icon { color: #25D366; border-color: #bbf7d0; }
-        .info-strip.email-feature { border-color: var(--tech-blue); background-color: #f0f9ff; }
-        .info-strip.email-feature .info-strip-icon { color: var(--tech-blue); border-color: #bae6fd; }
-        .info-strip-text h5 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
-        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); }
+        
+        /* Cleaned up Contact Strips (No pastel blues/greens) */
+        .info-strip { background: var(--charcoal-surface); border: 1px solid var(--border-tint); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
+        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.2); border-color: var(--performance-red); }
+        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--white-pure); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-tint); }
+        
+        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--white-pure); }
 
-        /* --- MINI AI PILL (Replaces floating box) --- */
-        .mini-ai-pill {
+        /* --- ROUND FLOATING AI CHAT WIDGET --- */
+        .chat-toggle-btn {
             position: fixed;
-            bottom: 5.5rem; /* Clears sticky mobile hotbar */
-            right: 1.5rem;
-            background: white;
-            border-radius: 50px;
-            padding: 0.4rem 1.2rem 0.4rem 0.4rem;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-            z-index: 990;
+            bottom: 6rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--charcoal-surface);
+            border: 2px solid var(--performance-red);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            z-index: 1000;
+            cursor: pointer;
+            transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            border: 1px solid var(--border-dark);
-            transition: transform 0.3s, box-shadow 0.3s;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
         }
-        .mini-ai-pill:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(220,38,38,0.35);
+        .chat-toggle-btn img { width: 100%; height: 100%; object-fit: cover; }
+        .chat-toggle-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4); }
+
+        .floating-chat-widget { 
+            position: fixed; 
+            bottom: 6.5rem; 
+            right: 2rem; 
+            width: 330px; 
+            background: white; 
+            border-radius: 16px; 
+            box-shadow: 0 15px 45px rgba(0,0,0,0.4); 
+            z-index: 1001; 
+            overflow: hidden; 
+            color: var(--obsidian); 
+            border: 1px solid #e2e8f0; 
+            display: none;
         }
-        .mini-ai-pill img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--performance-red);
-            object-fit: cover;
-        }
+        .widget-head { background: var(--charcoal-surface); color: white; padding: 1.2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--performance-red); }
+        .widget-head .profile-info { display: flex; align-items: center; gap: 1rem; }
+        .widget-head img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--performance-red); }
+        .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
+        .widget-pane .msg { background: white; padding: 1.2rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 0.5rem; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+
+        /* Social Icons Link Style (Fixed Mobile Centering) */
+        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.04); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.08); }
+        .social-circle-link:hover { background: var(--performance-red); color: white; transform: translateY(-4px); border-color: var(--performance-red); }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 950px) {
@@ -267,10 +281,9 @@
             /* Responsive gap for metrics ribbon on mobile */
             .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
             
-            /* Keep AI Pill out of the way on small mobile screens */
-            .mini-ai-pill { right: 1rem; bottom: 5rem; padding: 0.3rem 1rem 0.3rem 0.3rem; }
-            .mini-ai-pill img { width: 40px; height: 40px; }
-            .mini-ai-pill p { font-size: 0.8rem !important; }
+            /* Mobile adjustments for AI Circle */
+            .chat-toggle-btn { bottom: 5.5rem; right: 1rem; width: 55px; height: 55px; }
+            .floating-chat-widget { bottom: 5.5rem; right: 1rem; width: calc(100vw - 2rem); }
         }
     </style>
 </head>
@@ -327,7 +340,7 @@
                 <div class="ai-concierge-badge">
                     <img src="ai-receptionist.png" alt="Autotech Virtual Assistant">
                     <div>
-                        <h4 style="color: var(--tech-blue); font-weight:700; font-size: 1.1rem;">Meet Sarah, Virtual Service Desk</h4>
+                        <h4 style="color: var(--performance-red); font-weight:700; font-size: 1.1rem;">Meet Sarah, Virtual Service Desk</h4>
                         <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 3px;">Online 24/7 to manage emergency booking allocations, verify mechanical component timelines, and cross-reference workshop bays instantly.</p>
                     </div>
                 </div>
@@ -498,19 +511,36 @@
         </div>
     </section>
 
-    <a href="#booking" class="mini-ai-pill">
+    <button id="chatToggleBtn" class="chat-toggle-btn" onclick="document.getElementById('aiChatWidget').style.display = 'block'; this.style.display = 'none';">
         <img src="ai-receptionist.png" alt="Sarah AI">
-        <div style="display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Sarah (AI Desk)</p>
-            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #22c55e; font-size: 0.45rem; margin-right: 4px;"></i> Tap to check MOT dates</p>
+    </button>
+
+    <div id="aiChatWidget" class="floating-chat-widget">
+        <div class="widget-head">
+            <div class="profile-info">
+                <img src="ai-receptionist.png" alt="Sarah AI">
+                <div>
+                    <h5 style="font-size:0.95rem; font-weight:700; margin: 0;">Sarah (Autotech Desk)</h5>
+                    <span style="font-size:0.75rem; opacity:0.9;"><i class="fa-solid fa-circle" style="color: #4ade80; font-size: 0.45rem; margin-right: 4px;"></i> Active Assistant</span>
+                </div>
+            </div>
+            <button onclick="document.getElementById('aiChatWidget').style.display = 'none'; document.getElementById('chatToggleBtn').style.display = 'flex';" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 1.2rem;">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
-    </a>
+        <div class="widget-pane">
+            <div class="msg">
+                <strong>Welcome to Autotech! 🔧</strong><br>
+                Would you like me to instantly check real-time MOT testing bay space for this week, or check service component pricing metrics?
+            </div>
+        </div>
+    </div>
 
     <footer style="background-color: #0b0f17; padding: 6rem 5% 8rem; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border-tint);">
         <h3 class="display-header" style="color: white; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">AUTOTECH</h3>
         <p style="max-width: 480px; margin: 0 auto 1.8rem; font-size: 0.95rem;">High-Performance Mechanical Infrastructure. Powered cleanly via the GoChuchuro Agency Network ecosystem.</p>
         
-        <div style="margin-bottom: 3rem;">
+        <div class="social-circle-container">
             <a href="https://facebook.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="https://instagram.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
             <a href="https://tiktok.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tiktok"></i></a>
