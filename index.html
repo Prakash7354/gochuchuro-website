@@ -12,10 +12,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600;700;800;900&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
       tailwind.config = {
@@ -24,18 +25,9 @@
             colors: {
               midnightEmerald: '#0D1515',
               deepCharcoal:    '#111111',
-              deepForest:      '#2A3D2B',
-              forestOlive:     '#3D5A3E',
-              mountainSage:    '#6B8C52',
               antiqueGold:     '#D4AF37',
               brightGold:      '#E5C158',
               auroraTeal:      '#00B5C8',
-              coolSilver:      '#C8CDD6',
-              steelSilver:     '#9AA3B0',
-              platinum:        '#F5F6F8',
-              deepGarnet:      '#7D2E3A',
-              warmMaroon:      '#9E3D4A',
-              alertRed:        '#ef4444',
               alertAmber:      '#f59e0b',
             },
             fontFamily: {
@@ -49,444 +41,578 @@
     </script>
 
     <style>
-      *, *::before, *::after { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Nunito Sans', sans-serif; -webkit-font-smoothing: antialiased; color: #111111; }
-      .font-display { font-family: 'Cormorant Garamond', serif; }
-      .font-script  { font-family: 'Dancing Script', cursive; }
+        /* --- 3D AGENCY DESIGN SYSTEM --- */
+        :root {
+            /* Brand Theme Backgrounds */
+            --bg-emerald: #0D1515;    
+            --bg-charcoal: #111111;
+            
+            /* Glowing Accents */
+            --holo-teal: #00B5C8;
+            --holo-gold: #D4AF37;
+            --holo-bright-gold: #E5C158;
+            --alert-amber: #f59e0b;
+            
+            --gradient-primary: linear-gradient(135deg, var(--holo-teal), var(--holo-bright-gold));
+            --gradient-gold: linear-gradient(135deg, #fcd34d, #f59e0b);
+            
+            /* 3D UI Shadows */
+            --shadow-drop: 12px 12px 25px rgba(0, 0, 0, 0.9), -6px -6px 16px rgba(255, 255, 255, 0.03);
+            --shadow-inner: inset 6px 6px 15px rgba(0, 0, 0, 0.8), inset -4px -4px 12px rgba(255, 255, 255, 0.02);
+            
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
 
-      /* ── SCROLL FADE ── */
-      .fade-up { opacity:0; transform:translateY(26px); transition:opacity 0.65s ease,transform 0.65s ease; }
-      .fade-up.visible { opacity:1; transform:translateY(0); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
 
-      /* ── ANIMATIONS ── */
-      @keyframes crisisPulse {
-        0%,100%{box-shadow:0 0 0 0 rgba(245, 158, 11, 0.7);}
-        60%{box-shadow:0 0 0 14px rgba(245, 158, 11, 0);}
-      }
-      .crisis-pulse { animation: crisisPulse 1.8s ease infinite; }
+        body {
+            background-color: var(--bg-emerald);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
 
-      .gold-shimmer {
-        background:linear-gradient(90deg,#D4AF37 20%,#E5C158 38%,#fffbe0 50%,#E5C158 62%,#D4AF37 80%);
-        background-size:300% auto;
-        -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-        animation:shimmer 5s linear infinite;
-      }
-      @keyframes shimmer { 0%{background-position:-400% center;} 100%{background-position:400% center;} }
+        .font-header { font-family: 'Outfit', sans-serif; }
+        .font-letter { font-family: 'Playfair Display', serif; }
+        .font-signature { font-family: 'Dancing Script', cursive; }
 
-      /* ── GOLDEN LETTER CARD ── */
-      .letter-card {
-        background: linear-gradient(145deg, #FFFDF5 0%, #FFF8E7 40%, #FFFDF5 100%);
-        border: 2px solid #D4AF37; border-radius: 8px; position: relative;
-        box-shadow: 0 0 0 1px #E5C15840, 0 4px 6px rgba(212,175,55,0.08), 0 20px 60px rgba(212,175,55,0.12);
-      }
-      .letter-text { font-family: 'Cormorant Garamond', serif; color: #2C1810; line-height: 1.8; font-size: 1.2rem; }
-      .letter-greeting { font-family: 'Dancing Script', cursive; color: #92730A; font-size: 2rem; line-height: 1.4; }
-      .letter-signature { font-family: 'Dancing Script', cursive; color: #92730A; font-size: 1.8rem; }
+        /* --- 3D NEUMORPHIC PANELS --- */
+        .panel-3d {
+            background: var(--bg-charcoal); border-radius: 20px;
+            box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.04);
+            position: relative; z-index: 2;
+        }
+        
+        .panel-inset {
+            background: #0a0d0d; border-radius: 16px;
+            box-shadow: var(--shadow-inner); border: 1px solid rgba(255,255,255,0.02);
+        }
 
-      /* ── MODAL CALENDAR STYLES ── */
-      .modal-overlay {
-          position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-          background: rgba(13, 21, 21, 0.85); backdrop-filter: blur(8px);
-          z-index: 9999; display: flex; align-items: center; justify-content: center;
-          opacity: 0; visibility: hidden; transition: 0.3s ease;
-      }
-      .modal-overlay.active { opacity: 1; visibility: visible; }
-      
-      .modal-content {
-          background: white; width: 90%; max-width: 900px; height: 85vh; border-radius: 16px;
-          position: relative; transform: translateY(30px); transition: 0.3s ease;
-          overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-      }
-      .modal-overlay.active .modal-content { transform: translateY(0); }
-      
-      .close-btn {
-          position: absolute; top: 15px; right: 20px; font-size: 2rem; color: #111;
-          cursor: pointer; z-index: 10; line-height: 1; background: white; border-radius: 50%; width: 40px; height: 40px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      }
+        .text-gradient {
+            background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 181, 200, 0.3);
+        }
 
+        /* --- BUTTONS --- */
+        .btn-3d {
+            background: var(--bg-charcoal); color: var(--text-main);
+            padding: 1rem 2rem; border-radius: 12px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative; overflow: hidden;
+        }
+        .btn-3d::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-primary); }
+        .btn-3d:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.9), 0 0 20px rgba(0, 181, 200, 0.2); border-color: var(--holo-teal); }
+
+        .btn-glow {
+            background: var(--gradient-primary); color: #000;
+            padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            border: none; box-shadow: 0 0 20px rgba(0, 181, 200, 0.4); transition: 0.3s; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-glow:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 40px rgba(0, 181, 200, 0.6); color: white;}
+
+        /* SCARCITY PULSE BUTTON */
+        .btn-scarcity {
+            background: #1a0f00; border: 1px solid var(--alert-amber); color: var(--alert-amber);
+            padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 800; font-size: 0.85rem;
+            display: flex; align-items: center; gap: 0.5rem; cursor: pointer; transition: 0.3s;
+            animation: borderPulse 2s infinite; box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+        .btn-scarcity:hover { background: var(--alert-amber); color: black; box-shadow: 0 0 30px rgba(245, 158, 11, 0.6); }
+        @keyframes borderPulse { 0%, 100% { border-color: var(--alert-amber); } 50% { border-color: #452a00; } }
+        .dot-pulse { width: 8px; height: 8px; background: var(--alert-amber); border-radius: 50%; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(13, 21, 21, 0.85); backdrop-filter: blur(15px);
+            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0, 181, 200, 0.1);
+        }
+
+        .nav-menu { display: flex; gap: 2rem; }
+        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-link:hover { color: var(--holo-teal); text-shadow: 0 0 10px var(--holo-teal); }
+
+        /* --- HERO SPACE --- */
+        .hero { position: relative; min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; }
+        #hero-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .hero-content { position: relative; z-index: 2; transform: translateZ(50px); max-width: 1000px; }
+
+        /* --- 3D SECTION SEPARATORS --- */
+        .section-separator {
+            border-top: 1px solid rgba(0, 181, 200, 0.1);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- COMPARISON MATRIX --- */
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+        .compare-box { padding: 2.5rem; text-align: left; }
+        .compare-list li { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; color: var(--text-dim); }
+        .compare-list i { margin-top: 0.3rem; font-size: 1.2rem; }
+        .icon-red { color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+        .icon-green { color: #10b981; text-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+
+        /* --- 4 SIMPLE STEPS --- */
+        .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.5rem; margin-top: 3rem; }
+        .step-card { padding: 2.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; }
+        
+        /* Animated Gradient Icons */
+        @keyframes iconGlow {
+            0% { box-shadow: 0 0 15px rgba(0, 181, 200, 0.2); border-color: rgba(0, 181, 200, 0.5); color: var(--holo-teal); }
+            100% { box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); border-color: rgba(212, 175, 55, 0.8); color: var(--holo-bright-gold); }
+        }
+        .step-icon-wrap { 
+            width: 80px; height: 80px; border-radius: 50%; display: flex; justify-content: center; align-items: center; 
+            font-size: 2rem; margin-bottom: 1.5rem; border: 2px solid var(--holo-teal); 
+            animation: iconGlow 3s infinite alternate; background: var(--bg-charcoal);
+        }
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1.0s; }
+        .delay-3 { animation-delay: 1.5s; }
+
+        /* --- PRICING MATRIX --- */
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 4rem; }
+        .price-card { padding: 3rem 2.5rem; display: flex; flex-direction: column; transition: 0.4s; }
+        .price-card:hover { border-color: var(--holo-teal); }
+        .price-card.popular { border-color: var(--holo-gold); }
+        .price-card.popular:hover { box-shadow: 0 0 40px rgba(212, 175, 55, 0.2); }
+        .feature-list { list-style: none; margin: 2rem 0; flex-grow: 1; text-align: left;}
+        .feature-list li { margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.8rem; font-size: 0.95rem; color: var(--text-main); }
+        .feature-list i { color: var(--holo-teal); margin-top: 0.3rem; }
+        .feature-header { font-size: 0.8rem; letter-spacing: 1px; color: var(--text-dim); text-transform: uppercase; margin: 1.5rem 0 1rem; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem;}
+
+        /* --- MODAL CALENDAR --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(13, 21, 21, 0.9); backdrop-filter: blur(8px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s ease; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content { background: var(--bg-charcoal); width: 90%; max-width: 900px; height: 85vh; border-radius: 16px; position: relative; transform: translateY(30px); transition: 0.3s ease; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 25px 50px rgba(0,0,0,0.8); }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 2rem; color: white; cursor: pointer; z-index: 10; line-height: 1; background: rgba(255,255,255,0.1); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .close-btn:hover { background: var(--alert-amber); color: black; }
+
+        @media (max-width: 950px) {
+            .nav-menu { display: none; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3.2rem; }
+            .hero p { font-size: 1.1rem; }
+        }
     </style>
 </head>
+<body>
 
-<body class="antialiased overflow-x-hidden bg-platinum text-deepCharcoal">
+    <header>
+        <a href="#" class="flex items-center gap-3 group flex-shrink-0 text-decoration-none">
+            <img src="logo-transparent.png" alt="GoChuchuro logo" class="h-9 w-auto" onerror="this.style.display='none';document.getElementById('svg-logo').style.display='block'"/>
+            <svg id="svg-logo" style="display:none;" width="36" height="30" viewBox="0 0 42 36" fill="none">
+                <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="font-header text-2xl font-black tracking-widest text-white decoration-0 hidden sm:block">GOCHUCHURO<span class="text-holo-teal">.</span></span>
+        </a>
 
-<header class="w-full sticky top-0 z-[1000] bg-[#0D1515]/95 backdrop-blur-md border-b border-white/10 transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-5 py-3 flex flex-col md:flex-row md:items-center justify-between gap-4">
-    
-    <div class="flex items-center gap-6 w-full overflow-hidden">
-      <a href="#" class="flex items-center gap-3 group flex-shrink-0">
-        <span class="font-display text-2xl font-bold tracking-widest text-coolSilver group-hover:text-antiqueGold transition duration-300">GOCHUCHURO</span>
-      </a>
-
-      <nav class="flex overflow-x-auto md:overflow-visible items-center md:justify-center gap-5 text-sm font-bold tracking-wide w-full pb-1 md:pb-0">
-          <a href="#founder" class="text-coolSilver hover:text-brightGold transition duration-200">Our Approach</a>
-          
-          <div class="group relative flex-shrink-0 z-[100]">
-              <a href="showroom.html" class="flex items-center gap-1.5 text-auroraTeal hover:text-brightGold transition duration-200 cursor-pointer">
-                  ✨ Templates <i class="fa-solid fa-chevron-down text-[10px]"></i>
+        <nav class="nav-menu">
+            <a href="#solutions" class="nav-link">Solutions</a>
+            
+            <div class="group relative flex-shrink-0 z-[100]">
+              <a href="showroom.html" class="flex items-center gap-1.5 nav-link cursor-pointer">
+                  Templates <i class="fa-solid fa-chevron-down text-[10px]"></i>
               </a>
-              <div class="absolute top-full left-0 mt-3 w-64 rounded-xl shadow-2xl opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300" style="background-color: #0D1515; border: 1px solid rgba(255,255,255,0.1);">
-                  <a href="plumbing/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5">Plumbing & Heating</a>
-                  <a href="restaurant/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5">Restaurants</a>
-                  <a href="salon/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5">Hair Salons</a>
-                  <a href="garage/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5">Car Garages</a>
-                  <a href="driving/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5">Driving Instructors</a>
+              <div class="absolute top-full left-0 mt-3 w-64 rounded-xl shadow-2xl opacity-0 invisible translate-y-3 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 panel-3d border-holo-teal">
+                  <a href="plumbing/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5 font-semibold text-sm">Plumbing & Heating</a>
+                  <a href="restaurant/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5 font-semibold text-sm">Restaurants</a>
+                  <a href="salon/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5 font-semibold text-sm">Hair Salons</a>
+                  <a href="garage/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 border-b border-white/5 font-semibold text-sm">Car Garages</a>
+                  <a href="driving/3d/index.html" target="_blank" class="block px-5 py-4 text-coolSilver hover:text-white hover:bg-white/5 font-semibold text-sm">Driving Instructors</a>
               </div>
           </div>
-          <a href="#solutions" class="text-coolSilver hover:text-brightGold transition duration-200">How It Works</a>
-          <a href="#crisis" class="text-coolSilver hover:text-brightGold transition duration-200">Help</a>
-      </nav>
-    </div>
 
-    <button onclick="openCalendar()" class="crisis-pulse flex justify-center items-center gap-2 px-5 py-2.5 rounded-lg text-white text-xs font-black tracking-wide uppercase transition duration-200 w-full md:w-auto flex-shrink-0" style="background:var(--alert-amber); color: #111;">
-      <span class="animate-pulse text-red-600 text-lg leading-none">●</span> (3 Spots Left) Book Free Chat
-    </button>
-  </div>
-</header>
-
-<section class="relative section-dark text-white py-28 md:py-40 px-6 overflow-hidden border-b border-white/10 flex flex-col justify-center items-center min-h-[85vh]">
-  
-  <div id="hero-canvas-container" class="absolute inset-0 z-0 opacity-50"></div>
-  <div class="absolute inset-0 bg-gradient-to-b from-[#0D1515]/50 via-transparent to-[#0D1515] pointer-events-none z-0"></div>
-
-  <div class="max-w-4xl mx-auto text-center space-y-7 relative z-10 fade-up visible">
-    <div class="inline-flex items-center gap-2 text-sm font-bold tracking-widest text-brightGold uppercase bg-white/5 px-4 py-2 rounded-full border border-white/15 backdrop-blur-sm">
-      Grow Your Business Without The Stress
-    </div>
-    
-    <h1 class="text-5xl md:text-6xl font-black tracking-tight leading-tight drop-shadow-2xl">
-      Stop losing customers<br class="hidden md:block"/>
-      <span class="gold-shimmer">to missed calls.</span>
-    </h1>
-    
-    <p class="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto leading-relaxed font-normal drop-shadow-lg">
-      You started your business to be free, but now you work late doing admin. We fix this. We use simple software to run your business while you sleep.
-    </p>
-    
-    <div class="flex flex-wrap items-center justify-center gap-5 pt-1 drop-shadow-md">
-      <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>Help from real people</div>
-      <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-brightGold"></span>No tech skills needed</div>
-      <div class="flex items-center gap-2 text-base text-white/80 font-semibold"><span class="w-2.5 h-2.5 rounded-full bg-auroraTeal"></span>Live in 5 days</div>
-    </div>
-    
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-      <button onclick="openCalendar()" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl text-base font-black text-midnightEmerald bg-brightGold hover:bg-white transition duration-200 shadow-xl">
-        See What's Possible →
-      </button>
-    </div>
-  </div>
-</section>
-
-<div class="section-dark border-b border-white/10 py-6 overflow-hidden">
-  <p class="text-center text-xs font-black tracking-widest uppercase text-steelSilver mb-4">Helping local UK businesses grow everyday</p>
-  <div class="flex items-center justify-center gap-8 flex-wrap px-6">
-    <span class="text-sm font-bold text-coolSilver/70">🔧 Plumbers</span>
-    <span class="text-sm font-bold text-coolSilver/70">✂️ Hair Salons</span>
-    <span class="text-sm font-bold text-coolSilver/70">🍽️ Restaurants</span>
-    <span class="text-sm font-bold text-coolSilver/70">🚗 Driving Instructors</span>
-    <span class="text-sm font-bold text-coolSilver/70">🛠️ Car Garages</span>
-  </div>
-</div>
-
-<section id="founder" class="section-cream py-20 px-6 border-b border-antiqueGold/20">
-  <div class="max-w-3xl mx-auto">
-    <div class="text-center mb-10 fade-up">
-      <span class="inline-block text-xs font-black tracking-widest uppercase text-antiqueGold border-2 border-antiqueGold/40 bg-antiqueGold/8 px-4 py-1.5 rounded-full mb-3">A Personal Note</span>
-      <h2 class="font-display text-4xl md:text-5xl font-bold text-deepCharcoal">From the Founder</h2>
-    </div>
-
-    <div class="letter-card p-10 md:p-14 fade-up">
-      <p class="letter-greeting mb-6">Hello,</p>
-      <div class="letter-text space-y-5">
-        <p>Thank you for visiting. If you are reading this, you are probably looking for a real solution, not just another complicated piece of software.</p>
-        <p>Running a business is hard. I have sat with many business owners who are tired because they have to answer every call and reply to every email at night. As a business coach, I know you can achieve great things when you have the right help.</p>
-        <p>I created our <strong style="color:#92730A;">4 Simple Steps</strong> (Understand, Show, Build, Grow) to fix this problem. We listen to you first. Then we build everything for you, and we stay with you to help you grow.</p>
-        <p>Let's talk about how to make your business easier to run. Book a free 30-minute chat with me today. No pressure to buy anything.</p>
-      </div>
-
-      <hr class="border-t border-antiqueGold/30 my-8"/>
-
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
-        <div>
-          <p class="letter-text mb-1" style="font-size:0.95rem;">Best wishes,</p>
-          <p class="letter-signature text-3xl mb-1">Prakash Gurung</p>
-          <p class="letter-text font-bold" style="font-size:0.9rem; color:#5C4400;">Founder, GoChuchuro</p>
-        </div>
-        <div class="flex flex-col gap-2 items-start md:items-end text-xs font-bold text-gray-600">
-          <p>✔️ Certified Life Coach</p>
-          <p>✔️ Accredited Business Advisor</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="products" class="section-pale py-24 px-6 border-b border-gray-100" style="border-top:3px solid #00B5C8;">
-  <div class="max-w-6xl mx-auto">
-    <div class="max-w-2xl mb-16 fade-up">
-      <h2 class="font-display text-4xl md:text-5xl font-bold text-deepCharcoal leading-tight mb-5">
-        Simple plans. No hidden tricks.
-      </h2>
-      <p class="text-lg text-gray-700 leading-relaxed">
-        Software is the engine, but coaching is the driver. We provide both.
-      </p>
-    </div>
-
-    <div class="bg-gray-900 rounded-2xl border border-antiqueGold/40 p-8 md:p-10 fade-up mb-12 shadow-2xl">
-      <div class="text-center mb-10">
-        <span class="inline-block text-sm font-black uppercase text-antiqueGold border-2 border-antiqueGold/40 px-4 py-1.5 rounded-full mb-4">Special Launch Offers</span>
-        <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">Better tools. Better prices.</h3>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <a href="#faqs" class="nav-link">FAQ</a>
+        </nav>
         
-        <div class="bg-black border border-gray-700 rounded-xl p-6 hover:-translate-y-2 transition shadow-lg">
-          <p class="text-xs font-black uppercase text-mountainSage mb-1">Plan A — Essential</p>
-          <h4 class="font-display text-xl font-bold text-white mb-4">Digital Foundation</h4>
-          
-          <div class="flex items-end gap-2 mb-5">
-            <span class="line-through text-gray-500 text-2xl font-bold">£49</span>
-            <span class="font-display text-5xl font-bold text-antiqueGold">£29</span>
-            <span class="text-gray-400 text-sm mb-1">/mo</span>
-          </div>
-          
-          <ul class="space-y-3 mb-6 text-sm text-gray-300">
-            <li>✔️ Custom 5-page website</li>
-            <li>✔️ Secure web hosting</li>
-            <li>✔️ Get found on Google Maps</li>
-            <li>✔️ WhatsApp chat link</li>
-            <li>✔️ Monthly progress report</li>
-          </ul>
-          <button onclick="openCalendar()" class="w-full text-center text-mountainSage border border-mountainSage rounded-lg py-3 hover:bg-mountainSage hover:text-white transition">Get Started</button>
+        <button onclick="openCalendar()" class="btn-scarcity">
+            <div class="dot-pulse"></div> ! Still Manual?
+        </button>
+    </header>
+
+    <section class="hero">
+        <div id="hero-canvas-container"></div>
+        <div class="hero-content">
+            <h1 class="font-header text-5xl md:text-[5.5rem] font-black tracking-tight leading-tight drop-shadow-2xl mb-6">
+                Stop losing customers to <br><span class="text-gradient">missed calls and chaos.</span>
+            </h1>
+            <p class="text-xl md:text-3xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium mb-10">
+                You started your business for freedom, not to do admin late at night. We build immersive websites and smart systems that run your business while you sleep.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4 mt-6">
+                <button onclick="openCalendar()" class="btn-glow">See What's Possible <i class="fa-solid fa-arrow-right"></i></button>
+                <a href="showroom.html" class="btn-3d">View 3D Templates</a>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 mt-10 text-sm font-bold text-text-dim">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-check text-holo-teal"></i> Real human coaching</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-check text-holo-teal"></i> No tech skills needed</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-check text-holo-teal"></i> Live in 5 days</span>
+            </div>
         </div>
+    </section>
 
-        <div class="bg-gray-800 border-2 border-antiqueGold rounded-xl p-6 hover:-translate-y-2 transition shadow-lg relative">
-          <div class="absolute top-0 right-0 bg-antiqueGold text-black text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
-          <p class="text-xs font-black uppercase text-brightGold mb-1">Plan B — Growth</p>
-          <h4 class="font-display text-xl font-bold text-white mb-4">Growth Autopilot</h4>
-          
-          <div class="flex items-end gap-2 mb-5">
-            <span class="line-through text-gray-500 text-2xl font-bold">£199</span>
-            <span class="font-display text-5xl font-bold text-brightGold">£149</span>
-            <span class="text-gray-400 text-sm mb-1">/mo</span>
-          </div>
-          
-          <ul class="space-y-3 mb-6 text-sm text-gray-300">
-            <li>✔️ Everything in Essential</li>
-            <li>✔️ Missed-call auto text back</li>
-            <li>✔️ 24/7 Booking calendar</li>
-            <li>✔️ Google Review booster</li>
-            <li><strong class="text-white">✔️ 30-min 1-on-1 coaching</strong></li>
-          </ul>
-          <button onclick="openCalendar()" class="w-full text-center bg-antiqueGold text-black font-bold border border-antiqueGold rounded-lg py-3 hover:bg-white transition">Get Started</button>
+    <section class="section-separator" style="background-color: var(--bg-charcoal);">
+        <div class="max-w-[1200px] mx-auto px-5 py-24">
+            <div class="text-center mb-12">
+                <h2 class="font-header text-4xl font-bold mb-4">Why the old way is costing you money.</h2>
+                <p class="text-text-dim text-lg">Compare doing everything manually vs. letting our system handle it.</p>
+            </div>
+
+            <div class="compare-grid">
+                <div class="panel-inset compare-box" data-tilt data-tilt-max="3">
+                    <h3 class="font-header text-2xl font-bold mb-6 text-gray-400 border-b border-gray-800 pb-4">The Old Way (Manual)</h3>
+                    <ul class="compare-list">
+                        <li><i class="fa-solid fa-xmark icon-red"></i> <div><strong>Boring Static Website</strong><br>Looks like everyone else. Customers leave in seconds.</div></li>
+                        <li><i class="fa-solid fa-xmark icon-red"></i> <div><strong>Missed a Call? Lost a Job.</strong><br>If you are driving or on a job, that customer calls your competitor.</div></li>
+                        <li><i class="fa-solid fa-xmark icon-red"></i> <div><strong>Begging for Reviews</strong><br>Awkwardly asking customers to leave a review, and they usually forget.</div></li>
+                        <li><i class="fa-solid fa-xmark icon-red"></i> <div><strong>Juggling Apps</strong><br>Checking WhatsApp, Facebook, Instagram, and SMS separately all day.</div></li>
+                        <li><i class="fa-solid fa-xmark icon-red"></i> <div><strong>Losing Old Customers</strong><br>Forgetting to follow up or offer discounts to people who already bought from you.</div></li>
+                    </ul>
+                </div>
+
+                <div class="panel-3d compare-box" style="border-color: rgba(0, 181, 200, 0.3);" data-tilt data-tilt-max="3">
+                    <h3 class="font-header text-2xl font-bold mb-6 text-white border-b border-gray-700 pb-4">The <span class="text-gradient">GoChuchuro</span> Way</h3>
+                    <ul class="compare-list">
+                        <li><i class="fa-solid fa-check icon-green"></i> <div><strong class="text-white">Immersive 2D/3D Websites</strong><br>Stand out instantly with premium, interactive designs that build immediate trust.</div></li>
+                        <li><i class="fa-solid fa-check icon-green"></i> <div><strong class="text-white">Instant Text-Back</strong><br>Miss a call? The system instantly texts them: <em>"Hi, on a job! How can I help?"</em> Lead saved.</div></li>
+                        <li><i class="fa-solid fa-check icon-green"></i> <div><strong class="text-white">Automated 5-Star Reviews</strong><br>The system texts a review link the moment you finish a job. Watch your Google rank soar.</div></li>
+                        <li><i class="fa-solid fa-check icon-green"></i> <div><strong class="text-white">One Unified Inbox</strong><br>Every message from every app comes into one single, easy-to-use dashboard.</div></li>
+                        <li><i class="fa-solid fa-check icon-green"></i> <div><strong class="text-white">Automated Retention</strong><br>The system remembers birthdays and sends automated follow-up offers to keep them coming back.</div></li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="bg-black border border-auroraTeal/50 rounded-xl p-6 hover:-translate-y-2 transition shadow-lg">
-          <p class="text-xs font-black uppercase text-auroraTeal mb-1">Plan C — Elite</p>
-          <h4 class="font-display text-xl font-bold text-white mb-4">Elite AI System</h4>
-          
-          <div class="flex items-end gap-2 mb-5">
-            <span class="line-through text-gray-500 text-2xl font-bold">£349</span>
-            <span class="font-display text-5xl font-bold text-white">£297</span>
-            <span class="text-gray-400 text-sm mb-1">/mo</span>
-          </div>
-          
-          <ul class="space-y-3 mb-6 text-sm text-gray-300">
-            <li>✔️ Everything in Growth</li>
-            <li>✔️ AI Chatbot Receptionist</li>
-            <li>✔️ Smart automated billing</li>
-            <li><strong class="text-white">✔️ 2-hours 1-on-1 coaching</strong></li>
-            <li><strong class="text-white">✔️ Priority WhatsApp Support</strong></li>
-          </ul>
-          <button onclick="openCalendar()" class="w-full text-center text-auroraTeal border border-auroraTeal rounded-lg py-3 hover:bg-auroraTeal hover:text-black transition">Get Started</button>
+    <section class="max-w-[900px] mx-auto px-5 py-24">
+        <div class="panel-3d p-10 md:p-14" data-tilt data-tilt-max="2" data-tilt-glare data-tilt-max-glare="0.05">
+            <p class="font-signature text-holo-gold text-4xl mb-6">Hello,</p>
+            <div class="font-letter text-xl text-gray-300 space-y-5 leading-relaxed">
+                <p>Finding new customers is hard. But let’s be honest—<strong>managing them when you are busy, and keeping them coming back, is the real struggle.</strong></p>
+                <p>I have sat across from many local business owners who are excellent at their trade, but are exhausted. You spend your day working, and your evenings doing quotes, answering Facebook messages, and trying to remember who to follow up with.</p>
+                <p>We built GoChuchuro to solve the whole journey. We don't just build a beautiful website to <strong class="text-white">FIND</strong> you customers. We install the automation to <strong class="text-white">MANAGE</strong> their bookings while you sleep, and the smart follow-ups to <strong class="text-white">RETAIN</strong> them for life.</p>
+                <p>Technology should give you your time back, not give you another headache. Let’s talk about how to make your business easier to run.</p>
+            </div>
+            <div class="mt-10 pt-8 border-t border-gray-800 flex justify-between items-end flex-wrap gap-4">
+                <div>
+                    <p class="font-signature text-3xl text-white mb-1">Prakash Gurung</p>
+                    <p class="text-sm font-bold text-holo-gold uppercase tracking-widest">Founder & Certified Coach</p>
+                </div>
+                <button onclick="openCalendar()" class="btn-3d text-sm">Book Free Chat</button>
+            </div>
         </div>
+    </section>
 
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-8 mb-16 fade-up">
-      <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm">
-        <h4 class="font-display text-2xl font-bold text-deepCharcoal mb-4">Optional Extras</h4>
-        <div class="space-y-4">
-          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <div class="flex justify-between font-bold mb-1"><span>Get Found on Google</span><span class="text-antiqueGold">£49 / mo</span></div>
-            <p class="text-sm text-gray-600">We put your business on 70+ local directories to help you rank higher on Google Maps.</p>
-          </div>
-          <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <div class="flex justify-between font-bold mb-1"><span>Social Media Done For You</span><span class="text-antiqueGold">£199 / mo</span></div>
-            <p class="text-sm text-gray-600">No time to post? We write, design, and post content for your business every week.</p>
-          </div>
+    <section id="solutions" class="section-separator" style="background-color: var(--bg-charcoal);">
+        <div class="max-w-[1200px] mx-auto px-5 py-24 text-center">
+            <h2 class="font-header text-4xl font-bold mb-4">Our 4 Simple Steps</h2>
+            <p class="text-text-dim text-lg mb-12">We do all the heavy lifting so you don't have to.</p>
+            
+            <div class="steps-grid">
+                <div class="step-card panel-inset" data-tilt data-tilt-max="5">
+                    <div class="step-icon-wrap"><i class="fa-solid fa-ear-listen"></i></div>
+                    <h3 class="font-header text-xl font-bold text-white mb-3">1. Understand</h3>
+                    <p class="text-text-dim text-sm leading-relaxed">We jump on a quick call to listen to what is causing you stress in your business.</p>
+                </div>
+                <div class="step-card panel-inset" data-tilt data-tilt-max="5">
+                    <div class="step-icon-wrap delay-1"><i class="fa-solid fa-eye"></i></div>
+                    <h3 class="font-header text-xl font-bold text-white mb-3">2. Show</h3>
+                    <p class="text-text-dim text-sm leading-relaxed">We show you exactly how our system will fix your problems, with absolutely no tech jargon.</p>
+                </div>
+                <div class="step-card panel-inset" data-tilt data-tilt-max="5">
+                    <div class="step-icon-wrap delay-2"><i class="fa-solid fa-rocket"></i></div>
+                    <h3 class="font-header text-xl font-bold text-white mb-3">3. Build</h3>
+                    <p class="text-text-dim text-sm leading-relaxed">We build your entire website and booking system for you, handed over in just 5 working days.</p>
+                </div>
+                <div class="step-card panel-inset" data-tilt data-tilt-max="5">
+                    <div class="step-icon-wrap delay-3"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3 class="font-header text-xl font-bold text-white mb-3">4. Grow</h3>
+                    <p class="text-text-dim text-sm leading-relaxed">We don't leave you alone. We provide monthly coaching and support to ensure you succeed.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm flex flex-col justify-center text-center">
-        <h4 class="font-display text-2xl font-bold text-deepCharcoal mb-4">Ready to see what is possible?</h4>
-        <p class="text-gray-600 mb-6">Let's talk about your business on a quick, free phone call.</p>
-        <button onclick="openCalendar()" class="bg-antiqueGold text-black font-bold py-4 px-8 rounded-full shadow-lg hover:bg-black hover:text-white transition">See What's Possible →</button>
-      </div>
-    </div>
+    </section>
 
-  </div>
-</section>
-
-<section id="solutions" class="section-light py-24 px-6 border-b border-gray-100" style="border-top:3px solid #00B5C8;">
-  <div class="max-w-6xl mx-auto text-center fade-up">
-    <h2 class="font-display text-4xl md:text-5xl font-bold text-deepCharcoal mb-6">Our 4 Simple Steps</h2>
-    <p class="text-lg text-gray-700 mb-12">We do all the heavy lifting so you don't have to.</p>
-    
-    <div class="grid md:grid-cols-4 gap-6 text-left">
-      <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-        <div class="text-3xl mb-3">1️⃣</div>
-        <h4 class="font-bold text-lg mb-2">Understand</h4>
-        <p class="text-sm text-gray-600">We jump on a quick call to listen to what is causing you stress in your business.</p>
-      </div>
-      <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-        <div class="text-3xl mb-3">2️⃣</div>
-        <h4 class="font-bold text-lg mb-2">Show</h4>
-        <p class="text-sm text-gray-600">We show you exactly how our system will fix your problems, with no tech jargon.</p>
-      </div>
-      <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-        <div class="text-3xl mb-3">3️⃣</div>
-        <h4 class="font-bold text-lg mb-2">Build</h4>
-        <p class="text-sm text-gray-600">We build your entire website and booking system for you in just 5 working days.</p>
-      </div>
-      <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-        <div class="text-3xl mb-3">4️⃣</div>
-        <h4 class="font-bold text-lg mb-2">Grow</h4>
-        <p class="text-sm text-gray-600">We don't leave you alone. We provide monthly coaching and support to help you grow.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="crisis" class="section-light py-24 px-6" style="border-top:3px solid #DC2626;">
-  <div class="max-w-4xl mx-auto text-center fade-up">
-    <h2 class="font-display text-4xl font-bold text-deepCharcoal mb-5">Need help right now?</h2>
-    <p class="text-lg text-gray-700 mb-10">Send us a message in any language. A real person will reply to help you.</p>
-    
-    <div class="flex flex-col sm:flex-row justify-center gap-6">
-      <a href="mailto:hello@gochuchuro.com" class="bg-white border-2 border-red-500 text-red-600 font-bold py-4 px-8 rounded-xl hover:bg-red-50 transition shadow-sm">
-        <i class="fa-solid fa-envelope mr-2"></i> Email Us
-      </a>
-      <a href="https://wa.me/447474080809" class="bg-green-600 text-white font-bold py-4 px-8 rounded-xl hover:bg-green-700 transition shadow-md">
-        <i class="fa-brands fa-whatsapp mr-2"></i> WhatsApp Us
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer style="background:#111111;border-top:1px solid rgba(255,255,255,0.06);">
-  <div class="max-w-7xl mx-auto px-6 py-14 text-center md:text-left">
-    <div class="grid md:grid-cols-2 gap-10 items-center mb-10">
-      <div>
-        <span class="font-display text-2xl font-bold tracking-widest text-coolSilver">GOCHUCHURO</span>
-        <p class="text-sm text-gray-400 mt-4 max-w-md mx-auto md:mx-0">Helping UK small businesses grow without the stress. Simple software and friendly coaching.</p>
-        <p class="text-xs text-gray-600 mt-4">* Note: A one-off setup fee applies to all new plans (£129 for Essential, £199 for Growth, £499 for Elite) to custom-build your website and automation engine. Please see our terms for full details.</p>
-      </div>
-      <div class="md:text-right">
-        <p class="font-display text-xl font-bold text-antiqueGold italic mb-2">"Calm to thrive. Love to spark."</p>
-        <div class="flex justify-center md:justify-end gap-4 mt-4">
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-linkedin text-xl"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-facebook text-xl"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fa-brands fa-instagram text-xl"></i></a>
+    <section class="max-w-[800px] mx-auto px-5 py-24 text-center">
+        <div class="panel-3d p-10" style="border-color: rgba(212, 175, 55, 0.4);">
+            <h2 class="font-header text-3xl font-bold text-white mb-4">Choose Your Look: 2D or 3D?</h2>
+            <p class="text-text-dim mb-8 text-lg">Before you pick a plan, explore our Showroom. Every plan includes your choice of a clean, classic 2D website, or a futuristic, immersive 3D experience for your trade.</p>
+            <a href="showroom.html" class="btn-glow w-full sm:w-auto">Visit The Showroom Templates</a>
         </div>
-      </div>
+    </section>
+
+    <section id="pricing" class="section-separator" style="background-color: var(--bg-emerald);">
+        <div class="max-w-[1300px] mx-auto px-5 py-24">
+            <div class="text-center mb-16">
+                <span class="inline-block text-sm font-black tracking-widest uppercase text-holo-gold border border-holo-gold px-4 py-1.5 rounded-full mb-4">Launch Offers</span>
+                <h2 class="font-header text-4xl md:text-5xl font-bold mb-4">Simple plans. Honest pricing.</h2>
+                <p class="text-text-dim text-lg">Compare exactly what is inside the box. Technology powered by coaching.</p>
+            </div>
+
+            <div class="pricing-grid">
+                
+                <div class="price-card panel-inset" data-tilt data-tilt-max="2">
+                    <p class="text-sm font-black uppercase text-text-dim mb-2 tracking-widest">Plan A — Essential</p>
+                    <h3 class="font-header text-2xl font-bold text-white mb-6">Digital Foundation</h3>
+                    
+                    <div class="flex items-end gap-2 mb-2">
+                        <span class="line-through text-gray-600 text-2xl font-bold">£49</span>
+                        <span class="font-header text-5xl font-bold text-white">£29</span>
+                        <span class="text-gray-500 text-sm mb-1">/mo</span>
+                    </div>
+                    
+                    <div class="feature-header mt-8">🖥️ Automation Engine</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> <div>Choice of 2D or 3D Showroom Website (5-Pages)</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>Secure cloud hosting & SSL</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>Google Maps & Search sync</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>Unified Inbox (FB, IG, Web)</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>WhatsApp direct chat link</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>Social media post scheduler</div></li>
+                    </ul>
+
+                    <div class="feature-header">🎓 Coaching & Support</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check"></i> <div>Automated monthly progress report</div></li>
+                        <li><i class="fa-solid fa-check"></i> <div>Standard technical email support</div></li>
+                    </ul>
+
+                    <button onclick="openCalendar()" class="btn-3d w-full mt-auto">Book Free Chat</button>
+                </div>
+
+                <div class="price-card panel-3d popular" style="transform: scale(1.05); z-index: 10;">
+                    <div class="absolute top-0 right-0 bg-holo-gold text-black text-xs font-bold px-4 py-1.5 rounded-bl-lg animate-pulse">POPULAR</div>
+                    <p class="text-sm font-black uppercase text-holo-gold mb-2 tracking-widest">Plan B — Growth</p>
+                    <h3 class="font-header text-2xl font-bold text-white mb-6">Growth Autopilot</h3>
+                    
+                    <div class="flex items-end gap-2 mb-2">
+                        <span class="line-through text-gray-500 text-2xl font-bold">£199</span>
+                        <span class="font-header text-5xl font-bold text-holo-bright-gold text-gold">£149</span>
+                        <span class="text-gray-400 text-sm mb-1">/mo</span>
+                    </div>
+                    
+                    <div class="feature-header mt-8 text-holo-gold">🖥️ Automation Engine</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div><strong>Everything in Essential</strong></div></li>
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div>Customer Database (CRM)</div></li>
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div>Missed-call instant text-back</div></li>
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div>Automated booking calendar</div></li>
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div>Automated Google review booster</div></li>
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div>Automated birthday/offer texts</div></li>
+                    </ul>
+
+                    <div class="feature-header text-holo-gold">🎓 Coaching & Support</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div>Monthly report + Group seminars</div></li>
+                        <li><i class="fa-solid fa-check text-holo-gold"></i> <div><strong>1:1 Monthly Coaching (30 mins)</strong></div></li>
+                    </ul>
+
+                    <button onclick="openCalendar()" class="btn-glow w-full mt-auto">Book Free Chat</button>
+                </div>
+
+                <div class="price-card panel-inset" data-tilt data-tilt-max="2">
+                    <p class="text-sm font-black uppercase text-text-dim mb-2 tracking-widest">Plan C — Elite</p>
+                    <h3 class="font-header text-2xl font-bold text-white mb-6">Elite AI System</h3>
+                    
+                    <div class="flex items-end gap-2 mb-2">
+                        <span class="line-through text-gray-600 text-2xl font-bold">£349</span>
+                        <span class="font-header text-5xl font-bold text-white">£297</span>
+                        <span class="text-gray-500 text-sm mb-1">/mo</span>
+                    </div>
+                    
+                    <div class="feature-header mt-8">🖥️ Automation Engine</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check text-holo-teal"></i> <div><strong>Everything in Growth</strong></div></li>
+                        <li><i class="fa-solid fa-check text-holo-teal"></i> <div>Gemini AI 24/7 Chatbot receptionist</div></li>
+                        <li><i class="fa-solid fa-check text-holo-teal"></i> <div>Smart Text-to-Book Engine</div></li>
+                        <li><i class="fa-solid fa-check text-holo-teal"></i> <div>White-label system & Auto-Billing</div></li>
+                    </ul>
+
+                    <div class="feature-header">🎓 Coaching & Support</div>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check text-holo-teal"></i> <div><strong>1:1 Coaching (Up to 2 hrs / mo)</strong></div></li>
+                        <li><i class="fa-solid fa-check text-holo-teal"></i> <div>Priority WhatsApp VIP Access</div></li>
+                    </ul>
+
+                    <button onclick="openCalendar()" class="btn-3d w-full mt-auto">Book Free Chat</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="faqs" class="max-w-[1000px] mx-auto px-5 py-24">
+        <div class="text-center mb-12">
+            <h2 class="font-header text-4xl font-bold mb-4">Curious? Here is how it works.</h2>
+            <p class="text-text-dim text-lg">We believe in absolute transparency.</p>
+        </div>
+        <div class="space-y-6">
+            
+            <div class="panel-3d p-8">
+                <h4 class="font-bold text-xl text-white mb-3"><i class="fa-solid fa-circle-question text-holo-teal mr-2"></i> What is the "Free Session" exactly?</h4>
+                <p class="text-text-dim leading-relaxed">It is a 30-minute chat with Prakash. No sales pressure. We just look at your business, find out where you are losing time or money, and show you how to fix it. If you want us to build it for you, great. If not, you keep the advice for free.</p>
+            </div>
+
+            <div class="panel-3d p-8">
+                <h4 class="font-bold text-xl text-white mb-3"><i class="fa-solid fa-circle-question text-holo-teal mr-2"></i> How does the Missed Call Text-Back work?</h4>
+                <p class="text-text-dim leading-relaxed">If someone calls your business number and you don't answer, our system instantly sends them a text saying: "Hi! Sorry we missed your call. How can we help?" It stops them from calling your competitor and keeps the conversation in your Unified Inbox.</p>
+            </div>
+
+            <div class="panel-3d p-8">
+                <h4 class="font-bold text-xl text-white mb-3"><i class="fa-solid fa-circle-question text-holo-teal mr-2"></i> What if I need updates to my website later?</h4>
+                <p class="text-text-dim leading-relaxed">Our coaching plans include technical support. You are never left alone. Just send us an email or a WhatsApp message, and we will handle minor text or image changes for you seamlessly.</p>
+            </div>
+
+            <div class="panel-3d p-8">
+                <h4 class="font-bold text-xl text-white mb-3"><i class="fa-solid fa-circle-question text-holo-teal mr-2"></i> Do I need to be good with technology?</h4>
+                <p class="text-text-dim leading-relaxed">Not at all. That is the whole point. We build everything, test it, and hand it over to you fully working. You just use one simple app on your phone to reply to messages and see your bookings.</p>
+            </div>
+
+            <div class="panel-3d p-8">
+                <h4 class="font-bold text-xl text-white mb-3"><i class="fa-solid fa-circle-question text-holo-teal mr-2"></i> Am I locked into a long contract?</h4>
+                <p class="text-text-dim leading-relaxed">To ensure your automated systems and local SEO have the necessary time to work properly and rank on Google, we ask for a minimum 3-month commitment. After that, it is a simple, rolling 30-day arrangement.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="border-t border-white/10 bg-[#020408] py-16 px-5 mt-12">
+        <div class="max-w-[1200px] mx-auto grid md:grid-cols-2 gap-10 items-center text-center md:text-left">
+            <div>
+                <a href="#" class="flex items-center justify-center md:justify-start gap-3 group flex-shrink-0 text-decoration-none mb-4">
+                    <img src="logo-transparent.png" alt="GoChuchuro logo" class="h-9 w-auto" onerror="this.style.display='none';document.getElementById('svg-logo-footer').style.display='block'"/>
+                    <svg id="svg-logo-footer" style="display:none;" width="36" height="30" viewBox="0 0 42 36" fill="none">
+                        <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    <span class="font-header text-2xl font-black tracking-widest text-white decoration-0">GOCHUCHURO<span class="text-holo-teal">.</span></span>
+                </a>
+                
+                <p class="text-sm text-gray-400 mt-4 max-w-md mx-auto md:mx-0">Helping UK businesses grow without the stress. Smart websites, simple automation, and friendly coaching.</p>
+                
+                <div class="panel-inset p-4 mt-6 border border-gray-800">
+                    <p class="text-[11px] text-gray-500 leading-relaxed max-w-lg mx-auto md:mx-0">
+                        * Setup fees apply for the initial custom build of your 2D/3D website and automation logic: Essential (£129), Growth (£199), Elite (£499). All plans require a minimum 3-month commitment to ensure proper system integration and Google ranking results.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="md:text-right">
+                <p class="font-signature text-3xl text-holo-gold mb-6">"Calm to thrive. Love to spark."</p>
+                <div class="flex justify-center md:justify-end gap-5">
+                    <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center panel-inset hover:bg-holo-teal transition text-xl"><i class="fa-brands fa-linkedin text-white"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center panel-inset hover:bg-holo-teal transition text-xl"><i class="fa-brands fa-facebook text-white"></i></a>
+                    <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="w-12 h-12 rounded-xl flex items-center justify-center panel-inset hover:bg-holo-teal transition text-xl"><i class="fa-brands fa-instagram text-white"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-[1200px] mx-auto pt-8 mt-8 border-t border-white/10 text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>© 2026 GoChuchuro. All rights reserved.</p>
+            <div class="flex gap-4">
+                <a href="privacy.html" class="hover:text-white transition">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="calendarModal" class="modal-overlay">
+        <div class="modal-content panel-3d">
+            <div class="close-btn" onclick="closeCalendar()"><i class="fa-solid fa-xmark"></i></div>
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" style="width:100%; height:100%; border:none; border-radius: 16px;" scrolling="yes"></iframe>
+        </div>
     </div>
-    <div class="pt-8 border-t border-white/10 text-xs text-gray-600 flex flex-col md:flex-row justify-between items-center gap-4">
-      <p>© 2026 GoChuchuro. All rights reserved.</p>
-      <div class="flex gap-4">
-        <a href="#" class="hover:text-white">Privacy Policy</a>
-        <a href="#" class="hover:text-white">Terms & Conditions</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
-<div id="calendarModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="close-btn" onclick="closeCalendar()">&times;</div>
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" style="width:100%; height:100%; border:none;" scrolling="yes"></iframe>
-    </div>
-</div>
+    <script>
+        // Modal Logic
+        function openCalendar() { document.getElementById('calendarModal').classList.add('active'); }
+        function closeCalendar() { document.getElementById('calendarModal').classList.remove('active'); }
+        document.getElementById('calendarModal').addEventListener('click', function(e) { if(e.target === this) closeCalendar(); });
 
-<script>
-  // Scroll fade observer
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+        // --- THREE.JS FLUID/JELLY DATA STREAM BACKGROUND ---
+        const container = document.getElementById('hero-canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
 
-  // Modal Logic
-  function openCalendar() {
-      document.getElementById('calendarModal').classList.add('active');
-  }
-  function closeCalendar() {
-      document.getElementById('calendarModal').classList.remove('active');
-  }
-  // Close when clicking outside
-  document.getElementById('calendarModal').addEventListener('click', function(e) {
-      if(e.target === this) { closeCalendar(); }
-  });
+        // Create a wavy, tech-like wireframe plane
+        const geometry = new THREE.PlaneGeometry(35, 25, 45, 45);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x00B5C8, // Aurora Teal 
+            wireframe: true, 
+            transparent: true, 
+            opacity: 0.15 
+        });
+        
+        const plane = new THREE.Mesh(geometry, material);
+        plane.rotation.x = -Math.PI / 2.5;
+        plane.position.y = -4;
+        plane.position.z = -5;
+        scene.add(plane);
 
-  // --- THREE.JS BACKGROUND DATA STREAM SCRIPT ---
-  const container = document.getElementById('hero-canvas-container');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  container.appendChild(renderer.domElement);
+        // Store original vertices for wave animation
+        const positions = plane.geometry.attributes.position;
+        const originalZ = new Float32Array(positions.count);
+        for(let i = 0; i < positions.count; i++) {
+            originalZ[i] = positions.getZ(i);
+        }
 
-  // Create connecting dots (Nodes)
-  const particlesCount = 150;
-  const geometry = new THREE.BufferGeometry();
-  const posArray = new Float32Array(particlesCount * 3);
+        let mouseX = 0; let mouseY = 0;
+        let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
 
-  for(let i = 0; i < particlesCount * 3; i++) {
-      posArray[i] = (Math.random() - 0.5) * 10; 
-  }
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        });
 
-  geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  const material = new THREE.PointsMaterial({
-      size: 0.03,
-      color: 0x00B5C8, // Aurora Teal
-      transparent: true,
-      opacity: 0.8
-  });
+        const clock = new THREE.Clock();
 
-  const particlesMesh = new THREE.Points(geometry, material);
-  scene.add(particlesMesh);
-  
-  // Add subtle movement
-  camera.position.z = 3;
-  let mouseX = 0; let mouseY = 0;
-  let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime();
 
-  document.addEventListener('mousemove', (event) => {
-      mouseX = (event.clientX - windowHalfX);
-      mouseY = (event.clientY - windowHalfY);
-  });
+            // Animate plane vertices to create a jelly/fluid wave effect
+            for(let i = 0; i < positions.count; i++) {
+                const x = positions.getX(i);
+                const y = positions.getY(i);
+                // Rolling waves based on time, x, and y
+                const wave = Math.sin(x * 0.5 + time) * 0.5 + Math.cos(y * 0.5 + time) * 0.5;
+                positions.setZ(i, originalZ[i] + wave);
+            }
+            plane.geometry.attributes.position.needsUpdate = true;
 
-  const clock = new THREE.Clock();
-  function animate() {
-      requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+            // Subtle camera movement tracking mouse
+            camera.position.x += (mouseX * 0.002 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.002 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
 
-      particlesMesh.rotation.y += 0.05 * ((mouseX * 0.001) - particlesMesh.rotation.y);
-      particlesMesh.rotation.x += 0.05 * ((mouseY * 0.001) - particlesMesh.rotation.x);
-      particlesMesh.position.y = Math.sin(elapsedTime * 0.2) * 0.2; // Slow float
+            renderer.render(scene, camera);
+        }
+        animate();
 
-      renderer.render(scene, camera);
-  }
-  animate();
+        window.addEventListener('resize', () => {
+            windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
 
-  window.addEventListener('resize', () => {
-      windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-  });
-</script>
-
+        VanillaTilt.init(document.querySelectorAll(".panel-3d, .panel-inset"), {
+            speed: 400,
+            glare: true,
+            "max-glare": 0.05,
+        });
+    </script>
 </body>
 </html>
