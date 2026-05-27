@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Premium Plumbing & Heating | Hybrid UI</title>
+    <title>Fully Immersive 3D Plumbing</title>
     
     <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
@@ -15,265 +15,256 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <style>
-        /* --- HIGH-END 3D HYBRID DESIGN SYSTEMS --- */
+        /* --- FULL 3D IMMERSIVE DESIGN SYSTEM --- */
         :root {
-            /* Dark Theme Variables (Hero) */
-            --primary-dark: #070b14;    
-            --accent-teal: #00f6ff; 
+            /* Deep Space Backgrounds */
+            --bg-abyss: #030712;    
+            --bg-surface: #0f172a;
             
-            /* Light Theme Variables (Rest of Site) */
-            --bg-silver: #f8fafc;
-            --text-dark: #1e293b;
-            --text-gray: #64748b;
-            --accent-dark-teal: #0d9488;
+            /* Holographic Accents */
+            --holo-teal: #00f6ff;
+            --holo-purple: #8b5cf6;
+            --gradient-glow: linear-gradient(135deg, var(--holo-teal), var(--holo-purple));
             
-            /* Glassmorphism Variables */
-            --glass-dark: rgba(15, 23, 42, 0.6);
-            --glass-light: rgba(255, 255, 255, 0.7);
-            --border-glass-dark: rgba(255, 255, 255, 0.1);
-            --border-glass-light: rgba(255, 255, 255, 0.8);
+            /* 3D UI Lighting */
+            --shadow-drop: 10px 10px 20px rgba(0, 0, 0, 0.8), -5px -5px 15px rgba(255, 255, 255, 0.05);
+            --shadow-inner: inset 5px 5px 15px rgba(0, 0, 0, 0.8), inset -5px -5px 15px rgba(255, 255, 255, 0.05);
+            
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-silver);
-            color: var(--text-dark);
+            /* Global deep 3D background */
+            background-color: var(--bg-abyss);
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 246, 255, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+            background-attachment: fixed; /* Creates parallax depth */
+            color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 70px; 
             overflow-x: hidden;
+            padding-bottom: 70px;
         }
 
-        /* GLASSMORPHISM UTILITIES */
-        .glass-panel-dark {
-            background: var(--glass-dark);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass-dark);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            border-radius: 16px;
-            color: white;
+        /* --- 3D NEUMORPHIC PANELS --- */
+        .panel-3d {
+            background: var(--bg-surface);
+            border-radius: 20px;
+            box-shadow: var(--shadow-drop);
+            border: 1px solid rgba(255,255,255,0.03);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .panel-inset {
+            background: var(--bg-abyss);
+            border-radius: 12px;
+            box-shadow: var(--shadow-inner);
+            border: 1px solid rgba(255,255,255,0.02);
         }
 
-        .glass-panel-light {
-            background: var(--glass-light);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-glass-light);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-            border-radius: 16px;
-            color: var(--text-dark);
+        /* Holographic Text & Borders */
+        .text-holo {
+            background: var(--gradient-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 246, 255, 0.3);
         }
 
-        /* --- STICKY TOP NAVIGATION --- */
+        /* --- NAVIGATION --- */
         header {
-            background-color: rgba(7, 11, 20, 0.85);
-            backdrop-filter: blur(12px);
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(15px);
             padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-glass-dark);
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0, 246, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        .brand-logo { color: white; font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; text-shadow: 0 0 10px rgba(0, 246, 255, 0.3); }
-        .brand-logo i { color: var(--accent-teal); }
+        .brand-logo { color: white; font-size: 1.5rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+        .brand-logo i { background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
-        .nav-link:hover { color: var(--accent-teal); text-shadow: 0 0 8px var(--accent-teal); }
+        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .nav-link:hover { color: var(--holo-teal); text-shadow: 0 0 10px var(--holo-teal); }
 
-        /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
-        .sticky-action-bar {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 2px solid var(--accent-dark-teal);
-            padding: 1rem 5%; display: flex; justify-content: center; gap: 1.5rem;
-            z-index: 990; box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        /* --- 3D BUTTONS --- */
+        .btn-3d {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: var(--shadow-drop);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .action-bar-btn {
-            flex: 1; max-width: 260px; padding: 0.9rem; border-radius: 8px;
-            text-decoration: none; font-weight: 700; text-transform: uppercase;
-            font-size: 0.85rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; transition: 0.3s;
+        .btn-3d::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--gradient-glow);
         }
-        .action-bar-btn:hover { transform: translateY(-3px); }
-        .btn-silver-cta { background-color: transparent; color: var(--text-dark); border: 1px solid #cbd5e1; }
-        .btn-teal-cta { background-color: var(--accent-dark-teal); color: white; box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);}
+        .btn-3d:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.9), 0 0 20px rgba(0, 246, 255, 0.2);
+            color: var(--holo-teal);
+        }
 
-        /* --- 3D HERO WORKSPACE (DARK THEME) --- */
+        .btn-holo {
+            background: var(--gradient-glow);
+            color: var(--bg-abyss);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.4);
+            transition: 0.3s;
+        }
+        .btn-holo:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 40px rgba(0, 246, 255, 0.6); }
+
+        /* --- HERO SPACE --- */
         .hero {
-            position: relative; min-height: 90vh;
+            position: relative; min-height: 95vh;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 4rem 2rem; color: white; overflow: hidden;
-            background-color: var(--primary-dark);
+            text-align: center; padding: 4rem 2rem;
         }
         #hero-canvas-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-            background: linear-gradient(rgba(7, 11, 20, 0.6), rgba(7, 11, 20, 0.9)), url('gas-heating-1.png') no-repeat center center/cover;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;
+            /* Fades the 2D image into the 3D background */
+            background: linear-gradient(rgba(3, 7, 18, 0.7), rgba(3, 7, 18, 1)), url('gas-heating-1.png') no-repeat center center/cover;
         }
         .hero-content { position: relative; z-index: 2; transform: translateZ(50px); }
+        
         .hero-badge {
-            background-color: rgba(0, 246, 255, 0.1); border: 1px solid var(--accent-teal);
-            color: var(--accent-teal); padding: 0.5rem 1.2rem; border-radius: 50px;
-            font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1.5rem; display: inline-block; box-shadow: 0 0 20px rgba(0, 246, 255, 0.2);
+            background: var(--bg-surface);
+            box-shadow: var(--shadow-inner);
+            color: var(--holo-teal);
+            padding: 0.6rem 1.5rem; border-radius: 50px;
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 2rem;
+            display: inline-block; border: 1px solid rgba(0, 246, 255, 0.3);
         }
-        .hero h1 { font-size: 4rem; font-weight: 800; max-width: 900px; line-height: 1.1; margin-bottom: 1.2rem; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
-        .hero h1 span { color: var(--accent-teal); text-shadow: 0 0 20px rgba(0, 246, 255, 0.4); }
-        .hero p { font-size: 1.2rem; max-width: 650px; color: #cbd5e1; margin: 0 auto 2.5rem; font-weight: 500; }
+        
+        .hero h1 { font-size: 4.5rem; font-weight: 800; max-width: 900px; line-height: 1.1; margin-bottom: 1.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+        .hero p { font-size: 1.25rem; max-width: 650px; color: var(--text-dim); margin: 0 auto 2.5rem; font-weight: 500; }
 
-        .btn-primary {
-            background-color: var(--accent-teal); color: var(--primary-dark);
-            text-decoration: none; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800;
-            transition: all 0.3s ease; border: none; cursor: pointer; font-size: 1rem; box-shadow: 0 0 20px rgba(0, 246, 255, 0.4);
-        }
-        .btn-primary:hover { background-color: #ffffff; box-shadow: 0 0 30px rgba(0, 246, 255, 0.6); transform: translateY(-3px); }
-
-        /* --- THE TRANSITION TRUST BAR --- */
+        /* --- FLOATING TRUST BAR --- */
         .trust-bar {
-            padding: 3rem 5%; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;
-            position: relative; margin-top: -50px; z-index: 10;
+            padding: 2rem 5%; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap;
+            position: relative; margin-top: -60px; z-index: 10;
         }
-        .trust-item { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 2rem; }
-        .trust-item i { color: var(--accent-teal); font-size: 2rem; text-shadow: 0 0 10px var(--accent-teal); }
-        .trust-item span { font-size: 0.95rem; font-weight: 700; color: white; letter-spacing: 1px; }
-
-        .embedded-google-badge {
-            display: flex; align-items: center; gap: 0.8rem; background: white; padding: 0.8rem 1.6rem;
-            border-radius: 50px; text-decoration: none; color: var(--primary-dark);
-            border: 1px solid #e2e8f0; box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: 0.3s;
+        .trust-item { 
+            display: flex; align-items: center; gap: 1rem; padding: 1.5rem 2rem; 
+            border-radius: 50px; border: 1px solid rgba(255,255,255,0.05);
         }
-        .embedded-google-badge:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
+        .trust-item i { font-size: 2rem; background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .trust-item span { font-size: 0.95rem; font-weight: 700; letter-spacing: 1px; }
 
-        /* --- LIGHT THEME SECTION WRAPPERS --- */
-        .section-wrapper { padding: 6rem 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2;}
+        /* --- SECTION WRAPPERS --- */
+        .section-wrapper { padding: 8rem 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2;}
         .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.8rem; color: var(--text-dark); font-weight: 800; }
-        .section-header p { color: var(--text-gray); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .section-header h2 { font-size: 3rem; font-weight: 800; }
+        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* --- 3D CALENDAR BOOKING SYSTEM (LIGHT THEME) --- */
+        /* --- 3D BOOKING PIPELINE --- */
         .roi-tech-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; padding: 4rem; position: relative;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; 
+            padding: 4rem; 
         }
-        .tech-text-block h3 { font-size: 2.8rem; color: var(--text-dark); margin-bottom: 1rem; line-height: 1.1;}
-        .tech-text-block h3 span { color: var(--accent-dark-teal); }
         
         .ai-avatar-badge {
-            display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; border-left: 4px solid var(--accent-dark-teal);
+            display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; 
         }
         .ai-avatar-badge img { 
-            width: 70px; height: 70px; border-radius: 50%; object-fit: cover; 
-            border: 2px solid var(--accent-dark-teal); box-shadow: 0 5px 15px rgba(13, 148, 136, 0.2);
+            width: 75px; height: 75px; border-radius: 50%; object-fit: cover; 
+            border: 3px solid var(--holo-purple); box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
         }
 
         .calendar-mockup { padding: 3rem; transform-style: preserve-3d; }
-        .cal-header { display: flex; justify-content: space-between; margin-bottom: 2rem; font-weight: 700; font-size: 1.2rem; color: var(--text-dark);}
-        .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; transform: translateZ(30px); }
+        .cal-header { display: flex; justify-content: space-between; margin-bottom: 2rem; font-weight: 700; font-size: 1.2rem; }
+        .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; transform: translateZ(30px); }
         .cal-slot { 
-            background: white; padding: 1rem; text-align: center; border-radius: 8px; 
-            border: 1px solid #e2e8f0; font-size: 0.9rem; font-weight: 700; color: var(--text-dark); cursor: pointer; transition: 0.3s;
+            padding: 1.2rem; text-align: center; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: 0.3s;
         }
         .cal-slot:hover, .cal-slot.active { 
-            background: var(--accent-dark-teal); color: white; box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3); transform: translateZ(10px);
+            background: var(--gradient-glow); color: var(--bg-abyss); 
+            box-shadow: 0 0 20px rgba(0, 246, 255, 0.4); transform: translateZ(15px) scale(1.05);
+            border: none;
         }
-        .btn-confirm {
-            width:100%; padding: 1.1rem; background: var(--text-dark); color: white; border: none; border-radius: 8px; 
-            margin-top: 2rem; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s;
+
+        /* --- HOLOGRAPHIC SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; perspective: 1000px;}
+        .service-card { 
+            padding: 2.5rem; display: flex; flex-direction: column; align-items: center; text-align: center;
+            transform-style: preserve-3d; transition: 0.4s;
         }
-        .btn-confirm:hover { background: var(--accent-dark-teal); box-shadow: 0 10px 20px rgba(13, 148, 136, 0.3);}
-
-        /* --- ABOUT (LIGHT THEME) --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
-        .team-image-stack { position: relative; padding-bottom: 2rem; transform-style: preserve-3d;}
-        .team-main-img { width: 100%; border-radius: 16px; border: 1px solid white; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .team-sub-img { 
-            position: absolute; bottom: -20px; right: -20px; width: 55%; border-radius: 16px; 
-            border: 6px solid var(--bg-silver); box-shadow: 0 20px 40px rgba(0,0,0,0.15); transform: translateZ(50px);
+        /* Hologram Circle */
+        .holo-circle {
+            width: 100px; height: 100px; border-radius: 50%; margin-bottom: 2rem;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 2.5rem; color: var(--holo-teal);
+            box-shadow: var(--shadow-inner); border: 1px solid rgba(0, 246, 255, 0.2);
+            transform: translateZ(40px); transition: 0.4s;
         }
-        .human-text span { color:var(--accent-dark-teal); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px; }
-        .human-text h2 { font-size: 2.8rem; color: var(--text-dark); margin: 0.5rem 0 1.2rem; line-height: 1.15; font-weight: 800; }
-        .human-text ul li { color: var(--text-dark); margin-bottom: 10px; list-style: none; font-weight: 600;}
-        .human-text ul li i { color: var(--accent-dark-teal); margin-right: 12px; font-size: 1.2rem;}
+        .service-card:hover .holo-circle {
+            box-shadow: 0 0 30px rgba(0, 246, 255, 0.4);
+            transform: translateZ(60px) scale(1.1);
+        }
+        .service-card h3 { margin-bottom: 1rem; font-size: 1.4rem; transform: translateZ(30px); }
+        .service-card p { color: var(--text-dim); transform: translateZ(20px); }
 
-        /* --- SERVICES (LIGHT THEME) --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; perspective: 1000px;}
-        .service-card { overflow: hidden; transition: border-color 0.3s; transform-style: preserve-3d; }
-        .service-card:hover { border-color: var(--accent-dark-teal); }
-        .service-img { width: 100%; height: 220px; object-fit: cover; opacity: 0.9; transition: 0.3s;}
-        .service-card:hover .service-img { opacity: 1; transform: scale(1.05); }
-        .service-body { padding: 2rem; transform: translateZ(30px); }
-        .service-body h3 { color: var(--text-dark); margin-bottom: 1rem; font-size: 1.3rem; }
-        .service-body h3 i { color: var(--accent-dark-teal); margin-right: 0.5rem; }
-
-        /* --- TESTIMONIALS (LIGHT THEME) --- */
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .test-card { padding: 2.5rem; }
-        .stars { color: #f59e0b; margin-bottom: 1.2rem; font-size: 0.95rem; }
-        .test-card p { font-style: italic; color: var(--text-gray); margin-bottom: 2rem; font-size: 1.05rem; }
+        /* --- TESTIMONIALS --- */
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
+        .test-card { padding: 3rem; }
+        .stars { color: #f59e0b; margin-bottom: 1.5rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+        .test-card p { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
         .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-dark-teal); }
-        .client h4 { font-size: 1.1rem; color: var(--text-dark); }
-        .client span { font-size: 0.85rem; color: var(--accent-dark-teal); font-weight: 600; }
+        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--holo-teal); }
 
-        /* --- FAQS (LIGHT THEME) --- */
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .faq-box { padding: 2.2rem; transform-style: preserve-3d; }
-        .faq-box h4 { color: var(--text-dark); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; transform: translateZ(20px); }
-        .faq-box p { font-size: 0.95rem; color: var(--text-gray); line-height: 1.6; transform: translateZ(10px); }
-
-        /* --- CONTACT --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start; }
-        .input-group { margin-bottom: 1.5rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--text-dark); }
+        /* --- CONTACT TERMINAL --- */
+        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: start; }
+        .input-group { margin-bottom: 1.8rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--text-dim); }
         .input-group input, .input-group textarea { 
-            width: 100%; padding: 0.85rem 1rem; background: white; color: var(--text-dark);
-            border: 1px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; outline: none; transition: 0.3s;
+            width: 100%; padding: 1rem; color: white;
+            border: 1px solid rgba(255,255,255,0.05); font-size: 1rem; outline: none; transition: 0.3s;
         }
-        .input-group input:focus, .input-group textarea:focus { border-color: var(--accent-dark-teal); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1); }
-        .map-frame { width: 100%; height: 250px; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; margin-bottom: 2rem;}
-        
-        .info-strip { display: flex; align-items: center; gap: 1.2rem; margin-top: 1rem; text-decoration: none; padding: 1.5rem; transition: 0.3s;}
-        .info-strip:hover { transform: translateX(10px); border-color: var(--accent-dark-teal); }
-        .info-strip-icon { width: 50px; height: 50px; background: white; color: var(--accent-dark-teal); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);}
-        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-gray); text-transform: uppercase; font-weight: 600;}
-        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--text-dark); }
-
-        /* --- MINI AI PILL --- */
-        .mini-ai-pill {
-            position: fixed; bottom: 5.5rem; right: 1.5rem; background: white; border-radius: 50px;
-            padding: 0.4rem 1.2rem 0.4rem 0.4rem; box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-            z-index: 990; display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
-            border: 1px solid #e2e8f0; transition: transform 0.3s, box-shadow 0.3s;
+        .input-group input:focus, .input-group textarea:focus { 
+            border-color: var(--holo-teal); box-shadow: 0 0 15px rgba(0, 246, 255, 0.2); 
         }
-        .mini-ai-pill:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(13,148,136,0.3); border-color: var(--accent-dark-teal); }
-        .mini-ai-pill img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--accent-dark-teal); object-fit: cover; }
 
         /* --- FOOTER --- */
-        footer { background-color: var(--primary-dark); padding: 5rem 5% 8rem; color: #94a3b8; text-align: center; }
-        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+        footer { background: #02040a; padding: 6rem 5% 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
         .social-circle-link { 
-            width: 46px; height: 46px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; 
-            display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); 
+            width: 50px; height: 50px; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; 
+            font-size: 1.2rem; color: var(--text-dim); text-decoration: none; margin: 0 0.5rem; transition: 0.3s;
         }
-        .social-circle-link:hover { background: var(--accent-teal); color: var(--primary-dark); transform: translateY(-4px); border-color: var(--accent-teal); }
+        .social-circle-link:hover { color: var(--holo-teal); box-shadow: 0 0 20px rgba(0, 246, 255, 0.3); }
+
+        /* --- MOBILE BAR --- */
+        .sticky-action-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(3, 7, 18, 0.9); backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(0, 246, 255, 0.3);
+            padding: 1rem 5%; display: flex; justify-content: center; gap: 1rem; z-index: 990;
+        }
 
         @media (max-width: 900px) {
             .nav-menu { display: none; }
-            .roi-tech-section, .about-grid, .contact-layout, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .hero h1 { font-size: 2.8rem; }
+            .roi-tech-section, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+            .hero h1 { font-size: 3rem; }
             .roi-tech-section { padding: 2rem; }
-            .trust-bar { margin-top: 0; padding: 2rem 5%; flex-direction: column; }
-            .mini-ai-pill { padding: 0; width: 56px; height: 56px; right: 1rem; bottom: 5.5rem; justify-content: center; border-radius: 50%; }
-            .mini-ai-pill img { width: 100%; height: 100%; margin: 0; }
-            .ai-pill-text { display: none !important; }
+            .trust-bar { margin-top: 0; }
         }
     </style>
 </head>
@@ -283,259 +274,183 @@
         <a href="#" class="brand-logo"><i class="fa-solid fa-faucet-drip"></i> RAI & SONS</a>
         <nav class="nav-menu">
             <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#testimonials" class="nav-link">Testimonials</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#services" class="nav-link">Infrastructure</a>
+            <a href="#testimonials" class="nav-link">Data Streams</a>
+            <a href="#contact" class="nav-link">Dispatch</a>
         </nav>
-        <a href="tel:07123456789" class="btn-primary" style="padding: 0.5rem 1rem; box-shadow: none;">24/7 Call-Out</a>
+        <a href="tel:07123456789" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Initialize Call</a>
     </header>
 
     <div class="sticky-action-bar" id="actions">
-        <a href="tel:07123456789" class="action-bar-btn btn-silver-cta"><i class="fa-solid fa-phone-volume"></i> Call Team</a>
-        <a href="#booking" class="action-bar-btn btn-teal-cta"><i class="fa-solid fa-calendar-check"></i> Book Online</a>
+        <a href="tel:07123456789" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-phone"></i></a>
+        <a href="#booking" class="btn-holo" style="flex:2; text-align:center; padding: 0.8rem;">Book Online</a>
     </div>
 
     <section class="hero">
         <div id="hero-canvas-container"></div>
         <div class="hero-content">
-            <div class="hero-badge" data-tilt data-tilt-scale="1.1"><i class="fa-solid fa-shield-halved"></i> Gas Safe Registered</div>
-            <h1 data-tilt data-tilt-max="5" data-tilt-glare="true" data-tilt-max-glare="0.2">Next-Gen <span>Plumbing</span> Dynamics</h1>
-            <p>Combining traditional British engineering standards with immersive, frictionless booking technology. Serving Hampshire with bespoke solutions.</p>
-            <a href="#booking" class="btn-primary" style="display: inline-block;">View Live Availability <i class="fa-solid fa-satellite-dish" style="margin-left: 8px;"></i></a>
+            <div class="hero-badge" data-tilt data-tilt-scale="1.1"><i class="fa-solid fa-shield-halved"></i> Certified Safe</div>
+            <h1 data-tilt data-tilt-max="5">Next-Gen <span class="text-holo">Plumbing</span> Dynamics</h1>
+            <p>Traditional British engineering standards fused with immersive, frictionless booking technology. Deploying bespoke solutions across Hampshire.</p>
+            <a href="#booking" class="btn-3d">Access Dispatch Calendar <i class="fa-solid fa-satellite-dish" style="margin-left: 8px;"></i></a>
         </div>
     </section>
 
     <section class="trust-bar">
-        <a href="#testimonials" class="embedded-google-badge" data-tilt data-tilt-scale="1.05">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
-                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
-            </svg>
-            <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
-                <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
-                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 200+ Reviews</span>
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
+            <i class="fa-brands fa-google"></i>
+            <div>
+                <span class="text-holo">5.0 RATING</span><br>
+                <small style="color: var(--text-dim);">Verified Network</small>
             </div>
-        </a>
-        <div class="trust-item glass-panel-dark" data-tilt data-tilt-glare data-tilt-max-glare="0.3"><i class="fa-solid fa-circle-check"></i> <span>£5M LIABILITY</span></div>
-        <div class="trust-item glass-panel-dark" data-tilt data-tilt-glare data-tilt-max-glare="0.3"><i class="fa-solid fa-bolt"></i> <span>RAPID DISPATCH</span></div>
+        </div>
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10"><i class="fa-solid fa-circle-check"></i> <span>£5M LIABILITY</span></div>
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10"><i class="fa-solid fa-bolt"></i> <span>RAPID DISPATCH</span></div>
     </section>
 
     <section class="section-wrapper" id="booking">
-        <div class="roi-tech-section glass-panel-light">
+        <div class="roi-tech-section panel-3d">
             <div class="tech-text-block">
-                <h3>System Synced.<br><span>Start Booking.</span></h3>
-                <p style="font-size: 1.05rem; color: var(--text-gray);">We respect your time. Our infrastructure integrates AI and live calendar syncing so you can secure a certified engineer instantly.</p>
+                <h3>System Synced.<br><span class="text-holo">Start Booking.</span></h3>
+                <p style="color: var(--text-dim);">Bypass the phone tag. Our infrastructure utilizes live calendar syncing to secure a certified engineer instantly.</p>
                 
-                <div class="ai-avatar-badge glass-panel-light" data-tilt>
-                    <img src="Emma-Richardson .png" alt="AI Receptionist Emma">
+                <div class="ai-avatar-badge panel-inset" data-tilt>
+                    <img src="Emma-Richardson .png" alt="AI Emma">
                     <div>
-                        <h4 style="color: var(--text-dark);">Emma (AI Receptionist)</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-gray); margin-top: 2px;">Available 24/7 to issue estimates and secure emergency slots.</p>
+                        <h4>Emma (AI Interface)</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Available 24/7 to issue estimates.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="calendar-mockup glass-panel-light" data-tilt data-tilt-max="10" data-tilt-glare="true" data-tilt-max-glare="0.2">
-                <div class="cal-header">
-                    <span><i class="fa-solid fa-chevron-left" style="color: #94a3b8; cursor: pointer;"></i></span>
+            <div class="calendar-mockup panel-inset" data-tilt data-tilt-max="8">
+                <div class="cal-header text-holo">
+                    <i class="fa-solid fa-chevron-left" style="cursor: pointer;"></i>
                     <span>October 2026</span>
-                    <span><i class="fa-solid fa-chevron-right" style="color: var(--accent-dark-teal); cursor: pointer;"></i></span>
+                    <i class="fa-solid fa-chevron-right" style="cursor: pointer;"></i>
                 </div>
                 <div class="cal-grid">
-                    <div class="cal-slot">08:00 AM</div>
-                    <div class="cal-slot">09:30 AM</div>
-                    <div class="cal-slot active">11:00 AM</div>
-                    <div class="cal-slot">13:00 PM</div>
-                    <div class="cal-slot">14:30 PM</div>
-                    <div class="cal-slot">16:00 PM</div>
+                    <div class="cal-slot panel-3d">08:00 AM</div>
+                    <div class="cal-slot panel-3d">09:30 AM</div>
+                    <div class="cal-slot panel-3d" style="background: var(--gradient-glow); color: var(--bg-abyss); border:none;">11:00 AM</div>
+                    <div class="cal-slot panel-3d">13:00 PM</div>
+                    <div class="cal-slot panel-3d">14:30 PM</div>
+                    <div class="cal-slot panel-3d">16:00 PM</div>
                 </div>
-                <button class="btn-confirm">Confirm Dispatch Pipeline</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="about">
-        <div class="about-grid">
-            <div class="team-image-stack" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.4">
-                <img src="blue-man.png" alt="Lead Engineer" class="team-main-img">
-                <img src="installation-maintenance.png" alt="Maintenance Team" class="team-sub-img">
-            </div>
-            <div class="human-text">
-                <span>Your Local Specialists</span>
-                <h2>Uncompromising Human Standards.</h2>
-                <p style="margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--text-gray);">The technology is futuristic, but our service is distinctly human. At Rai & Sons, world-class engineering is matched with real, local customer service. Our fleet of highly trained engineers has been keeping Andover safe for over a decade.</p>
-                <ul>
-                    <li><i class="fa-solid fa-check"></i> Fully Vetted & Accredited Staff</li>
-                    <li><i class="fa-solid fa-check"></i> Advanced Diagnostics & Powerflushing</li>
-                    <li><i class="fa-solid fa-check"></i> Respectful of Your Property</li>
-                </ul>
+                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Confirm Pipeline Slot</button>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="services">
         <div class="section-header">
-            <h2>Core Infrastructure</h2>
-            <p>Certified, compliant, and rapidly deployed solutions for domestic properties.</p>
+            <h2 class="text-holo">Core Infrastructure</h2>
+            <p>Rapidly deployed solutions for domestic properties.</p>
         </div>
         
         <div class="services-grid">
-            <div class="service-card glass-panel-light" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.3">
-                <img src="working-kichen.png" alt="Boiler" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-fire"></i> Boiler Installations</h3>
-                    <p style="color: var(--text-gray);">Energy-efficient upgrades and bespoke heating systems with up to 10-year warranties.</p>
-                </div>
+            <div class="service-card panel-3d" data-tilt data-tilt-max="15">
+                <div class="holo-circle panel-inset"><i class="fa-solid fa-fire"></i></div>
+                <h3>Boiler Installations</h3>
+                <p>Energy-efficient upgrades and bespoke heating systems with up to 10-year warranties.</p>
             </div>
 
-            <div class="service-card glass-panel-light" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.3">
-                <img src="water-pipe-underbasin.png" alt="Repairs" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-droplet"></i> Emergency Repairs</h3>
-                    <p style="color: var(--text-gray);">Rapid response for burst pipes, aggressive leaks, and drainage blockages.</p>
-                </div>
+            <div class="service-card panel-3d" data-tilt data-tilt-max="15">
+                <div class="holo-circle panel-inset"><i class="fa-solid fa-droplet"></i></div>
+                <h3>Emergency Repairs</h3>
+                <p>Rapid response for burst pipes, aggressive leaks, and drainage blockages.</p>
             </div>
 
-            <div class="service-card glass-panel-light" data-tilt data-tilt-max="15" data-tilt-glare data-tilt-max-glare="0.3">
-                <img src="landlord-gas-safety-certificate.png" alt="Gas Safety" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-file-shield"></i> Landlord CP12s</h3>
-                    <p style="color: var(--text-gray);">Legally compliant Gas Safety Certificates issued digitally on-site for instant compliance.</p>
-                </div>
+            <div class="service-card panel-3d" data-tilt data-tilt-max="15">
+                <div class="holo-circle panel-inset"><i class="fa-solid fa-file-shield"></i></div>
+                <h3>Landlord CP12s</h3>
+                <p>Legally compliant Gas Safety Certificates issued digitally on-site for instant compliance.</p>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="testimonials">
         <div class="section-header">
-            <h2>Trusted by the Community</h2>
-            <p>Don't just take our word for it. Read our verified Google tracking streams.</p>
+            <h2>Data Streams</h2>
+            <p>Verified feedback from the local network.</p>
         </div>
         <div class="test-grid">
-            <div class="test-card glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
                 <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                 <p>"Absolutely brilliant. Booked a slot online through their smart calendar, the engineer arrived exactly on time, and sorted our boiler pressure issue within the hour."</p>
                 <div class="client">
                     <img src="James-Mitchell.png" alt="James Mitchell">
                     <div>
                         <h4>James Mitchell</h4>
-                        <span>Homeowner, Andover</span>
+                        <span class="text-holo" style="font-size: 0.85rem;">Homeowner</span>
                     </div>
                 </div>
             </div>
 
-            <div class="test-card glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
+            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
                 <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Managing multiple lettings means I need a firm I can rely on. Rai & Sons handle all our CP12 certificates automatically. The digital reporting is a game-changer."</p>
+                <p>"Managing multiple lettings means I need a firm I can rely on. Rai & Sons handle all our certificates automatically. The digital reporting is a game-changer."</p>
                 <div class="client">
-                    <div style="width: 55px; height: 55px; border-radius: 50%; background: var(--text-dark); border: 2px solid var(--accent-dark-teal); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; color: white;">S</div>
+                    <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--bg-abyss); border: 2px solid var(--holo-purple); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; color: white;">S</div>
                     <div>
                         <h4>Sarah Jenkins</h4>
-                        <span>Local Lettings Agent</span>
+                        <span class="text-holo" style="font-size: 0.85rem;">Lettings Agent</span>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="faqs">
-        <div class="section-header">
-            <h2>Operational FAQ Systems</h2>
-            <p>Clear, honest answers to common queries regarding pricing and dispatch logistics.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-box glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-                <h4>Do you charge a call-out fee?</h4>
-                <p>During standard working hours, we do not charge a call-out fee. We provide a clear, upfront quote before any work commences.</p>
-            </div>
-            <div class="faq-box glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-                <h4>Are your engineers fully certified?</h4>
-                <p>Yes. Every engineer deployed is strictly Gas Safe registered and carries comprehensive public liability insurance up to £5,000,000.</p>
-            </div>
-            <div class="faq-box glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-                <h4>Can I book an exact time slot?</h4>
-                <p>Absolutely. Unlike traditional firms that give a vague window, our smart scheduling system allows you to select a dedicated 90-minute arrival window.</p>
-            </div>
-            <div class="faq-box glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-                <h4>Do you provide landlord certificates?</h4>
-                <p>Yes, we process digital CP12 Gas Safety Certificates on-site, instantly emailing copies to both the landlord and the managing agent.</p>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="contact">
-        <div class="section-header">
-            <h2>Engineering Dispatch Desk</h2>
-            <p>Ready to book or need an emergency call-out? Reach out to our team instantly.</p>
-        </div>
         <div class="contact-layout">
-            <div class="glass-panel-light" style="padding: 3rem;" data-tilt data-tilt-max="2" data-tilt-glare data-tilt-max-glare="0.1">
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem; color: var(--text-dark);">Send an Enquiry</h3>
+            <div class="panel-3d" style="padding: 3rem;" data-tilt data-tilt-max="3">
+                <h3 style="margin-bottom: 2rem; font-size: 2rem;" class="text-holo">Initialize Request</h3>
                 <form onsubmit="event.preventDefault();">
                     <div class="input-group">
-                        <label>Your Name</label>
-                        <input type="text" placeholder="e.g. Prakash Rai" required>
+                        <label>Identifier (Name)</label>
+                        <input type="text" class="panel-inset" placeholder="e.g. Prakash Rai" required>
                     </div>
                     <div class="input-group">
-                        <label>Phone Number</label>
-                        <input type="tel" placeholder="e.g. 07123 456789" required>
+                        <label>Comms Link (Phone)</label>
+                        <input type="tel" class="panel-inset" placeholder="e.g. 07123 456789" required>
                     </div>
                     <div class="input-group">
-                        <label>How can we help?</label>
-                        <textarea rows="4" placeholder="Briefly describe your plumbing issue..."></textarea>
+                        <label>Diagnostic Details</label>
+                        <textarea rows="4" class="panel-inset" placeholder="Describe your plumbing issue..."></textarea>
                     </div>
-                    <button type="submit" class="btn-confirm" style="margin-top: 0;">Initialize Request <i class="fa-solid fa-paper-plane" style="margin-left: 5px;"></i></button>
+                    <button type="submit" class="btn-holo" style="width: 100%; margin-top: 1rem;">Transmit Data <i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
 
             <div>
-                <div class="map-frame glass-panel-light">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-frame panel-3d" style="height: 300px; margin-bottom: 2rem; padding: 0.5rem;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" width="100%" height="100%" style="border-radius: 12px; border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
                 </div>
-                <a href="https://wa.me/447123456789" target="_blank" class="info-strip glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.3">
-                    <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <div class="info-strip-text">
-                        <h5>Direct Digital Comms</h5>
-                        <p>+44 7123 456 789</p>
-                    </div>
-                </a>
-                <a href="mailto:info@raiandsonsheating.co.uk" class="info-strip glass-panel-light" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.3">
-                    <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="info-strip-text">
-                        <h5>Service Desk Pipeline</h5>
-                        <p>info@raiandsonsheating.co.uk</p>
+                
+                <a href="https://wa.me/447123456789" class="panel-3d" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; text-decoration: none; margin-bottom: 1.5rem;" data-tilt>
+                    <i class="fa-brands fa-whatsapp text-holo" style="font-size: 2.5rem;"></i>
+                    <div>
+                        <h5 style="color: var(--text-dim); text-transform: uppercase;">Direct Comms</h5>
+                        <p style="font-size: 1.2rem; font-weight: 700; color: white;">+44 7123 456 789</p>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <a href="#booking" class="mini-ai-pill">
-        <img src="Emma-Richardson .png" alt="Emma AI">
-        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: var(--text-dark); margin: 0; line-height: 1.2;">Emma (AI Desk)</p>
-            <p style="font-size: 0.75rem; color: var(--text-gray); margin: 0; font-weight: 600;"><i class="fa-solid fa-circle" style="color: var(--accent-dark-teal); font-size: 0.45rem; margin-right: 4px;"></i> Tap to check availability</p>
-        </div>
-    </a>
-
     <footer>
-        <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 800;"><i class="fa-solid fa-faucet-drip" style="color: var(--accent-teal);"></i> RAI & SONS</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Premium Gas & Plumbing Infrastructure serving the local Andover community.</p>
+        <h3 style="margin-bottom: 1.5rem; font-size: 2rem; font-weight: 800;"><i class="fa-solid fa-faucet-drip text-holo"></i> RAI & SONS</h3>
+        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Premium Gas & Plumbing Infrastructure.</p>
         
-        <div class="social-circle-container">
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
+        <div style="margin-bottom: 3rem;">
+            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
-
-        <p style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">© 2026 GoChuchuro Agency System. Premium Trade Assets.</p>
+        <p style="font-size: 0.85rem; color: #475569;">© 2026 GoChuchuro Agency System. Premium Assets.</p>
     </footer>
 
     <script>
-        // Initialize Three.js Scene inside the Hero Container
         const container = document.getElementById('hero-canvas-container');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
@@ -544,71 +459,57 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         container.appendChild(renderer.domElement);
 
-        // Create a geometric particle network representing water/gas flow
-        const geometry = new THREE.BufferGeometry();
-        const particlesCount = 800;
-        const posArray = new Float32Array(particlesCount * 3);
-
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 15; 
-        }
-
-        geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        // Create a 3D Tunnel / Cylinder
+        const geometry = new THREE.CylinderGeometry(5, 1, 20, 32, 1, true);
         const material = new THREE.PointsMaterial({
-            size: 0.03,
+            size: 0.05,
             color: 0x00f6ff, 
             transparent: true,
             opacity: 0.8,
             blending: THREE.AdditiveBlending
         });
 
-        const particlesMesh = new THREE.Points(geometry, material);
-        scene.add(particlesMesh);
-        camera.position.z = 3;
+        const tunnelMesh = new THREE.Points(geometry, material);
+        tunnelMesh.rotation.x = Math.PI / 2; // Point tunnel at camera
+        scene.add(tunnelMesh);
+        camera.position.z = 2;
 
-        // Mouse interaction logic
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetX = 0;
-        let targetY = 0;
-        let windowHalfX = window.innerWidth / 2;
-        let windowHalfY = window.innerHeight / 2;
+        let mouseX = 0; let mouseY = 0;
+        let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
 
         document.addEventListener('mousemove', (event) => {
             mouseX = (event.clientX - windowHalfX);
             mouseY = (event.clientY - windowHalfY);
         });
 
-        // Animation Loop
         const clock = new THREE.Clock();
         function animate() {
             requestAnimationFrame(animate);
             const elapsedTime = clock.getElapsedTime();
 
-            targetX = mouseX * 0.001;
-            targetY = mouseY * 0.001;
-
-            particlesMesh.rotation.y += 0.05 * (targetX - particlesMesh.rotation.y);
-            particlesMesh.rotation.x += 0.05 * (targetY - particlesMesh.rotation.x);
-            particlesMesh.position.y = Math.sin(elapsedTime * 0.5) * 0.1;
+            // Rotate tunnel to simulate forward movement
+            tunnelMesh.rotation.y = elapsedTime * 0.2;
+            
+            // Mouse look-around effect
+            camera.position.x += (mouseX * 0.002 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.002 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
 
             renderer.render(scene, camera);
         }
         animate();
 
-        // Handle Window Resize to keep canvas constrained perfectly
         window.addEventListener('resize', () => {
-            windowHalfX = window.innerWidth / 2;
-            windowHalfY = window.innerHeight / 2;
+            windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
         });
 
-        // Initialize 3D UI Tilt effects on both dark and light glass panels
-        VanillaTilt.init(document.querySelectorAll(".glass-panel-dark, .glass-panel-light, .hero-badge, .embedded-google-badge"), {
+        VanillaTilt.init(document.querySelectorAll(".panel-3d, .hero-badge, .btn-3d"), {
             speed: 400,
             glare: true,
+            "max-glare": 0.15,
         });
     </script>
 </body>
