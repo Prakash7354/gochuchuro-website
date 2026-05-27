@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Immersive | QuickPass Driving School</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <style>
+        /* --- HIGH-PERFORMANCE 3D DESIGN SYSTEM --- */
+        :root {
+            /* Deep Slate / Asphalt Backgrounds */
+            --bg-abyss: #020617;    
+            --bg-surface: #0f172a;
+            
+            /* Success / Go Green Neon Accents */
+            --holo-green: #10b981;
+            --holo-cyan: #06b6d4;
+            --gradient-glow: linear-gradient(135deg, var(--holo-green), var(--holo-cyan));
+            --alert-red: #ef4444;
+            
+            /* 3D UI Lighting */
+            --shadow-drop: 10px 10px 25px rgba(0, 0, 0, 0.9), -5px -5px 15px rgba(255, 255, 255, 0.05);
+            --shadow-inner: inset 5px 5px 20px rgba(0, 0, 0, 0.9), inset -3px -3px 10px rgba(255, 255, 255, 0.05);
+            
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-abyss);
+            background-image: 
+                radial-gradient(circle at 15% 30%, rgba(16, 185, 129, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 70%, rgba(6, 182, 212, 0.05), transparent 25%);
+            background-attachment: fixed; 
+            color: var(--text-main); line-height: 1.6; overflow-x: hidden; padding-bottom: 70px;
+        }
+
+        .bold-header { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+
+        /* --- 3D NEUMORPHIC PANELS --- */
+        .panel-3d {
+            background: var(--bg-surface); border-radius: 16px;
+            box-shadow: var(--shadow-drop); border: 1px solid rgba(16, 185, 129, 0.1);
+            position: relative; z-index: 2;
+        }
+        
+        .panel-inset {
+            background: #060b14; border-radius: 12px;
+            box-shadow: var(--shadow-inner); border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        /* Neon Green Text */
+        .text-holo {
+            background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .img-glow {
+            border: 2px solid var(--holo-green);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
+            object-fit: cover;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(15px);
+            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+        .brand-logo { color: white; font-size: 1.8rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; letter-spacing: 1px;}
+        .brand-logo span { color: var(--holo-green); }
+        .nav-menu { display: flex; gap: 2rem; }
+        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-link:hover { color: var(--holo-green); text-shadow: 0 0 10px var(--holo-green); }
+
+        /* --- 3D BUTTONS --- */
+        .btn-3d {
+            background: var(--bg-surface); color: var(--text-main);
+            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
+            box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative; overflow: hidden;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+        }
+        .btn-3d::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-glow); }
+        .btn-3d:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.9), 0 0 20px rgba(16, 185, 129, 0.2); color: var(--holo-green); border-color: var(--holo-green);}
+
+        .btn-holo {
+            background: var(--gradient-glow); color: var(--bg-abyss);
+            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
+            border: none; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); transition: 0.3s; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
+        }
+        .btn-holo:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); color: white;}
+
+        /* --- HERO SPACE --- */
+        .hero { position: relative; min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; }
+        #hero-canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 1)), url('driving-hero.jpg') no-repeat center center/cover; }
+        .hero-content { position: relative; z-index: 2; transform: translateZ(50px); }
+        
+        .hero-badge {
+            background: var(--bg-surface); box-shadow: var(--shadow-inner); color: var(--text-main);
+            padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.9rem; font-weight: 700; margin-bottom: 2rem;
+            display: inline-flex; align-items: center; gap: 0.8rem; border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .hero-badge span { color: var(--alert-red); font-weight: 900; font-size: 1.2rem; }
+
+        .hero h1 { font-size: 4.8rem; max-width: 900px; line-height: 1.05; margin-bottom: 1.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.9); }
+        .hero p { font-size: 1.25rem; max-width: 680px; color: var(--text-dim); margin: 0 auto 2.5rem; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+
+        /* --- FLOATING TRUST BAR --- */
+        .trust-bar { padding: 2rem 5%; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; position: relative; margin-top: -60px; z-index: 10; }
+        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.5rem 2.5rem; border-radius: 16px; text-align: center;}
+        .trust-item i { font-size: 2rem; background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;}
+        .trust-item h4 { font-size: 1.5rem; color: white;}
+        .trust-item span { font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; color: var(--text-dim); text-transform: uppercase;}
+
+        /* --- SECTION WRAPPERS --- */
+        .section-wrapper { padding: 8rem 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2;}
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-header h2 { font-size: 3.2rem; }
+        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        /* --- 3D BOOKING PIPELINE (DASHBOARD STYLE) --- */
+        .roi-tech-section { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center; padding: 4.5rem; }
+        .ai-avatar-badge { display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; border-left: 3px solid var(--holo-green);}
+        .ai-avatar-badge img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--holo-green);}
+
+        .calendar-mockup { padding: 3rem; transform-style: preserve-3d; }
+        .deck-header { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-dim); padding-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;}
+        
+        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 2rem; gap: 1rem; transform: translateZ(30px); }
+        .cover-bubble { flex: 1; padding: 1rem 0; text-align: center; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.85rem; text-transform: uppercase;}
+        .cover-bubble:hover, .cover-bubble.selected { background: var(--gradient-glow); color: var(--bg-abyss); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); transform: translateZ(10px) scale(1.05); border: none; }
+
+        select.panel-3d { width: 100%; padding: 1rem; color: white; border-radius: 8px; outline: none; font-weight: 600; cursor: pointer; margin-bottom: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.2); appearance: none; background-color: var(--bg-surface);}
+
+        /* --- ABOUT INSTRUCTORS --- */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .instructor-images { display: flex; gap: 1.5rem; position: relative; transform-style: preserve-3d; perspective: 1000px;}
+        .instructor-img-card { flex: 1; border-radius: 16px; transform: translateZ(30px); transition: 0.4s;}
+        .instructor-img-card:hover { transform: translateZ(50px) scale(1.05); border-color: var(--holo-green);}
+        .instructor-img-card img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; filter: contrast(1.1); display: block;}
+        
+        .human-text span { font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; }
+        .human-text h2 { font-size: 3rem; margin: 0.5rem 0 1.2rem; line-height: 1.15; }
+        .human-text ul { list-style: none; margin-top: 1.5rem; }
+        .human-text ul li { margin-bottom: 12px; font-weight: 600; color: var(--text-main); display: flex; align-items: center;}
+        .human-text ul li i { color: var(--holo-green); margin-right: 12px; font-size: 1.2rem; text-shadow: 0 0 10px var(--holo-green); }
+
+        /* --- CAR OPTIONS MATRIX --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; perspective: 1000px;}
+        .service-card { padding: 2.5rem; display: flex; flex-direction: column; transform-style: preserve-3d; transition: 0.4s; }
+        .service-card:hover { border-color: var(--holo-green); }
+        .service-img { width: 100%; height: 200px; border-radius: 8px; margin-bottom: 1.5rem; object-fit: cover; box-shadow: var(--shadow-inner); transform: translateZ(40px); transition: 0.4s; filter: grayscale(20%);}
+        .service-card:hover .service-img { box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); transform: translateZ(60px) scale(1.02); filter: grayscale(0%);}
+        .card-badge { display: inline-block; background: var(--bg-abyss); color: var(--holo-green); padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 800; margin-bottom: 1rem; transform: translateZ(25px); border: 1px solid rgba(16, 185, 129, 0.3);}
+        .card-badge.red { color: var(--alert-red); border-color: rgba(239, 68, 68, 0.3); }
+        .service-card h3 { margin-bottom: 0.5rem; font-size: 1.6rem; transform: translateZ(30px); }
+        .service-card p { color: var(--text-dim); transform: translateZ(20px); margin-bottom: 1.5rem; flex-grow: 1;}
+
+        /* --- 3D SLIDING GALLERY --- */
+        .gallery-container { padding: 3rem 0; overflow: hidden; position: relative; margin-top: 2rem;}
+        .gallery-track { display: flex; width: calc(350px * 12); animation: scrollGallery 40s linear infinite; }
+        .gallery-track:hover { animation-play-state: paused; }
+        
+        @keyframes scrollGallery { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 6)); } }
+        
+        .gallery-item { width: 320px; height: 240px; margin: 0 15px; border-radius: 12px; padding: 0.5rem; flex-shrink: 0; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2); transition: 0.4s; filter: contrast(1.1);}
+        .gallery-item img:hover { border-color: var(--holo-green); box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); transform: scale(1.05); }
+
+        /* --- TESTIMONIALS --- */
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
+        .test-card { padding: 3rem; }
+        .stars { color: #f59e0b; margin-bottom: 1.5rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
+        .test-card p { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
+        .client { display: flex; align-items: center; gap: 1.2rem; }
+        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+
+        /* --- FAQS --- */
+        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+        .faq-box { padding: 2.5rem; transform-style: preserve-3d; }
+        .faq-box h4 { margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; transform: translateZ(20px); color: var(--holo-green); }
+        .faq-box p { font-size: 1rem; color: var(--text-dim); line-height: 1.6; transform: translateZ(10px); }
+
+        /* --- CONTACT TERMINAL --- */
+        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: start; }
+        .map-frame { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
+        
+        .info-strip { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; text-decoration: none; margin-bottom: 1.5rem; transition: 0.3s;}
+        .info-strip:hover { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); transform: translateX(5px);}
+
+        /* --- AI WIDGET PILL --- */
+        .mini-ai-pill {
+            position: fixed; bottom: 5.5rem; right: 2rem; border-radius: 50px;
+            padding: 0.4rem 1.2rem 0.4rem 0.4rem; z-index: 1000; display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
+            transition: 0.3s;
+        }
+        .mini-ai-pill img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--holo-green); object-fit: cover; }
+        .mini-ai-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); }
+
+        /* --- FOOTER --- */
+        footer { background: #01040a; padding: 6rem 5% 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 2;}
+        .social-circle-link { width: 50px; height: 50px; border-radius: 8px; display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; color: var(--text-dim); text-decoration: none; margin: 0 0.5rem; transition: 0.3s; }
+        .social-circle-link:hover { color: white; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); border-color: var(--holo-green); background: var(--gradient-glow);}
+
+        /* --- MOBILE BAR --- */
+        .sticky-action-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(16, 185, 129, 0.5); padding: 1rem 5%; display: flex; justify-content: center; gap: 1rem; z-index: 990; }
+
+        @media (max-width: 950px) {
+            .nav-menu { display: none; }
+            .roi-tech-section, .contact-layout, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
+            .hero h1 { font-size: 3.5rem; }
+            .roi-tech-section { padding: 2.5rem; }
+            .trust-bar { margin-top: 0; flex-direction: column;}
+            .mini-ai-pill { padding: 0; width: 55px; height: 55px; right: 1rem; bottom: 5.5rem; justify-content: center; }
+            .ai-pill-text { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-logo bold-header">
+            Quick<span class="text-holo">Pass</span>
+        </a>
+        <nav class="nav-menu">
+            <a href="#about" class="nav-link">About Us</a>
+            <a href="#services" class="nav-link">Car Options</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#reviews" class="nav-link">Reviews</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <a href="tel:07123456789" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Call Us</a>
+    </header>
+
+    <div class="sticky-action-bar" id="actions">
+        <a href="tel:07123456789" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-phone"></i> Call</a>
+        <a href="#booking" class="btn-holo" style="flex:2; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-car"></i> Book Lesson</a>
+    </div>
+
+    <div id="hero-canvas-container"></div>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge panel-3d" data-tilt data-tilt-scale="1.1">
+                <span>L</span> DVSA Approved Instructors
+            </div>
+            <h1 class="bold-header" data-tilt data-tilt-max="3">Learn Fast. <br><span class="text-holo">Pass First Time.</span></h1>
+            <p data-tilt data-tilt-max="2">Friendly, patient driving lessons in Andover. Choose between our modern automatic or traditional manual cars, and learn with an instructor that suits you.</p>
+            <a href="#booking" class="btn-3d" style="margin-top: 1rem;">Start Learning Today <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i></a>
+        </div>
+    </section>
+
+    <section class="trust-bar">
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
+            <i class="fa-solid fa-percent text-holo"></i>
+            <h4 class="bold-header">High Pass Rate</h4>
+            <span>Above National Average</span>
+        </div>
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
+            <i class="fa-solid fa-user-group text-holo"></i>
+            <h4 class="bold-header">Male & Female</h4>
+            <span>Friendly Local Tutors</span>
+        </div>
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
+            <i class="fa-solid fa-car-side text-holo"></i>
+            <h4 class="bold-header">Auto & Manual</h4>
+            <span>Dual Controlled Cars</span>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="booking">
+        <div class="roi-tech-section panel-3d">
+            <div class="tech-text-block">
+                <h3 class="bold-header">Book Your First<br><span class="text-holo">Lesson.</span></h3>
+                <p style="color: var(--text-dim); font-size: 1.1rem;">Ready to get behind the wheel? Use our interactive dashboard to check availability and request your first driving lesson instantly.</p>
+                
+                <div class="ai-avatar-badge panel-inset" data-tilt>
+                    <img src="female-reviewer-3.jpg" alt="Chloe Assistant" class="img-glow">
+                    <div>
+                        <h4 style="color: white; font-family: 'Outfit', sans-serif;">Chat with Chloe</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Our smart booking assistant is available 24/7.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calendar-mockup panel-inset" data-tilt data-tilt-max="5">
+                <h4 class="deck-header bold-header">1. Choose Your Car</h4>
+                <div class="covers-selector">
+                    <div class="cover-bubble panel-3d" style="background: var(--gradient-glow); color: var(--bg-abyss); border:none;">Automatic</div>
+                    <div class="cover-bubble panel-3d">Manual</div>
+                </div>
+                
+                <h4 class="deck-header bold-header" style="margin-top: 1.5rem;">2. Instructor Preference</h4>
+                <select class="panel-3d" style="margin-bottom: 1.5rem;">
+                    <option>No Preference</option>
+                    <option>Female Instructor</option>
+                    <option>Male Instructor</option>
+                </select>
+
+                <h4 class="deck-header bold-header">3. Experience Level</h4>
+                <select class="panel-3d">
+                    <option>Complete Beginner</option>
+                    <option>Partly Trained (10+ hours)</option>
+                    <option>Test Ready / Refresher</option>
+                </select>
+
+                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Check Availability</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="about">
+        <div class="about-grid">
+            <div class="instructor-images">
+                <div class="instructor-img-card panel-3d" data-tilt data-tilt-max="5">
+                    <img src="female-instrutor.jpg" alt="Female Driving Instructor">
+                </div>
+                <div class="instructor-img-card panel-3d" style="transform: translateY(40px) translateZ(20px);" data-tilt data-tilt-max="5">
+                    <img src="male-instructor.JPG" alt="Male Driving Instructor">
+                </div>
+            </div>
+            <div class="human-text" style="padding-left: 1rem;">
+                <span class="text-holo">Your Local Team</span>
+                <h2 class="bold-header">Learn Your Way.</h2>
+                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem;">Learning to drive shouldn't be stressful. We know that every student learns differently, which is why we offer a completely personalised approach to your lessons.</p>
+                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem;">We proudly offer both male and female instructors who are patient, friendly, and highly experienced. Whether you are a nervous beginner or just need to polish up before your test, we go at a pace that suits you.</p>
+                <ul>
+                    <li><i class="fa-solid fa-check-circle"></i> Patient, relaxed teaching style</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Pick up from home, college, or work</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Free theory test advice and support</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="services">
+        <div class="section-header">
+            <h2 class="bold-header text-holo">Choose Your Car</h2>
+            <p>We offer both modern automatic and traditional manual driving lessons.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
+                <img src="auto-car.jpg" alt="Automatic Lessons" class="service-img">
+                <span class="card-badge">Most Popular</span>
+                <h3 class="bold-header">Automatic Lessons</h3>
+                <p>Skip the stress of stalling and learning clutch control. Automatic cars are much easier to drive, meaning you usually need fewer lessons to pass your test.</p>
+                <p style="font-size: 1.4rem; color: var(--holo-green); font-weight: 800; transform: translateZ(30px);">From £38 / hr</p>
+            </div>
+            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
+                <img src="manual-car.jpg" alt="Manual Lessons" class="service-img">
+                <span class="card-badge" style="color: white; border-color: rgba(255,255,255,0.2);">Traditional</span>
+                <h3 class="bold-header">Manual Lessons</h3>
+                <p>Learn to drive the traditional way. Passing in a manual car gives you a full licence, allowing you to drive both manual and automatic cars in the future.</p>
+                <p style="font-size: 1.4rem; color: var(--holo-green); font-weight: 800; transform: translateZ(30px);">From £36 / hr</p>
+            </div>
+            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
+                <img src="learning-drive-1.jpg" alt="Intensive Courses" class="service-img">
+                <span class="card-badge red">Fast Track</span>
+                <h3 class="bold-header">Intensive Courses</h3>
+                <p>Need to pass quickly for a job or university? Our intensive driving courses condense months of lessons into just a few weeks of focused driving.</p>
+                <p style="font-size: 1.4rem; color: var(--holo-green); font-weight: 800; transform: translateZ(30px);">Contact for prices</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="gallery" style="padding-top: 2rem;">
+        <div class="section-header">
+            <h2 class="bold-header text-holo">Recent Passes</h2>
+            <p>Join the hundreds of happy students who have passed with QuickPass.</p>
+        </div>
+        <div class="gallery-container panel-inset">
+            <div class="gallery-track">
+                <div class="gallery-item panel-3d"><img src="driving-pass-1.jpg" alt="Student Passed"></div>
+                <div class="gallery-item panel-3d"><img src="test-pass-2.jpg" alt="Happy student"></div>
+                <div class="gallery-item panel-3d"><img src="test-pass-3.jpeg" alt="Driving test pass"></div>
+                <div class="gallery-item panel-3d"><img src="test-pass-4.jpg" alt="Passed driving test"></div>
+                <div class="gallery-item panel-3d"><img src="pass-5.JPG" alt="Successful student"></div>
+                <div class="gallery-item panel-3d"><img src="pass-6JPG.JPG" alt="Passed first time"></div>
+                
+                <div class="gallery-item panel-3d"><img src="driving-pass-1.jpg" alt="Student Passed"></div>
+                <div class="gallery-item panel-3d"><img src="test-pass-2.jpg" alt="Happy student"></div>
+                <div class="gallery-item panel-3d"><img src="test-pass-3.jpeg" alt="Driving test pass"></div>
+                <div class="gallery-item panel-3d"><img src="test-pass-4.jpg" alt="Passed driving test"></div>
+                <div class="gallery-item panel-3d"><img src="pass-5.JPG" alt="Successful student"></div>
+                <div class="gallery-item panel-3d"><img src="pass-6JPG.JPG" alt="Passed first time"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="reviews">
+        <div class="section-header">
+            <h2 class="bold-header">What Our Learners Say</h2>
+            <p>Real reviews from students who learned with us.</p>
+        </div>
+        <div class="test-grid">
+            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"I was so nervous to start driving, but my instructor was amazingly patient. We went at my pace, and I ended up passing first time with only 2 minor faults! Highly recommend the automatic lessons."</p>
+                <div class="client">
+                    <img src="female-reviewer-1.jpg" alt="Sarah Jenkins" class="img-glow">
+                    <div>
+                        <h4 class="bold-header" style="font-size: 1.1rem;">Sarah Jenkins</h4>
+                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Passed First Time</span>
+                    </div>
+                </div>
+            </div>
+            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"Moved to QuickPass after having a bad experience with another school. The difference was night and day. The instructors are super professional, and the cars are brand new and easy to drive."</p>
+                <div class="client">
+                    <img src="male-reviewer-1.jpg" alt="Tom Hardy" class="img-glow">
+                    <div>
+                        <h4 class="bold-header" style="font-size: 1.1rem;">Tom Hardy</h4>
+                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Manual Lessons</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="faqs">
+        <div class="section-header">
+            <h2 class="bold-header text-holo">Questions? We Can Help.</h2>
+            <p>Everything you need to know before starting your driving journey.</p>
+        </div>
+        <div class="faq-grid">
+            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
+                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">Should I choose automatic or manual?</h4>
+                <p>Automatic is generally faster and easier to learn because there's no clutch or gears to worry about. However, a manual licence allows you to drive both manual and automatic cars.</p>
+            </div>
+            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
+                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">Do I need to pass my theory test first?</h4>
+                <p>No, you can start taking practical driving lessons before you pass your theory test. In fact, combining the two often helps you understand the theory questions much better.</p>
+            </div>
+            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
+                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">How many lessons will I need?</h4>
+                <p>The DVSA recommends around 45 hours of professional lessons, but everyone is different. Your instructor will assess your progress and tell you when you are test-ready.</p>
+            </div>
+            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
+                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">Can I request a female instructor?</h4>
+                <p>Yes, absolutely. We have a diverse team of both male and female instructors. Just let us know your preference when you book your first lesson.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="contact">
+        <div class="section-header">
+            <h2 class="bold-header">Get In Touch</h2>
+            <p>Ready to start? Message us directly to book your slot.</p>
+        </div>
+        <div class="contact-layout">
+            <div>
+                <a href="https://wa.me/447123456789" target="_blank" class="info-strip panel-3d" data-tilt data-tilt-max="5">
+                    <i class="fa-brands fa-whatsapp text-holo" style="font-size: 2.5rem;"></i>
+                    <div>
+                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">WhatsApp Us</h5>
+                        <p style="font-size: 1.2rem; font-weight: 700; color: white;">+44 7123 456 789</p>
+                    </div>
+                </a>
+                <a href="mailto:hello@quickpass.co.uk" class="info-strip panel-3d" data-tilt data-tilt-max="5">
+                    <i class="fa-solid fa-envelope text-holo" style="font-size: 2.5rem;"></i>
+                    <div>
+                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Email Us</h5>
+                        <p style="font-size: 1.1rem; font-weight: 700; color: white;">hello@quickpass.co.uk</p>
+                    </div>
+                </a>
+                
+                <div class="panel-inset" style="padding: 1.5rem; margin-top: 2rem;">
+                    <h4 class="bold-header text-holo" style="margin-bottom: 0.5rem;">Areas We Cover</h4>
+                    <p style="color: var(--text-dim); font-size: 0.95rem;">We provide driving lessons across Andover, Tidworth, Whitchurch, and the surrounding villages. We can pick you up from home, work, or college.</p>
+                </div>
+            </div>
+
+            <div class="panel-3d map-frame" style="padding: 0.5rem;">
+                <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border-radius: 12px; border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <a href="#booking" class="mini-ai-pill panel-3d" data-tilt>
+        <img src="female-reviewer-3.jpg" alt="Chloe AI" class="img-glow">
+        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center; padding-right: 0.5rem;">
+            <p style="font-size: 0.95rem; font-weight: 800; color: white; margin: 0; line-height: 1.2;">Chloe (Help Desk)</p>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; font-weight: 600;"><i class="fa-solid fa-circle text-holo" style="font-size: 0.45rem; margin-right: 4px;"></i> Tap to chat</p>
+        </div>
+    </a>
+
+    <footer>
+        <h3 class="bold-header" style="margin-bottom: 1.5rem; font-size: 2rem; color: white;">Quick<span class="text-holo">Pass</span></h3>
+        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Helping Andover learn to drive safely and confidently.</p>
+        
+        <div style="margin-bottom: 3rem; display: flex; justify-content: center; gap: 1rem;">
+            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+        <p style="font-size: 0.85rem; color: #475569;">© 2026 QuickPass Driving School. Built by GoChuchuro Agency.</p>
+    </footer>
+
+    <script>
+        const container = document.getElementById('hero-canvas-container');
+        const scene = new THREE.Scene();
+        
+        // Fog to fade grid in the distance
+        scene.fog = new THREE.FogExp2(0x020617, 0.03);
+
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        // 1. Moving Floor Grid (Neon Green)
+        const gridHelper = new THREE.GridHelper(100, 40, 0x10b981, 0x064e3b);
+        gridHelper.position.y = -3;
+        scene.add(gridHelper);
+
+        // 2. Floating Passing Lights (Speed effect)
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 200;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 40; // Spread x
+            posArray[i+1] = Math.random() * 10 - 2;   // Spread y (above grid)
+            posArray[i+2] = (Math.random() - 0.5) * 40; // Spread z
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.08, color: 0x10b981, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+        camera.position.z = 10;
+        camera.position.y = 1;
+
+        // Mouse Parallax Logic
+        let mouseX = 0; let mouseY = 0;
+        let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        });
+
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Animate grid moving forward to simulate driving speed
+            gridHelper.position.z = (elapsedTime * 8) % 2.5;
+
+            // Animate lights rushing past camera
+            const positions = particlesMesh.geometry.attributes.position.array;
+            for(let i = 2; i < particlesCount * 3; i += 3) {
+                positions[i] += 0.3; // Move on Z axis
+                if(positions[i] > 15) { positions[i] = -25; } // Reset behind camera
+            }
+            particlesMesh.geometry.attributes.position.needsUpdate = true;
+            
+            // Subtle camera tilt based on mouse (steering effect)
+            camera.position.x += (mouseX * 0.003 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.002 + 1 - camera.position.y) * 0.05;
+            camera.lookAt(0, 0, 0);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        });
+
+        // Initialize 3D UI Tilt effects
+        VanillaTilt.init(document.querySelectorAll(".panel-3d, .btn-3d"), {
+            speed: 400,
+            glare: true,
+            "max-glare": 0.15,
+        });
+    </script>
+</body>
+</html>
