@@ -162,8 +162,8 @@
                 <div class="card-bottom">
                     <p>Perfect for local plumbers. Show your services clearly, get emergency calls quickly, and let customers book appointments online.</p>
                     <div class="button-group">
-                        <a href="plumber-2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="plumber-3d/index.html" class="btn btn-3d">Experience Future 3D</a>
+                        <a href="plumbing/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
+                        <a href="plumbing/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
                     </div>
                 </div>
             </div>
@@ -176,8 +176,8 @@
                 <div class="card-bottom">
                     <p>Help new drivers pass their test. Display your lesson prices, show student reviews, and let new learners book their first class easily.</p>
                     <div class="button-group">
-                        <a href="driving-2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="driving-3d/index.html" class="btn btn-3d">Experience Future 3D</a>
+                        <a href="driving/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
+                        <a href="driving/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
                     </div>
                 </div>
             </div>
@@ -190,8 +190,8 @@
                 <div class="card-bottom">
                     <p>Great for food businesses. Display your menu beautifully, accept table reservations, and help hungry customers find your location.</p>
                     <div class="button-group">
-                        <a href="restaurant-2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="restaurant-3d/index.html" class="btn btn-3d">Experience Future 3D</a>
+                        <a href="restaurant/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
+                        <a href="restaurant/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
                     </div>
                 </div>
             </div>
@@ -204,8 +204,8 @@
                 <div class="card-bottom">
                     <p>Beautiful design for local salons. Show your price list, introduce your team, and let clients book their haircuts or treatments fast.</p>
                     <div class="button-group">
-                        <a href="salon-2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="salon-3d/index.html" class="btn btn-3d">Experience Future 3D</a>
+                        <a href="salon/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
+                        <a href="salon/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
                     </div>
                 </div>
             </div>
@@ -218,8 +218,8 @@
                 <div class="card-bottom">
                     <p>Built for mechanics and MOT shops. Make it easy for drivers to book car repairs and see clear pricing before they arrive.</p>
                     <div class="button-group">
-                        <a href="garage-2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="garage-3d/index.html" class="btn btn-3d">Experience Future 3D</a>
+                        <a href="garage/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
+                        <a href="garage/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@
 
         // Create a connecting digital node network
         const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 300; // Less particles, but we will draw lines between them
+        const particlesCount = 300; 
         const posArray = new Float32Array(particlesCount * 3);
 
         for(let i = 0; i < particlesCount * 3; i++) {
@@ -262,7 +262,6 @@
         scene.add(particleMesh);
         camera.position.z = 5;
 
-        // Subtle slow rotation
         function animate() {
             requestAnimationFrame(animate);
             particleMesh.rotation.y += 0.001;
@@ -271,14 +270,12 @@
         }
         animate();
 
-        // Handle Window Resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Initialize 3D UI Tilt effects on the cards
         VanillaTilt.init(document.querySelectorAll(".blueprint-card"), {
             speed: 400,
             glare: true,
