@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autotech | MOT & Premium Servicing</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- BRAND DESIGN SYSTEM --- */
+        :root {
+            --obsidian: #090c12;         
+            --charcoal-surface: #121824; 
+            --silver-light: #f4f6fa;     
+            --white-pure: #ffffff;       
+            --performance-red: #dc2626;  
+            --accent-glow: #ef4444;      
+            --text-creme: #f8fafc;
+            --text-dark: #0f172a;
+            --text-dim: #94a3b8;
+            --border-tint: rgba(255, 255, 255, 0.06);
+            --border-dark: #cbd5e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+
+        body { background-color: var(--obsidian); color: var(--text-creme); line-height: 1.6; padding-bottom: 70px; }
+
+        .display-header { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
+
+        /* --- STICKY TOP NAVIGATION --- */
+        header {
+            background-color: rgba(9, 12, 18, 0.95); backdrop-filter: blur(12px);
+            padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-tint);
+        }
+
+        .brand-identity {
+            color: var(--text-creme); text-decoration: none; font-size: 1.6rem; font-weight: 800;
+            letter-spacing: 1px; display: flex; flex-direction: column; line-height: 1.1;
+        }
+        .brand-identity span { color: var(--performance-red); }
+        .brand-identity .subtitle { font-size: 0.75rem; color: var(--text-dim); letter-spacing: 4px; font-weight: 500; margin-top: 2px; }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-link-item { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-link-item:hover { color: var(--performance-red); }
+
+        /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
+        .sticky-action-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(18, 24, 36, 0.96); backdrop-filter: blur(10px);
+            border-top: 2px solid var(--performance-red); padding: 1rem 5%;
+            display: flex; justify-content: center; gap: 1.5rem; z-index: 999; box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+        }
+
+        .action-bar-btn {
+            flex: 1; max-width: 280px; padding: 0.9rem; border-radius: 8px; text-decoration: none;
+            font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; transition: 0.3s; border: none;
+        }
+        .action-bar-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(220, 38, 38, 0.25); }
+        .btn-dark-cta { background-color: #1e293b; color: white; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-red-cta { background-color: var(--performance-red); color: white; }
+
+        /* --- HERO BANNER W/ 35% SHADING --- */
+        .hero-banner {
+            background: linear-gradient(rgba(9, 12, 18, 0.35), rgba(9, 12, 18, 0.35)), url('hero-autotech-bg.jpg') no-repeat center center/cover;
+            min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 4rem 2rem;
+        }
+
+        .hero-banner h1 { font-size: 4.5rem; color: var(--text-creme); line-height: 1.05; margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
+        .hero-banner h1 span { color: var(--performance-red); }
+        .hero-banner p { font-size: 1.3rem; max-width: 750px; color: #e2e8f0; margin-bottom: 2.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-weight: 500; }
+
+        /* --- METRICS / PERFORMANCE HUB --- */
+        .metrics-ribbon { background-color: var(--charcoal-surface); padding: 2.5rem 5%; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; border-bottom: 1px solid var(--border-tint); text-align: center; }
+        .metric-node h4 { font-size: 2.2rem; color: var(--performance-red); font-weight: 800; font-family: 'Montserrat', sans-serif; }
+        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dim); margin-top: 0.2rem; font-weight: 600; }
+        
+        .embedded-google-badge {
+            display: flex; align-items: center; gap: 0.8rem; background: white; padding: 0.8rem 1.6rem;
+            border-radius: 50px; text-decoration: none; color: var(--text-dark); border: 1px solid var(--border-tint);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .embedded-google-badge:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
+
+        /* --- INTERACTIVE BOOKING ENGINE --- */
+        .tech-roi-container { background-color: var(--charcoal-surface); border-radius: 20px; border: 1px solid var(--border-tint); padding: 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center; margin: 5rem auto; max-width: 1250px; position: relative; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.4); }
+        .tech-pitch-content h3 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--text-creme); }
+        .tech-pitch-content h3 span { color: var(--performance-red); }
+        
+        .ai-concierge-badge { display: flex; align-items: center; background: rgba(9, 12, 18, 0.7); padding: 1.5rem; border-radius: 16px; gap: 1.5rem; border: 1px solid var(--border-tint); margin: 2.5rem 0 0 0; }
+        .ai-concierge-badge img { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--performance-red); object-fit: cover; }
+
+        .interactive-table-deck { background: var(--obsidian); border-radius: 16px; padding: 2.5rem; border: 1px solid var(--border-tint); }
+        .deck-header { font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-tint); padding-bottom: 1rem; letter-spacing: 0.5px; }
+        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 2rem; gap: 0.5rem; }
+        .cover-bubble { flex: 1; padding: 0.75rem 0; text-align: center; border-radius: 8px; border: 1px solid var(--border-tint); font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; background: rgba(255,255,255,0.02); }
+        .cover-bubble.selected, .cover-bubble:hover { background-color: var(--performance-red); color: white; border-color: var(--performance-red); box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3); }
+
+        /* --- SECTION STRUCTURES --- */
+        .section-layout { padding: 6.5rem 5%; max-width: 1300px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4.5rem; }
+        .section-header h2 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.5px; }
+        .section-header p { font-size: 1.1rem; margin-top: 0.6rem; color: var(--text-dim); }
+
+        /* --- METALLIC SILVER WORKSHOP BREAK --- */
+        .silver-break-bg { background-color: var(--silver-light); color: var(--text-dark); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+        .silver-break-bg h2 { color: var(--text-dark); }
+        .silver-break-bg p { color: #475569; }
+
+        /* --- PREMIUM SERVICE CARDS MATRIX --- */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .menu-card { background: var(--charcoal-surface); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-tint); transition: 0.3s; display: flex; flex-direction: column; }
+        .menu-card:hover { transform: translateY(-8px); border-color: var(--performance-red); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .menu-card img { width: 100%; height: 240px; object-fit: cover; border-bottom: 1px solid var(--border-tint); filter: grayscale(20%); transition: 0.3s; }
+        .menu-card:hover img { filter: grayscale(0%); }
+        .card-inner { padding: 2.2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-title-row { margin-bottom: 1rem; }
+        .card-title-row h4 { font-size: 1.4rem; color: var(--text-creme); font-weight: 700; }
+        .card-badge { display: inline-block; background: rgba(220, 38, 38, 0.15); color: var(--accent-glow); padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.5rem; }
+
+        /* --- 2D SLIDING GALLERY --- */
+        .gallery-container { padding: 4rem 0; overflow: hidden; background: var(--charcoal-surface); border-top: 1px solid var(--border-tint); border-bottom: 1px solid var(--border-tint);}
+        .gallery-track { display: flex; width: calc(350px * 10); animation: scrollGallery 30s linear infinite; }
+        .gallery-track:hover { animation-play-state: paused; }
+        
+        @keyframes scrollGallery {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 5)); } 
+        }
+        
+        .gallery-item { width: 320px; height: 220px; margin: 0 15px; border-radius: 8px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; border: 1px solid var(--border-tint);}
+        .gallery-item img:hover { transform: scale(1.05); }
+
+        /* --- VERIFIED TESTIMONIAL PLATFORM --- */
+        .review-sector { background-color: #06090e; padding: 6.5rem 5%; border-top: 1px solid var(--border-tint); border-bottom: 1px solid var(--border-tint); }
+        .testimonial-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .review-envelope { background: var(--charcoal-surface); border: 1px solid var(--border-tint); padding: 2.5rem; border-radius: 16px; }
+        .stars-row { color: #fbbc05; margin-bottom: 1.2rem; font-size: 0.95rem; }
+        .review-envelope p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6; }
+        .client { display: flex; align-items: center; gap: 1.2rem; }
+        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--performance-red); }
+        .client h4 { font-size: 1.1rem; font-weight: 700; color: var(--text-creme); }
+
+        /* --- PURE WHITE CRISP DIAGNOSTICS & FAQS --- */
+        .white-break-bg { background-color: var(--white-pure); color: var(--text-dark); border-top: 1px solid var(--border-dark); }
+        .white-break-bg h2 { color: var(--text-dark); }
+        .white-break-bg p { color: #57657a; }
+        .faq-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .faq-node { background: var(--silver-light); padding: 2.2rem; border-radius: 12px; border: 1px solid var(--border-dark); }
+        .faq-node h4 { color: #0f172a; margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
+        .faq-node p { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- LOGISTICS MAP & DIRECT CHANNELS --- */
+        .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
+        .map-frame { width: 100%; height: 360px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-dark); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
+        
+        .info-strip { background: var(--charcoal-surface); border: 1px solid var(--border-tint); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
+        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.2); border-color: var(--performance-red); }
+        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--white-pure); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-tint); }
+        
+        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--white-pure); }
+
+        /* --- ROUND FLOATING AI CHAT WIDGET --- */
+        .chat-toggle-btn {
+            position: fixed; bottom: 6rem; right: 2rem; width: 60px; height: 60px;
+            border-radius: 50%; background: var(--charcoal-surface); border: 2px solid var(--performance-red);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4); z-index: 1000; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; padding: 0; overflow: hidden;
+        }
+        .chat-toggle-btn img { width: 100%; height: 100%; object-fit: cover; }
+        .chat-toggle-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4); }
+
+        .floating-chat-widget { 
+            position: fixed; bottom: 6.5rem; right: 2rem; width: 330px; background: white;
+            border-radius: 16px; box-shadow: 0 15px 45px rgba(0,0,0,0.4); z-index: 1001;
+            overflow: hidden; color: var(--obsidian); border: 1px solid #e2e8f0; display: none;
+        }
+        .widget-head { background: var(--charcoal-surface); color: white; padding: 1.2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--performance-red); }
+        .widget-head .profile-info { display: flex; align-items: center; gap: 1rem; }
+        .widget-head img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--performance-red); }
+        .widget-pane { padding: 1.5rem; font-size: 0.9rem; background: #f8fafc; }
+        .widget-pane .msg { background: white; padding: 1.2rem; border-radius: 12px 12px 12px 0; border: 1px solid #e2e8f0; margin-bottom: 0.5rem; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+
+        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.04); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.08); }
+        .social-circle-link:hover { background: var(--performance-red); color: white; transform: translateY(-4px); border-color: var(--performance-red); }
+
+        @media (max-width: 950px) {
+            .nav-links { display: none; }
+            .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3.5rem; }
+            .tech-roi-container { padding: 2.5rem; margin-top: 2rem; }
+            .hero-banner h1 { font-size: 2.6rem; }
+            .about-grid-mobile { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+            .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
+            .chat-toggle-btn { bottom: 5.5rem; right: 1rem; width: 55px; height: 55px; }
+            .floating-chat-widget { bottom: 5.5rem; right: 1rem; width: calc(100vw - 2rem); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-identity display-header">AUTOTECH <span class="subtitle">MOT & REPAIRS</span></a>
+        <nav class="nav-links">
+            <a href="#services" class="nav-link-item">Services</a>
+            <a href="#booking" class="nav-link-item">Book Online</a>
+            <a href="#workshop" class="nav-link-item">About Us</a>
+            <a href="#gallery" class="nav-link-item">Gallery</a>
+            <a href="#reviews" class="nav-link-item">Reviews</a>
+            <a href="#faqs" class="nav-link-item">FAQs</a>
+            <a href="#location" class="nav-link-item">Location</a>
+        </nav>
+    </header>
+
+    <div class="sticky-action-bar" id="actions">
+        <a href="tel:01722273777" class="action-bar-btn btn-dark-cta"><i class="fa-solid fa-phone"></i> Call Garage</a>
+        <a href="#booking" class="action-bar-btn btn-red-cta"><i class="fa-solid fa-calendar-check"></i> Book MOT</a>
+    </div>
+
+    <section class="hero-banner">
+        <h1 class="display-header">Reliable Local Mechanics <span>& MOT Testing</span></h1>
+        <p>Expert car repairs, transparent pricing, and fast MOT testing right here in Andover. Keep your car running safely and smoothly.</p>
+        <a href="#services" class="action-bar-btn btn-red-cta" style="max-width: 240px; padding: 1.1rem;">See All Services</a>
+    </section>
+
+    <section class="metrics-ribbon">
+        <a href="#reviews" class="embedded-google-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
+                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+            </svg>
+            <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
+                <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
+                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 140+ Reviews</span>
+            </div>
+        </a>
+        <div class="metric-node"><h4>DVSA</h4><p>Approved Test Centre</p></div>
+        <div class="metric-node"><h4>100%</h4><p>Quality Parts Used</p></div>
+    </section>
+
+    <section class="section-layout" style="padding-top: 0;">
+        <div class="tech-roi-container" id="booking">
+            <div class="tech-pitch-content">
+                <h3 class="display-header">Skip the Queue.<br><span>Book Online.</span></h3>
+                <p>Don't wait on hold. Use our simple online calendar to lock in your MOT, service, or diagnostic check instantly.</p>
+                
+                <div class="ai-concierge-badge">
+                    <img src="ai-receptionist.png" alt="Sarah - Garage Assistant">
+                    <div>
+                        <h4 style="color: var(--performance-red); font-weight:700; font-size: 1.1rem;">Meet Sarah, Our Virtual Assistant</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 3px;">Available 24/7 to help you check available booking slots and get rough quotes for standard repairs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-table-deck">
+                <h4 class="deck-header display-header text-creme">Select Your Service</h4>
+                <div class="covers-selector">
+                    <div class="cover-bubble selected">MOT Test</div>
+                    <div class="cover-bubble">Interim Service</div>
+                    <div class="cover-bubble">Full Service</div>
+                </div>
+                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">What type of vehicle?</p>
+                <select style="width: 100%; padding: 0.9rem; background: var(--charcoal-surface); border: 1px solid var(--border-tint); color: white; border-radius: 8px; outline: none; font-weight: 600;">
+                    <option>Standard Car / Hatchback</option>
+                    <option>Performance / Sports Car</option>
+                    <option>Commercial Van</option>
+                    <option>4x4 / SUV</option>
+                </select>
+                <button style="width:100%; padding:1.1rem; background: var(--performance-red); color: white; border:none; border-radius:8px; margin-top:1.5rem; font-weight:700; text-transform:uppercase; cursor:pointer; letter-spacing: 0.5px; transition: 0.3s;" onclick="alert('Checking garage availability...')">Find Available Slots</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="silver-break-bg" id="workshop">
+        <div class="section-layout">
+            <div class="about-grid-mobile" style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items: center;">
+                <div>
+                    <img src="interior.png..jpeg" alt="Autotech Garage Andover" style="width:100%; border-radius:16px; border:1px solid var(--border-dark); box-shadow:0 20px 40px rgba(0,0,0,0.08);">
+                </div>
+                <div>
+                    <span style="color:var(--performance-red); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">Your Trusted Local Garage</span>
+                    <h2 class="display-header" style="font-size: 2.8rem; margin:0.4rem 0 1.2rem; line-height:1.15;">Honest Mechanics, Fair Prices.</h2>
+                    <p style="margin-bottom:1.5rem; font-size: 1.05rem;">At Autotech, we believe in straightforward, honest advice. We will never carry out any repair work without showing you exactly what is wrong and agreeing on a price first.</p>
+                    <p style="font-size: 1.05rem;">Our modern garage is equipped with the latest diagnostic tools, meaning we can fix everything from a simple tyre change to complex engine warnings quickly and safely.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-layout" id="services" style="background-color: var(--obsidian);">
+        <div class="section-header">
+            <h2 class="display-header">Our Main Services</h2>
+            <p style="color: var(--text-dim);">Professional care to keep your vehicle safe and reliable.</p>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="car-repair.jpg" alt="Car Repairs Andover">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4>MOTs & General Repairs</h4>
+                        <span class="card-badge">DVSA Approved</span>
+                    </div>
+                    <p style="color: var(--text-dim); font-size:0.95rem; margin-bottom: 1.5rem;">
+                        Failed your MOT? Hearing a strange noise? We handle brakes, exhausts, suspension, and all general repairs to get you back on the road safely.
+                    </p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="oil-change.png" alt="Car Servicing Andover">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4>Annual Servicing</h4>
+                        <span class="card-badge">Engine Health</span>
+                    </div>
+                    <p style="color: var(--text-dim); font-size:0.95rem; margin-bottom: 1.5rem;">
+                        Regular oil changes and filter replacements keep your car running smoothly and prevent expensive breakdowns in the future.
+                    </p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="car-diagnostic.png.jpeg" alt="Car Diagnostics">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4>Warning Lights & Diagnostics</h4>
+                        <span class="card-badge">Fault Finding</span>
+                    </div>
+                    <p style="color: var(--text-dim); font-size:0.95rem; margin-bottom: 1.5rem;">
+                        Dashboard lit up like a Christmas tree? We plug into your car's computer to quickly find and fix electrical and engine faults.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="section-header" style="margin-top: 4rem; margin-bottom: 2rem;">
+            <h2 class="display-header">Inside Our Workshop</h2>
+            <p style="color: var(--text-dim);">A look at our team hard at work.</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-track">
+                <div class="gallery-item"><img src="interior.png..jpeg" alt="Garage Interior"></div>
+                <div class="gallery-item"><img src="car-repair.jpg" alt="Mechanic Repairing Car"></div>
+                <div class="gallery-item"><img src="car-diagnostic.png.jpeg" alt="Car Diagnostics"></div>
+                <div class="gallery-item"><img src="oil-change.png" alt="Oil Change"></div>
+                <div class="gallery-item"><img src="hero-autotech-bg.jpg" alt="Workshop Bay"></div>
+                
+                <div class="gallery-item"><img src="interior.png..jpeg" alt="Garage Interior"></div>
+                <div class="gallery-item"><img src="car-repair.jpg" alt="Mechanic Repairing Car"></div>
+                <div class="gallery-item"><img src="car-diagnostic.png.jpeg" alt="Car Diagnostics"></div>
+                <div class="gallery-item"><img src="oil-change.png" alt="Oil Change"></div>
+                <div class="gallery-item"><img src="hero-autotech-bg.jpg" alt="Workshop Bay"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-sector" id="reviews">
+        <div class="section-header">
+            <h2 class="display-header" style="color: var(--text-creme);">Customer Reviews</h2>
+            <p style="color: var(--text-dim);">See what local Andover drivers are saying about our garage.</p>
+        </div>
+        <div class="testimonial-matrix">
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The finest garage in town. They found a tricky electrical fault in my car that another garage completely missed. Great prices and very honest."</p>
+                <div class="client">
+                    <img src="reviewer-1.jpg" alt="Emma Richardson">
+                    <div><h4>Emma Richardson</h4><span style="font-size:0.8rem; color:var(--performance-red); font-weight: 600;">Local Driver</span></div>
+                </div>
+            </div>
+
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"We take all our company delivery vans here. Booking online is a breeze, they never add hidden costs, and they get the vans back on the road fast."</p>
+                <div class="client">
+                    <img src="reviewer-2.jpg" alt="Marcus Vance">
+                    <div><h4>Marcus Vance</h4><span style="font-size:0.8rem; color:var(--performance-red); font-weight: 600;">Fleet Manager</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="white-break-bg">
+        <div class="section-layout" id="faqs">
+            <div class="section-header">
+                <h2 class="display-header">Frequently Asked Questions</h2>
+                <p>Common questions about booking and repairs.</p>
+            </div>
+            <div class="faq-matrix">
+                <div class="faq-node">
+                    <h4>Will using your garage void my car's warranty?</h4>
+                    <p>No, it won't! We use approved parts and follow the manufacturer's exact service schedule, which legally protects your warranty.</p>
+                </div>
+                <div class="faq-node">
+                    <h4>What happens if my car fails its MOT?</h4>
+                    <p>If your car fails, we will call you immediately with a clear explanation of what is wrong and a fixed price to fix it. We never do work without your permission.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-layout" id="location" style="padding-top:0;">
+            <div class="contact-workspace">
+                <div class="map-frame">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div>
+                    <h3 class="display-header" style="font-size: 2.3rem; margin-bottom: 1rem; color: var(--text-dark);">Find Our Garage</h3>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">Located conveniently in central Andover. Drop your car off and relax in our waiting area with a free coffee.</p>
+                    
+                    <a href="https://wa.me/441722273777" target="_blank" class="info-strip whatsapp">
+                        <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="info-strip-text">
+                            <h5>Message Us on WhatsApp</h5>
+                            <p>+44 1722 273777</p>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:bookings@autotechcarandvan.co.uk" class="info-strip email-feature">
+                        <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="info-strip-text">
+                            <h5>Email the Workshop</h5>
+                            <p>bookings@autotechcarandvan.co.uk</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <button id="chatToggleBtn" class="chat-toggle-btn" onclick="document.getElementById('aiChatWidget').style.display = 'block'; this.style.display = 'none';">
+        <img src="ai-receptionist.png" alt="Sarah AI">
+    </button>
+
+    <div id="aiChatWidget" class="floating-chat-widget">
+        <div class="widget-head">
+            <div class="profile-info">
+                <img src="ai-receptionist.png" alt="Sarah AI">
+                <div>
+                    <h5 style="font-size:0.95rem; font-weight:700; margin: 0;">Sarah (Virtual Desk)</h5>
+                    <span style="font-size:0.75rem; opacity:0.9;"><i class="fa-solid fa-circle" style="color: #4ade80; font-size: 0.45rem; margin-right: 4px;"></i> Online to help</span>
+                </div>
+            </div>
+            <button onclick="document.getElementById('aiChatWidget').style.display = 'none'; document.getElementById('chatToggleBtn').style.display = 'flex';" style="background: transparent; border: none; color: white; cursor: pointer; font-size: 1.2rem;">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="widget-pane">
+            <div class="msg">
+                <strong>Welcome to Autotech! 🔧</strong><br>
+                Need to check MOT availability or get a quote for a service? Just ask!
+            </div>
+        </div>
+    </div>
+
+    <footer style="background-color: #0b0f17; padding: 6rem 5% 8rem; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border-tint);">
+        <h3 class="display-header" style="color: white; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">AUTOTECH</h3>
+        <p style="max-width: 480px; margin: 0 auto 1.8rem; font-size: 0.95rem;">Keeping Andover driving safely.</p>
+        
+        <div class="social-circle-container">
+            <a href="https://facebook.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://google.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
+        </div>
+
+        <p style="font-size:0.8rem; border-top: 1px solid var(--border-tint); padding-top:2rem;">© 2026 GoChuchuro Systems. Premium Workshop Assets.</p>
+    </footer>
+
+</body>
+</html>
