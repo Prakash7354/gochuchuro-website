@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUMIÈRE | Premium Unisex Hair & Colour Studio</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <style>
+        /* --- SALON VIP DESIGN SYSTEM --- */
+        :root {
+            --obsidian: #08080a;         /* High-End Deep Black Background */
+            --charcoal-surface: #121215; /* Secondary Surface (Cards/Widgets) */
+            --silver-premium: #cbd5e1;   /* High-end Silver Accent */
+            --white-pure: #ffffff;       /* Text Pure White */
+            --vip-gold: #c6a06f;         /* Moody VIP Gold Core Accent */
+            --vip-gold-glow: #e2c092;    /* Interactive Highlight Gold */
+            --text-silver: #f1f5f9;      /* Body Text */
+            --text-dim: #94a3b8;         /* Muted text/descriptions */
+            --border-faint: rgba(255, 255, 255, 0.04); 
+            --border-dark: #334155;
+            --tech-white: #ffffff;       
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--text-silver);
+            line-height: 1.6;
+            padding-bottom: 70px; /* Clears sticky mobile hotbar */
+        }
+
+        .serif-display {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        /* --- STICKY TOP NAVIGATION --- */
+        header {
+            background-color: rgba(8, 8, 10, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1.2rem 5%; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid var(--border-faint);
+        }
+
+        .brand-identity {
+            color: var(--white-pure); text-decoration: none; font-size: 1.8rem; font-weight: 800;
+            letter-spacing: 2.5px; text-transform: uppercase;
+        }
+        .brand-identity span { color: var(--vip-gold); }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-link-item { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-link-item:hover { color: var(--vip-gold); }
+
+        /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
+        .sticky-action-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(18, 18, 21, 0.96); backdrop-filter: blur(10px);
+            border-top: 2px solid var(--vip-gold); padding: 1rem 5%; display: flex; justify-content: center; gap: 1.5rem;
+            z-index: 990; box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
+        }
+
+        .action-bar-btn {
+            flex: 1; max-width: 260px; padding: 0.9rem; border-radius: 4px; text-decoration: none;
+            font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; transition: 0.3s; border: none;
+        }
+        .action-bar-btn:hover { transform: translateY(-3px); }
+        .btn-silver-cta { background-color: transparent; color: var(--silver-premium); border: 1px solid var(--border-dark); }
+        .btn-gold-cta { background-color: var(--vip-gold); color: var(--obsidian); }
+
+        /* --- HERO BANNER W/ 35% SHADING --- */
+        .hero-banner {
+            background: linear-gradient(rgba(8, 8, 10, 0.65), rgba(8, 8, 10, 0.65)), url('hero-salon.jpg') no-repeat center center/cover;
+            min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem;
+        }
+
+        .hero-banner h1 { font-size: 4.8rem; line-height: 1.05; color: var(--white-pure); margin-bottom: 1.5rem; text-shadow: 0 4px 20px rgba(0,0,0,0.9); }
+        .hero-banner h1 span { color: var(--vip-gold); font-style: italic; }
+        .hero-banner p { font-size: 1.25rem; max-width: 700px; color: #e2e8f0; margin-bottom: 2.5rem; text-shadow: 0 2px 10px rgba(0,0,0,0.8); font-weight: 500; }
+
+        /* --- METRICS RIBBON --- */
+        .metrics-ribbon { background-color: var(--charcoal-surface); padding: 2.5rem 5%; display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; border-bottom: 1px solid var(--border-faint); text-align: center; }
+        .metric-node h4 { font-size: 2.2rem; color: var(--vip-gold); font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;}
+        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; font-weight: 600; }
+
+        .embedded-google-badge {
+            display: flex; align-items: center; gap: 0.8rem; background: white; padding: 0.8rem 1.6rem;
+            border-radius: 50px; text-decoration: none; color: var(--obsidian); border: 1px solid var(--border-faint);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .embedded-google-badge:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
+
+        /* --- SECTION WRAPPERS --- */
+        .section-layout { padding: 7rem 5%; max-width: 1300px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4.5rem; }
+        .section-header h2 { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.5px; color: var(--white-pure); }
+        .section-header p { font-size: 1.1rem; margin-top: 0.6rem; color: var(--text-dim); }
+
+        /* --- BOOKING HUB --- */
+        .tech-roi-container {
+            background-color: var(--charcoal-surface); border-radius: 12px; border: 1px solid var(--border-faint);
+            padding: 4rem; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
+            margin: 5rem auto; max-width: 1250px; position: relative; z-index: 10; box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+        }
+
+        .tech-pitch-content h3 { font-size: 2.4rem; margin-bottom: 1rem; color: var(--white-pure); }
+        .tech-pitch-content h3 span { color: var(--vip-gold); }
+        
+        .ai-concierge-badge { display: flex; align-items: center; background: rgba(8, 8, 10, 0.7); padding: 1.5rem; border-radius: 10px; gap: 1.5rem; border: 1px solid var(--border-faint); margin: 2.5rem 0 0; }
+        .ai-concierge-badge img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--tech-white); object-fit: cover; }
+
+        .interactive-table-deck { background: var(--obsidian); border-radius: 12px; padding: 2.5rem; border: 1px solid var(--border-faint); }
+        .deck-header { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-faint); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;}
+        
+        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 1.5rem; gap: 0.5rem; }
+        .cover-bubble { flex: 1; padding: 0.8rem 0; text-align: center; border-radius: 4px; border: 1px solid var(--border-faint); display: flex; align-items: center; justify-content: center; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; background: rgba(255,255,255,0.02);}
+        .cover-bubble.selected, .cover-bubble:hover { background-color: var(--vip-gold); color: var(--obsidian); border-color: var(--vip-gold); }
+
+        /* --- STRATEGIC SILVER STUDIO BREAK --- */
+        .silver-break-bg { background-color: var(--silver-premium); color: var(--obsidian); border-top: 1px solid var(--border-dark); border-bottom: 1px solid var(--border-dark); }
+        .silver-break-bg p { color: #334155; }
+        .silver-break-bg .serif-display { color: var(--obsidian); }
+        .editorial-image-group { position: relative; padding-bottom: 2rem; }
+        .editorial-main { width: 100%; border-radius: 12px; border: 1px solid var(--border-dark); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .editorial-portrait { position: absolute; bottom: 0; right: -2rem; width: 45%; border-radius: 8px; border: 5px solid var(--silver-premium); box-shadow: 0 20px 40px rgba(0,0,0,0.3); object-fit: cover; }
+
+        /* --- VIP SERVICE CARDS --- */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .menu-card { background: var(--charcoal-surface); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-faint); transition: 0.3s ease; }
+        .menu-card:hover { transform: translateY(-7px); border-color: var(--vip-gold); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .menu-card img { width: 100%; height: 260px; object-fit: cover; border-bottom: 1px solid var(--border-faint); transition: 0.4s; }
+        .card-inner { padding: 2.2rem; }
+        .card-title-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+        .card-title-row h4 { font-size: 1.4rem; color: var(--white-pure); }
+        .card-price { color: var(--vip-gold); font-weight: 800; font-size: 1.3rem; }
+        .card-description { color: var(--text-dim); font-size:0.9rem; font-weight: 300; }
+
+        /* --- 2D SLIDING GALLERY --- */
+        .gallery-container { padding: 4rem 0; overflow: hidden; background: var(--charcoal-surface); border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint);}
+        .gallery-track { display: flex; width: calc(350px * 10); animation: scrollGallery 30s linear infinite; }
+        .gallery-track:hover { animation-play-state: paused; }
+        
+        @keyframes scrollGallery { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 5)); } }
+        
+        .gallery-item { width: 320px; height: 220px; margin: 0 15px; border-radius: 8px; overflow: hidden; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; border: 1px solid var(--border-faint);}
+        .gallery-item img:hover { transform: scale(1.05); border-color: var(--vip-gold);}
+
+        /* --- VERIFIED GUEST FEEDBACK --- */
+        .review-sector { background-color: #060608; padding: 7rem 5%; border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint); }
+        .testimonial-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
+        .review-envelope { background: var(--charcoal-surface); border: 1px solid var(--border-faint); padding: 2.5rem; border-radius: 12px; }
+        .stars-row { color: #fbbc04; margin-bottom: 1rem; font-size: 0.9rem; }
+        .review-envelope p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; font-weight: 300; line-height: 1.6; }
+        .client { display: flex; align-items: center; gap: 1.2rem; }
+        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--vip-gold); }
+
+        /* --- FAQ & CONTACT BREAK --- */
+        .white-break-bg { background-color: var(--white-pure); color: var(--obsidian); border-top: 1px solid #cbd5e1; }
+        .white-break-bg h2 { color: var(--obsidian); }
+        .white-break-bg p { color: #57657a; }
+        
+        .faq-matrix { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        .faq-node { background: var(--silver-premium); padding: 2.2rem; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .faq-node h4 { color: #0f172a; margin-bottom: 0.5rem; font-size: 1.15rem; font-weight: 700; }
+        .faq-node p { color: #475569; font-size: 0.95rem; line-height: 1.6; }
+
+        .contact-workspace { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
+        .map-frame { width: 100%; height: 360px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-dark); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        .info-strip { background: var(--charcoal-surface); border: 1px solid var(--border-faint); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none; }
+        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.2); border-color: var(--vip-gold); }
+        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--white-pure); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-faint); }
+        
+        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--white-pure); }
+
+        /* --- MINI AI PILL (Desktop) --- */
+        .mini-ai-pill {
+            position: fixed; bottom: 5.5rem; right: 1.5rem; background: white; border-radius: 50px;
+            padding: 0.4rem 1.2rem 0.4rem 0.4rem; box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+            z-index: 990; display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
+            border: 1px solid #cbd5e1; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .mini-ai-pill:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(198,160,111,0.35); }
+        .mini-ai-pill img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--vip-gold); object-fit: cover; }
+
+        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
+        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.04); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.08); }
+        .social-circle-link:hover { background: var(--vip-gold); color: var(--obsidian); transform: translateY(-4px); border-color: var(--vip-gold); }
+
+        @media (max-width: 950px) {
+            .nav-links { display: none; }
+            .tech-roi-container, .contact-workspace, .faq-matrix { grid-template-columns: 1fr; gap: 3rem; }
+            .tech-roi-container { padding: 2rem; margin-top: 2rem; }
+            .hero-banner h1 { font-size: 2.8rem; }
+            .about-grid-mobile { grid-template-columns: 1fr !important; gap: 4rem !important; }
+            .editorial-portrait { right: 0; width: 60%; }
+            .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
+            .mini-ai-pill { padding: 0; width: 56px; height: 56px; right: 1rem; bottom: 5.5rem; justify-content: center; border-radius: 50%; }
+            .mini-ai-pill img { width: 100%; height: 100%; margin: 0; }
+            .ai-pill-text { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="brand-identity serif-display">LUMIÈRE <span>.</span></a>
+        <nav class="nav-links">
+            <a href="#services" class="nav-link-item">Services</a>
+            <a href="#booking" class="nav-link-item">Book Online</a>
+            <a href="#studio" class="nav-link-item">Our Salon</a>
+            <a href="#gallery" class="nav-link-item">Gallery</a>
+            <a href="#reviews" class="nav-link-item">Reviews</a>
+            <a href="#location" class="nav-link-item">Location</a>
+        </nav>
+    </header>
+
+    <div class="sticky-action-bar" id="actions">
+        <a href="tel:+44123456789" class="action-bar-btn btn-silver-cta"><i class="fa-solid fa-phone"></i> Call Salon</a>
+        <a href="#booking" class="action-bar-btn btn-gold-cta"><i class="fa-solid fa-calendar-alt"></i> Book Appointment</a>
+    </div>
+
+    <section class="hero-banner">
+        <h1 class="serif-display">Uncompromising Artistry. <span>Beautiful Hair</span>.</h1>
+        <p>A welcoming, luxury hair studio dedicated to bespoke colour and expert styling for everyone. Elevate your everyday look.</p>
+        <a href="#services" class="action-bar-btn btn-gold-cta" style="max-width: 220px; font-weight: 700; padding: 1rem;">View Services</a>
+    </section>
+
+    <section class="metrics-ribbon">
+        <a href="#reviews" class="embedded-google-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
+                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+            </svg>
+            <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
+                <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
+                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 120+ Reviews</span>
+            </div>
+        </a>
+        <div class="metric-node"><h4>Master</h4><p>Level Stylists</p></div>
+        <div class="metric-node"><h4>Bespoke</h4><p>Gender-Neutral Care</p></div>
+    </section>
+
+    <section class="section-layout" style="padding-top: 0;">
+        <div class="tech-roi-container" id="booking">
+            <div class="tech-pitch-content">
+                <h3 class="serif-display">Book Your Chair <span>Instantly.</span></h3>
+                <p style="color: var(--text-dim); margin-bottom: 1.5rem;">Avoid waiting on the phone. Use our live booking calendar to secure your appointment instantly.</p>
+                
+                <div class="ai-concierge-badge">
+                    <img src="receptionist-ai.jpg" alt="AI Receptionist Maya">
+                    <div>
+                        <h4 style="color: var(--vip-gold); font-weight:700;">Meet Maya, Your Salon Assistant</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 2px;">Available 24/7 to help you find the perfect time slot and answer any styling questions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-table-deck">
+                <h4 class="deck-header serif-display">Select Your Service</h4>
+                <div class="covers-selector">
+                    <div class="cover-bubble selected">Cut & Finish</div>
+                    <div class="cover-bubble">Colour & Highlights</div>
+                    <div class="cover-bubble">Treatment</div>
+                </div>
+                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;">Select Hair Length</p>
+                <select style="width: 100%; padding: 0.85rem; background: var(--charcoal-surface); border: 1px solid var(--border-faint); color: white; border-radius: 4px; outline: none; font-weight: 600; cursor: pointer;">
+                    <option>Short (Above Ear / Clipper)</option>
+                    <option>Medium (Above Shoulder)</option>
+                    <option>Long (Below Shoulder)</option>
+                </select>
+                <button style="width:100%; padding:1rem; background: var(--vip-gold); color: var(--obsidian); border:none; border-radius:4px; margin-top:1.5rem; font-weight:700; text-transform:uppercase; cursor:pointer;" onclick="alert('Checking appointment availability...')">Find Available Times</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="silver-break-bg" id="studio">
+        <div class="section-layout">
+            <div class="about-grid-mobile" style="display:grid; grid-template-columns: 1fr 1fr; gap:4rem; align-items: center;">
+                <div class="editorial-image-group">
+                    <img src="interior-mirrors.jpg" alt="Lumiere Salon Interior" class="editorial-main">
+                    <img src="stylist-portrait.jpg" alt="Creative Stylist" class="editorial-portrait">
+                </div>
+                <div style="padding-left: 2rem;">
+                    <span style="color:var(--obsidian); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">Our Salon</span>
+                    <h2 class="serif-display" style="font-size: 2.8rem; margin:0.5rem 0 1rem; line-height:1.2;">Elevating Your Style.</h2>
+                    <p style="margin-bottom:1.5rem; font-size: 1.05rem; color: #475569;">At Lumière, we combine modern styling techniques with expert colour knowledge. Whether you are looking for a complete transformation or a subtle refresh, our talented team takes the time to understand your hair.</p>
+                    <p style="font-size: 1.05rem; color: #475569;">Relax in our beautiful studio environment, enjoy a premium coffee, and let us take care of the rest.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-layout" id="services" style="background-color: var(--obsidian);">
+        <div class="section-header">
+            <h2 class="serif-display">Our Services</h2>
+            <p style="color: var(--text-dim);">Beautiful results tailored specifically to your hair type and lifestyle.</p>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="service-cut.jpg" alt="Precision Haircut">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4 class="serif-display">Precision Cut & Finish</h4>
+                        <span style="color:var(--vip-gold); font-weight:800;">From £45</span>
+                    </div>
+                    <p class="card-description">Includes a relaxing hair wash, expert cut tailored to your face shape, and a professional blow-dry finish.</p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="service-color.jpg" alt="Bespoke Hair Colour">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4 class="serif-display">Bespoke Colour Science</h4>
+                        <span style="color:var(--vip-gold); font-weight:800;">From £85</span>
+                    </div>
+                    <p class="card-description">From natural balayage to full foil highlights. We use premium products to ensure vibrant, lasting colour. (Patch test required).</p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <img src="service-treatment.jpg" alt="Hair Repair Treatment">
+                <div class="card-inner">
+                    <div class="card-title-row">
+                        <h4 class="serif-display">Deep Repair Treatment</h4>
+                        <span style="color:var(--vip-gold); font-weight:800;">From £25</span>
+                    </div>
+                    <p class="card-description">Revive damaged or dry hair with our intensive conditioning treatments, designed to restore shine and strength instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="section-header" style="margin-top: 5rem; margin-bottom: 2rem;">
+            <h2 class="serif-display">Inside Lumière</h2>
+            <p style="color: var(--text-dim);">A glimpse into our salon and the styles we create.</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-track">
+                <div class="gallery-item"><img src="interior-mirrors.jpg" alt="Salon Mirrors"></div>
+                <div class="gallery-item"><img src="hair-designing.jpg" alt="Hair Designing"></div>
+                <div class="gallery-item"><img src="hair-drying.jpeg" alt="Hair Drying"></div>
+                <div class="gallery-item"><img src="men-hair.jpeg" alt="Men's Haircut"></div>
+                <div class="gallery-item"><img src="hero-salon.jpg" alt="Salon Atmosphere"></div>
+                
+                <div class="gallery-item"><img src="interior-mirrors.jpg" alt="Salon Mirrors"></div>
+                <div class="gallery-item"><img src="hair-designing.jpg" alt="Hair Designing"></div>
+                <div class="gallery-item"><img src="hair-drying.jpeg" alt="Hair Drying"></div>
+                <div class="gallery-item"><img src="men-hair.jpeg" alt="Men's Haircut"></div>
+                <div class="gallery-item"><img src="hero-salon.jpg" alt="Salon Atmosphere"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="review-sector" id="reviews">
+        <div class="section-header">
+            <h2 class="serif-display" style="color: var(--white-pure);">Client Reviews</h2>
+            <p style="color: var(--text-dim);">Real feedback directly from our 5-star Google Business Profile.</p>
+        </div>
+        <div class="testimonial-matrix">
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"The best salon experience I have ever had. The stylists really listen to what you want, and the colour work is flawless. Booking online was so easy."</p>
+                <div class="client">
+                    <img src="reviewer-1.jpg" alt="Emma Richardson">
+                    <div><h4 class="serif-display">Emma Richardson</h4><span style="font-size:0.8rem; color:var(--vip-gold); font-weight:600;">Verified Client</span></div>
+                </div>
+            </div>
+
+            <div class="review-envelope">
+                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p>"A fantastic, welcoming atmosphere. I came in for a completely new style and they nailed it. The online booking system makes scheduling my next trim a breeze."</p>
+                <div class="client">
+                    <img src="reviewer-2.jpg" alt="Marcus Vance">
+                    <div><h4 class="serif-display">Marcus Vance</h4><span style="font-size:0.8rem; color:var(--vip-gold); font-weight:600;">Regular Client</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="white-break-bg">
+        <div class="section-layout" id="faqs">
+            <div class="section-header">
+                <h2 class="serif-display">Frequently Asked Questions</h2>
+                <p>Simple answers about booking, patch tests, and salon policies.</p>
+            </div>
+            <div class="faq-matrix">
+                <div class="faq-node">
+                    <h4>Do I need a patch test before colouring?</h4>
+                    <p>Yes. Your safety is our priority. If you are a new client, or haven't had colour with us in the last 6 months, you must pop in for a quick 48-hour patch test before your appointment.</p>
+                </div>
+                <div class="faq-node">
+                    <h4>Will my appointment run on time?</h4>
+                    <p>We pride ourselves on punctuality. We schedule ample time for every client so you are never rushed. If we are running slightly behind, we will always let you know immediately.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-layout" id="location" style="padding-top:0;">
+            <div class="contact-workspace">
+                <div class="map-frame">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+                
+                <div>
+                    <h3 class="serif-display" style="font-size: 2.3rem; margin-bottom: 1rem; color: var(--obsidian);">Find Our Salon</h3>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.05rem;">Conveniently located in central Andover, with plenty of nearby parking available for your visit.</p>
+                    
+                    <a href="https://wa.me/44123456789" target="_blank" class="info-strip">
+                        <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                        <div class="info-strip-text">
+                            <h5>Message Us on WhatsApp</h5>
+                            <p>+44 123 456 789</p>
+                        </div>
+                    </a>
+                    
+                    <a href="mailto:hello@lumierestudio.co.uk" class="info-strip">
+                        <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="info-strip-text">
+                            <h5>Email the Salon</h5>
+                            <p>hello@lumierestudio.co.uk</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="#booking" class="mini-ai-pill">
+        <img src="receptionist-ai.jpg" alt="Maya AI">
+        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
+            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2;">Maya (Salon Assistant)</p>
+            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600;"><i class="fa-solid fa-circle" style="color: #22c55e; font-size: 0.45rem; margin-right: 4px;"></i> Click to Book</p>
+        </div>
+    </a>
+
+    <footer style="background-color: #0b0f17; padding: 6rem 5% 8rem; text-align: center; color: var(--text-dim); border-top: 1px solid var(--border-faint);">
+        <h3 class="serif-display" style="color: white; font-size:1.8rem; letter-spacing:1px; margin-bottom:1rem;">LUMIÈRE<span style="color:var(--vip-gold);">.</span></h3>
+        <p style="max-width: 480px; margin: 0 auto 1.8rem; font-size: 0.95rem;">Beautiful hair and premium service right here in Andover.</p>
+        
+        <div class="social-circle-container">
+            <a href="https://facebook.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-circle-link"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+
+        <p style="font-size:0.8rem; border-top: 1px solid var(--border-faint); padding-top:2rem;">© 2026 GoChuchuro Systems. Premium Beauty Assets.</p>
+    </footer>
+
+</body>
+</html>
