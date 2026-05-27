@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fully Immersive 3D Plumbing | Final</title>
+    <title>3D Premium Plumbing & Heating | Rai & Sons</title>
     
     <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
@@ -62,7 +62,6 @@
             text-shadow: 0 0 20px rgba(0, 246, 255, 0.3);
         }
 
-        /* Image Glow Wrappers */
         .img-glow {
             border: 2px solid var(--holo-teal);
             box-shadow: 0 0 20px rgba(0, 246, 255, 0.3);
@@ -118,7 +117,7 @@
         .section-header h2 { font-size: 3rem; font-weight: 800; }
         .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 
-        /* --- 3D BOOKING PIPELINE (WITH AI PHOTO) --- */
+        /* --- 3D BOOKING PIPELINE --- */
         .roi-tech-section { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; padding: 4rem; }
         .ai-avatar-badge { display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; }
         .ai-avatar-badge img { width: 75px; height: 75px; border-radius: 50%; }
@@ -132,7 +131,6 @@
         /* --- ABOUT & TEAM PHOTOS --- */
         .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
         .team-image-stack { position: relative; padding-bottom: 2rem; transform-style: preserve-3d; }
-        /* Placing images inside 3D panels */
         .main-img-wrap { padding: 1rem; border-radius: 20px; }
         .main-img-wrap img { width: 100%; border-radius: 12px; }
         .sub-img-wrap { position: absolute; bottom: -20px; right: -20px; width: 55%; padding: 0.5rem; border-radius: 16px; transform: translateZ(50px); }
@@ -144,7 +142,7 @@
         .human-text ul li { margin-bottom: 12px; font-weight: 600; color: var(--text-main); }
         .human-text ul li i { color: var(--holo-teal); margin-right: 12px; font-size: 1.2rem; text-shadow: 0 0 10px var(--holo-teal); }
 
-        /* --- HOLOGRAPHIC SERVICES --- */
+        /* --- SERVICES --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3rem; perspective: 1000px;}
         .service-card { padding: 2.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; transform-style: preserve-3d; transition: 0.4s; }
         .holo-circle { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; color: var(--holo-teal); box-shadow: var(--shadow-inner); border: 1px solid rgba(0, 246, 255, 0.2); transform: translateZ(40px); transition: 0.4s; }
@@ -152,21 +150,35 @@
         .service-card h3 { margin-bottom: 1rem; font-size: 1.4rem; transform: translateZ(30px); }
         .service-card p { color: var(--text-dim); transform: translateZ(20px); }
 
-        /* --- TESTIMONIALS (WITH PHOTOS) --- */
+        /* --- 3D SLIDING GALLERY --- */
+        .gallery-container { padding: 4rem 0; overflow: hidden; position: relative; }
+        .gallery-track { display: flex; width: calc(350px * 10); animation: scrollGallery 25s linear infinite; }
+        .gallery-track:hover { animation-play-state: paused; }
+        
+        @keyframes scrollGallery {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-350px * 5)); } /* Shifts halfway to create seamless loop */
+        }
+        
+        .gallery-item { width: 320px; height: 220px; margin: 0 15px; border-radius: 12px; padding: 0.5rem; flex-shrink: 0; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid rgba(0, 246, 255, 0.3); transition: 0.3s; }
+        .gallery-item img:hover { border-color: var(--holo-teal); box-shadow: 0 0 20px rgba(0, 246, 255, 0.4); transform: scale(1.02); }
+
+        /* --- TESTIMONIALS --- */
         .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; }
         .test-card { padding: 3rem; }
         .stars { color: #f59e0b; margin-bottom: 1.5rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
         .test-card p { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
         .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 60px; height: 60px; border-radius: 50%; }
+        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
 
-        /* --- FAQS (RESTORED) --- */
+        /* --- FAQS --- */
         .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .faq-box { padding: 2.2rem; transform-style: preserve-3d; }
         .faq-box h4 { margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; transform: translateZ(20px); color: var(--holo-teal); }
         .faq-box p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6; transform: translateZ(10px); }
 
-        /* --- CONTACT TERMINAL --- */
+        /* --- CONTACT --- */
         .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: start; }
         .input-group { margin-bottom: 1.8rem; }
         .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--text-dim); }
@@ -206,25 +218,27 @@
         <a href="#" class="brand-logo"><i class="fa-solid fa-faucet-drip"></i> RAI & SONS</a>
         <nav class="nav-menu">
             <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Infrastructure</a>
-            <a href="#testimonials" class="nav-link">Data Streams</a>
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#testimonials" class="nav-link">Reviews</a>
             <a href="#faqs" class="nav-link">FAQs</a>
+            <a href="#contact" class="nav-link">Contact</a>
         </nav>
-        <a href="tel:07123456789" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Initialize Call</a>
+        <a href="tel:07123456789" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.9rem;">Call Us Now</a>
     </header>
 
     <div class="sticky-action-bar" id="actions">
-        <a href="tel:07123456789" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-phone"></i></a>
+        <a href="tel:07123456789" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-phone"></i> Call</a>
         <a href="#booking" class="btn-holo" style="flex:2; text-align:center; padding: 0.8rem;">Book Online</a>
     </div>
 
     <section class="hero">
         <div id="hero-canvas-container"></div>
         <div class="hero-content">
-            <div class="hero-badge panel-3d" data-tilt data-tilt-scale="1.1"><i class="fa-solid fa-shield-halved"></i> Certified Safe</div>
-            <h1 data-tilt data-tilt-max="5">Next-Gen <span class="text-holo">Plumbing</span> Dynamics</h1>
-            <p>Traditional British engineering standards fused with immersive, frictionless booking technology. Deploying bespoke solutions across Hampshire.</p>
-            <a href="#booking" class="btn-3d">Access Dispatch Calendar <i class="fa-solid fa-satellite-dish" style="margin-left: 8px;"></i></a>
+            <div class="hero-badge panel-3d" data-tilt data-tilt-scale="1.1"><i class="fa-solid fa-shield-halved"></i> Gas Safe Registered</div>
+            <h1 data-tilt data-tilt-max="5">Next-Generation <span class="text-holo">Plumbing</span> Services</h1>
+            <p>Traditional British engineering standards combined with easy online booking. Serving Hampshire with reliable, everyday plumbing solutions.</p>
+            <a href="#booking" class="btn-3d">Book an Appointment <i class="fa-solid fa-calendar-check" style="margin-left: 8px;"></i></a>
         </div>
     </section>
 
@@ -233,24 +247,24 @@
             <i class="fa-brands fa-google"></i>
             <div>
                 <span class="text-holo">5.0 RATING</span><br>
-                <small style="color: var(--text-dim);">Verified Network</small>
+                <small style="color: var(--text-dim);">Over 200 Local Reviews</small>
             </div>
         </div>
         <div class="trust-item panel-3d" data-tilt data-tilt-max="10"><i class="fa-solid fa-circle-check"></i> <span>£5M LIABILITY</span></div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10"><i class="fa-solid fa-bolt"></i> <span>RAPID DISPATCH</span></div>
+        <div class="trust-item panel-3d" data-tilt data-tilt-max="10"><i class="fa-solid fa-bolt"></i> <span>FAST CALL-OUTS</span></div>
     </section>
 
     <section class="section-wrapper" id="booking">
         <div class="roi-tech-section panel-3d">
             <div class="tech-text-block">
-                <h3>System Synced.<br><span class="text-holo">Start Booking.</span></h3>
-                <p style="color: var(--text-dim);">Bypass the phone tag. Our infrastructure utilizes live calendar syncing to secure a certified engineer instantly.</p>
+                <h3>Stop Waiting.<br><span class="text-holo">Start Booking.</span></h3>
+                <p style="color: var(--text-dim);">No more waiting around. Use our smart calendar to pick a time, and we'll send a certified plumber straight to your door.</p>
                 
                 <div class="ai-avatar-badge panel-inset" data-tilt>
-                    <img src="Emma-Richardson .png" alt="AI Emma" class="img-glow">
+                    <img src="Emma-Richardson .png" alt="Emma Receptionist" class="img-glow">
                     <div>
-                        <h4>Emma (AI Interface)</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Available 24/7 to issue estimates.</p>
+                        <h4>Emma (Our Virtual Assistant)</h4>
+                        <p style="font-size: 0.85rem; color: var(--text-dim);">Available 24/7 to help you book.</p>
                     </div>
                 </div>
             </div>
@@ -269,7 +283,7 @@
                     <div class="cal-slot panel-3d">14:30 PM</div>
                     <div class="cal-slot panel-3d">16:00 PM</div>
                 </div>
-                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Confirm Pipeline Slot</button>
+                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Confirm Your Booking</button>
             </div>
         </div>
     </section>
@@ -278,20 +292,20 @@
         <div class="about-grid">
             <div class="team-image-stack" data-tilt data-tilt-max="5">
                 <div class="main-img-wrap panel-3d">
-                    <img src="blue-man.png" alt="Lead Engineer" class="img-glow">
+                    <img src="blue-man.png" alt="Lead Plumber" class="img-glow">
                 </div>
                 <div class="sub-img-wrap panel-inset">
-                    <img src="installation-maintenance.png" alt="Maintenance Team" class="img-glow">
+                    <img src="owner-lead-engineer.png" alt="Plumbing Team" class="img-glow">
                 </div>
             </div>
             <div class="human-text">
                 <span class="text-holo">Your Local Specialists</span>
-                <h2>Uncompromising Human Standards.</h2>
-                <p style="color: var(--text-dim); font-size: 1.1rem;">The technology is futuristic, but our service is distinctly human. At Rai & Sons, world-class engineering is matched with real, local customer service. Our fleet of highly trained engineers has been keeping Andover safe for over a decade.</p>
+                <h2>Friendly, Expert Service.</h2>
+                <p style="color: var(--text-dim); font-size: 1.1rem;">We know how stressful plumbing problems can be. That is why our team at Rai & Sons focuses on showing up on time, being respectful of your home, and getting the job done right the first time.</p>
                 <ul>
-                    <li><i class="fa-solid fa-check"></i> Fully Vetted & Accredited Staff</li>
-                    <li><i class="fa-solid fa-check"></i> Advanced Diagnostics & Powerflushing</li>
-                    <li><i class="fa-solid fa-check"></i> Respectful of Your Property</li>
+                    <li><i class="fa-solid fa-check"></i> Fully Vetted & Gas Safe Registered</li>
+                    <li><i class="fa-solid fa-check"></i> Clean, Tidy, and Respectful</li>
+                    <li><i class="fa-solid fa-check"></i> Honest, Upfront Pricing</li>
                 </ul>
             </div>
         </div>
@@ -299,32 +313,55 @@
 
     <section class="section-wrapper" id="services">
         <div class="section-header">
-            <h2 class="text-holo">Core Infrastructure</h2>
-            <p>Rapidly deployed solutions for domestic properties.</p>
+            <h2 class="text-holo">Our Services</h2>
+            <p>Fast, reliable help for your home plumbing and heating.</p>
         </div>
         <div class="services-grid">
             <div class="service-card panel-3d" data-tilt data-tilt-max="15">
                 <div class="holo-circle panel-inset"><i class="fa-solid fa-fire"></i></div>
-                <h3>Boiler Installations</h3>
-                <p>Energy-efficient upgrades and bespoke heating systems with up to 10-year warranties.</p>
+                <h3>New Boilers</h3>
+                <p>Energy-efficient upgrades and bespoke heating systems with up to 10-year warranties to keep you warm.</p>
             </div>
             <div class="service-card panel-3d" data-tilt data-tilt-max="15">
                 <div class="holo-circle panel-inset"><i class="fa-solid fa-droplet"></i></div>
                 <h3>Emergency Repairs</h3>
-                <p>Rapid response for burst pipes, aggressive leaks, and drainage blockages.</p>
+                <p>Fast help for burst pipes, blocked drains, and stubborn leaks before they cause damage.</p>
             </div>
             <div class="service-card panel-3d" data-tilt data-tilt-max="15">
                 <div class="holo-circle panel-inset"><i class="fa-solid fa-file-shield"></i></div>
-                <h3>Landlord CP12s</h3>
-                <p>Legally compliant Gas Safety Certificates issued digitally on-site for instant compliance.</p>
+                <h3>Landlord Safety</h3>
+                <p>Legally required Gas Safety Certificates (CP12s) done quickly and sent straight to your email.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-wrapper" id="gallery" style="padding-top: 2rem;">
+        <div class="section-header">
+            <h2 class="text-holo">Our Recent Work</h2>
+            <p>Take a look at the everyday plumbing and heating jobs we handle.</p>
+        </div>
+        
+        <div class="gallery-container panel-inset">
+            <div class="gallery-track">
+                <div class="gallery-item panel-3d"><img src="emergency-plumbing-repair.png" alt="Repair Work"></div>
+                <div class="gallery-item panel-3d"><img src="heating-pipe-1.png" alt="Pipe Work"></div>
+                <div class="gallery-item panel-3d"><img src="rediator-flushing.png" alt="Radiator Service"></div>
+                <div class="gallery-item panel-3d"><img src="water-pipe-underbasin.png" alt="Underbasin Plumbing"></div>
+                <div class="gallery-item panel-3d"><img src="working-heating-panel.png" alt="Heating Installation"></div>
+                
+                <div class="gallery-item panel-3d"><img src="emergency-plumbing-repair.png" alt="Repair Work"></div>
+                <div class="gallery-item panel-3d"><img src="heating-pipe-1.png" alt="Pipe Work"></div>
+                <div class="gallery-item panel-3d"><img src="rediator-flushing.png" alt="Radiator Service"></div>
+                <div class="gallery-item panel-3d"><img src="water-pipe-underbasin.png" alt="Underbasin Plumbing"></div>
+                <div class="gallery-item panel-3d"><img src="working-heating-panel.png" alt="Heating Installation"></div>
             </div>
         </div>
     </section>
 
     <section class="section-wrapper" id="testimonials">
         <div class="section-header">
-            <h2>Data Streams</h2>
-            <p>Verified feedback from the local network.</p>
+            <h2>Customer Reviews</h2>
+            <p>See what your neighbours in Andover are saying about us.</p>
         </div>
         <div class="test-grid">
             <div class="test-card panel-3d" data-tilt data-tilt-max="5">
@@ -334,17 +371,17 @@
                     <img src="James-Mitchell.png" alt="James Mitchell" class="img-glow">
                     <div>
                         <h4>James Mitchell</h4>
-                        <span class="text-holo" style="font-size: 0.85rem;">Homeowner</span>
+                        <span class="text-holo" style="font-size: 0.85rem;">Local Homeowner</span>
                     </div>
                 </div>
             </div>
             <div class="test-card panel-3d" data-tilt data-tilt-max="5">
                 <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Managing multiple lettings means I need a firm I can rely on. Rai & Sons handle all our certificates automatically. The digital reporting is a game-changer."</p>
+                <p>"Managing multiple lettings means I need a firm I can rely on. Rai & Sons handle all our certificates automatically. It takes all the stress away."</p>
                 <div class="client">
-                    <div class="img-glow" style="width: 60px; height: 60px; border-radius: 50%; background: var(--bg-abyss); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; color: white;">S</div>
+                    <img src="Sarah-Patel.png" alt="Sarah Patel" class="img-glow">
                     <div>
-                        <h4>Sarah Jenkins</h4>
+                        <h4>Sarah Patel</h4>
                         <span class="text-holo" style="font-size: 0.85rem;">Lettings Agent</span>
                     </div>
                 </div>
@@ -354,25 +391,25 @@
 
     <section class="section-wrapper" id="faqs">
         <div class="section-header">
-            <h2 class="text-holo">Operational FAQ Systems</h2>
-            <p>Clear, honest answers to common queries regarding pricing and dispatch logistics.</p>
+            <h2 class="text-holo">Frequently Asked Questions</h2>
+            <p>Clear, honest answers to common queries regarding pricing and our services.</p>
         </div>
         <div class="faq-grid">
             <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
                 <h4>Do you charge a call-out fee?</h4>
-                <p>During standard working hours, we do not charge a call-out fee. We provide a clear, upfront quote before any work commences.</p>
+                <p>During standard working hours, we do not charge a call-out fee. We provide a clear, upfront quote before we start any work on your property.</p>
             </div>
             <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4>Are your engineers fully certified?</h4>
-                <p>Yes. Every engineer deployed is strictly Gas Safe registered and carries comprehensive public liability insurance up to £5,000,000.</p>
+                <h4>Are your plumbers fully certified?</h4>
+                <p>Yes. Every plumber we send is strictly Gas Safe registered and fully insured, so your home is always in safe hands.</p>
             </div>
             <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4>Can I book an exact time slot?</h4>
-                <p>Absolutely. Unlike traditional firms that give a vague window, our smart scheduling system allows you to select a dedicated 90-minute arrival window.</p>
+                <h4>Can I book an exact time?</h4>
+                <p>Absolutely. Unlike traditional firms that give a vague "morning or afternoon" window, our online booking allows you to select a specific time slot.</p>
             </div>
             <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4>Do you provide landlord certificates?</h4>
-                <p>Yes, we process digital CP12 Gas Safety Certificates on-site, instantly emailing copies to both the landlord and the managing agent.</p>
+                <h4>Do you do landlord checks?</h4>
+                <p>Yes, we carry out thorough CP12 Gas Safety Checks for landlords and instantly email you the digital certificates once passed.</p>
             </div>
         </div>
     </section>
@@ -380,21 +417,21 @@
     <section class="section-wrapper" id="contact">
         <div class="contact-layout">
             <div class="panel-3d" style="padding: 3rem;" data-tilt data-tilt-max="3">
-                <h3 style="margin-bottom: 2rem; font-size: 2rem;" class="text-holo">Initialize Request</h3>
+                <h3 style="margin-bottom: 2rem; font-size: 2rem;" class="text-holo">Send a Message</h3>
                 <form onsubmit="event.preventDefault();">
                     <div class="input-group">
-                        <label>Identifier (Name)</label>
-                        <input type="text" class="panel-inset" placeholder="e.g. Prakash Rai" required>
+                        <label>Your Name</label>
+                        <input type="text" class="panel-inset" placeholder="e.g. John Smith" required>
                     </div>
                     <div class="input-group">
-                        <label>Comms Link (Phone)</label>
+                        <label>Phone Number</label>
                         <input type="tel" class="panel-inset" placeholder="e.g. 07123 456789" required>
                     </div>
                     <div class="input-group">
-                        <label>Diagnostic Details</label>
+                        <label>How can we help?</label>
                         <textarea rows="4" class="panel-inset" placeholder="Describe your plumbing issue..."></textarea>
                     </div>
-                    <button type="submit" class="btn-holo" style="width: 100%; margin-top: 1rem;">Transmit Data <i class="fa-solid fa-paper-plane"></i></button>
+                    <button type="submit" class="btn-holo" style="width: 100%; margin-top: 1rem;">Send Request <i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
 
@@ -406,7 +443,7 @@
                 <a href="https://wa.me/447123456789" class="panel-3d" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; text-decoration: none; margin-bottom: 1.5rem;" data-tilt>
                     <i class="fa-brands fa-whatsapp text-holo" style="font-size: 2.5rem;"></i>
                     <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase;">Direct Comms</h5>
+                        <h5 style="color: var(--text-dim); text-transform: uppercase;">Message us on WhatsApp</h5>
                         <p style="font-size: 1.2rem; font-weight: 700; color: white;">+44 7123 456 789</p>
                     </div>
                 </a>
@@ -417,21 +454,21 @@
     <a href="#booking" class="mini-ai-pill panel-3d" data-tilt>
         <img src="Emma-Richardson .png" alt="Emma AI" class="img-glow">
         <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center; padding-right: 0.5rem;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: white; margin: 0; line-height: 1.2;">Emma (AI Desk)</p>
-            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; font-weight: 600;"><i class="fa-solid fa-circle text-holo" style="font-size: 0.45rem; margin-right: 4px;"></i> Active Link</p>
+            <p style="font-size: 0.95rem; font-weight: 800; color: white; margin: 0; line-height: 1.2;">Emma (Help Desk)</p>
+            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; font-weight: 600;"><i class="fa-solid fa-circle text-holo" style="font-size: 0.45rem; margin-right: 4px;"></i> Click to Book</p>
         </div>
     </a>
 
     <footer>
         <h3 style="margin-bottom: 1.5rem; font-size: 2rem; font-weight: 800;"><i class="fa-solid fa-faucet-drip text-holo"></i> RAI & SONS</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Premium Gas & Plumbing Infrastructure.</p>
+        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Reliable Gas & Plumbing Services in Andover.</p>
         
         <div style="margin-bottom: 3rem;">
             <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-facebook-f"></i></a>
             <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
-        <p style="font-size: 0.85rem; color: #475569;">© 2026 GoChuchuro Agency System. Premium Assets.</p>
+        <p style="font-size: 0.85rem; color: #475569;">© 2026 GoChuchuro Agency. All Rights Reserved.</p>
     </footer>
 
     <script>
