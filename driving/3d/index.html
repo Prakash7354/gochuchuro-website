@@ -1,601 +1,821 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Immersive | QuickPass Driving School</title>
-    
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="QuickPass Driving School — 3D immersive experience. DVSA approved lessons in Andover. Book online today."/>
+  <title>QuickPass | 3D Immersive — Driving Lessons Andover</title>
+  <link rel="icon" type="image/png" href="../../favicon.png" sizes="32x32"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <style>
+    /* =============================================
+       QUICKPASS 3D — NEON ROAD TUNNEL SYSTEM
+       You ARE in the car. Driving forward at speed.
+       Green neon road + speed blur — cinematic opening
+       Completely different from all other trades:
+       - Garage: red racing grid flat on floor
+       - Plumbing: teal vortex rings inward
+       - Restaurant: warm embers rising up
+       - Driving: viewer IS on the road, driving forward
+       ============================================= */
+    :root {
+      --void:    #020617;
+      --surface: #0f172a;
+      --surface2:#111827;
+      --green:   #10b981;
+      --green2:  #34d399;
+      --cyan:    #06b6d4;
+      --lime:    #a3e635;
+      --red:     #ef4444;
+      --green-dim:rgba(16,185,129,0.14);
+      --text:    #f8fafc;
+      --dim:     #94a3b8;
+      --mid:     #cbd5e1;
+      --gc-teal: #00B5C8;
+      --grad-g:  linear-gradient(135deg,#10b981,#06b6d4);
+      --grad-gl: linear-gradient(135deg,#10b981,#a3e635);
+      --shadow:  12px 12px 28px rgba(0,0,0,0.95),-4px -4px 14px rgba(255,255,255,0.02);
+      --inset:   inset 8px 8px 20px rgba(0,0,0,0.9),inset -3px -3px 10px rgba(255,255,255,0.03);
+      --glow:    0 0 20px rgba(16,185,129,0.35);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--void);color:var(--text);
+      font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;
+      overflow-x:hidden;padding-bottom:72px;cursor:none;
+      background-image:
+        radial-gradient(circle at 15% 30%,rgba(16,185,129,0.05),transparent 25%),
+        radial-gradient(circle at 85% 70%,rgba(6,182,212,0.05),transparent 25%);
+      background-attachment:fixed;
+    }
+    .bold{font-family:'Outfit',sans-serif;font-weight:800;letter-spacing:-.5px}
 
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    /* CURSOR */
+    #cd{width:9px;height:9px;background:var(--green);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--green),0 0 24px rgba(16,185,129,0.4)}
+    #cr{width:38px;height:38px;border:1.5px solid rgba(16,185,129,0.45);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%)}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    /* PANELS */
+    .p3d{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);border:1px solid rgba(16,185,129,0.12);position:relative;z-index:2}
+    .pin{background:#060b14;border-radius:12px;box-shadow:var(--inset);border:1px solid rgba(255,255,255,0.03)}
 
-    <style>
-        /* --- HIGH-PERFORMANCE 3D DESIGN SYSTEM --- */
-        :root {
-            /* Deep Slate / Asphalt Backgrounds */
-            --bg-abyss: #020617;    
-            --bg-surface: #0f172a;
-            
-            /* Success / Go Green Neon Accents */
-            --holo-green: #10b981;
-            --holo-cyan: #06b6d4;
-            --gradient-glow: linear-gradient(135deg, var(--holo-green), var(--holo-cyan));
-            --alert-red: #ef4444;
-            
-            /* 3D UI Lighting */
-            --shadow-drop: 10px 10px 25px rgba(0, 0, 0, 0.9), -5px -5px 15px rgba(255, 255, 255, 0.05);
-            --shadow-inner: inset 5px 5px 20px rgba(0, 0, 0, 0.9), inset -3px -3px 10px rgba(255, 255, 255, 0.05);
-            
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-        }
+    /* TEXT */
+    .th{background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .tl{background:var(--grad-gl);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+    .rv.on{opacity:1;transform:translateY(0)}
+    .rl{opacity:0;transform:translateX(-32px);transition:opacity .8s ease,transform .8s ease}
+    .rl.on{opacity:1;transform:translateX(0)}
+    .rr{opacity:0;transform:translateX(32px);transition:opacity .8s ease,transform .8s ease}
+    .rr.on{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-        body {
-            background-color: var(--bg-abyss);
-            background-image: 
-                radial-gradient(circle at 15% 30%, rgba(16, 185, 129, 0.05), transparent 25%),
-                radial-gradient(circle at 85% 70%, rgba(6, 182, 212, 0.05), transparent 25%);
-            background-attachment: fixed; 
-            color: var(--text-main); line-height: 1.6; overflow-x: hidden; padding-bottom: 70px;
-        }
+    /* HEADER */
+    header{background:rgba(2,6,23,0.9);backdrop-filter:blur(18px);padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:500;border-bottom:1px solid rgba(16,185,129,0.3);box-shadow:0 8px 40px rgba(0,0,0,0.8)}
+    .bname{color:white;font-size:1.8rem;text-decoration:none;display:flex;align-items:center;font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:.5px}
+    .bname span{background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav{display:flex;align-items:center;gap:1.6rem}
+    .nl{color:var(--dim);text-decoration:none;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.5px;transition:all .25s}
+    .nl:hover{color:var(--green);text-shadow:0 0 10px rgba(16,185,129,.5)}
+    .nsr{color:var(--gc-teal);text-decoration:none;font-weight:700;font-size:.75rem;border:1px solid rgba(0,181,200,.3);padding:.38rem .85rem;border-radius:6px;transition:all .25s;display:flex;align-items:center;gap:.35rem}
+    .nsr:hover{background:rgba(0,181,200,.1)}
+    .bholo{background:var(--grad-g);color:var(--void);padding:.65rem 1.4rem;border-radius:8px;font-weight:900;text-decoration:none;border:none;cursor:none;font-size:.8rem;box-shadow:var(--glow);transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;font-family:'Outfit',sans-serif}
+    .bholo:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(16,185,129,.55)}
 
-        .bold-header { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.5px; }
+    /* ACTION BAR */
+    .abar{position:fixed;bottom:0;left:0;right:0;z-index:600;background:rgba(2,6,23,0.97);backdrop-filter:blur(16px);border-top:1px solid rgba(16,185,129,.4);padding:.85rem 5%;display:flex;justify-content:center;gap:1rem;box-shadow:0 -8px 30px rgba(0,0,0,.8)}
+    .ab{flex:1;max-width:280px;padding:.85rem;border-radius:8px;text-decoration:none;font-weight:900;text-transform:uppercase;font-size:.82rem;letter-spacing:.5px;border:none;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;transition:all .3s;cursor:none;font-family:'Outfit',sans-serif}
+    .ab-out{background:transparent;color:white;border:2px solid rgba(16,185,129,.5)}
+    .ab-out:hover{border-color:var(--green);color:var(--green)}
+    .ab-holo{background:var(--grad-g);color:var(--void)}
+    .ab-holo:hover{transform:translateY(-2px);box-shadow:var(--glow)}
 
-        /* --- 3D NEUMORPHIC PANELS --- */
-        .panel-3d {
-            background: var(--bg-surface); border-radius: 16px;
-            box-shadow: var(--shadow-drop); border: 1px solid rgba(16, 185, 129, 0.1);
-            position: relative; z-index: 2;
-        }
-        
-        .panel-inset {
-            background: #060b14; border-radius: 12px;
-            box-shadow: var(--shadow-inner); border: 1px solid rgba(255,255,255,0.02);
-        }
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+    #hc{position:absolute;inset:0;z-index:0}
+    /* Deep vignette — road disappears into centre */
+    .hv{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 100%,transparent 10%,rgba(2,6,23,.5) 50%,rgba(2,6,23,.9) 100%)}
+    .hb{position:absolute;bottom:0;left:0;right:0;height:15%;z-index:1;pointer-events:none;background:linear-gradient(transparent,var(--void))}
+    /* Neon HUD scanlines */
+    .hsl{position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(16,185,129,.014) 3px,rgba(16,185,129,.014) 4px)}
+    /* Speed blur lines at sides */
+    .hspeed{position:absolute;top:0;bottom:0;width:15%;z-index:2;pointer-events:none}
+    .hsl-l{left:0;background:linear-gradient(90deg,rgba(16,185,129,.08),transparent)}
+    .hsl-r{right:0;background:linear-gradient(270deg,rgba(16,185,129,.08),transparent)}
+    /* HUD corner brackets */
+    .ctl{position:absolute;top:80px;left:2rem;z-index:3;width:50px;height:50px;border-top:2px solid rgba(16,185,129,.7);border-left:2px solid rgba(16,185,129,.7);pointer-events:none}
+    .cbr{position:absolute;bottom:80px;right:2rem;z-index:3;width:35px;height:35px;border-bottom:2px solid rgba(16,185,129,.35);border-right:2px solid rgba(16,185,129,.35);pointer-events:none}
+    /* Speedometer arc — decorative */
+    .speedarc{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);z-index:3;pointer-events:none;animation:fi .8s ease 1s both}
+    @keyframes fi{from{opacity:0}to{opacity:1}}
+    @keyframes fiu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fid{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 
-        /* Neon Green Text */
-        .text-holo {
-            background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
-        }
+    .hcon{position:relative;z-index:4;max-width:960px;padding:0 2rem}
+    .hbadge{display:inline-flex;align-items:center;gap:.5rem;background:var(--surface);box-shadow:var(--inset);color:var(--text);padding:.5rem 1.4rem;border-radius:50px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:2rem;border:1px solid rgba(239,68,68,.35);animation:fid .8s ease both}
+    .hbadge .l{color:var(--red);font-weight:900;font-size:1.1rem}
+    .hero h1{font-size:clamp(2.8rem,9vw,7rem);font-weight:900;line-height:.95;margin-bottom:1.4rem;text-shadow:0 8px 30px rgba(0,0,0,.95);animation:fiu .9s ease .15s both;letter-spacing:-2px;font-family:'Outfit',sans-serif}
+    .hero p{font-size:1.15rem;max-width:620px;margin:0 auto 2.5rem;color:var(--dim);font-weight:400;animation:fiu .9s ease .3s both}
+    .hbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;animation:fi 1s ease .5s both}
+    .b3d{background:var(--surface);color:var(--text);padding:1rem 2.2rem;border-radius:8px;font-weight:900;text-decoration:none;border:1px solid rgba(255,255,255,.06);cursor:none;text-transform:uppercase;letter-spacing:.5px;font-size:.86rem;box-shadow:var(--shadow);transition:all .3s;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.5rem;font-family:'Outfit',sans-serif}
+    .b3d::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--grad-g)}
+    .b3d:hover{transform:translateY(-4px);color:var(--green);border-color:var(--green);box-shadow:0 20px 40px rgba(0,0,0,.9),var(--glow)}
+    .htp{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;margin-top:2rem;animation:fi 1.2s ease .7s both}
+    .hpi{display:flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+    .hpi i{color:var(--green);font-size:.7rem}
 
-        .img-glow {
-            border: 2px solid var(--holo-green);
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
-            object-fit: cover;
-        }
+    /* HUD PANELS */
+    .hud{position:absolute;z-index:5;pointer-events:none;animation:fi 1.5s ease 1s both}
+    .hudl{left:2rem;top:50%;transform:translateY(-50%)}
+    .hudr{right:2rem;top:50%;transform:translateY(-50%)}
+    .hcard{background:rgba(15,23,42,.9);border:1px solid rgba(16,185,129,.25);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.7rem;backdrop-filter:blur(10px);min-width:150px;box-shadow:0 0 20px rgba(16,185,129,.08),var(--shadow)}
+    .hlbl{font-size:.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:700;margin-bottom:.3rem}
+    .hval{font-size:1.4rem;font-weight:900;line-height:1;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Outfit',sans-serif}
+    .hsub{font-size:.58rem;color:var(--dim);margin-top:.12rem}
+    .hbar{height:3px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:.5rem;overflow:hidden}
+    .hfill{height:100%;background:var(--grad-g);border-radius:2px;animation:fillbar 2s ease 1.5s both}
+    @keyframes fillbar{from{width:0}to{width:var(--w,70%)}}
+    .hdot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:.4rem;animation:blink 1.2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
 
-        /* --- NAVIGATION --- */
-        header {
-            background: rgba(2, 6, 23, 0.85); backdrop-filter: blur(15px);
-            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        .brand-logo { color: white; font-size: 1.8rem; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; letter-spacing: 1px;}
-        .brand-logo span { color: var(--holo-green); }
-        .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-link:hover { color: var(--holo-green); text-shadow: 0 0 10px var(--holo-green); }
+    /* TRUST CARDS */
+    .trow{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:0 5% 3rem;margin-top:-40px;position:relative;z-index:10}
+    .tcard{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:1.4rem 1.8rem;border-radius:14px;transition:all .4s;text-align:center}
+    .tcard:hover{transform:translateY(-6px);border-color:var(--green);box-shadow:0 20px 40px rgba(0,0,0,.8),var(--glow)}
+    .tcard i{font-size:1.8rem;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .tcard h4{font-size:1rem;font-weight:900;color:white;font-family:'Outfit',sans-serif}
+    .tcard span{font-size:.68rem;font-weight:700;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
 
-        /* --- 3D BUTTONS --- */
-        .btn-3d {
-            background: var(--bg-surface); color: var(--text-main);
-            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
-            box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative; overflow: hidden;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
-        }
-        .btn-3d::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-glow); }
-        .btn-3d:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.9), 0 0 20px rgba(16, 185, 129, 0.2); color: var(--holo-green); border-color: var(--holo-green);}
+    /* BOOKING */
+    .bsec{padding:5rem 5%;max-width:1200px;margin:0 auto}
+    .bgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;padding:3.5rem;position:relative;overflow:hidden}
+    .bgrid::before{content:'';position:absolute;top:-50px;right:-50px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(16,185,129,.06),transparent 70%);pointer-events:none}
+    .bpitch h3{font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1rem;font-family:'Outfit',sans-serif}
+    .bpitch h3 span{color:var(--green)}
+    .bpitch p{color:var(--dim);line-height:1.75;margin-bottom:1.5rem;font-size:.95rem}
+    .aib{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;border-left:3px solid var(--green);background:rgba(6,11,20,.7);border-radius:0 10px 10px 0;border-top:1px solid rgba(255,255,255,.03);border-right:1px solid rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.03)}
+    .aiv{width:48px;height:48px;border-radius:50%;background:rgba(2,6,23,.8);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;overflow:hidden;position:relative;box-shadow:var(--glow)}
+    .aiv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .aiv i{color:var(--green)}
+    .bpanel{padding:2rem}
+    .bpanel h5{font-size:.68rem;text-transform:uppercase;font-weight:700;letter-spacing:1px;color:var(--dim);margin-bottom:.6rem;margin-top:1.2rem}
+    .bpanel h5:first-child{margin-top:0}
+    .bsel{width:100%;padding:.88rem 1rem;background:var(--surface);border:1px solid rgba(16,185,129,.2);color:var(--text);border-radius:8px;outline:none;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;box-shadow:var(--inset);margin-bottom:.3rem}
+    .bsel:focus{border-color:var(--green)}
 
-        .btn-holo {
-            background: var(--gradient-glow); color: var(--bg-abyss);
-            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
-            border: none; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); transition: 0.3s; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
-        }
-        .btn-holo:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 40px rgba(16, 185, 129, 0.6); color: white;}
+    /* CAR CARDS — 3D lift with speed image effect */
+    .csec{padding:5.5rem 5%;position:relative;z-index:10}
+    .csec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(16,185,129,.35),transparent)}
+    .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;perspective:1200px;max-width:1300px;margin:0 auto}
+    .xcard{background:var(--surface);border-radius:20px;overflow:hidden;border:1px solid rgba(16,185,129,.1);box-shadow:var(--shadow);transform-style:preserve-3d;transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s,border-color .3s;position:relative;cursor:none}
+    .xcard:hover{transform:translateY(-18px) rotateX(6deg) rotateY(-3deg) scale(1.02);box-shadow:0 40px 80px rgba(0,0,0,.9),var(--glow);border-color:rgba(16,185,129,.45)}
+    .xcimg{height:220px;position:relative;overflow:hidden}
+    .xcimg i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.15;z-index:1;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .xcimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.1);transition:.5s;z-index:2}
+    .xcard:hover .xcimg img{filter:saturate(1.1) contrast(1.05);transform:scale(1.08)}
+    .xcimg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,var(--surface));z-index:3}
+    .xbadge{position:absolute;top:.75rem;left:.75rem;z-index:4;background:rgba(2,6,23,.9);padding:.2rem .65rem;border-radius:4px;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+    .xbadge-g{color:var(--green);border:1px solid rgba(16,185,129,.3)}
+    .xbadge-r{color:var(--red);border:1px solid rgba(239,68,68,.3)}
+    .xbadge-w{color:white;border:1px solid rgba(255,255,255,.2)}
+    .xbody{padding:1.6rem 1.8rem;transform:translateZ(0);transition:transform .5s}
+    .xcard:hover .xbody{transform:translateZ(30px)}
+    .xtitle{font-size:1.3rem;font-weight:900;color:var(--text);margin-bottom:.5rem;font-family:'Outfit',sans-serif}
+    .xdesc{color:var(--dim);font-size:.87rem;line-height:1.65;margin-bottom:1.1rem}
+    .xprice{font-size:1.3rem;font-weight:900;color:var(--green);font-family:'Outfit',sans-serif;text-shadow:var(--glow)}
+    .xcta{display:inline-flex;align-items:center;gap:.4rem;color:var(--green);font-weight:800;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;background:none;border:none;cursor:none;padding:0;transition:gap .25s;margin-top:.6rem;display:block}
+    .xcard:hover .xcta{gap:.8rem}
+    .xglow{position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--grad-g);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:5}
+    .xcard:hover .xglow{transform:scaleX(1)}
 
-        /* --- HERO SPACE --- */
-        .hero { position: relative; min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; }
-        #hero-canvas-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 1)), url('driving-hero.jpg') no-repeat center center/cover; }
-        .hero-content { position: relative; z-index: 2; transform: translateZ(50px); }
-        
-        .hero-badge {
-            background: var(--bg-surface); box-shadow: var(--shadow-inner); color: var(--text-main);
-            padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.9rem; font-weight: 700; margin-bottom: 2rem;
-            display: inline-flex; align-items: center; gap: 0.8rem; border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-        .hero-badge span { color: var(--alert-red); font-weight: 900; font-size: 1.2rem; }
+    /* ABOUT — instructors with 3D depth */
+    .abouts{padding:5.5rem 5%;background:rgba(15,23,42,.35);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+    .agrid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto}
+    .iimgs{display:flex;gap:1.5rem;perspective:1000px;transform-style:preserve-3d}
+    .icard{flex:1;border-radius:16px;overflow:hidden;transform:translateZ(20px);transition:.4s;border:1px solid rgba(16,185,129,.15);box-shadow:var(--shadow)}
+    .icard:hover{transform:translateZ(40px) scale(1.04);border-color:var(--green);box-shadow:0 0 30px rgba(16,185,129,.2),var(--shadow)}
+    .icard img{width:100%;height:340px;object-fit:cover;display:block;filter:contrast(1.1) saturate(.9);transition:.3s}
+    .icard:hover img{filter:contrast(1.05) saturate(1.1)}
+    .icard-ph{width:100%;height:340px;background:linear-gradient(135deg,#0f172a,#1e3a2a);display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--green);opacity:.2}
+    .albl{font-size:.72rem;text-transform:uppercase;font-weight:800;letter-spacing:1.5px;margin-bottom:.5rem;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .agrid h2{font-size:clamp(2rem,3.5vw,3rem);margin-bottom:1rem;line-height:1.1;font-family:'Outfit',sans-serif}
+    .agrid p{color:var(--dim);font-size:.95rem;line-height:1.75;margin-bottom:.9rem}
+    .ach{list-style:none;margin-top:1.3rem}
+    .ach li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--mid);margin-bottom:.6rem}
+    .ach li i{color:var(--green);margin-top:.2rem;flex-shrink:0;text-shadow:var(--glow)}
+    .grl{width:45px;height:3px;background:var(--grad-g);border-radius:2px;margin:.7rem 0;box-shadow:var(--glow)}
 
-        .hero h1 { font-size: 4.8rem; max-width: 900px; line-height: 1.05; margin-bottom: 1.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.9); }
-        .hero p { font-size: 1.25rem; max-width: 680px; color: var(--text-dim); margin: 0 auto 2.5rem; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+    /* GALLERY */
+    .gals{overflow:hidden;background:var(--void);padding:3.5rem 0;border-top:3px solid var(--green)}
+    .gall{text-align:center;font-family:'Outfit',sans-serif;font-size:.68rem;font-weight:900;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.5rem}
+    .galt{display:flex;width:calc(310px * 14);animation:gscroll 40s linear infinite}
+    .galt:hover{animation-play-state:paused}
+    @keyframes gscroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-310px * 7))}}
+    .gi{width:285px;height:220px;margin:0 12px;border-radius:12px;overflow:hidden;flex-shrink:0;position:relative;background:var(--surface2);border:1px solid rgba(16,185,129,.2);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;transition:all .4s}
+    .gi:hover{border-color:var(--green);box-shadow:var(--glow),var(--shadow);transform:scale(1.04) translateY(-4px)}
+    .gi i{font-size:2.5rem;opacity:.15;z-index:1;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.1);transition:.35s}
+    .gi:hover img{filter:saturate(1.1) contrast(1.05);transform:scale(1.07)}
 
-        /* --- FLOATING TRUST BAR --- */
-        .trust-bar { padding: 2rem 5%; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; position: relative; margin-top: -60px; z-index: 10; }
-        .trust-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.5rem 2.5rem; border-radius: 16px; text-align: center;}
-        .trust-item i { font-size: 2rem; background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;}
-        .trust-item h4 { font-size: 1.5rem; color: white;}
-        .trust-item span { font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; color: var(--text-dim); text-transform: uppercase;}
+    /* REVIEWS */
+    .revs{padding:5.5rem 5%;background:rgba(2,6,23,1);border-top:1px solid rgba(255,255,255,.04)}
+    .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;max-width:1100px;margin:0 auto}
+    .rc{padding:2.4rem;transform-style:preserve-3d;transition:all .4s}
+    .rc:hover{border-color:rgba(16,185,129,.3);box-shadow:var(--glow),var(--shadow);transform:translateY(-6px)}
+    .rstars{color:#f59e0b;font-size:.95rem;margin-bottom:1.2rem;letter-spacing:1px}
+    .rtxt{font-style:italic;color:var(--dim);margin-bottom:1.8rem;font-size:.98rem;line-height:1.65}
+    .rper{display:flex;align-items:center;gap:1rem}
+    .rav{width:50px;height:50px;border-radius:50%;flex-shrink:0;background:rgba(16,185,129,.1);border:2px solid var(--green);box-shadow:var(--glow);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+    .rav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .rper h4{font-size:.95rem;font-weight:900;font-family:'Outfit',sans-serif}
+    .rper span{font-size:.72rem;font-weight:700;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        /* --- SECTION WRAPPERS --- */
-        .section-wrapper { padding: 8rem 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2;}
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 3.2rem; }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    /* FAQ */
+    .faqs{padding:5.5rem 5%;max-width:880px;margin:0 auto}
+    .fi{border-bottom:1px solid rgba(255,255,255,.06)}
+    .fq{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 0;cursor:none;font-weight:700;font-size:.95rem;color:var(--mid);transition:color .25s;text-transform:uppercase;letter-spacing:.3px;font-family:'Outfit',sans-serif}
+    .fq:hover{color:var(--green)}
+    .fqi{font-size:.72rem;color:var(--green);transition:transform .3s}
+    .fi.open .fqi{transform:rotate(45deg)}
+    .fa{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;color:var(--dim);font-size:.9rem;line-height:1.75;text-transform:none;letter-spacing:0;font-family:'Plus Jakarta Sans',sans-serif;font-weight:400}
+    .fa.open{max-height:250px;padding-bottom:1.2rem}
 
-        /* --- 3D BOOKING PIPELINE (DASHBOARD STYLE) --- */
-        .roi-tech-section { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center; padding: 4.5rem; }
-        .ai-avatar-badge { display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; border-left: 3px solid var(--holo-green);}
-        .ai-avatar-badge img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--holo-green);}
+    /* CONTACT */
+    .cons{padding:5.5rem 5%;background:rgba(15,23,42,.3);border-top:1px solid rgba(255,255,255,.04)}
+    .cgrid2{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;max-width:1200px;margin:0 auto}
+    .cstrip{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;text-decoration:none;margin-bottom:1rem;transition:all .3s}
+    .cstrip:hover{border-color:var(--green);box-shadow:var(--glow);transform:translateX(4px)}
+    .cic{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;border:1px solid rgba(255,255,255,.05);color:var(--green)}
+    .clbl{font-size:.65rem;text-transform:uppercase;font-weight:700;letter-spacing:.5px;color:var(--dim)}
+    .cval{font-size:.92rem;font-weight:700;color:white}
+    .carea{padding:1.2rem;background:rgba(2,6,23,.6);border:1px solid rgba(16,185,129,.15);border-radius:10px;margin-top:.4rem}
+    .mf{width:100%;height:320px;border-radius:14px;overflow:hidden;border:1px solid rgba(16,185,129,.2);box-shadow:var(--shadow)}
+    .mf iframe{width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg);border-radius:14px}
 
-        .calendar-mockup { padding: 3rem; transform-style: preserve-3d; }
-        .deck-header { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-dim); padding-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 2rem; gap: 1rem; transform: translateZ(30px); }
-        .cover-bubble { flex: 1; padding: 1rem 0; text-align: center; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.85rem; text-transform: uppercase;}
-        .cover-bubble:hover, .cover-bubble.selected { background: var(--gradient-glow); color: var(--bg-abyss); box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); transform: translateZ(10px) scale(1.05); border: none; }
+    /* SHARED */
+    .sw{padding:5.5rem 5%;max-width:1300px;margin:0 auto}
+    .sh{text-align:center;margin-bottom:3.5rem}
+    .sh .slbl{font-size:.7rem;text-transform:uppercase;font-weight:800;letter-spacing:2px;margin-bottom:.4rem;display:block;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .sh h2{font-size:clamp(2rem,4vw,3.2rem);font-family:'Outfit',sans-serif}
+    .sh p{color:var(--dim);font-size:.95rem;margin-top:.5rem}
+    .grl-c{width:45px;height:3px;background:var(--grad-g);border-radius:2px;margin:.7rem auto;box-shadow:var(--glow)}
 
-        select.panel-3d { width: 100%; padding: 1rem; color: white; border-radius: 8px; outline: none; font-weight: 600; cursor: pointer; margin-bottom: 1.5rem; border: 1px solid rgba(16, 185, 129, 0.2); appearance: none; background-color: var(--bg-surface);}
+    /* FOOTER */
+    footer{background:#01040a;padding:5rem 5% 7rem;text-align:center;border-top:3px solid var(--green)}
+    .fbrand{font-size:2.2rem;font-weight:900;color:white;margin-bottom:.5rem;font-family:'Outfit',sans-serif}
+    .fbrand span{background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .socrow{display:flex;justify-content:center;gap:.8rem;margin:1.2rem 0 1.5rem;flex-wrap:wrap}
+    .sc{width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,.06)}
+    .sc:hover{background:var(--grad-g);color:var(--void);transform:translateY(-4px);border-color:var(--green)}
+    .flinks{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .flinks a{font-size:.75rem;color:#374151;text-decoration:none;font-weight:600;transition:color .2s}
+    .flinks a:hover{color:var(--gc-teal)}
 
-        /* --- ABOUT INSTRUCTORS --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .instructor-images { display: flex; gap: 1.5rem; position: relative; transform-style: preserve-3d; perspective: 1000px;}
-        .instructor-img-card { flex: 1; border-radius: 16px; transform: translateZ(30px); transition: 0.4s;}
-        .instructor-img-card:hover { transform: translateZ(50px) scale(1.05); border-color: var(--holo-green);}
-        .instructor-img-card img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; filter: contrast(1.1); display: block;}
-        
-        .human-text span { font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; }
-        .human-text h2 { font-size: 3rem; margin: 0.5rem 0 1.2rem; line-height: 1.15; }
-        .human-text ul { list-style: none; margin-top: 1.5rem; }
-        .human-text ul li { margin-bottom: 12px; font-weight: 600; color: var(--text-main); display: flex; align-items: center;}
-        .human-text ul li i { color: var(--holo-green); margin-right: 12px; font-size: 1.2rem; text-shadow: 0 0 10px var(--holo-green); }
+    /* GC BADGE */
+    .gcb{position:fixed;bottom:82px;right:1.5rem;z-index:550;background:rgba(13,21,21,.97);border:1px solid rgba(0,181,200,.35);border-radius:14px;padding:.8rem 1rem;box-shadow:0 10px 35px rgba(0,0,0,.7);max-width:220px;text-align:center;animation:badin .8s ease .8s both;backdrop-filter:blur(14px)}
+    @keyframes badin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:translateX(0)}}
+    .gcbc{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--dim);font-size:.72rem;cursor:pointer}
+    .gcbl{font-size:.6rem;font-weight:800;letter-spacing:1.5px;color:rgba(0,181,200,.6);text-transform:uppercase;margin-bottom:.3rem}
+    .gcb p{font-size:.7rem;color:rgba(200,205,214,.8);margin-bottom:.5rem;line-height:1.4}
+    .gcb p strong{color:white}
+    .gcb a{display:inline-flex;align-items:center;gap:.35rem;background:linear-gradient(135deg,#00B5C8,#E5C158);color:#000;padding:.44rem 1rem;border-radius:8px;font-size:.7rem;font-weight:900;text-decoration:none;text-transform:uppercase;letter-spacing:.5px}
+    .gcb a:hover{transform:scale(1.03)}
 
-        /* --- CAR OPTIONS MATRIX --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; perspective: 1000px;}
-        .service-card { padding: 2.5rem; display: flex; flex-direction: column; transform-style: preserve-3d; transition: 0.4s; }
-        .service-card:hover { border-color: var(--holo-green); }
-        .service-img { width: 100%; height: 200px; border-radius: 8px; margin-bottom: 1.5rem; object-fit: cover; box-shadow: var(--shadow-inner); transform: translateZ(40px); transition: 0.4s; filter: grayscale(20%);}
-        .service-card:hover .service-img { box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); transform: translateZ(60px) scale(1.02); filter: grayscale(0%);}
-        .card-badge { display: inline-block; background: var(--bg-abyss); color: var(--holo-green); padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 800; margin-bottom: 1rem; transform: translateZ(25px); border: 1px solid rgba(16, 185, 129, 0.3);}
-        .card-badge.red { color: var(--alert-red); border-color: rgba(239, 68, 68, 0.3); }
-        .service-card h3 { margin-bottom: 0.5rem; font-size: 1.6rem; transform: translateZ(30px); }
-        .service-card p { color: var(--text-dim); transform: translateZ(20px); margin-bottom: 1.5rem; flex-grow: 1;}
+    /* MODAL */
+    .mo{position:fixed;inset:0;background:rgba(2,6,23,.95);backdrop-filter:blur(16px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .35s}
+    .mo.on{opacity:1;visibility:visible}
+    .mb{background:var(--surface);width:92%;max-width:940px;height:86vh;border-radius:18px;position:relative;transform:translateY(28px);transition:transform .35s;overflow:hidden;border:1px solid rgba(16,185,129,.25);box-shadow:0 30px 70px rgba(0,0,0,.95),var(--glow)}
+    .mo.on .mb{transform:translateY(0)}
+    .mc{position:absolute;top:14px;right:16px;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;cursor:none;z-index:10;transition:all .25s}
+    .mc:hover{background:var(--green);color:var(--void)}
+    .mb iframe{width:100%;height:100%;border:0;border-radius:18px}
 
-        /* --- 3D SLIDING GALLERY --- */
-        .gallery-container { padding: 3rem 0; overflow: hidden; position: relative; margin-top: 2rem;}
-        .gallery-track { display: flex; width: calc(350px * 12); animation: scrollGallery 40s linear infinite; }
-        .gallery-track:hover { animation-play-state: paused; }
-        
-        @keyframes scrollGallery { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 6)); } }
-        
-        .gallery-item { width: 320px; height: 240px; margin: 0 15px; border-radius: 12px; padding: 0.5rem; flex-shrink: 0; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.2); transition: 0.4s; filter: contrast(1.1);}
-        .gallery-item img:hover { border-color: var(--holo-green); box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); transform: scale(1.05); }
-
-        /* --- TESTIMONIALS --- */
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
-        .test-card { padding: 3rem; }
-        .stars { color: #f59e0b; margin-bottom: 1.5rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-        .test-card p { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
-        .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
-
-        /* --- FAQS --- */
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-        .faq-box { padding: 2.5rem; transform-style: preserve-3d; }
-        .faq-box h4 { margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; transform: translateZ(20px); color: var(--holo-green); }
-        .faq-box p { font-size: 1rem; color: var(--text-dim); line-height: 1.6; transform: translateZ(10px); }
-
-        /* --- CONTACT TERMINAL --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: start; }
-        .map-frame { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-        
-        .info-strip { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; text-decoration: none; margin-bottom: 1.5rem; transition: 0.3s;}
-        .info-strip:hover { box-shadow: 0 0 20px rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.5); transform: translateX(5px);}
-
-        /* --- AI WIDGET PILL --- */
-        .mini-ai-pill {
-            position: fixed; bottom: 5.5rem; right: 2rem; border-radius: 50px;
-            padding: 0.4rem 1.2rem 0.4rem 0.4rem; z-index: 1000; display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
-            transition: 0.3s;
-        }
-        .mini-ai-pill img { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--holo-green); object-fit: cover; }
-        .mini-ai-pill:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4); }
-
-        /* --- FOOTER --- */
-        footer { background: #01040a; padding: 6rem 5% 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 2;}
-        .social-circle-link { width: 50px; height: 50px; border-radius: 8px; display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; color: var(--text-dim); text-decoration: none; margin: 0 0.5rem; transition: 0.3s; }
-        .social-circle-link:hover { color: white; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); border-color: var(--holo-green); background: var(--gradient-glow);}
-
-        /* --- MOBILE BAR --- */
-        .sticky-action-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(16, 185, 129, 0.5); padding: 1rem 5%; display: flex; justify-content: center; gap: 1rem; z-index: 990; }
-
-        @media (max-width: 950px) {
-            .nav-menu { display: none; }
-            .roi-tech-section, .contact-layout, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .hero h1 { font-size: 3.5rem; }
-            .roi-tech-section { padding: 2.5rem; }
-            .trust-bar { margin-top: 0; flex-direction: column;}
-            .mini-ai-pill { padding: 0; width: 55px; height: 55px; right: 1rem; bottom: 5.5rem; justify-content: center; }
-            .ai-pill-text { display: none !important; }
-        }
-    </style>
+    /* RESPONSIVE */
+    @media(max-width:960px){body{cursor:auto}#cd,#cr{display:none}nav .nl{display:none}.bgrid,.agrid,.cgrid2{grid-template-columns:1fr;gap:2.5rem}.bgrid{padding:1.8rem}.hero h1{font-size:3rem}.gcb{display:none}.trow{margin-top:0}.hud{display:none}.iimgs{flex-direction:column}}
+    @media(max-width:600px){.hero h1{font-size:2.3rem}.cgrid,.rg{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="brand-logo bold-header">
-            Quick<span class="text-holo">Pass</span>
-        </a>
-        <nav class="nav-menu">
-            <a href="#about" class="nav-link">About Us</a>
-            <a href="#services" class="nav-link">Car Options</a>
-            <a href="#gallery" class="nav-link">Gallery</a>
-            <a href="#reviews" class="nav-link">Reviews</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </nav>
-        <a href="tel:07123456789" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Call Us</a>
-    </header>
+<div id="cd"></div>
+<div id="cr"></div>
 
-    <div class="sticky-action-bar" id="actions">
-        <a href="tel:07123456789" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-phone"></i> Call</a>
-        <a href="#booking" class="btn-holo" style="flex:2; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-car"></i> Book Lesson</a>
+<!-- HEADER -->
+<header>
+  <a href="#" class="bname">Quick<span>Pass</span></a>
+  <nav>
+    <a href="#about"   class="nl">About</a>
+    <a href="#cars"    class="nl">Cars</a>
+    <a href="#gallery" class="nl">Passes</a>
+    <a href="#reviews" class="nl">Reviews</a>
+    <a href="#faqs"    class="nl">FAQs</a>
+    <a href="#contact" class="nl">Contact</a>
+    <a href="../../showroom.html" class="nsr"><i class="fa-solid fa-arrow-left" style="font-size:.6rem"></i>Showroom</a>
+  </nav>
+  <button onclick="openB()" class="bholo"><i class="fa-solid fa-car"></i>Book Lesson</button>
+</header>
+
+<!-- HERO — Three.js road tunnel fills this -->
+<section class="hero">
+  <div id="hc"></div>
+  <div class="hv"></div>
+  <div class="hb"></div>
+  <div class="hsl"></div>
+  <div class="hspeed hsl-l"></div>
+  <div class="hspeed hsl-r"></div>
+  <div class="ctl"></div>
+  <div class="cbr"></div>
+
+  <!-- Left HUD -->
+  <div class="hud hudl">
+    <div class="hcard">
+      <div class="hlbl"><span class="hdot"></span>Availability</div>
+      <div class="hval">Open</div>
+      <div class="hsub">Lessons available now</div>
+      <div class="hbar"><div class="hfill" style="--w:100%"></div></div>
     </div>
+    <div class="hcard">
+      <div class="hlbl">Pass Rate</div>
+      <div class="hval">High</div>
+      <div class="hsub">Above national average</div>
+      <div class="hbar"><div class="hfill" style="--w:88%"></div></div>
+    </div>
+  </div>
 
-    <div id="hero-canvas-container"></div>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge panel-3d" data-tilt data-tilt-scale="1.1">
-                <span>L</span> DVSA Approved Instructors
-            </div>
-            <h1 class="bold-header" data-tilt data-tilt-max="3">Learn Fast. <br><span class="text-holo">Pass First Time.</span></h1>
-            <p data-tilt data-tilt-max="2">Friendly, patient driving lessons in Andover. Choose between our modern automatic or traditional manual cars, and learn with an instructor that suits you.</p>
-            <a href="#booking" class="btn-3d" style="margin-top: 1rem;">Start Learning Today <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i></a>
-        </div>
-    </section>
+  <!-- Right HUD -->
+  <div class="hud hudr">
+    <div class="hcard">
+      <div class="hlbl">From</div>
+      <div class="hval">£36/hr</div>
+      <div class="hsub">Manual lessons</div>
+      <div class="hbar"><div class="hfill" style="--w:70%"></div></div>
+    </div>
+    <div class="hcard">
+      <div class="hlbl">Car Types</div>
+      <div class="hval">2</div>
+      <div class="hsub">Auto &amp; manual</div>
+      <div class="hbar"><div class="hfill" style="--w:100%"></div></div>
+    </div>
+  </div>
 
-    <section class="trust-bar">
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <i class="fa-solid fa-percent text-holo"></i>
-            <h4 class="bold-header">High Pass Rate</h4>
-            <span>Above National Average</span>
-        </div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <i class="fa-solid fa-user-group text-holo"></i>
-            <h4 class="bold-header">Male & Female</h4>
-            <span>Friendly Local Tutors</span>
-        </div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <i class="fa-solid fa-car-side text-holo"></i>
-            <h4 class="bold-header">Auto & Manual</h4>
-            <span>Dual Controlled Cars</span>
-        </div>
-    </section>
+  <div class="hcon">
+    <div class="hbadge"><span class="l">L</span> DVSA Approved Driving Instructors</div>
+    <h1>Learn Fast.<br><span class="th">Pass First Time.</span></h1>
+    <p>Friendly, patient driving lessons in Andover. Automatic or manual. Male or female. We go at your pace.</p>
+    <div class="hbtns">
+      <button onclick="openB()" class="bholo" style="padding:1.1rem 2.4rem;font-size:.9rem"><i class="fa-solid fa-car"></i>Start Learning Today</button>
+      <a href="#cars" class="b3d"><i class="fa-solid fa-list"></i>Car Options</a>
+    </div>
+    <div class="htp">
+      <span class="hpi"><i class="fa-solid fa-check"></i>DVSA approved</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Auto &amp; manual</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Pick up from home</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Male &amp; female</span>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="booking">
-        <div class="roi-tech-section panel-3d">
-            <div class="tech-text-block">
-                <h3 class="bold-header">Book Your First<br><span class="text-holo">Lesson.</span></h3>
-                <p style="color: var(--text-dim); font-size: 1.1rem;">Ready to get behind the wheel? Use our interactive dashboard to check availability and request your first driving lesson instantly.</p>
-                
-                <div class="ai-avatar-badge panel-inset" data-tilt>
-                    <img src="female-reviewer-3.jpg" alt="Chloe Assistant" class="img-glow">
-                    <div>
-                        <h4 style="color: white; font-family: 'Outfit', sans-serif;">Chat with Chloe</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Our smart booking assistant is available 24/7.</p>
-                    </div>
-                </div>
-            </div>
+<!-- TRUST CARDS -->
+<div class="trow rv">
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-percent"></i><h4>High Pass Rate</h4><span>Above National Avg</span>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-user-group"></i><h4>Male &amp; Female</h4><span>Your Choice</span>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-car-side"></i><h4>Auto &amp; Manual</h4><span>Dual Control</span>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-location-dot"></i><h4>Pick Up</h4><span>Home / College</span>
+  </div>
+</div>
 
-            <div class="calendar-mockup panel-inset" data-tilt data-tilt-max="5">
-                <h4 class="deck-header bold-header">1. Choose Your Car</h4>
-                <div class="covers-selector">
-                    <div class="cover-bubble panel-3d" style="background: var(--gradient-glow); color: var(--bg-abyss); border:none;">Automatic</div>
-                    <div class="cover-bubble panel-3d">Manual</div>
-                </div>
-                
-                <h4 class="deck-header bold-header" style="margin-top: 1.5rem;">2. Instructor Preference</h4>
-                <select class="panel-3d" style="margin-bottom: 1.5rem;">
-                    <option>No Preference</option>
-                    <option>Female Instructor</option>
-                    <option>Male Instructor</option>
-                </select>
+<!-- BOOKING -->
+<section class="bsec" id="booking">
+  <div class="bgrid p3d rv">
+    <div class="bpitch">
+      <p class="albl">Easy Online Booking</p>
+      <h3>Book Your First<br><span>Lesson.</span></h3>
+      <div class="grl"></div>
+      <p>Ready to get behind the wheel? Fill in your preferences and we will find you the perfect slot and instructor in seconds.</p>
+      <div class="aib">
+        <div class="aiv"><i class="fa-solid fa-headset"></i><img src="female-reviewer-3.jpg" alt="Chloe" onerror="this.style.display='none'"/></div>
+        <div><h4 style="color:white;font-size:.9rem;font-family:'Outfit',sans-serif;margin-bottom:2px">Chat with Chloe</h4><p style="font-size:.78rem;color:var(--dim)">Our smart assistant is available 24/7.</p></div>
+      </div>
+    </div>
+    <div class="bpanel pin" data-tilt data-tilt-max="6">
+      <h5>1. Choose Your Car</h5>
+      <select class="bsel">
+        <option>Automatic (Easier — no gears)</option>
+        <option>Manual (Traditional)</option>
+      </select>
+      <h5>2. Instructor Preference</h5>
+      <select class="bsel">
+        <option>No Preference</option>
+        <option>Female Instructor</option>
+        <option>Male Instructor</option>
+      </select>
+      <h5>3. Experience Level</h5>
+      <select class="bsel" style="margin-bottom:1.3rem">
+        <option>Complete Beginner</option>
+        <option>Partly Trained (10+ hours)</option>
+        <option>Test Ready / Refresher</option>
+      </select>
+      <button onclick="openB()" class="bholo" style="width:100%;justify-content:center;padding:1rem"><i class="fa-solid fa-car"></i>Check Availability</button>
+      <p style="font-size:.65rem;color:var(--dim);text-align:center;margin-top:.6rem">Free to book. Cancel anytime.</p>
+    </div>
+  </div>
+</section>
 
-                <h4 class="deck-header bold-header">3. Experience Level</h4>
-                <select class="panel-3d">
-                    <option>Complete Beginner</option>
-                    <option>Partly Trained (10+ hours)</option>
-                    <option>Test Ready / Refresher</option>
-                </select>
+<!-- ABOUT -->
+<section class="abouts" id="about">
+  <div class="agrid">
+    <div class="iimgs rl">
+      <div class="icard"><div class="icard-ph"><i class="fa-solid fa-user"></i></div><img src="female-instructor.png" alt="Female Instructor" onerror="this.style.display='none'"/></div>
+      <div class="icard" style="transform:translateY(40px) translateZ(20px)"><div class="icard-ph"><i class="fa-solid fa-user"></i></div><img src="male-instructor.JPG" alt="Male Instructor" onerror="this.style.display='none'"/></div>
+    </div>
+    <div class="rr">
+      <p class="albl">Your Local Team</p>
+      <h2>Learn Your Way.</h2>
+      <div class="grl"></div>
+      <p>Learning to drive should not be stressful. Every student learns differently, so we offer a completely personalised approach at your own pace.</p>
+      <p>Both male and female instructors available — patient, friendly, and highly experienced. Whether you are a nervous beginner or just need a final polish, we have got you.</p>
+      <ul class="ach">
+        <li><i class="fa-solid fa-check-circle"></i>Patient, relaxed teaching style</li>
+        <li><i class="fa-solid fa-check-circle"></i>Pick up from home, college, or work</li>
+        <li><i class="fa-solid fa-check-circle"></i>Free theory test advice and support</li>
+        <li><i class="fa-solid fa-check-circle"></i>Dual-controlled cars throughout</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Check Availability</button>
-            </div>
-        </div>
-    </section>
+<!-- CAR OPTIONS — 3D cards -->
+<section class="csec" id="cars">
+  <div class="sh rv"><span class="slbl">What We Offer</span><h2>Choose Your <span class="th">Car</span></h2><div class="grl-c"></div><p>Modern automatic or traditional manual — both in brand new dual-controlled vehicles.</p></div>
+  <div class="cgrid">
+    <div class="xcard rv d1">
+      <div class="xcimg" style="background:linear-gradient(135deg,#0f172a,#1e3a2a)">
+        <i class="fa-solid fa-car"></i><span class="xbadge xbadge-g">Most Popular</span>
+        <img src="auto-car.jpg" alt="Automatic Lessons" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xbody">
+        <div class="xtitle">Automatic Lessons</div>
+        <p class="xdesc">No gears, no stalling, less stress. Automatic cars are much easier to learn in — most students need fewer lessons to pass.</p>
+        <p class="xprice">From £38 / hr</p>
+        <button onclick="openB()" class="xcta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xglow"></div>
+    </div>
+    <div class="xcard rv d2">
+      <div class="xcimg" style="background:linear-gradient(135deg,#0f172a,#1a2433)">
+        <i class="fa-solid fa-car-side"></i><span class="xbadge xbadge-w">Traditional</span>
+        <img src="manual-car.jpg" alt="Manual Lessons" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xbody">
+        <div class="xtitle">Manual Lessons</div>
+        <p class="xdesc">Learn the traditional way and earn a full licence — allowing you to drive both manual and automatic cars anywhere.</p>
+        <p class="xprice">From £36 / hr</p>
+        <button onclick="openB()" class="xcta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xglow"></div>
+    </div>
+    <div class="xcard rv d3">
+      <div class="xcimg" style="background:linear-gradient(135deg,#2d0505,#0f172a)">
+        <i class="fa-solid fa-bolt"></i><span class="xbadge xbadge-r">Fast Track</span>
+        <img src="learning-drive-1.jpg" alt="Intensive Course" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xbody">
+        <div class="xtitle">Intensive Courses</div>
+        <p class="xdesc">Need to pass quickly for a job or university? Condense months of lessons into focused weeks and get test-ready fast.</p>
+        <p class="xprice">Contact Us</p>
+        <button onclick="openB()" class="xcta">Enquire <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xglow"></div>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="about">
-        <div class="about-grid">
-            <div class="instructor-images">
-                <div class="instructor-img-card panel-3d" data-tilt data-tilt-max="5">
-                    <img src="female-instructor.png" alt="Female Driving Instructor">
-                </div>
-                <div class="instructor-img-card panel-3d" style="transform: translateY(40px) translateZ(20px);" data-tilt data-tilt-max="5">
-                    <img src="male-instructor.JPG" alt="Male Driving Instructor">
-                </div>
-            </div>
-            <div class="human-text" style="padding-left: 1rem;">
-                <span class="text-holo">Your Local Team</span>
-                <h2 class="bold-header">Learn Your Way.</h2>
-                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem;">Learning to drive shouldn't be stressful. We know that every student learns differently, which is why we offer a completely personalised approach to your lessons.</p>
-                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem;">We proudly offer both male and female instructors who are patient, friendly, and highly experienced. Whether you are a nervous beginner or just need to polish up before your test, we go at a pace that suits you.</p>
-                <ul>
-                    <li><i class="fa-solid fa-check-circle"></i> Patient, relaxed teaching style</li>
-                    <li><i class="fa-solid fa-check-circle"></i> Pick up from home, college, or work</li>
-                    <li><i class="fa-solid fa-check-circle"></i> Free theory test advice and support</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<!-- GALLERY — Recent Passes -->
+<div class="gals" id="gallery">
+  <div class="sh rv" style="margin-bottom:2rem;padding-top:2rem">
+    <span class="slbl">Congratulations to all our passers</span>
+    <h2>Pass Wall &#127881;</h2>
+    <div class="grl-c"></div>
+    <p>Hundreds of happy students who passed with QuickPass.</p>
+  </div>
+  <div class="galt">
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="driving-pass-1.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-2.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-3.jpeg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-4.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="pass-5.JPG" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="pass-6JPG.JPG" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="driving-pass-1.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-2.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-3.jpeg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-4.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="pass-5.JPG" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="pass-6JPG.JPG" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="driving-pass-1.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-star"></i><img src="test-pass-2.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
+  </div>
+</div>
 
-    <section class="section-wrapper" id="services">
-        <div class="section-header">
-            <h2 class="bold-header text-holo">Choose Your Car</h2>
-            <p>We offer both modern automatic and traditional manual driving lessons.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="auto-car.jpg" alt="Automatic Lessons" class="service-img">
-                <span class="card-badge">Most Popular</span>
-                <h3 class="bold-header">Automatic Lessons</h3>
-                <p>Skip the stress of stalling and learning clutch control. Automatic cars are much easier to drive, meaning you usually need fewer lessons to pass your test.</p>
-                <p style="font-size: 1.4rem; color: var(--holo-green); font-weight: 800; transform: translateZ(30px);">From £38 / hr</p>
-            </div>
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="manual-car.jpg" alt="Manual Lessons" class="service-img">
-                <span class="card-badge" style="color: white; border-color: rgba(255,255,255,0.2);">Traditional</span>
-                <h3 class="bold-header">Manual Lessons</h3>
-                <p>Learn to drive the traditional way. Passing in a manual car gives you a full licence, allowing you to drive both manual and automatic cars in the future.</p>
-                <p style="font-size: 1.4rem; color: var(--holo-green); font-weight: 800; transform: translateZ(30px);">From £36 / hr</p>
-            </div>
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="learning-drive-1.jpg" alt="Intensive Courses" class="service-img">
-                <span class="card-badge red">Fast Track</span>
-                <h3 class="bold-header">Intensive Courses</h3>
-                <p>Need to pass quickly for a job or university? Our intensive driving courses condense months of lessons into just a few weeks of focused driving.</p>
-                <p style="font-size: 1.4rem; color: var(--holo-green); font-weight: 800; transform: translateZ(30px);">Contact for prices</p>
-            </div>
-        </div>
-    </section>
+<!-- REVIEWS — 3 reviewers -->
+<section class="revs" id="reviews">
+  <div class="sh rv"><span class="slbl">Real Reviews</span><h2>What Learners Say</h2><div class="grl-c"></div></div>
+  <div class="rg">
+    <div class="rc p3d rv d1" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"I was so nervous to start, but my instructor was amazingly patient. We went at my pace and I passed first time with only 2 minor faults. Highly recommend the automatic lessons!"</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="female-reviewer-1.jpg" alt="Sarah Jenkins" onerror="this.style.display='none'"/></div><div><h4>Sarah Jenkins</h4><span>Passed First Time &#9989;</span></div></div>
+    </div>
+    <div class="rc p3d rv d2" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"Moved to QuickPass after a bad experience elsewhere. The difference was night and day. Super professional instructors, brand new cars, and I passed my manual test on the second attempt."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="male-reviewer-1.jpg" alt="Tom Hardy" onerror="this.style.display='none'"/></div><div><h4>Tom Hardy</h4><span>Manual Lessons &#9989;</span></div></div>
+    </div>
+    <div class="rc p3d rv d3" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"Booked my automatic lessons online in literally two minutes. My instructor picked me up from college every week and I passed on my very first attempt. So happy I chose QuickPass!"</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="female-reviewer-1.jpg" alt="Priya Sharma" onerror="this.style.display='none'"/></div><div><h4>Priya Sharma</h4><span>Automatic Lessons &#9989;</span></div></div>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="gallery" style="padding-top: 2rem;">
-        <div class="section-header">
-            <h2 class="bold-header text-holo">Recent Passes</h2>
-            <p>Join the hundreds of happy students who have passed with QuickPass.</p>
-        </div>
-        <div class="gallery-container panel-inset">
-            <div class="gallery-track">
-                <div class="gallery-item panel-3d"><img src="driving-pass-1.jpg" alt="Student Passed"></div>
-                <div class="gallery-item panel-3d"><img src="test-pass-2.jpg" alt="Happy student"></div>
-                <div class="gallery-item panel-3d"><img src="test-pass-3.jpeg" alt="Driving test pass"></div>
-                <div class="gallery-item panel-3d"><img src="test-pass-4.jpg" alt="Passed driving test"></div>
-                <div class="gallery-item panel-3d"><img src="pass-5.JPG" alt="Successful student"></div>
-                <div class="gallery-item panel-3d"><img src="pass-6JPG.JPG" alt="Passed first time"></div>
-                
-                <div class="gallery-item panel-3d"><img src="driving-pass-1.jpg" alt="Student Passed"></div>
-                <div class="gallery-item panel-3d"><img src="test-pass-2.jpg" alt="Happy student"></div>
-                <div class="gallery-item panel-3d"><img src="test-pass-3.jpeg" alt="Driving test pass"></div>
-                <div class="gallery-item panel-3d"><img src="test-pass-4.jpg" alt="Passed driving test"></div>
-                <div class="gallery-item panel-3d"><img src="pass-5.JPG" alt="Successful student"></div>
-                <div class="gallery-item panel-3d"><img src="pass-6JPG.JPG" alt="Passed first time"></div>
-            </div>
-        </div>
-    </section>
+<!-- FAQ -->
+<section class="faqs" id="faqs">
+  <div class="sh rv"><span class="slbl">Got Questions?</span><h2 class="th">We Can Help.</h2><div class="grl-c"></div></div>
+  <div class="rv">
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Should I choose automatic or manual?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Automatic is generally faster and easier because there are no gears or clutch. A manual licence does let you drive both types. It comes down to your personal goals — our instructors are happy to advise during your first lesson.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Do I need to pass my theory test first?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">No. You can start practical driving lessons at any time. In fact, learning in the car often makes theory questions much easier to understand, so many students do both at the same time.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>How many lessons will I need?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">The DVSA recommends around 45 hours on average, but everyone is different. Your instructor will monitor your progress and tell you honestly when you are ready for your test. No pressure, no rushed lessons.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Can I request a female instructor?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Absolutely. We have both male and female instructors available. Just select your preference when you book and we will match you right away.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>What areas do you cover?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">We cover Andover, Tidworth, Whitchurch, and surrounding villages. We can pick you up from home, work, or college — just let us know your location when booking.</div></div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="reviews">
-        <div class="section-header">
-            <h2 class="bold-header">What Our Learners Say</h2>
-            <p>Real reviews from students who learned with us.</p>
-        </div>
-        <div class="test-grid">
-            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"I was so nervous to start driving, but my instructor was amazingly patient. We went at my pace, and I ended up passing first time with only 2 minor faults! Highly recommend the automatic lessons."</p>
-                <div class="client">
-                    <img src="female-reviewer-1.jpg" alt="Sarah Jenkins" class="img-glow">
-                    <div>
-                        <h4 class="bold-header" style="font-size: 1.1rem;">Sarah Jenkins</h4>
-                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Passed First Time</span>
-                    </div>
-                </div>
-            </div>
-            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Moved to QuickPass after having a bad experience with another school. The difference was night and day. The instructors are super professional, and the cars are brand new and easy to drive."</p>
-                <div class="client">
-                    <img src="male-reviewer-1.jpg" alt="Tom Hardy" class="img-glow">
-                    <div>
-                        <h4 class="bold-header" style="font-size: 1.1rem;">Tom Hardy</h4>
-                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Manual Lessons</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- CONTACT -->
+<section class="cons" id="contact">
+  <div class="sh rv"><span class="slbl">Get In Touch</span><h2>Ready to Start?</h2><div class="grl-c"></div></div>
+  <div class="cgrid2">
+    <div class="rl">
+      <a href="https://wa.me/447474080809" target="_blank" class="cstrip p3d" data-tilt data-tilt-max="4">
+        <div class="cic"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i></div>
+        <div><div class="clbl">WhatsApp Us</div><div class="cval">Message for a Quick Booking</div></div>
+      </a>
+      <a href="mailto:hello@gochuchuro.com" class="cstrip p3d" data-tilt data-tilt-max="4">
+        <div class="cic" style="color:var(--green)"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="clbl">Email Us</div><div class="cval">Send a Booking Enquiry</div></div>
+      </a>
+      <div class="carea">
+        <h4 style="color:white;font-family:'Outfit',sans-serif;font-weight:800;margin-bottom:.4rem;font-size:.95rem"><span class="th">Areas We Cover</span></h4>
+        <p style="font-size:.88rem;color:var(--dim)">Andover, Tidworth, Whitchurch, and surrounding villages. Pick up from home, work, or college.</p>
+      </div>
+      <button onclick="openB()" class="bholo" style="width:100%;justify-content:center;padding:1rem;margin-top:1rem"><i class="fa-solid fa-car"></i>Book a Lesson Now</button>
+    </div>
+    <div class="mf rr p3d" data-tilt data-tilt-max="3">
+      <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="faqs">
-        <div class="section-header">
-            <h2 class="bold-header text-holo">Questions? We Can Help.</h2>
-            <p>Everything you need to know before starting your driving journey.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">Should I choose automatic or manual?</h4>
-                <p>Automatic is generally faster and easier to learn because there's no clutch or gears to worry about. However, a manual licence allows you to drive both manual and automatic cars.</p>
-            </div>
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">Do I need to pass my theory test first?</h4>
-                <p>No, you can start taking practical driving lessons before you pass your theory test. In fact, combining the two often helps you understand the theory questions much better.</p>
-            </div>
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">How many lessons will I need?</h4>
-                <p>The DVSA recommends around 45 hours of professional lessons, but everyone is different. Your instructor will assess your progress and tell you when you are test-ready.</p>
-            </div>
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="bold-header text-holo" style="font-size: 1.1rem;">Can I request a female instructor?</h4>
-                <p>Yes, absolutely. We have a diverse team of both male and female instructors. Just let us know your preference when you book your first lesson.</p>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER — social icons here only -->
+<footer>
+  <div class="fbrand">Quick<span>Pass</span></div>
+  <p style="color:var(--dim);font-size:.88rem;margin-bottom:.5rem">Helping Andover learn to drive safely and confidently.</p>
+  <div class="socrow">
+    <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="sc" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="sc" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="sc" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://wa.me/447474080809" target="_blank" class="sc" title="WhatsApp" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <div class="flinks">
+    <a href="../../showroom.html">Back to Showroom</a>
+    <a href="../../index.html">GoChuchuro Home</a>
+    <a href="../../index.html#pricing">Pricing from £49/mo</a>
+    <a href="../../privacy.html">Privacy Policy</a>
+  </div>
+  <p style="font-size:.72rem;color:#374151;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;margin-top:.5rem">
+    &copy; 2026 QuickPass Driving School, Andover. Website powered by
+    <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700">GoChuchuro</a>.
+  </p>
+</footer>
 
-    <section class="section-wrapper" id="contact">
-        <div class="section-header">
-            <h2 class="bold-header">Get In Touch</h2>
-            <p>Ready to start? Message us directly to book your slot.</p>
-        </div>
-        <div class="contact-layout">
-            <div>
-                <a href="https://wa.me/447123456789" target="_blank" class="info-strip panel-3d" data-tilt data-tilt-max="5">
-                    <i class="fa-brands fa-whatsapp text-holo" style="font-size: 2.5rem;"></i>
-                    <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">WhatsApp Us</h5>
-                        <p style="font-size: 1.2rem; font-weight: 700; color: white;">+44 7123 456 789</p>
-                    </div>
-                </a>
-                <a href="mailto:hello@quickpass.co.uk" class="info-strip panel-3d" data-tilt data-tilt-max="5">
-                    <i class="fa-solid fa-envelope text-holo" style="font-size: 2.5rem;"></i>
-                    <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Email Us</h5>
-                        <p style="font-size: 1.1rem; font-weight: 700; color: white;">hello@quickpass.co.uk</p>
-                    </div>
-                </a>
-                
-                <div class="panel-inset" style="padding: 1.5rem; margin-top: 2rem;">
-                    <h4 class="bold-header text-holo" style="margin-bottom: 0.5rem;">Areas We Cover</h4>
-                    <p style="color: var(--text-dim); font-size: 0.95rem;">We provide driving lessons across Andover, Tidworth, Whitchurch, and the surrounding villages. We can pick you up from home, work, or college.</p>
-                </div>
-            </div>
+<!-- STICKY ACTION BAR -->
+<div class="abar">
+  <a href="https://wa.me/447474080809" target="_blank" class="ab ab-out"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i>WhatsApp</a>
+  <button onclick="openB()" class="ab ab-holo"><i class="fa-solid fa-car"></i>Book a Lesson</button>
+</div>
 
-            <div class="panel-3d map-frame" style="padding: 0.5rem;">
-                <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border-radius: 12px; border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </section>
+<!-- GC BADGE -->
+<div class="gcb" id="gcb">
+  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">&times;</button>
+  <div class="gcbl">Powered by GoChuchuro</div>
+  <p><strong>Want this website</strong> for your school?</p>
+  <a href="../../index.html" target="_blank"><i class="fa-regular fa-calendar"></i>Free Chat</a>
+</div>
 
-    <a href="#booking" class="mini-ai-pill panel-3d" data-tilt>
-        <img src="female-reviewer-3.jpg" alt="Chloe AI" class="img-glow">
-        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center; padding-right: 0.5rem;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: white; margin: 0; line-height: 1.2;">Chloe (Help Desk)</p>
-            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; font-weight: 600;"><i class="fa-solid fa-circle text-holo" style="font-size: 0.45rem; margin-right: 4px;"></i> Tap to chat</p>
-        </div>
-    </a>
+<!-- BOOKING MODAL -->
+<div class="mo" id="bm">
+  <div class="mb">
+    <button class="mc" onclick="closeB()"><i class="fa-solid fa-xmark"></i></button>
+    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" scrolling="yes"></iframe>
+  </div>
+</div>
 
-    <footer>
-        <h3 class="bold-header" style="margin-bottom: 1.5rem; font-size: 2rem; color: white;">Quick<span class="text-holo">Pass</span></h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Helping Andover learn to drive safely and confidently.</p>
-        
-        <div style="margin-bottom: 3rem; display: flex; justify-content: center; gap: 1rem;">
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
-        <p style="font-size: 0.85rem; color: #475569;">© 2026 QuickPass Driving School. Built by GoChuchuro Agency.</p>
-    </footer>
+<script>
+/* CURSOR */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(ar)})();
 
-    <script>
-        const container = document.getElementById('hero-canvas-container');
-        const scene = new THREE.Scene();
-        
-        // Fog to fade grid in the distance
-        scene.fog = new THREE.FogExp2(0x020617, 0.03);
+/* MODAL */
+function openB(){document.getElementById('bm').classList.add('on');document.body.style.overflow='hidden'}
+function closeB(){document.getElementById('bm').classList.remove('on');document.body.style.overflow=''}
+document.getElementById('bm').addEventListener('click',function(e){if(e.target===this)closeB()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeB()});
 
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
+/* FAQ */
+function tF(el){const it=el.parentElement,ans=it.querySelector('.fa'),op=it.classList.contains('open');document.querySelectorAll('.fi').forEach(i=>{i.classList.remove('open');i.querySelector('.fa').classList.remove('open')});if(!op){it.classList.add('open');ans.classList.add('open')}}
 
-        // 1. Moving Floor Grid (Neon Green)
-        const gridHelper = new THREE.GridHelper(100, 40, 0x10b981, 0x064e3b);
-        gridHelper.position.y = -3;
-        scene.add(gridHelper);
+/* REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
 
-        // 2. Floating Passing Lights (Speed effect)
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 200;
-        const posArray = new Float32Array(particlesCount * 3);
+/* ================================================================
+   THREE.JS HERO — NEON ROAD TUNNEL
+   The viewer IS in the car, driving forward at speed.
 
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 40; // Spread x
-            posArray[i+1] = Math.random() * 10 - 2;   // Spread y (above grid)
-            posArray[i+2] = (Math.random() - 0.5) * 40; // Spread z
-        }
+   The entire visual is built around ONE feeling:
+   you are behind the wheel of a car at night,
+   accelerating down a dark road with neon green
+   lane markings converging to the vanishing point.
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.08, color: 0x10b981, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-        });
+   Completely different from all other trades:
+   Garage: red horizontal racing grid on floor
+   Plumbing: teal vortex rings spiralling inward  
+   Restaurant: warm embers floating upward
+   Driving: you are ON the road, moving forward
+================================================================ */
+const hc=document.getElementById('hc');
+const W=hc.clientWidth,H=hc.clientHeight;
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x020617,0.028);
 
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 10;
-        camera.position.y = 1;
+const cam=new THREE.PerspectiveCamera(75,W/H,0.1,300);
+cam.position.set(0,1.8,0); // low position — eye level in a car
+cam.lookAt(0,1.2,-10);
 
-        // Mouse Parallax Logic
-        let mouseX = 0; let mouseY = 0;
-        let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
+const ren=new THREE.WebGLRenderer({alpha:true,antialias:true});
+ren.setSize(W,H);
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+hc.appendChild(ren.domElement);
 
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - windowHalfX);
-            mouseY = (event.clientY - windowHalfY);
-        });
+/* --- ROAD SURFACE — wide flat plane stretching forward --- */
+const roadGeo=new THREE.PlaneGeometry(14,200,1,1);
+const roadMat=new THREE.MeshBasicMaterial({color:0x0a0a0f,transparent:true,opacity:.9});
+const road=new THREE.Mesh(roadGeo,roadMat);
+road.rotation.x=-Math.PI/2;
+road.position.set(0,-.5,-90);
+scene.add(road);
 
-        const clock = new THREE.Clock();
+/* --- NEON LANE MARKINGS — the heart of the effect --- */
+/* Centre dashes — dotted white line down the middle */
+function makeDash(x,z,color,w,h){
+  const g=new THREE.PlaneGeometry(w,h);
+  const m=new THREE.MeshBasicMaterial({color,transparent:true,opacity:.8});
+  const mesh=new THREE.Mesh(g,m);
+  mesh.rotation.x=-Math.PI/2;
+  mesh.position.set(x,-.48,z);
+  return mesh;
+}
 
-        function animate() {
-            requestAnimationFrame(animate);
-            const elapsedTime = clock.getElapsedTime();
+const dashes=[];
+for(let i=0;i<40;i++){
+  const d=makeDash(0,-i*5+5,0xffffff,0.08,2.5);
+  scene.add(d);
+  dashes.push(d);
+}
 
-            // Animate grid moving forward to simulate driving speed
-            gridHelper.position.z = (elapsedTime * 8) % 2.5;
+/* Left neon lane line — solid green */
+const llGeo=new THREE.PlaneGeometry(0.12,200);
+const llMat=new THREE.MeshBasicMaterial({color:0x10b981,transparent:true,opacity:.9});
+const llMesh=new THREE.Mesh(llGeo,llMat);
+llMesh.rotation.x=-Math.PI/2;
+llMesh.position.set(-4.5,-.48,-90);
+scene.add(llMesh);
 
-            // Animate lights rushing past camera
-            const positions = particlesMesh.geometry.attributes.position.array;
-            for(let i = 2; i < particlesCount * 3; i += 3) {
-                positions[i] += 0.3; // Move on Z axis
-                if(positions[i] > 15) { positions[i] = -25; } // Reset behind camera
-            }
-            particlesMesh.geometry.attributes.position.needsUpdate = true;
-            
-            // Subtle camera tilt based on mouse (steering effect)
-            camera.position.x += (mouseX * 0.003 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 0.002 + 1 - camera.position.y) * 0.05;
-            camera.lookAt(0, 0, 0);
+/* Right neon lane line */
+const rlGeo=new THREE.PlaneGeometry(0.12,200);
+const rlMat=new THREE.MeshBasicMaterial({color:0x10b981,transparent:true,opacity:.9});
+const rlMesh=new THREE.Mesh(rlGeo,rlMat);
+rlMesh.rotation.x=-Math.PI/2;
+rlMesh.position.set(4.5,-.48,-90);
+scene.add(rlMesh);
 
-            renderer.render(scene, camera);
-        }
-        animate();
+/* Neon glow mesh under lane lines */
+const lgGeo=new THREE.PlaneGeometry(0.6,200);
+const lgMat=new THREE.MeshBasicMaterial({color:0x10b981,transparent:true,opacity:.12});
+const lgL=new THREE.Mesh(lgGeo,lgMat);
+lgL.rotation.x=-Math.PI/2;
+lgL.position.set(-4.5,-.49,-90);
+scene.add(lgL);
+const lgR=new THREE.Mesh(lgGeo.clone(),lgMat.clone());
+lgR.rotation.x=-Math.PI/2;
+lgR.position.set(4.5,-.49,-90);
+scene.add(lgR);
 
-        // Handle Resize
-        window.addEventListener('resize', () => {
-            windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        });
+/* --- SPEED STREAK PARTICLES — rushing past the windows --- */
+const sCount=300,sPos=new Float32Array(sCount*3);
+for(let i=0;i<sCount*3;i+=3){
+  const side=Math.random()>.5?1:-1;
+  sPos[i]  =side*(4+Math.random()*8); // outside the road
+  sPos[i+1]=(Math.random()-.3)*3;
+  sPos[i+2]=(Math.random()-.5)*160;
+}
+const sGeo=new THREE.BufferGeometry();
+sGeo.setAttribute('position',new THREE.BufferAttribute(sPos,3));
+const sMat=new THREE.PointsMaterial({size:.06,color:0x10b981,transparent:true,opacity:.7,blending:THREE.AdditiveBlending});
+const streaks=new THREE.Points(sGeo,sMat);
+scene.add(streaks);
 
-        // Initialize 3D UI Tilt effects
-        VanillaTilt.init(document.querySelectorAll(".panel-3d, .btn-3d"), {
-            speed: 400,
-            glare: true,
-            "max-glare": 0.15,
-        });
-    </script>
+/* --- DISTANT LIGHTS — oncoming headlights effect --- */
+const hCount=30,hPos=new Float32Array(hCount*3);
+for(let i=0;i<hCount*3;i+=3){
+  hPos[i]  =(Math.random()-.5)*3;
+  hPos[i+1]=.8+Math.random()*.6;
+  hPos[i+2]=-(Math.random()*200);
+}
+const hGeo=new THREE.BufferGeometry();
+hGeo.setAttribute('position',new THREE.BufferAttribute(hPos,3));
+const hMat=new THREE.PointsMaterial({size:.25,color:0xffffff,transparent:true,opacity:.5,blending:THREE.AdditiveBlending});
+scene.add(new THREE.Points(hGeo,hMat));
+
+/* --- ROADSIDE LIGHTS — street lamp poles --- */
+const lampPos=[];
+for(let i=0;i<20;i++){
+  const g=new THREE.CylinderGeometry(.04,.04,6,4);
+  const m=new THREE.MeshBasicMaterial({color:0x334155,transparent:true,opacity:.6});
+  const pole=new THREE.Mesh(g,m);
+  pole.position.set(i%2===0?-7:7,.5,-i*10-5);
+  scene.add(pole);
+  lampPos.push(pole);
+}
+
+let roadOffset=0,tx=0,ty=0;
+document.addEventListener('mousemove',e=>{
+  tx=(e.clientX/W-.5)*.4; // steering: mouse moves camera left/right
+  ty=(e.clientY/H-.5)*.2;
+});
+
+const clk=new THREE.Clock();
+(function anim(){
+  requestAnimationFrame(anim);
+  const dt=clk.getDelta();
+  const t=clk.getElapsedTime();
+
+  /* ROAD MOVES — animate dashes rushing towards camera */
+  roadOffset=(roadOffset+0.4)%5;
+  dashes.forEach((d,i)=>{
+    d.position.z=(-i*5+roadOffset+5);
+    if(d.position.z>6) d.position.z-=200;
+  });
+
+  /* SPEED STREAKS rush past */
+  const sp=streaks.geometry.attributes.position.array;
+  for(let i=2;i<sCount*3;i+=3){
+    sp[i]+=.6;
+    if(sp[i]>8) sp[i]=-160;
+  }
+  streaks.geometry.attributes.position.needsUpdate=true;
+
+  /* CAMERA — slight bobbing (road bumps) + mouse steering */
+  cam.position.x+=(tx*0.8-cam.position.x)*.04;
+  cam.position.y=1.8+Math.sin(t*1.2)*.04; // very subtle road bump
+  cam.lookAt(cam.position.x*.3,1.2+Math.sin(t*.4)*.02,-10);
+
+  ren.render(scene,cam);
+})();
+
+window.addEventListener('resize',()=>{
+  const w=hc.clientWidth,h=hc.clientHeight;
+  cam.aspect=w/h;cam.updateProjectionMatrix();
+  ren.setSize(w,h);
+});
+
+/* VANILLA TILT */
+VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{speed:400,glare:true,'max-glare':.12});
+</script>
 </body>
 </html>
