@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarvahansh Travel | Premium Global Journeys</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        qatarMaroon: '#8A1538',
+                        qatarGold: '#D4AF37',
+                        luxuryDark: '#0B111A',
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* --- THE LAYERS --- */
+        
+        /* Layer 1: The Provided Image Background */
+        .hero-bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('image_e71345.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            /* Subtle dark tint so the white text and glowing waves pop */
+            filter: brightness(0.6) contrast(1.1); 
+            transform: scale(1.05); /* Slight zoom for premium feel */
+        }
+
+        /* Layer 2: The 3D WebGL Canvas (The Jelly Waves) */
+        #jelly-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 2;
+            pointer-events: none; /* Let clicks pass through to buttons */
+        }
+
+        /* Layer 3: The Content & UI Overlay */
+        .content-layer {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- LUXURY GLASSMORPHISM UI --- */
+        .glass-nav {
+            background: rgba(11, 17, 26, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-panel {
+            background: rgba(11, 17, 26, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        .gold-gradient {
+            background: linear-gradient(135deg, #FFF1CA, #D4AF37, #997A15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-luxury {
+            background: linear-gradient(135deg, #D4AF37, #997A15);
+            color: #000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #FFF1CA;
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-luxury:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.5);
+            background: linear-gradient(135deg, #FFF1CA, #D4AF37);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.4s;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-bg-image"></div>
+
+    <div id="jelly-canvas"></div>
+
+    <div class="content-layer">
+        
+        <header class="glass-nav w-full py-5 px-8 md:px-16 flex justify-between items-center">
+            <a href="#" class="flex flex-col">
+                <span class="font-display text-2xl md:text-3xl font-bold tracking-widest text-white leading-none">
+                    SARVAHANSH
+                </span>
+                <span class="font-body text-[10px] uppercase tracking-[0.3em] text-qatarGold mt-1">
+                    Premium Travel Agent
+                </span>
+            </a>
+
+            <nav class="hidden md:flex gap-10 items-center">
+                <a href="#" class="text-white text-sm font-semibold tracking-widest uppercase hover:text-qatarGold transition">Destinations</a>
+                <a href="#" class="text-white text-sm font-semibold tracking-widest uppercase hover:text-qatarGold transition">First Class</a>
+                <a href="#" class="text-white text-sm font-semibold tracking-widest uppercase hover:text-qatarGold transition">Corporate</a>
+                <a href="#" class="border border-white/30 px-6 py-2 rounded-full text-white text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition">Contact</a>
+            </nav>
+        </header>
+
+        <main class="flex-1 flex items-center justify-center px-5">
+            
+            <div class="glass-panel p-10 md:p-16 max-w-4xl text-center w-full" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
+                
+                <div class="inline-flex items-center gap-3 bg-black/40 border border-white/20 rounded-full px-5 py-2 mb-8">
+                    <i class="fa-solid fa-plane-departure text-qatarGold"></i>
+                    <span class="text-xs md:text-sm font-bold tracking-widest text-white uppercase">Official Qatar Airways Partner</span>
+                </div>
+
+                <h1 class="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight text-glow">
+                    Flying Memories of <br>
+                    <span class="gold-gradient italic">A Lifetime.</span>
+                </h1>
+                
+                <p class="font-body text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+                    We don't just book flights. We architect seamless, bespoke transit experiences for the modern traveller. Elevate your next journey with Sarvahansh Travel.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-5">
+                    <a href="#" class="btn-luxury">Plan Your Escape</a>
+                    <a href="#" class="btn-outline">Explore First Class</a>
+                </div>
+
+                <div class="mt-12 opacity-50 animate-bounce">
+                    <i class="fa-solid fa-chevron-down text-white text-xl"></i>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Setup Scene
+        const container = document.getElementById('jelly-canvas');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        // Lighting to make the jelly look glossy and 3D
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+        scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0x00e5ff, 2, 100); // Cyan glow
+        pointLight1.position.set(5, 5, 5);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(0xD4AF37, 2, 100); // Qatar Gold glow
+        pointLight2.position.set(-5, -5, 5);
+        scene.add(pointLight2);
+
+        // Create the Wavy Plane (The Jelly)
+        // High segment count (80x80) allows for smooth, liquid-like vertex manipulation
+        const geometry = new THREE.PlaneGeometry(30, 15, 80, 80);
+        
+        // Premium Glass/Liquid Material
+        const material = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            metalness: 0.1,
+            roughness: 0.1,
+            transmission: 0.6, // Glass-like transparency
+            thickness: 0.5,
+            transparent: true,
+            opacity: 0.25, // Subtle enough to see the plane image clearly
+            wireframe: false
+        });
+
+        const plane = new THREE.Mesh(geometry, material);
+        plane.rotation.x = -0.2; // Tilt it slightly towards the camera
+        plane.position.z = -3;
+        scene.add(plane);
+
+        // Store original vertices to calculate the waves
+        const positions = plane.geometry.attributes.position;
+        const originalZ = new Float32Array(positions.count);
+        for(let i = 0; i < positions.count; i++) {
+            originalZ[i] = positions.getZ(i);
+        }
+
+        // Mouse interaction for parallax
+        let mouseX = 0; 
+        let mouseY = 0;
+        let windowHalfX = window.innerWidth / 2; 
+        let windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        });
+
+        // Animation Loop
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime() * 0.8; // Speed of the waves
+
+            // Apply the Math.sin/cos algorithm to create the flowing jelly effect
+            for(let i = 0; i < positions.count; i++) {
+                const x = positions.getX(i);
+                const y = positions.getY(i);
+                
+                // Complex wave calculation for fluid dynamics
+                const waveX = Math.sin(x * 0.5 + time) * 0.4;
+                const waveY = Math.cos(y * 0.5 + time) * 0.4;
+                const waveZ = Math.sin(x * 0.2 + y * 0.2 + time) * 0.3;
+
+                positions.setZ(i, originalZ[i] + waveX + waveY + waveZ);
+            }
+            plane.geometry.attributes.position.needsUpdate = true;
+
+            // Move the lights slightly to make the reflections shimmer
+            pointLight1.position.x = Math.sin(time * 0.5) * 10;
+            pointLight2.position.x = Math.cos(time * 0.5) * 10;
+
+            // Subtle camera pan following the mouse (Parallax)
+            camera.position.x += (mouseX * 0.002 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 0.002 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Handle Window Resize
+        window.addEventListener('resize', () => {
+            windowHalfX = window.innerWidth / 2; 
+            windowHalfY = window.innerHeight / 2;
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Initialize Glass Panel Tilt
+        VanillaTilt.init(document.querySelectorAll(".glass-panel"), {
+            max: 3,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.1,
+        });
+    </script>
+</body>
+</html>
