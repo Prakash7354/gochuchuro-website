@@ -1,546 +1,1136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D High-Performance Garage | Autotech</title>
-    
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Autotech — DVSA approved MOT testing, car servicing and repairs in Andover. Book online instantly. Transparent pricing. No hidden costs."/>
+  <title>Autotech | 3D Immersive Garage Experience</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="../../favicon.png" sizes="32x32"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <style>
+    /* =============================================
+       AUTOTECH 3D — MOTORSPORT IMMERSIVE SYSTEM
+       ============================================= */
+    :root {
+      --abyss:         #050505;
+      --surface:       #0f1218;
+      --surface-mid:   #111318;
+      --surface-light: #181e2a;
+      --red:           #ef4444;
+      --red-dark:      #991b1b;
+      --red-glow:      rgba(239,68,68,0.35);
+      --red-dim:       rgba(239,68,68,0.12);
+      --text-main:     #f8fafc;
+      --text-dim:      #94a3b8;
+      --text-mid:      #cbd5e1;
+      --border:        rgba(255,255,255,0.06);
+      --border-red:    rgba(239,68,68,0.2);
+      --shadow-drop:   12px 12px 28px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
+      --shadow-inner:  inset 6px 6px 18px rgba(0,0,0,0.9),  inset -3px -3px 10px rgba(255,255,255,0.03);
+      --gradient-red:  linear-gradient(135deg,#ef4444,#991b1b);
+      --gradient-holo: linear-gradient(135deg,#ef4444,#dc2626,#7f1d1d);
+      /* GoChuchuro */
+      --gc-teal:       #00B5C8;
+      --gc-gold:       #D4AF37;
+    }
 
-    <style>
-        /* --- HIGH-PERFORMANCE MOTORSPORT 3D SYSTEM --- */
-        :root {
-            /* Carbon/Obsidian Themes */
-            --bg-abyss: #050505;    
-            --bg-surface: #111318;
-            
-            /* Motorsport Neon Red Accents */
-            --holo-red: #ef4444;
-            --holo-crimson: #991b1b;
-            --gradient-glow: linear-gradient(135deg, var(--holo-red), var(--holo-crimson));
-            
-            /* Heavy Industrial 3D Lighting */
-            --shadow-drop: 10px 10px 25px rgba(0, 0, 0, 0.95), -5px -5px 15px rgba(255, 255, 255, 0.03);
-            --shadow-inner: inset 5px 5px 20px rgba(0, 0, 0, 0.95), inset -3px -3px 10px rgba(255, 255, 255, 0.05);
-            
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-        }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      background:var(--abyss); color:var(--text-main);
+      font-family:'Barlow',sans-serif; line-height:1.6;
+      overflow-x:hidden; padding-bottom:72px;
+      cursor:none;
+      background-image:
+        radial-gradient(circle at 8% 15%, rgba(239,68,68,0.06), transparent 35%),
+        radial-gradient(circle at 92% 85%, rgba(239,68,68,0.04), transparent 30%);
+      background-attachment:fixed;
+    }
+    .font-display { font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:-0.5px; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    /* ---- CUSTOM CURSOR ---- */
+    .cursor-dot {
+      width:8px; height:8px; background:var(--red);
+      border-radius:50%; position:fixed; top:0; left:0;
+      pointer-events:none; z-index:99999; transform:translate(-50%,-50%);
+      box-shadow:0 0 10px var(--red); transition:width .3s,height .3s,background .3s;
+    }
+    .cursor-ring {
+      width:34px; height:34px; border:1.5px solid rgba(239,68,68,0.5);
+      border-radius:50%; position:fixed; top:0; left:0;
+      pointer-events:none; z-index:99998; transform:translate(-50%,-50%);
+      transition:width .3s,height .3s;
+    }
 
-        body {
-            background-color: var(--bg-abyss);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(239, 68, 68, 0.05), transparent 30%),
-                radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.05), transparent 30%);
-            background-attachment: fixed; 
-            color: var(--text-main); line-height: 1.6; overflow-x: hidden; padding-bottom: 70px;
-        }
+    /* ---- PANEL SYSTEM ---- */
+    .panel-3d {
+      background:var(--surface-mid); border-radius:16px;
+      box-shadow:var(--shadow-drop);
+      border:1px solid var(--border-red);
+      position:relative; z-index:2;
+    }
+    .panel-inset {
+      background:#07090e; border-radius:12px;
+      box-shadow:var(--shadow-inner);
+      border:1px solid rgba(255,255,255,0.03);
+    }
 
-        .display-header { font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
+    /* ---- TEXT EFFECTS ---- */
+    .text-holo {
+      background:var(--gradient-red);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .text-gradient-gc {
+      background:linear-gradient(135deg,var(--gc-teal),var(--gc-gold));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .glow-line-red {
+      width:50px; height:3px; background:var(--gradient-red);
+      border-radius:2px; margin:.8rem 0;
+      box-shadow:0 0 12px var(--red-glow);
+    }
 
-        /* --- 3D NEUMORPHIC PANELS --- */
-        .panel-3d {
-            background: var(--bg-surface); border-radius: 16px;
-            box-shadow: var(--shadow-drop); border: 1px solid rgba(239, 68, 68, 0.1);
-            position: relative; z-index: 2;
-        }
-        
-        .panel-inset {
-            background: #080a0f; border-radius: 12px;
-            box-shadow: var(--shadow-inner); border: 1px solid rgba(255,255,255,0.02);
-        }
+    /* ---- SCROLL REVEAL ---- */
+    .reveal { opacity:0; transform:translateY(30px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .reveal-left  { opacity:0; transform:translateX(-32px); transition:opacity .75s ease, transform .75s ease; }
+    .reveal-left.visible  { opacity:1; transform:translateX(0); }
+    .reveal-right { opacity:0; transform:translateX(32px);  transition:opacity .75s ease, transform .75s ease; }
+    .reveal-right.visible { opacity:1; transform:translateX(0); }
+    .delay-1{transition-delay:.1s;} .delay-2{transition-delay:.2s;} .delay-3{transition-delay:.3s;}
+    .delay-4{transition-delay:.4s;} .delay-5{transition-delay:.5s;}
 
-        /* Neon Red Text */
-        .text-holo {
-            background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
-        }
+    /* ===================== HEADER ===================== */
+    header {
+      background:rgba(5,5,5,0.9); backdrop-filter:blur(18px);
+      padding:1rem 5%; display:flex; justify-content:space-between;
+      align-items:center; position:sticky; top:0; z-index:500;
+      border-bottom:1px solid rgba(239,68,68,0.25);
+      box-shadow:0 8px 30px rgba(0,0,0,0.8);
+    }
+    .brand-logo {
+      text-decoration:none; display:flex; flex-direction:column; line-height:1.1;
+    }
+    .brand-name {
+      font-family:'Barlow Condensed',sans-serif; font-size:1.9rem;
+      font-weight:900; letter-spacing:3px; color:var(--text-main);
+      text-transform:uppercase;
+    }
+    .brand-name span { color:var(--red); }
+    .brand-sub {
+      font-size:.65rem; color:var(--text-dim); letter-spacing:4px;
+      font-weight:600; text-transform:uppercase;
+    }
+    nav { display:flex; align-items:center; gap:1.8rem; }
+    .nav-link {
+      color:var(--text-dim); text-decoration:none; font-weight:700;
+      font-size:.82rem; text-transform:uppercase; letter-spacing:1px; transition:all .25s;
+    }
+    .nav-link:hover { color:var(--red); text-shadow:0 0 10px var(--red-glow); }
+    .nav-showroom {
+      color:var(--gc-teal); text-decoration:none; font-weight:700;
+      font-size:.78rem; text-transform:uppercase; letter-spacing:1px;
+      border:1px solid rgba(0,181,200,0.3); padding:.4rem .9rem;
+      border-radius:6px; transition:all .25s;
+      display:flex; align-items:center; gap:.35rem;
+    }
+    .nav-showroom:hover { background:rgba(0,181,200,0.1); }
+    .btn-holo {
+      background:var(--gradient-red); color:white;
+      padding:.65rem 1.4rem; border-radius:8px; font-weight:800;
+      text-decoration:none; border:none; cursor:none;
+      text-transform:uppercase; letter-spacing:1px; font-size:.8rem;
+      box-shadow:0 0 18px var(--red-glow); transition:all .3s;
+      display:inline-flex; align-items:center; gap:.4rem;
+    }
+    .btn-holo:hover { transform:translateY(-3px); box-shadow:0 0 30px var(--red-glow); }
 
-        .img-glow {
-            border: 2px solid var(--holo-red);
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
-            object-fit: cover;
-        }
+    /* ===================== STICKY ACTION BAR ===================== */
+    .action-bar {
+      position:fixed; bottom:0; left:0; right:0; z-index:600;
+      background:rgba(5,5,5,0.97); backdrop-filter:blur(16px);
+      border-top:2px solid rgba(239,68,68,0.5);
+      padding:.85rem 5%; display:flex; justify-content:center; gap:1rem;
+      box-shadow:0 -8px 30px rgba(0,0,0,0.8);
+    }
+    .action-btn {
+      flex:1; max-width:280px; padding:.85rem; border-radius:8px;
+      text-decoration:none; font-weight:800; text-transform:uppercase;
+      font-size:.83rem; letter-spacing:1px; border:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:.5rem; transition:all .3s; cursor:none;
+      font-family:'Barlow Condensed',sans-serif;
+    }
+    .action-btn-ghost {
+      background:var(--surface-light); color:var(--text-mid);
+      border:1px solid var(--border-red);
+    }
+    .action-btn-ghost:hover { color:var(--red); border-color:var(--red); }
+    .action-btn-red { background:var(--gradient-red); color:white; }
+    .action-btn-red:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--red-glow); }
 
-        /* --- NAVIGATION --- */
-        header {
-            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px);
-            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(239, 68, 68, 0.3); box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        .brand-logo { color: white; font-size: 1.8rem; font-weight: 900; text-decoration: none; display: flex; flex-direction: column; line-height: 1; letter-spacing: 1px;}
-        .brand-logo span { font-size: 0.75rem; letter-spacing: 4px; color: var(--text-dim); font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;}
-        .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-link:hover { color: var(--holo-red); text-shadow: 0 0 10px var(--holo-red); }
+    /* ===================== HERO ===================== */
+    .hero {
+      position:relative; min-height:95vh;
+      display:flex; flex-direction:column;
+      justify-content:center; align-items:center;
+      text-align:center; padding:4rem 2rem;
+      overflow:hidden;
+    }
+    #hero-canvas-container {
+      position:absolute; inset:0; z-index:0;
+    }
+    /* Overlay gradient on top of Three.js */
+    .hero-overlay {
+      position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:
+        radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(5,5,5,0.85) 75%),
+        linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.1) 40%, rgba(5,5,5,0.8) 90%, var(--abyss) 100%);
+    }
+    /* Scan lines */
+    .hero-scanlines {
+      position:absolute; inset:0; z-index:2; pointer-events:none;
+      background:repeating-linear-gradient(
+        0deg, transparent, transparent 3px,
+        rgba(239,68,68,0.015) 3px, rgba(239,68,68,0.015) 4px
+      );
+    }
+    /* Red corner accent brackets */
+    .corner-tl {
+      position:absolute; top:1.5rem; left:1.5rem; z-index:3; pointer-events:none;
+      width:60px; height:60px;
+      border-top:2px solid rgba(239,68,68,0.6);
+      border-left:2px solid rgba(239,68,68,0.6);
+    }
+    .corner-br {
+      position:absolute; bottom:80px; right:1.5rem; z-index:3; pointer-events:none;
+      width:40px; height:40px;
+      border-bottom:2px solid rgba(239,68,68,0.3);
+      border-right:2px solid rgba(239,68,68,0.3);
+    }
+    .hero-content {
+      position:relative; z-index:4; max-width:1000px;
+    }
+    .hero-badge {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.4);
+      color:var(--red); padding:.4rem 1.1rem; border-radius:4px;
+      font-size:.72rem; font-weight:800; letter-spacing:2px;
+      text-transform:uppercase; margin-bottom:1.8rem;
+      animation:fadeInDown .8s ease both;
+    }
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeInUp   { from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn     { from{opacity:0;}to{opacity:1;} }
+    .hero h1 {
+      font-size:clamp(3rem,8vw,7rem);
+      line-height:1.0; margin-bottom:1.5rem;
+      text-shadow:0 8px 30px rgba(0,0,0,0.95);
+      animation:fadeInUp .9s ease .15s both;
+    }
+    .hero p {
+      font-size:1.2rem; max-width:680px; margin:0 auto 2.5rem;
+      color:var(--text-dim); font-weight:500;
+      text-shadow:0 2px 10px rgba(0,0,0,0.9);
+      animation:fadeInUp .9s ease .3s both;
+    }
+    .hero-cta-row {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;
+      animation:fadeIn 1s ease .5s both;
+    }
+    .btn-3d {
+      background:var(--surface-mid); color:var(--text-main);
+      padding:1rem 2.2rem; border-radius:8px; font-weight:800;
+      text-decoration:none; border:none; cursor:none;
+      text-transform:uppercase; letter-spacing:1px; font-size:.88rem;
+      box-shadow:var(--shadow-drop); border:1px solid rgba(255,255,255,0.05);
+      transition:all .3s; position:relative; overflow:hidden;
+      display:inline-flex; align-items:center; gap:.5rem;
+      font-family:'Barlow Condensed',sans-serif;
+    }
+    .btn-3d::before {
+      content:''; position:absolute; top:0; left:0;
+      width:100%; height:2px; background:var(--gradient-red);
+    }
+    .btn-3d:hover { transform:translateY(-4px); color:var(--red); border-color:var(--red); box-shadow:0 18px 35px rgba(0,0,0,0.9),0 0 20px var(--red-dim); }
+    /* trust pills */
+    .hero-trust {
+      display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem;
+      margin-top:2rem; animation:fadeIn 1.2s ease .7s both;
+    }
+    .trust-pill {
+      display:flex; align-items:center; gap:.4rem;
+      font-size:.75rem; font-weight:700; color:var(--text-dim);
+      text-transform:uppercase; letter-spacing:.5px;
+    }
+    .trust-pill i { color:var(--red); font-size:.75rem; }
 
-        /* --- 3D BUTTONS --- */
-        .btn-3d {
-            background: var(--bg-surface); color: var(--text-main);
-            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
-            box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative; overflow: hidden;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
-        }
-        .btn-3d::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-glow); }
-        .btn-3d:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.2); color: var(--holo-red); border-color: var(--holo-red);}
+    /* ===================== FLOATING TRUST CARDS ===================== */
+    .trust-cards {
+      display:flex; justify-content:center; gap:2rem;
+      flex-wrap:wrap; padding:0 5% 2rem;
+      margin-top:-50px; position:relative; z-index:10;
+    }
+    .trust-card {
+      display:flex; align-items:center; gap:1.2rem;
+      padding:1.4rem 2rem; border-radius:14px;
+      transition:all .35s;
+    }
+    .trust-card:hover { transform:translateY(-5px); border-color:var(--red); box-shadow:0 0 30px var(--red-dim); }
+    .trust-card i { font-size:2rem; }
 
-        .btn-holo {
-            background: var(--gradient-glow); color: white;
-            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
-            border: none; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); transition: 0.3s; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem;
-        }
-        .btn-holo:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 40px rgba(239, 68, 68, 0.7); }
+    /* ===================== BOOKING ENGINE ===================== */
+    .booking-section { padding:6rem 5%; max-width:1200px; margin:0 auto; }
+    .booking-grid {
+      display:grid; grid-template-columns:1.1fr .9fr;
+      gap:4rem; align-items:center;
+      padding:3.5rem; position:relative; overflow:hidden;
+    }
+    .booking-grid::before {
+      content:''; position:absolute; top:-60px; right:-60px;
+      width:250px; height:250px; border-radius:50%;
+      background:radial-gradient(circle, rgba(239,68,68,0.08), transparent 70%);
+      pointer-events:none;
+    }
+    .booking-pitch h3 { font-size:clamp(1.8rem,3vw,2.8rem); margin-bottom:1rem; }
+    .booking-pitch h3 span { color:var(--red); }
+    .booking-pitch p { color:var(--text-dim); line-height:1.75; margin-bottom:1.5rem; }
+    .ai-badge {
+      display:flex; align-items:center; gap:1.2rem;
+      background:rgba(5,5,5,0.7); padding:1.2rem 1.4rem;
+      border-radius:12px; border-left:3px solid var(--red);
+      border-top:1px solid var(--border); border-right:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .ai-avatar {
+      width:52px; height:52px; border-radius:50%;
+      background:var(--gradient-red); border:2px solid var(--red);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.4rem; flex-shrink:0;
+      box-shadow:0 0 16px var(--red-glow);
+    }
+    .booking-panel { padding:2.2rem; }
+    .booking-panel h4 {
+      font-family:'Barlow Condensed',sans-serif; font-size:1.2rem;
+      font-weight:800; text-transform:uppercase; letter-spacing:1px;
+      text-align:center; margin-bottom:1.4rem; padding-bottom:1rem;
+      border-bottom:1px solid rgba(239,68,68,0.2);
+    }
+    .service-bubbles { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.4rem; }
+    .service-bubble {
+      flex:1; min-width:70px; padding:.65rem .4rem; text-align:center;
+      border-radius:8px; border:1px solid var(--border-red);
+      font-weight:800; cursor:none; transition:all .25s;
+      font-size:.78rem; text-transform:uppercase; letter-spacing:.5px;
+      color:var(--text-dim); background:rgba(239,68,68,0.04);
+      font-family:'Barlow Condensed',sans-serif;
+      box-shadow:var(--shadow-drop);
+    }
+    .service-bubble.active, .service-bubble:hover {
+      background:var(--gradient-red); color:white;
+      border-color:var(--red); box-shadow:0 0 18px var(--red-glow);
+    }
+    .booking-label {
+      font-size:.7rem; text-align:center; color:var(--text-dim);
+      text-transform:uppercase; font-weight:700; letter-spacing:.5px; margin-bottom:1rem;
+    }
+    .booking-select {
+      width:100%; padding:.9rem 1rem; margin-bottom:1.2rem;
+      background:var(--surface); border:1px solid var(--border-red);
+      color:var(--text-main); border-radius:8px; outline:none;
+      font-family:'Barlow',sans-serif; font-weight:600; font-size:.88rem;
+      cursor:pointer; box-shadow:var(--shadow-inner);
+    }
+    .booking-select:focus { border-color:var(--red); }
 
-        /* --- HERO SPACE --- */
-        .hero { position: relative; min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; }
-        #hero-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(rgba(5, 5, 5, 0.7), rgba(5, 5, 5, 1)), url('hero-autotech-bg.jpg') no-repeat center center/cover; }
-        .hero-content { position: relative; z-index: 2; transform: translateZ(50px); }
-        
-        .hero h1 { font-size: 4.8rem; max-width: 900px; line-height: 1.05; margin-bottom: 1.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.9); }
-        .hero p { font-size: 1.25rem; max-width: 680px; color: var(--text-dim); margin: 0 auto 2.5rem; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+    /* ===================== ABOUT ===================== */
+    .about-section { padding:6rem 5%; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:center; max-width:1200px; margin:0 auto; }
+    .about-img-wrap {
+      border-radius:16px; overflow:hidden;
+      border:1px solid var(--border-red);
+      box-shadow:0 0 40px var(--red-dim), var(--shadow-drop);
+      position:relative;
+    }
+    .about-img-placeholder {
+      width:100%; aspect-ratio:4/3;
+      background:linear-gradient(135deg,#0f1218 0%,#1a0505 60%,#0f1218 100%);
+      display:flex; align-items:center; justify-content:center;
+      font-size:6rem; color:var(--red); opacity:.15;
+    }
+    .about-img-wrap img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    }
+    .about-img-wrap::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top right,rgba(239,68,68,0.08),transparent);
+      pointer-events:none;
+    }
+    .about-label { color:var(--red); font-size:.75rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; margin-bottom:.5rem; }
+    .about-grid h2 { font-size:clamp(2rem,3vw,3rem); margin-bottom:1rem; line-height:1.1; }
+    .about-grid p { color:var(--text-dim); font-size:1rem; line-height:1.75; margin-bottom:1rem; }
+    .about-checks { list-style:none; margin-top:1.5rem; }
+    .about-checks li { display:flex; align-items:flex-start; gap:.7rem; font-size:.92rem; color:var(--text-mid); margin-bottom:.6rem; }
+    .about-checks li i { color:var(--red); margin-top:.2rem; flex-shrink:0; }
 
-        /* --- FLOATING TRUST BAR --- */
-        .trust-bar { padding: 2rem 5%; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; position: relative; margin-top: -60px; z-index: 10; }
-        .trust-item { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 2.5rem; border-radius: 12px; }
-        .trust-item i { font-size: 2rem; background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .trust-item span { font-size: 0.95rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;}
+    /* ===================== SERVICES ===================== */
+    .services-section { padding:6rem 5%; max-width:1300px; margin:0 auto; }
+    .services-grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+      gap:2.5rem; perspective:1200px;
+    }
+    .service-card {
+      padding:0; display:flex; flex-direction:column;
+      transform-style:preserve-3d; transition:all .4s;
+      overflow:hidden;
+    }
+    .service-card:hover { border-color:var(--red); box-shadow:0 0 40px var(--red-dim), var(--shadow-drop); }
+    .svc-img {
+      height:200px; display:flex; align-items:center; justify-content:center;
+      position:relative; overflow:hidden; transform:translateZ(20px);
+      transition:all .4s;
+    }
+    .svc-img i { font-size:4.5rem; opacity:.2; z-index:1; position:relative; }
+    .svc-img img {
+      position:absolute; inset:0; width:100%; height:100%;
+      object-fit:cover; filter:grayscale(30%); transition:.4s;
+    }
+    .service-card:hover .svc-img img { filter:grayscale(0%) brightness(1.05); transform:scale(1.06); }
+    .svc-img::after {
+      content:''; position:absolute; bottom:0; left:0; right:0; height:50%;
+      background:linear-gradient(transparent,var(--surface-mid)); z-index:2;
+    }
+    .svc-img-mot     { background:linear-gradient(135deg,#1a0505,#2d0808); }
+    .svc-img-service { background:linear-gradient(135deg,#071020,#0d1e35); }
+    .svc-img-diag    { background:linear-gradient(135deg,#0d0800,#1c1200); }
+    .svc-badge {
+      position:absolute; top:.75rem; left:.75rem; z-index:3;
+      background:rgba(5,5,5,0.85); color:var(--red);
+      padding:.2rem .65rem; border-radius:4px;
+      font-size:.65rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:1px; border:1px solid var(--border-red);
+    }
+    .svc-body { padding:1.6rem 1.8rem; flex:1; display:flex; flex-direction:column; transform:translateZ(10px); }
+    .svc-title {
+      font-family:'Barlow Condensed',sans-serif; font-size:1.4rem;
+      font-weight:800; text-transform:uppercase; color:var(--text-main);
+      margin-bottom:.5rem;
+    }
+    .svc-desc { color:var(--text-dim); font-size:.88rem; line-height:1.65; flex:1; margin-bottom:1.2rem; }
+    .svc-cta {
+      display:inline-flex; align-items:center; gap:.4rem;
+      color:var(--red); font-weight:800; font-size:.8rem;
+      text-transform:uppercase; letter-spacing:.5px;
+      background:none; border:none; cursor:none; padding:0; transition:gap .2s;
+      font-family:'Barlow Condensed',sans-serif;
+    }
+    .service-card:hover .svc-cta { gap:.7rem; }
 
-        /* --- SECTION WRAPPERS --- */
-        .section-wrapper { padding: 8rem 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2;}
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 3.2rem; }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    /* ===================== GALLERY ===================== */
+    .gallery-section {
+      overflow:hidden; position:relative;
+      background:var(--surface); padding:3rem 0;
+      border-top:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+    }
+    .gallery-label {
+      text-align:center; font-family:'Barlow Condensed',sans-serif;
+      font-size:.7rem; font-weight:800; letter-spacing:4px;
+      text-transform:uppercase; color:var(--text-dim); margin-bottom:1.5rem;
+    }
+    .gallery-track { display:flex; width:calc(310px * 10); animation:slideGallery 35s linear infinite; }
+    .gallery-track:hover { animation-play-state:paused; }
+    @keyframes slideGallery { 0%{transform:translateX(0);}100%{transform:translateX(calc(-310px * 5));} }
+    .gallery-item {
+      width:280px; height:200px; margin:0 15px; border-radius:12px;
+      overflow:hidden; flex-shrink:0; position:relative;
+      background:var(--surface-light); border:1px solid var(--border-red);
+      box-shadow:var(--shadow-drop);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .gallery-item i { font-size:3rem; color:var(--red); opacity:.18; }
+    .gallery-item img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:.35s; filter:contrast(1.1); }
+    .gallery-item:hover img { transform:scale(1.07); box-shadow:0 0 25px var(--red-glow); }
 
-        /* --- 3D BOOKING PIPELINE (DASHBOARD STYLE) --- */
-        .roi-tech-section { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center; padding: 4.5rem; }
-        .ai-avatar-badge { display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; border-left: 3px solid var(--holo-red);}
-        .ai-avatar-badge img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--holo-red);}
+    /* ===================== REVIEWS ===================== */
+    .reviews-section { padding:6rem 5%; background:rgba(3,4,7,1); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .reviews-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2.5rem; max-width:1100px; margin:0 auto; }
+    .review-card {
+      padding:2.5rem; transform-style:preserve-3d; transition:all .35s;
+    }
+    .review-card:hover { border-color:var(--red); box-shadow:0 0 30px var(--red-dim); }
+    .stars { color:#f59e0b; font-size:1rem; margin-bottom:1.4rem; letter-spacing:1px; text-shadow:0 0 8px rgba(245,158,11,.3); }
+    .review-text { font-style:italic; color:var(--text-dim); margin-bottom:2rem; font-size:1.02rem; line-height:1.65; }
+    .reviewer { display:flex; align-items:center; gap:1rem; }
+    .reviewer-avatar {
+      width:52px; height:52px; border-radius:50%; flex-shrink:0;
+      background:var(--gradient-red); border:2px solid var(--red);
+      box-shadow:0 0 12px var(--red-glow);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; overflow:hidden; position:relative;
+    }
+    .reviewer-avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .reviewer h4 { font-family:'Barlow Condensed',sans-serif; font-size:1.15rem; font-weight:800; text-transform:uppercase; }
+    .reviewer span { font-size:.75rem; color:var(--red); font-weight:700; letter-spacing:.5px; text-transform:uppercase; }
 
-        .calendar-mockup { padding: 3rem; transform-style: preserve-3d; }
-        .deck-header { font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid rgba(239, 68, 68, 0.2); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 2rem; gap: 1rem; transform: translateZ(30px); }
-        .cover-bubble { flex: 1; padding: 1rem 0; text-align: center; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.9rem; text-transform: uppercase;}
-        .cover-bubble:hover, .cover-bubble.selected { background: var(--gradient-glow); color: white; box-shadow: 0 0 20px rgba(239, 68, 68, 0.5); transform: translateZ(10px) scale(1.05); border: none; }
+    /* ===================== FAQ ACCORDION ===================== */
+    .faq-section { padding:6rem 5%; max-width:900px; margin:0 auto; }
+    .faq-list { }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-q {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:1.3rem 0; cursor:none; font-weight:700;
+      font-family:'Barlow Condensed',sans-serif; font-size:1.1rem;
+      text-transform:uppercase; letter-spacing:.5px; transition:color .25s;
+      color:var(--text-mid);
+    }
+    .faq-q:hover { color:var(--red); }
+    .faq-icon { font-size:.78rem; color:var(--red); transition:transform .3s; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); }
+    .faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease, padding .3s; color:var(--text-dim); font-size:.92rem; line-height:1.75; }
+    .faq-a.open { max-height:250px; padding-bottom:1.2rem; }
 
-        /* --- ABOUT STORY --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .team-image-stack { position: relative; padding-bottom: 2rem; transform-style: preserve-3d; }
-        .main-img-wrap { padding: 1rem; border-radius: 16px; }
-        .main-img-wrap img { width: 100%; border-radius: 8px; filter: contrast(1.1) saturate(1.2);}
-        
-        .human-text span { font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; }
-        .human-text h2 { font-size: 3rem; margin: 0.5rem 0 1.2rem; line-height: 1.15; }
+    /* ===================== CONTACT / LOCATION ===================== */
+    .contact-section { padding:6rem 5%; background:var(--surface); border-top:1px solid var(--border); }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; max-width:1200px; margin:0 auto; }
+    .map-frame { width:100%; height:340px; border-radius:14px; overflow:hidden; border:1px solid var(--border-red); box-shadow:0 0 25px var(--red-dim); }
+    .map-frame iframe { width:100%; height:100%; border:0; filter:invert(90%) hue-rotate(180deg); border-radius:14px; }
+    .contact-label-sm { font-size:.7rem; text-transform:uppercase; font-weight:700; letter-spacing:.5px; color:var(--text-dim); }
+    .contact-strip {
+      display:flex; align-items:center; gap:1.2rem;
+      padding:1.2rem 1.4rem; text-decoration:none; margin-bottom:1rem;
+      transition:all .3s;
+    }
+    .contact-strip:hover { border-color:var(--red); box-shadow:0 0 20px var(--red-dim); transform:translateX(4px); }
+    .contact-icon {
+      width:48px; height:48px; border-radius:8px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; flex-shrink:0; border:1px solid var(--border);
+    }
+    .contact-val { font-size:1rem; font-weight:700; color:white; }
+    .social-row { display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.4rem; }
+    .social-circle {
+      width:44px; height:44px; border-radius:8px;
+      background:rgba(255,255,255,0.03); color:var(--text-dim);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1rem; text-decoration:none; transition:all .3s;
+      border:1px solid var(--border);
+    }
+    .social-circle:hover { background:var(--gradient-red); color:white; transform:translateY(-4px); border-color:var(--red); box-shadow:0 0 15px var(--red-glow); }
 
-        /* --- SERVICES MATRIX --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; perspective: 1000px;}
-        .service-card { padding: 2.5rem; display: flex; flex-direction: column; transform-style: preserve-3d; transition: 0.4s; }
-        .service-card:hover { border-color: var(--holo-red); }
-        .service-img { width: 100%; height: 200px; border-radius: 8px; margin-bottom: 1.5rem; object-fit: cover; box-shadow: var(--shadow-inner); transform: translateZ(40px); transition: 0.4s; filter: grayscale(30%);}
-        .service-card:hover .service-img { box-shadow: 0 0 30px rgba(239, 68, 68, 0.3); transform: translateZ(60px) scale(1.02); filter: grayscale(0%);}
-        .card-badge { display: inline-block; background: var(--bg-abyss); color: var(--holo-red); padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 800; margin-bottom: 1rem; transform: translateZ(25px); border: 1px solid rgba(239, 68, 68, 0.3);}
-        .service-card h3 { margin-bottom: 0.5rem; font-size: 1.6rem; transform: translateZ(30px); }
-        .service-card p { color: var(--text-dim); transform: translateZ(20px); margin-bottom: 1.5rem; flex-grow: 1;}
+    /* ===================== FOOTER ===================== */
+    footer {
+      background:#020203; padding:5rem 5% 7rem;
+      text-align:center; border-top:1px solid var(--border);
+    }
+    .footer-brand {
+      font-family:'Barlow Condensed',sans-serif; font-size:2.5rem;
+      font-weight:900; letter-spacing:4px; text-transform:uppercase;
+      margin-bottom:.5rem;
+    }
+    .footer-links { display:flex; justify-content:center; gap:1.5rem; margin:1.2rem 0; flex-wrap:wrap; }
+    .footer-links a { font-size:.78rem; color:#374151; text-decoration:none; font-weight:600; transition:color .2s; }
+    .footer-links a:hover { color:var(--gc-teal); }
 
-        /* --- 3D SLIDING GALLERY --- */
-        .gallery-container { padding: 3rem 0; overflow: hidden; position: relative; margin-top: 2rem;}
-        .gallery-track { display: flex; width: calc(350px * 10); animation: scrollGallery 35s linear infinite; }
-        .gallery-track:hover { animation-play-state: paused; }
-        
-        @keyframes scrollGallery { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 5)); } }
-        
-        .gallery-item { width: 320px; height: 220px; margin: 0 15px; border-radius: 12px; padding: 0.5rem; flex-shrink: 0; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.2); transition: 0.4s; filter: contrast(1.1);}
-        .gallery-item img:hover { border-color: var(--holo-red); box-shadow: 0 0 25px rgba(239, 68, 68, 0.5); transform: scale(1.05); }
+    /* ===================== GC FLOATING BADGE ===================== */
+    .gc-badge {
+      position:fixed; bottom:82px; right:1.5rem; z-index:550;
+      background:rgba(13,21,21,0.97); border:1px solid rgba(0,181,200,0.35);
+      border-radius:14px; padding:.8rem 1rem;
+      box-shadow:0 10px 35px rgba(0,0,0,0.7);
+      max-width:220px; text-align:center;
+      animation:badgeSlide .8s ease .6s both;
+      backdrop-filter:blur(14px);
+    }
+    @keyframes badgeSlide { from{opacity:0;transform:translateX(28px);}to{opacity:1;transform:translateX(0);} }
+    .gc-badge-close {
+      position:absolute; top:6px; right:8px;
+      background:none; border:none; color:var(--text-dim);
+      font-size:.75rem; cursor:pointer;
+    }
+    .gc-badge-logo { font-family:'Barlow Condensed',sans-serif; font-size:.65rem; font-weight:800; letter-spacing:1.5px; color:rgba(0,181,200,0.6); text-transform:uppercase; margin-bottom:.3rem; }
+    .gc-badge p { font-size:.72rem; color:rgba(200,205,214,0.8); margin-bottom:.5rem; line-height:1.4; }
+    .gc-badge p strong { color:white; }
+    .gc-badge a {
+      display:inline-flex; align-items:center; gap:.35rem;
+      background:linear-gradient(135deg,#00B5C8,#E5C158); color:#000;
+      padding:.45rem 1rem; border-radius:8px;
+      font-size:.72rem; font-weight:900; text-decoration:none;
+      text-transform:uppercase; letter-spacing:.5px; transition:all .25s;
+    }
+    .gc-badge a:hover { transform:scale(1.03); }
 
-        /* --- TESTIMONIALS --- */
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
-        .test-card { padding: 3rem; }
-        .stars { color: #f59e0b; margin-bottom: 1.5rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(245, 158, 11, 0.3); }
-        .test-card p { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
-        .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+    /* ===================== BOOKING MODAL ===================== */
+    .modal-overlay {
+      position:fixed; inset:0;
+      background:rgba(2,2,3,0.95); backdrop-filter:blur(14px);
+      z-index:9999; display:flex; align-items:center; justify-content:center;
+      opacity:0; visibility:hidden; transition:all .35s ease;
+    }
+    .modal-overlay.active { opacity:1; visibility:visible; }
+    .modal-box {
+      background:var(--surface-mid); width:92%; max-width:940px;
+      height:86vh; border-radius:18px; position:relative;
+      transform:translateY(30px); transition:transform .35s ease;
+      overflow:hidden; border:1px solid var(--border-red);
+      box-shadow:0 30px 70px rgba(0,0,0,0.95), 0 0 40px var(--red-dim);
+    }
+    .modal-overlay.active .modal-box { transform:translateY(0); }
+    .modal-close {
+      position:absolute; top:14px; right:16px;
+      background:rgba(239,68,68,0.15); border:1px solid var(--border-red);
+      border-radius:50%; width:38px; height:38px;
+      display:flex; align-items:center; justify-content:center;
+      color:white; font-size:1rem; cursor:none; z-index:10; transition:all .25s;
+    }
+    .modal-close:hover { background:var(--red); }
+    .modal-box iframe { width:100%; height:100%; border:0; border-radius:18px; }
 
-        /* --- FAQS --- */
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-        .faq-box { padding: 2.5rem; transform-style: preserve-3d; }
-        .faq-box h4 { margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; transform: translateZ(20px); color: var(--holo-red); }
-        .faq-box p { font-size: 1rem; color: var(--text-dim); line-height: 1.6; transform: translateZ(10px); }
-
-        /* --- CONTACT TERMINAL --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: start; }
-        .map-frame { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-        
-        .info-strip { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; text-decoration: none; margin-bottom: 1.5rem; transition: 0.3s;}
-        .info-strip:hover { box-shadow: 0 0 20px rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.5); }
-
-        /* --- AI WIDGET BUTTON --- */
-        .chat-toggle-btn {
-            position: fixed; bottom: 5.5rem; right: 2rem; width: 65px; height: 65px;
-            border-radius: 50%; background: var(--bg-surface); border: 2px solid var(--holo-red);
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); z-index: 1000; cursor: pointer; transition: 0.3s;
-            display: flex; align-items: center; justify-content: center; padding: 0.3rem; overflow: hidden;
-        }
-        .chat-toggle-btn img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-        .chat-toggle-btn:hover { transform: scale(1.1); box-shadow: 0 0 35px rgba(239, 68, 68, 0.6); }
-
-        /* --- FOOTER --- */
-        footer { background: #020203; padding: 6rem 5% 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        .social-circle-link { width: 50px; height: 50px; border-radius: 8px; display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; color: var(--text-dim); text-decoration: none; margin: 0 0.5rem; transition: 0.3s; }
-        .social-circle-link:hover { color: white; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: var(--holo-red); background: var(--gradient-glow);}
-
-        /* --- MOBILE BAR --- */
-        .sticky-action-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(239, 68, 68, 0.5); padding: 1rem 5%; display: flex; justify-content: center; gap: 1rem; z-index: 990; }
-
-        @media (max-width: 950px) {
-            .nav-menu { display: none; }
-            .roi-tech-section, .contact-layout, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .hero h1 { font-size: 3.5rem; }
-            .roi-tech-section { padding: 2.5rem; }
-            .trust-bar { margin-top: 0; }
-            .chat-toggle-btn { bottom: 5rem; right: 1rem; width: 55px; height: 55px; }
-        }
-    </style>
+    /* ===================== RESPONSIVE ===================== */
+    @media(max-width:960px){
+      body { cursor:auto; }
+      .cursor-dot,.cursor-ring { display:none; }
+      nav .nav-link { display:none; }
+      .booking-grid, .about-grid, .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .booking-grid { padding:2rem; }
+      .hero h1 { font-size:3rem; }
+      .gc-badge { display:none; }
+      .trust-cards { margin-top:0; }
+    }
+    @media(max-width:600px){
+      .hero h1 { font-size:2.3rem; }
+      .services-grid { grid-template-columns:1fr; }
+      .reviews-grid { grid-template-columns:1fr; }
+      .service-bubbles { flex-direction:column; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="brand-logo display-header">
-            AUTOTECH <span class="text-holo">MOT & REPAIRS</span>
-        </a>
-        <nav class="nav-menu">
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#booking" class="nav-link">Book Online</a>
-            <a href="#about" class="nav-link">About Us</a>
-            <a href="#gallery" class="nav-link">Gallery</a>
-            <a href="#reviews" class="nav-link">Reviews</a>
-            <a href="#contact" class="nav-link">Location</a>
-        </nav>
-        <a href="tel:01722273777" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Call Garage</a>
-    </header>
+  <div class="cursor-dot"  id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-    <div class="sticky-action-bar" id="actions">
-        <a href="#services" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-wrench"></i> Services</a>
-        <a href="#booking" class="btn-holo" style="flex:2; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-calendar-check"></i> Book MOT</a>
-    </div>
-
-    <section class="hero">
-        <div id="hero-canvas-container"></div>
-        <div class="hero-content">
-            <h1 class="display-header" data-tilt data-tilt-max="3">Reliable Local Mechanics <br><span class="text-holo">& MOT Testing</span></h1>
-            <p data-tilt data-tilt-max="2">Expert car repairs, transparent pricing, and fast MOT testing in Andover. High-performance diagnostics to keep your car running safely.</p>
-            <a href="#services" class="btn-3d" style="margin-top: 1rem;">View Our Services <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i></a>
-        </div>
-    </section>
-
-    <section class="trust-bar">
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <i class="fa-brands fa-google text-holo"></i>
-            <div>
-                <span class="text-main" style="font-size: 1.2rem;">5.0 RATING</span><br>
-                <small style="color: var(--text-dim);">Google Reviews</small>
-            </div>
-        </div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <h4 class="display-header text-holo" style="font-size: 1.8rem; margin-right: 10px;">DVSA</h4>
-            <span>Approved Centre</span>
-        </div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <h4 class="display-header text-holo" style="font-size: 1.8rem; margin-right: 10px;">100%</h4>
-            <span>Quality Parts</span>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="booking">
-        <div class="roi-tech-section panel-3d">
-            <div class="tech-text-block">
-                <h3 class="display-header">Skip the Queue.<br><span class="text-holo">Book Online.</span></h3>
-                <p style="color: var(--text-dim); font-size: 1.1rem;">Don't wait on hold. Use our smart digital dashboard to lock in your MOT, service, or diagnostic check instantly.</p>
-                
-                <div class="ai-avatar-badge panel-inset" data-tilt>
-                    <img src="ai-receptionist.png" alt="Sarah - Garage Assistant" class="img-glow">
-                    <div>
-                        <h4 style="color: white;">Sarah (Virtual Desk)</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Online 24/7 to check availability and quotes.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="calendar-mockup panel-inset" data-tilt data-tilt-max="8">
-                <h4 class="deck-header text-holo display-header">Select Service Type</h4>
-                <div class="covers-selector">
-                    <div class="cover-bubble panel-3d" style="background: var(--gradient-glow); color: white; border:none;">MOT Test</div>
-                    <div class="cover-bubble panel-3d">Interim Service</div>
-                    <div class="cover-bubble panel-3d">Full Service</div>
-                </div>
-                
-                <h4 class="deck-header text-holo display-header" style="margin-top: 2rem;">Vehicle Class</h4>
-                <select class="panel-3d" style="width: 100%; padding: 1rem; color: white; border-radius: 8px; outline: none; font-weight: 600; cursor: pointer; border: 1px solid rgba(239, 68, 68, 0.2);">
-                    <option>Standard Car / Hatchback</option>
-                    <option>Performance / Sports</option>
-                    <option>Commercial Van</option>
-                    <option>4x4 / SUV</option>
-                </select>
-
-                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Find Available Slots</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="about">
-        <div class="about-grid">
-            <div class="team-image-stack" data-tilt data-tilt-max="5">
-                <div class="main-img-wrap panel-3d">
-                    <img src="interior.png..jpeg" alt="Autotech Garage Andover" class="img-glow">
-                </div>
-            </div>
-            <div class="human-text">
-                <span class="text-holo">Your Trusted Local Garage</span>
-                <h2 class="display-header">Honest Mechanics, Fair Prices.</h2>
-                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem;">At Autotech, we believe in straightforward advice. We will never carry out any repair work without showing you exactly what is wrong and agreeing on a price first.</p>
-                <p style="color: var(--text-dim); font-size: 1.1rem;">Our modern garage is equipped with the latest diagnostic tools, meaning we can fix everything from a simple tyre change to complex engine warnings quickly and safely.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="services">
-        <div class="section-header">
-            <h2 class="display-header text-holo">Our Main Services</h2>
-            <p>Professional care to keep your vehicle safe and reliable.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="car-repair.jpg" alt="Car Repairs" class="service-img">
-                <span class="card-badge">DVSA Approved</span>
-                <h3 class="display-header">MOTs & Repairs</h3>
-                <p>Failed your MOT? Hearing a strange noise? We handle brakes, exhausts, suspension, and all general repairs.</p>
-            </div>
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="oil-change.png" alt="Car Servicing" class="service-img">
-                <span class="card-badge">Engine Health</span>
-                <h3 class="display-header">Annual Servicing</h3>
-                <p>Regular oil changes and filter replacements keep your car running smoothly and prevent expensive breakdowns.</p>
-            </div>
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="car-diagnostic.png.jpeg" alt="Diagnostics" class="service-img">
-                <span class="card-badge">Fault Finding</span>
-                <h3 class="display-header">Diagnostics</h3>
-                <p>Dashboard lit up? We plug into your car's computer to quickly find and fix electrical and engine faults.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="gallery" style="padding-top: 2rem;">
-        <div class="section-header">
-            <h2 class="display-header text-holo">Inside Our Workshop</h2>
-            <p>A look at our state-of-the-art bays and team hard at work.</p>
-        </div>
-        <div class="gallery-container panel-inset">
-            <div class="gallery-track">
-                <div class="gallery-item panel-3d"><img src="interior.png..jpeg" alt="Garage Interior"></div>
-                <div class="gallery-item panel-3d"><img src="car-repair.jpg" alt="Mechanic Repairing Car"></div>
-                <div class="gallery-item panel-3d"><img src="car-diagnostic.png.jpeg" alt="Car Diagnostics"></div>
-                <div class="gallery-item panel-3d"><img src="oil-change.png" alt="Oil Change"></div>
-                <div class="gallery-item panel-3d"><img src="hero-autotech-bg.jpg" alt="Workshop Bay"></div>
-                
-                <div class="gallery-item panel-3d"><img src="interior.png..jpeg" alt="Garage Interior"></div>
-                <div class="gallery-item panel-3d"><img src="car-repair.jpg" alt="Mechanic Repairing Car"></div>
-                <div class="gallery-item panel-3d"><img src="car-diagnostic.png.jpeg" alt="Car Diagnostics"></div>
-                <div class="gallery-item panel-3d"><img src="oil-change.png" alt="Oil Change"></div>
-                <div class="gallery-item panel-3d"><img src="hero-autotech-bg.jpg" alt="Workshop Bay"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="reviews">
-        <div class="section-header">
-            <h2 class="display-header">Customer Reviews</h2>
-            <p>See what local Andover drivers are saying about our garage.</p>
-        </div>
-        <div class="test-grid">
-            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"The finest garage in town. They found a tricky electrical fault in my car that another garage completely missed. Great prices and very honest."</p>
-                <div class="client">
-                    <img src="reviewer-1.jpg" alt="Jenny Mitchell" class="img-glow">
-                    <div>
-                        <h4 class="display-header" style="font-size: 1.1rem;">Jenny Mitchell</h4>
-                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Local Driver</span>
-                    </div>
-                </div>
-            </div>
-            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"We take all our company delivery vans here. Booking online is a breeze, they never add hidden costs, and they get the vans back on the road fast."</p>
-                <div class="client">
-                    <img src="reviewer-2.jpg" alt="Marcus Vance" class="img-glow" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                    <div>
-                        <h4 class="display-header" style="font-size: 1.1rem;">Marcus Vance</h4>
-                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Fleet Manager</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="faqs">
-        <div class="section-header">
-            <h2 class="display-header text-holo">Frequently Asked Questions</h2>
-            <p>Common questions about booking and repairs.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="display-header text-holo" style="font-size: 1.1rem;">Will using your garage void my warranty?</h4>
-                <p>No, it won't! We use approved parts and follow the manufacturer's exact service schedule, which legally protects your warranty.</p>
-            </div>
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="display-header text-holo" style="font-size: 1.1rem;">What happens if my car fails its MOT?</h4>
-                <p>If your car fails, we will call you immediately with a clear explanation of what is wrong and a fixed price to fix it. We never do work without your permission.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="location">
-        <div class="section-header">
-            <h2 class="display-header">Find Our Garage</h2>
-            <p>Conveniently located in central Andover. Drop your car off and relax.</p>
-        </div>
-        <div class="contact-layout">
-            <div class="panel-3d map-frame" style="padding: 0.5rem;">
-                <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border-radius: 12px; border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div>
-                <a href="https://wa.me/441722273777" target="_blank" class="info-strip panel-3d" data-tilt data-tilt-max="5">
-                    <i class="fa-brands fa-whatsapp text-holo" style="font-size: 2.5rem;"></i>
-                    <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Message Us</h5>
-                        <p style="font-size: 1.2rem; font-weight: 700; color: white;">+44 1722 273777</p>
-                    </div>
-                </a>
-                <a href="mailto:bookings@autotechcarandvan.co.uk" class="info-strip panel-3d" data-tilt data-tilt-max="5">
-                    <i class="fa-solid fa-envelope text-holo" style="font-size: 2.5rem;"></i>
-                    <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Email Workshop</h5>
-                        <p style="font-size: 1.1rem; font-weight: 700; color: white;">bookings@autotech.co.uk</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <button id="chatToggleBtn" class="chat-toggle-btn" onclick="alert('Digital Assistant System Active')">
-        <img src="ai-receptionist.png" alt="Sarah AI">
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <a href="#" class="brand-logo">
+      <span class="brand-name">AUTO<span>TECH</span></span>
+      <span class="brand-sub">MOT &amp; Repairs &nbsp;&middot;&nbsp; Andover</span>
+    </a>
+    <nav>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#booking"  class="nav-link">Book</a>
+      <a href="#about"    class="nav-link">About</a>
+      <a href="#reviews"  class="nav-link">Reviews</a>
+      <a href="#faqs"     class="nav-link">FAQs</a>
+      <a href="#location" class="nav-link">Location</a>
+      <a href="../../showroom.html" class="nav-showroom">
+        <i class="fa-solid fa-arrow-left" style="font-size:.6rem;"></i> Showroom
+      </a>
+    </nav>
+    <button onclick="openBooking()" class="btn-holo">
+      <i class="fa-solid fa-calendar-check"></i> Book MOT
     </button>
+  </header>
 
-    <footer>
-        <h3 class="display-header text-holo" style="margin-bottom: 1.5rem; font-size: 2rem;">AUTOTECH</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Keeping Andover driving safely.</p>
-        
-        <div style="margin-bottom: 3rem; display: flex; justify-content: center; gap: 1rem;">
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-tiktok"></i></a>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div id="hero-canvas-container"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-scanlines"></div>
+    <div class="corner-tl"></div>
+    <div class="corner-br"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-certificate" style="font-size:.65rem;"></i>
+        DVSA Approved &nbsp;&middot;&nbsp; Andover&rsquo;s Trusted Garage &nbsp;&middot;&nbsp; Since 2008
+      </div>
+      <h1 class="font-display">
+        Reliable Local Mechanics<br>
+        <span class="text-holo">&amp; MOT Testing.</span>
+      </h1>
+      <p>Expert repairs. Transparent pricing. Zero hidden costs. DVSA approved MOT testing and full vehicle care, right here in Andover.</p>
+      <div class="hero-cta-row">
+        <button onclick="openBooking()" class="btn-holo" style="padding:1.1rem 2.5rem;">
+          <i class="fa-solid fa-calendar-check"></i> Book Your MOT
+        </button>
+        <a href="#services" class="btn-3d">
+          <i class="fa-solid fa-wrench"></i> View Services
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-pill"><i class="fa-solid fa-check"></i> No hidden costs</span>
+        <span class="trust-pill"><i class="fa-solid fa-check"></i> DVSA approved</span>
+        <span class="trust-pill"><i class="fa-solid fa-check"></i> 140+ 5-star reviews</span>
+        <span class="trust-pill"><i class="fa-solid fa-check"></i> Same-day results</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FLOATING TRUST CARDS ===================== -->
+  <div class="trust-cards reveal">
+    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
+      <i class="fa-brands fa-google text-holo" style="font-size:2rem;"></i>
+      <div>
+        <div style="font-size:1.2rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;">5.0 Stars</div>
+        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Google Reviews</div>
+      </div>
+    </div>
+    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
+      <i class="fa-solid fa-certificate text-holo" style="font-size:2rem;"></i>
+      <div>
+        <div class="font-display" style="font-size:1.2rem;">DVSA</div>
+        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Approved Centre</div>
+      </div>
+    </div>
+    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
+      <i class="fa-solid fa-gear text-holo" style="font-size:2rem;"></i>
+      <div>
+        <div class="font-display" style="font-size:1.2rem;">1,200+</div>
+        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Cars Serviced</div>
+      </div>
+    </div>
+    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
+      <i class="fa-solid fa-bolt text-holo" style="font-size:2rem;"></i>
+      <div>
+        <div class="font-display" style="font-size:1.2rem;">Same Day</div>
+        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">MOT Results</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== BOOKING ENGINE ===================== -->
+  <section class="booking-section" id="booking">
+    <div class="booking-grid panel-3d reveal">
+      <div class="booking-pitch">
+        <p class="about-label">Smart Online Booking</p>
+        <h3 class="font-display">Skip the Queue.<br><span>Book Online.</span></h3>
+        <div class="glow-line-red"></div>
+        <p>Do not wait on hold. Pick your service, choose your vehicle type, and lock in your slot instantly. We confirm within the hour.</p>
+        <div class="ai-badge">
+          <div class="ai-avatar"><i class="fa-solid fa-headset"></i></div>
+          <div>
+            <h4 style="color:white;font-size:.95rem;margin-bottom:2px;">Virtual Booking Assistant</h4>
+            <p style="font-size:.8rem;color:var(--text-dim);">Available 24/7 to help you book and get instant quotes.</p>
+          </div>
         </div>
-        <p style="font-size: 0.85rem; color: #475569;">© 2026 GoChuchuro Systems. Premium Workshop Assets.</p>
-    </footer>
+      </div>
+      <div class="booking-panel panel-inset" data-tilt data-tilt-max="6">
+        <h4 class="text-holo font-display">Select Service Type</h4>
+        <div class="service-bubbles">
+          <div class="service-bubble active" onclick="selectService(this)">MOT Test</div>
+          <div class="service-bubble" onclick="selectService(this)">Interim Service</div>
+          <div class="service-bubble" onclick="selectService(this)">Full Service</div>
+          <div class="service-bubble" onclick="selectService(this)">Diagnostics</div>
+        </div>
+        <p class="booking-label">Vehicle Class</p>
+        <select class="booking-select">
+          <option>Standard Car / Hatchback</option>
+          <option>Performance / Sports Car</option>
+          <option>Commercial Van</option>
+          <option>4x4 / SUV</option>
+        </select>
+        <button onclick="openBooking()" class="btn-holo" style="width:100%;justify-content:center;padding:1rem;">
+          <i class="fa-solid fa-calendar-check"></i> Find Available Slots
+        </button>
+        <p style="font-size:.68rem;color:var(--text-dim);text-align:center;margin-top:.7rem;">Free cancellation up to 24 hours in advance.</p>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        const container = document.getElementById('hero-canvas-container');
-        const scene = new THREE.Scene();
-        
-        // Add subtle fog to blend the grid into the distance
-        scene.fog = new THREE.FogExp2(0x050505, 0.03);
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about-section" id="about">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-left" data-tilt data-tilt-max="4">
+        <div class="about-img-placeholder"><i class="fa-solid fa-garage"></i></div>
+        <img src="interior.jpg" alt="Autotech workshop" onerror="this.style.display='none'"/>
+      </div>
+      <div class="reveal-right">
+        <p class="about-label">Your Trusted Local Garage</p>
+        <h2 class="font-display">Honest Mechanics.<br>Fair Prices.</h2>
+        <div class="glow-line-red"></div>
+        <p>At Autotech we believe in straightforward, honest advice. We will never carry out any repair work without showing you exactly what is wrong and agreeing a price first. No surprises. No pressure.</p>
+        <p>Our workshop is equipped with the latest diagnostic tools, meaning we fix everything from a simple tyre change to complex engine faults quickly and safely.</p>
+        <ul class="about-checks">
+          <li><i class="fa-solid fa-check-circle"></i> We show you the problem before we fix it</li>
+          <li><i class="fa-solid fa-check-circle"></i> Fixed prices agreed before work begins</li>
+          <li><i class="fa-solid fa-check-circle"></i> Manufacturer-approved parts used throughout</li>
+          <li><i class="fa-solid fa-check-circle"></i> Full warranty on all work carried out</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
+  <!-- ===================== SERVICES ===================== -->
+  <section class="services-section" id="services">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+      <p class="about-label">What We Do</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3.2rem);">Our <span class="text-holo">Services</span></h2>
+      <div class="glow-line-red" style="margin:.8rem auto;"></div>
+      <p style="color:var(--text-dim);">Professional care to keep your vehicle safe, reliable, and on the road.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card panel-3d reveal delay-1" data-tilt data-tilt-max="8">
+        <div class="svc-img svc-img-mot">
+          <i class="fa-solid fa-certificate"></i>
+          <span class="svc-badge">DVSA Approved</span>
+          <img src="mot-test.jpg" alt="MOT Testing" onerror="this.style.display='none'"/>
+        </div>
+        <div class="svc-body">
+          <div class="svc-title">MOT Testing &amp; Repairs</div>
+          <p class="svc-desc">Failed your MOT? Hearing a strange noise? We handle brakes, exhausts, suspension, lighting, and all MOT advisory work.</p>
+          <button onclick="openBooking()" class="svc-cta">Book MOT <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="service-card panel-3d reveal delay-2" data-tilt data-tilt-max="8">
+        <div class="svc-img svc-img-service">
+          <i class="fa-solid fa-oil-can"></i>
+          <span class="svc-badge">Engine Health</span>
+          <img src="car-service.jpg" alt="Car Servicing" onerror="this.style.display='none'"/>
+        </div>
+        <div class="svc-body">
+          <div class="svc-title">Annual Servicing</div>
+          <p class="svc-desc">Regular oil changes, filter replacements, and manufacturer schedule servicing prevents expensive breakdowns before they happen.</p>
+          <button onclick="openBooking()" class="svc-cta">Book Service <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="service-card panel-3d reveal delay-3" data-tilt data-tilt-max="8">
+        <div class="svc-img svc-img-diag">
+          <i class="fa-solid fa-microchip"></i>
+          <span class="svc-badge">Fault Finding</span>
+          <img src="diagnostics.jpg" alt="Diagnostics" onerror="this.style.display='none'"/>
+        </div>
+        <div class="svc-body">
+          <div class="svc-title">Diagnostics &amp; Warning Lights</div>
+          <p class="svc-desc">Dashboard lit up? We plug into your car&rsquo;s onboard computer to quickly pinpoint and fix electrical and engine faults accurately.</p>
+          <button onclick="openBooking()" class="svc-cta">Get Diagnosed <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // 1. Moving Floor Grid (Neon Red)
-        const gridHelper = new THREE.GridHelper(100, 40, 0xef4444, 0x330000);
-        gridHelper.position.y = -3;
-        scene.add(gridHelper);
+  <!-- ===================== GALLERY ===================== -->
+  <div class="gallery-section" id="gallery">
+    <p class="gallery-label">Inside Our Workshop</p>
+    <div class="gallery-track">
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-garage"></i><img src="gallery-1.jpg" alt="Workshop" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-car-on"></i><img src="gallery-2.jpg" alt="MOT bay" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-screwdriver-wrench"></i><img src="gallery-3.jpg" alt="Mechanic" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-microchip"></i><img src="gallery-4.jpg" alt="Diagnostics" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-oil-can"></i><img src="gallery-5.jpg" alt="Servicing" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-garage"></i><img src="gallery-1.jpg" alt="Workshop" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-car-on"></i><img src="gallery-2.jpg" alt="MOT bay" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-screwdriver-wrench"></i><img src="gallery-3.jpg" alt="Mechanic" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-microchip"></i><img src="gallery-4.jpg" alt="Diagnostics" onerror="this.style.display='none'"/></div>
+      <div class="gallery-item panel-3d"><i class="fa-solid fa-oil-can"></i><img src="gallery-5.jpg" alt="Servicing" onerror="this.style.display='none'"/></div>
+    </div>
+  </div>
 
-        // 2. Floating Sparks (Speed effect)
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 300;
-        const posArray = new Float32Array(particlesCount * 3);
+  <!-- ===================== REVIEWS ===================== -->
+  <section class="reviews-section" id="reviews">
+    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
+      <p class="about-label">What Drivers Say</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);">Customer Reviews</h2>
+      <div class="glow-line-red" style="margin:.8rem auto;"></div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card panel-3d reveal delay-1" data-tilt data-tilt-max="4">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"The finest garage in town. They found a tricky electrical fault that another garage completely missed. Great prices, very honest, and they called me before doing anything."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">
+            <i class="fa-solid fa-user" style="color:white;opacity:.4;"></i>
+            <img src="reviewer-1.jpg" alt="Emma Richardson" onerror="this.style.display='none'"/>
+          </div>
+          <div><h4>Emma Richardson</h4><span>Local Driver, Andover</span></div>
+        </div>
+      </div>
+      <div class="review-card panel-3d reveal delay-2" data-tilt data-tilt-max="4">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"We take all our company vans here. Booking online is a breeze, they never add hidden costs, and they always get the vans back same day. Excellent service every time."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">
+            <i class="fa-solid fa-user" style="color:white;opacity:.4;"></i>
+            <img src="reviewer-2.jpg" alt="Marcus Vance" onerror="this.style.display='none'"/>
+          </div>
+          <div><h4>Marcus Vance</h4><span>Fleet Manager</span></div>
+        </div>
+      </div>
+      <div class="review-card panel-3d reveal delay-3" data-tilt data-tilt-max="4">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p class="review-text">"Passed my MOT with no issues. The team were friendly, the waiting area spotless. Got a text the moment it was ready. Would not go anywhere else in Andover."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">
+            <i class="fa-solid fa-user" style="color:white;opacity:.4;"></i>
+          </div>
+          <div><h4>Priya Sharma</h4><span>Verified Google Review</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 40; // Spread x
-            posArray[i+1] = Math.random() * 10 - 2;   // Spread y (above grid)
-            posArray[i+2] = (Math.random() - 0.5) * 40; // Spread z
-        }
+  <!-- ===================== FAQ ACCORDION ===================== -->
+  <section class="faq-section" id="faqs">
+    <div style="text-align:center;margin-bottom:3rem;" class="reveal">
+      <p class="about-label">Common Questions</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);"><span class="text-holo">FAQs</span></h2>
+      <div class="glow-line-red" style="margin:.8rem auto;"></div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Will using your garage void my new car&rsquo;s warranty?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </div>
+        <div class="faq-a">No, it will not. We use manufacturer-approved parts and follow the exact service schedules required by your car maker. Under Block Exemption law, you can service your car at any qualified garage during the warranty period without voiding it.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What happens if my car fails its MOT?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </div>
+        <div class="faq-a">We call you immediately with a clear explanation of what failed and a fixed price to repair it. We never carry out any work without your approval. If you prefer, you can collect the car and get it repaired elsewhere.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How long does an MOT test take?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </div>
+        <div class="faq-a">Approximately 45 to 60 minutes. You are welcome to wait in our comfortable area with complimentary tea and coffee, or we will text you when it is ready for collection.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do you offer a courtesy car while mine is being serviced?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </div>
+        <div class="faq-a">Yes, subject to availability. Please mention this when booking so we can reserve one for you.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>How will I know when my next service is due?</span>
+          <i class="fa-solid fa-plus faq-icon"></i>
+        </div>
+        <div class="faq-a">Our automated system sends you a reminder text and email 30 days before your next service is due, based on your last visit. No more forgetting.</div>
+      </div>
+    </div>
+  </section>
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.08, color: 0xef4444, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending
-        });
+  <!-- ===================== LOCATION ===================== -->
+  <section class="contact-section" id="location">
+    <div style="text-align:center;margin-bottom:3rem;max-width:1200px;margin-left:auto;margin-right:auto;" class="reveal">
+      <p class="about-label">Find Us</p>
+      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);">Visit Our <span class="text-holo">Garage</span></h2>
+      <div class="glow-line-red" style="margin:.8rem auto;"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="map-frame reveal-left" data-tilt data-tilt-max="3">
+        <iframe
+          src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="">
+        </iframe>
+      </div>
+      <div class="reveal-right">
+        <p style="color:var(--text-dim);margin-bottom:1.5rem;font-size:1rem;">Conveniently located in central Andover with free customer parking. Drop in or book ahead.</p>
+        <a href="https://wa.me/447474080809" target="_blank" class="contact-strip panel-3d" data-tilt data-tilt-max="4">
+          <div class="contact-icon" style="background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.2);color:#25D366;">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div>
+            <div class="contact-label-sm">WhatsApp Us</div>
+            <div class="contact-val">Message for a Quick Quote</div>
+          </div>
+        </a>
+        <a href="mailto:hello@gochuchuro.com" class="contact-strip panel-3d" data-tilt data-tilt-max="4">
+          <div class="contact-icon" style="background:rgba(0,181,200,0.1);border-color:rgba(0,181,200,0.2);color:var(--gc-teal);">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div>
+            <div class="contact-label-sm">Email Us</div>
+            <div class="contact-val">Send a Booking Enquiry</div>
+          </div>
+        </a>
+        <button onclick="openBooking()" class="btn-holo" style="width:100%;justify-content:center;padding:1rem;margin-top:.4rem;">
+          <i class="fa-solid fa-calendar-check"></i> Book Online Now
+        </button>
+        <div class="social-row">
+          <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="social-circle" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="social-circle" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="social-circle" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://wa.me/447474080809" target="_blank" class="social-circle" title="WhatsApp" style="color:#25D366;"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 10;
-        camera.position.y = 1;
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="footer-brand"><span class="text-holo">AUTO</span>TECH</div>
+    <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1.5rem;">Keeping Andover driving safely.</p>
+    <div style="display:flex;justify-content:center;gap:.8rem;margin-bottom:1.5rem;">
+      <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="social-circle" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="social-circle" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="social-circle" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://wa.me/447474080809" target="_blank" class="social-circle" title="WhatsApp" style="color:#25D366;"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <div class="footer-links">
+      <a href="../../showroom.html">Back to Showroom</a>
+      <a href="../../index.html">GoChuchuro Home</a>
+      <a href="../../index.html#pricing">Pricing from £49/mo</a>
+      <a href="../../privacy.html">Privacy Policy</a>
+    </div>
+    <p style="font-size:.75rem;color:#374151;border-top:1px solid var(--border);padding-top:1.5rem;margin-top:1rem;">
+      &copy; 2026 Autotech &mdash; MOT &amp; Car Repairs, Andover. Website built and powered by
+      <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700;">GoChuchuro</a>.
+    </p>
+  </footer>
 
-        // Mouse Parallax Logic
-        let mouseX = 0; let mouseY = 0;
-        let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
+  <!-- ===================== STICKY ACTION BAR ===================== -->
+  <div class="action-bar">
+    <a href="https://wa.me/447474080809" target="_blank" class="action-btn action-btn-ghost">
+      <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> WhatsApp
+    </a>
+    <button onclick="openBooking()" class="action-btn action-btn-red">
+      <i class="fa-solid fa-calendar-check"></i> Book MOT / Service
+    </button>
+  </div>
 
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - windowHalfX);
-            mouseY = (event.clientY - windowHalfY);
-        });
+  <!-- ===================== GC FLOATING BADGE ===================== -->
+  <div class="gc-badge" id="gcBadge">
+    <button class="gc-badge-close" onclick="document.getElementById('gcBadge').style.display='none'">&times;</button>
+    <div class="gc-badge-logo">Powered by GoChuchuro</div>
+    <p><strong>Want this website</strong> for your business?</p>
+    <a href="../../index.html" target="_blank">
+      <i class="fa-regular fa-calendar"></i> Free Chat
+    </a>
+  </div>
 
-        const clock = new THREE.Clock();
+  <!-- ===================== BOOKING MODAL ===================== -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeBooking()"><i class="fa-solid fa-xmark"></i></button>
+      <iframe
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true"
+        scrolling="yes">
+      </iframe>
+    </div>
+  </div>
 
-        function animate() {
-            requestAnimationFrame(animate);
-            const elapsedTime = clock.getElapsedTime();
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    /* ---- CURSOR ---- */
+    const dot=document.getElementById('cursorDot'), ring=document.getElementById('cursorRing');
+    let mX=0,mY=0,rX=0,rY=0;
+    document.addEventListener('mousemove',e=>{
+      mX=e.clientX;mY=e.clientY;
+      dot.style.left=mX+'px';dot.style.top=mY+'px';
+    });
+    (function animRing(){rX+=(mX-rX)*.12;rY+=(mY-rY)*.12;ring.style.left=rX+'px';ring.style.top=rY+'px';requestAnimationFrame(animRing);})();
 
-            // Animate grid moving forward to simulate speed
-            gridHelper.position.z = (elapsedTime * 5) % 2.5;
+    /* ---- BOOKING MODAL ---- */
+    function openBooking()  { document.getElementById('bookingModal').classList.add('active'); document.body.style.overflow='hidden'; }
+    function closeBooking() { document.getElementById('bookingModal').classList.remove('active'); document.body.style.overflow=''; }
+    document.getElementById('bookingModal').addEventListener('click',function(e){ if(e.target===this)closeBooking(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeBooking(); });
 
-            // Animate sparks rushing past camera
-            const positions = particlesMesh.geometry.attributes.position.array;
-            for(let i = 2; i < particlesCount * 3; i += 3) {
-                positions[i] += 0.2; // Move on Z axis
-                if(positions[i] > 15) { positions[i] = -25; } // Reset behind camera
-            }
-            particlesMesh.geometry.attributes.position.needsUpdate = true;
-            
-            // Subtle camera tilt based on mouse (steering effect)
-            camera.position.x += (mouseX * 0.003 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 0.002 + 1 - camera.position.y) * 0.05;
-            camera.lookAt(0, 0, 0);
+    /* ---- SERVICE BUBBLE ---- */
+    function selectService(el){ document.querySelectorAll('.service-bubble').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
 
-            renderer.render(scene, camera);
-        }
-        animate();
+    /* ---- FAQ ACCORDION ---- */
+    function toggleFaq(el){
+      const item=el.parentElement, answer=item.querySelector('.faq-a'), isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').classList.remove('open');});
+      if(!isOpen){item.classList.add('open');answer.classList.add('open');}
+    }
 
-        // Handle Resize
-        window.addEventListener('resize', () => {
-            windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        });
+    /* ---- SCROLL REVEAL ---- */
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
 
-        // Initialize 3D UI Tilt effects
-        VanillaTilt.init(document.querySelectorAll(".panel-3d, .btn-3d"), {
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-        });
-    </script>
+    /* ---- THREE.JS HERO — Racing Grid + Sparks ---- */
+    const container=document.getElementById('hero-canvas-container');
+    const scene=new THREE.Scene();
+    scene.fog=new THREE.FogExp2(0x050505,0.025);
+
+    const camera=new THREE.PerspectiveCamera(70,container.clientWidth/container.clientHeight,0.1,1000);
+    const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
+    renderer.setSize(container.clientWidth,container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+    container.appendChild(renderer.domElement);
+
+    /* Racing grid — red lines */
+    const grid=new THREE.GridHelper(120,50,0xef4444,0x330000);
+    grid.position.y=-4;
+    scene.add(grid);
+
+    /* Second fainter grid for depth */
+    const grid2=new THREE.GridHelper(200,20,0x220000,0x110000);
+    grid2.position.y=-4.1;
+    scene.add(grid2);
+
+    /* Speed sparks — red particles */
+    const pCount=400;
+    const pPos=new Float32Array(pCount*3);
+    for(let i=0;i<pCount*3;i+=3){
+      pPos[i]  =(Math.random()-.5)*50;
+      pPos[i+1]=Math.random()*12-3;
+      pPos[i+2]=(Math.random()-.5)*50;
+    }
+    const pGeo=new THREE.BufferGeometry();
+    pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+    const pMat=new THREE.PointsMaterial({size:.08,color:0xef4444,transparent:true,opacity:.7,blending:THREE.AdditiveBlending});
+    const pMesh=new THREE.Points(pGeo,pMat);
+    scene.add(pMesh);
+
+    /* Faint gold accent particles */
+    const pCount2=120;
+    const pPos2=new Float32Array(pCount2*3);
+    for(let i=0;i<pCount2*3;i++)pPos2[i]=(Math.random()-.5)*60;
+    const pGeo2=new THREE.BufferGeometry();
+    pGeo2.setAttribute('position',new THREE.BufferAttribute(pPos2,3));
+    const pMat2=new THREE.PointsMaterial({size:.06,color:0xD4AF37,transparent:true,opacity:.25,blending:THREE.AdditiveBlending});
+    scene.add(new THREE.Points(pGeo2,pMat2));
+
+    camera.position.set(0,2,12);
+    let tRX=0,tRY=0;
+    document.addEventListener('mousemove',e=>{
+      tRX=(e.clientY/window.innerHeight-.5)*.3;
+      tRY=(e.clientX/window.innerWidth-.5)*.3;
+    });
+
+    const clk=new THREE.Clock();
+    (function animHero(){
+      requestAnimationFrame(animHero);
+      const t=clk.getElapsedTime();
+      /* Grid rushes towards camera — speed sensation */
+      grid.position.z=(t*6)%2.5;
+      grid2.position.z=(t*3)%5;
+      /* Sparks rush past camera */
+      const pos=pMesh.geometry.attributes.position.array;
+      for(let i=2;i<pCount*3;i+=3){ pos[i]+=0.22; if(pos[i]>18)pos[i]=-32; }
+      pMesh.geometry.attributes.position.needsUpdate=true;
+      /* Mouse camera tilt — steering wheel feel */
+      camera.position.x+=(tRY*3-camera.position.x)*.05;
+      camera.position.y+=(-tRX*2+2-camera.position.y)*.05;
+      camera.lookAt(0,0,0);
+      renderer.render(scene,camera);
+    })();
+
+    window.addEventListener('resize',()=>{
+      camera.aspect=container.clientWidth/container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth,container.clientHeight);
+    });
+
+    /* ---- VANILLA TILT ---- */
+    VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{
+      speed:400,glare:true,'max-glare':.15,
+    });
+  </script>
 </body>
 </html>
