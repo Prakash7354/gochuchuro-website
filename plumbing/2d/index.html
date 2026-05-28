@@ -1,705 +1,780 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Plumbing & Heating Engineers | Smart Local Experts</title>
-    
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Rai &amp; Sons — Gas Safe registered plumbing and heating engineers in Andover. Boiler installations, emergency repairs and CP12 certificates. Book online today."/>
+  <title>Rai &amp; Sons | Plumbing &amp; Heating Engineers, Andover</title>
+  <link rel="icon" type="image/png" href="../../favicon.png" sizes="32x32"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* =============================================
+       RAI & SONS 2D — PRECISION & TRUST SYSTEM
+       Light palette, navy + teal, British trade
+       ============================================= */
+    :root {
+      --navy:       #0f172a;
+      --navy-mid:   #1e293b;
+      --teal:       #0d9488;
+      --teal-light: #14b8a6;
+      --teal-dim:   rgba(13,148,136,0.12);
+      --orange:     #ea580c;
+      --orange-dim: rgba(234,88,12,0.15);
+      --bg:         #f8fafc;
+      --bg-white:   #ffffff;
+      --text:       #334155;
+      --text-dark:  #0f172a;
+      --text-dim:   #64748b;
+      --border:     #e2e8f0;
+      --gold:       #f59e0b;
+      --gc-teal:    #00B5C8;
+      --gc-gold:    #D4AF37;
+      --shadow-sm:  0 4px 16px rgba(0,0,0,0.06);
+      --shadow-md:  0 12px 35px rgba(0,0,0,0.09);
+      --shadow-lg:  0 20px 50px rgba(0,0,0,0.1);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { background:var(--bg); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; line-height:1.6; overflow-x:hidden; padding-bottom:72px; }
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    /* ---- SCROLL REVEAL ---- */
+    .rv { opacity:0; transform:translateY(24px); transition:opacity .7s ease,transform .7s ease; }
+    .rv.on { opacity:1; transform:translateY(0); }
+    .rl { opacity:0; transform:translateX(-28px); transition:opacity .7s ease,transform .7s ease; }
+    .rl.on { opacity:1; transform:translateX(0); }
+    .rr { opacity:0; transform:translateX(28px); transition:opacity .7s ease,transform .7s ease; }
+    .rr.on { opacity:1; transform:translateX(0); }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
 
-    <style>
-        /* --- HIGH-END UI DESIGN SYSTEMS --- */
-        :root {
-            --primary-dark: #0f172a;    
-            --accent-teal: #0d9488;    
-            --emergency-orange: #ea580c; 
-            --stars-gold: #f59e0b;      
-            --bg-light: #f8fafc;
-            --bg-white: #ffffff;
-            --text-dark: #334155;
-            --text-light: #ffffff;
-            --border-gray: #e2e8f0;
-            --tech-purple: #6366f1;
-        }
+    /* ===================== HEADER ===================== */
+    header {
+      background:rgba(15,23,42,0.98); backdrop-filter:blur(12px);
+      padding:1rem 5%; display:flex; justify-content:space-between; align-items:center;
+      position:sticky; top:0; z-index:500;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+    .brand-logo {
+      color:white; font-size:1.3rem; font-weight:800; text-decoration:none;
+      display:flex; align-items:center; gap:.5rem;
+    }
+    .brand-logo i { color:var(--teal-light); }
+    nav { display:flex; align-items:center; gap:1.8rem; }
+    .nl { color:#cbd5e1; text-decoration:none; font-weight:600; font-size:.88rem; transition:color .25s; }
+    .nl:hover { color:var(--teal-light); }
+    .nsr {
+      color:var(--gc-teal); text-decoration:none; font-weight:700; font-size:.78rem;
+      border:1px solid rgba(0,181,200,0.3); padding:.38rem .85rem; border-radius:6px;
+      transition:all .25s; display:flex; align-items:center; gap:.35rem;
+    }
+    .nsr:hover { background:rgba(0,181,200,0.1); }
+    .btn-orange {
+      background:var(--orange); color:white; padding:.6rem 1.2rem; border-radius:8px;
+      text-decoration:none; font-weight:700; font-size:.85rem; display:flex; align-items:center;
+      gap:.4rem; box-shadow:0 4px 14px var(--orange-dim); transition:all .3s;
+    }
+    .btn-orange:hover { transform:translateY(-2px); box-shadow:0 8px 20px var(--orange-dim); }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
+    /* ===================== ACTION BAR ===================== */
+    .abar {
+      position:fixed; bottom:0; left:0; right:0; z-index:600;
+      background:rgba(15,23,42,0.98); backdrop-filter:blur(12px);
+      border-top:2px solid var(--teal); padding:.85rem 5%;
+      display:flex; justify-content:center; gap:1.2rem;
+      box-shadow:0 -8px 30px rgba(0,0,0,0.4);
+    }
+    .ab {
+      flex:1; max-width:260px; padding:.85rem; border-radius:8px; text-decoration:none;
+      font-weight:700; text-transform:uppercase; font-size:.82rem; letter-spacing:1px; border:none;
+      display:inline-flex; align-items:center; justify-content:center; gap:.5rem; transition:all .3s; cursor:pointer;
+    }
+    .ab-silver { background:transparent; color:#e2e8f0; border:1px solid #e2e8f0; }
+    .ab-silver:hover { background:rgba(255,255,255,0.08); }
+    .ab-teal { background:var(--teal); color:white; }
+    .ab-teal:hover { background:var(--teal-light); transform:translateY(-2px); }
 
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-            padding-bottom: 70px; 
-        }
+    /* ===================== HERO ===================== */
+    .hero {
+      position:relative; min-height:88vh;
+      display:flex; flex-direction:column; justify-content:center;
+      align-items:center; text-align:center; padding:5rem 2rem 4rem;
+      overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(rgba(15,23,42,.65),rgba(15,23,42,.88)),
+                 url('gas-heating-1.png') no-repeat center center/cover;
+      z-index:0;
+    }
+    /* CSS fallback pattern if image missing */
+    .hero-bg-fallback {
+      position:absolute; inset:0; z-index:0;
+      background:linear-gradient(135deg,#0f172a 0%,#0d3030 40%,#0f172a 100%);
+    }
+    .hero-grid {
+      position:absolute; inset:0; z-index:1; pointer-events:none;
+      background:
+        linear-gradient(rgba(13,148,136,0.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(13,148,136,0.04) 1px,transparent 1px);
+      background-size:50px 50px;
+    }
+    .hero-content { position:relative; z-index:2; max-width:920px; }
+    .hbadge {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(13,148,136,0.2); border:1px solid var(--teal);
+      color:#2dd4bf; padding:.45rem 1.2rem; border-radius:50px;
+      font-size:.8rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:1px; margin-bottom:1.8rem;
+      animation:fid .8s ease both;
+    }
+    @keyframes fid { from{opacity:0;transform:translateY(-14px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fiu { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fi  { from{opacity:0} to{opacity:1} }
+    .hero h1 {
+      font-size:clamp(2.5rem,6vw,4.5rem); font-weight:800; line-height:1.1;
+      color:white; margin-bottom:1.2rem;
+      text-shadow:0 4px 20px rgba(0,0,0,0.9);
+      animation:fiu .9s ease .15s both;
+    }
+    .hero h1 span { color:var(--teal-light); }
+    .hero p {
+      font-size:1.15rem; max-width:640px; margin:0 auto 2.5rem;
+      color:#cbd5e1; font-weight:500;
+      text-shadow:0 2px 8px rgba(0,0,0,0.8);
+      animation:fiu .9s ease .3s both;
+    }
+    .hbtns { display:flex; gap:1.2rem; justify-content:center; flex-wrap:wrap; animation:fi 1s ease .5s both; }
+    .btn-teal {
+      background:var(--teal); color:white; padding:1rem 2.2rem; border-radius:8px;
+      font-weight:700; text-decoration:none; border:none; cursor:pointer;
+      font-size:.95rem; transition:all .3s; display:inline-flex; align-items:center; gap:.5rem;
+      box-shadow:0 4px 16px rgba(13,148,136,0.35);
+    }
+    .btn-teal:hover { background:var(--teal-light); transform:translateY(-3px); box-shadow:0 8px 25px rgba(13,148,136,0.4); }
+    .btn-ghost-white {
+      background:rgba(255,255,255,0.08); color:white; padding:1rem 2.2rem; border-radius:8px;
+      font-weight:700; text-decoration:none; border:1px solid rgba(255,255,255,0.25);
+      font-size:.95rem; transition:all .3s; display:inline-flex; align-items:center; gap:.5rem;
+    }
+    .btn-ghost-white:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.5); }
+    .htrust { display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; margin-top:2rem; animation:fi 1.2s ease .7s both; }
+    .htrust span { display:flex; align-items:center; gap:.4rem; font-size:.78rem; font-weight:700; color:rgba(255,255,255,0.65); text-transform:uppercase; letter-spacing:.5px; }
+    .htrust i { color:var(--teal-light); }
 
-        /* --- STICKY TOP NAVIGATION --- */
-        header {
-            background-color: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
+    /* ===================== TRUST RIBBON ===================== */
+    .trust-ribbon {
+      background:var(--navy-mid); padding:2.2rem 5%;
+      display:flex; justify-content:center; align-items:center;
+      gap:3rem; flex-wrap:wrap; border-bottom:4px solid var(--teal); color:#f1f5f9;
+    }
+    .tri { display:flex; flex-direction:column; align-items:center; gap:.4rem; text-align:center; }
+    .tri i { color:var(--teal-light); font-size:1.6rem; }
+    .tri span { font-size:.78rem; text-transform:uppercase; letter-spacing:1px; font-weight:700; }
+    .gbadge {
+      display:flex; align-items:center; gap:.8rem; background:white;
+      padding:.7rem 1.4rem; border-radius:50px; text-decoration:none;
+      color:var(--text-dark); border:1px solid var(--border);
+      box-shadow:var(--shadow-md); transition:all .3s;
+    }
+    .gbadge:hover { transform:translateY(-3px); box-shadow:var(--shadow-lg); }
 
-        .brand-logo {
-            color: var(--text-light);
-            font-size: 1.4rem;
-            font-weight: 800;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    /* ===================== BOOKING ENGINE ===================== */
+    .book-wrap {
+      background:var(--bg-white); border-radius:20px; padding:3.5rem;
+      display:grid; grid-template-columns:1fr 1fr; gap:4rem;
+      align-items:center; box-shadow:var(--shadow-lg);
+      border:1px solid var(--border); max-width:1200px; margin:0 auto;
+      position:relative; overflow:hidden;
+    }
+    .book-wrap::before {
+      content:''; position:absolute; top:-60px; right:-60px;
+      width:200px; height:200px; border-radius:50%;
+      background:radial-gradient(circle,rgba(13,148,136,0.08),transparent 70%);
+      pointer-events:none;
+    }
+    .book-text h3 { font-size:clamp(1.8rem,3vw,2.6rem); color:var(--text-dark); margin-bottom:.8rem; }
+    .book-text h3 span { color:var(--teal); }
+    .book-text p { color:var(--text-dim); font-size:.98rem; line-height:1.75; margin-bottom:1.5rem; }
+    .tech-feat { display:flex; gap:1.2rem; margin-bottom:1.2rem; align-items:flex-start; }
+    .tfi {
+      width:46px; height:46px; background:var(--teal-dim); color:var(--teal);
+      border-radius:10px; display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; flex-shrink:0; border:1px solid rgba(13,148,136,0.2);
+    }
+    .ai-badge {
+      display:flex; align-items:center; gap:1.2rem;
+      background:var(--bg); border:1px solid var(--border);
+      border-radius:12px; padding:1.2rem; margin-top:1.5rem;
+    }
+    .ai-avatar {
+      width:52px; height:52px; border-radius:50%; overflow:hidden;
+      border:2px solid var(--teal); flex-shrink:0; background:var(--teal-dim);
+      display:flex; align-items:center; justify-content:center; position:relative;
+    }
+    .ai-avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .cal-mock { background:var(--bg); border-radius:14px; padding:2.2rem; border:1px solid var(--border); }
+    .cal-hdr { display:flex; justify-content:space-between; margin-bottom:1.5rem; font-weight:700; font-size:1rem; color:var(--text-dark); }
+    .cal-lbl { font-size:.78rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--text-dim); margin-bottom:1rem; }
+    .cal-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; margin-bottom:1.5rem; }
+    .cal-slot {
+      background:white; padding:.85rem; text-align:center; border-radius:8px;
+      border:1px solid var(--border); font-size:.85rem; font-weight:700;
+      color:var(--text-dark); cursor:pointer; transition:all .2s;
+    }
+    .cal-slot:hover, .cal-slot.active {
+      background:var(--teal); color:white; border-color:var(--teal);
+      box-shadow:0 4px 12px rgba(13,148,136,0.25);
+    }
 
-        .brand-logo i { color: var(--accent-teal); }
+    /* ===================== ABOUT ===================== */
+    .about-wrap {
+      display:grid; grid-template-columns:1fr 1.2fr;
+      gap:4rem; align-items:center; max-width:1200px; margin:0 auto;
+    }
+    .img-stack { position:relative; padding-bottom:2.5rem; }
+    .img-main {
+      width:100%; border-radius:16px;
+      box-shadow:var(--shadow-lg); object-fit:cover;
+    }
+    .img-main-ph {
+      width:100%; aspect-ratio:3/4;
+      background:linear-gradient(135deg,#0f172a,#0d3030);
+      border-radius:16px; display:flex; align-items:center;
+      justify-content:center; font-size:5rem; color:var(--teal); opacity:.25;
+    }
+    .img-sub {
+      position:absolute; bottom:0; right:-1.5rem; width:55%;
+      border-radius:14px; border:6px solid var(--bg);
+      box-shadow:var(--shadow-md); object-fit:cover;
+    }
+    .img-sub-ph {
+      position:absolute; bottom:0; right:-1.5rem; width:55%; aspect-ratio:4/3;
+      background:linear-gradient(135deg,#0d3030,#0f172a);
+      border-radius:14px; border:6px solid var(--bg);
+      display:flex; align-items:center; justify-content:center;
+      font-size:2.5rem; color:var(--teal); opacity:.3;
+    }
+    .albl { color:var(--teal); font-size:.78rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px; margin-bottom:.5rem; display:block; }
+    .about-wrap h2 { font-size:clamp(1.8rem,3vw,2.8rem); color:var(--text-dark); margin-bottom:1.2rem; }
+    .about-wrap p { color:var(--text); font-size:.98rem; line-height:1.75; margin-bottom:.9rem; }
+    .alist { list-style:none; margin-top:1.2rem; }
+    .alist li { display:flex; align-items:flex-start; gap:.75rem; font-size:.95rem; font-weight:600; color:var(--text-dark); margin-bottom:.7rem; }
+    .alist li i { color:var(--teal); margin-top:.2rem; flex-shrink:0; }
 
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-        }
+    /* ===================== SERVICES ===================== */
+    .svc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:2rem; }
+    .svc-card {
+      background:var(--bg-white); border-radius:16px; overflow:hidden;
+      border:1px solid var(--border); transition:all .35s; display:flex; flex-direction:column;
+    }
+    .svc-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); border-color:var(--teal); }
+    .svc-img {
+      width:100%; height:220px; object-fit:cover;
+      display:block; transition:.35s; filter:saturate(.9);
+    }
+    .svc-card:hover .svc-img { filter:saturate(1.1); }
+    .svc-img-ph {
+      width:100%; height:220px; display:flex; align-items:center;
+      justify-content:center; font-size:4rem;
+    }
+    .svc-body { padding:1.6rem; flex:1; display:flex; flex-direction:column; }
+    .svc-body h3 { color:var(--text-dark); margin-bottom:.7rem; font-size:1.2rem; }
+    .svc-body h3 i { color:var(--teal); margin-right:.4rem; }
+    .svc-body p { font-size:.9rem; color:var(--text); line-height:1.65; flex:1; margin-bottom:1.2rem; }
+    .svc-cta {
+      display:inline-flex; align-items:center; gap:.4rem;
+      color:var(--teal); font-weight:700; font-size:.82rem; text-decoration:none;
+      transition:gap .2s;
+    }
+    .svc-card:hover .svc-cta { gap:.7rem; }
 
-        .nav-link {
-            color: #cbd5e1;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
+    /* ===================== GALLERY ===================== */
+    .gal-s {
+      overflow:hidden; background:var(--navy-mid);
+      padding:3rem 0;
+      border-top:1px solid rgba(255,255,255,0.06);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .gal-lbl { text-align:center; font-size:.68rem; font-weight:800; letter-spacing:4px; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:1.5rem; }
+    .gal-t { display:flex; width:calc(310px * 12); animation:gscroll 40s linear infinite; }
+    .gal-t:hover { animation-play-state:paused; }
+    @keyframes gscroll { 0%{transform:translateX(0)} 100%{transform:translateX(calc(-310px * 6))} }
+    .gi {
+      width:280px; height:200px; margin:0 15px; border-radius:12px;
+      overflow:hidden; flex-shrink:0; background:rgba(255,255,255,0.04);
+      border:1px solid rgba(13,148,136,0.2);
+      box-shadow:0 4px 20px rgba(0,0,0,0.4);
+      display:flex; align-items:center; justify-content:center; position:relative;
+    }
+    .gi i { font-size:2.8rem; color:var(--teal-light); opacity:.2; z-index:1; }
+    .gi img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:.35s; filter:saturate(.85); }
+    .gi:hover img { filter:saturate(1.1); transform:scale(1.05); }
+    .gi:hover { border-color:var(--teal); box-shadow:0 0 20px rgba(13,148,136,0.2); }
 
-        .nav-link:hover { color: var(--accent-teal); }
+    /* ===================== TESTIMONIALS ===================== */
+    .tes-s { background:var(--navy); padding:6rem 5%; }
+    .tg { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2.5rem; max-width:1100px; margin:0 auto; }
+    .tc { background:rgba(255,255,255,0.05); padding:2.5rem; border-radius:16px; border:1px solid rgba(255,255,255,0.08); transition:all .3s; }
+    .tc:hover { border-color:rgba(13,148,136,0.4); transform:translateY(-4px); }
+    .tstars { color:var(--gold); margin-bottom:1.2rem; font-size:.9rem; letter-spacing:1px; }
+    .tq { font-style:italic; color:#cbd5e1; margin-bottom:1.8rem; font-size:1rem; line-height:1.65; }
+    .tper { display:flex; align-items:center; gap:1rem; }
+    .tav {
+      width:50px; height:50px; border-radius:50%; overflow:hidden; flex-shrink:0;
+      border:2px solid var(--teal); background:var(--teal-dim);
+      display:flex; align-items:center; justify-content:center; position:relative;
+    }
+    .tav img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .tper h4 { font-size:.95rem; font-weight:700; color:white; }
+    .tper span { font-size:.75rem; color:var(--teal-light); font-weight:600; }
 
-        .cta-header-btn {
-            background-color: var(--emergency-orange);
-            color: var(--text-light);
-            padding: 0.6rem 1.2rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 14px rgba(234, 88, 12, 0.3);
-            transition: 0.3s;
-        }
+    /* ===================== FAQ ACCORDION ===================== */
+    .faq-list { max-width:800px; margin:0 auto; }
+    .fi { border-bottom:1px solid var(--border); }
+    .fq { display:flex; justify-content:space-between; align-items:center; padding:1.2rem 0; cursor:pointer; font-weight:700; font-size:.98rem; color:var(--text-dark); transition:color .25s; }
+    .fq:hover { color:var(--teal); }
+    .fqi { font-size:.75rem; color:var(--teal); transition:transform .3s; }
+    .fi.open .fqi { transform:rotate(45deg); }
+    .fa { max-height:0; overflow:hidden; transition:max-height .4s ease,padding .3s; color:var(--text-dim); font-size:.92rem; line-height:1.75; }
+    .fa.open { max-height:250px; padding-bottom:1.2rem; }
 
-        .cta-header-btn:hover { transform: translateY(-2px); }
+    /* ===================== CONTACT ===================== */
+    .con-grid { display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start; max-width:1200px; margin:0 auto; }
+    .form-box { background:var(--bg-white); padding:2.8rem; border-radius:16px; border:1px solid var(--border); box-shadow:var(--shadow-md); }
+    .form-box h3 { font-size:1.8rem; font-weight:800; color:var(--text-dark); margin-bottom:1.5rem; }
+    .ig { margin-bottom:1.4rem; }
+    .ig label { display:block; margin-bottom:.45rem; font-weight:700; font-size:.85rem; color:var(--text-dark); }
+    .ig input, .ig textarea { width:100%; padding:.85rem 1rem; border:1px solid var(--border); border-radius:8px; font-size:.92rem; outline:none; font-family:'Plus Jakarta Sans',sans-serif; color:var(--text-dark); background:var(--bg); }
+    .ig input:focus, .ig textarea:focus { border-color:var(--teal); box-shadow:0 0 0 4px var(--teal-dim); }
+    .map-frame { width:100%; height:300px; border-radius:14px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-sm); margin-bottom:1.2rem; }
+    .map-frame iframe { width:100%; height:100%; border:0; }
+    .cstrip {
+      display:flex; align-items:center; gap:1.2rem;
+      background:var(--bg-white); border:1px solid var(--border);
+      border-radius:12px; padding:1.1rem 1.3rem; margin-bottom:1rem;
+      text-decoration:none; transition:all .3s;
+    }
+    .cstrip:hover { border-color:var(--teal); transform:scale(1.01); box-shadow:var(--shadow-sm); }
+    .cic { width:44px; height:44px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; border:1px solid var(--border); flex-shrink:0; }
+    .clbl { font-size:.7rem; text-transform:uppercase; font-weight:700; letter-spacing:.5px; color:var(--text-dim); }
+    .cval { font-size:.95rem; font-weight:700; color:var(--text-dark); }
 
-        /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
-        .sticky-action-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(15, 23, 42, 0.98);
-            backdrop-filter: blur(10px);
-            border-top: 2px solid var(--accent-teal);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            z-index: 990;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
-        }
+    /* ===================== SHARED ===================== */
+    .sw { padding:6rem 5%; max-width:1300px; margin:0 auto; }
+    .sh { text-align:center; margin-bottom:3.5rem; }
+    .sh .slbl { color:var(--teal); font-size:.75rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; margin-bottom:.4rem; display:block; }
+    .sh h2 { font-size:clamp(1.8rem,3.5vw,2.8rem); color:var(--text-dark); font-weight:800; }
+    .sh p { color:var(--text-dim); font-size:.98rem; margin-top:.5rem; }
+    .tl { width:45px; height:3px; background:var(--teal); border-radius:2px; margin:.8rem auto 0; }
+    .tl-l { margin-left:0; }
+    .bg-white-s { background:var(--bg-white); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .bg-light-s { background:var(--bg); border-top:1px solid var(--border); }
 
-        .action-bar-btn {
-            flex: 1;
-            max-width: 260px;
-            padding: 0.9rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            transition: 0.3s;
-        }
-        .action-bar-btn:hover { transform: translateY(-3px); }
-        .btn-silver-cta { background-color: transparent; color: var(--border-gray); border: 1px solid var(--border-gray); }
-        .btn-teal-cta { background-color: var(--accent-teal); color: var(--text-light); }
+    /* ===================== FOOTER ===================== */
+    footer { background:var(--navy); padding:5rem 5% 7rem; color:#94a3b8; text-align:center; border-top:1px solid rgba(255,255,255,0.08); }
+    .fbrand { font-size:1.8rem; font-weight:800; color:white; margin-bottom:.5rem; }
+    .fbrand i { color:var(--teal-light); }
+    .socrow { display:flex; justify-content:center; gap:.8rem; margin:1.2rem 0 1.5rem; flex-wrap:wrap; }
+    .sc { width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.05); color:#cbd5e1; display:flex; align-items:center; justify-content:center; font-size:1rem; text-decoration:none; transition:all .3s; border:1px solid rgba(255,255,255,0.1); }
+    .sc:hover { background:var(--teal); color:white; transform:translateY(-4px); border-color:var(--teal); }
+    .flinks { display:flex; justify-content:center; gap:1.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+    .flinks a { font-size:.75rem; color:#475569; text-decoration:none; font-weight:600; transition:color .2s; }
+    .flinks a:hover { color:var(--gc-teal); }
 
-        /* --- HERO WORKSPACE (RESTORED IMAGE PATH & AESTHETIC OVERLAY) --- */
-        .hero {
-            /* Restored the original image path and applied a rich, moody Slate gradient overlay */
-            background-color: var(--primary-dark); /* Fallback color */
-            background: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.85)), url('gas-heating-1.png') no-repeat center center/cover;
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-light);
-        }
+    /* ===================== GC BADGE ===================== */
+    .gcb { position:fixed; bottom:82px; right:1.5rem; z-index:550; background:rgba(13,21,21,0.97); border:1px solid rgba(0,181,200,0.35); border-radius:14px; padding:.8rem 1rem; box-shadow:0 10px 35px rgba(0,0,0,0.5); max-width:220px; text-align:center; animation:badgein .8s ease .6s both; backdrop-filter:blur(14px); }
+    @keyframes badgein { from{opacity:0;transform:translateX(26px)} to{opacity:1;transform:translateX(0)} }
+    .gcbc { position:absolute; top:6px; right:8px; background:none; border:none; color:#64748b; font-size:.72rem; cursor:pointer; }
+    .gcbl { font-family:'Plus Jakarta Sans',sans-serif; font-size:.6rem; font-weight:800; letter-spacing:1.5px; color:rgba(0,181,200,0.6); text-transform:uppercase; margin-bottom:.3rem; }
+    .gcb p { font-size:.7rem; color:rgba(200,205,214,0.8); margin-bottom:.5rem; line-height:1.4; }
+    .gcb p strong { color:white; }
+    .gcb a { display:inline-flex; align-items:center; gap:.35rem; background:linear-gradient(135deg,#00B5C8,#E5C158); color:#000; padding:.44rem 1rem; border-radius:8px; font-size:.7rem; font-weight:900; text-decoration:none; text-transform:uppercase; letter-spacing:.5px; transition:all .25s; }
+    .gcb a:hover { transform:scale(1.03); }
 
-        .hero-badge {
-            background-color: rgba(13, 148, 136, 0.2);
-            border: 1px solid var(--accent-teal);
-            color: #2dd4bf;
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-        }
+    /* ===================== MODAL ===================== */
+    .mo { position:fixed; inset:0; background:rgba(15,23,42,0.92); backdrop-filter:blur(14px); z-index:9999; display:flex; align-items:center; justify-content:center; opacity:0; visibility:hidden; transition:all .35s; }
+    .mo.on { opacity:1; visibility:visible; }
+    .mb { background:var(--bg-white); width:92%; max-width:940px; height:86vh; border-radius:18px; position:relative; transform:translateY(28px); transition:transform .35s; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-lg); }
+    .mo.on .mb { transform:translateY(0); }
+    .mc { position:absolute; top:14px; right:16px; background:rgba(15,23,42,.08); border:1px solid var(--border); border-radius:50%; width:38px; height:38px; display:flex; align-items:center; justify-content:center; color:var(--text-dark); font-size:1rem; cursor:pointer; z-index:10; transition:all .25s; }
+    .mc:hover { background:var(--teal); color:white; }
+    .mb iframe { width:100%; height:100%; border:0; border-radius:18px; }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            max-width: 900px;
-            line-height: 1.1;
-            margin-bottom: 1.2rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
-        }
-
-        .hero h1 span { color: var(--accent-teal); }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 650px;
-            color: #cbd5e1;
-            margin-bottom: 2.5rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-            font-weight: 500;
-        }
-
-        .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
-
-        .btn-primary {
-            background-color: var(--accent-teal);
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .btn-primary:hover { background-color: #0f766e; }
-
-        /* --- TRUST BADGES / METRICS RIBBON --- */
-        .trust-bar {
-            background-color: #1e293b;
-            padding: 2.5rem 5%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            border-bottom: 4px solid var(--accent-teal);
-            color: #f1f5f9;
-            font-weight: 600;
-            text-align: center;
-        }
-        
-        .trust-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .trust-item i { color: var(--accent-teal); font-size: 1.8rem; margin-bottom: 0.2rem; }
-        .trust-item span { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        .embedded-google-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: white;
-            padding: 0.8rem 1.6rem;
-            border-radius: 50px;
-            text-decoration: none;
-            color: var(--primary-dark);
-            border: 1px solid var(--border-gray);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .embedded-google-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.25);
-        }
-
-        /* --- SECTION WRAPPERS --- */
-        .section-wrapper { padding: 6rem 5%; max-width: 1300px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.5rem; color: var(--primary-dark); font-weight: 800; }
-        .section-header p { color: #64748b; font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
-
-        /* --- TECH ROI SECTION --- */
-        .roi-tech-section {
-            background-color: var(--bg-white);
-            border-radius: 20px;
-            padding: 4rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
-            margin: 5rem auto; 
-            position: relative;
-            max-width: 1200px;
-            border: 1px solid var(--border-gray);
-        }
-
-        .tech-text-block h3 { font-size: 2.4rem; color: var(--primary-dark); margin-bottom: 1rem; }
-        .tech-text-block h3 span { color: var(--accent-teal); }
-        .tech-feature { display: flex; gap: 1.5rem; margin-top: 2rem; }
-        .tech-icon { width: 50px; height: 50px; background: rgba(13, 148, 136, 0.1); color: var(--accent-teal); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-
-        .ai-avatar-badge {
-            display: flex;
-            align-items: center;
-            background: var(--bg-light);
-            padding: 1.5rem;
-            border-radius: 12px;
-            gap: 1.5rem;
-            border: 1px solid var(--border-gray);
-            margin-top: 2.5rem;
-        }
-        .ai-avatar-badge img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-teal); }
-
-        .calendar-mockup {
-            background: var(--bg-light);
-            border-radius: 16px;
-            padding: 2.5rem;
-            border: 1px solid var(--border-gray);
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
-        }
-        .cal-header { display: flex; justify-content: space-between; margin-bottom: 1.5rem; font-weight: 700; font-size: 1.1rem; color: var(--primary-dark);}
-        .cal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        .cal-slot { background: white; padding: 1rem; text-align: center; border-radius: 8px; border: 1px solid var(--border-gray); font-size: 0.9rem; font-weight: 700; color: var(--primary-dark); cursor: pointer; transition: 0.2s;}
-        .cal-slot:hover, .cal-slot.active { background: var(--accent-teal); color: white; border-color: var(--accent-teal); box-shadow: 0 4px 12px rgba(13,148,136,0.2); }
-
-        /* --- ABOUT & TEAM --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: center; }
-        .team-image-stack { position: relative; padding-bottom: 2rem;}
-        .team-main-img { width: 100%; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .team-sub-img { position: absolute; bottom: 0; right: -2rem; width: 50%; border-radius: 16px; border: 8px solid var(--bg-light); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-
-        /* --- SERVICES --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-        .service-card { background: var(--bg-white); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-gray); transition: 0.3s; }
-        .service-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-color: var(--accent-teal); }
-        .service-img { width: 100%; height: 220px; object-fit: cover; }
-        .service-body { padding: 2rem; }
-        .service-body h3 { color: var(--primary-dark); margin-bottom: 1rem; font-size: 1.3rem; }
-        .service-body h3 i { color: var(--accent-teal); margin-right: 0.5rem; }
-        .service-body p { font-size: 0.95rem; color: var(--text-dark); margin-bottom: 1.5rem; }
-
-        /* --- TESTIMONIALS --- */
-        .testimonials { background-color: var(--primary-dark); color: white; padding: 6rem 5%; }
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .test-card { background: rgba(255,255,255,0.05); padding: 2.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); }
-        .stars { color: var(--stars-gold); margin-bottom: 1.2rem; font-size: 0.95rem; }
-        .test-card p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6;}
-        .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-teal); }
-
-        /* --- FAQS --- */
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .faq-box { background: var(--bg-white); padding: 2.2rem; border-radius: 12px; border: 1px solid var(--border-gray); }
-        .faq-box h4 { color: var(--primary-dark); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
-        .faq-box p { font-size: 0.95rem; color: #475569; line-height: 1.6;}
-
-        /* --- CONTACT & MAP SECTION --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; align-items: start; }
-        .contact-form-box { background: var(--bg-white); padding: 3rem; border-radius: 16px; border: 1px solid var(--border-gray); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .input-group { margin-bottom: 1.5rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--primary-dark); }
-        .input-group input, .input-group textarea { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-gray); border-radius: 8px; font-size: 0.95rem; outline: none; }
-        .input-group input:focus, .input-group textarea:focus { border-color: var(--accent-teal); box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1); }
-        
-        .map-frame { width: 100%; height: 360px; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-gray); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        
-        /* Cleaned Up Contact Strips */
-        .info-strip { background: var(--bg-white); border: 1px solid var(--border-gray); border-radius: 12px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none;}
-        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: var(--accent-teal); }
-        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--accent-teal); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-gray); }
-        
-        .info-strip-text h5 { font-size: 0.85rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;}
-        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); }
-
-        /* --- MINI AI PILL (Replaces bulky floating chat) --- */
-        .mini-ai-pill {
-            position: fixed;
-            bottom: 5.5rem; /* Clears sticky mobile hotbar */
-            right: 1.5rem;
-            background: white;
-            border-radius: 50px;
-            padding: 0.4rem 1.2rem 0.4rem 0.4rem;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-            z-index: 990;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            border: 1px solid var(--border-gray);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .mini-ai-pill:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(13,148,136,0.3); /* Teal Shadow */
-            border-color: var(--accent-teal);
-        }
-        .mini-ai-pill img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-teal);
-            object-fit: cover;
-        }
-
-        /* Social Icons in Footer */
-        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
-        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.05); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
-        .social-circle-link:hover { background: var(--accent-teal); color: white; transform: translateY(-4px); border-color: var(--accent-teal); }
-
-        @media (max-width: 900px) {
-            .nav-menu { display: none; }
-            .roi-tech-section, .about-grid, .faq-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .roi-tech-section { padding: 2.5rem; margin-top: 2rem;}
-            .team-sub-img { position: relative; width: 100%; bottom: 0; right: 0; margin-top: 1rem;}
-            
-            /* Responsive gap for metrics ribbon on mobile */
-            .trust-bar { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
-            
-            /* Mobile Specific: Transform AI Pill into a Circle Avatar */
-            .mini-ai-pill {
-                padding: 0; 
-                width: 56px;
-                height: 56px;
-                right: 1rem; 
-                bottom: 5.5rem; 
-                justify-content: center;
-                border-radius: 50%;
-            }
-            .mini-ai-pill img { 
-                width: 100%; 
-                height: 100%; 
-                margin: 0;
-            }
-            .ai-pill-text {
-                display: none !important; /* Hides text container */
-            }
-        }
-    </style>
+    /* ===================== RESPONSIVE ===================== */
+    @media(max-width:900px) {
+      nav .nl { display:none; }
+      .book-wrap,.about-wrap,.con-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .book-wrap { padding:1.8rem; }
+      .img-sub,.img-sub-ph { position:relative; width:100%; right:0; margin-top:1rem; border:4px solid var(--bg); }
+      .gcb { display:none; }
+    }
+    @media(max-width:600px) {
+      .hero h1 { font-size:2.2rem; }
+      .svc-grid { grid-template-columns:1fr; }
+      .tg { grid-template-columns:1fr; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="brand-logo">
-            <i class="fa-solid fa-faucet-drip"></i> RAI & SONS
-        </a>
-        <nav class="nav-menu">
-            <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#testimonials" class="nav-link">Testimonials</a>
-            <a href="#faqs" class="nav-link">FAQs</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </nav>
-        <a href="tel:07123456789" class="cta-header-btn" style="display: none;">
-            <i class="fa-solid fa-phone-volume"></i> 24/7 Call-Out
-        </a>
-    </header>
+<!-- HEADER -->
+<header>
+  <a href="#" class="brand-logo"><i class="fa-solid fa-faucet-drip"></i> RAI &amp; SONS</a>
+  <nav>
+    <a href="#about"   class="nl">About</a>
+    <a href="#services" class="nl">Services</a>
+    <a href="#gallery" class="nl">Gallery</a>
+    <a href="#reviews" class="nl">Reviews</a>
+    <a href="#faqs"    class="nl">FAQs</a>
+    <a href="#contact" class="nl">Contact</a>
+    <a href="../../showroom.html" class="nsr"><i class="fa-solid fa-arrow-left" style="font-size:.6rem"></i>Showroom</a>
+  </nav>
+  <a href="tel:07123456789" class="btn-orange"><i class="fa-solid fa-phone-volume"></i>24/7 Call-Out</a>
+</header>
 
-    <div class="sticky-action-bar" id="actions">
-        <a href="tel:07123456789" class="action-bar-btn btn-silver-cta"><i class="fa-solid fa-phone-volume"></i> Call Team</a>
-        <a href="#booking" class="action-bar-btn btn-teal-cta"><i class="fa-solid fa-calendar-check"></i> Book Online</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-fallback"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hbadge"><i class="fa-solid fa-shield-halved"></i> Gas Safe Registered Professionals</div>
+    <h1>Next-Generation <span>Plumbing &amp; Heating</span> Services</h1>
+    <p>Traditional British engineering standards with smart, frictionless online booking. Serving Andover and Hampshire with reliable boiler and plumbing solutions.</p>
+    <div class="hbtns">
+      <button onclick="openB()" class="btn-teal"><i class="fa-solid fa-calendar-check"></i>Book Online Now</button>
+      <a href="#services" class="btn-ghost-white"><i class="fa-solid fa-list"></i>View Services</a>
     </div>
+    <div class="htrust">
+      <span><i class="fa-solid fa-check"></i>Gas Safe registered</span>
+      <span><i class="fa-solid fa-check"></i>£5M liability cover</span>
+      <span><i class="fa-solid fa-check"></i>200+ 5-star reviews</span>
+      <span><i class="fa-solid fa-check"></i>No call-out fee</span>
+    </div>
+  </div>
+</section>
 
-    <section class="hero">
-        <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Gas Safe Registered Professionals</div>
-        <h1>Next-Generation <span>Plumbing & Heating</span> Services</h1>
-        <p>Combining traditional British engineering standards with smart, frictionless booking technology. Serving Andover and Hampshire with bespoke boiler and plumbing solutions.</p>
-        <div class="hero-buttons">
-            <a href="#booking" class="btn-primary">View Live Availability <i class="fa-solid fa-calendar-check"></i></a>
+<!-- TRUST RIBBON -->
+<div class="trust-ribbon rv">
+  <a href="#reviews" class="gbadge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="26px" height="26px">
+      <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+      <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+      <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+      <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+    </svg>
+    <div style="font-size:.82rem;font-weight:700;display:flex;flex-direction:column;line-height:1.2">
+      <span>5.0 <span style="color:#fbbc05;font-size:.7rem">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+      <span style="font-size:.68rem;color:#64748b;font-weight:500">200+ Reviews</span>
+    </div>
+  </a>
+  <div class="tri"><i class="fa-solid fa-circle-check"></i><span>£5M Liability</span></div>
+  <div class="tri"><i class="fa-solid fa-bolt"></i><span>Rapid Dispatch</span></div>
+  <div class="tri"><i class="fa-solid fa-certificate"></i><span>CP12 Certified</span></div>
+  <div class="tri"><i class="fa-solid fa-clock"></i><span>24/7 Emergency</span></div>
+</div>
+
+<!-- BOOKING ENGINE -->
+<section class="sw" id="booking">
+  <div class="book-wrap rv">
+    <div class="book-text">
+      <span style="color:var(--teal);font-size:.75rem;text-transform:uppercase;font-weight:800;letter-spacing:1.5px;margin-bottom:.4rem;display:block">Smart Booking</span>
+      <h3>Stop Waiting.<br><span>Start Booking.</span></h3>
+      <div class="tl tl-l" style="margin-bottom:1.2rem"></div>
+      <p>We respect your time. Our system lets you secure a certified engineer without the back-and-forth phone calls. Pick a slot that works for you and we handle the rest.</p>
+      <div class="tech-feat">
+        <div class="tfi"><i class="fa-solid fa-calendar-days"></i></div>
+        <div>
+          <h4 style="color:var(--text-dark);margin-bottom:3px">Live Calendar Sync</h4>
+          <p style="font-size:.88rem;color:var(--text-dim)">Tap a slot. Our dispatch system assigns the nearest engineer automatically.</p>
         </div>
-    </section>
+      </div>
+      <div class="tech-feat">
+        <div class="tfi"><i class="fa-solid fa-bell"></i></div>
+        <div>
+          <h4 style="color:var(--text-dark);margin-bottom:3px">Automated Reminders</h4>
+          <p style="font-size:.88rem;color:var(--text-dim)">You receive a confirmation text and a reminder the evening before. No surprises.</p>
+        </div>
+      </div>
+      <div class="ai-badge">
+        <div class="ai-avatar">
+          <i class="fa-solid fa-headset" style="color:var(--teal);font-size:1.3rem"></i>
+          <img src="Emma-Richardson .png" alt="Emma" onerror="this.style.display='none'"/>
+        </div>
+        <div>
+          <h4 style="color:var(--text-dark);font-size:.95rem;margin-bottom:2px">Emma — Virtual Assistant</h4>
+          <p style="font-size:.8rem;color:var(--text-dim)">Available 24/7 for emergency slots, rough estimates and FAQs.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cal-mock">
+      <div class="cal-hdr">
+        <span style="color:#94a3b8;cursor:pointer"><i class="fa-solid fa-chevron-left"></i></span>
+        <span>October 2026</span>
+        <span style="color:var(--teal);cursor:pointer"><i class="fa-solid fa-chevron-right"></i></span>
+      </div>
+      <p class="cal-lbl">Select an arrival window:</p>
+      <div class="cal-grid">
+        <div class="cal-slot" onclick="selSlot(this)">08:00</div>
+        <div class="cal-slot" onclick="selSlot(this)">09:30</div>
+        <div class="cal-slot active" onclick="selSlot(this)">11:00</div>
+        <div class="cal-slot" onclick="selSlot(this)">13:00</div>
+        <div class="cal-slot" onclick="selSlot(this)">14:30</div>
+        <div class="cal-slot" onclick="selSlot(this)">16:00</div>
+      </div>
+      <button onclick="openB()" class="btn-teal" style="width:100%;justify-content:center;padding:1rem">
+        <i class="fa-solid fa-calendar-check"></i>Confirm Appointment
+      </button>
+      <p style="font-size:.7rem;color:var(--text-dim);text-align:center;margin-top:.7rem">Free cancellation up to 2 hours before.</p>
+    </div>
+  </div>
+</section>
 
-    <section class="trust-bar">
-        
-        <a href="#testimonials" class="embedded-google-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
-                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
-            </svg>
-            <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
-                <span>5.0 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
-                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">See 200+ Reviews</span>
-            </div>
+<!-- ABOUT -->
+<section class="bg-white-s" id="about">
+  <div class="sw">
+    <div class="about-wrap">
+      <div class="img-stack rl">
+        <div class="img-main-ph"><i class="fa-solid fa-person-digging"></i></div>
+        <img src="blue-man.png" alt="Lead Plumbing Engineer" class="img-main" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px" onerror="this.style.display='none'"/>
+        <div class="img-sub-ph"><i class="fa-solid fa-tools"></i></div>
+        <img src="installation-maintenance.png" alt="Maintenance Team" class="img-sub" onerror="this.style.display='none'"/>
+      </div>
+      <div class="rr">
+        <span class="albl">Your Local Specialists</span>
+        <h2>Uncompromising Standards.</h2>
+        <div class="tl tl-l" style="margin-bottom:1.2rem"></div>
+        <p>At Rai &amp; Sons, world-class engineering is matched with world-class customer service. Our Gas Safe registered engineers have been keeping Andover warm and safe for over a decade.</p>
+        <p>Whether it is a routine boiler service or an emergency midnight call-out, our transparent quoting system means you never face hidden fees.</p>
+        <ul class="alist">
+          <li><i class="fa-solid fa-check-circle"></i>Fully vetted and Gas Safe registered staff</li>
+          <li><i class="fa-solid fa-check-circle"></i>Advanced diagnostics and power-flushing</li>
+          <li><i class="fa-solid fa-check-circle"></i>Respectful of your property and time</li>
+          <li><i class="fa-solid fa-check-circle"></i>Digital CP12 certificates issued on-site</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="bg-light-s" id="services">
+  <div class="sw">
+    <div class="sh rv">
+      <span class="slbl">What We Do</span>
+      <h2>Our Core Services</h2>
+      <div class="tl"></div>
+      <p>Certified, compliant and rapidly deployed for domestic and commercial properties.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card rv d1">
+        <div class="svc-img-ph" style="background:linear-gradient(135deg,#f0fdfa,#ccfbf1)"><i style="color:var(--teal)">🔥</i></div>
+        <img src="working-kichen.png" alt="Boiler Installation" class="svc-img" style="position:absolute" onerror="this.style.display='none'"/>
+        <div class="svc-body">
+          <h3><i class="fa-solid fa-fire"></i>Boiler Installations</h3>
+          <p>Energy-efficient upgrades with up to 10-year manufacturer warranties. Full system balancing and commissioning included as standard.</p>
+          <button onclick="openB()" class="svc-cta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="svc-card rv d2" style="position:relative">
+        <div class="svc-img-ph" style="background:linear-gradient(135deg,#eff6ff,#dbeafe)"><i style="color:#3b82f6">💧</i></div>
+        <img src="water-pipe-underbasin.png" alt="Emergency Plumbing" class="svc-img" style="position:absolute;inset:0;width:100%;height:220px;object-fit:cover" onerror="this.style.display='none'"/>
+        <div class="svc-body">
+          <h3><i class="fa-solid fa-droplet"></i>Emergency Repairs</h3>
+          <p>Rapid response for burst pipes, aggressive leaks and drainage blockages. We carry extensive spare parts to ensure first-time fixes.</p>
+          <button onclick="openB()" class="svc-cta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="svc-card rv d3" style="position:relative">
+        <div class="svc-img-ph" style="background:linear-gradient(135deg,#fefce8,#fef9c3)"><i style="color:#eab308">🌡️</i></div>
+        <img src="working-heating-panel.png" alt="Central Heating" class="svc-img" style="position:absolute;inset:0;width:100%;height:220px;object-fit:cover" onerror="this.style.display='none'"/>
+        <div class="svc-body">
+          <h3><i class="fa-solid fa-temperature-arrow-up"></i>Central Heating</h3>
+          <p>Radiator installations, valve replacements and power-flushing to eliminate cold spots and restore system efficiency.</p>
+          <button onclick="openB()" class="svc-cta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="svc-card rv d4" style="position:relative">
+        <div class="svc-img-ph" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7)"><i style="color:#22c55e">📋</i></div>
+        <img src="landlord-gas-safety-certificate.png" alt="Landlord CP12" class="svc-img" style="position:absolute;inset:0;width:100%;height:220px;object-fit:cover" onerror="this.style.display='none'"/>
+        <div class="svc-body">
+          <h3><i class="fa-solid fa-file-shield"></i>Landlord CP12s</h3>
+          <p>Legally compliant Gas Safety Certificates issued digitally on-site. Automated annual reminders for estate agents and private landlords.</p>
+          <button onclick="openB()" class="svc-cta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gal-s" id="gallery">
+  <p class="gal-lbl">Our Recent Work</p>
+  <div class="gal-t">
+    <div class="gi"><i class="fa-solid fa-fire"></i><img src="emergency-plumbing-repair.png" alt="Emergency repair" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-pipe-valve"></i><img src="heating-pipe-1.png" alt="Pipe work" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-snowflake"></i><img src="rediator-flushing.png" alt="Radiator flushing" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-droplet"></i><img src="water-pipe-underbasin.png" alt="Under-basin plumbing" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-temperature-arrow-up"></i><img src="working-heating-panel.png" alt="Heating panel" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-fire"></i><img src="gas-heating-1.png" alt="Gas heating" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-fire"></i><img src="emergency-plumbing-repair.png" alt="Emergency repair" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-pipe-valve"></i><img src="heating-pipe-1.png" alt="Pipe work" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-snowflake"></i><img src="rediator-flushing.png" alt="Radiator flushing" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-droplet"></i><img src="water-pipe-underbasin.png" alt="Under-basin plumbing" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-temperature-arrow-up"></i><img src="working-heating-panel.png" alt="Heating panel" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-fire"></i><img src="gas-heating-1.png" alt="Gas heating" onerror="this.style.display='none'"/></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="tes-s" id="reviews">
+  <div class="sh rv" style="margin-bottom:3rem">
+    <span class="slbl" style="color:var(--teal-light)">Trusted by the Community</span>
+    <h2 style="color:white">What Our Customers Say</h2>
+    <div class="tl"></div>
+  </div>
+  <div class="tg">
+    <div class="tc rv d1">
+      <div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="tq">"Absolutely brilliant. Booked a slot online through their smart calendar, the engineer arrived exactly on time, and sorted our boiler pressure issue within the hour. No hidden fees whatsoever."</p>
+      <div class="tper">
+        <div class="tav"><i class="fa-solid fa-user" style="color:white;opacity:.4"></i><img src="James-Mitchell.png" alt="James Mitchell" onerror="this.style.display='none'"/></div>
+        <div><h4>James Mitchell</h4><span>Homeowner, Andover</span></div>
+      </div>
+    </div>
+    <div class="tc rv d2">
+      <div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="tq">"Managing multiple lettings means I need a firm I can rely on completely. Rai &amp; Sons handle all our CP12 certificates automatically. The digital reporting is a genuine game-changer."</p>
+      <div class="tper">
+        <div class="tav" style="background:rgba(255,255,255,0.1);font-size:1.2rem;font-weight:bold;color:white">S</div>
+        <div><h4>Sarah Jenkins</h4><span>Local Lettings Agent</span></div>
+      </div>
+    </div>
+    <div class="tc rv d3">
+      <div class="tstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="tq">"Called about a burst pipe at 11pm. The team arrived within the hour, had it fixed, and cleaned up after themselves. Could not have asked for better service in an emergency."</p>
+      <div class="tper">
+        <div class="tav"><i class="fa-solid fa-user" style="color:white;opacity:.4"></i><img src="Sarah-Patel.png" alt="Sarah Patel" onerror="this.style.display='none'"/></div>
+        <div><h4>Sarah Patel</h4><span>Homeowner, Hampshire</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ ACCORDION -->
+<section class="bg-white-s" id="faqs">
+  <div class="sw">
+    <div class="sh rv">
+      <span class="slbl">Common Questions</span>
+      <h2>Frequently Asked Questions</h2>
+      <div class="tl"></div>
+      <p>Clear, honest answers about pricing, booking and our services.</p>
+    </div>
+    <div class="faq-list rv">
+      <div class="fi"><div class="fq" onclick="tF(this)"><span>Do you charge a call-out fee?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">During standard working hours, we do not charge a call-out fee. We provide a clear, upfront quote before any work begins. Out-of-hours emergency rates apply and are always communicated clearly before we attend.</div></div>
+      <div class="fi"><div class="fq" onclick="tF(this)"><span>Are your engineers fully certified?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes. Every engineer we deploy is Gas Safe registered and carries comprehensive public liability insurance up to £5,000,000. You can verify any engineer&rsquo;s Gas Safe credentials on the official register before they arrive.</div></div>
+      <div class="fi"><div class="fq" onclick="tF(this)"><span>Can I book an exact arrival time?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Absolutely. Unlike traditional firms that give a vague &ldquo;morning or afternoon&rdquo; window, our smart scheduling system lets you select a dedicated 90-minute arrival window. You also receive a text when the engineer is on their way.</div></div>
+      <div class="fi"><div class="fq" onclick="tF(this)"><span>Do you provide landlord gas safety certificates?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes. We issue digital CP12 Gas Safety Certificates on-site, instantly emailing copies to both the landlord and the managing agent. We also send automated annual renewal reminders so you are never caught out.</div></div>
+      <div class="fi"><div class="fq" onclick="tF(this)"><span>What areas do you cover?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">We cover Andover and the wider Hampshire area including Basingstoke, Winchester, Salisbury and surrounding villages. Contact us if you are unsure whether we cover your area and we will do our best to help.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="bg-light-s" id="contact">
+  <div class="sw">
+    <div class="sh rv">
+      <span class="slbl">Get In Touch</span>
+      <h2>Book or Enquire</h2>
+      <div class="tl"></div>
+      <p>Ready to book or need an emergency call-out? Reach our team instantly.</p>
+    </div>
+    <div class="con-grid">
+      <div class="form-box rv">
+        <h3>Send an Enquiry</h3>
+        <form onsubmit="event.preventDefault();openB()">
+          <div class="ig"><label>Your Name</label><input type="text" placeholder="e.g. Prakash Rai" required/></div>
+          <div class="ig"><label>Phone Number</label><input type="tel" placeholder="e.g. 07123 456789" required/></div>
+          <div class="ig"><label>How can we help?</label><textarea rows="4" placeholder="Briefly describe your plumbing or heating issue&hellip;"></textarea></div>
+          <button type="submit" class="btn-teal" style="width:100%;justify-content:center;padding:1rem;font-size:.95rem">
+            Submit Request <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+      <div class="rr">
+        <div class="map-frame">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+        </div>
+        <a href="https://wa.me/447474080809" target="_blank" class="cstrip">
+          <div class="cic" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.2);color:#25D366"><i class="fa-brands fa-whatsapp"></i></div>
+          <div><div class="clbl">WhatsApp Us</div><div class="cval">Message for a Quick Quote</div></div>
         </a>
+        <a href="mailto:hello@gochuchuro.com" class="cstrip">
+          <div class="cic" style="background:rgba(13,148,136,.08);border-color:rgba(13,148,136,.2);color:var(--teal)"><i class="fa-solid fa-envelope"></i></div>
+          <div><div class="clbl">Email Us</div><div class="cval">Send a Booking Enquiry</div></div>
+        </a>
+        <button onclick="openB()" class="btn-teal" style="width:100%;justify-content:center;padding:1rem;margin-top:.4rem">
+          <i class="fa-solid fa-calendar-check"></i>Book Online Now
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="trust-item"><i class="fa-solid fa-circle-check"></i> <span>£5M Liability</span></div>
-        <div class="trust-item"><i class="fa-solid fa-bolt"></i> <span>Rapid Dispatch</span></div>
-        <div class="trust-item"><i class="fa-solid fa-certificate"></i> <span>CP12 Certified</span></div>
-    </section>
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand"><i class="fa-solid fa-faucet-drip"></i> RAI &amp; SONS</div>
+  <p style="font-size:.88rem;margin-bottom:.5rem">Premium Gas &amp; Plumbing services across Andover and Hampshire.</p>
+  <div class="socrow">
+    <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="sc" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="sc" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="sc" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://wa.me/447474080809" target="_blank" class="sc" title="WhatsApp" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <div class="flinks">
+    <a href="../../showroom.html">Back to Showroom</a>
+    <a href="../../index.html">GoChuchuro Home</a>
+    <a href="../../index.html#pricing">Pricing from £49/mo</a>
+    <a href="../../privacy.html">Privacy Policy</a>
+  </div>
+  <p style="font-size:.72rem;color:#374151;border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;margin-top:.5rem">
+    &copy; 2026 Rai &amp; Sons &mdash; Plumbing &amp; Heating, Andover. Website powered by
+    <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700">GoChuchuro</a>.
+  </p>
+</footer>
 
-    <section class="section-wrapper" style="padding-top: 0;">
-        <div class="roi-tech-section" id="booking">
-            <div class="tech-text-block">
-                <h3>Stop Waiting. <span>Start Booking.</span></h3>
-                <p style="font-size: 1.05rem; color: var(--text-dark); margin-bottom: 1.5rem;">We respect your time. Our infrastructure integrates AI and live calendar syncing so you can secure a certified engineer without the back-and-forth phone tag.</p>
-                
-                <div class="ai-avatar-badge">
-                    <img src="Emma-Richardson .png" alt="AI Receptionist Emma">
-                    <div>
-                        <h4 style="color: var(--primary-dark);">Meet Emma, our AI Receptionist</h4>
-                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 2px;">Available 24/7 to answer FAQs, issue rough estimates, and book emergency slots instantly.</p>
-                    </div>
-                </div>
+<!-- STICKY ACTION BAR -->
+<div class="abar">
+  <a href="https://wa.me/447474080809" target="_blank" class="ab ab-silver"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i>WhatsApp</a>
+  <button onclick="openB()" class="ab ab-teal"><i class="fa-solid fa-calendar-check"></i>Book Online</button>
+</div>
 
-                <div class="tech-feature">
-                    <div class="tech-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                    <div>
-                        <h4 style="color: var(--primary-dark);">Live Calendar Synchronisation</h4>
-                        <p style="font-size: 0.9rem; color: #64748b;">Tap a slot that works for you. Our dispatch system automatically assigns the nearest van.</p>
-                    </div>
-                </div>
-            </div>
+<!-- GC BADGE -->
+<div class="gcb" id="gcb">
+  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">&times;</button>
+  <div class="gcbl">Powered by GoChuchuro</div>
+  <p><strong>Want this website</strong> for your business?</p>
+  <a href="../../index.html" target="_blank"><i class="fa-regular fa-calendar"></i>Free Chat</a>
+</div>
 
-            <div class="calendar-mockup">
-                <div class="cal-header">
-                    <span><i class="fa-solid fa-chevron-left" style="color: #94a3b8; cursor: pointer;"></i></span>
-                    <span>October 2026</span>
-                    <span><i class="fa-solid fa-chevron-right" style="color: var(--accent-teal); cursor: pointer;"></i></span>
-                </div>
-                <p style="font-size: 0.85rem; margin-bottom: 1rem; color: #64748b; font-weight: 600; text-transform: uppercase;">Select an arrival window:</p>
-                <div class="cal-grid">
-                    <div class="cal-slot">08:00 AM</div>
-                    <div class="cal-slot">09:30 AM</div>
-                    <div class="cal-slot active">11:00 AM</div>
-                    <div class="cal-slot">13:00 PM</div>
-                    <div class="cal-slot">14:30 PM</div>
-                    <div class="cal-slot">16:00 PM</div>
-                </div>
-                <button style="width:100%; padding: 1.1rem; background: var(--primary-dark); color: white; border: none; border-radius: 8px; margin-top: 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;" onmouseover="this.style.background='var(--accent-teal)'" onmouseout="this.style.background='var(--primary-dark)'" onclick="alert('System Ready: Connecting to Dispatch Pipeline.')">Confirm Appointment</button>
-            </div>
-        </div>
-    </section>
+<!-- BOOKING MODAL -->
+<div class="mo" id="bm">
+  <div class="mb">
+    <button class="mc" onclick="closeB()"><i class="fa-solid fa-xmark"></i></button>
+    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" scrolling="yes"></iframe>
+  </div>
+</div>
 
-    <section class="section-wrapper" id="about">
-        <div class="about-grid">
-            <div class="team-image-stack">
-                <img src="blue-man.png" alt="Lead Engineer" class="team-main-img">
-                <img src="installation-maintenance.png" alt="Maintenance Team" class="team-sub-img">
-            </div>
-            <div>
-                <span style="color:var(--accent-teal); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">Your Local Specialists</span>
-                <h2 style="font-size: 2.8rem; color: var(--primary-dark); margin: 0.5rem 0 1.2rem; line-height: 1.15; font-weight: 800;">Uncompromising Standards.</h2>
-                <p style="margin-bottom: 1.5rem; color: var(--text-dark); font-size: 1.05rem;">At Rai & Sons, we believe that world-class engineering should be matched with world-class customer service. Our fleet of highly trained, Gas Safe registered engineers has been keeping Andover warm and safe for over a decade.</p>
-                <p style="margin-bottom: 2rem; color: var(--text-dark); font-size: 1.05rem;">Whether it's a routine bespoke boiler service programme or an emergency midnight call-out, our transparent quoting system ensures you never face hidden fees.</p>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 1rem; font-weight: 600;">
-                    <li><i class="fa-solid fa-check" style="color: var(--accent-teal); margin-right: 12px; font-size: 1.2rem;"></i> Fully Vetted & Accredited Staff</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--accent-teal); margin-right: 12px; font-size: 1.2rem;"></i> Advanced Diagnostics & Powerflushing</li>
-                    <li><i class="fa-solid fa-check" style="color: var(--accent-teal); margin-right: 12px; font-size: 1.2rem;"></i> Respectful of Your Property & Time</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="services" style="background-color: var(--bg-white); border-top: 1px solid var(--border-gray); border-bottom: 1px solid var(--border-gray);">
-        <div class="section-header">
-            <h2>Our Core Services</h2>
-            <p>Certified, compliant, and rapidly deployed solutions for domestic and commercial properties.</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <img src="working-kichen.png" alt="Boiler Installation & Certification" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-fire"></i> Boiler Installations</h3>
-                    <p>Energy-efficient upgrades and bespoke heating systems with up to 10-year manufacturer warranties. Full system balancing included.</p>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <img src="water-pipe-underbasin.png" alt="Emergency Plumbing Repair" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-droplet"></i> Emergency Repairs</h3>
-                    <p>Rapid response for burst pipes, aggressive leaks, and drainage blockages. We carry extensive spare parts to ensure first-time fixes.</p>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <img src="working-heating-panel.png" alt="Radiator and Heating" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-temperature-arrow-up"></i> Central Heating</h3>
-                    <p>Complete radiator installations, valve replacements, and thermodynamic powerflushing to eradicate cold spots and restore efficiency.</p>
-                </div>
-            </div>
-
-            <div class="service-card">
-                <img src="landlord-gas-safety-certificate.png" alt="Gas Safety Checks" class="service-img">
-                <div class="service-body">
-                    <h3><i class="fa-solid fa-file-shield"></i> Landlord CP12s</h3>
-                    <p>Legally compliant Gas Safety Certificates issued digitally on-site for estate agents and private landlords. Automated annual reminders.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials" id="testimonials">
-        <div class="section-header">
-            <h2 style="color: white;">Trusted by the Community</h2>
-            <p style="color: #94a3b8;">Don't just take our word for it. Read our verified Google tracking streams.</p>
-        </div>
-        <div class="test-grid">
-            <div class="test-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Absolutely brilliant. Booked a slot online through their smart calendar, the engineer arrived exactly on time, and sorted our boiler pressure issue within the hour. No hidden fees."</p>
-                <div class="client">
-                    <img src="James-Mitchell.png" alt="James Mitchell">
-                    <div>
-                        <h4 style="font-size: 1.1rem; color: white;">James Mitchell</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 600;">Homeowner, Andover</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="test-card">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"Managing multiple lettings means I need a firm I can rely on. Rai & Sons handle all our CP12 certificates automatically. The digital reporting and instant invoicing is a game-changer."</p>
-                <div class="client">
-                    <div style="width: 55px; height: 55px; border-radius: 50%; background: #334155; border: 2px solid var(--accent-teal); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; color: white;">S</div>
-                    <div>
-                        <h4 style="font-size: 1.1rem; color: white;">Sarah Jenkins</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-teal); font-weight: 600;">Local Lettings Agent</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="faqs">
-        <div class="section-header">
-            <h2>Operational FAQ Systems</h2>
-            <p>Clear, honest answers to common queries regarding pricing and dispatch logistics.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-box">
-                <h4>Do you charge a call-out fee?</h4>
-                <p>During standard working hours, we do not charge a call-out fee. We provide a clear, upfront quote before any work commences. Out-of-hours emergency rates apply.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Are your engineers fully certified?</h4>
-                <p>Yes. Every engineer deployed is strictly Gas Safe registered and carries comprehensive public liability insurance up to £5,000,000.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Can I book an exact time slot?</h4>
-                <p>Absolutely. Unlike traditional firms that give a vague "AM or PM" window, our smart scheduling system allows you to select a dedicated 90-minute arrival window.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Do you provide landlord certificates?</h4>
-                <p>Yes, we process digital CP12 Gas Safety Certificates on-site, instantly emailing copies to both the landlord and the managing agent.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-wrapper" id="contact" style="background-color: var(--bg-light); border-top: 1px solid var(--border-gray);">
-        <div class="section-header">
-            <h2>Engineering Dispatch Desk</h2>
-            <p>Ready to book or need an emergency call-out? Reach out to our team instantly.</p>
-        </div>
-        
-        <div class="contact-layout">
-            <div class="contact-form-box">
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem; color: var(--primary-dark); font-weight: 800;">Send an Enquiry</h3>
-                <form onsubmit="event.preventDefault(); alert('Demo Notice: This form routes directly to the agency CRM!');">
-                    <div class="input-group">
-                        <label>Your Name</label>
-                        <input type="text" placeholder="e.g. Prakash Rai" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Phone Number</label>
-                        <input type="tel" placeholder="e.g. 07123 456789" required>
-                    </div>
-                    <div class="input-group">
-                        <label>How can we help?</label>
-                        <textarea rows="4" placeholder="Briefly describe your plumbing issue..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; letter-spacing: 0.5px;">Submit Request <i class="fa-solid fa-paper-plane" style="margin-left: 5px;"></i></button>
-                </form>
-            </div>
-
-            <div>
-                <div class="map-frame">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-
-                <a href="https://wa.me/447123456789" target="_blank" class="info-strip whatsapp">
-                    <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <div class="info-strip-text">
-                        <h5>Direct Digital Communication</h5>
-                        <p>+44 7123 456 789</p>
-                    </div>
-                </a>
-
-                <a href="mailto:info@raiandsonsheating.co.uk" class="info-strip">
-                    <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="info-strip-text">
-                        <h5>Service Desk Pipeline</h5>
-                        <p>info@raiandsonsheating.co.uk</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <a href="#booking" class="mini-ai-pill">
-        <img src="Emma-Richardson .png" alt="Emma AI">
-        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Emma (AI Desk)</p>
-            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: var(--accent-teal); font-size: 0.45rem; margin-right: 4px;"></i> Tap to check availability</p>
-        </div>
-    </a>
-
-    <footer style="background-color: var(--primary-dark); padding: 5rem 5% 8rem; color: #94a3b8; text-align: center; border-top: 1px solid rgba(255,255,255,0.1);">
-        <h3 style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 800;"><i class="fa-solid fa-faucet-drip" style="color: var(--accent-teal);"></i> RAI & SONS</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Premium Gas & Plumbing Infrastructure serving the local Andover community.</p>
-        
-        <div class="social-circle-container">
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
-        </div>
-
-        <p style="font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">© 2026 GoChuchuro Agency System. Premium Trade Assets.</p>
-    </footer>
-
+<script>
+  function openB(){document.getElementById('bm').classList.add('on');document.body.style.overflow='hidden'}
+  function closeB(){document.getElementById('bm').classList.remove('on');document.body.style.overflow=''}
+  document.getElementById('bm').addEventListener('click',function(e){if(e.target===this)closeB()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeB()});
+  function selSlot(el){document.querySelectorAll('.cal-slot').forEach(s=>s.classList.remove('active'));el.classList.add('active')}
+  function tF(el){const it=el.parentElement,ans=it.querySelector('.fa'),op=it.classList.contains('open');document.querySelectorAll('.fi').forEach(i=>{i.classList.remove('open');i.querySelector('.fa').classList.remove('open')});if(!op){it.classList.add('open');ans.classList.add('open')}}
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+  document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
-
