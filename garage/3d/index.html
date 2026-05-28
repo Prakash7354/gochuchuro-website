@@ -3,1134 +3,1023 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Autotech — DVSA approved MOT testing, car servicing and repairs in Andover. Book online instantly. Transparent pricing. No hidden costs."/>
-  <title>Autotech | 3D Immersive Garage Experience</title>
-
+  <meta name="description" content="Autotech — DVSA approved MOT testing and car servicing in Andover. Book online now."/>
+  <title>Autotech | 3D Experience — MOT &amp; Car Repairs</title>
   <link rel="icon" type="image/png" href="../../favicon.png" sizes="32x32"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-
   <style>
-    /* =============================================
-       AUTOTECH 3D — MOTORSPORT IMMERSIVE SYSTEM
-       ============================================= */
     :root {
-      --abyss:         #050505;
-      --surface:       #0f1218;
-      --surface-mid:   #111318;
-      --surface-light: #181e2a;
-      --red:           #ef4444;
-      --red-dark:      #991b1b;
-      --red-glow:      rgba(239,68,68,0.35);
-      --red-dim:       rgba(239,68,68,0.12);
-      --text-main:     #f8fafc;
-      --text-dim:      #94a3b8;
-      --text-mid:      #cbd5e1;
-      --border:        rgba(255,255,255,0.06);
-      --border-red:    rgba(239,68,68,0.2);
-      --shadow-drop:   12px 12px 28px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
-      --shadow-inner:  inset 6px 6px 18px rgba(0,0,0,0.9),  inset -3px -3px 10px rgba(255,255,255,0.03);
-      --gradient-red:  linear-gradient(135deg,#ef4444,#991b1b);
-      --gradient-holo: linear-gradient(135deg,#ef4444,#dc2626,#7f1d1d);
-      /* GoChuchuro */
-      --gc-teal:       #00B5C8;
-      --gc-gold:       #D4AF37;
+      --void:#030406; --surface:#0c0e14; --surface2:#111520;
+      --red:#ef4444; --red2:#dc2626; --red-dark:#7f1d1d;
+      --red-glow:rgba(239,68,68,0.4); --red-dim:rgba(239,68,68,0.12);
+      --gc-teal:#00B5C8; --gc-gold:#D4AF37;
+      --text:#f8fafc; --dim:#64748b; --mid:#94a3b8;
+      --grad-red:linear-gradient(135deg,#ef4444,#7f1d1d);
+      --grad-teal:linear-gradient(135deg,#00B5C8,#D4AF37);
+      --shadow:12px 12px 30px rgba(0,0,0,0.95),-4px -4px 14px rgba(255,255,255,0.02);
+      --inset:inset 8px 8px 20px rgba(0,0,0,0.9),inset -3px -3px 10px rgba(255,255,255,0.03);
     }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--void);color:var(--text);
+      font-family:'Barlow',sans-serif;line-height:1.6;
+      overflow-x:hidden;padding-bottom:72px;cursor:none;
+    }
+    .fd{font-family:'Barlow Condensed',sans-serif;font-weight:800;text-transform:uppercase}
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body {
-      background:var(--abyss); color:var(--text-main);
-      font-family:'Barlow',sans-serif; line-height:1.6;
-      overflow-x:hidden; padding-bottom:72px;
-      cursor:none;
-      background-image:
-        radial-gradient(circle at 8% 15%, rgba(239,68,68,0.06), transparent 35%),
-        radial-gradient(circle at 92% 85%, rgba(239,68,68,0.04), transparent 30%);
-      background-attachment:fixed;
-    }
-    .font-display { font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:-0.5px; }
+    /* CURSOR */
+    #cd{width:10px;height:10px;background:var(--red);border-radius:50%;
+      position:fixed;top:0;left:0;pointer-events:none;z-index:99999;
+      transform:translate(-50%,-50%);box-shadow:0 0 14px var(--red),0 0 28px var(--red-glow);
+      transition:transform .15s}
+    #cr{width:40px;height:40px;border:1.5px solid rgba(239,68,68,0.5);
+      border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;
+      transform:translate(-50%,-50%)}
 
-    /* ---- CUSTOM CURSOR ---- */
-    .cursor-dot {
-      width:8px; height:8px; background:var(--red);
-      border-radius:50%; position:fixed; top:0; left:0;
-      pointer-events:none; z-index:99999; transform:translate(-50%,-50%);
-      box-shadow:0 0 10px var(--red); transition:width .3s,height .3s,background .3s;
-    }
-    .cursor-ring {
-      width:34px; height:34px; border:1.5px solid rgba(239,68,68,0.5);
-      border-radius:50%; position:fixed; top:0; left:0;
-      pointer-events:none; z-index:99998; transform:translate(-50%,-50%);
-      transition:width .3s,height .3s;
-    }
+    /* PANELS */
+    .p3d{background:var(--surface);border-radius:16px;
+      box-shadow:var(--shadow);border:1px solid rgba(239,68,68,0.15);position:relative;z-index:2}
+    .pin{background:#06080c;border-radius:12px;box-shadow:var(--inset);
+      border:1px solid rgba(255,255,255,0.03)}
 
-    /* ---- PANEL SYSTEM ---- */
-    .panel-3d {
-      background:var(--surface-mid); border-radius:16px;
-      box-shadow:var(--shadow-drop);
-      border:1px solid var(--border-red);
-      position:relative; z-index:2;
-    }
-    .panel-inset {
-      background:#07090e; border-radius:12px;
-      box-shadow:var(--shadow-inner);
-      border:1px solid rgba(255,255,255,0.03);
-    }
+    /* TEXT */
+    .th{background:var(--grad-red);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .tgc{background:var(--grad-teal);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-    /* ---- TEXT EFFECTS ---- */
-    .text-holo {
-      background:var(--gradient-red);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    }
-    .text-gradient-gc {
-      background:linear-gradient(135deg,var(--gc-teal),var(--gc-gold));
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    }
-    .glow-line-red {
-      width:50px; height:3px; background:var(--gradient-red);
-      border-radius:2px; margin:.8rem 0;
-      box-shadow:0 0 12px var(--red-glow);
-    }
+    /* SCROLL REVEAL */
+    .rv{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+    .rv.on{opacity:1;transform:translateY(0)}
+    .rl{opacity:0;transform:translateX(-36px);transition:opacity .8s ease,transform .8s ease}
+    .rl.on{opacity:1;transform:translateX(0)}
+    .rr{opacity:0;transform:translateX(36px);transition:opacity .8s ease,transform .8s ease}
+    .rr.on{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+    .d4{transition-delay:.4s}.d5{transition-delay:.5s}
 
-    /* ---- SCROLL REVEAL ---- */
-    .reveal { opacity:0; transform:translateY(30px); transition:opacity .75s ease, transform .75s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-    .reveal-left  { opacity:0; transform:translateX(-32px); transition:opacity .75s ease, transform .75s ease; }
-    .reveal-left.visible  { opacity:1; transform:translateX(0); }
-    .reveal-right { opacity:0; transform:translateX(32px);  transition:opacity .75s ease, transform .75s ease; }
-    .reveal-right.visible { opacity:1; transform:translateX(0); }
-    .delay-1{transition-delay:.1s;} .delay-2{transition-delay:.2s;} .delay-3{transition-delay:.3s;}
-    .delay-4{transition-delay:.4s;} .delay-5{transition-delay:.5s;}
-
-    /* ===================== HEADER ===================== */
-    header {
-      background:rgba(5,5,5,0.9); backdrop-filter:blur(18px);
-      padding:1rem 5%; display:flex; justify-content:space-between;
-      align-items:center; position:sticky; top:0; z-index:500;
-      border-bottom:1px solid rgba(239,68,68,0.25);
-      box-shadow:0 8px 30px rgba(0,0,0,0.8);
-    }
-    .brand-logo {
-      text-decoration:none; display:flex; flex-direction:column; line-height:1.1;
-    }
-    .brand-name {
-      font-family:'Barlow Condensed',sans-serif; font-size:1.9rem;
-      font-weight:900; letter-spacing:3px; color:var(--text-main);
-      text-transform:uppercase;
-    }
-    .brand-name span { color:var(--red); }
-    .brand-sub {
-      font-size:.65rem; color:var(--text-dim); letter-spacing:4px;
-      font-weight:600; text-transform:uppercase;
-    }
-    nav { display:flex; align-items:center; gap:1.8rem; }
-    .nav-link {
-      color:var(--text-dim); text-decoration:none; font-weight:700;
-      font-size:.82rem; text-transform:uppercase; letter-spacing:1px; transition:all .25s;
-    }
-    .nav-link:hover { color:var(--red); text-shadow:0 0 10px var(--red-glow); }
-    .nav-showroom {
-      color:var(--gc-teal); text-decoration:none; font-weight:700;
-      font-size:.78rem; text-transform:uppercase; letter-spacing:1px;
-      border:1px solid rgba(0,181,200,0.3); padding:.4rem .9rem;
-      border-radius:6px; transition:all .25s;
-      display:flex; align-items:center; gap:.35rem;
-    }
-    .nav-showroom:hover { background:rgba(0,181,200,0.1); }
-    .btn-holo {
-      background:var(--gradient-red); color:white;
-      padding:.65rem 1.4rem; border-radius:8px; font-weight:800;
-      text-decoration:none; border:none; cursor:none;
-      text-transform:uppercase; letter-spacing:1px; font-size:.8rem;
-      box-shadow:0 0 18px var(--red-glow); transition:all .3s;
-      display:inline-flex; align-items:center; gap:.4rem;
-    }
-    .btn-holo:hover { transform:translateY(-3px); box-shadow:0 0 30px var(--red-glow); }
-
-    /* ===================== STICKY ACTION BAR ===================== */
-    .action-bar {
-      position:fixed; bottom:0; left:0; right:0; z-index:600;
-      background:rgba(5,5,5,0.97); backdrop-filter:blur(16px);
-      border-top:2px solid rgba(239,68,68,0.5);
-      padding:.85rem 5%; display:flex; justify-content:center; gap:1rem;
-      box-shadow:0 -8px 30px rgba(0,0,0,0.8);
-    }
-    .action-btn {
-      flex:1; max-width:280px; padding:.85rem; border-radius:8px;
-      text-decoration:none; font-weight:800; text-transform:uppercase;
-      font-size:.83rem; letter-spacing:1px; border:none;
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:.5rem; transition:all .3s; cursor:none;
-      font-family:'Barlow Condensed',sans-serif;
-    }
-    .action-btn-ghost {
-      background:var(--surface-light); color:var(--text-mid);
-      border:1px solid var(--border-red);
-    }
-    .action-btn-ghost:hover { color:var(--red); border-color:var(--red); }
-    .action-btn-red { background:var(--gradient-red); color:white; }
-    .action-btn-red:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--red-glow); }
-
-    /* ===================== HERO ===================== */
-    .hero {
-      position:relative; min-height:95vh;
-      display:flex; flex-direction:column;
-      justify-content:center; align-items:center;
-      text-align:center; padding:4rem 2rem;
-      overflow:hidden;
-    }
-    #hero-canvas-container {
-      position:absolute; inset:0; z-index:0;
-    }
-    /* Overlay gradient on top of Three.js */
-    .hero-overlay {
-      position:absolute; inset:0; z-index:1; pointer-events:none;
-      background:
-        radial-gradient(ellipse at 50% 60%, transparent 30%, rgba(5,5,5,0.85) 75%),
-        linear-gradient(to bottom, rgba(5,5,5,0.3) 0%, rgba(5,5,5,0.1) 40%, rgba(5,5,5,0.8) 90%, var(--abyss) 100%);
-    }
-    /* Scan lines */
-    .hero-scanlines {
-      position:absolute; inset:0; z-index:2; pointer-events:none;
-      background:repeating-linear-gradient(
-        0deg, transparent, transparent 3px,
-        rgba(239,68,68,0.015) 3px, rgba(239,68,68,0.015) 4px
-      );
-    }
-    /* Red corner accent brackets */
-    .corner-tl {
-      position:absolute; top:1.5rem; left:1.5rem; z-index:3; pointer-events:none;
-      width:60px; height:60px;
-      border-top:2px solid rgba(239,68,68,0.6);
-      border-left:2px solid rgba(239,68,68,0.6);
-    }
-    .corner-br {
-      position:absolute; bottom:80px; right:1.5rem; z-index:3; pointer-events:none;
-      width:40px; height:40px;
-      border-bottom:2px solid rgba(239,68,68,0.3);
-      border-right:2px solid rgba(239,68,68,0.3);
-    }
-    .hero-content {
-      position:relative; z-index:4; max-width:1000px;
-    }
-    .hero-badge {
-      display:inline-flex; align-items:center; gap:.5rem;
-      background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.4);
-      color:var(--red); padding:.4rem 1.1rem; border-radius:4px;
-      font-size:.72rem; font-weight:800; letter-spacing:2px;
-      text-transform:uppercase; margin-bottom:1.8rem;
-      animation:fadeInDown .8s ease both;
-    }
-    @keyframes fadeInDown { from{opacity:0;transform:translateY(-16px);}to{opacity:1;transform:translateY(0);} }
-    @keyframes fadeInUp   { from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);} }
-    @keyframes fadeIn     { from{opacity:0;}to{opacity:1;} }
-    .hero h1 {
-      font-size:clamp(3rem,8vw,7rem);
-      line-height:1.0; margin-bottom:1.5rem;
-      text-shadow:0 8px 30px rgba(0,0,0,0.95);
-      animation:fadeInUp .9s ease .15s both;
-    }
-    .hero p {
-      font-size:1.2rem; max-width:680px; margin:0 auto 2.5rem;
-      color:var(--text-dim); font-weight:500;
-      text-shadow:0 2px 10px rgba(0,0,0,0.9);
-      animation:fadeInUp .9s ease .3s both;
-    }
-    .hero-cta-row {
-      display:flex; flex-wrap:wrap; justify-content:center; gap:1rem;
-      animation:fadeIn 1s ease .5s both;
-    }
-    .btn-3d {
-      background:var(--surface-mid); color:var(--text-main);
-      padding:1rem 2.2rem; border-radius:8px; font-weight:800;
-      text-decoration:none; border:none; cursor:none;
-      text-transform:uppercase; letter-spacing:1px; font-size:.88rem;
-      box-shadow:var(--shadow-drop); border:1px solid rgba(255,255,255,0.05);
-      transition:all .3s; position:relative; overflow:hidden;
-      display:inline-flex; align-items:center; gap:.5rem;
-      font-family:'Barlow Condensed',sans-serif;
-    }
-    .btn-3d::before {
-      content:''; position:absolute; top:0; left:0;
-      width:100%; height:2px; background:var(--gradient-red);
-    }
-    .btn-3d:hover { transform:translateY(-4px); color:var(--red); border-color:var(--red); box-shadow:0 18px 35px rgba(0,0,0,0.9),0 0 20px var(--red-dim); }
-    /* trust pills */
-    .hero-trust {
-      display:flex; flex-wrap:wrap; justify-content:center; gap:1.2rem;
-      margin-top:2rem; animation:fadeIn 1.2s ease .7s both;
-    }
-    .trust-pill {
-      display:flex; align-items:center; gap:.4rem;
-      font-size:.75rem; font-weight:700; color:var(--text-dim);
-      text-transform:uppercase; letter-spacing:.5px;
-    }
-    .trust-pill i { color:var(--red); font-size:.75rem; }
-
-    /* ===================== FLOATING TRUST CARDS ===================== */
-    .trust-cards {
-      display:flex; justify-content:center; gap:2rem;
-      flex-wrap:wrap; padding:0 5% 2rem;
-      margin-top:-50px; position:relative; z-index:10;
-    }
-    .trust-card {
-      display:flex; align-items:center; gap:1.2rem;
-      padding:1.4rem 2rem; border-radius:14px;
-      transition:all .35s;
-    }
-    .trust-card:hover { transform:translateY(-5px); border-color:var(--red); box-shadow:0 0 30px var(--red-dim); }
-    .trust-card i { font-size:2rem; }
-
-    /* ===================== BOOKING ENGINE ===================== */
-    .booking-section { padding:6rem 5%; max-width:1200px; margin:0 auto; }
-    .booking-grid {
-      display:grid; grid-template-columns:1.1fr .9fr;
-      gap:4rem; align-items:center;
-      padding:3.5rem; position:relative; overflow:hidden;
-    }
-    .booking-grid::before {
-      content:''; position:absolute; top:-60px; right:-60px;
-      width:250px; height:250px; border-radius:50%;
-      background:radial-gradient(circle, rgba(239,68,68,0.08), transparent 70%);
-      pointer-events:none;
-    }
-    .booking-pitch h3 { font-size:clamp(1.8rem,3vw,2.8rem); margin-bottom:1rem; }
-    .booking-pitch h3 span { color:var(--red); }
-    .booking-pitch p { color:var(--text-dim); line-height:1.75; margin-bottom:1.5rem; }
-    .ai-badge {
-      display:flex; align-items:center; gap:1.2rem;
-      background:rgba(5,5,5,0.7); padding:1.2rem 1.4rem;
-      border-radius:12px; border-left:3px solid var(--red);
-      border-top:1px solid var(--border); border-right:1px solid var(--border); border-bottom:1px solid var(--border);
-    }
-    .ai-avatar {
-      width:52px; height:52px; border-radius:50%;
-      background:var(--gradient-red); border:2px solid var(--red);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.4rem; flex-shrink:0;
-      box-shadow:0 0 16px var(--red-glow);
-    }
-    .booking-panel { padding:2.2rem; }
-    .booking-panel h4 {
-      font-family:'Barlow Condensed',sans-serif; font-size:1.2rem;
-      font-weight:800; text-transform:uppercase; letter-spacing:1px;
-      text-align:center; margin-bottom:1.4rem; padding-bottom:1rem;
+    /* HEADER */
+    header{
+      background:rgba(3,4,6,0.92);backdrop-filter:blur(20px);
+      padding:.9rem 5%;display:flex;justify-content:space-between;align-items:center;
+      position:sticky;top:0;z-index:500;
       border-bottom:1px solid rgba(239,68,68,0.2);
+      box-shadow:0 8px 40px rgba(0,0,0,0.8);
     }
-    .service-bubbles { display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1.4rem; }
-    .service-bubble {
-      flex:1; min-width:70px; padding:.65rem .4rem; text-align:center;
-      border-radius:8px; border:1px solid var(--border-red);
-      font-weight:800; cursor:none; transition:all .25s;
-      font-size:.78rem; text-transform:uppercase; letter-spacing:.5px;
-      color:var(--text-dim); background:rgba(239,68,68,0.04);
-      font-family:'Barlow Condensed',sans-serif;
-      box-shadow:var(--shadow-drop);
-    }
-    .service-bubble.active, .service-bubble:hover {
-      background:var(--gradient-red); color:white;
-      border-color:var(--red); box-shadow:0 0 18px var(--red-glow);
-    }
-    .booking-label {
-      font-size:.7rem; text-align:center; color:var(--text-dim);
-      text-transform:uppercase; font-weight:700; letter-spacing:.5px; margin-bottom:1rem;
-    }
-    .booking-select {
-      width:100%; padding:.9rem 1rem; margin-bottom:1.2rem;
-      background:var(--surface); border:1px solid var(--border-red);
-      color:var(--text-main); border-radius:8px; outline:none;
-      font-family:'Barlow',sans-serif; font-weight:600; font-size:.88rem;
-      cursor:pointer; box-shadow:var(--shadow-inner);
-    }
-    .booking-select:focus { border-color:var(--red); }
+    .bname{text-decoration:none;display:flex;flex-direction:column;line-height:1}
+    .bn{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:900;
+      letter-spacing:3px;text-transform:uppercase;color:var(--text)}
+    .bn span{color:var(--red)}
+    .bs{font-size:.62rem;color:var(--dim);letter-spacing:4px;font-weight:600;text-transform:uppercase;margin-top:1px}
+    nav{display:flex;align-items:center;gap:1.6rem}
+    .nl{color:var(--mid);text-decoration:none;font-weight:700;font-size:.8rem;
+      text-transform:uppercase;letter-spacing:1px;transition:all .25s}
+    .nl:hover{color:var(--red);text-shadow:0 0 10px var(--red-glow)}
+    .nsr{color:var(--gc-teal);text-decoration:none;font-weight:700;font-size:.75rem;
+      text-transform:uppercase;letter-spacing:1px;border:1px solid rgba(0,181,200,0.3);
+      padding:.38rem .85rem;border-radius:6px;transition:all .25s;display:flex;align-items:center;gap:.35rem}
+    .nsr:hover{background:rgba(0,181,200,0.1)}
+    .bholo{background:var(--grad-red);color:white;padding:.65rem 1.4rem;border-radius:8px;
+      font-weight:800;text-decoration:none;border:none;cursor:none;text-transform:uppercase;
+      letter-spacing:1px;font-size:.8rem;box-shadow:0 0 20px var(--red-glow);transition:all .3s;
+      display:inline-flex;align-items:center;gap:.4rem;font-family:'Barlow Condensed',sans-serif}
+    .bholo:hover{transform:translateY(-3px);box-shadow:0 0 35px var(--red-glow)}
 
-    /* ===================== ABOUT ===================== */
-    .about-section { padding:6rem 5%; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:center; max-width:1200px; margin:0 auto; }
-    .about-img-wrap {
-      border-radius:16px; overflow:hidden;
-      border:1px solid var(--border-red);
-      box-shadow:0 0 40px var(--red-dim), var(--shadow-drop);
-      position:relative;
-    }
-    .about-img-placeholder {
-      width:100%; aspect-ratio:4/3;
-      background:linear-gradient(135deg,#0f1218 0%,#1a0505 60%,#0f1218 100%);
-      display:flex; align-items:center; justify-content:center;
-      font-size:6rem; color:var(--red); opacity:.15;
-    }
-    .about-img-wrap img {
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-    }
-    .about-img-wrap::after {
-      content:''; position:absolute; inset:0;
-      background:linear-gradient(to top right,rgba(239,68,68,0.08),transparent);
-      pointer-events:none;
-    }
-    .about-label { color:var(--red); font-size:.75rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; margin-bottom:.5rem; }
-    .about-grid h2 { font-size:clamp(2rem,3vw,3rem); margin-bottom:1rem; line-height:1.1; }
-    .about-grid p { color:var(--text-dim); font-size:1rem; line-height:1.75; margin-bottom:1rem; }
-    .about-checks { list-style:none; margin-top:1.5rem; }
-    .about-checks li { display:flex; align-items:flex-start; gap:.7rem; font-size:.92rem; color:var(--text-mid); margin-bottom:.6rem; }
-    .about-checks li i { color:var(--red); margin-top:.2rem; flex-shrink:0; }
+    /* ACTION BAR */
+    .abar{position:fixed;bottom:0;left:0;right:0;z-index:600;
+      background:rgba(3,4,6,0.97);backdrop-filter:blur(16px);
+      border-top:2px solid rgba(239,68,68,0.4);
+      padding:.85rem 5%;display:flex;justify-content:center;gap:1rem;
+      box-shadow:0 -8px 30px rgba(0,0,0,0.8)}
+    .ab{flex:1;max-width:280px;padding:.85rem;border-radius:8px;text-decoration:none;
+      font-weight:800;text-transform:uppercase;font-size:.82rem;letter-spacing:1px;border:none;
+      display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+      transition:all .3s;cursor:none;font-family:'Barlow Condensed',sans-serif}
+    .abg{background:var(--surface2);color:var(--mid);border:1px solid rgba(239,68,68,0.2)}
+    .abg:hover{color:var(--red);border-color:var(--red)}
+    .abr{background:var(--grad-red);color:white}
+    .abr:hover{transform:translateY(-2px);box-shadow:0 6px 20px var(--red-glow)}
 
-    /* ===================== SERVICES ===================== */
-    .services-section { padding:6rem 5%; max-width:1300px; margin:0 auto; }
-    .services-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
-      gap:2.5rem; perspective:1200px;
+    /* ================================================================
+       HERO — FULL IMMERSIVE 3D EXPERIENCE
+    ================================================================ */
+    .hero{
+      position:relative;height:100vh;min-height:700px;
+      display:flex;flex-direction:column;justify-content:center;align-items:center;
+      text-align:center;overflow:hidden;
     }
-    .service-card {
-      padding:0; display:flex; flex-direction:column;
-      transform-style:preserve-3d; transition:all .4s;
-      overflow:hidden;
-    }
-    .service-card:hover { border-color:var(--red); box-shadow:0 0 40px var(--red-dim), var(--shadow-drop); }
-    .svc-img {
-      height:200px; display:flex; align-items:center; justify-content:center;
-      position:relative; overflow:hidden; transform:translateZ(20px);
-      transition:all .4s;
-    }
-    .svc-img i { font-size:4.5rem; opacity:.2; z-index:1; position:relative; }
-    .svc-img img {
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; filter:grayscale(30%); transition:.4s;
-    }
-    .service-card:hover .svc-img img { filter:grayscale(0%) brightness(1.05); transform:scale(1.06); }
-    .svc-img::after {
-      content:''; position:absolute; bottom:0; left:0; right:0; height:50%;
-      background:linear-gradient(transparent,var(--surface-mid)); z-index:2;
-    }
-    .svc-img-mot     { background:linear-gradient(135deg,#1a0505,#2d0808); }
-    .svc-img-service { background:linear-gradient(135deg,#071020,#0d1e35); }
-    .svc-img-diag    { background:linear-gradient(135deg,#0d0800,#1c1200); }
-    .svc-badge {
-      position:absolute; top:.75rem; left:.75rem; z-index:3;
-      background:rgba(5,5,5,0.85); color:var(--red);
-      padding:.2rem .65rem; border-radius:4px;
-      font-size:.65rem; font-weight:800; text-transform:uppercase;
-      letter-spacing:1px; border:1px solid var(--border-red);
-    }
-    .svc-body { padding:1.6rem 1.8rem; flex:1; display:flex; flex-direction:column; transform:translateZ(10px); }
-    .svc-title {
-      font-family:'Barlow Condensed',sans-serif; font-size:1.4rem;
-      font-weight:800; text-transform:uppercase; color:var(--text-main);
-      margin-bottom:.5rem;
-    }
-    .svc-desc { color:var(--text-dim); font-size:.88rem; line-height:1.65; flex:1; margin-bottom:1.2rem; }
-    .svc-cta {
-      display:inline-flex; align-items:center; gap:.4rem;
-      color:var(--red); font-weight:800; font-size:.8rem;
-      text-transform:uppercase; letter-spacing:.5px;
-      background:none; border:none; cursor:none; padding:0; transition:gap .2s;
-      font-family:'Barlow Condensed',sans-serif;
-    }
-    .service-card:hover .svc-cta { gap:.7rem; }
+    #hc{position:absolute;inset:0;z-index:0}
+    /* Deep vignette so content reads clearly */
+    .hv{position:absolute;inset:0;z-index:1;pointer-events:none;
+      background:radial-gradient(ellipse at 50% 50%,transparent 20%,rgba(3,4,6,0.6) 65%,rgba(3,4,6,0.9) 100%)}
+    .hb{position:absolute;bottom:0;left:0;right:0;height:30%;z-index:1;pointer-events:none;
+      background:linear-gradient(transparent,var(--void))}
+    /* Red corner tech brackets */
+    .ctl{position:absolute;top:80px;left:2rem;z-index:3;width:50px;height:50px;
+      border-top:2px solid rgba(239,68,68,0.7);border-left:2px solid rgba(239,68,68,0.7);pointer-events:none}
+    .cbr{position:absolute;bottom:80px;right:2rem;z-index:3;width:35px;height:35px;
+      border-bottom:2px solid rgba(239,68,68,0.3);border-right:2px solid rgba(239,68,68,0.3);pointer-events:none}
+    /* Scanlines */
+    .hsl{position:absolute;inset:0;z-index:2;pointer-events:none;
+      background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(239,68,68,0.018) 3px,rgba(239,68,68,0.018) 4px)}
+    .hcon{position:relative;z-index:4;max-width:1000px;padding:0 2rem}
+    .hbadge{display:inline-flex;align-items:center;gap:.5rem;
+      background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.4);
+      color:var(--red);padding:.4rem 1.1rem;border-radius:4px;
+      font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+      margin-bottom:1.8rem;animation:fid .8s ease both}
+    @keyframes fid{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fiu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fi{from{opacity:0}to{opacity:1}}
+    .hero h1{font-size:clamp(2.8rem,8vw,7.5rem);line-height:.95;margin-bottom:1.4rem;
+      letter-spacing:-2px;text-shadow:0 6px 40px rgba(0,0,0,0.95);animation:fiu .9s ease .15s both}
+    .hero p{font-size:1.15rem;max-width:620px;margin:0 auto 2.5rem;color:var(--mid);
+      font-weight:400;animation:fiu .9s ease .3s both}
+    .hctas{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;animation:fi 1s ease .5s both}
+    .b3d{background:var(--surface);color:var(--text);padding:1rem 2.2rem;border-radius:8px;
+      font-weight:800;text-decoration:none;border:1px solid rgba(255,255,255,0.06);cursor:none;
+      text-transform:uppercase;letter-spacing:1px;font-size:.86rem;
+      box-shadow:var(--shadow);transition:all .3s;position:relative;overflow:hidden;
+      display:inline-flex;align-items:center;gap:.5rem;font-family:'Barlow Condensed',sans-serif}
+    .b3d::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--grad-red)}
+    .b3d:hover{transform:translateY(-4px);color:var(--red);border-color:var(--red);
+      box-shadow:0 20px 40px rgba(0,0,0,0.9),0 0 25px var(--red-dim)}
+    .htp{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;
+      margin-top:2rem;animation:fi 1.2s ease .7s both}
+    .hpi{display:flex;align-items:center;gap:.4rem;font-size:.73rem;font-weight:700;
+      color:var(--dim);text-transform:uppercase;letter-spacing:.5px}
+    .hpi i{color:var(--red);font-size:.72rem}
 
-    /* ===================== GALLERY ===================== */
-    .gallery-section {
-      overflow:hidden; position:relative;
-      background:var(--surface); padding:3rem 0;
-      border-top:1px solid var(--border);
-      border-bottom:1px solid var(--border);
+    /* ================================================================
+       3D HUD PANELS — float beside hero text on desktop
+    ================================================================ */
+    .hud-panel{
+      position:absolute;z-index:5;pointer-events:none;
+      animation:fi 1.5s ease 1s both;
     }
-    .gallery-label {
-      text-align:center; font-family:'Barlow Condensed',sans-serif;
-      font-size:.7rem; font-weight:800; letter-spacing:4px;
-      text-transform:uppercase; color:var(--text-dim); margin-bottom:1.5rem;
+    .hud-left{left:2rem;top:50%;transform:translateY(-50%)}
+    .hud-right{right:2rem;top:50%;transform:translateY(-50%)}
+    .hud-card{
+      background:rgba(12,14,20,0.85);border:1px solid rgba(239,68,68,0.3);
+      border-radius:12px;padding:1rem 1.2rem;margin-bottom:.8rem;
+      backdrop-filter:blur(10px);min-width:160px;
+      box-shadow:0 0 20px rgba(239,68,68,0.1),var(--shadow);
     }
-    .gallery-track { display:flex; width:calc(310px * 10); animation:slideGallery 35s linear infinite; }
-    .gallery-track:hover { animation-play-state:paused; }
-    @keyframes slideGallery { 0%{transform:translateX(0);}100%{transform:translateX(calc(-310px * 5));} }
-    .gallery-item {
-      width:280px; height:200px; margin:0 15px; border-radius:12px;
-      overflow:hidden; flex-shrink:0; position:relative;
-      background:var(--surface-light); border:1px solid var(--border-red);
-      box-shadow:var(--shadow-drop);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .gallery-item i { font-size:3rem; color:var(--red); opacity:.18; }
-    .gallery-item img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:.35s; filter:contrast(1.1); }
-    .gallery-item:hover img { transform:scale(1.07); box-shadow:0 0 25px var(--red-glow); }
+    .hud-label{font-size:.58rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:700;margin-bottom:.3rem}
+    .hud-val{font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;font-weight:900;color:var(--red);line-height:1}
+    .hud-sub{font-size:.62rem;color:var(--mid);margin-top:.15rem}
+    .hud-bar{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:.5rem;overflow:hidden}
+    .hud-fill{height:100%;background:var(--grad-red);border-radius:2px;animation:fillBar 2s ease 1.5s both}
+    @keyframes fillBar{from{width:0}to{width:var(--w,70%)}}
+    .hud-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--red);
+      margin-right:.4rem;animation:blink 1.5s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-    /* ===================== REVIEWS ===================== */
-    .reviews-section { padding:6rem 5%; background:rgba(3,4,7,1); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
-    .reviews-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2.5rem; max-width:1100px; margin:0 auto; }
-    .review-card {
-      padding:2.5rem; transform-style:preserve-3d; transition:all .35s;
+    /* ================================================================
+       3D INTERACTIVE CARDS — the main selling point
+    ================================================================ */
+    .cards-section{padding:5rem 5%;background:var(--void);position:relative;z-index:10}
+    .cards-section::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
+      background:linear-gradient(90deg,transparent,rgba(239,68,68,0.3),transparent)}
+    .card-grid{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:2.5rem;perspective:1200px;max-width:1300px;margin:0 auto;
     }
-    .review-card:hover { border-color:var(--red); box-shadow:0 0 30px var(--red-dim); }
-    .stars { color:#f59e0b; font-size:1rem; margin-bottom:1.4rem; letter-spacing:1px; text-shadow:0 0 8px rgba(245,158,11,.3); }
-    .review-text { font-style:italic; color:var(--text-dim); margin-bottom:2rem; font-size:1.02rem; line-height:1.65; }
-    .reviewer { display:flex; align-items:center; gap:1rem; }
-    .reviewer-avatar {
-      width:52px; height:52px; border-radius:50%; flex-shrink:0;
-      background:var(--gradient-red); border:2px solid var(--red);
-      box-shadow:0 0 12px var(--red-glow);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.1rem; overflow:hidden; position:relative;
+    /* THE CARD — full 3D lift experience */
+    .xcard{
+      background:var(--surface);border-radius:20px;overflow:hidden;
+      border:1px solid rgba(239,68,68,0.12);
+      box-shadow:var(--shadow);
+      transform-style:preserve-3d;
+      transition:transform .5s cubic-bezier(.23,1,.32,1),
+                 box-shadow .5s ease,border-color .3s;
+      position:relative;cursor:none;
     }
-    .reviewer-avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-    .reviewer h4 { font-family:'Barlow Condensed',sans-serif; font-size:1.15rem; font-weight:800; text-transform:uppercase; }
-    .reviewer span { font-size:.75rem; color:var(--red); font-weight:700; letter-spacing:.5px; text-transform:uppercase; }
+    .xcard:hover{
+      transform:translateY(-18px) rotateX(6deg) rotateY(-3deg) scale(1.02);
+      box-shadow:0 40px 80px rgba(0,0,0,0.9),0 0 50px rgba(239,68,68,0.2);
+      border-color:rgba(239,68,68,0.5);
+    }
+    .xcard-img{height:220px;position:relative;overflow:hidden;transform:translateZ(0)}
+    .xcard-img i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      font-size:5rem;opacity:.15;z-index:1;color:var(--red)}
+    .xcard-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:saturate(0.8) contrast(1.1);transition:.5s;z-index:2}
+    .xcard:hover .xcard-img img{filter:saturate(1.1) contrast(1.05);transform:scale(1.08)}
+    .xcard-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;
+      background:linear-gradient(transparent,var(--surface));z-index:3}
+    .xbadge{position:absolute;top:.8rem;left:.8rem;z-index:4;
+      background:rgba(3,4,6,0.88);color:var(--red);
+      padding:.22rem .7rem;border-radius:4px;font-size:.62rem;
+      font-weight:800;text-transform:uppercase;letter-spacing:1px;
+      border:1px solid rgba(239,68,68,0.35)}
+    /* Content lifts out of the screen on hover */
+    .xcard-body{padding:1.6rem 1.8rem;transform:translateZ(0);transition:transform .5s ease}
+    .xcard:hover .xcard-body{transform:translateZ(30px)}
+    .xtitle{font-family:'Barlow Condensed',sans-serif;font-size:1.4rem;font-weight:800;
+      text-transform:uppercase;color:var(--text);margin-bottom:.5rem}
+    .xdesc{color:var(--mid);font-size:.88rem;line-height:1.65;margin-bottom:1.2rem}
+    .xcta{display:inline-flex;align-items:center;gap:.4rem;color:var(--red);font-weight:800;
+      font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;background:none;
+      border:none;cursor:none;padding:0;transition:gap .25s;
+      font-family:'Barlow Condensed',sans-serif}
+    .xcard:hover .xcta{gap:.8rem}
+    /* Glow line at bottom that animates on hover */
+    .xcard-glow{position:absolute;bottom:0;left:0;right:0;height:2px;
+      background:var(--grad-red);transform:scaleX(0);transform-origin:left;
+      transition:transform .4s ease;z-index:5}
+    .xcard:hover .xcard-glow{transform:scaleX(1)}
 
-    /* ===================== FAQ ACCORDION ===================== */
-    .faq-section { padding:6rem 5%; max-width:900px; margin:0 auto; }
-    .faq-list { }
-    .faq-item { border-bottom:1px solid var(--border); }
-    .faq-q {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:1.3rem 0; cursor:none; font-weight:700;
-      font-family:'Barlow Condensed',sans-serif; font-size:1.1rem;
-      text-transform:uppercase; letter-spacing:.5px; transition:color .25s;
-      color:var(--text-mid);
+    /* ================================================================
+       TRUST CARDS (floating, from-the-screen depth)
+    ================================================================ */
+    .trust-row{
+      display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+      padding:0 5% 3rem;margin-top:-40px;position:relative;z-index:10;
     }
-    .faq-q:hover { color:var(--red); }
-    .faq-icon { font-size:.78rem; color:var(--red); transition:transform .3s; }
-    .faq-item.open .faq-icon { transform:rotate(45deg); }
-    .faq-a { max-height:0; overflow:hidden; transition:max-height .4s ease, padding .3s; color:var(--text-dim); font-size:.92rem; line-height:1.75; }
-    .faq-a.open { max-height:250px; padding-bottom:1.2rem; }
+    .tcard{
+      display:flex;align-items:center;gap:1rem;padding:1.2rem 1.8rem;
+      border-radius:14px;transition:all .4s;transform-style:preserve-3d;
+    }
+    .tcard:hover{transform:translateY(-6px) translateZ(10px);border-color:var(--red);
+      box-shadow:0 20px 40px rgba(0,0,0,0.8),0 0 25px var(--red-dim)}
+    .tcard i{font-size:1.8rem}
 
-    /* ===================== CONTACT / LOCATION ===================== */
-    .contact-section { padding:6rem 5%; background:var(--surface); border-top:1px solid var(--border); }
-    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; max-width:1200px; margin:0 auto; }
-    .map-frame { width:100%; height:340px; border-radius:14px; overflow:hidden; border:1px solid var(--border-red); box-shadow:0 0 25px var(--red-dim); }
-    .map-frame iframe { width:100%; height:100%; border:0; filter:invert(90%) hue-rotate(180deg); border-radius:14px; }
-    .contact-label-sm { font-size:.7rem; text-transform:uppercase; font-weight:700; letter-spacing:.5px; color:var(--text-dim); }
-    .contact-strip {
-      display:flex; align-items:center; gap:1.2rem;
-      padding:1.2rem 1.4rem; text-decoration:none; margin-bottom:1rem;
-      transition:all .3s;
-    }
-    .contact-strip:hover { border-color:var(--red); box-shadow:0 0 20px var(--red-dim); transform:translateX(4px); }
-    .contact-icon {
-      width:48px; height:48px; border-radius:8px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.3rem; flex-shrink:0; border:1px solid var(--border);
-    }
-    .contact-val { font-size:1rem; font-weight:700; color:white; }
-    .social-row { display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.4rem; }
-    .social-circle {
-      width:44px; height:44px; border-radius:8px;
-      background:rgba(255,255,255,0.03); color:var(--text-dim);
-      display:flex; align-items:center; justify-content:center;
-      font-size:1rem; text-decoration:none; transition:all .3s;
-      border:1px solid var(--border);
-    }
-    .social-circle:hover { background:var(--gradient-red); color:white; transform:translateY(-4px); border-color:var(--red); box-shadow:0 0 15px var(--red-glow); }
+    /* ================================================================
+       BOOKING ENGINE
+    ================================================================ */
+    .book-sec{padding:5rem 5%;max-width:1200px;margin:0 auto}
+    .bgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;
+      padding:3.5rem;position:relative;overflow:hidden}
+    .bgrid::before{content:'';position:absolute;top:-50px;right:-50px;width:220px;height:220px;
+      border-radius:50%;background:radial-gradient(circle,rgba(239,68,68,0.07),transparent 70%);pointer-events:none}
+    .bp h3{font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1rem}
+    .bp h3 span{color:var(--red)}
+    .bp p{color:var(--mid);line-height:1.75;margin-bottom:1.5rem;font-size:.95rem}
+    .aib{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;
+      border-left:3px solid var(--red);background:rgba(3,4,6,0.7);
+      border-radius:0 10px 10px 0;border-top:1px solid rgba(255,255,255,0.04);
+      border-right:1px solid rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .aiv{width:48px;height:48px;border-radius:50%;background:var(--grad-red);
+      border:2px solid var(--red);display:flex;align-items:center;justify-content:center;
+      font-size:1.3rem;flex-shrink:0;box-shadow:0 0 14px var(--red-glow)}
+    .bpanel{padding:2rem}
+    .bpanel h4{font-family:'Barlow Condensed',sans-serif;font-size:1.15rem;font-weight:800;
+      text-transform:uppercase;letter-spacing:1px;text-align:center;margin-bottom:1.3rem;
+      padding-bottom:1rem;border-bottom:1px solid rgba(239,68,68,0.15)}
+    .sbs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.3rem}
+    .sb{flex:1;min-width:70px;padding:.6rem .4rem;text-align:center;border-radius:8px;
+      border:1px solid rgba(239,68,68,0.2);font-weight:800;cursor:none;transition:all .25s;
+      font-size:.76rem;text-transform:uppercase;letter-spacing:.5px;color:var(--mid);
+      background:rgba(239,68,68,0.04);box-shadow:var(--shadow);
+      font-family:'Barlow Condensed',sans-serif}
+    .sb.a,.sb:hover{background:var(--grad-red);color:white;border-color:var(--red);
+      box-shadow:0 0 16px var(--red-glow)}
+    .bsel{width:100%;padding:.88rem 1rem;margin-bottom:1.2rem;background:var(--surface);
+      border:1px solid rgba(239,68,68,0.2);color:var(--text);border-radius:8px;outline:none;
+      font-family:'Barlow',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;
+      box-shadow:var(--inset)}
+    .bsel:focus{border-color:var(--red)}
+    .blbl{font-size:.68rem;text-align:center;color:var(--dim);text-transform:uppercase;
+      font-weight:700;letter-spacing:.5px;margin-bottom:1rem}
 
-    /* ===================== FOOTER ===================== */
-    footer {
-      background:#020203; padding:5rem 5% 7rem;
-      text-align:center; border-top:1px solid var(--border);
-    }
-    .footer-brand {
-      font-family:'Barlow Condensed',sans-serif; font-size:2.5rem;
-      font-weight:900; letter-spacing:4px; text-transform:uppercase;
-      margin-bottom:.5rem;
-    }
-    .footer-links { display:flex; justify-content:center; gap:1.5rem; margin:1.2rem 0; flex-wrap:wrap; }
-    .footer-links a { font-size:.78rem; color:#374151; text-decoration:none; font-weight:600; transition:color .2s; }
-    .footer-links a:hover { color:var(--gc-teal); }
+    /* ================================================================
+       ABOUT
+    ================================================================ */
+    .about-s{padding:5.5rem 5%;background:var(--surface);
+      border-top:1px solid rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .agrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto}
+    .awrap{border-radius:16px;overflow:hidden;border:1px solid rgba(239,68,68,0.2);
+      box-shadow:0 0 40px var(--red-dim),var(--shadow);position:relative;
+      transform-style:preserve-3d}
+    .awrap:hover{box-shadow:0 0 60px rgba(239,68,68,0.2),0 40px 80px rgba(0,0,0,0.8)}
+    .aph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#0c0e14,#1a0505);
+      display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--red);opacity:.15}
+    .awrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .awrap::after{content:'';position:absolute;inset:0;
+      background:linear-gradient(to top right,rgba(239,68,68,0.06),transparent);pointer-events:none}
+    .albl{color:var(--red);font-size:.72rem;text-transform:uppercase;font-weight:800;letter-spacing:2px;margin-bottom:.5rem}
+    .agrid h2{font-size:clamp(2rem,3.5vw,3rem);margin-bottom:1rem;line-height:1.1}
+    .agrid p{color:var(--mid);font-size:.95rem;line-height:1.75;margin-bottom:.9rem}
+    .ach{list-style:none;margin-top:1.3rem}
+    .ach li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--mid);margin-bottom:.55rem}
+    .ach li i{color:var(--red);margin-top:.2rem;flex-shrink:0}
+    .grl{width:45px;height:3px;background:var(--grad-red);border-radius:2px;
+      margin:.7rem 0;box-shadow:0 0 10px var(--red-glow)}
 
-    /* ===================== GC FLOATING BADGE ===================== */
-    .gc-badge {
-      position:fixed; bottom:82px; right:1.5rem; z-index:550;
-      background:rgba(13,21,21,0.97); border:1px solid rgba(0,181,200,0.35);
-      border-radius:14px; padding:.8rem 1rem;
-      box-shadow:0 10px 35px rgba(0,0,0,0.7);
-      max-width:220px; text-align:center;
-      animation:badgeSlide .8s ease .6s both;
-      backdrop-filter:blur(14px);
-    }
-    @keyframes badgeSlide { from{opacity:0;transform:translateX(28px);}to{opacity:1;transform:translateX(0);} }
-    .gc-badge-close {
-      position:absolute; top:6px; right:8px;
-      background:none; border:none; color:var(--text-dim);
-      font-size:.75rem; cursor:pointer;
-    }
-    .gc-badge-logo { font-family:'Barlow Condensed',sans-serif; font-size:.65rem; font-weight:800; letter-spacing:1.5px; color:rgba(0,181,200,0.6); text-transform:uppercase; margin-bottom:.3rem; }
-    .gc-badge p { font-size:.72rem; color:rgba(200,205,214,0.8); margin-bottom:.5rem; line-height:1.4; }
-    .gc-badge p strong { color:white; }
-    .gc-badge a {
-      display:inline-flex; align-items:center; gap:.35rem;
-      background:linear-gradient(135deg,#00B5C8,#E5C158); color:#000;
-      padding:.45rem 1rem; border-radius:8px;
-      font-size:.72rem; font-weight:900; text-decoration:none;
-      text-transform:uppercase; letter-spacing:.5px; transition:all .25s;
-    }
-    .gc-badge a:hover { transform:scale(1.03); }
+    /* ================================================================
+       GALLERY — full scrolling with all images
+    ================================================================ */
+    .gal-s{overflow:hidden;background:var(--surface);padding:3.5rem 0;
+      border-top:1px solid rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .gal-lbl{text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;
+      font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-bottom:1.5rem}
+    .gal-t{display:flex;width:calc(310px * 12);animation:gscroll 40s linear infinite}
+    .gal-t:hover{animation-play-state:paused}
+    @keyframes gscroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-310px * 6))}}
+    .gi{width:280px;height:200px;margin:0 15px;border-radius:12px;overflow:hidden;
+      flex-shrink:0;position:relative;background:var(--surface2);
+      border:1px solid rgba(239,68,68,0.15);box-shadow:var(--shadow);
+      display:flex;align-items:center;justify-content:center;transform-style:preserve-3d;
+      transition:all .4s}
+    .gi:hover{border-color:var(--red);box-shadow:0 0 30px var(--red-dim),var(--shadow);
+      transform:scale(1.04) translateY(-4px)}
+    .gi i{font-size:2.8rem;color:var(--red);opacity:.18;z-index:1;position:relative}
+    .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+      filter:contrast(1.1) saturate(.9);transition:.4s}
+    .gi:hover img{filter:contrast(1.15) saturate(1.1);transform:scale(1.06)}
 
-    /* ===================== BOOKING MODAL ===================== */
-    .modal-overlay {
-      position:fixed; inset:0;
-      background:rgba(2,2,3,0.95); backdrop-filter:blur(14px);
-      z-index:9999; display:flex; align-items:center; justify-content:center;
-      opacity:0; visibility:hidden; transition:all .35s ease;
-    }
-    .modal-overlay.active { opacity:1; visibility:visible; }
-    .modal-box {
-      background:var(--surface-mid); width:92%; max-width:940px;
-      height:86vh; border-radius:18px; position:relative;
-      transform:translateY(30px); transition:transform .35s ease;
-      overflow:hidden; border:1px solid var(--border-red);
-      box-shadow:0 30px 70px rgba(0,0,0,0.95), 0 0 40px var(--red-dim);
-    }
-    .modal-overlay.active .modal-box { transform:translateY(0); }
-    .modal-close {
-      position:absolute; top:14px; right:16px;
-      background:rgba(239,68,68,0.15); border:1px solid var(--border-red);
-      border-radius:50%; width:38px; height:38px;
-      display:flex; align-items:center; justify-content:center;
-      color:white; font-size:1rem; cursor:none; z-index:10; transition:all .25s;
-    }
-    .modal-close:hover { background:var(--red); }
-    .modal-box iframe { width:100%; height:100%; border:0; border-radius:18px; }
+    /* ================================================================
+       REVIEWS
+    ================================================================ */
+    .rev-s{padding:5.5rem 5%;background:rgba(2,3,4,1);
+      border-top:1px solid rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;max-width:1100px;margin:0 auto}
+    .rc{padding:2.4rem;transform-style:preserve-3d;transition:all .4s}
+    .rc:hover{border-color:var(--red);box-shadow:0 0 35px var(--red-dim),var(--shadow);
+      transform:translateY(-6px)}
+    .rstars{color:#f59e0b;font-size:.95rem;margin-bottom:1.3rem;letter-spacing:1px;
+      text-shadow:0 0 8px rgba(245,158,11,.3)}
+    .rtxt{font-style:italic;color:var(--mid);margin-bottom:1.8rem;font-size:1rem;line-height:1.65}
+    .rper{display:flex;align-items:center;gap:1rem}
+    .rav{width:50px;height:50px;border-radius:50%;flex-shrink:0;background:var(--grad-red);
+      border:2px solid var(--red);box-shadow:0 0 12px var(--red-glow);
+      display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+    .rav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .rav i{opacity:.4}
+    .rper h4{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:800;text-transform:uppercase}
+    .rper span{font-size:.72rem;color:var(--red);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
 
-    /* ===================== RESPONSIVE ===================== */
+    /* ================================================================
+       FAQ ACCORDION
+    ================================================================ */
+    .faq-s{padding:5.5rem 5%;max-width:880px;margin:0 auto}
+    .fi{border-bottom:1px solid rgba(255,255,255,0.06)}
+    .fq{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 0;
+      cursor:none;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;
+      text-transform:uppercase;letter-spacing:.5px;transition:color .25s;color:var(--mid)}
+    .fq:hover{color:var(--red)}
+    .fqi{font-size:.75rem;color:var(--red);transition:transform .3s}
+    .fi.open .fqi{transform:rotate(45deg)}
+    .fa{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;
+      color:var(--dim);font-size:.9rem;line-height:1.75;font-weight:400;text-transform:none;letter-spacing:0}
+    .fa.open{max-height:250px;padding-bottom:1.2rem}
+
+    /* ================================================================
+       CONTACT / LOCATION
+    ================================================================ */
+    .con-s{padding:5.5rem 5%;background:var(--surface);
+      border-top:1px solid rgba(255,255,255,0.04)}
+    .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;max-width:1200px;margin:0 auto}
+    .mf{width:100%;height:340px;border-radius:14px;overflow:hidden;
+      border:1px solid rgba(239,68,68,0.2);box-shadow:0 0 25px var(--red-dim)}
+    .mf iframe{width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg);border-radius:14px}
+    .cs{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;
+      text-decoration:none;margin-bottom:1rem;transition:all .3s}
+    .cs:hover{border-color:var(--red);box-shadow:0 0 20px var(--red-dim);transform:translateX(4px)}
+    .cic{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;
+      justify-content:center;font-size:1.2rem;flex-shrink:0;border:1px solid rgba(255,255,255,0.06)}
+    .clbl{font-size:.68rem;text-transform:uppercase;font-weight:700;letter-spacing:.5px;color:var(--dim)}
+    .cval{font-size:.95rem;font-weight:700;color:white}
+
+    /* ================================================================
+       FOOTER — social icons here only, single instance
+    ================================================================ */
+    footer{background:#020203;padding:5rem 5% 7rem;text-align:center;
+      border-top:1px solid rgba(255,255,255,0.05)}
+    .fbrand{font-family:'Barlow Condensed',sans-serif;font-size:2.5rem;
+      font-weight:900;letter-spacing:4px;text-transform:uppercase;margin-bottom:.5rem}
+    .socrow{display:flex;justify-content:center;gap:.8rem;margin:1.2rem 0 1.5rem;flex-wrap:wrap}
+    .sc{width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,0.03);
+      color:var(--mid);display:flex;align-items:center;justify-content:center;
+      font-size:1rem;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,0.06)}
+    .sc:hover{background:var(--grad-red);color:white;transform:translateY(-4px);
+      border-color:var(--red);box-shadow:0 0 14px var(--red-glow)}
+    .flinks{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .flinks a{font-size:.75rem;color:#374151;text-decoration:none;font-weight:600;transition:color .2s}
+    .flinks a:hover{color:var(--gc-teal)}
+
+    /* ================================================================
+       GC BADGE
+    ================================================================ */
+    .gcb{position:fixed;bottom:82px;right:1.5rem;z-index:550;
+      background:rgba(13,21,21,0.97);border:1px solid rgba(0,181,200,0.35);
+      border-radius:14px;padding:.8rem 1rem;box-shadow:0 10px 35px rgba(0,0,0,0.7);
+      max-width:220px;text-align:center;animation:badgein .8s ease .8s both;backdrop-filter:blur(14px)}
+    @keyframes badgein{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:translateX(0)}}
+    .gcbc{position:absolute;top:6px;right:8px;background:none;border:none;
+      color:var(--dim);font-size:.72rem;cursor:pointer}
+    .gcbl{font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:800;
+      letter-spacing:1.5px;color:rgba(0,181,200,0.6);text-transform:uppercase;margin-bottom:.3rem}
+    .gcb p{font-size:.7rem;color:rgba(200,205,214,0.8);margin-bottom:.5rem;line-height:1.4}
+    .gcb p strong{color:white}
+    .gcb a{display:inline-flex;align-items:center;gap:.35rem;
+      background:linear-gradient(135deg,#00B5C8,#E5C158);color:#000;
+      padding:.44rem 1rem;border-radius:8px;font-size:.7rem;font-weight:900;
+      text-decoration:none;text-transform:uppercase;letter-spacing:.5px;transition:all .25s}
+    .gcb a:hover{transform:scale(1.03)}
+
+    /* ================================================================
+       BOOKING MODAL
+    ================================================================ */
+    .mo{position:fixed;inset:0;background:rgba(2,3,4,0.95);backdrop-filter:blur(16px);
+      z-index:9999;display:flex;align-items:center;justify-content:center;
+      opacity:0;visibility:hidden;transition:all .35s ease}
+    .mo.on{opacity:1;visibility:visible}
+    .mb{background:var(--surface);width:92%;max-width:940px;height:86vh;border-radius:18px;
+      position:relative;transform:translateY(28px);transition:transform .35s ease;
+      overflow:hidden;border:1px solid rgba(239,68,68,0.2);
+      box-shadow:0 30px 70px rgba(0,0,0,0.95),0 0 50px var(--red-dim)}
+    .mo.on .mb{transform:translateY(0)}
+    .mc{position:absolute;top:14px;right:16px;background:rgba(239,68,68,0.15);
+      border:1px solid rgba(239,68,68,0.3);border-radius:50%;width:38px;height:38px;
+      display:flex;align-items:center;justify-content:center;
+      color:white;font-size:1rem;cursor:none;z-index:10;transition:all .25s}
+    .mc:hover{background:var(--red)}
+    .mb iframe{width:100%;height:100%;border:0;border-radius:18px}
+
+    /* ================================================================
+       SECTION HEADER SHARED
+    ================================================================ */
+    .sh{text-align:center;margin-bottom:3.5rem}
+    .sh .slbl{color:var(--red);font-size:.72rem;text-transform:uppercase;font-weight:800;
+      letter-spacing:2px;margin-bottom:.4rem}
+    .sh h2{font-size:clamp(2rem,4vw,3.2rem)}
+    .sh p{color:var(--mid);font-size:.95rem;margin-top:.5rem}
+    .grl-c{width:45px;height:3px;background:var(--grad-red);border-radius:2px;
+      margin:.7rem auto;box-shadow:0 0 10px var(--red-glow)}
+
+    /* RESPONSIVE */
     @media(max-width:960px){
-      body { cursor:auto; }
-      .cursor-dot,.cursor-ring { display:none; }
-      nav .nav-link { display:none; }
-      .booking-grid, .about-grid, .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
-      .booking-grid { padding:2rem; }
-      .hero h1 { font-size:3rem; }
-      .gc-badge { display:none; }
-      .trust-cards { margin-top:0; }
+      body{cursor:auto}
+      #cd,#cr{display:none}
+      nav .nl{display:none}
+      .bgrid,.agrid,.cgrid{grid-template-columns:1fr;gap:2.5rem}
+      .bgrid{padding:1.8rem}
+      .hero h1{font-size:2.8rem}
+      .gcb{display:none}
+      .trust-row{margin-top:0}
+      .hud-panel{display:none}
     }
     @media(max-width:600px){
-      .hero h1 { font-size:2.3rem; }
-      .services-grid { grid-template-columns:1fr; }
-      .reviews-grid { grid-template-columns:1fr; }
-      .service-bubbles { flex-direction:column; }
+      .hero h1{font-size:2.1rem}
+      .card-grid,.rg{grid-template-columns:1fr}
+      .hctas .bholo,.hctas .b3d{width:100%;justify-content:center}
     }
   </style>
 </head>
 <body>
 
-  <div class="cursor-dot"  id="cursorDot"></div>
-  <div class="cursor-ring" id="cursorRing"></div>
+<div id="cd"></div>
+<div id="cr"></div>
 
-  <!-- ===================== HEADER ===================== -->
-  <header>
-    <a href="#" class="brand-logo">
-      <span class="brand-name">AUTO<span>TECH</span></span>
-      <span class="brand-sub">MOT &amp; Repairs &nbsp;&middot;&nbsp; Andover</span>
-    </a>
-    <nav>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#booking"  class="nav-link">Book</a>
-      <a href="#about"    class="nav-link">About</a>
-      <a href="#reviews"  class="nav-link">Reviews</a>
-      <a href="#faqs"     class="nav-link">FAQs</a>
-      <a href="#location" class="nav-link">Location</a>
-      <a href="../../showroom.html" class="nav-showroom">
-        <i class="fa-solid fa-arrow-left" style="font-size:.6rem;"></i> Showroom
+<!-- HEADER -->
+<header>
+  <a href="#" class="bname">
+    <span class="bn">AUTO<span>TECH</span></span>
+    <span class="bs">MOT &amp; Repairs &middot; Andover</span>
+  </a>
+  <nav>
+    <a href="#services" class="nl">Services</a>
+    <a href="#booking"  class="nl">Book</a>
+    <a href="#about"    class="nl">About</a>
+    <a href="#reviews"  class="nl">Reviews</a>
+    <a href="#faqs"     class="nl">FAQs</a>
+    <a href="#location" class="nl">Location</a>
+    <a href="../../showroom.html" class="nsr"><i class="fa-solid fa-arrow-left" style="font-size:.6rem"></i>Showroom</a>
+  </nav>
+  <button onclick="openB()" class="bholo"><i class="fa-solid fa-calendar-check"></i>Book MOT</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div id="hc"></div>
+  <div class="hv"></div>
+  <div class="hb"></div>
+  <div class="hsl"></div>
+  <div class="ctl"></div>
+  <div class="cbr"></div>
+
+  <!-- Left HUD panel -->
+  <div class="hud-panel hud-left">
+    <div class="hud-card">
+      <div class="hud-label"><span class="hud-dot"></span>System Status</div>
+      <div class="hud-val">LIVE</div>
+      <div class="hud-sub">Booking system active</div>
+      <div class="hud-bar"><div class="hud-fill" style="--w:100%"></div></div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-label">Google Rating</div>
+      <div class="hud-val">5.0 ★</div>
+      <div class="hud-sub">140+ verified reviews</div>
+      <div class="hud-bar"><div class="hud-fill" style="--w:100%"></div></div>
+    </div>
+  </div>
+
+  <!-- Right HUD panel -->
+  <div class="hud-panel hud-right">
+    <div class="hud-card">
+      <div class="hud-label">MOT Slots Today</div>
+      <div class="hud-val">3 Left</div>
+      <div class="hud-sub">Book before they go</div>
+      <div class="hud-bar"><div class="hud-fill" style="--w:30%"></div></div>
+    </div>
+    <div class="hud-card">
+      <div class="hud-label">Cars Serviced</div>
+      <div class="hud-val">1,200+</div>
+      <div class="hud-sub">Since 2008</div>
+      <div class="hud-bar"><div class="hud-fill" style="--w:90%"></div></div>
+    </div>
+  </div>
+
+  <div class="hcon">
+    <div class="hbadge"><i class="fa-solid fa-certificate" style="font-size:.62rem"></i>DVSA Approved &middot; Andover&rsquo;s Trusted Garage</div>
+    <h1 class="fd">Reliable Local Mechanics<br><span class="th">&amp; MOT Testing.</span></h1>
+    <p>Expert repairs. Transparent pricing. Zero hidden costs.<br>Book online and get same-day confirmation.</p>
+    <div class="hctas">
+      <button onclick="openB()" class="bholo" style="padding:1.1rem 2.4rem;font-size:.9rem">
+        <i class="fa-solid fa-calendar-check"></i>Book Your MOT
+      </button>
+      <a href="#services" class="b3d"><i class="fa-solid fa-wrench"></i>All Services</a>
+    </div>
+    <div class="htp">
+      <span class="hpi"><i class="fa-solid fa-check"></i>No hidden costs</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>DVSA approved</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Same-day results</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Free courtesy car</span>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST CARDS -->
+<div class="trust-row rv">
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-brands fa-google th" style="font-size:1.8rem"></i>
+    <div><div class="fd" style="font-size:1.2rem">5.0 Stars</div>
+    <div style="font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px">Google Reviews</div></div>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-certificate th" style="font-size:1.8rem"></i>
+    <div><div class="fd" style="font-size:1.2rem">DVSA</div>
+    <div style="font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px">Approved Centre</div></div>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-bolt th" style="font-size:1.8rem"></i>
+    <div><div class="fd" style="font-size:1.2rem">Same Day</div>
+    <div style="font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px">MOT Results</div></div>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.1">
+    <i class="fa-solid fa-shield-halved th" style="font-size:1.8rem"></i>
+    <div><div class="fd" style="font-size:1.2rem">Warranted</div>
+    <div style="font-size:.68rem;color:var(--dim);text-transform:uppercase;letter-spacing:1px">All Work Guaranteed</div></div>
+  </div>
+</div>
+
+<!-- SERVICES — 3D interactive cards -->
+<section class="cards-section" id="services">
+  <div class="sh rv">
+    <p class="slbl">What We Do</p>
+    <h2 class="fd">Our <span class="th">Services</span></h2>
+    <div class="grl-c"></div>
+    <p>Professional care to keep your vehicle safe, reliable, and on the road.</p>
+  </div>
+  <div class="card-grid">
+    <div class="xcard rv d1">
+      <div class="xcard-img" style="background:linear-gradient(135deg,#1a0505,#2d0808)">
+        <i class="fa-solid fa-certificate"></i>
+        <span class="xbadge">DVSA Approved</span>
+        <img src="car-repair.jpg" alt="MOT Testing" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xcard-body">
+        <div class="xtitle">MOT Testing &amp; Repairs</div>
+        <p class="xdesc">Failed your MOT? Hearing something odd? We handle brakes, exhausts, suspension and all advisory work to get you back on the road safely.</p>
+        <button onclick="openB()" class="xcta">Book MOT <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xcard-glow"></div>
+    </div>
+    <div class="xcard rv d2">
+      <div class="xcard-img" style="background:linear-gradient(135deg,#071020,#0d1e35)">
+        <i class="fa-solid fa-oil-can"></i>
+        <span class="xbadge">Engine Health</span>
+        <img src="oil-change.png" alt="Car Servicing" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xcard-body">
+        <div class="xtitle">Annual Servicing</div>
+        <p class="xdesc">Regular oil changes and manufacturer schedule servicing prevents expensive breakdowns before they happen. We use only approved parts.</p>
+        <button onclick="openB()" class="xcta">Book Service <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xcard-glow"></div>
+    </div>
+    <div class="xcard rv d3">
+      <div class="xcard-img" style="background:linear-gradient(135deg,#0d0800,#1c1200)">
+        <i class="fa-solid fa-microchip"></i>
+        <span class="xbadge">Fault Finding</span>
+        <img src="car-diagnostic.png.jpeg" alt="Diagnostics" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xcard-body">
+        <div class="xtitle">Diagnostics &amp; Warning Lights</div>
+        <p class="xdesc">Dashboard lit up? We plug into your car&rsquo;s computer to pinpoint electrical and engine faults accurately — and fix them the same day.</p>
+        <button onclick="openB()" class="xcta">Get Diagnosed <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xcard-glow"></div>
+    </div>
+    <div class="xcard rv d1">
+      <div class="xcard-img" style="background:linear-gradient(135deg,#050a05,#0a1a0a)">
+        <i class="fa-solid fa-circle-dot"></i>
+        <span class="xbadge">All Brands</span>
+        <img src="car-repair.jpg" alt="Tyres" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xcard-body">
+        <div class="xtitle">Tyres &amp; Wheel Alignment</div>
+        <p class="xdesc">Budget to premium tyres fitted while you wait. Laser alignment ensures even wear and improves fuel economy. Free tyre pressure check always included.</p>
+        <button onclick="openB()" class="xcta">Check Tyres <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xcard-glow"></div>
+    </div>
+    <div class="xcard rv d2">
+      <div class="xcard-img" style="background:linear-gradient(135deg,#1a0505,#200808)">
+        <i class="fa-solid fa-brake-warning"></i>
+        <span class="xbadge">Safety Critical</span>
+        <img src="car-repair.jpg" alt="Brakes" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xcard-body">
+        <div class="xtitle">Brakes &amp; Suspension</div>
+        <p class="xdesc">Squealing, grinding, or pulling to one side? We replace brake pads, discs, calipers and suspension components to restore full confidence.</p>
+        <button onclick="openB()" class="xcta">Book Check <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xcard-glow"></div>
+    </div>
+    <div class="xcard rv d3">
+      <div class="xcard-img" style="background:linear-gradient(135deg,#050a14,#0a1428)">
+        <i class="fa-solid fa-snowflake"></i>
+        <span class="xbadge">Regassing</span>
+        <img src="car-diagnostic.png.jpeg" alt="Air Con" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xcard-body">
+        <div class="xtitle">Air Conditioning Service</div>
+        <p class="xdesc">Not as cold as it used to be? We regas and inspect your air con using specialist equipment to keep you comfortable and protect the compressor.</p>
+        <button onclick="openB()" class="xcta">Book Regas <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xcard-glow"></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING ENGINE -->
+<section class="book-sec" id="booking">
+  <div class="bgrid p3d rv">
+    <div class="bp">
+      <p class="albl">Smart Online Booking</p>
+      <h3 class="fd">Skip the Queue.<br><span>Book Online.</span></h3>
+      <div class="grl"></div>
+      <p>Pick your service, choose your vehicle, and lock in a slot instantly. We confirm within the hour. No waiting on hold.</p>
+      <div class="aib">
+        <div class="aiv"><i class="fa-solid fa-headset"></i></div>
+        <div>
+          <h4 style="color:white;font-size:.92rem;margin-bottom:2px">Virtual Booking Assistant</h4>
+          <p style="font-size:.78rem;color:var(--dim)">Available 24/7 for quotes and availability.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bpanel pin" data-tilt data-tilt-max="7">
+      <h4 class="th fd">Select Your Service</h4>
+      <div class="sbs">
+        <div class="sb a" onclick="selSvc(this)">MOT Test</div>
+        <div class="sb" onclick="selSvc(this)">Interim</div>
+        <div class="sb" onclick="selSvc(this)">Full Service</div>
+        <div class="sb" onclick="selSvc(this)">Diagnostics</div>
+      </div>
+      <p class="blbl">Vehicle type</p>
+      <select class="bsel">
+        <option>Standard Car / Hatchback</option>
+        <option>Performance / Sports Car</option>
+        <option>Commercial Van</option>
+        <option>4x4 / SUV</option>
+      </select>
+      <button onclick="openB()" class="bholo" style="width:100%;justify-content:center;padding:1rem">
+        <i class="fa-solid fa-calendar-check"></i>Find Available Slots
+      </button>
+      <p style="font-size:.65rem;color:var(--dim);text-align:center;margin-top:.6rem">Free cancellation up to 24 hours in advance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-s" id="about">
+  <div class="agrid">
+    <div class="awrap rl" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.08">
+      <div class="aph"><i class="fa-solid fa-garage"></i></div>
+      <img src="interior.png..jpeg" alt="Autotech workshop" onerror="this.style.display='none'"/>
+    </div>
+    <div class="rr">
+      <p class="albl">Your Trusted Local Garage</p>
+      <h2 class="fd">Honest Mechanics.<br>Fair Prices.</h2>
+      <div class="grl"></div>
+      <p>At Autotech, we never carry out any repair work without showing you exactly what is wrong and agreeing a price first. No surprises. No pressure.</p>
+      <p>Our workshop uses the latest diagnostic tools. We fix everything from a simple tyre change to complex engine faults, quickly and safely.</p>
+      <ul class="ach">
+        <li><i class="fa-solid fa-check-circle"></i>We show you the problem before we fix it</li>
+        <li><i class="fa-solid fa-check-circle"></i>Fixed price agreed before work begins</li>
+        <li><i class="fa-solid fa-check-circle"></i>Manufacturer-approved parts used throughout</li>
+        <li><i class="fa-solid fa-check-circle"></i>Full warranty on all work carried out</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY — all 5 original images + loop -->
+<div class="gal-s" id="gallery">
+  <p class="gal-lbl">Inside Our Workshop</p>
+  <div class="gal-t">
+    <div class="gi p3d"><i class="fa-solid fa-garage"></i><img src="interior.png..jpeg" alt="Garage interior" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-wrench"></i><img src="car-repair.jpg" alt="Mechanic at work" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-microchip"></i><img src="car-diagnostic.png.jpeg" alt="Diagnostics" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-oil-can"></i><img src="oil-change.png" alt="Oil change" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-car"></i><img src="hero-autotech-bg.jpg" alt="Workshop bay" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-garage"></i><img src="interior.png..jpeg" alt="Garage interior" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-wrench"></i><img src="car-repair.jpg" alt="Mechanic at work" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-microchip"></i><img src="car-diagnostic.png.jpeg" alt="Diagnostics" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-oil-can"></i><img src="oil-change.png" alt="Oil change" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-car"></i><img src="hero-autotech-bg.jpg" alt="Workshop bay" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-garage"></i><img src="interior.png..jpeg" alt="Garage interior" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-wrench"></i><img src="car-repair.jpg" alt="Mechanic at work" onerror="this.style.display='none'"/></div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section class="rev-s" id="reviews">
+  <div class="sh rv">
+    <p class="slbl">What Drivers Say</p>
+    <h2 class="fd">Customer Reviews</h2>
+    <div class="grl-c"></div>
+  </div>
+  <div class="rg">
+    <div class="rc p3d rv d1" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"The finest garage in town. They found a tricky electrical fault that another garage completely missed. Great prices, very honest, and called me before doing anything."</p>
+      <div class="rper">
+        <div class="rav"><i class="fa-solid fa-user"></i><img src="reviewer-1.jpg" alt="Emma Richardson" onerror="this.style.display='none'"/></div>
+        <div><h4>Emma Richardson</h4><span>Local Driver, Andover</span></div>
+      </div>
+    </div>
+    <div class="rc p3d rv d2" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"We take all our company vans here. Booking online is a breeze, never any hidden costs, and they always get the vans back the same day. Excellent service every single time."</p>
+      <div class="rper">
+        <div class="rav"><i class="fa-solid fa-user"></i><img src="reviewer-2.jpg" alt="Marcus Vance" onerror="this.style.display='none'"/></div>
+        <div><h4>Marcus Vance</h4><span>Fleet Manager</span></div>
+      </div>
+    </div>
+    <div class="rc p3d rv d3" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"Passed my MOT with no issues at all. The team were brilliant, the waiting area spotless, and I got a text the moment it was ready. Would not go anywhere else."</p>
+      <div class="rper">
+        <div class="rav"><i class="fa-solid fa-user"></i></div>
+        <div><h4>Priya Sharma</h4><span>Verified Google Review</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ ACCORDION -->
+<section class="faq-s" id="faqs">
+  <div class="sh rv">
+    <p class="slbl">Common Questions</p>
+    <h2 class="fd"><span class="th">FAQs</span></h2>
+    <div class="grl-c"></div>
+  </div>
+  <div class="rv">
+    <div class="fi"><div class="fq" onclick="tFaq(this)"><span>Will using your garage void my new car&rsquo;s warranty?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">No, it will not. We use manufacturer-approved parts and follow the exact service schedules required. Under Block Exemption law, you can service your car at any qualified garage without voiding the warranty.</div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)"><span>What happens if my car fails its MOT?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">We call you immediately with a clear explanation of what failed and a fixed price to repair it. We never carry out any work without your written approval first.</div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)"><span>How long does an MOT test take?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Approximately 45 to 60 minutes. You are welcome to wait with complimentary tea and coffee, or we text you the moment it is ready for collection.</div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)"><span>Do you offer a courtesy car while mine is serviced?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes, subject to availability. Please mention this when booking so we can reserve one for you.</div></div>
+    <div class="fi"><div class="fq" onclick="tFaq(this)"><span>How will I know when my next service is due?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Our automated system sends you a reminder text and email 30 days before your next service is due. No more forgetting — it just arrives when you need it.</div></div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="con-s" id="location">
+  <div class="sh rv"><p class="slbl">Find Us</p><h2 class="fd">Visit Our <span class="th">Garage</span></h2><div class="grl-c"></div></div>
+  <div class="cgrid">
+    <div class="mf rl" data-tilt data-tilt-max="3">
+      <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+    </div>
+    <div class="rr">
+      <p style="color:var(--mid);margin-bottom:1.4rem;font-size:.95rem">Conveniently located in central Andover with free customer parking. Drop in or book ahead.</p>
+      <a href="https://wa.me/447474080809" target="_blank" class="cs p3d" data-tilt data-tilt-max="4">
+        <div class="cic" style="background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.2);color:#25D366"><i class="fa-brands fa-whatsapp"></i></div>
+        <div><div class="clbl">WhatsApp Us</div><div class="cval">Message for a Quick Quote</div></div>
       </a>
-    </nav>
-    <button onclick="openBooking()" class="btn-holo">
-      <i class="fa-solid fa-calendar-check"></i> Book MOT
-    </button>
-  </header>
-
-  <!-- ===================== HERO ===================== -->
-  <section class="hero">
-    <div id="hero-canvas-container"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-scanlines"></div>
-    <div class="corner-tl"></div>
-    <div class="corner-br"></div>
-
-    <div class="hero-content">
-      <div class="hero-badge">
-        <i class="fa-solid fa-certificate" style="font-size:.65rem;"></i>
-        DVSA Approved &nbsp;&middot;&nbsp; Andover&rsquo;s Trusted Garage &nbsp;&middot;&nbsp; Since 2008
-      </div>
-      <h1 class="font-display">
-        Reliable Local Mechanics<br>
-        <span class="text-holo">&amp; MOT Testing.</span>
-      </h1>
-      <p>Expert repairs. Transparent pricing. Zero hidden costs. DVSA approved MOT testing and full vehicle care, right here in Andover.</p>
-      <div class="hero-cta-row">
-        <button onclick="openBooking()" class="btn-holo" style="padding:1.1rem 2.5rem;">
-          <i class="fa-solid fa-calendar-check"></i> Book Your MOT
-        </button>
-        <a href="#services" class="btn-3d">
-          <i class="fa-solid fa-wrench"></i> View Services
-        </a>
-      </div>
-      <div class="hero-trust">
-        <span class="trust-pill"><i class="fa-solid fa-check"></i> No hidden costs</span>
-        <span class="trust-pill"><i class="fa-solid fa-check"></i> DVSA approved</span>
-        <span class="trust-pill"><i class="fa-solid fa-check"></i> 140+ 5-star reviews</span>
-        <span class="trust-pill"><i class="fa-solid fa-check"></i> Same-day results</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FLOATING TRUST CARDS ===================== -->
-  <div class="trust-cards reveal">
-    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
-      <i class="fa-brands fa-google text-holo" style="font-size:2rem;"></i>
-      <div>
-        <div style="font-size:1.2rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;">5.0 Stars</div>
-        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Google Reviews</div>
-      </div>
-    </div>
-    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
-      <i class="fa-solid fa-certificate text-holo" style="font-size:2rem;"></i>
-      <div>
-        <div class="font-display" style="font-size:1.2rem;">DVSA</div>
-        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Approved Centre</div>
-      </div>
-    </div>
-    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
-      <i class="fa-solid fa-gear text-holo" style="font-size:2rem;"></i>
-      <div>
-        <div class="font-display" style="font-size:1.2rem;">1,200+</div>
-        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">Cars Serviced</div>
-      </div>
-    </div>
-    <div class="trust-card panel-3d" data-tilt data-tilt-max="8">
-      <i class="fa-solid fa-bolt text-holo" style="font-size:2rem;"></i>
-      <div>
-        <div class="font-display" style="font-size:1.2rem;">Same Day</div>
-        <div style="font-size:.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;">MOT Results</div>
-      </div>
+      <a href="mailto:hello@gochuchuro.com" class="cs p3d" data-tilt data-tilt-max="4">
+        <div class="cic" style="background:rgba(0,181,200,0.1);border-color:rgba(0,181,200,0.2);color:var(--gc-teal)"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="clbl">Email Us</div><div class="cval">Send a Booking Enquiry</div></div>
+      </a>
+      <button onclick="openB()" class="bholo" style="width:100%;justify-content:center;padding:1rem;margin-top:.4rem">
+        <i class="fa-solid fa-calendar-check"></i>Book Online Now
+      </button>
     </div>
   </div>
+</section>
 
-  <!-- ===================== BOOKING ENGINE ===================== -->
-  <section class="booking-section" id="booking">
-    <div class="booking-grid panel-3d reveal">
-      <div class="booking-pitch">
-        <p class="about-label">Smart Online Booking</p>
-        <h3 class="font-display">Skip the Queue.<br><span>Book Online.</span></h3>
-        <div class="glow-line-red"></div>
-        <p>Do not wait on hold. Pick your service, choose your vehicle type, and lock in your slot instantly. We confirm within the hour.</p>
-        <div class="ai-badge">
-          <div class="ai-avatar"><i class="fa-solid fa-headset"></i></div>
-          <div>
-            <h4 style="color:white;font-size:.95rem;margin-bottom:2px;">Virtual Booking Assistant</h4>
-            <p style="font-size:.8rem;color:var(--text-dim);">Available 24/7 to help you book and get instant quotes.</p>
-          </div>
-        </div>
-      </div>
-      <div class="booking-panel panel-inset" data-tilt data-tilt-max="6">
-        <h4 class="text-holo font-display">Select Service Type</h4>
-        <div class="service-bubbles">
-          <div class="service-bubble active" onclick="selectService(this)">MOT Test</div>
-          <div class="service-bubble" onclick="selectService(this)">Interim Service</div>
-          <div class="service-bubble" onclick="selectService(this)">Full Service</div>
-          <div class="service-bubble" onclick="selectService(this)">Diagnostics</div>
-        </div>
-        <p class="booking-label">Vehicle Class</p>
-        <select class="booking-select">
-          <option>Standard Car / Hatchback</option>
-          <option>Performance / Sports Car</option>
-          <option>Commercial Van</option>
-          <option>4x4 / SUV</option>
-        </select>
-        <button onclick="openBooking()" class="btn-holo" style="width:100%;justify-content:center;padding:1rem;">
-          <i class="fa-solid fa-calendar-check"></i> Find Available Slots
-        </button>
-        <p style="font-size:.68rem;color:var(--text-dim);text-align:center;margin-top:.7rem;">Free cancellation up to 24 hours in advance.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== ABOUT ===================== -->
-  <section class="about-section" id="about">
-    <div class="about-grid">
-      <div class="about-img-wrap reveal-left" data-tilt data-tilt-max="4">
-        <div class="about-img-placeholder"><i class="fa-solid fa-garage"></i></div>
-        <img src="interior.jpg" alt="Autotech workshop" onerror="this.style.display='none'"/>
-      </div>
-      <div class="reveal-right">
-        <p class="about-label">Your Trusted Local Garage</p>
-        <h2 class="font-display">Honest Mechanics.<br>Fair Prices.</h2>
-        <div class="glow-line-red"></div>
-        <p>At Autotech we believe in straightforward, honest advice. We will never carry out any repair work without showing you exactly what is wrong and agreeing a price first. No surprises. No pressure.</p>
-        <p>Our workshop is equipped with the latest diagnostic tools, meaning we fix everything from a simple tyre change to complex engine faults quickly and safely.</p>
-        <ul class="about-checks">
-          <li><i class="fa-solid fa-check-circle"></i> We show you the problem before we fix it</li>
-          <li><i class="fa-solid fa-check-circle"></i> Fixed prices agreed before work begins</li>
-          <li><i class="fa-solid fa-check-circle"></i> Manufacturer-approved parts used throughout</li>
-          <li><i class="fa-solid fa-check-circle"></i> Full warranty on all work carried out</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== SERVICES ===================== -->
-  <section class="services-section" id="services">
-    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
-      <p class="about-label">What We Do</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3.2rem);">Our <span class="text-holo">Services</span></h2>
-      <div class="glow-line-red" style="margin:.8rem auto;"></div>
-      <p style="color:var(--text-dim);">Professional care to keep your vehicle safe, reliable, and on the road.</p>
-    </div>
-    <div class="services-grid">
-      <div class="service-card panel-3d reveal delay-1" data-tilt data-tilt-max="8">
-        <div class="svc-img svc-img-mot">
-          <i class="fa-solid fa-certificate"></i>
-          <span class="svc-badge">DVSA Approved</span>
-          <img src="mot-test.jpg" alt="MOT Testing" onerror="this.style.display='none'"/>
-        </div>
-        <div class="svc-body">
-          <div class="svc-title">MOT Testing &amp; Repairs</div>
-          <p class="svc-desc">Failed your MOT? Hearing a strange noise? We handle brakes, exhausts, suspension, lighting, and all MOT advisory work.</p>
-          <button onclick="openBooking()" class="svc-cta">Book MOT <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-      <div class="service-card panel-3d reveal delay-2" data-tilt data-tilt-max="8">
-        <div class="svc-img svc-img-service">
-          <i class="fa-solid fa-oil-can"></i>
-          <span class="svc-badge">Engine Health</span>
-          <img src="car-service.jpg" alt="Car Servicing" onerror="this.style.display='none'"/>
-        </div>
-        <div class="svc-body">
-          <div class="svc-title">Annual Servicing</div>
-          <p class="svc-desc">Regular oil changes, filter replacements, and manufacturer schedule servicing prevents expensive breakdowns before they happen.</p>
-          <button onclick="openBooking()" class="svc-cta">Book Service <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-      <div class="service-card panel-3d reveal delay-3" data-tilt data-tilt-max="8">
-        <div class="svc-img svc-img-diag">
-          <i class="fa-solid fa-microchip"></i>
-          <span class="svc-badge">Fault Finding</span>
-          <img src="diagnostics.jpg" alt="Diagnostics" onerror="this.style.display='none'"/>
-        </div>
-        <div class="svc-body">
-          <div class="svc-title">Diagnostics &amp; Warning Lights</div>
-          <p class="svc-desc">Dashboard lit up? We plug into your car&rsquo;s onboard computer to quickly pinpoint and fix electrical and engine faults accurately.</p>
-          <button onclick="openBooking()" class="svc-cta">Get Diagnosed <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== GALLERY ===================== -->
-  <div class="gallery-section" id="gallery">
-    <p class="gallery-label">Inside Our Workshop</p>
-    <div class="gallery-track">
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-garage"></i><img src="gallery-1.jpg" alt="Workshop" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-car-on"></i><img src="gallery-2.jpg" alt="MOT bay" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-screwdriver-wrench"></i><img src="gallery-3.jpg" alt="Mechanic" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-microchip"></i><img src="gallery-4.jpg" alt="Diagnostics" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-oil-can"></i><img src="gallery-5.jpg" alt="Servicing" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-garage"></i><img src="gallery-1.jpg" alt="Workshop" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-car-on"></i><img src="gallery-2.jpg" alt="MOT bay" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-screwdriver-wrench"></i><img src="gallery-3.jpg" alt="Mechanic" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-microchip"></i><img src="gallery-4.jpg" alt="Diagnostics" onerror="this.style.display='none'"/></div>
-      <div class="gallery-item panel-3d"><i class="fa-solid fa-oil-can"></i><img src="gallery-5.jpg" alt="Servicing" onerror="this.style.display='none'"/></div>
-    </div>
+<!-- FOOTER — social icons here only -->
+<footer>
+  <div class="fbrand"><span class="th">AUTO</span>TECH</div>
+  <p style="color:var(--dim);font-size:.88rem;margin-bottom:.5rem">Keeping Andover driving safely.</p>
+  <div class="socrow">
+    <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="sc" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="sc" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="sc" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://wa.me/447474080809" target="_blank" class="sc" title="WhatsApp" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></a>
   </div>
-
-  <!-- ===================== REVIEWS ===================== -->
-  <section class="reviews-section" id="reviews">
-    <div style="text-align:center;margin-bottom:3.5rem;" class="reveal">
-      <p class="about-label">What Drivers Say</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);">Customer Reviews</h2>
-      <div class="glow-line-red" style="margin:.8rem auto;"></div>
-    </div>
-    <div class="reviews-grid">
-      <div class="review-card panel-3d reveal delay-1" data-tilt data-tilt-max="4">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="review-text">"The finest garage in town. They found a tricky electrical fault that another garage completely missed. Great prices, very honest, and they called me before doing anything."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">
-            <i class="fa-solid fa-user" style="color:white;opacity:.4;"></i>
-            <img src="reviewer-1.jpg" alt="Emma Richardson" onerror="this.style.display='none'"/>
-          </div>
-          <div><h4>Emma Richardson</h4><span>Local Driver, Andover</span></div>
-        </div>
-      </div>
-      <div class="review-card panel-3d reveal delay-2" data-tilt data-tilt-max="4">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="review-text">"We take all our company vans here. Booking online is a breeze, they never add hidden costs, and they always get the vans back same day. Excellent service every time."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">
-            <i class="fa-solid fa-user" style="color:white;opacity:.4;"></i>
-            <img src="reviewer-2.jpg" alt="Marcus Vance" onerror="this.style.display='none'"/>
-          </div>
-          <div><h4>Marcus Vance</h4><span>Fleet Manager</span></div>
-        </div>
-      </div>
-      <div class="review-card panel-3d reveal delay-3" data-tilt data-tilt-max="4">
-        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="review-text">"Passed my MOT with no issues. The team were friendly, the waiting area spotless. Got a text the moment it was ready. Would not go anywhere else in Andover."</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">
-            <i class="fa-solid fa-user" style="color:white;opacity:.4;"></i>
-          </div>
-          <div><h4>Priya Sharma</h4><span>Verified Google Review</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FAQ ACCORDION ===================== -->
-  <section class="faq-section" id="faqs">
-    <div style="text-align:center;margin-bottom:3rem;" class="reveal">
-      <p class="about-label">Common Questions</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);"><span class="text-holo">FAQs</span></h2>
-      <div class="glow-line-red" style="margin:.8rem auto;"></div>
-    </div>
-    <div class="faq-list reveal">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>Will using your garage void my new car&rsquo;s warranty?</span>
-          <i class="fa-solid fa-plus faq-icon"></i>
-        </div>
-        <div class="faq-a">No, it will not. We use manufacturer-approved parts and follow the exact service schedules required by your car maker. Under Block Exemption law, you can service your car at any qualified garage during the warranty period without voiding it.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>What happens if my car fails its MOT?</span>
-          <i class="fa-solid fa-plus faq-icon"></i>
-        </div>
-        <div class="faq-a">We call you immediately with a clear explanation of what failed and a fixed price to repair it. We never carry out any work without your approval. If you prefer, you can collect the car and get it repaired elsewhere.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>How long does an MOT test take?</span>
-          <i class="fa-solid fa-plus faq-icon"></i>
-        </div>
-        <div class="faq-a">Approximately 45 to 60 minutes. You are welcome to wait in our comfortable area with complimentary tea and coffee, or we will text you when it is ready for collection.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>Do you offer a courtesy car while mine is being serviced?</span>
-          <i class="fa-solid fa-plus faq-icon"></i>
-        </div>
-        <div class="faq-a">Yes, subject to availability. Please mention this when booking so we can reserve one for you.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">
-          <span>How will I know when my next service is due?</span>
-          <i class="fa-solid fa-plus faq-icon"></i>
-        </div>
-        <div class="faq-a">Our automated system sends you a reminder text and email 30 days before your next service is due, based on your last visit. No more forgetting.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== LOCATION ===================== -->
-  <section class="contact-section" id="location">
-    <div style="text-align:center;margin-bottom:3rem;max-width:1200px;margin-left:auto;margin-right:auto;" class="reveal">
-      <p class="about-label">Find Us</p>
-      <h2 class="font-display" style="font-size:clamp(2rem,4vw,3rem);">Visit Our <span class="text-holo">Garage</span></h2>
-      <div class="glow-line-red" style="margin:.8rem auto;"></div>
-    </div>
-    <div class="contact-grid">
-      <div class="map-frame reveal-left" data-tilt data-tilt-max="3">
-        <iframe
-          src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen="">
-        </iframe>
-      </div>
-      <div class="reveal-right">
-        <p style="color:var(--text-dim);margin-bottom:1.5rem;font-size:1rem;">Conveniently located in central Andover with free customer parking. Drop in or book ahead.</p>
-        <a href="https://wa.me/447474080809" target="_blank" class="contact-strip panel-3d" data-tilt data-tilt-max="4">
-          <div class="contact-icon" style="background:rgba(37,211,102,0.1);border-color:rgba(37,211,102,0.2);color:#25D366;">
-            <i class="fa-brands fa-whatsapp"></i>
-          </div>
-          <div>
-            <div class="contact-label-sm">WhatsApp Us</div>
-            <div class="contact-val">Message for a Quick Quote</div>
-          </div>
-        </a>
-        <a href="mailto:hello@gochuchuro.com" class="contact-strip panel-3d" data-tilt data-tilt-max="4">
-          <div class="contact-icon" style="background:rgba(0,181,200,0.1);border-color:rgba(0,181,200,0.2);color:var(--gc-teal);">
-            <i class="fa-solid fa-envelope"></i>
-          </div>
-          <div>
-            <div class="contact-label-sm">Email Us</div>
-            <div class="contact-val">Send a Booking Enquiry</div>
-          </div>
-        </a>
-        <button onclick="openBooking()" class="btn-holo" style="width:100%;justify-content:center;padding:1rem;margin-top:.4rem;">
-          <i class="fa-solid fa-calendar-check"></i> Book Online Now
-        </button>
-        <div class="social-row">
-          <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="social-circle" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="social-circle" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="social-circle" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://wa.me/447474080809" target="_blank" class="social-circle" title="WhatsApp" style="color:#25D366;"><i class="fa-brands fa-whatsapp"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== FOOTER ===================== -->
-  <footer>
-    <div class="footer-brand"><span class="text-holo">AUTO</span>TECH</div>
-    <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1.5rem;">Keeping Andover driving safely.</p>
-    <div style="display:flex;justify-content:center;gap:.8rem;margin-bottom:1.5rem;">
-      <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="social-circle" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="social-circle" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="social-circle" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-      <a href="https://wa.me/447474080809" target="_blank" class="social-circle" title="WhatsApp" style="color:#25D366;"><i class="fa-brands fa-whatsapp"></i></a>
-    </div>
-    <div class="footer-links">
-      <a href="../../showroom.html">Back to Showroom</a>
-      <a href="../../index.html">GoChuchuro Home</a>
-      <a href="../../index.html#pricing">Pricing from £49/mo</a>
-      <a href="../../privacy.html">Privacy Policy</a>
-    </div>
-    <p style="font-size:.75rem;color:#374151;border-top:1px solid var(--border);padding-top:1.5rem;margin-top:1rem;">
-      &copy; 2026 Autotech &mdash; MOT &amp; Car Repairs, Andover. Website built and powered by
-      <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700;">GoChuchuro</a>.
-    </p>
-  </footer>
-
-  <!-- ===================== STICKY ACTION BAR ===================== -->
-  <div class="action-bar">
-    <a href="https://wa.me/447474080809" target="_blank" class="action-btn action-btn-ghost">
-      <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> WhatsApp
-    </a>
-    <button onclick="openBooking()" class="action-btn action-btn-red">
-      <i class="fa-solid fa-calendar-check"></i> Book MOT / Service
-    </button>
+  <div class="flinks">
+    <a href="../../showroom.html">Back to Showroom</a>
+    <a href="../../index.html">GoChuchuro Home</a>
+    <a href="../../index.html#pricing">Pricing from £49/mo</a>
+    <a href="../../privacy.html">Privacy Policy</a>
   </div>
+  <p style="font-size:.72rem;color:#374151;border-top:1px solid rgba(255,255,255,0.05);padding-top:1.5rem;margin-top:.5rem">
+    &copy; 2026 Autotech &mdash; MOT &amp; Car Repairs, Andover. Website powered by
+    <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700">GoChuchuro</a>.
+  </p>
+</footer>
 
-  <!-- ===================== GC FLOATING BADGE ===================== -->
-  <div class="gc-badge" id="gcBadge">
-    <button class="gc-badge-close" onclick="document.getElementById('gcBadge').style.display='none'">&times;</button>
-    <div class="gc-badge-logo">Powered by GoChuchuro</div>
-    <p><strong>Want this website</strong> for your business?</p>
-    <a href="../../index.html" target="_blank">
-      <i class="fa-regular fa-calendar"></i> Free Chat
-    </a>
+<!-- STICKY ACTION BAR -->
+<div class="abar">
+  <a href="https://wa.me/447474080809" target="_blank" class="ab abg"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i>WhatsApp</a>
+  <button onclick="openB()" class="ab abr"><i class="fa-solid fa-calendar-check"></i>Book MOT / Service</button>
+</div>
+
+<!-- GC BADGE -->
+<div class="gcb" id="gcb">
+  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">&times;</button>
+  <div class="gcbl">Powered by GoChuchuro</div>
+  <p><strong>Want this website</strong> for your business?</p>
+  <a href="../../index.html" target="_blank"><i class="fa-regular fa-calendar"></i>Free Chat</a>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="mo" id="bm">
+  <div class="mb">
+    <button class="mc" onclick="closeB()"><i class="fa-solid fa-xmark"></i></button>
+    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" scrolling="yes"></iframe>
   </div>
+</div>
 
-  <!-- ===================== BOOKING MODAL ===================== -->
-  <div class="modal-overlay" id="bookingModal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeBooking()"><i class="fa-solid fa-xmark"></i></button>
-      <iframe
-        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true"
-        scrolling="yes">
-      </iframe>
-    </div>
-  </div>
+<script>
+/* CURSOR */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(ar)})();
 
-  <!-- ===================== SCRIPTS ===================== -->
-  <script>
-    /* ---- CURSOR ---- */
-    const dot=document.getElementById('cursorDot'), ring=document.getElementById('cursorRing');
-    let mX=0,mY=0,rX=0,rY=0;
-    document.addEventListener('mousemove',e=>{
-      mX=e.clientX;mY=e.clientY;
-      dot.style.left=mX+'px';dot.style.top=mY+'px';
-    });
-    (function animRing(){rX+=(mX-rX)*.12;rY+=(mY-rY)*.12;ring.style.left=rX+'px';ring.style.top=rY+'px';requestAnimationFrame(animRing);})();
+/* MODAL */
+function openB(){document.getElementById('bm').classList.add('on');document.body.style.overflow='hidden'}
+function closeB(){document.getElementById('bm').classList.remove('on');document.body.style.overflow=''}
+document.getElementById('bm').addEventListener('click',function(e){if(e.target===this)closeB()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeB()});
 
-    /* ---- BOOKING MODAL ---- */
-    function openBooking()  { document.getElementById('bookingModal').classList.add('active'); document.body.style.overflow='hidden'; }
-    function closeBooking() { document.getElementById('bookingModal').classList.remove('active'); document.body.style.overflow=''; }
-    document.getElementById('bookingModal').addEventListener('click',function(e){ if(e.target===this)closeBooking(); });
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeBooking(); });
+/* SERVICE SELECTOR */
+function selSvc(el){document.querySelectorAll('.sb').forEach(b=>b.classList.remove('a'));el.classList.add('a')}
 
-    /* ---- SERVICE BUBBLE ---- */
-    function selectService(el){ document.querySelectorAll('.service-bubble').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
+/* FAQ */
+function tFaq(el){
+  const it=el.parentElement,ans=it.querySelector('.fa'),op=it.classList.contains('open');
+  document.querySelectorAll('.fi').forEach(i=>{i.classList.remove('open');i.querySelector('.fa').classList.remove('open')});
+  if(!op){it.classList.add('open');ans.classList.add('open')}
+}
 
-    /* ---- FAQ ACCORDION ---- */
-    function toggleFaq(el){
-      const item=el.parentElement, answer=item.querySelector('.faq-a'), isOpen=item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').classList.remove('open');});
-      if(!isOpen){item.classList.add('open');answer.classList.add('open');}
-    }
+/* SCROLL REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
 
-    /* ---- SCROLL REVEAL ---- */
-    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
-    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>obs.observe(el));
+/* ================================================================
+   THREE.JS HERO — FULL IMMERSIVE WAVE MESH + SPEED GRID + SPARKS
+================================================================ */
+const hc=document.getElementById('hc');
+const W=hc.clientWidth, H=hc.clientHeight;
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x030406,0.018);
 
-    /* ---- THREE.JS HERO — Racing Grid + Sparks ---- */
-    const container=document.getElementById('hero-canvas-container');
-    const scene=new THREE.Scene();
-    scene.fog=new THREE.FogExp2(0x050505,0.025);
+const cam=new THREE.PerspectiveCamera(65,W/H,0.1,300);
+cam.position.set(0,3,18);
+cam.lookAt(0,0,0);
 
-    const camera=new THREE.PerspectiveCamera(70,container.clientWidth/container.clientHeight,0.1,1000);
-    const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});
-    renderer.setSize(container.clientWidth,container.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
-    container.appendChild(renderer.domElement);
+const ren=new THREE.WebGLRenderer({alpha:true,antialias:true});
+ren.setSize(W,H);
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+hc.appendChild(ren.domElement);
 
-    /* Racing grid — red lines */
-    const grid=new THREE.GridHelper(120,50,0xef4444,0x330000);
-    grid.position.y=-4;
-    scene.add(grid);
+/* --- WAVE MESH — large, low, fills the entire floor space --- */
+const wGeo=new THREE.PlaneGeometry(80,60,90,60);
+const wMat=new THREE.MeshBasicMaterial({color:0xef4444,wireframe:true,transparent:true,opacity:.18});
+const wave=new THREE.Mesh(wGeo,wMat);
+wave.rotation.x=-Math.PI/2.2;
+wave.position.set(0,-4,-8);
+scene.add(wave);
 
-    /* Second fainter grid for depth */
-    const grid2=new THREE.GridHelper(200,20,0x220000,0x110000);
-    grid2.position.y=-4.1;
-    scene.add(grid2);
+/* Second wave — teal accent, offset phase */
+const wGeo2=new THREE.PlaneGeometry(90,65,50,35);
+const wMat2=new THREE.MeshBasicMaterial({color:0x00B5C8,wireframe:true,transparent:true,opacity:.07});
+const wave2=new THREE.Mesh(wGeo2,wMat2);
+wave2.rotation.x=-Math.PI/2.2;
+wave2.position.set(0,-6,-12);
+scene.add(wave2);
 
-    /* Speed sparks — red particles */
-    const pCount=400;
-    const pPos=new Float32Array(pCount*3);
-    for(let i=0;i<pCount*3;i+=3){
-      pPos[i]  =(Math.random()-.5)*50;
-      pPos[i+1]=Math.random()*12-3;
-      pPos[i+2]=(Math.random()-.5)*50;
-    }
-    const pGeo=new THREE.BufferGeometry();
-    pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
-    const pMat=new THREE.PointsMaterial({size:.08,color:0xef4444,transparent:true,opacity:.7,blending:THREE.AdditiveBlending});
-    const pMesh=new THREE.Points(pGeo,pMat);
-    scene.add(pMesh);
+/* Third — deep gold undertone */
+const wGeo3=new THREE.PlaneGeometry(70,50,25,18);
+const wMat3=new THREE.MeshBasicMaterial({color:0xD4AF37,wireframe:true,transparent:true,opacity:.04});
+const wave3=new THREE.Mesh(wGeo3,wMat3);
+wave3.rotation.x=-Math.PI/2.1;
+wave3.position.set(0,-9,-18);
+scene.add(wave3);
 
-    /* Faint gold accent particles */
-    const pCount2=120;
-    const pPos2=new Float32Array(pCount2*3);
-    for(let i=0;i<pCount2*3;i++)pPos2[i]=(Math.random()-.5)*60;
-    const pGeo2=new THREE.BufferGeometry();
-    pGeo2.setAttribute('position',new THREE.BufferAttribute(pPos2,3));
-    const pMat2=new THREE.PointsMaterial({size:.06,color:0xD4AF37,transparent:true,opacity:.25,blending:THREE.AdditiveBlending});
-    scene.add(new THREE.Points(pGeo2,pMat2));
+/* Store original Z for animation */
+const pos1=wave.geometry.attributes.position;
+const pos2=wave2.geometry.attributes.position;
+const pos3=wave3.geometry.attributes.position;
+const oz1=new Float32Array(pos1.count),oz2=new Float32Array(pos2.count),oz3=new Float32Array(pos3.count);
+for(let i=0;i<pos1.count;i++)oz1[i]=pos1.getZ(i);
+for(let i=0;i<pos2.count;i++)oz2[i]=pos2.getZ(i);
+for(let i=0;i<pos3.count;i++)oz3[i]=pos3.getZ(i);
 
-    camera.position.set(0,2,12);
-    let tRX=0,tRY=0;
-    document.addEventListener('mousemove',e=>{
-      tRX=(e.clientY/window.innerHeight-.5)*.3;
-      tRY=(e.clientX/window.innerWidth-.5)*.3;
-    });
+/* Speed sparks — rushing particles */
+const sCount=500, sPos=new Float32Array(sCount*3);
+for(let i=0;i<sCount*3;i+=3){
+  sPos[i]=(Math.random()-.5)*70;
+  sPos[i+1]=Math.random()*10-2;
+  sPos[i+2]=(Math.random()-.5)*80;
+}
+const sGeo=new THREE.BufferGeometry();
+sGeo.setAttribute('position',new THREE.BufferAttribute(sPos,3));
+const sMat=new THREE.PointsMaterial({size:.1,color:0xef4444,transparent:true,opacity:.75,blending:THREE.AdditiveBlending});
+const sparks=new THREE.Points(sGeo,sMat);
+scene.add(sparks);
 
-    const clk=new THREE.Clock();
-    (function animHero(){
-      requestAnimationFrame(animHero);
-      const t=clk.getElapsedTime();
-      /* Grid rushes towards camera — speed sensation */
-      grid.position.z=(t*6)%2.5;
-      grid2.position.z=(t*3)%5;
-      /* Sparks rush past camera */
-      const pos=pMesh.geometry.attributes.position.array;
-      for(let i=2;i<pCount*3;i+=3){ pos[i]+=0.22; if(pos[i]>18)pos[i]=-32; }
-      pMesh.geometry.attributes.position.needsUpdate=true;
-      /* Mouse camera tilt — steering wheel feel */
-      camera.position.x+=(tRY*3-camera.position.x)*.05;
-      camera.position.y+=(-tRX*2+2-camera.position.y)*.05;
-      camera.lookAt(0,0,0);
-      renderer.render(scene,camera);
-    })();
+/* Gold dust */
+const gCount=150,gPos=new Float32Array(gCount*3);
+for(let i=0;i<gCount*3;i++)gPos[i]=(Math.random()-.5)*90;
+const gGeo=new THREE.BufferGeometry();
+gGeo.setAttribute('position',new THREE.BufferAttribute(gPos,3));
+const gMat=new THREE.PointsMaterial({size:.07,color:0xD4AF37,transparent:true,opacity:.3,blending:THREE.AdditiveBlending});
+scene.add(new THREE.Points(gGeo,gMat));
 
-    window.addEventListener('resize',()=>{
-      camera.aspect=container.clientWidth/container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth,container.clientHeight);
-    });
+let tx=0,ty=0;
+document.addEventListener('mousemove',e=>{
+  tx=(e.clientX/W-.5)*.6;
+  ty=(e.clientY/H-.5)*.3;
+});
 
-    /* ---- VANILLA TILT ---- */
-    VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{
-      speed:400,glare:true,'max-glare':.15,
-    });
-  </script>
+const clk=new THREE.Clock();
+(function anim(){
+  requestAnimationFrame(anim);
+  const t=clk.getElapsedTime();
+
+  /* Wave 1 — large undulation, amplitude increases away from centre */
+  for(let i=0;i<pos1.count;i++){
+    const x=pos1.getX(i),y=pos1.getY(i);
+    const d=Math.sqrt(x*x+y*y)*.04;
+    pos1.setZ(i,oz1[i]+Math.sin(x*.18+t*.9)*1.2+Math.cos(y*.18+t*.8)*1.0+Math.sin(d-t*.6)*0.6);
+  }
+  pos1.needsUpdate=true;
+
+  /* Wave 2 — offset phase, softer */
+  for(let i=0;i<pos2.count;i++){
+    const x=pos2.getX(i),y=pos2.getY(i);
+    pos2.setZ(i,oz2[i]+Math.sin(x*.12+t*.6+1.2)*1.4+Math.cos(y*.12+t*.7)*1.1);
+  }
+  pos2.needsUpdate=true;
+
+  /* Wave 3 — slow deep swell */
+  for(let i=0;i<pos3.count;i++){
+    const x=pos3.getX(i),y=pos3.getY(i);
+    pos3.setZ(i,oz3[i]+Math.sin(x*.08+t*.4+2.4)*1.8+Math.cos(y*.08+t*.5)*1.4);
+  }
+  pos3.needsUpdate=true;
+
+  /* Sparks rush towards camera */
+  const sp=sparks.geometry.attributes.position.array;
+  for(let i=2;i<sCount*3;i+=3){sp[i]+=.28;if(sp[i]>20)sp[i]=-60;}
+  sparks.geometry.attributes.position.needsUpdate=true;
+
+  /* Camera follows mouse — steering sensation */
+  cam.position.x+=(tx*4-cam.position.x)*.04;
+  cam.position.y+=(-ty*2+3-cam.position.y)*.04;
+  cam.lookAt(0,0,0);
+  ren.render(scene,cam);
+})();
+
+window.addEventListener('resize',()=>{
+  const w=hc.clientWidth,h=hc.clientHeight;
+  cam.aspect=w/h;cam.updateProjectionMatrix();
+  ren.setSize(w,h);
+});
+
+/* VANILLA TILT */
+VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{speed:400,glare:true,'max-glare':.15});
+</script>
 </body>
 </html>
