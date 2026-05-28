@@ -1,286 +1,976 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D GoChuchuro Showroom | Premium Business Templates</title>
-    
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="GoChuchuro Template Showroom — See exactly what your business website could look like. 2D and 3D designs for trades, salons, restaurants, and more. Live in 5 days."/>
+  <title>GoChuchuro Showroom | Your Business Website, Built in 5 Days</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32"/>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180"/>
 
-    <style>
-        :root {
-            --slate-dark: #070b14;
-            --brand-teal: #00f6ff;
-            --text-light: #ffffff;
-            --text-muted: #cbd5e1;
-            --glass-bg: rgba(15, 23, 42, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { 
-            background-color: var(--slate-dark); 
-            color: var(--text-light); 
-            line-height: 1.6; 
-            overflow-x: hidden;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
-        /* 3D Background Canvas */
-        #showroom-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-        }
+  <style>
+    /* =============================================
+       GOCHUCHURO SHOWROOM — BRAND DESIGN SYSTEM
+       ============================================= */
+    :root {
+      --bg-emerald:       #0D1515;
+      --bg-charcoal:      #111111;
+      --bg-deep:          #080e0e;
+      --holo-teal:        #00B5C8;
+      --holo-gold:        #D4AF37;
+      --holo-bright-gold: #E5C158;
+      --cool-silver:      #C8CDD6;
+      --text-main:        #f8fafc;
+      --text-dim:         #94a3b8;
+      --alert-amber:      #f59e0b;
+      --forest-olive:     #3D5A3E;
+      --gradient-primary: linear-gradient(135deg, #00B5C8, #E5C158);
+      --gradient-gold:    linear-gradient(135deg, #D4AF37, #E5C158, #D4AF37);
+      --shadow-drop:      12px 12px 30px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
+      --shadow-inner:     inset 6px 6px 18px rgba(0,0,0,0.85), inset -3px -3px 10px rgba(255,255,255,0.02);
+      --glow-teal:        0 0 30px rgba(0,181,200,0.25), 0 0 60px rgba(0,181,200,0.1);
+      --glow-gold:        0 0 30px rgba(212,175,55,0.3),  0 0 60px rgba(212,175,55,0.1);
+    }
 
-        /* Content Wrapper to sit above the 3D background */
-        .content-wrapper {
-            position: relative;
-            z-index: 1;
-        }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
 
-        /* Header */
-        .showroom-header { 
-            background-color: rgba(7, 11, 20, 0.8); 
-            backdrop-filter: blur(10px);
-            padding: 1.2rem 6%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid var(--glass-border); 
-        }
-        .back-home-btn { 
-            color: #ffffff; text-decoration: none; font-weight: 700; font-size: 0.95rem; 
-            display: flex; align-items: center; gap: 0.5rem; transition: 0.3s; 
-        }
-        .back-home-btn:hover { color: var(--brand-teal); text-shadow: 0 0 10px var(--brand-teal); }
+    body {
+      background-color: var(--bg-emerald);
+      color: var(--text-main);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-        /* Intro Banner */
-        .intro-banner { text-align: center; padding: 5rem 2rem 3rem; max-width: 800px; margin: 0 auto; }
-        .intro-banner span { 
-            background: rgba(0, 246, 255, 0.1); border: 1px solid var(--brand-teal);
-            color: var(--brand-teal); padding: 0.4rem 1rem; border-radius: 50px;
-            font-weight: 800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; 
-            box-shadow: 0 0 15px rgba(0, 246, 255, 0.2);
-        }
-        .intro-banner h1 { font-size: 2.8rem; font-weight: 800; color: white; margin: 1.5rem 0 1rem; letter-spacing: -0.5px; text-shadow: 0 4px 15px rgba(0,0,0,0.5);}
-        .intro-banner p { color: var(--text-muted); font-size: 1.1rem; }
+    /* ---- CUSTOM CURSOR ---- */
+    .cursor-dot {
+      width:8px; height:8px; background:var(--holo-teal);
+      border-radius:50%; position:fixed; top:0; left:0;
+      pointer-events:none; z-index:99999; transform:translate(-50%,-50%);
+      transition:width .3s,height .3s,background .3s;
+      box-shadow:0 0 10px var(--holo-teal);
+    }
+    .cursor-ring {
+      width:36px; height:36px; border:1.5px solid rgba(0,181,200,0.5);
+      border-radius:50%; position:fixed; top:0; left:0;
+      pointer-events:none; z-index:99998; transform:translate(-50%,-50%);
+      transition:width .3s,height .3s,border-color .3s;
+    }
 
-        /* Grid & Cards */
-        .grid-container { 
-            max-width: 1300px; margin: 0 auto; padding: 2rem 6% 6rem; 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; 
-            perspective: 1000px;
-        }
-        
-        .blueprint-card { 
-            background: var(--glass-bg); 
-            backdrop-filter: blur(12px);
-            border-radius: 16px; overflow: hidden; 
-            border: 1px solid var(--glass-border); 
-            display: flex; flex-direction: column; justify-content: space-between; 
-            transform-style: preserve-3d;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-        
-        .card-top { padding: 3rem 2rem; text-align: center; color: white; transform: translateZ(30px); }
-        .card-top i { font-size: 3.5rem; margin-bottom: 1rem; text-shadow: 0 0 20px rgba(255,255,255,0.4);}
-        
-        .card-bottom { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; transform: translateZ(20px);}
-        .card-bottom p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
-        
-        /* Dual Button Layout */
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
+    /* ---- THREE.JS CANVAS ---- */
+    #showroom-canvas {
+      position:fixed; inset:0; width:100vw; height:100vh; z-index:0; pointer-events:none;
+    }
 
-        .btn { 
-            display: block; text-align: center; padding: 0.9rem; border-radius: 8px; 
-            text-decoration: none; font-weight: 700; font-size: 0.9rem; transition: 0.3s; 
-        }
-        
-        .btn-2d {
-            background-color: transparent;
-            color: white;
-            border: 1px solid var(--text-muted);
-        }
-        .btn-2d:hover { background-color: rgba(255,255,255,0.1); border-color: white; }
+    /* ---- LAYOUT ---- */
+    .page-wrap { position:relative; z-index:1; }
 
-        .btn-3d {
-            background-color: var(--brand-teal);
-            color: var(--slate-dark);
-            border: none;
-            box-shadow: 0 0 15px rgba(0, 246, 255, 0.4);
-        }
-        .btn-3d:hover { background-color: white; box-shadow: 0 0 25px rgba(0, 246, 255, 0.6); transform: translateY(-2px);}
+    /* ---- HEADER ---- */
+    .sr-header {
+      background:rgba(13,21,21,0.88); backdrop-filter:blur(20px);
+      padding:.9rem 5%; display:flex; justify-content:space-between; align-items:center;
+      position:sticky; top:0; z-index:100;
+      border-bottom:1px solid rgba(0,181,200,0.08);
+      box-shadow:0 4px 30px rgba(0,0,0,0.4);
+    }
+    .back-btn {
+      display:flex; align-items:center; gap:.6rem;
+      color:var(--cool-silver); text-decoration:none;
+      font-weight:700; font-size:.88rem; letter-spacing:.5px;
+      text-transform:uppercase; transition:all .3s;
+    }
+    .back-btn:hover { color:var(--holo-teal); text-shadow:0 0 12px var(--holo-teal); }
+    .sr-logo {
+      font-family:'Outfit',sans-serif; font-size:1rem;
+      font-weight:900; letter-spacing:2px; color:white;
+      text-decoration:none;
+    }
+    .sr-logo span { color:var(--holo-teal); }
 
-        /* Industry Specific Colors for Icons */
-        .icon-plumbing { color: #00f6ff; } 
-        .icon-restaurant { color: #fbbf24; } 
-        .icon-salon { color: #f43f5e; } 
-        .icon-garage { color: #f87171; } 
-        .icon-driving { color: #a855f7; }
+    /* ---- TRUST STRIP ---- */
+    .trust-strip {
+      background:rgba(0,181,200,0.04);
+      border-bottom:1px solid rgba(0,181,200,0.1);
+      padding:.65rem 5%; display:flex;
+      justify-content:center; align-items:center;
+      flex-wrap:wrap; gap:1.5rem;
+    }
+    .trust-item {
+      display:flex; align-items:center; gap:.5rem;
+      font-size:.8rem; font-weight:700; color:var(--text-dim);
+      letter-spacing:.5px;
+    }
+    .trust-item i { color:var(--holo-teal); font-size:.85rem; }
+    .trust-item strong { color:white; }
 
-        footer { background-color: rgba(2, 6, 23, 0.9); color: #475569; text-align: center; padding: 2.5rem; font-size: 0.9rem; border-top: 1px solid var(--glass-border);}
-    </style>
+    /* ---- HERO BANNER ---- */
+    .sr-hero {
+      text-align:center; padding:5rem 2rem 3rem;
+      max-width:860px; margin:0 auto; position:relative;
+    }
+    .sr-badge {
+      display:inline-flex; align-items:center; gap:.5rem;
+      background:rgba(0,181,200,0.08); border:1px solid rgba(0,181,200,0.3);
+      padding:.4rem 1.2rem; border-radius:100px;
+      font-size:.78rem; font-weight:800; letter-spacing:1px;
+      text-transform:uppercase; color:var(--holo-teal); margin-bottom:1.8rem;
+      animation:fadeInDown .8s ease both;
+    }
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeInUp   { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn     { from{opacity:0;}to{opacity:1;} }
+
+    .sr-hero h1 {
+      font-size:clamp(2.2rem,5vw,4rem); font-weight:900;
+      line-height:1.15; margin-bottom:1.2rem;
+      animation:fadeInUp .9s ease .15s both;
+    }
+    .text-gradient {
+      background:var(--gradient-primary);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .sr-hero p {
+      font-size:1.1rem; color:var(--cool-silver);
+      line-height:1.75; margin-bottom:.5rem;
+      animation:fadeInUp .9s ease .3s both;
+    }
+    .tagline-script {
+      font-family:'Dancing Script',cursive;
+      font-size:1.2rem; color:var(--holo-bright-gold);
+      animation:fadeIn 1.2s ease .5s both;
+      display:block; margin-bottom:2.5rem;
+    }
+
+    /* ---- SECTION DIVIDER ---- */
+    .glow-line {
+      width:80px; height:2px; margin:1rem auto 0;
+      background:var(--gradient-primary); border-radius:100px;
+      box-shadow:0 0 12px rgba(0,181,200,0.4);
+    }
+
+    /* ---- TRADE GRID ---- */
+    .trade-grid {
+      max-width:1320px; margin:0 auto;
+      padding:1rem 4% 5rem;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:2.5rem;
+    }
+
+    /* ---- TRADE CARD ---- */
+    .trade-card {
+      background:rgba(17,17,17,0.7);
+      backdrop-filter:blur(14px);
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.05);
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      box-shadow:var(--shadow-drop);
+      transition:all .4s ease;
+      opacity:0; transform:translateY(30px);
+      animation:cardIn .7s ease forwards;
+    }
+    .trade-card:hover {
+      border-color:rgba(0,181,200,0.25);
+      box-shadow:0 0 40px rgba(0,181,200,0.12), var(--shadow-drop);
+      transform:translateY(-5px) !important;
+    }
+    @keyframes cardIn { to{opacity:1;transform:translateY(0);} }
+    .trade-card:nth-child(1){animation-delay:.1s;}
+    .trade-card:nth-child(2){animation-delay:.2s;}
+    .trade-card:nth-child(3){animation-delay:.3s;}
+    .trade-card:nth-child(4){animation-delay:.4s;}
+    .trade-card:nth-child(5){animation-delay:.5s;}
+
+    /* ---- BROWSER MOCKUP ---- */
+    .browser-wrap {
+      position:relative; padding:1.2rem 1.2rem .6rem;
+      background:rgba(8,14,14,0.6);
+      border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .browser-bar {
+      height:24px; background:rgba(255,255,255,0.04);
+      border-radius:8px; display:flex; align-items:center;
+      padding:0 .6rem; gap:.4rem; margin-bottom:.7rem;
+    }
+    .browser-dot {
+      width:7px; height:7px; border-radius:50%; flex-shrink:0;
+    }
+    .browser-url {
+      flex:1; height:12px; background:rgba(255,255,255,0.05);
+      border-radius:4px; margin-left:.4rem;
+    }
+    .browser-screen {
+      border-radius:8px; overflow:hidden;
+      position:relative; height:160px;
+      display:flex; flex-direction:column;
+    }
+
+    /* ---- STYLISED WEBSITE PREVIEWS ---- */
+    /* Plumbing preview */
+    .preview-plumbing {
+      background:linear-gradient(160deg,#0a1628 0%,#0d2240 60%,#0a3050 100%);
+    }
+    .preview-plumbing::before {
+      content:''; position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2300B5C8' stroke-width='0.3' opacity='0.15'%3E%3Crect x='5' y='5' width='30' height='30' rx='2'/%3E%3Ccircle cx='20' cy='20' r='8'/%3E%3C/g%3E%3C/svg%3E");
+    }
+    /* Restaurant preview */
+    .preview-restaurant {
+      background:linear-gradient(160deg,#1a0a00 0%,#2d1200 50%,#1a0800 100%);
+    }
+    .preview-restaurant::before {
+      content:''; position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='20' fill='none' stroke='%23D4AF37' stroke-width='0.3' opacity='0.2'/%3E%3C/svg%3E");
+    }
+    /* Salon preview */
+    .preview-salon {
+      background:linear-gradient(160deg,#1a0a14 0%,#2d1020 50%,#1a0a18 100%);
+    }
+    .preview-salon::before {
+      content:''; position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15 Q15 0 30 15 Q15 30 0 15' fill='none' stroke='%23f43f5e' stroke-width='0.3' opacity='0.2'/%3E%3C/svg%3E");
+    }
+    /* Garage preview */
+    .preview-garage {
+      background:linear-gradient(160deg,#0f0a00 0%,#1c1400 50%,#100e00 100%);
+    }
+    .preview-garage::before {
+      content:''; position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L40 40 M40 0 L0 40' stroke='%23f87171' stroke-width='0.3' opacity='0.15'/%3E%3C/svg%3E");
+    }
+    /* Driving preview */
+    .preview-driving {
+      background:linear-gradient(160deg,#0d0014 0%,#190028 50%,#0d0018 100%);
+    }
+    .preview-driving::before {
+      content:''; position:absolute; inset:0;
+      background:url("data:image/svg+xml,%3Csvg width='60' height='30' viewBox='0 0 60 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15 Q30 0 60 15' fill='none' stroke='%23a855f7' stroke-width='0.4' opacity='0.2'/%3E%3C/svg%3E");
+    }
+
+    /* Preview inner content elements */
+    .preview-nav {
+      position:relative; z-index:2;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:.5rem .8rem; background:rgba(0,0,0,0.35);
+      font-size:.5rem; font-weight:700; letter-spacing:1px;
+      text-transform:uppercase;
+    }
+    .preview-hero-area {
+      position:relative; z-index:2;
+      flex:1; display:flex; flex-direction:column;
+      justify-content:center; padding:.5rem .8rem;
+    }
+    .preview-headline {
+      font-size:.65rem; font-weight:900; margin-bottom:.3rem;
+      line-height:1.2;
+    }
+    .preview-sub {
+      font-size:.45rem; opacity:.6; margin-bottom:.5rem; line-height:1.4;
+    }
+    .preview-btn {
+      display:inline-block; padding:.2rem .5rem;
+      border-radius:3px; font-size:.45rem; font-weight:800;
+      text-transform:uppercase; letter-spacing:.5px;
+    }
+    .preview-dots {
+      position:absolute; bottom:.4rem; right:.6rem; z-index:2;
+      display:flex; gap:.25rem;
+    }
+    .preview-dot {
+      width:4px; height:4px; border-radius:50%; opacity:.4;
+    }
+    /* 3D badge overlay on card hover */
+    .card-3d-badge {
+      position:absolute; top:.6rem; right:.6rem; z-index:3;
+      background:rgba(0,181,200,0.15); border:1px solid rgba(0,181,200,0.4);
+      border-radius:100px; padding:.2rem .5rem;
+      font-size:.55rem; font-weight:800; color:var(--holo-teal);
+      letter-spacing:.5px; text-transform:uppercase;
+    }
+
+    /* ---- CARD BODY ---- */
+    .card-body { padding:1.5rem 1.8rem; flex:1; display:flex; flex-direction:column; }
+    .card-icon-row {
+      display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem;
+    }
+    .card-icon {
+      width:44px; height:44px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; flex-shrink:0;
+      box-shadow:0 0 16px rgba(0,0,0,0.4);
+    }
+    .card-title {
+      font-size:1.1rem; font-weight:900; color:white; line-height:1.2;
+    }
+    .card-subtitle {
+      font-size:.75rem; font-weight:700; text-transform:uppercase;
+      letter-spacing:.8px; margin-top:.1rem;
+    }
+    .card-desc {
+      font-size:.88rem; color:var(--text-dim); line-height:1.7;
+      margin-bottom:1rem; flex:1;
+    }
+
+    /* Pain + benefit micro-story */
+    .card-story {
+      background:rgba(0,181,200,0.04); border:1px solid rgba(0,181,200,0.1);
+      border-radius:10px; padding:.7rem .9rem; margin-bottom:1.2rem;
+      font-size:.8rem; color:var(--cool-silver); line-height:1.6;
+    }
+    .card-story em { color:var(--holo-teal); font-style:normal; font-weight:700; }
+
+    /* ---- BUTTON GROUP ---- */
+    .btn-group { display:flex; flex-direction:column; gap:.7rem; }
+    .btn-primary {
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      background:var(--gradient-primary); color:#000;
+      padding:.85rem 1.2rem; border-radius:12px; font-weight:900;
+      text-decoration:none; font-size:.88rem; letter-spacing:.5px;
+      text-transform:uppercase; border:none;
+      box-shadow:0 0 20px rgba(0,181,200,0.3);
+      transition:all .3s; cursor:none;
+    }
+    .btn-primary:hover {
+      transform:translateY(-3px);
+      box-shadow:0 0 35px rgba(0,181,200,0.5);
+      color:white;
+    }
+    .btn-secondary {
+      display:flex; align-items:center; justify-content:center; gap:.5rem;
+      background:transparent; color:var(--cool-silver);
+      padding:.7rem 1.2rem; border-radius:12px; font-weight:700;
+      text-decoration:none; font-size:.82rem;
+      border:1px solid rgba(255,255,255,0.1);
+      transition:all .3s; cursor:none;
+    }
+    .btn-secondary:hover {
+      color:white; border-color:rgba(255,255,255,0.3);
+      background:rgba(255,255,255,0.04);
+    }
+
+    /* ---- SOCIAL PROOF STRIP ---- */
+    .proof-strip {
+      max-width:1100px; margin:0 auto 1rem;
+      padding:0 4%;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.5rem;
+    }
+    .proof-card {
+      background:rgba(17,17,17,0.6); backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.05);
+      border-radius:14px; padding:1.2rem 1.4rem;
+      display:flex; align-items:flex-start; gap:.8rem;
+      opacity:0; animation:cardIn .7s ease forwards;
+    }
+    .proof-card:nth-child(1){animation-delay:.6s;}
+    .proof-card:nth-child(2){animation-delay:.7s;}
+    .proof-card:nth-child(3){animation-delay:.8s;}
+    .proof-avatar {
+      width:40px; height:40px; border-radius:50%; object-fit:cover;
+      object-position:top; border:2px solid rgba(0,181,200,0.35);
+      flex-shrink:0;
+    }
+    .proof-stars { color:var(--holo-bright-gold); font-size:.75rem; letter-spacing:1px; margin-bottom:.25rem; }
+    .proof-quote { font-size:.78rem; color:var(--cool-silver); line-height:1.55; margin-bottom:.3rem; font-family:'Cormorant Garamond',serif; font-size:.9rem; }
+    .proof-name { font-size:.75rem; font-weight:800; color:white; font-family:'Outfit',sans-serif; }
+    .proof-role { font-size:.72rem; color:var(--text-dim); font-family:'Outfit',sans-serif; }
+
+    /* ---- STICKY BOTTOM CTA ---- */
+    .sticky-cta {
+      position:fixed; bottom:0; left:0; width:100%; z-index:200;
+      background:rgba(8,14,14,0.96); backdrop-filter:blur(20px);
+      border-top:1px solid rgba(0,181,200,0.2);
+      padding:.9rem 5%;
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:.8rem;
+      box-shadow:0 -10px 40px rgba(0,0,0,0.6);
+      transform:translateY(100%);
+      transition:transform .5s ease;
+    }
+    .sticky-cta.visible { transform:translateY(0); }
+    .sticky-cta-text {
+      font-size:.9rem; color:var(--cool-silver); font-weight:600;
+    }
+    .sticky-cta-text strong { color:white; }
+    .sticky-cta-actions { display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
+    .sticky-btn-book {
+      background:var(--gradient-primary); color:#000;
+      padding:.65rem 1.4rem; border-radius:10px;
+      font-weight:900; font-size:.85rem; text-transform:uppercase;
+      letter-spacing:1px; border:none; cursor:none; transition:all .3s;
+      text-decoration:none; display:inline-flex; align-items:center; gap:.4rem;
+    }
+    .sticky-btn-book:hover { transform:translateY(-2px); box-shadow:0 0 25px rgba(0,181,200,0.4); color:white; }
+    .sticky-btn-home {
+      color:var(--text-dim); font-size:.82rem; font-weight:700;
+      text-decoration:none; letter-spacing:.5px; transition:color .3s;
+    }
+    .sticky-btn-home:hover { color:var(--holo-teal); }
+    .sticky-close {
+      background:none; border:none; color:var(--text-dim);
+      font-size:1rem; cursor:none; padding:.2rem; transition:color .3s;
+    }
+    .sticky-close:hover { color:white; }
+
+    /* ---- SECTION LABEL ---- */
+    .section-label {
+      text-align:center; padding:3rem 2rem 1.5rem; position:relative;
+    }
+    .section-label h2 {
+      font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900;
+      color:white; margin-bottom:.5rem;
+    }
+    .section-label p { color:var(--text-dim); font-size:.95rem; }
+
+    /* ---- FOOTER ---- */
+    .sr-footer {
+      background:rgba(2,6,8,0.95); border-top:1px solid rgba(255,255,255,0.05);
+      padding:2.5rem 5%; text-align:center;
+      padding-bottom:5rem; /* space for sticky CTA */
+    }
+    .sr-footer-logo {
+      font-family:'Outfit',sans-serif; font-size:1.1rem;
+      font-weight:900; letter-spacing:2px; color:white; margin-bottom:.5rem;
+    }
+    .sr-footer-logo span { color:var(--holo-teal); }
+    .sr-footer p { font-size:.8rem; color:#374151; margin-top:.4rem; }
+    .footer-links { display:flex; justify-content:center; gap:1.5rem; margin-top:.8rem; flex-wrap:wrap; }
+    .footer-links a {
+      font-size:.78rem; color:#4b5563; text-decoration:none;
+      font-weight:600; transition:color .3s;
+    }
+    .footer-links a:hover { color:var(--holo-teal); }
+
+    /* ---- SCROLLBAR ---- */
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:var(--bg-deep); }
+    ::-webkit-scrollbar-thumb { background:rgba(0,181,200,0.3); border-radius:2px; }
+
+    /* ---- RESPONSIVE ---- */
+    @media(max-width:768px){
+      body { cursor:auto; }
+      .cursor-dot,.cursor-ring { display:none; }
+      .sr-hero { padding:3.5rem 1.2rem 2rem; }
+      .trade-grid { grid-template-columns:1fr; padding:1rem 1.2rem 5rem; gap:1.8rem; }
+      .proof-strip { grid-template-columns:1fr; padding:0 1.2rem; }
+      .trust-strip { gap:.8rem; padding:.6rem 1rem; }
+      .trust-item { font-size:.72rem; }
+      .sticky-cta { padding:.8rem 1rem; }
+      .sticky-cta-text { font-size:.8rem; }
+      .btn-group { flex-direction:column; }
+    }
+  </style>
 </head>
 <body>
 
-    <div id="showroom-canvas"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-    <div class="content-wrapper">
-        <header class="showroom-header">
-            <a href="index.html" class="back-home-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">GoChuchuro 3D Hub</span>
-        </header>
+  <!-- Three.js particle background -->
+  <canvas id="showroom-canvas"></canvas>
 
-        <section class="intro-banner">
-            <span>Ready-To-Use Designs</span>
-            <h1>Choose Your Style</h1>
-            <p>Welcome to our template showroom! Choose an industry below to see how we can build your website. You can view the simple, classic 2D version or explore our new, futuristic 3D experience.</p>
-        </section>
+  <div class="page-wrap">
 
-        <main class="grid-container">
-            
-            <div class="blueprint-card" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-                <div class="card-top">
-                    <i class="fa-solid fa-faucet-drip icon-plumbing"></i>
-                    <h3 style="font-size: 1.4rem; font-weight: 800;">Plumbers & Heating</h3>
-                </div>
-                <div class="card-bottom">
-                    <p>Perfect for local plumbers. Show your services clearly, get emergency calls quickly, and let customers book appointments online.</p>
-                    <div class="button-group">
-                        <a href="plumbing/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="plumbing/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
-                    </div>
-                </div>
-            </div>
+    <!-- ===================== HEADER ===================== -->
+    <header class="sr-header">
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Back to GoChuchuro
+      </a>
+      <a href="index.html" class="sr-logo">GOCHUCHURO<span>.</span></a>
+      <a href="index.html#pricing" class="back-btn" style="color:var(--holo-gold);">
+        <i class="fa-solid fa-tag"></i> From £49/mo
+      </a>
+    </header>
 
-            <div class="blueprint-card" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-                <div class="card-top">
-                    <i class="fa-solid fa-car-side icon-driving"></i>
-                    <h3 style="font-size: 1.4rem; font-weight: 800;">Driving Instructors</h3>
-                </div>
-                <div class="card-bottom">
-                    <p>Help new drivers pass their test. Display your lesson prices, show student reviews, and let new learners book their first class easily.</p>
-                    <div class="button-group">
-                        <a href="driving/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="driving/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blueprint-card" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-                <div class="card-top">
-                    <i class="fa-solid fa-utensils icon-restaurant"></i>
-                    <h3 style="font-size: 1.4rem; font-weight: 800;">Dining & Takeaway</h3>
-                </div>
-                <div class="card-bottom">
-                    <p>Great for food businesses. Display your menu beautifully, accept table reservations, and help hungry customers find your location.</p>
-                    <div class="button-group">
-                        <a href="restaurant/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="restaurant/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blueprint-card" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-                <div class="card-top">
-                    <i class="fa-solid fa-scissors icon-salon"></i>
-                    <h3 style="font-size: 1.4rem; font-weight: 800;">Hair & Beauty</h3>
-                </div>
-                <div class="card-bottom">
-                    <p>Beautiful design for local salons. Show your price list, introduce your team, and let clients book their haircuts or treatments fast.</p>
-                    <div class="button-group">
-                        <a href="salon/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="salon/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="blueprint-card" data-tilt data-tilt-max="8" data-tilt-glare data-tilt-max-glare="0.2">
-                <div class="card-top">
-                    <i class="fa-solid fa-screwdriver-wrench icon-garage"></i>
-                    <h3 style="font-size: 1.4rem; font-weight: 800;">Car Garage & MOT</h3>
-                </div>
-                <div class="card-bottom">
-                    <p>Built for mechanics and MOT shops. Make it easy for drivers to book car repairs and see clear pricing before they arrive.</p>
-                    <div class="button-group">
-                        <a href="garage/2d/index.html" class="btn btn-2d">View Standard 2D Site</a>
-                        <a href="garage/3d/index.html" class="btn btn-3d">Experience Future 3D</a>
-                    </div>
-                </div>
-            </div>
-
-        </main>
-
-        <footer>
-            <p>© 2026 GoChuchuro Agency System. All Rights Reserved.</p>
-        </footer>
+    <!-- ===================== TRUST STRIP ===================== -->
+    <div class="trust-strip">
+      <div class="trust-item"><i class="fa-solid fa-circle-check"></i> <span><strong>Every template</strong> fully built for you</span></div>
+      <div class="trust-item"><i class="fa-solid fa-bolt"></i> <span>Live in <strong>5 working days</strong></span></div>
+      <div class="trust-item"><i class="fa-solid fa-rotate"></i> <span><strong>2D or 3D</strong> — your choice</span></div>
+      <div class="trust-item"><i class="fa-solid fa-graduation-cap"></i> <span><strong>Coaching included</strong> in every plan</span></div>
+      <div class="trust-item"><i class="fa-solid fa-sterling-sign"></i> <span>Plans <strong>from £49/mo</strong></span></div>
     </div>
 
-    <script>
-        const container = document.getElementById('showroom-canvas');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        container.appendChild(renderer.domElement);
+    <!-- ===================== HERO BANNER ===================== -->
+    <section class="sr-hero">
+      <div class="sr-badge">
+        <i class="fa-solid fa-cube" style="font-size:.65rem;"></i>
+        2D &amp; 3D Template Showroom
+      </div>
+      <h1>
+        This could be<br>
+        <span class="text-gradient">your website.</span>
+      </h1>
+      <p>Pick your trade below. See exactly what your business could look like online. Every design is fully built, automated, and ready to take bookings — handed over in 5 working days.</p>
+      <span class="tagline-script">"Reach Your Peak. Automate Your Growth."</span>
+      <div class="glow-line"></div>
+    </section>
 
-        // Create a connecting digital node network
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 300; 
-        const posArray = new Float32Array(particlesCount * 3);
+    <!-- ===================== SOCIAL PROOF ===================== -->
+    <div class="proof-strip">
+      <div class="proof-card">
+        <img src="kabir-rohan.png" alt="Kabir Rohan" class="proof-avatar"
+             onerror="this.style.display='none'"/>
+        <div>
+          <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="proof-quote">"Within the first week the text-back system saved three leads."</p>
+          <div class="proof-name">Kabir Rohan</div>
+          <div class="proof-role">Plumber, Manchester</div>
+        </div>
+      </div>
+      <div class="proof-card">
+        <img src="sunita-thapa.png" alt="Sunita Thapa" class="proof-avatar"
+             onerror="this.style.display='none'"/>
+        <div>
+          <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="proof-quote">"No-shows dropped dramatically. The system is so sajilo &mdash; easy."</p>
+          <div class="proof-name">Sunita Thapa</div>
+          <div class="proof-role">Salon Owner, Leicester</div>
+        </div>
+      </div>
+      <div class="proof-card">
+        <img src="daniel-ojasbi.jpeg" alt="Daniel Ojasbi" class="proof-avatar"
+             onerror="this.style.display='none'"/>
+        <div>
+          <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="proof-quote">"The AI system handles enquiries while I focus on client cases."</p>
+          <div class="proof-name">Daniel Ojasbi</div>
+          <div class="proof-role">Mortgage Advisor, London</div>
+        </div>
+      </div>
+    </div>
 
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 20; 
-        }
+    <!-- ===================== SECTION LABEL ===================== -->
+    <div class="section-label">
+      <h2>Choose your trade. See your future website.</h2>
+      <p>Click <strong style="color:var(--holo-teal);">Experience 3D</strong> for our immersive design &mdash; or <strong style="color:var(--cool-silver);">View Standard</strong> for a clean, classic look.</p>
+    </div>
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.05,
-            color: 0x00f6ff,
-            transparent: true,
-            opacity: 0.5
-        });
+    <!-- ===================== TRADE CARDS GRID ===================== -->
+    <main class="trade-grid">
 
-        const particleMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particleMesh);
-        camera.position.z = 5;
+      <!-- PLUMBING -->
+      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="browser-wrap">
+          <div class="browser-bar">
+            <div class="browser-dot" style="background:#ef4444;"></div>
+            <div class="browser-dot" style="background:#f59e0b;"></div>
+            <div class="browser-dot" style="background:#10b981;"></div>
+            <div class="browser-url"></div>
+          </div>
+          <div class="browser-screen preview-plumbing">
+            <div class="preview-nav" style="color:#00B5C8;">
+              <span>AquaFix Plumbing</span>
+              <span style="color:rgba(255,255,255,0.4);">Services &bull; Book &bull; Contact</span>
+            </div>
+            <div class="preview-hero-area">
+              <div class="preview-headline" style="color:#00B5C8;">Fast. Reliable. <br>Local Plumbing.</div>
+              <div class="preview-sub">Emergency call-outs 24/7. Boiler installs. Bathroom fits.</div>
+              <span class="preview-btn" style="background:#00B5C8;color:#000;">Book Now &rarr;</span>
+            </div>
+            <div class="preview-dots">
+              <div class="preview-dot" style="background:#00B5C8;opacity:.8;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+            </div>
+          </div>
+          <div class="card-3d-badge">3D Ready</div>
+        </div>
+        <div class="card-body">
+          <div class="card-icon-row">
+            <div class="card-icon" style="background:rgba(0,181,200,0.1);border:1px solid rgba(0,181,200,0.2);">
+              <i class="fa-solid fa-faucet-drip" style="color:#00B5C8;"></i>
+            </div>
+            <div>
+              <div class="card-title">Plumbers &amp; Heating</div>
+              <div class="card-subtitle" style="color:#00B5C8;">Trades &amp; Services</div>
+            </div>
+          </div>
+          <div class="card-story">
+            You are under a sink. Phone rings. You miss it. <em>GoChuchuro fires a text in 30 seconds.</em> Customer stays. Job saved.
+          </div>
+          <p class="card-desc">Missed call text-back, 24/7 online booking, Google review automation, and a professional website that earns trust at first glance.</p>
+          <div class="btn-group">
+            <a href="plumbing/3d/index.html" target="_blank" class="btn-primary">
+              <i class="fa-solid fa-cube"></i> Experience 3D Version
+            </a>
+            <a href="plumbing/2d/index.html" target="_blank" class="btn-secondary">
+              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
+            </a>
+          </div>
+        </div>
+      </div>
 
-        function animate() {
-            requestAnimationFrame(animate);
-            particleMesh.rotation.y += 0.001;
-            particleMesh.rotation.x += 0.0005;
-            renderer.render(scene, camera);
-        }
-        animate();
+      <!-- RESTAURANT -->
+      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="browser-wrap">
+          <div class="browser-bar">
+            <div class="browser-dot" style="background:#ef4444;"></div>
+            <div class="browser-dot" style="background:#f59e0b;"></div>
+            <div class="browser-dot" style="background:#10b981;"></div>
+            <div class="browser-url"></div>
+          </div>
+          <div class="browser-screen preview-restaurant">
+            <div class="preview-nav" style="color:#D4AF37;">
+              <span>Spice Garden</span>
+              <span style="color:rgba(255,255,255,0.4);">Menu &bull; Book &bull; Find Us</span>
+            </div>
+            <div class="preview-hero-area">
+              <div class="preview-headline" style="color:#E5C158;">Authentic Flavours.<br>Book Your Table.</div>
+              <div class="preview-sub">Dine in &bull; Takeaway &bull; Private Events &bull; Open 7 days</div>
+              <span class="preview-btn" style="background:#D4AF37;color:#000;">Reserve Now &rarr;</span>
+            </div>
+            <div class="preview-dots">
+              <div class="preview-dot" style="background:#D4AF37;opacity:.8;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+            </div>
+          </div>
+          <div class="card-3d-badge">3D Ready</div>
+        </div>
+        <div class="card-body">
+          <div class="card-icon-row">
+            <div class="card-icon" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);">
+              <i class="fa-solid fa-utensils" style="color:#D4AF37;"></i>
+            </div>
+            <div>
+              <div class="card-title">Dining &amp; Takeaway</div>
+              <div class="card-subtitle" style="color:#D4AF37;">Restaurants &amp; Cafes</div>
+            </div>
+          </div>
+          <div class="card-story">
+            Quiet Tuesday. Text all 500 past customers: <em>"Kids eat free tonight &mdash; book your table."</em> Tables filled. Automatically.
+          </div>
+          <p class="card-desc">SMS campaigns to fill slow nights, online table booking, loyalty automation, and Google review requests after every visit.</p>
+          <div class="btn-group">
+            <a href="restaurant/3d/index.html" target="_blank" class="btn-primary">
+              <i class="fa-solid fa-cube"></i> Experience 3D Version
+            </a>
+            <a href="restaurant/2d/index.html" target="_blank" class="btn-secondary">
+              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
+            </a>
+          </div>
+        </div>
+      </div>
 
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+      <!-- SALON -->
+      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="browser-wrap">
+          <div class="browser-bar">
+            <div class="browser-dot" style="background:#ef4444;"></div>
+            <div class="browser-dot" style="background:#f59e0b;"></div>
+            <div class="browser-dot" style="background:#10b981;"></div>
+            <div class="browser-url"></div>
+          </div>
+          <div class="browser-screen preview-salon">
+            <div class="preview-nav" style="color:#f43f5e;">
+              <span>Glow Studio</span>
+              <span style="color:rgba(255,255,255,0.4);">Services &bull; Team &bull; Book</span>
+            </div>
+            <div class="preview-hero-area">
+              <div class="preview-headline" style="color:#f43f5e;">Your Best Look.<br>Book Online Now.</div>
+              <div class="preview-sub">Hair cuts &bull; Colour &bull; Treatments &bull; Nails</div>
+              <span class="preview-btn" style="background:#f43f5e;color:#fff;">Book Appointment &rarr;</span>
+            </div>
+            <div class="preview-dots">
+              <div class="preview-dot" style="background:#f43f5e;opacity:.8;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+            </div>
+          </div>
+          <div class="card-3d-badge">3D Ready</div>
+        </div>
+        <div class="card-body">
+          <div class="card-icon-row">
+            <div class="card-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);">
+              <i class="fa-solid fa-scissors" style="color:#f43f5e;"></i>
+            </div>
+            <div>
+              <div class="card-title">Hair &amp; Beauty</div>
+              <div class="card-subtitle" style="color:#f43f5e;">Salons &amp; Spas</div>
+            </div>
+          </div>
+          <div class="card-story">
+            Chair empty at 2pm. System texts a past client: <em>"Time for a top-up? Book your slot here."</em> Chair filled by 3pm.
+          </div>
+          <p class="card-desc">No-show reminders cut empty appointments by 60%. Automated re-booking fills the quiet slots. Birthday offers keep clients loyal.</p>
+          <div class="btn-group">
+            <a href="salon/3d/index.html" target="_blank" class="btn-primary">
+              <i class="fa-solid fa-cube"></i> Experience 3D Version
+            </a>
+            <a href="salon/2d/index.html" target="_blank" class="btn-secondary">
+              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
+            </a>
+          </div>
+        </div>
+      </div>
 
-        VanillaTilt.init(document.querySelectorAll(".blueprint-card"), {
-            speed: 400,
-            glare: true,
-            "max-glare": 0.2,
-        });
-    </script>
+      <!-- GARAGE -->
+      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="browser-wrap">
+          <div class="browser-bar">
+            <div class="browser-dot" style="background:#ef4444;"></div>
+            <div class="browser-dot" style="background:#f59e0b;"></div>
+            <div class="browser-dot" style="background:#10b981;"></div>
+            <div class="browser-url"></div>
+          </div>
+          <div class="browser-screen preview-garage">
+            <div class="preview-nav" style="color:#f87171;">
+              <span>FastFix Garage</span>
+              <span style="color:rgba(255,255,255,0.4);">Services &bull; MOT &bull; Book</span>
+            </div>
+            <div class="preview-hero-area">
+              <div class="preview-headline" style="color:#f87171;">MOT &amp; Repairs.<br>Book in Seconds.</div>
+              <div class="preview-sub">MOT testing &bull; Servicing &bull; Tyres &bull; Air con regas</div>
+              <span class="preview-btn" style="background:#f87171;color:#000;">Book Your MOT &rarr;</span>
+            </div>
+            <div class="preview-dots">
+              <div class="preview-dot" style="background:#f87171;opacity:.8;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+            </div>
+          </div>
+          <div class="card-3d-badge">3D Ready</div>
+        </div>
+        <div class="card-body">
+          <div class="card-icon-row">
+            <div class="card-icon" style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);">
+              <i class="fa-solid fa-screwdriver-wrench" style="color:#f87171;"></i>
+            </div>
+            <div>
+              <div class="card-title">Car Garage &amp; MOT</div>
+              <div class="card-subtitle" style="color:#f87171;">Auto &amp; Mechanics</div>
+            </div>
+          </div>
+          <div class="card-story">
+            MOT due next month. System sends every past customer a reminder. <em>They book online before calling a competitor.</em>
+          </div>
+          <p class="card-desc">MOT reminder automation, 24/7 online booking for services, digital job sign-offs, and a trusted local presence on Google Maps.</p>
+          <div class="btn-group">
+            <a href="garage/3d/index.html" target="_blank" class="btn-primary">
+              <i class="fa-solid fa-cube"></i> Experience 3D Version
+            </a>
+            <a href="garage/2d/index.html" target="_blank" class="btn-secondary">
+              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DRIVING -->
+      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+        <div class="browser-wrap">
+          <div class="browser-bar">
+            <div class="browser-dot" style="background:#ef4444;"></div>
+            <div class="browser-dot" style="background:#f59e0b;"></div>
+            <div class="browser-dot" style="background:#10b981;"></div>
+            <div class="browser-url"></div>
+          </div>
+          <div class="browser-screen preview-driving">
+            <div class="preview-nav" style="color:#a855f7;">
+              <span>Pass First Time</span>
+              <span style="color:rgba(255,255,255,0.4);">Lessons &bull; Prices &bull; Book</span>
+            </div>
+            <div class="preview-hero-area">
+              <div class="preview-headline" style="color:#a855f7;">Pass Your Test.<br>Book a Lesson.</div>
+              <div class="preview-sub">Manual &bull; Automatic &bull; Intensive courses &bull; Test routes</div>
+              <span class="preview-btn" style="background:#a855f7;color:#fff;">Book First Lesson &rarr;</span>
+            </div>
+            <div class="preview-dots">
+              <div class="preview-dot" style="background:#a855f7;opacity:.8;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+              <div class="preview-dot" style="background:#fff;"></div>
+            </div>
+          </div>
+          <div class="card-3d-badge">3D Ready</div>
+        </div>
+        <div class="card-body">
+          <div class="card-icon-row">
+            <div class="card-icon" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);">
+              <i class="fa-solid fa-car-side" style="color:#a855f7;"></i>
+            </div>
+            <div>
+              <div class="card-title">Driving Instructors</div>
+              <div class="card-subtitle" style="color:#a855f7;">Lessons &amp; Courses</div>
+            </div>
+          </div>
+          <div class="card-story">
+            Learner visits your website at 10pm. <em>Books their first lesson online. Confirmation text sent instantly.</em> You wake up with a new student.
+          </div>
+          <p class="card-desc">24/7 lesson booking, lesson reminder texts, Google review automation after every pass, and student referral rewards on autopilot.</p>
+          <div class="btn-group">
+            <a href="driving/3d/index.html" target="_blank" class="btn-primary">
+              <i class="fa-solid fa-cube"></i> Experience 3D Version
+            </a>
+            <a href="driving/2d/index.html" target="_blank" class="btn-secondary">
+              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ===================== BOTTOM CTA SECTION ===================== -->
+    <section style="background:rgba(0,181,200,0.04);border-top:1px solid rgba(0,181,200,0.1);border-bottom:1px solid rgba(0,181,200,0.1);padding:3.5rem 5%;text-align:center;margin-bottom:0;">
+      <div style="max-width:700px;margin:0 auto;">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">&#x2605;</div>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:1rem;">
+          Seen something you like?<br>
+          <span class="text-gradient">We build it for you.</span>
+        </h2>
+        <p style="color:var(--cool-silver);font-size:1rem;line-height:1.75;margin-bottom:.5rem;">
+          Every template above comes fully built, connected to your booking system, and automated. No tech skills needed. You just download one app.
+        </p>
+        <p style="font-family:'Dancing Script',cursive;color:var(--holo-bright-gold);font-size:1.2rem;margin-bottom:2rem;">
+          "Reach Your Peak. Automate Your Growth."
+        </p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
+          <a href="index.html" onclick="setTimeout(()=>document.querySelector('[onclick=openCalendar]')&&openCalendar&&openCalendar(),300);" 
+             style="background:var(--gradient-primary);color:#000;padding:1.1rem 2.2rem;border-radius:14px;font-weight:900;text-decoration:none;font-size:.9rem;text-transform:uppercase;letter-spacing:1px;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 0 25px rgba(0,181,200,0.3);">
+            <i class="fa-regular fa-calendar"></i> Book Your Free 30-Min Chat
+          </a>
+          <a href="index.html#pricing"
+             style="background:transparent;color:var(--cool-silver);padding:1.1rem 2.2rem;border-radius:14px;font-weight:700;text-decoration:none;font-size:.88rem;border:1px solid rgba(255,255,255,0.12);display:inline-flex;align-items:center;gap:.5rem;transition:all .3s;">
+            <i class="fa-solid fa-tag"></i> See Pricing from £49/mo
+          </a>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-dim);margin-top:1.2rem;">
+          No commitment. No jargon. 30 minutes with Prakash — and you keep the advice either way.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="sr-footer">
+      <div class="sr-footer-logo">GOCHUCHURO<span>.</span></div>
+      <p style="font-family:'Dancing Script',cursive;color:var(--holo-bright-gold);font-size:1rem;margin:.3rem 0;">"Reach Your Peak. Automate Your Growth."</p>
+      <p>Helping UK small businesses grow without the stress.</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#faqs">FAQs</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+      <p style="margin-top:1rem;">&copy; 2026 GoChuchuro. All rights reserved. Registered in England &amp; Wales.</p>
+    </footer>
+
+  </div><!-- end page-wrap -->
+
+  <!-- ===================== STICKY BOTTOM CTA ===================== -->
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-text">
+      <strong>Like what you see?</strong> We build it fully for you &mdash; from £49/mo.
+    </div>
+    <div class="sticky-cta-actions">
+      <a href="index.html" class="sticky-btn-book">
+        <i class="fa-regular fa-calendar"></i> Book Free Chat
+      </a>
+      <a href="index.html#pricing" class="sticky-btn-home">
+        See pricing &rarr;
+      </a>
+      <button class="sticky-close" onclick="document.getElementById('stickyCta').style.display='none'" aria-label="Dismiss">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    /* ---- CURSOR ---- */
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mX=0,mY=0,rX=0,rY=0;
+    document.addEventListener('mousemove', e=>{
+      mX=e.clientX; mY=e.clientY;
+      dot.style.left=mX+'px'; dot.style.top=mY+'px';
+    });
+    (function animRing(){
+      rX+=(mX-rX)*.12; rY+=(mY-rY)*.12;
+      ring.style.left=rX+'px'; ring.style.top=rY+'px';
+      requestAnimationFrame(animRing);
+    })();
+
+    /* ---- THREE.JS PARTICLE FIELD — mouse-reactive ---- */
+    const canvas   = document.getElementById('showroom-canvas');
+    const scene    = new THREE.Scene();
+    const camera   = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Teal particles
+    const countA = 350;
+    const posA   = new Float32Array(countA*3);
+    for(let i=0;i<countA*3;i++) posA[i]=(Math.random()-.5)*22;
+    const geoA   = new THREE.BufferGeometry();
+    geoA.setAttribute('position', new THREE.BufferAttribute(posA,3));
+    const matA   = new THREE.PointsMaterial({size:.045,color:0x00B5C8,transparent:true,opacity:.45});
+    const meshA  = new THREE.Points(geoA,matA);
+    scene.add(meshA);
+
+    // Gold particles — slightly larger, sparser
+    const countB = 120;
+    const posB   = new Float32Array(countB*3);
+    for(let i=0;i<countB*3;i++) posB[i]=(Math.random()-.5)*26;
+    const geoB   = new THREE.BufferGeometry();
+    geoB.setAttribute('position', new THREE.BufferAttribute(posB,3));
+    const matB   = new THREE.PointsMaterial({size:.07,color:0xD4AF37,transparent:true,opacity:.3});
+    const meshB  = new THREE.Points(geoB,matB);
+    scene.add(meshB);
+
+    camera.position.z = 5;
+    let targetRX=0, targetRY=0;
+
+    document.addEventListener('mousemove', e=>{
+      targetRX = (e.clientY/window.innerHeight - .5) * .4;
+      targetRY = (e.clientX/window.innerWidth  - .5) * .4;
+    });
+
+    const clk = new THREE.Clock();
+    (function animScene(){
+      requestAnimationFrame(animScene);
+      const t = clk.getElapsedTime();
+      meshA.rotation.y += .0008;
+      meshA.rotation.x += .0003;
+      // Mouse-responsive lean
+      meshA.rotation.x += (targetRX - meshA.rotation.x) * .02;
+      meshA.rotation.y += (targetRY - meshA.rotation.y) * .02;
+      meshB.rotation.y -= .0005;
+      meshB.rotation.x -= .0002;
+      // Gentle breathing scale
+      const s = 1 + Math.sin(t*.4)*.015;
+      meshA.scale.set(s,s,s);
+      renderer.render(scene, camera);
+    })();
+
+    window.addEventListener('resize',()=>{
+      camera.aspect = window.innerWidth/window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    /* ---- STICKY CTA — appears after scroll ---- */
+    const stickyCta = document.getElementById('stickyCta');
+    window.addEventListener('scroll', ()=>{
+      if(window.scrollY > 400) stickyCta.classList.add('visible');
+    }, { passive:true });
+
+    /* ---- VANILLA TILT ---- */
+    VanillaTilt.init(document.querySelectorAll('.trade-card'), {
+      speed:400, glare:true, 'max-glare':.06, scale:1.02,
+    });
+  </script>
 </body>
 </html>
