@@ -1,554 +1,789 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Immersive Salon | LUMIÈRE</title>
-    
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Lumière — Premium 3D immersive hair and colour studio, Andover. Book your appointment online today."/>
+  <title>LUMIÈRE | 3D Immersive Hair &amp; Colour Studio</title>
+  <link rel="icon" type="image/png" href="../../favicon.png" sizes="32x32"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <style>
+    /* =============================================
+       LUMIÈRE 3D — SILK RIBBON GOLD SYSTEM
+       Obsidian void + warm gold-champagne gradient
+       Hero: floating silk wave + gold bokeh particles
+       Camera drifts like looking into a vanity mirror
+       Completely different from all other 3D trades:
+       - Garage: red racing grid
+       - Plumbing: teal vortex rings
+       - Restaurant: warm rising embers
+       - Driving: neon road tunnel
+       - Salon: delicate gold bokeh + flowing silk ribbon
+       ============================================= */
+    :root {
+      --void:    #050505;
+      --surface: #121215;
+      --surface2:#1a1a1f;
+      --gold:    #c6a06f;
+      --gold2:   #e2c092;
+      --champ:   #f3e5ab;
+      --gold-dim:rgba(198,160,111,0.14);
+      --text:    #f8fafc;
+      --dim:     #94a3b8;
+      --mid:     #cbd5e1;
+      --gc-teal: #00B5C8;
+      --gc-gold: #D4AF37;
+      --grad-g:  linear-gradient(135deg,#c6a06f,#e2c092);
+      --grad-gc: linear-gradient(135deg,#c6a06f,#f3e5ab);
+      --shadow:  12px 12px 28px rgba(0,0,0,0.95),-4px -4px 14px rgba(255,255,255,0.02);
+      --inset:   inset 8px 8px 20px rgba(0,0,0,0.9),inset -3px -3px 10px rgba(255,255,255,0.03);
+      --glow:    0 0 20px rgba(198,160,111,0.2);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--void);color:var(--text);
+      font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;
+      overflow-x:hidden;padding-bottom:72px;cursor:none;
+      background-image:
+        radial-gradient(circle at 10% 20%,rgba(198,160,111,0.05),transparent 30%),
+        radial-gradient(circle at 90% 80%,rgba(198,160,111,0.05),transparent 30%);
+      background-attachment:fixed;
+    }
+    .serif{font-family:'Playfair Display',serif;font-weight:700}
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    /* CURSOR — gold dot */
+    #cd{width:9px;height:9px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);box-shadow:0 0 12px var(--gold),0 0 24px rgba(198,160,111,0.4)}
+    #cr{width:38px;height:38px;border:1.5px solid rgba(198,160,111,0.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%)}
 
-    <style>
-        /* --- LUXURY 3D DESIGN SYSTEM --- */
-        :root {
-            /* Deep Studio Backgrounds */
-            --bg-abyss: #050505;    
-            --bg-surface: #121215;
-            
-            /* VIP Holographic Accents */
-            --holo-gold: #c6a06f;
-            --holo-champagne: #f3e5ab;
-            --gradient-glow: linear-gradient(135deg, var(--holo-gold), var(--holo-champagne));
-            
-            /* 3D UI Lighting */
-            --shadow-drop: 10px 10px 25px rgba(0, 0, 0, 0.95), -5px -5px 15px rgba(255, 255, 255, 0.03);
-            --shadow-inner: inset 5px 5px 20px rgba(0, 0, 0, 0.95), inset -3px -3px 10px rgba(255, 255, 255, 0.05);
-            
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-        }
+    /* PANELS */
+    .p3d{background:var(--surface);border-radius:16px;box-shadow:var(--shadow);border:1px solid rgba(198,160,111,0.1);position:relative;z-index:2}
+    .pin{background:#08080a;border-radius:12px;box-shadow:var(--inset);border:1px solid rgba(255,255,255,0.03)}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    /* TEXT */
+    .th{background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .tc{background:var(--grad-gc);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        body {
-            background-color: var(--bg-abyss);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(198, 160, 111, 0.05), transparent 30%),
-                radial-gradient(circle at 90% 80%, rgba(198, 160, 111, 0.05), transparent 30%);
-            background-attachment: fixed; 
-            color: var(--text-main); line-height: 1.6; overflow-x: hidden; padding-bottom: 70px;
-        }
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+    .rv.on{opacity:1;transform:translateY(0)}
+    .rl{opacity:0;transform:translateX(-32px);transition:opacity .8s ease,transform .8s ease}
+    .rl.on{opacity:1;transform:translateX(0)}
+    .rr{opacity:0;transform:translateX(32px);transition:opacity .8s ease,transform .8s ease}
+    .rr.on{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-        .serif-display { font-family: 'Playfair Display', serif; font-weight: 700; }
+    /* HEADER */
+    header{background:rgba(5,5,5,0.9);backdrop-filter:blur(18px);padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:500;border-bottom:1px solid rgba(198,160,111,0.2);box-shadow:0 8px 40px rgba(0,0,0,0.8)}
+    .bname{color:white;font-size:1.7rem;text-decoration:none;letter-spacing:2.5px;text-transform:uppercase;display:flex;align-items:center;gap:.3rem}
+    .bname span{background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    nav{display:flex;align-items:center;gap:1.6rem}
+    .nl{color:var(--dim);text-decoration:none;font-weight:500;font-size:.82rem;text-transform:uppercase;letter-spacing:1px;transition:all .25s}
+    .nl:hover{color:var(--gold);text-shadow:0 0 10px rgba(198,160,111,.4)}
+    .nsr{color:var(--gc-teal);text-decoration:none;font-weight:700;font-size:.75rem;border:1px solid rgba(0,181,200,.3);padding:.38rem .85rem;border-radius:6px;transition:all .25s;display:flex;align-items:center;gap:.35rem}
+    .nsr:hover{background:rgba(0,181,200,.1)}
+    .bholo{background:var(--grad-g);color:var(--void);padding:.65rem 1.4rem;border-radius:8px;font-weight:800;text-decoration:none;border:none;cursor:none;font-size:.8rem;box-shadow:var(--glow);transition:all .3s;display:inline-flex;align-items:center;gap:.4rem;letter-spacing:.5px}
+    .bholo:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(198,160,111,.35)}
 
-        /* --- 3D NEUMORPHIC PANELS --- */
-        .panel-3d {
-            background: var(--bg-surface); border-radius: 16px;
-            box-shadow: var(--shadow-drop); border: 1px solid rgba(198, 160, 111, 0.1);
-            position: relative; z-index: 2;
-        }
-        
-        .panel-inset {
-            background: #08080a; border-radius: 12px;
-            box-shadow: var(--shadow-inner); border: 1px solid rgba(255,255,255,0.02);
-        }
+    /* ACTION BAR */
+    .abar{position:fixed;bottom:0;left:0;right:0;z-index:600;background:rgba(5,5,5,0.97);backdrop-filter:blur(16px);border-top:1px solid rgba(198,160,111,.4);padding:.85rem 5%;display:flex;justify-content:center;gap:1rem;box-shadow:0 -8px 30px rgba(0,0,0,.8)}
+    .ab{flex:1;max-width:280px;padding:.85rem;border-radius:8px;text-decoration:none;font-weight:800;text-transform:uppercase;font-size:.82rem;letter-spacing:.5px;border:none;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;transition:all .3s;cursor:none}
+    .ab-sil{background:var(--surface2);color:var(--mid);border:1px solid rgba(198,160,111,.2)}
+    .ab-sil:hover{color:var(--gold);border-color:var(--gold)}
+    .ab-holo{background:var(--grad-g);color:var(--void)}
+    .ab-holo:hover{transform:translateY(-2px);box-shadow:var(--glow)}
 
-        /* Holographic Text & Glows */
-        .text-holo {
-            background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 15px rgba(198, 160, 111, 0.3);
-        }
+    /* HERO */
+    .hero{position:relative;height:100vh;min-height:700px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden}
+    #hc{position:absolute;inset:0;z-index:0}
+    /* Deep warm vignette */
+    .hv{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at 50% 40%,rgba(198,160,111,.04) 0%,rgba(5,5,5,.55) 50%,rgba(5,5,5,.92) 100%)}
+    .hb{position:absolute;bottom:0;left:0;right:0;height:25%;z-index:1;pointer-events:none;background:linear-gradient(transparent,var(--void))}
+    /* Fine grain texture overlay — luxury feel */
+    .hgrain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+    /* Gold corner ornaments */
+    .ctl{position:absolute;top:80px;left:2rem;z-index:3;width:40px;height:40px;border-top:1px solid rgba(198,160,111,.5);border-left:1px solid rgba(198,160,111,.5);pointer-events:none}
+    .cbr{position:absolute;bottom:80px;right:2rem;z-index:3;width:28px;height:28px;border-bottom:1px solid rgba(198,160,111,.25);border-right:1px solid rgba(198,160,111,.25);pointer-events:none}
+    .hcon{position:relative;z-index:4;max-width:900px;padding:0 2rem}
+    .hbadge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(198,160,111,.1);border:1px solid rgba(198,160,111,.3);color:var(--gold2);padding:.5rem 1.4rem;border-radius:50px;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:2rem;animation:fid .8s ease both}
+    @keyframes fid{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fiu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fi{from{opacity:0}to{opacity:1}}
+    .hero h1{font-size:clamp(2.8rem,8vw,6rem);line-height:1.0;margin-bottom:1.4rem;text-shadow:0 8px 30px rgba(0,0,0,.95);animation:fiu .9s ease .15s both}
+    .hero h1 span{font-style:italic}
+    .hero p{font-size:1.15rem;max-width:660px;margin:0 auto 2.5rem;color:var(--dim);font-weight:300;letter-spacing:.2px;animation:fiu .9s ease .3s both}
+    .hbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;animation:fi 1s ease .5s both}
+    .b3d{background:var(--surface);color:var(--text);padding:1rem 2.2rem;border-radius:8px;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.06);cursor:none;text-transform:uppercase;letter-spacing:1px;font-size:.85rem;box-shadow:var(--shadow);transition:all .3s;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:.5rem}
+    .b3d::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:var(--grad-g)}
+    .b3d:hover{transform:translateY(-4px);color:var(--gold);border-color:rgba(198,160,111,.4);box-shadow:0 20px 40px rgba(0,0,0,.9),var(--glow)}
+    .htp{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;margin-top:2rem;animation:fi 1.2s ease .7s both}
+    .hpi{display:flex;align-items:center;gap:.4rem;font-size:.72rem;font-weight:500;color:var(--dim);letter-spacing:.5px;text-transform:uppercase}
+    .hpi i{color:var(--gold);font-size:.7rem}
 
-        .img-glow {
-            border: 2px solid var(--holo-gold);
-            box-shadow: 0 0 25px rgba(198, 160, 111, 0.2);
-            object-fit: cover;
-        }
+    /* HUD PANELS — editorial, minimal */
+    .hud{position:absolute;z-index:5;pointer-events:none;animation:fi 1.5s ease 1s both}
+    .hudl{left:2rem;top:50%;transform:translateY(-50%)}
+    .hudr{right:2rem;top:50%;transform:translateY(-50%)}
+    .hcard{background:rgba(18,18,21,0.88);border:1px solid rgba(198,160,111,.2);border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.7rem;backdrop-filter:blur(10px);min-width:145px;box-shadow:var(--shadow)}
+    .hlbl{font-size:.55rem;text-transform:uppercase;letter-spacing:2px;color:var(--dim);font-weight:600;margin-bottom:.3rem}
+    .hval{font-size:1.3rem;font-weight:700;line-height:1;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Playfair Display',serif;font-style:italic}
+    .hsub{font-size:.58rem;color:var(--dim);margin-top:.12rem}
+    .hbar{height:2px;background:rgba(255,255,255,.05);border-radius:2px;margin-top:.5rem;overflow:hidden}
+    .hfill{height:100%;background:var(--grad-g);border-radius:2px;animation:fillbar 2.5s ease 1.5s both}
+    @keyframes fillbar{from{width:0}to{width:var(--w,80%)}}
+    .hdot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);margin-right:.4rem;animation:blink 2s infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 
-        /* --- NAVIGATION --- */
-        header {
-            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px);
-            padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(198, 160, 111, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        }
-        .brand-identity { color: white; font-size: 1.8rem; font-weight: 800; text-decoration: none; letter-spacing: 2.5px; text-transform: uppercase;}
-        .brand-identity span { color: var(--holo-gold); }
-        .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-link:hover { color: var(--holo-gold); text-shadow: 0 0 10px var(--holo-gold); }
+    /* TRUST CARDS */
+    .trow{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:0 5% 3rem;margin-top:-40px;position:relative;z-index:10}
+    .tcard{display:flex;align-items:center;gap:1rem;padding:1.2rem 1.8rem;border-radius:14px;transition:all .4s}
+    .tcard:hover{transform:translateY(-6px);border-color:rgba(198,160,111,.35);box-shadow:0 20px 40px rgba(0,0,0,.8),var(--glow)}
+    .tcard i{font-size:1.8rem;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .tcard div h4{font-size:1rem;font-weight:700;color:white;font-family:'Playfair Display',serif;font-style:italic}
+    .tcard div span{font-size:.65rem;font-weight:600;letter-spacing:.5px;color:var(--dim);text-transform:uppercase}
 
-        /* --- 3D BUTTONS --- */
-        .btn-3d {
-            background: var(--bg-surface); color: var(--text-main);
-            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
-            box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s ease; position: relative; overflow: hidden;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
-        }
-        .btn-3d::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-glow); }
-        .btn-3d:hover { transform: translateY(-4px); box-shadow: 0 15px 25px rgba(0,0,0,0.9), 0 0 20px rgba(198, 160, 111, 0.2); color: var(--holo-gold); border-color: var(--holo-gold);}
+    /* SERVICE CARDS — 3D depth with image reveal */
+    .csec{padding:5.5rem 5%;position:relative;z-index:10}
+    .csec::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(198,160,111,.25),transparent)}
+    .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;perspective:1200px;max-width:1300px;margin:0 auto}
+    .xcard{background:var(--surface);border-radius:16px;overflow:hidden;border:1px solid rgba(198,160,111,.1);box-shadow:var(--shadow);transform-style:preserve-3d;transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s,border-color .3s;position:relative;cursor:none}
+    .xcard:hover{transform:translateY(-18px) rotateX(6deg) rotateY(-3deg) scale(1.02);box-shadow:0 40px 80px rgba(0,0,0,.9),var(--glow);border-color:rgba(198,160,111,.35)}
+    .xcimg{height:240px;position:relative;overflow:hidden}
+    .xcimg i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:.12;z-index:1;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .xcimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.8) contrast(1.05);transition:.5s;z-index:2}
+    .xcard:hover .xcimg img{filter:saturate(1.05) brightness(1.03);transform:scale(1.06)}
+    .xcimg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(transparent,var(--surface));z-index:3}
+    .xbadge{position:absolute;top:.75rem;left:.75rem;z-index:4;background:rgba(5,5,5,.9);color:var(--gold);padding:.2rem .65rem;border-radius:4px;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;border:1px solid rgba(198,160,111,.25)}
+    .xbody{padding:1.8rem;transform:translateZ(0);transition:transform .5s}
+    .xcard:hover .xbody{transform:translateZ(30px)}
+    .xrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem}
+    .xtitle{font-size:1.3rem;color:white}
+    .xprice{font-size:1.2rem;color:var(--gold);font-weight:800;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .xdesc{color:var(--dim);font-size:.87rem;line-height:1.65;margin-bottom:1rem;font-weight:300}
+    .xcta{display:inline-flex;align-items:center;gap:.4rem;color:var(--gold);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px;background:none;border:none;cursor:none;padding:0;transition:gap .25s}
+    .xcard:hover .xcta{gap:.7rem}
+    .xglow{position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--grad-g);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:5}
+    .xcard:hover .xglow{transform:scaleX(1)}
 
-        .btn-holo {
-            background: var(--gradient-glow); color: var(--bg-abyss);
-            padding: 1rem 2.5rem; border-radius: 8px; font-weight: 800; text-decoration: none; display: inline-block;
-            border: none; box-shadow: 0 0 20px rgba(198, 160, 111, 0.3); transition: 0.3s; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;
-        }
-        .btn-holo:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 40px rgba(198, 160, 111, 0.5); }
+    /* BOOKING */
+    .bsec{padding:5rem 5%;max-width:1200px;margin:0 auto}
+    .bgrid{display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;padding:3.5rem;position:relative;overflow:hidden}
+    .bgrid::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(198,160,111,.05),transparent 70%);pointer-events:none}
+    .bpitch h3{font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1rem}
+    .bpitch h3 span{color:var(--gold)}
+    .bpitch p{color:var(--dim);line-height:1.75;margin-bottom:1.5rem;font-size:.95rem;font-weight:300}
+    .aib{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;border-left:2px solid var(--gold);background:rgba(5,5,5,.7);border-radius:0 10px 10px 0;border-top:1px solid rgba(255,255,255,.03);border-right:1px solid rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.03)}
+    .aiv{width:48px;height:48px;border-radius:50%;background:rgba(5,5,5,.8);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;overflow:hidden;position:relative;box-shadow:var(--glow)}
+    .aiv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .aiv i{color:var(--gold)}
+    .bpanel{padding:2rem}
+    .bpanel h4{font-style:italic;text-align:center;margin-bottom:1.3rem;padding-bottom:1rem;border-bottom:1px solid rgba(198,160,111,.15);font-size:1.1rem}
+    .svcs{display:flex;gap:.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
+    .svc{flex:1;min-width:70px;padding:.7rem .4rem;text-align:center;border-radius:8px;border:1px solid rgba(198,160,111,.2);font-weight:700;cursor:none;transition:all .25s;font-size:.72rem;text-transform:uppercase;letter-spacing:.3px;color:var(--dim);background:rgba(198,160,111,.04);box-shadow:var(--shadow)}
+    .svc.on,.svc:hover{background:var(--grad-g);color:var(--void);border-color:var(--gold);box-shadow:var(--glow)}
+    .bpref{font-size:.66rem;text-align:center;color:var(--dim);text-transform:uppercase;font-weight:700;letter-spacing:.5px;margin-bottom:.8rem}
+    .bsel{width:100%;padding:.85rem 1rem;margin-bottom:1.2rem;background:var(--surface);border:1px solid rgba(198,160,111,.2);color:var(--text);border-radius:8px;outline:none;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.88rem;cursor:pointer;box-shadow:var(--inset)}
+    .bsel:focus{border-color:var(--gold)}
 
-        /* --- HERO SPACE --- */
-        .hero { position: relative; min-height: 95vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 4rem 2rem; }
-        #hero-canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; background: linear-gradient(rgba(5, 5, 5, 0.6), rgba(5, 5, 5, 1)), url('hero-salon.jpg') no-repeat center center/cover; }
-        .hero-content { position: relative; z-index: 2; transform: translateZ(50px); }
-        
-        .hero h1 { font-size: 4.8rem; max-width: 900px; line-height: 1.05; margin-bottom: 1.5rem; text-shadow: 0 10px 30px rgba(0,0,0,0.9); }
-        .hero h1 span { font-style: italic; }
-        .hero p { font-size: 1.25rem; max-width: 680px; color: var(--text-dim); margin: 0 auto 2.5rem; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.9); }
+    /* ABOUT */
+    .abouts{padding:5.5rem 5%;background:rgba(18,18,21,.35);border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+    .agrid{display:grid;grid-template-columns:1fr 1.2fr;gap:4.5rem;align-items:center;max-width:1200px;margin:0 auto}
+    .aimgs{position:relative;padding-bottom:2.5rem;transform-style:preserve-3d}
+    .amain-wrap{padding:.75rem;border-radius:14px}
+    .amain-wrap img{width:100%;border-radius:10px;filter:contrast(1.05) saturate(.9)}
+    .amain-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#121215,#1a0f05);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--gold);opacity:.18}
+    .asub-wrap{position:absolute;bottom:-1rem;right:-1rem;width:50%;padding:.5rem;border-radius:12px;transform:translateZ(40px)}
+    .asub-wrap img{width:100%;border-radius:8px}
+    .asub-ph{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,#1a0f05,#121215);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--gold);opacity:.2}
+    .albl{font-size:.72rem;text-transform:uppercase;font-weight:800;letter-spacing:1.5px;margin-bottom:.5rem;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .agrid h2{font-size:clamp(2rem,3.5vw,3rem);margin-bottom:1rem;line-height:1.1}
+    .agrid p{color:var(--dim);font-size:.95rem;line-height:1.75;margin-bottom:.9rem;font-weight:300}
+    .ach{list-style:none;margin-top:1.3rem}
+    .ach li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--mid);margin-bottom:.6rem;font-weight:400}
+    .ach li i{color:var(--gold);margin-top:.2rem;flex-shrink:0}
+    .grl{width:45px;height:2px;background:var(--grad-g);border-radius:2px;margin:.7rem 0;box-shadow:var(--glow)}
 
-        /* --- FLOATING TRUST BAR --- */
-        .trust-bar { padding: 2rem 5%; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; position: relative; margin-top: -60px; z-index: 10; }
-        .trust-item { display: flex; align-items: center; gap: 1rem; padding: 1.5rem 2.5rem; border-radius: 12px; }
-        .trust-item i { font-size: 2rem; background: var(--gradient-glow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .trust-item span { font-size: 0.95rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;}
+    /* GALLERY */
+    .gals{overflow:hidden;background:rgba(18,18,21,.3);padding:3.5rem 0;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
+    .gall{text-align:center;font-family:'Playfair Display',serif;font-size:.7rem;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.5rem;font-style:italic}
+    .galt{display:flex;width:calc(310px * 12);animation:gscroll 38s linear infinite}
+    .galt:hover{animation-play-state:paused}
+    @keyframes gscroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-310px * 6))}}
+    .gi{width:285px;height:215px;margin:0 12px;border-radius:12px;overflow:hidden;flex-shrink:0;position:relative;background:var(--surface2);border:1px solid rgba(198,160,111,.12);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;transition:all .4s}
+    .gi:hover{border-color:var(--gold);box-shadow:var(--glow),var(--shadow);transform:scale(1.04) translateY(-4px)}
+    .gi i{font-size:2.8rem;opacity:.15;z-index:1;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05);transition:.4s}
+    .gi:hover img{filter:saturate(1.05) contrast(1.02);transform:scale(1.07)}
 
-        /* --- SECTION WRAPPERS --- */
-        .section-wrapper { padding: 8rem 5%; max-width: 1300px; margin: 0 auto; position: relative; z-index: 2;}
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 3.2rem; }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    /* REVIEWS */
+    .revs{padding:5.5rem 5%;background:rgba(4,2,8,1);border-top:1px solid rgba(255,255,255,.04)}
+    .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;max-width:1100px;margin:0 auto}
+    .rc{padding:2.5rem;transform-style:preserve-3d;transition:all .4s}
+    .rc:hover{border-color:rgba(198,160,111,.25);box-shadow:var(--glow),var(--shadow);transform:translateY(-6px)}
+    .rstars{color:#c6a06f;font-size:.9rem;margin-bottom:1.2rem;letter-spacing:1px}
+    .rtxt{font-style:italic;color:var(--dim);margin-bottom:1.8rem;font-size:.98rem;line-height:1.65;font-weight:300}
+    .rper{display:flex;align-items:center;gap:1rem}
+    .rav{width:50px;height:50px;border-radius:50%;flex-shrink:0;background:var(--gold-dim);border:2px solid var(--gold);box-shadow:var(--glow);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+    .rav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .rper h4{font-size:1rem;font-weight:700;font-style:italic}
+    .rper span{font-size:.72rem;font-weight:700;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-        /* --- 3D BOOKING PIPELINE --- */
-        .roi-tech-section { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 5rem; align-items: center; padding: 4.5rem; }
-        .ai-avatar-badge { display: flex; align-items: center; padding: 1.5rem; gap: 1.5rem; margin-top: 2.5rem; border-left: 3px solid var(--holo-gold);}
-        .ai-avatar-badge img { width: 70px; height: 70px; border-radius: 50%; border: 2px solid var(--holo-gold);}
+    /* FAQ */
+    .faqs{padding:5.5rem 5%;max-width:880px;margin:0 auto}
+    .fi{border-bottom:1px solid rgba(255,255,255,.06)}
+    .fq{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 0;cursor:none;font-weight:500;font-size:.95rem;color:var(--mid);transition:color .25s;letter-spacing:.2px}
+    .fq:hover{color:var(--gold)}
+    .fqi{font-size:.72rem;color:var(--gold);transition:transform .3s}
+    .fi.open .fqi{transform:rotate(45deg)}
+    .fa{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;color:var(--dim);font-size:.9rem;line-height:1.75;font-weight:300}
+    .fa.open{max-height:250px;padding-bottom:1.2rem}
 
-        .calendar-mockup { padding: 3rem; transform-style: preserve-3d; }
-        .deck-header { font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid rgba(198, 160, 111, 0.2); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 2rem; gap: 1rem; transform: translateZ(30px); }
-        .cover-bubble { flex: 1; padding: 1rem 0; text-align: center; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 0.85rem; text-transform: uppercase;}
-        .cover-bubble:hover, .cover-bubble.selected { background: var(--gradient-glow); color: var(--bg-abyss); box-shadow: 0 0 20px rgba(198, 160, 111, 0.4); transform: translateZ(10px) scale(1.05); border: none; }
+    /* LOCATION */
+    .cons{padding:5.5rem 5%;background:rgba(18,18,21,.35);border-top:1px solid rgba(255,255,255,.04)}
+    .cgrid2{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;max-width:1200px;margin:0 auto}
+    .mf{width:100%;height:340px;border-radius:14px;overflow:hidden;border:1px solid rgba(198,160,111,.15);box-shadow:var(--shadow)}
+    .mf iframe{width:100%;height:100%;border:0;filter:invert(90%) hue-rotate(180deg);border-radius:14px}
+    .cstrip{display:flex;align-items:center;gap:1.1rem;padding:1.1rem 1.3rem;text-decoration:none;margin-bottom:1rem;transition:all .3s}
+    .cstrip:hover{border-color:var(--gold);box-shadow:var(--glow);transform:translateX(4px)}
+    .cic{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;border:1px solid rgba(255,255,255,.05);color:var(--gold)}
+    .clbl{font-size:.65rem;text-transform:uppercase;font-weight:700;letter-spacing:.5px;color:var(--dim)}
+    .cval{font-size:.92rem;font-weight:700;color:white}
 
-        /* --- ABOUT STORY --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
-        .team-image-stack { position: relative; padding-bottom: 2rem; transform-style: preserve-3d; }
-        .main-img-wrap { padding: 1rem; border-radius: 16px; }
-        .main-img-wrap img { width: 100%; border-radius: 8px; filter: contrast(1.1); }
-        .sub-img-wrap { position: absolute; bottom: -20px; right: -20px; width: 50%; padding: 0.5rem; border-radius: 12px; transform: translateZ(50px); }
-        .sub-img-wrap img { width: 100%; border-radius: 6px; }
-        
-        .human-text span { font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:2px; }
-        .human-text h2 { font-size: 3rem; margin: 0.5rem 0 1.2rem; line-height: 1.15; }
+    /* SHARED */
+    .sw{padding:5.5rem 5%;max-width:1300px;margin:0 auto}
+    .sh{text-align:center;margin-bottom:3.5rem}
+    .sh .slbl{font-size:.7rem;text-transform:uppercase;font-weight:800;letter-spacing:2px;margin-bottom:.4rem;display:block;background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .sh h2{font-size:clamp(2rem,4vw,3rem)}
+    .sh p{color:var(--dim);font-size:.95rem;margin-top:.5rem;font-weight:300}
+    .grl-c{width:45px;height:2px;background:var(--grad-g);border-radius:2px;margin:.7rem auto;box-shadow:var(--glow)}
 
-        /* --- SERVICES MATRIX --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; perspective: 1000px;}
-        .service-card { padding: 2.5rem; display: flex; flex-direction: column; transform-style: preserve-3d; transition: 0.4s; }
-        .service-card:hover { border-color: var(--holo-gold); }
-        .service-img { width: 100%; height: 200px; border-radius: 8px; margin-bottom: 1.5rem; object-fit: cover; box-shadow: var(--shadow-inner); transform: translateZ(40px); transition: 0.4s; filter: grayscale(20%);}
-        .service-card:hover .service-img { box-shadow: 0 0 30px rgba(198, 160, 111, 0.3); transform: translateZ(60px) scale(1.02); filter: grayscale(0%);}
-        .card-badge { display: inline-block; background: var(--bg-abyss); color: var(--holo-gold); padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 800; margin-bottom: 1rem; transform: translateZ(25px); border: 1px solid rgba(198, 160, 111, 0.3);}
-        .service-card h3 { margin-bottom: 0.5rem; font-size: 1.6rem; transform: translateZ(30px); }
-        .service-card p { color: var(--text-dim); transform: translateZ(20px); margin-bottom: 1.5rem; flex-grow: 1;}
+    /* FOOTER */
+    footer{background:#020203;padding:5rem 5% 7rem;text-align:center;border-top:1px solid rgba(255,255,255,.05)}
+    .fbrand{font-size:1.8rem;font-weight:700;color:white;margin-bottom:.5rem;letter-spacing:2px;text-transform:uppercase;font-style:italic}
+    .fbrand span{background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .socrow{display:flex;justify-content:center;gap:.8rem;margin:1.2rem 0 1.5rem;flex-wrap:wrap}
+    .sc{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,.06)}
+    .sc:hover{background:var(--grad-g);color:var(--void);transform:translateY(-4px);border-color:var(--gold)}
+    .flinks{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .flinks a{font-size:.75rem;color:#374151;text-decoration:none;font-weight:600;transition:color .2s}
+    .flinks a:hover{color:var(--gc-teal)}
 
-        /* --- 3D SLIDING GALLERY --- */
-        .gallery-container { padding: 3rem 0; overflow: hidden; position: relative; margin-top: 2rem;}
-        .gallery-track { display: flex; width: calc(350px * 10); animation: scrollGallery 35s linear infinite; }
-        .gallery-track:hover { animation-play-state: paused; }
-        
-        @keyframes scrollGallery { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-350px * 5)); } }
-        
-        .gallery-item { width: 320px; height: 220px; margin: 0 15px; border-radius: 12px; padding: 0.5rem; flex-shrink: 0; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; border: 1px solid rgba(198, 160, 111, 0.2); transition: 0.4s; }
-        .gallery-item img:hover { border-color: var(--holo-gold); box-shadow: 0 0 25px rgba(198, 160, 111, 0.4); transform: scale(1.05); }
+    /* GC BADGE */
+    .gcb{position:fixed;bottom:82px;right:1.5rem;z-index:550;background:rgba(13,21,21,.97);border:1px solid rgba(0,181,200,.35);border-radius:14px;padding:.8rem 1rem;box-shadow:0 10px 35px rgba(0,0,0,.7);max-width:220px;text-align:center;animation:badin .8s ease .8s both;backdrop-filter:blur(14px)}
+    @keyframes badin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:translateX(0)}}
+    .gcbc{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--dim);font-size:.72rem;cursor:pointer}
+    .gcbl{font-size:.6rem;font-weight:800;letter-spacing:1.5px;color:rgba(0,181,200,.6);text-transform:uppercase;margin-bottom:.3rem}
+    .gcb p{font-size:.7rem;color:rgba(200,205,214,.8);margin-bottom:.5rem;line-height:1.4}
+    .gcb p strong{color:white}
+    .gcb a{display:inline-flex;align-items:center;gap:.35rem;background:linear-gradient(135deg,#00B5C8,#E5C158);color:#000;padding:.44rem 1rem;border-radius:8px;font-size:.7rem;font-weight:900;text-decoration:none;text-transform:uppercase;letter-spacing:.5px}
+    .gcb a:hover{transform:scale(1.03)}
 
-        /* --- TESTIMONIALS --- */
-        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; }
-        .test-card { padding: 3rem; }
-        .stars { color: #c6a06f; margin-bottom: 1.5rem; font-size: 1.1rem; text-shadow: 0 0 10px rgba(198, 160, 111, 0.3); }
-        .test-card p { font-style: italic; color: var(--text-dim); margin-bottom: 2rem; font-size: 1.1rem; }
-        .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+    /* MODAL */
+    .mo{position:fixed;inset:0;background:rgba(5,5,5,.96);backdrop-filter:blur(16px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .35s}
+    .mo.on{opacity:1;visibility:visible}
+    .mb{background:var(--surface);width:92%;max-width:940px;height:86vh;border-radius:14px;position:relative;transform:translateY(28px);transition:transform .35s;overflow:hidden;border:1px solid rgba(198,160,111,.2);box-shadow:0 30px 70px rgba(0,0,0,.95),var(--glow)}
+    .mo.on .mb{transform:translateY(0)}
+    .mc{position:absolute;top:14px;right:16px;background:rgba(198,160,111,.1);border:1px solid rgba(198,160,111,.2);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;cursor:none;z-index:10;transition:all .25s}
+    .mc:hover{background:var(--gold);color:var(--void)}
+    .mb iframe{width:100%;height:100%;border:0;border-radius:14px}
 
-        /* --- FAQS --- */
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-        .faq-box { padding: 2.5rem; transform-style: preserve-3d; }
-        .faq-box h4 { margin-bottom: 0.8rem; font-size: 1.2rem; font-weight: 700; transform: translateZ(20px); color: var(--holo-gold); }
-        .faq-box p { font-size: 1rem; color: var(--text-dim); line-height: 1.6; transform: translateZ(10px); }
-
-        /* --- CONTACT TERMINAL --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 5rem; align-items: start; }
-        .map-frame { width: 100%; height: 350px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-        
-        .info-strip { display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem; text-decoration: none; margin-bottom: 1.5rem; transition: 0.3s;}
-        .info-strip:hover { box-shadow: 0 0 20px rgba(198, 160, 111, 0.2); border-color: rgba(198, 160, 111, 0.5); }
-
-        /* --- AI WIDGET PILL --- */
-        .mini-ai-pill {
-            position: fixed; bottom: 5.5rem; right: 1.5rem; border-radius: 50px;
-            padding: 0.4rem 1.2rem 0.4rem 0.4rem; z-index: 990; display: flex; align-items: center; gap: 0.8rem; text-decoration: none;
-            transition: 0.3s;
-        }
-        .mini-ai-pill img { width: 48px; height: 48px; border-radius: 50%; }
-
-        /* --- FOOTER --- */
-        footer { background: #020203; padding: 6rem 5% 4rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        .social-circle-link { width: 50px; height: 50px; border-radius: 8px; display: inline-flex; justify-content: center; align-items: center; font-size: 1.2rem; color: var(--text-dim); text-decoration: none; margin: 0 0.5rem; transition: 0.3s; }
-        .social-circle-link:hover { color: var(--bg-abyss); box-shadow: 0 0 20px rgba(198, 160, 111, 0.4); border-color: var(--holo-gold); background: var(--gradient-glow);}
-
-        /* --- MOBILE BAR --- */
-        .sticky-action-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px); border-top: 1px solid rgba(198, 160, 111, 0.5); padding: 1rem 5%; display: flex; justify-content: center; gap: 1rem; z-index: 990; }
-
-        @media (max-width: 950px) {
-            .nav-menu { display: none; }
-            .roi-tech-section, .contact-layout, .about-grid, .faq-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .hero h1 { font-size: 3.5rem; }
-            .roi-tech-section { padding: 2.5rem; }
-            .trust-bar { margin-top: 0; }
-            .mini-ai-pill { padding: 0; width: 56px; height: 56px; right: 1rem; bottom: 5.5rem; justify-content: center; border-radius: 50%; }
-            .mini-ai-pill img { width: 100%; height: 100%; margin: 0; }
-            .ai-pill-text { display: none !important; }
-        }
-    </style>
+    /* RESPONSIVE */
+    @media(max-width:960px){body{cursor:auto}#cd,#cr{display:none}nav .nl{display:none}.bgrid,.agrid,.cgrid2{grid-template-columns:1fr;gap:2.5rem}.bgrid{padding:1.8rem}.hero h1{font-size:3rem}.gcb{display:none}.trow{margin-top:0}.hud{display:none}.aimgs{transform:none}}
+    @media(max-width:600px){.hero h1{font-size:2.3rem}.cgrid,.rg{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="brand-identity serif-display">
-            LUMIÈRE <span>.</span>
-        </a>
-        <nav class="nav-menu">
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#booking" class="nav-link">Book Online</a>
-            <a href="#about" class="nav-link">Our Salon</a>
-            <a href="#gallery" class="nav-link">Gallery</a>
-            <a href="#reviews" class="nav-link">Reviews</a>
-            <a href="#contact" class="nav-link">Location</a>
-        </nav>
-        <a href="tel:01234567890" class="btn-holo" style="padding: 0.6rem 1.2rem; font-size: 0.8rem;">Call Salon</a>
-    </header>
+<div id="cd"></div>
+<div id="cr"></div>
 
-    <div class="sticky-action-bar" id="actions">
-        <a href="#services" class="btn-3d" style="flex:1; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-scissors"></i> Services</a>
-        <a href="#booking" class="btn-holo" style="flex:2; text-align:center; padding: 0.8rem;"><i class="fa-solid fa-calendar-check"></i> Book Chair</a>
+<!-- HEADER -->
+<header>
+  <a href="#" class="bname serif">LUMIÈRE <span>.</span></a>
+  <nav>
+    <a href="#services" class="nl">Services</a>
+    <a href="#booking"  class="nl">Book</a>
+    <a href="#about"    class="nl">Our Salon</a>
+    <a href="#gallery"  class="nl">Gallery</a>
+    <a href="#reviews"  class="nl">Reviews</a>
+    <a href="#location" class="nl">Location</a>
+    <a href="../../showroom.html" class="nsr"><i class="fa-solid fa-arrow-left" style="font-size:.6rem"></i>Showroom</a>
+  </nav>
+  <button onclick="openB()" class="bholo"><i class="fa-solid fa-calendar-alt"></i>Book Now</button>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div id="hc"></div>
+  <div class="hv"></div>
+  <div class="hb"></div>
+  <div class="hgrain"></div>
+  <div class="ctl"></div>
+  <div class="cbr"></div>
+
+  <!-- Left HUD — editorial minimal -->
+  <div class="hud hudl">
+    <div class="hcard">
+      <div class="hlbl"><span class="hdot"></span>Status</div>
+      <div class="hval">Open</div>
+      <div class="hsub">Appointments available</div>
+      <div class="hbar"><div class="hfill" style="--w:100%"></div></div>
     </div>
+    <div class="hcard">
+      <div class="hlbl">Google</div>
+      <div class="hval">5.0 ★</div>
+      <div class="hsub">120+ verified reviews</div>
+      <div class="hbar"><div class="hfill" style="--w:100%"></div></div>
+    </div>
+  </div>
 
-    <section class="hero">
-        <div id="hero-canvas-container"></div>
-        <div class="hero-content">
-            <h1 class="serif-display" data-tilt data-tilt-max="3">Uncompromising Artistry. <br><span class="text-holo">Beautiful Hair.</span></h1>
-            <p data-tilt data-tilt-max="2">A welcoming, luxury hair studio dedicated to bespoke colour and expert styling for everyone. Elevate your everyday look.</p>
-            <a href="#services" class="btn-3d" style="margin-top: 1rem;">View Services <i class="fa-solid fa-arrow-down" style="margin-left: 8px;"></i></a>
-        </div>
-    </section>
+  <!-- Right HUD -->
+  <div class="hud hudr">
+    <div class="hcard">
+      <div class="hlbl">Services</div>
+      <div class="hval">Bespoke</div>
+      <div class="hsub">Cut, colour &amp; treatment</div>
+      <div class="hbar"><div class="hfill" style="--w:90%"></div></div>
+    </div>
+    <div class="hcard">
+      <div class="hlbl">Studio</div>
+      <div class="hval">Unisex</div>
+      <div class="hsub">All welcome here</div>
+      <div class="hbar"><div class="hfill" style="--w:100%"></div></div>
+    </div>
+  </div>
 
-    <section class="trust-bar">
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <i class="fa-brands fa-google text-holo"></i>
-            <div>
-                <span class="text-main" style="font-size: 1.2rem;">5.0 RATING</span><br>
-                <small style="color: var(--text-dim);">Verified Reviews</small>
-            </div>
-        </div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <h4 class="serif-display text-holo" style="font-size: 1.8rem; margin-right: 10px;">VIP</h4>
-            <span>Master Stylists</span>
-        </div>
-        <div class="trust-item panel-3d" data-tilt data-tilt-max="10">
-            <h4 class="serif-display text-holo" style="font-size: 1.8rem; margin-right: 10px;">100%</h4>
-            <span>Bespoke Care</span>
-        </div>
-    </section>
+  <div class="hcon">
+    <div class="hbadge"><i class="fa-solid fa-scissors"></i> Premium Unisex Hair &amp; Colour Studio &middot; Andover</div>
+    <h1 class="serif">Uncompromising Artistry.<br><span class="th">Beautiful Hair.</span></h1>
+    <p>A welcoming luxury studio dedicated to bespoke colour and expert styling for everyone. Elevate your everyday look.</p>
+    <div class="hbtns">
+      <button onclick="openB()" class="bholo" style="padding:1.1rem 2.4rem;font-size:.9rem"><i class="fa-solid fa-calendar-alt"></i>Book Your Chair</button>
+      <a href="#services" class="b3d"><i class="fa-solid fa-scissors"></i>View Services</a>
+    </div>
+    <div class="htp">
+      <span class="hpi"><i class="fa-solid fa-check"></i>Master stylists</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Bespoke unisex care</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>Premium products</span>
+      <span class="hpi"><i class="fa-solid fa-check"></i>5.0 Google rated</span>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="booking">
-        <div class="roi-tech-section panel-3d">
-            <div class="tech-text-block">
-                <h3 class="serif-display">Book Your Chair <br><span class="text-holo">Instantly.</span></h3>
-                <p style="color: var(--text-dim); font-size: 1.1rem;">Avoid waiting on the phone. Use our smart digital dashboard to secure your appointment instantly.</p>
-                
-                <div class="ai-avatar-badge panel-inset" data-tilt>
-                    <img src="receptionist-ai.jpg" alt="Maya - Salon Assistant" class="img-glow">
-                    <div>
-                        <h4 style="color: white;">Maya (Virtual Host)</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim);">Online 24/7 to check availability and styling questions.</p>
-                    </div>
-                </div>
-            </div>
+<!-- TRUST CARDS -->
+<div class="trow rv">
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.08">
+    <i class="fa-brands fa-google"></i><div><h4>5.0 Stars</h4><span>Google Reviews</span></div>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.08">
+    <i class="fa-solid fa-scissors"></i><div><h4>Master</h4><span>Level Stylists</span></div>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.08">
+    <i class="fa-solid fa-spa"></i><div><h4>Bespoke</h4><span>Unisex Care</span></div>
+  </div>
+  <div class="tcard p3d" data-tilt data-tilt-max="10" data-tilt-glare data-tilt-max-glare="0.08">
+    <i class="fa-solid fa-flask"></i><div><h4>Premium</h4><span>Products Only</span></div>
+  </div>
+</div>
 
-            <div class="calendar-mockup panel-inset" data-tilt data-tilt-max="8">
-                <h4 class="deck-header text-holo serif-display">Select Your Service</h4>
-                <div class="covers-selector">
-                    <div class="cover-bubble panel-3d" style="background: var(--gradient-glow); color: var(--bg-abyss); border:none;">Cut & Finish</div>
-                    <div class="cover-bubble panel-3d">Colour & Highlights</div>
-                    <div class="cover-bubble panel-3d">Treatment</div>
-                </div>
-                
-                <h4 class="deck-header text-holo serif-display" style="margin-top: 2rem;">Hair Length</h4>
-                <select class="panel-3d" style="width: 100%; padding: 1rem; color: white; border-radius: 8px; outline: none; font-weight: 600; cursor: pointer; border: 1px solid rgba(198, 160, 111, 0.2);">
-                    <option>Short (Above Ear / Clipper)</option>
-                    <option>Medium (Above Shoulder)</option>
-                    <option>Long (Below Shoulder)</option>
-                </select>
+<!-- SERVICES — 3D cards -->
+<section class="csec" id="services">
+  <div class="sh rv"><span class="slbl">What We Do</span><h2 class="serif"><span class="th">Our Services</span></h2><div class="grl-c"></div><p>Beautiful results tailored to your hair type and lifestyle.</p></div>
+  <div class="cgrid">
+    <div class="xcard rv d1">
+      <div class="xcimg" style="background:linear-gradient(135deg,#121215,#1a0f05)">
+        <i class="fa-solid fa-scissors"></i><span class="xbadge">Cut &amp; Style</span>
+        <img src="service-cut.jpg" alt="Precision Cut" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xbody">
+        <div class="xrow"><div class="xtitle serif">Precision Cut &amp; Finish</div><span class="xprice">From £45</span></div>
+        <p class="xdesc">A relaxing hair wash, an expert cut tailored to your face shape, and a professional blow-dry finish.</p>
+        <button onclick="openB()" class="xcta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xglow"></div>
+    </div>
+    <div class="xcard rv d2">
+      <div class="xcimg" style="background:linear-gradient(135deg,#1a0f05,#121215)">
+        <i class="fa-solid fa-palette"></i><span class="xbadge">Balayage / Foils</span>
+        <img src="service-color.jpg" alt="Bespoke Colour" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xbody">
+        <div class="xrow"><div class="xtitle serif">Bespoke Colour Science</div><span class="xprice">From £85</span></div>
+        <p class="xdesc">Natural balayage to full foil highlights using premium products for vibrant, lasting colour. Patch test required.</p>
+        <button onclick="openB()" class="xcta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xglow"></div>
+    </div>
+    <div class="xcard rv d3">
+      <div class="xcimg" style="background:linear-gradient(135deg,#121215,#1a0a0a)">
+        <i class="fa-solid fa-droplet"></i><span class="xbadge">Structural Repair</span>
+        <img src="service-treatment.jpg" alt="Deep Treatment" onerror="this.style.display='none'"/>
+      </div>
+      <div class="xbody">
+        <div class="xrow"><div class="xtitle serif">Deep Repair Treatment</div><span class="xprice">From £25</span></div>
+        <p class="xdesc">Revive damaged or dry hair with our intensive conditioning treatments, restoring shine and strength instantly.</p>
+        <button onclick="openB()" class="xcta">Book Now <i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+      <div class="xglow"></div>
+    </div>
+  </div>
+</section>
 
-                <button class="btn-holo" style="width:100%; margin-top: 2rem;">Find Available Times</button>
-            </div>
-        </div>
-    </section>
+<!-- BOOKING ENGINE -->
+<section class="bsec" id="booking">
+  <div class="bgrid p3d rv">
+    <div class="bpitch">
+      <p class="albl">Reserve Your Chair</p>
+      <h3 class="serif">Book Your Chair <span>Instantly.</span></h3>
+      <div class="grl"></div>
+      <p>No waiting on the phone. Use our live calendar to secure your appointment at a time that suits you perfectly.</p>
+      <div class="aib">
+        <div class="aiv"><i class="fa-solid fa-headset"></i><img src="receptionist-ai.jpg" alt="Maya" onerror="this.style.display='none'"/></div>
+        <div><h4 style="color:var(--gold);font-size:.9rem;margin-bottom:2px">Meet Maya &mdash; Your Salon Assistant</h4><p style="font-size:.78rem;color:var(--dim)">Available 24/7 for bookings and styling questions.</p></div>
+      </div>
+    </div>
+    <div class="bpanel pin" data-tilt data-tilt-max="6">
+      <h4 class="serif th">Select Your Service</h4>
+      <div class="svcs">
+        <div class="svc on" onclick="selS(this)">Cut &amp; Finish</div>
+        <div class="svc" onclick="selS(this)">Colour</div>
+        <div class="svc" onclick="selS(this)">Treatment</div>
+      </div>
+      <p class="bpref">Hair Length</p>
+      <select class="bsel">
+        <option>Short (Above Ear)</option>
+        <option>Medium (Above Shoulder)</option>
+        <option>Long (Below Shoulder)</option>
+      </select>
+      <button onclick="openB()" class="bholo" style="width:100%;justify-content:center;padding:1rem"><i class="fa-solid fa-calendar-alt"></i>Find Available Times</button>
+      <p style="font-size:.65rem;color:var(--dim);text-align:center;margin-top:.6rem">Free to book. Cancel anytime.</p>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="about">
-        <div class="about-grid">
-            <div class="team-image-stack" data-tilt data-tilt-max="5">
-                <div class="main-img-wrap panel-3d">
-                    <img src="interior-mirrors.jpg" alt="Lumiere Salon Interior" class="img-glow">
-                </div>
-                <div class="sub-img-wrap panel-inset">
-                    <img src="stylist-portrait.jpg" alt="Creative Stylist" class="img-glow">
-                </div>
-            </div>
-            <div class="human-text">
-                <span class="text-holo">Our Salon</span>
-                <h2 class="serif-display">Elevating Your Style.</h2>
-                <p style="color: var(--text-dim); font-size: 1.1rem; margin-bottom: 1.5rem;">At Lumière, we combine modern styling techniques with expert colour knowledge. Whether you are looking for a complete transformation or a subtle refresh, our talented team takes the time to understand your hair.</p>
-                <p style="color: var(--text-dim); font-size: 1.1rem;">Relax in our beautiful studio environment, enjoy a premium coffee, and let us take care of the rest.</p>
-            </div>
-        </div>
-    </section>
+<!-- ABOUT -->
+<section class="abouts" id="about">
+  <div class="agrid">
+    <div class="aimgs rl" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
+      <div class="amain-wrap p3d">
+        <div class="amain-ph"><i class="fa-solid fa-scissors" style="color:var(--gold);font-size:5rem;opacity:.18"></i></div>
+        <img src="interior-mirrors.jpg" alt="Lumière salon interior" style="position:absolute;inset:0.75rem;width:calc(100% - 1.5rem);border-radius:10px;object-fit:cover;filter:contrast(1.05) saturate(.9)" onerror="this.style.display='none'"/>
+      </div>
+      <div class="asub-wrap pin">
+        <div class="asub-ph"><i class="fa-solid fa-user" style="background:var(--grad-g);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:2.5rem;opacity:.4"></i></div>
+        <img src="stylist-portrait.jpg" alt="Creative stylist" style="position:absolute;inset:0.5rem;width:calc(100% - 1rem);border-radius:6px;object-fit:cover" onerror="this.style.display='none'"/>
+      </div>
+    </div>
+    <div class="rr">
+      <p class="albl">Our Salon</p>
+      <h2 class="serif">Elevating<br>Your Style.</h2>
+      <div class="grl"></div>
+      <p>At Lumière, we combine modern styling techniques with expert colour knowledge. Whether you want a complete transformation or a subtle refresh, our team takes time to understand your hair and your life.</p>
+      <p>Relax in our beautiful studio, enjoy a premium coffee, and let us take care of the rest.</p>
+      <ul class="ach">
+        <li><i class="fa-solid fa-check-circle"></i>Expert cut and colour professionals</li>
+        <li><i class="fa-solid fa-check-circle"></i>Premium products throughout every service</li>
+        <li><i class="fa-solid fa-check-circle"></i>Welcoming to all hair types and identities</li>
+        <li><i class="fa-solid fa-check-circle"></i>Patch test required before colour services</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="services">
-        <div class="section-header">
-            <h2 class="serif-display text-holo">Our Services</h2>
-            <p>Beautiful results tailored specifically to your hair type and lifestyle.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="service-cut.jpg" alt="Precision Haircut" class="service-img">
-                <span class="card-badge">Cut & Style</span>
-                <h3 class="serif-display">Precision Cut & Finish</h3>
-                <p>Includes a relaxing hair wash, expert cut tailored to your face shape, and a professional blow-dry finish.</p>
-            </div>
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="service-color.jpg" alt="Bespoke Hair Colour" class="service-img">
-                <span class="card-badge">Balayage / Foils</span>
-                <h3 class="serif-display">Bespoke Colour Science</h3>
-                <p>From natural balayage to full foil highlights. We use premium products to ensure vibrant, lasting colour.</p>
-            </div>
-            <div class="service-card panel-3d" data-tilt data-tilt-max="10">
-                <img src="service-treatment.jpg" alt="Hair Repair Treatment" class="service-img">
-                <span class="card-badge">Structural Repair</span>
-                <h3 class="serif-display">Deep Repair Treatment</h3>
-                <p>Revive damaged or dry hair with our intensive conditioning treatments, designed to restore shine and strength instantly.</p>
-            </div>
-        </div>
-    </section>
+<!-- GALLERY -->
+<div class="gals" id="gallery">
+  <div class="sh rv" style="padding-top:2rem;margin-bottom:2rem">
+    <span class="slbl">Inside Lumière</span>
+    <h2 class="serif">The Studio &amp; Our Work</h2>
+    <div class="grl-c"></div>
+  </div>
+  <div class="galt">
+    <div class="gi p3d"><i class="fa-solid fa-scissors"></i><img src="hair-designing.jpg" alt="Hair designing" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-wind"></i><img src="hair-drying.jpeg" alt="Hair drying" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-user"></i><img src="men-hair.jpeg" alt="Men's cut" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-mirror"></i><img src="interior-mirrors.jpg" alt="Salon interior" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-spa"></i><img src="hero-salon.jpg" alt="Salon atmosphere" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-user"></i><img src="stylist-portrait.jpg" alt="Stylist" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-scissors"></i><img src="hair-designing.jpg" alt="Hair designing" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-wind"></i><img src="hair-drying.jpeg" alt="Hair drying" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-user"></i><img src="men-hair.jpeg" alt="Men's cut" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-mirror"></i><img src="interior-mirrors.jpg" alt="Salon interior" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-spa"></i><img src="hero-salon.jpg" alt="Salon atmosphere" onerror="this.style.display='none'"/></div>
+    <div class="gi p3d"><i class="fa-solid fa-user"></i><img src="stylist-portrait.jpg" alt="Stylist" onerror="this.style.display='none'"/></div>
+  </div>
+</div>
 
-    <section class="section-wrapper" id="gallery" style="padding-top: 2rem;">
-        <div class="section-header">
-            <h2 class="serif-display text-holo">Inside Lumière</h2>
-            <p>A glimpse into our salon and the beautiful styles we create.</p>
-        </div>
-        <div class="gallery-container panel-inset">
-            <div class="gallery-track">
-                <div class="gallery-item panel-3d"><img src="hair-designing.jpg" alt="Hair Designing"></div>
-                <div class="gallery-item panel-3d"><img src="hair-drying.jpeg" alt="Hair Drying"></div>
-                <div class="gallery-item panel-3d"><img src="men-hair.jpeg" alt="Men's Haircut"></div>
-                <div class="gallery-item panel-3d"><img src="interior-mirrors.jpg" alt="Salon Mirrors"></div>
-                <div class="gallery-item panel-3d"><img src="hero-salon.jpg" alt="Salon Atmosphere"></div>
-                
-                <div class="gallery-item panel-3d"><img src="hair-designing.jpg" alt="Hair Designing"></div>
-                <div class="gallery-item panel-3d"><img src="hair-drying.jpeg" alt="Hair Drying"></div>
-                <div class="gallery-item panel-3d"><img src="men-hair.jpeg" alt="Men's Haircut"></div>
-                <div class="gallery-item panel-3d"><img src="interior-mirrors.jpg" alt="Salon Mirrors"></div>
-                <div class="gallery-item panel-3d"><img src="hero-salon.jpg" alt="Salon Atmosphere"></div>
-            </div>
-        </div>
-    </section>
+<!-- REVIEWS — 3 reviewers -->
+<section class="revs" id="reviews">
+  <div class="sh rv"><span class="slbl">Client Feedback</span><h2 class="serif">Client Reviews</h2><div class="grl-c"></div></div>
+  <div class="rg">
+    <div class="rc p3d rv d1" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"The best salon experience I have ever had. The stylists really listen to what you want, and the colour work is absolutely flawless. I will never go anywhere else."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="hair-reviewer-1.jpg" alt="Emma Richardson" onerror="this.style.display='none'"/></div><div><h4 class="serif">Emma Richardson</h4><span>Verified Client</span></div></div>
+    </div>
+    <div class="rc p3d rv d2" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"A fantastic, welcoming atmosphere. I came in for a completely new style and they nailed it. The online booking system makes everything effortless."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="hair-reviewer-2.jpg" alt="Marcus Vance" onerror="this.style.display='none'"/></div><div><h4 class="serif">Marcus Vance</h4><span>Regular Client</span></div></div>
+    </div>
+    <div class="rc p3d rv d3" data-tilt data-tilt-max="5">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"I have been coming here for my balayage for over a year and the results are consistently beautiful. The team always make me feel completely at ease and at home."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="hair-reviewer-1.jpg" alt="Sunita Thapa" onerror="this.style.display='none'"/></div><div><h4 class="serif">Sunita Thapa</h4><span>Colour Client</span></div></div>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="reviews">
-        <div class="section-header">
-            <h2 class="serif-display">Client Reviews</h2>
-            <p>Real feedback directly from our 5-star Google Business Profile.</p>
-        </div>
-        <div class="test-grid">
-            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"The best salon experience I have ever had. The stylists really listen to what you want, and the colour work is flawless. Booking online was so easy."</p>
-                <div class="client">
-                    <img src="hair-reviewer-1.jpg" alt="Emma Richardson" class="img-glow">
-                    <div>
-                        <h4 class="serif-display" style="font-size: 1.1rem;">Emma Richardson</h4>
-                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Verified Client</span>
-                    </div>
-                </div>
-            </div>
-            <div class="test-card panel-3d" data-tilt data-tilt-max="5">
-                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"A fantastic, welcoming atmosphere. I came in for a completely new style and they nailed it. The online booking system makes scheduling my next trim a breeze."</p>
-                <div class="client">
-                    <img src="hair-reviewer-2.jpg" alt="Marcus Vance" class="img-glow">
-                    <div>
-                        <h4 class="serif-display" style="font-size: 1.1rem;">Marcus Vance</h4>
-                        <span class="text-holo" style="font-size: 0.85rem; font-weight: 700;">Regular Client</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FAQ -->
+<section class="faqs" id="faqs">
+  <div class="sh rv"><span class="slbl">Common Questions</span><h2 class="serif th">FAQs</h2><div class="grl-c"></div></div>
+  <div class="rv">
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Do I need a patch test before colouring?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes. Your safety is our priority. New clients, or anyone who has not had colour with us in the last six months, must pop in for a quick 48-hour patch test before their appointment. This is non-negotiable for your protection.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Will my appointment run on time?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">We pride ourselves on punctuality and schedule ample time for every client so you are never rushed. If we are running slightly behind, we will always let you know immediately.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Do you cater for all hair types?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Absolutely. Lumière is a fully inclusive unisex salon. Our stylists are experienced with all hair types, textures, and lengths — from fine and straight to naturally curly and afro-textured hair. Everyone is welcome here.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>How do I cancel or change my booking?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Please give us at least 24 hours' notice if you need to cancel or reschedule. You can do this through the booking system, by WhatsApp, or by calling the salon directly. We appreciate as much notice as possible.</div></div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="faqs">
-        <div class="section-header">
-            <h2 class="serif-display text-holo">Frequently Asked Questions</h2>
-            <p>Simple answers about booking, patch tests, and salon policies.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="serif-display text-holo" style="font-size: 1.1rem;">Do I need a patch test before colouring?</h4>
-                <p>Yes. Your safety is our priority. If you are a new client, or haven't had colour with us in the last 6 months, you must pop in for a quick 48-hour patch test before your appointment.</p>
-            </div>
-            <div class="faq-box panel-3d" data-tilt data-tilt-max="5">
-                <h4 class="serif-display text-holo" style="font-size: 1.1rem;">Will my appointment run on time?</h4>
-                <p>We pride ourselves on punctuality. We schedule ample time for every client so you are never rushed. If we are running slightly behind, we will always let you know immediately.</p>
-            </div>
-        </div>
-    </section>
+<!-- LOCATION -->
+<section class="cons" id="location">
+  <div class="sh rv"><span class="slbl">Find Us</span><h2 class="serif">Visit <span class="th">Lumière</span></h2><div class="grl-c"></div></div>
+  <div class="cgrid2">
+    <div class="mf p3d rl" data-tilt data-tilt-max="3">
+      <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+    </div>
+    <div class="rr">
+      <p style="color:var(--dim);margin-bottom:1.4rem;font-size:.95rem;font-weight:300">Conveniently located in central Andover with easy parking nearby. Open Tuesday to Saturday.</p>
+      <a href="https://wa.me/447474080809" target="_blank" class="cstrip p3d" data-tilt data-tilt-max="4">
+        <div class="cic"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i></div>
+        <div><div class="clbl">WhatsApp Us</div><div class="cval">Message for a Quick Booking</div></div>
+      </a>
+      <a href="mailto:hello@gochuchuro.com" class="cstrip p3d" data-tilt data-tilt-max="4">
+        <div class="cic" style="color:var(--gold)"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="clbl">Email Us</div><div class="cval">Send a Booking Enquiry</div></div>
+      </a>
+      <button onclick="openB()" class="bholo" style="width:100%;justify-content:center;padding:1rem;margin-top:.4rem"><i class="fa-solid fa-calendar-alt"></i>Book Your Chair Online</button>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="location">
-        <div class="section-header">
-            <h2 class="serif-display">Find Our Salon</h2>
-            <p>Conveniently located in central Andover, with plenty of nearby parking available.</p>
-        </div>
-        <div class="contact-layout">
-            <div class="panel-3d map-frame" style="padding: 0.5rem;">
-                <iframe src="https://maps.google.com/maps?q=Andover,Hampshire,UK&t=&z=14&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border-radius: 12px; border:0; filter: invert(90%) hue-rotate(180deg);" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div>
-                <a href="https://wa.me/44123456789" target="_blank" class="info-strip panel-3d" data-tilt data-tilt-max="5">
-                    <i class="fa-brands fa-whatsapp text-holo" style="font-size: 2.5rem;"></i>
-                    <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Message Us</h5>
-                        <p style="font-size: 1.2rem; font-weight: 700; color: white;">+44 123 456 789</p>
-                    </div>
-                </a>
-                <a href="mailto:hello@lumierestudio.co.uk" class="info-strip panel-3d" data-tilt data-tilt-max="5">
-                    <i class="fa-solid fa-envelope text-holo" style="font-size: 2.5rem;"></i>
-                    <div>
-                        <h5 style="color: var(--text-dim); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px;">Email the Salon</h5>
-                        <p style="font-size: 1.1rem; font-weight: 700; color: white;">hello@lumierestudio.co.uk</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER — social icons here only -->
+<footer>
+  <div class="fbrand serif">LUMIÈRE <span>.</span></div>
+  <p style="color:var(--dim);font-size:.88rem;margin-bottom:.5rem">Beautiful hair and premium service right here in Andover.</p>
+  <div class="socrow">
+    <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="sc" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="sc" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="sc" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://wa.me/447474080809" target="_blank" class="sc" title="WhatsApp" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <div class="flinks">
+    <a href="../../showroom.html">Back to Showroom</a>
+    <a href="../../index.html">GoChuchuro Home</a>
+    <a href="../../index.html#pricing">Pricing from £49/mo</a>
+    <a href="../../privacy.html">Privacy Policy</a>
+  </div>
+  <p style="font-size:.72rem;color:#374151;border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;margin-top:.5rem">
+    &copy; 2026 Lumière Hair &amp; Colour Studio, Andover. Website powered by
+    <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700">GoChuchuro</a>.
+  </p>
+</footer>
 
-    <a href="#booking" class="mini-ai-pill panel-3d" data-tilt>
-        <img src="receptionist-ai.jpg" alt="Maya AI" class="img-glow">
-        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center; padding-right: 0.5rem;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: white; margin: 0; line-height: 1.2;">Maya (Salon Host)</p>
-            <p style="font-size: 0.75rem; color: var(--text-dim); margin: 0; font-weight: 600;"><i class="fa-solid fa-circle text-holo" style="font-size: 0.45rem; margin-right: 4px;"></i> Click to Book</p>
-        </div>
-    </a>
+<!-- STICKY ACTION BAR -->
+<div class="abar">
+  <a href="https://wa.me/447474080809" target="_blank" class="ab ab-sil"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i>WhatsApp</a>
+  <button onclick="openB()" class="ab ab-holo"><i class="fa-solid fa-calendar-alt"></i>Book Appointment</button>
+</div>
 
-    <footer>
-        <h3 class="serif-display text-holo" style="margin-bottom: 1.5rem; font-size: 2rem;">LUMIÈRE.</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; color: var(--text-dim);">Beautiful hair and premium service right here in Andover.</p>
-        
-        <div style="margin-bottom: 3rem; display: flex; justify-content: center; gap: 1rem;">
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-circle-link panel-inset"><i class="fa-brands fa-tiktok"></i></a>
-        </div>
-        <p style="font-size: 0.85rem; color: #475569;">© 2026 GoChuchuro Systems. Premium Beauty Assets.</p>
-    </footer>
+<!-- GC BADGE -->
+<div class="gcb" id="gcb">
+  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">&times;</button>
+  <div class="gcbl">Powered by GoChuchuro</div>
+  <p><strong>Want this website</strong> for your salon?</p>
+  <a href="../../index.html" target="_blank"><i class="fa-regular fa-calendar"></i>Free Chat</a>
+</div>
 
-    <script>
-        const container = document.getElementById('hero-canvas-container');
-        const scene = new THREE.Scene();
-        
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
+<!-- BOOKING MODAL -->
+<div class="mo" id="bm">
+  <div class="mb">
+    <button class="mc" onclick="closeB()"><i class="fa-solid fa-xmark"></i></button>
+    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" scrolling="yes"></iframe>
+  </div>
+</div>
 
-        // Soft floating gold bokeh particles
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 200; // Fewer, larger particles for luxury feel
-        const posArray = new Float32Array(particlesCount * 3);
+<script>
+/* CURSOR */
+const cd=document.getElementById('cd'),cr=document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px'});
+(function ar(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(ar)})();
 
-        for(let i = 0; i < particlesCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 20; 
-        }
+/* MODAL */
+function openB(){document.getElementById('bm').classList.add('on');document.body.style.overflow='hidden'}
+function closeB(){document.getElementById('bm').classList.remove('on');document.body.style.overflow=''}
+document.getElementById('bm').addEventListener('click',function(e){if(e.target===this)closeB()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeB()});
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        
-        // Creating a soft glowing circle texture programmatically
-        const canvas = document.createElement('canvas');
-        canvas.width = 32; canvas.height = 32;
-        const context = canvas.getContext('2d');
-        const gradient = context.createRadialGradient(16, 16, 0, 16, 16, 16);
-        gradient.addColorStop(0, 'rgba(243, 229, 171, 1)'); // Bright Champagne Center
-        gradient.addColorStop(0.2, 'rgba(198, 160, 111, 0.8)'); // Gold Edge
-        gradient.addColorStop(1, 'rgba(0,0,0,0)'); // Transparent Outer
-        context.fillStyle = gradient;
-        context.fillRect(0,0,32,32);
-        const texture = new THREE.CanvasTexture(canvas);
+/* SERVICE SELECTOR */
+function selS(el){document.querySelectorAll('.svc').forEach(s=>s.classList.remove('on'));el.classList.add('on')}
 
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.2,
-            map: texture,
-            transparent: true,
-            opacity: 0.6,
-            blending: THREE.AdditiveBlending,
-            depthWrite: false
-        });
+/* FAQ */
+function tF(el){const it=el.parentElement,ans=it.querySelector('.fa'),op=it.classList.contains('open');document.querySelectorAll('.fi').forEach(i=>{i.classList.remove('open');i.querySelector('.fa').classList.remove('open')});if(!op){it.classList.add('open');ans.classList.add('open')}}
 
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
-        camera.position.z = 5;
+/* REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
 
-        let mouseX = 0; let mouseY = 0;
-        let windowHalfX = window.innerWidth / 2; let windowHalfY = window.innerHeight / 2;
+/* ================================================================
+   THREE.JS HERO — SILK RIBBON WAVE + GOLD BOKEH PARTICLES
+   The most different hero in the showroom.
+   Where all others are about MOVEMENT (speed, vortex, embers),
+   this one is about STILLNESS and LUXURY — like candlelight.
 
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX - windowHalfX);
-            mouseY = (event.clientY - windowHalfY);
-        });
+   Three layers:
+   1. Flowing silk wave mesh — a gentle undulating surface of
+      gold wireframe that breathes like expensive fabric
+   2. Gold bokeh particles — large soft glowing circles that
+      drift very slowly upward, like candle light reflections
+   3. Fine champagne dust — tiny particles settling gently down
 
-        const clock = new THREE.Clock();
+   Camera: drifts so slowly you barely notice, like looking into
+   a vanity mirror while a breeze moves the room.
+================================================================ */
+const hc=document.getElementById('hc');
+const W=hc.clientWidth,H=hc.clientHeight;
+const scene=new THREE.Scene();
+scene.fog=new THREE.FogExp2(0x050505,0.015);
 
-        function animate() {
-            requestAnimationFrame(animate);
-            const elapsedTime = clock.getElapsedTime();
+const cam=new THREE.PerspectiveCamera(60,W/H,0.1,200);
+cam.position.set(0,2,12);
+cam.lookAt(0,0,0);
 
-            // Very slow, elegant drifting
-            particlesMesh.position.y = Math.sin(elapsedTime * 0.2) * 0.5;
-            particlesMesh.rotation.y = elapsedTime * 0.05;
-            
-            // Soft parallax reacting to mouse
-            camera.position.x += (mouseX * 0.001 - camera.position.x) * 0.05;
-            camera.position.y += (-mouseY * 0.001 - camera.position.y) * 0.05;
-            camera.lookAt(scene.position);
+const ren=new THREE.WebGLRenderer({alpha:true,antialias:true});
+ren.setSize(W,H);
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+hc.appendChild(ren.domElement);
 
-            renderer.render(scene, camera);
-        }
-        animate();
+/* --- SILK WAVE MESH — the centrepiece --- */
+const wGeo=new THREE.PlaneGeometry(35,25,55,38);
+const wMat=new THREE.MeshBasicMaterial({color:0xc6a06f,wireframe:true,transparent:true,opacity:.1});
+const wave=new THREE.Mesh(wGeo,wMat);
+wave.rotation.x=-Math.PI/2.8;
+wave.position.set(0,-4,-4);
+scene.add(wave);
 
-        // Handle Resize
-        window.addEventListener('resize', () => {
-            windowHalfX = window.innerWidth / 2; windowHalfY = window.innerHeight / 2;
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-        });
+/* Second wave — champagne, offset */
+const wGeo2=new THREE.PlaneGeometry(40,28,28,18);
+const wMat2=new THREE.MeshBasicMaterial({color:0xf3e5ab,wireframe:true,transparent:true,opacity:.04});
+const wave2=new THREE.Mesh(wGeo2,wMat2);
+wave2.rotation.x=-Math.PI/2.8;
+wave2.position.set(0,-7,-8);
+scene.add(wave2);
 
-        // Initialize 3D UI Tilt effects
-        VanillaTilt.init(document.querySelectorAll(".panel-3d, .btn-3d"), {
-            speed: 400,
-            glare: true,
-            "max-glare": 0.15,
-        });
-    </script>
+const pos1=wave.geometry.attributes.position;
+const pos2=wave2.geometry.attributes.position;
+const oz1=new Float32Array(pos1.count),oz2=new Float32Array(pos2.count);
+for(let i=0;i<pos1.count;i++)oz1[i]=pos1.getZ(i);
+for(let i=0;i<pos2.count;i++)oz2[i]=pos2.getZ(i);
+
+/* --- GOLD BOKEH — large soft glowing blobs --- */
+/* Create a soft circular texture for luxury bokeh */
+const bCanvas=document.createElement('canvas');
+bCanvas.width=64;bCanvas.height=64;
+const bCtx=bCanvas.getContext('2d');
+const bGrad=bCtx.createRadialGradient(32,32,0,32,32,32);
+bGrad.addColorStop(0,'rgba(243,229,171,1)');
+bGrad.addColorStop(0.25,'rgba(198,160,111,0.7)');
+bGrad.addColorStop(1,'rgba(0,0,0,0)');
+bCtx.fillStyle=bGrad;
+bCtx.fillRect(0,0,64,64);
+const bTex=new THREE.CanvasTexture(bCanvas);
+
+const bCount=120,bPos=new Float32Array(bCount*3);
+for(let i=0;i<bCount*3;i+=3){
+  bPos[i]  =(Math.random()-.5)*22;
+  bPos[i+1]=(Math.random()-.5)*14;
+  bPos[i+2]=(Math.random()-.5)*18;
+}
+const bGeo=new THREE.BufferGeometry();
+bGeo.setAttribute('position',new THREE.BufferAttribute(bPos,3));
+const bMat=new THREE.PointsMaterial({size:.55,map:bTex,transparent:true,opacity:.55,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
+const bokeh=new THREE.Points(bGeo,bMat);
+scene.add(bokeh);
+
+/* --- CHAMPAGNE DUST — very fine, settles downward --- */
+const dCount=250,dPos=new Float32Array(dCount*3);
+for(let i=0;i<dCount*3;i++)dPos[i]=(Math.random()-.5)*30;
+const dGeo=new THREE.BufferGeometry();
+dGeo.setAttribute('position',new THREE.BufferAttribute(dPos,3));
+const dMat=new THREE.PointsMaterial({size:.04,color:0xf3e5ab,transparent:true,opacity:.35,blending:THREE.AdditiveBlending});
+const dust=new THREE.Points(dGeo,dMat);
+scene.add(dust);
+
+let tx=0,ty=0;
+document.addEventListener('mousemove',e=>{
+  tx=(e.clientX/W-.5)*.3;
+  ty=(e.clientY/H-.5)*.2;
+});
+
+const clk=new THREE.Clock();
+(function anim(){
+  requestAnimationFrame(anim);
+  const t=clk.getElapsedTime();
+
+  /* SILK WAVE — slow, graceful, like expensive fabric in a breeze */
+  for(let i=0;i<pos1.count;i++){
+    const x=pos1.getX(i),y=pos1.getY(i);
+    pos1.setZ(i,oz1[i]+Math.sin(x*.12+t*.4)*1.2+Math.cos(y*.1+t*.35)*1.0+Math.sin(x*.06+y*.06+t*.25)*.5);
+  }
+  pos1.needsUpdate=true;
+  for(let i=0;i<pos2.count;i++){
+    const x=pos2.getX(i),y=pos2.getY(i);
+    pos2.setZ(i,oz2[i]+Math.sin(x*.1+t*.3+1.8)*1.4+Math.cos(y*.09+t*.28)*1.2);
+  }
+  pos2.needsUpdate=true;
+
+  /* BOKEH — very slow drift upward, rotate gently */
+  const bp=bokeh.geometry.attributes.position.array;
+  for(let i=1;i<bCount*3;i+=3){
+    bp[i]+=.004; // very slow rise
+    if(bp[i]>8) bp[i]=-8;
+    bp[i-1]+=Math.sin(t*.12+i)*.001; // barely perceptible sway
+  }
+  bokeh.geometry.attributes.position.needsUpdate=true;
+
+  /* CHAMPAGNE DUST — settles very slowly downward */
+  const dp=dust.geometry.attributes.position.array;
+  for(let i=1;i<dCount*3;i+=3){
+    dp[i]-=.003;
+    if(dp[i]<-12) dp[i]=12;
+    dp[i-1]+=Math.sin(t*.08+i*.5)*.0005;
+  }
+  dust.geometry.attributes.position.needsUpdate=true;
+
+  /* CAMERA — the slowest, most elegant drift in the showroom */
+  /* Like looking in a vanity mirror while a breeze moves the room */
+  cam.position.x+=(tx*1.5-cam.position.x)*.02;
+  cam.position.y+=(2-ty*1-cam.position.y)*.02;
+  cam.position.z=12+Math.sin(t*.15)*.3; // very subtle breath
+  cam.lookAt(0,0,0);
+  ren.render(scene,cam);
+})();
+
+window.addEventListener('resize',()=>{
+  const w=hc.clientWidth,h=hc.clientHeight;
+  cam.aspect=w/h;cam.updateProjectionMatrix();
+  ren.setSize(w,h);
+});
+
+/* VANILLA TILT */
+VanillaTilt.init(document.querySelectorAll('[data-tilt]'),{speed:300,glare:true,'max-glare':.1});
+</script>
 </body>
 </html>
