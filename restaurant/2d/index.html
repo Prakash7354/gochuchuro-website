@@ -1,578 +1,537 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE TIMUR | Premium Dining & Takeaway</title>
-    
-    <link rel="icon" type="image/png" href="favicon.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="The Timur — Premium Nepalese and Asian dining in Andover. Dine in or takeaway. Book your table online today."/>
+  <title>The Timur | Premium Nepalese &amp; Asian Dining, Andover</title>
+  <link rel="icon" type="image/png" href="../../favicon.png" sizes="32x32"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* =============================================
+       THE TIMUR 2D — INDIGO GOLD EDITORIAL SYSTEM
+       Warm, serif, premium — distinct from garage & plumbing
+       ============================================= */
+    :root {
+      --indigo:     #1e1b4b;
+      --indigo-mid: #2d2a6e;
+      --slate:      #0f172a;
+      --panel:      #1e293b;
+      --gold:       #f59e0b;
+      --gold-hover: #d97706;
+      --gold-dim:   rgba(245,158,11,0.12);
+      --crimson:    #e11d48;
+      --text:       #f8fafc;
+      --dim:        #94a3b8;
+      --mid:        #cbd5e1;
+      --border:     rgba(255,255,255,0.06);
+      --border-s:   #334155;
+      --gc-teal:    #00B5C8;
+      --gc-gold:    #D4AF37;
+      --shadow-sm:  0 4px 16px rgba(0,0,0,0.3);
+      --shadow-md:  0 12px 35px rgba(0,0,0,0.45);
+      --shadow-lg:  0 24px 60px rgba(0,0,0,0.5);
+    }
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{background:var(--slate);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.6;overflow-x:hidden;padding-bottom:72px}
+    .serif{font-family:'Playfair Display',serif;font-weight:700}
 
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    /* REVEAL */
+    .rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+    .rv.on{opacity:1;transform:translateY(0)}
+    .rl{opacity:0;transform:translateX(-28px);transition:opacity .75s ease,transform .75s ease}
+    .rl.on{opacity:1;transform:translateX(0)}
+    .rr{opacity:0;transform:translateX(28px);transition:opacity .75s ease,transform .75s ease}
+    .rr.on{opacity:1;transform:translateX(0)}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
 
-    <style>
-        /* --- RESTAURANT UI DESIGN SYSTEM --- */
-        :root {
-            --primary-dark: #1e1b4b;     /* Deep Indigo / Midnight */
-            --accent-gold: #f59e0b;      /* Saffron Amber / Gold */
-            --accent-gold-hover: #d97706;
-            --bg-slate: #0f172a;         /* Dark Slate Background */
-            --bg-panel: #1e293b;         /* Elevated Panel Background */
-            --text-light: #f8fafc;
-            --text-dim: #94a3b8;
-            --border-faint: rgba(255, 255, 255, 0.06);
-            --border-solid: #334155;
-        }
+    /* HEADER */
+    header{background:rgba(30,27,75,0.98);backdrop-filter:blur(12px);padding:1rem 5%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:500;border-bottom:1px solid var(--border)}
+    .bname{color:var(--text);font-size:1.5rem;text-decoration:none;display:flex;align-items:center;gap:.6rem;letter-spacing:2px;text-transform:uppercase}
+    .bname i{color:var(--gold)}
+    nav{display:flex;align-items:center;gap:1.8rem}
+    .nl{color:var(--dim);text-decoration:none;font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:1px;transition:color .25s}
+    .nl:hover{color:var(--gold)}
+    .nsr{color:var(--gc-teal);text-decoration:none;font-weight:700;font-size:.75rem;border:1px solid rgba(0,181,200,0.3);padding:.38rem .85rem;border-radius:6px;transition:all .25s;display:flex;align-items:center;gap:.35rem}
+    .nsr:hover{background:rgba(0,181,200,0.1)}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            scroll-behavior: smooth;
-        }
+    /* ACTION BAR */
+    .abar{position:fixed;bottom:0;left:0;right:0;z-index:600;background:rgba(30,27,75,0.98);backdrop-filter:blur(12px);border-top:2px solid var(--gold);padding:.85rem 5%;display:flex;justify-content:center;gap:1.2rem;box-shadow:0 -8px 30px rgba(0,0,0,0.6)}
+    .ab{flex:1;max-width:260px;padding:.85rem;border-radius:4px;text-decoration:none;font-weight:700;text-transform:uppercase;font-size:.82rem;letter-spacing:1px;border:none;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;transition:all .3s;cursor:pointer}
+    .ab-dark{background:transparent;color:var(--text);border:1px solid var(--border-s)}
+    .ab-dark:hover{background:rgba(255,255,255,.05)}
+    .ab-gold{background:var(--gold);color:var(--indigo)}
+    .ab-gold:hover{background:var(--gold-hover);transform:translateY(-2px);box-shadow:0 8px 20px var(--gold-dim)}
 
-        body {
-            background-color: var(--bg-slate);
-            color: var(--text-light);
-            line-height: 1.6;
-            padding-bottom: 70px; /* Clears sticky mobile hotbar */
-        }
+    /* HERO */
+    .hero{position:relative;min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 2rem 4rem;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;z-index:0;background:linear-gradient(rgba(30,27,75,.4),rgba(30,27,75,.85)),url('hero-dining.jpg') no-repeat center center/cover}
+    .hero-fp{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#1e1b4b 0%,#2d1a00 50%,#1e1b4b 100%)}
+    .hcon{position:relative;z-index:2;max-width:940px}
+    .hbadge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(245,158,11,.18);border:1px solid rgba(245,158,11,.45);color:#fcd34d;padding:.45rem 1.2rem;border-radius:50px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.8rem;animation:fid .8s ease both}
+    @keyframes fid{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fiu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fi{from{opacity:0}to{opacity:1}}
+    .hero h1{font-size:clamp(2.6rem,6vw,5rem);line-height:1.1;margin-bottom:1.2rem;text-shadow:0 4px 20px rgba(0,0,0,0.9);animation:fiu .9s ease .15s both}
+    .hero h1 span{color:var(--gold);font-style:italic}
+    .hero p{font-size:1.15rem;max-width:660px;margin:0 auto 2.5rem;color:#e2e8f0;font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,.9);animation:fiu .9s ease .3s both}
+    .hbtns{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;animation:fi 1s ease .5s both}
+    .htrust{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:2rem;animation:fi 1.2s ease .7s both}
+    .htp{display:flex;align-items:center;gap:.4rem;font-size:.78rem;font-weight:700;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.5px}
+    .htp i{color:var(--gold)}
 
-        .serif-display {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-        }
+    /* BUTTONS */
+    .bgold{background:var(--gold);color:var(--indigo);padding:1rem 2.2rem;border-radius:6px;font-weight:700;text-decoration:none;border:none;cursor:pointer;font-size:.95rem;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 4px 16px var(--gold-dim)}
+    .bgold:hover{background:var(--gold-hover);transform:translateY(-3px);box-shadow:0 8px 25px var(--gold-dim)}
+    .bghost{background:rgba(255,255,255,.07);color:var(--text);padding:1rem 2.2rem;border-radius:6px;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.2);font-size:.95rem;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem}
+    .bghost:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4)}
 
-        /* --- STICKY TOP NAVIGATION --- */
-        header {
-            background-color: rgba(30, 27, 75, 0.98);
-            backdrop-filter: blur(12px);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-faint);
-        }
+    /* METRICS RIBBON */
+    .mrib{background:var(--panel);padding:2.2rem 5%;display:flex;justify-content:center;align-items:center;gap:3rem;flex-wrap:wrap;border-bottom:1px solid var(--border);text-align:center}
+    .mn h4{font-size:2.2rem;color:var(--gold)}
+    .mn p{font-size:.78rem;text-transform:uppercase;letter-spacing:1px;color:var(--dim);margin-top:.2rem;font-weight:700}
+    .gbadge{display:flex;align-items:center;gap:.8rem;background:white;padding:.7rem 1.4rem;border-radius:50px;text-decoration:none;color:#0f172a;border:1px solid var(--border);box-shadow:var(--shadow-md);transition:all .3s}
+    .gbadge:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
 
-        .brand-logo {
-            color: var(--text-light);
-            font-size: 1.6rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .brand-logo i { color: var(--accent-gold); }
+    /* BOOKING */
+    .bsec{background:var(--panel);border-radius:16px;padding:3.5rem;display:grid;grid-template-columns:1.1fr .9fr;gap:4rem;align-items:center;box-shadow:var(--shadow-lg);border:1px solid var(--border);max-width:1200px;margin:0 auto}
+    .btext h3{font-size:clamp(1.8rem,3vw,2.8rem);color:var(--text);margin-bottom:.8rem}
+    .btext h3 span{color:var(--gold)}
+    .btext p{color:var(--dim);font-size:.98rem;line-height:1.75;margin-bottom:1.5rem}
+    .ai-b{display:flex;align-items:center;gap:1.2rem;background:rgba(15,23,42,.5);border:1px solid var(--border);border-radius:12px;padding:1.2rem}
+    .ai-av{width:52px;height:52px;border-radius:50%;border:2px solid var(--gold);flex-shrink:0;overflow:hidden;position:relative;background:var(--gold-dim);display:flex;align-items:center;justify-content:center}
+    .ai-av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .ai-av i{color:var(--gold);font-size:1.3rem}
+    .bdeck{background:var(--slate);border-radius:12px;padding:2.2rem;border:1px solid var(--border)}
+    .bdh{font-size:1rem;margin-bottom:1.4rem;text-align:center;border-bottom:1px solid var(--border);padding-bottom:1rem;text-transform:uppercase;letter-spacing:1px;color:var(--text)}
+    .covs{display:flex;gap:.5rem;margin-bottom:1.4rem;flex-wrap:wrap}
+    .cov{flex:1;min-width:50px;padding:.75rem;text-align:center;border-radius:4px;border:1px solid var(--border);font-weight:700;cursor:pointer;transition:all .2s;font-size:.9rem;background:rgba(255,255,255,.02);color:var(--dim)}
+    .cov.on,.cov:hover{background:var(--gold);color:var(--indigo);border-color:var(--gold)}
+    .bpref{font-size:.78rem;text-align:center;color:var(--dim);text-transform:uppercase;font-weight:700;letter-spacing:.5px;margin-bottom:.8rem}
+    .bsel{width:100%;padding:.85rem;background:rgba(15,23,42,.8);border:1px solid var(--border);color:white;border-radius:6px;outline:none;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;margin-bottom:1.2rem}
+    .bsel:focus{border-color:var(--gold)}
 
-        .nav-menu { display: flex; gap: 2rem; }
-        .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .nav-link:hover { color: var(--accent-gold); }
+    /* ABOUT */
+    .asec{padding:6rem 5%;max-width:1200px;margin:0 auto}
+    .agrid{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:center}
+    .aimg{position:relative}
+    .aim-main{width:100%;border-radius:12px;border:1px solid var(--border-s);box-shadow:20px 20px 0 var(--gold);display:block}
+    .aim-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#1e1b4b,#3d1a00);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:var(--gold);opacity:.2;border:1px solid var(--border-s);box-shadow:20px 20px 0 var(--gold)}
+    .albl{color:var(--gold);font-size:.78rem;text-transform:uppercase;font-weight:800;letter-spacing:1.5px;margin-bottom:.5rem;display:block}
+    .agrid h2{font-size:clamp(1.8rem,3vw,2.8rem);margin-bottom:1rem;line-height:1.15}
+    .agrid p{color:var(--dim);font-size:.98rem;line-height:1.75;margin-bottom:1rem}
+    .gl{width:45px;height:3px;background:var(--gold);border-radius:2px;margin:.7rem 0;box-shadow:0 0 10px var(--gold-dim)}
 
-        /* --- STICKY PERSISTENT ACTION HOT-BAR (MOBILE) --- */
-        .sticky-action-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(30, 27, 75, 0.98);
-            backdrop-filter: blur(10px);
-            border-top: 2px solid var(--accent-gold);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            z-index: 990;
-            box-shadow: 0 -10px 30px rgba(0,0,0,0.6);
-        }
+    /* MENU CARDS */
+    .msec{padding:6rem 5%;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem}
+    .mc{background:var(--panel);border-radius:12px;overflow:hidden;border:1px solid var(--border);transition:all .35s;display:flex;flex-direction:column}
+    .mc:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
+    .mc-img{width:100%;height:240px;object-fit:cover;filter:saturate(.85);transition:.4s;display:block}
+    .mc:hover .mc-img{filter:saturate(1.1)}
+    .mc-ph{width:100%;height:240px;display:flex;align-items:center;justify-content:center;font-size:5rem}
+    .mc-body{padding:2rem;text-align:center;flex:1;display:flex;flex-direction:column}
+    .mc-body h3{color:var(--text);margin-bottom:.5rem;font-size:1.6rem}
+    .mbadge{display:inline-block;background:var(--gold-dim);color:var(--gold);padding:.2rem .7rem;border-radius:4px;font-size:.72rem;text-transform:uppercase;font-weight:700;margin-bottom:.8rem;align-self:center}
+    .mc-body p{color:var(--dim);font-size:.9rem;line-height:1.65;flex:1;margin-bottom:1.2rem}
+    .mprice{font-size:1.4rem;color:var(--gold);font-weight:800}
 
-        .action-bar-btn {
-            flex: 1;
-            max-width: 260px;
-            padding: 0.9rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.6rem;
-            transition: 0.3s;
-            border: none;
-        }
-        .action-bar-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); }
-        .btn-dark-cta { background-color: transparent; color: var(--text-light); border: 1px solid var(--border-solid); }
-        .btn-gold-cta { background-color: var(--accent-gold); color: var(--primary-dark); }
+    /* GALLERY */
+    .gal-s{overflow:hidden;background:rgba(30,27,75,.6);padding:3.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .gal-lbl{text-align:center;font-size:.68rem;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:1.5rem;font-family:'Playfair Display',serif}
+    .gal-t{display:flex;width:calc(310px * 12);animation:gscroll 38s linear infinite}
+    .gal-t:hover{animation-play-state:paused}
+    @keyframes gscroll{0%{transform:translateX(0)}100%{transform:translateX(calc(-310px * 6))}}
+    .gi{width:280px;height:200px;margin:0 15px;border-radius:14px;overflow:hidden;flex-shrink:0;background:var(--panel);border:1px solid rgba(245,158,11,.15);box-shadow:var(--shadow-md);display:flex;align-items:center;justify-content:center;position:relative;transition:all .4s}
+    .gi:hover{border-color:var(--gold);box-shadow:0 0 25px var(--gold-dim),var(--shadow-md);transform:scale(1.04) translateY(-4px)}
+    .gi i{font-size:2.8rem;color:var(--gold);opacity:.2;z-index:1}
+    .gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85);transition:.4s}
+    .gi:hover img{filter:saturate(1.1)}
 
-        /* --- HERO WORKSPACE --- */
-        .hero {
-            background-color: var(--primary-dark);
-            background: linear-gradient(rgba(30, 27, 75, 0.35), rgba(30, 27, 75, 0.35)), url('hero-dining.jpg') no-repeat center center/cover;
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-light);
-        }
+    /* REVIEWS */
+    .rsec{background:#06090e;padding:6rem 5%;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:2.5rem;max-width:1100px;margin:0 auto}
+    .rc{background:var(--panel);padding:2.5rem;border-radius:12px;border:1px solid var(--border);transition:all .3s}
+    .rc:hover{border-color:rgba(245,158,11,.3);transform:translateY(-4px)}
+    .rstars{color:#fbbc04;margin-bottom:1.2rem;font-size:.9rem;letter-spacing:1px}
+    .rtxt{font-style:italic;color:var(--mid);margin-bottom:1.8rem;font-size:1rem;line-height:1.65}
+    .rper{display:flex;align-items:center;gap:1rem}
+    .rav{width:52px;height:52px;border-radius:50%;border:2px solid var(--gold);flex-shrink:0;overflow:hidden;position:relative;background:var(--gold-dim);display:flex;align-items:center;justify-content:center}
+    .rav img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .rper h4{font-size:1rem;font-weight:700;color:white}
+    .rper span{font-size:.75rem;color:var(--gold);font-weight:600}
 
-        .hero h1 {
-            font-size: 4.5rem;
-            max-width: 900px;
-            line-height: 1.1;
-            margin-bottom: 1.2rem;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
-        }
-        .hero h1 span { color: var(--accent-gold); font-style: italic; }
+    /* FAQ ACCORDION */
+    .fql{max-width:800px;margin:0 auto}
+    .fi{border-bottom:1px solid var(--border)}
+    .fq{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 0;cursor:pointer;font-weight:700;font-size:.98rem;color:var(--text);transition:color .25s}
+    .fq:hover{color:var(--gold)}
+    .fqi{font-size:.75rem;color:var(--gold);transition:transform .3s}
+    .fi.open .fqi{transform:rotate(45deg)}
+    .fa{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;color:var(--dim);font-size:.92rem;line-height:1.75}
+    .fa.open{max-height:250px;padding-bottom:1.2rem}
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 680px;
-            color: #e2e8f0;
-            margin-bottom: 2.5rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
-            font-weight: 500;
-        }
+    /* LOCATION */
+    .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;max-width:1200px;margin:0 auto}
+    .mf{width:100%;height:360px;border-radius:12px;overflow:hidden;border:1px solid var(--border-s);box-shadow:var(--shadow-md)}
+    .mf iframe{width:100%;height:100%;border:0}
+    .cs{display:flex;align-items:center;gap:1.2rem;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.4rem;text-decoration:none;transition:all .3s;margin-bottom:1rem}
+    .cs:hover{transform:scale(1.01);border-color:var(--gold);box-shadow:var(--shadow-sm)}
+    .cic{width:46px;height:46px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;border:1px solid var(--border-s);color:var(--gold)}
+    .clbl{font-size:.68rem;text-transform:uppercase;font-weight:700;letter-spacing:.5px;color:var(--dim)}
+    .cval{font-size:.95rem;font-weight:700;color:var(--text)}
 
-        .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    /* SHARED */
+    .sw{padding:6rem 5%;max-width:1300px;margin:0 auto}
+    .sh{text-align:center;margin-bottom:3.5rem}
+    .sh .slbl{color:var(--gold);font-size:.75rem;text-transform:uppercase;font-weight:800;letter-spacing:2px;margin-bottom:.4rem;display:block}
+    .sh h2{font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--text)}
+    .sh p{color:var(--dim);font-size:.98rem;margin-top:.5rem}
+    .gl-c{width:45px;height:3px;background:var(--gold);border-radius:2px;margin:.7rem auto;box-shadow:0 0 10px var(--gold-dim)}
 
-        /* --- TRUST BADGES / METRICS RIBBON --- */
-        .metrics-ribbon {
-            background-color: var(--bg-panel);
-            padding: 2.5rem 5%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid var(--border-faint);
-            text-align: center;
-        }
-        
-        .metric-node h4 { font-size: 2.2rem; color: var(--accent-gold); font-family: 'Plus Jakarta Sans', sans-serif;}
-        .metric-node p { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-top: 0.2rem; font-weight: 600;}
+    /* FOOTER */
+    footer{background:#06090e;padding:5rem 5% 7rem;color:var(--dim);text-align:center;border-top:1px solid var(--border)}
+    .fbrand{font-size:1.8rem;color:white;margin-bottom:.5rem;letter-spacing:2px;text-transform:uppercase}
+    .fbrand i{color:var(--gold)}
+    .socrow{display:flex;justify-content:center;gap:.8rem;margin:1.2rem 0 1.5rem;flex-wrap:wrap}
+    .sc{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.03);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;transition:all .3s;border:1px solid rgba(255,255,255,.06)}
+    .sc:hover{background:var(--gold);color:var(--indigo);transform:translateY(-4px);border-color:var(--gold)}
+    .flinks{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+    .flinks a{font-size:.75rem;color:#374151;text-decoration:none;font-weight:600;transition:color .2s}
+    .flinks a:hover{color:var(--gc-teal)}
 
-        .embedded-google-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: white;
-            padding: 0.8rem 1.6rem;
-            border-radius: 50px;
-            text-decoration: none;
-            color: #0f172a;
-            border: 1px solid var(--border-faint);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .embedded-google-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-        }
+    /* GC BADGE */
+    .gcb{position:fixed;bottom:82px;right:1.5rem;z-index:550;background:rgba(13,21,21,0.97);border:1px solid rgba(0,181,200,0.35);border-radius:14px;padding:.8rem 1rem;box-shadow:0 10px 35px rgba(0,0,0,.7);max-width:220px;text-align:center;animation:badin .8s ease .6s both;backdrop-filter:blur(14px)}
+    @keyframes badin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:translateX(0)}}
+    .gcbc{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--dim);font-size:.72rem;cursor:pointer}
+    .gcbl{font-size:.6rem;font-weight:800;letter-spacing:1.5px;color:rgba(0,181,200,0.6);text-transform:uppercase;margin-bottom:.3rem}
+    .gcb p{font-size:.7rem;color:rgba(200,205,214,.8);margin-bottom:.5rem;line-height:1.4}
+    .gcb p strong{color:white}
+    .gcb a{display:inline-flex;align-items:center;gap:.35rem;background:linear-gradient(135deg,#00B5C8,#E5C158);color:#000;padding:.44rem 1rem;border-radius:8px;font-size:.7rem;font-weight:900;text-decoration:none;text-transform:uppercase;letter-spacing:.5px;transition:all .25s}
+    .gcb a:hover{transform:scale(1.03)}
 
-        /* --- SECTION WRAPPERS --- */
-        .section-wrapper { padding: 6.5rem 5%; max-width: 1300px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-header h2 { font-size: 2.8rem; color: var(--text-light); }
-        .section-header p { color: var(--text-dim); font-size: 1.1rem; margin-top: 0.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    /* MODAL */
+    .mo{position:fixed;inset:0;background:rgba(30,27,75,.94);backdrop-filter:blur(14px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .35s}
+    .mo.on{opacity:1;visibility:visible}
+    .mb{background:var(--panel);width:92%;max-width:940px;height:86vh;border-radius:18px;position:relative;transform:translateY(28px);transition:transform .35s;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg)}
+    .mo.on .mb{transform:translateY(0)}
+    .mc2{position:absolute;top:14px;right:16px;background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.3);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:white;font-size:1rem;cursor:pointer;z-index:10;transition:all .25s}
+    .mc2:hover{background:var(--gold);color:var(--indigo)}
+    .mb iframe{width:100%;height:100%;border:0;border-radius:18px}
 
-        /* --- BOOKING SECTION --- */
-        .roi-tech-section {
-            background-color: var(--bg-panel);
-            border-radius: 16px;
-            padding: 4rem;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 4rem;
-            align-items: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
-            margin: 5rem auto; 
-            border: 1px solid var(--border-faint);
-        }
-
-        .tech-text-block h3 { font-size: 2.5rem; color: var(--text-light); margin-bottom: 1rem; }
-        .tech-text-block h3 span { color: var(--accent-gold); }
-        
-        .ai-avatar-badge {
-            display: flex;
-            align-items: center;
-            background: rgba(15, 23, 42, 0.5);
-            padding: 1.5rem;
-            border-radius: 12px;
-            gap: 1.5rem;
-            border: 1px solid var(--border-faint);
-            margin-top: 2.5rem;
-        }
-        .ai-avatar-badge img { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold); }
-
-        .interactive-table-deck { background: var(--bg-slate); border-radius: 12px; padding: 2.5rem; border: 1px solid var(--border-faint); }
-        .deck-header { font-size: 1.1rem; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-faint); padding-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light);}
-        
-        .covers-selector { display: flex; justify-content: space-around; margin-bottom: 1.5rem; gap: 0.5rem; }
-        .cover-bubble { flex: 1; padding: 0.8rem 0; text-align: center; border-radius: 4px; border: 1px solid var(--border-faint); font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.9rem; background: rgba(255,255,255,0.02);}
-        .cover-bubble.selected, .cover-bubble:hover { background-color: var(--accent-gold); color: var(--primary-dark); border-color: var(--accent-gold); }
-
-        /* --- ABOUT STORY --- */
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-        .editorial-image-group { position: relative; }
-        .editorial-main { width: 100%; border-radius: 12px; border: 1px solid var(--border-solid); box-shadow: 20px 20px 0px var(--accent-gold); }
-        
-        /* --- MENU SECTION --- */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .service-card { background: var(--bg-panel); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-faint); transition: 0.3s; display: flex; flex-direction: column; }
-        .service-card:hover { transform: translateY(-7px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); border-color: var(--accent-gold); }
-        .service-img { width: 100%; height: 240px; object-fit: cover; filter: grayscale(15%); transition: 0.4s;}
-        .service-card:hover .service-img { filter: grayscale(0%); }
-        .service-body { padding: 2.5rem; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start;}
-        .service-body h3 { color: var(--text-light); margin-bottom: 0.5rem; font-size: 1.6rem; }
-        .service-badge { display: inline-block; background: rgba(245, 158, 11, 0.15); color: var(--accent-gold); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; margin-bottom: 1rem; align-self: center; }
-        .service-body p { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 1.5rem; flex-grow: 1; }
-        .service-price { font-size: 1.4rem; color: var(--accent-gold); font-weight: 800; }
-
-        /* --- VERIFIED REVIEWS --- */
-        .review-sector { background-color: #06090e; padding: 7rem 5%; border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint); }
-        .testimonial-matrix { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; }
-        .review-envelope { background: var(--bg-panel); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-faint); }
-        .stars-row { color: #fbbc04; margin-bottom: 1.2rem; font-size: 0.95rem; }
-        .review-envelope p { font-style: italic; color: #cbd5e1; margin-bottom: 2rem; font-size: 1.05rem; line-height: 1.6;}
-        .client { display: flex; align-items: center; gap: 1.2rem; }
-        .client img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold); }
-
-        /* --- FAQS --- */
-        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .faq-box { background: var(--bg-panel); padding: 2.2rem; border-radius: 8px; border: 1px solid var(--border-faint); }
-        .faq-box h4 { color: var(--text-light); margin-bottom: 0.6rem; font-size: 1.15rem; font-weight: 700; }
-        .faq-box p { font-size: 0.95rem; color: var(--text-dim); line-height: 1.6;}
-
-        /* --- CONTACT & MAP SECTION --- */
-        .contact-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 4rem; align-items: start; }
-        .map-frame { width: 100%; height: 360px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-solid); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        
-        .info-strip { background: var(--bg-panel); border: 1px solid var(--border-faint); border-radius: 8px; padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; margin-top: 1.5rem; transition: 0.3s; text-decoration: none;}
-        .info-strip:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.3); border-color: var(--accent-gold); }
-        .info-strip-icon { width: 50px; height: 50px; background: transparent; color: var(--accent-gold); border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.4rem; border: 1px solid var(--border-solid); }
-        
-        .info-strip-text h5 { font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;}
-        .info-strip-text p { font-size: 1.15rem; font-weight: 700; color: var(--text-light); }
-
-        /* --- MINI AI PILL --- */
-        .mini-ai-pill {
-            position: fixed;
-            bottom: 5.5rem; 
-            right: 1.5rem;
-            background: white;
-            border-radius: 50px;
-            padding: 0.4rem 1.2rem 0.4rem 0.4rem;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-            z-index: 990;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            text-decoration: none;
-            border: 1px solid var(--border-solid);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .mini-ai-pill:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4);
-            border-color: var(--accent-gold);
-        }
-        .mini-ai-pill img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid var(--accent-gold);
-            object-fit: cover;
-        }
-
-        /* Social Icons in Footer */
-        .social-circle-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem; }
-        .social-circle-link { width: 46px; height: 46px; background: rgba(255,255,255,0.03); color: #cbd5e1; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; text-decoration: none; transition: 0.3s; border: 1px solid rgba(255,255,255,0.06); }
-        .social-circle-link:hover { background: var(--accent-gold); color: var(--primary-dark); transform: translateY(-4px); border-color: var(--accent-gold); }
-
-        @media (max-width: 950px) {
-            .nav-menu { display: none; }
-            .roi-tech-section, .about-grid, .faq-grid, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
-            .roi-tech-section { padding: 2rem; margin-top: 2rem;}
-            .editorial-main { box-shadow: 10px 10px 0px var(--accent-gold); }
-            .hero h1 { font-size: 3.2rem; }
-            
-            .metrics-ribbon { gap: 1.5rem; padding: 2rem 5%; flex-direction: column; }
-            
-            .mini-ai-pill {
-                padding: 0; 
-                width: 56px;
-                height: 56px;
-                right: 1rem; 
-                bottom: 5.5rem; 
-                justify-content: center;
-                border-radius: 50%;
-            }
-            .mini-ai-pill img { 
-                width: 100%; 
-                height: 100%; 
-                margin: 0;
-            }
-            .ai-pill-text { display: none !important; }
-        }
-    </style>
+    /* RESPONSIVE */
+    @media(max-width:900px){nav .nl{display:none}.bsec,.agrid,.cgrid{grid-template-columns:1fr;gap:2.5rem}.bsec{padding:1.8rem}.gcb{display:none}.aim-main,.aim-ph{box-shadow:10px 10px 0 var(--gold)}}
+    @media(max-width:600px){.hero h1{font-size:2.3rem}.mgrid{grid-template-columns:1fr}.rg{grid-template-columns:1fr}}
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="brand-logo serif-display">
-            <i class="fa-solid fa-leaf"></i> THE TIMUR
-        </a>
-        <nav class="nav-menu">
-            <a href="#about" class="nav-link">About Us</a>
-            <a href="#services" class="nav-link">Our Menu</a>
-            <a href="#reviews" class="nav-link">Reviews</a>
-            <a href="#faqs" class="nav-link">FAQs</a>
-            <a href="#location" class="nav-link">Location</a>
-        </nav>
-        <a href="tel:01234567890" class="cta-header-btn" style="display: none;">
-            <i class="fa-solid fa-phone"></i> Call Direct
-        </a>
-    </header>
+<!-- HEADER -->
+<header>
+  <a href="#" class="bname serif"><i class="fa-solid fa-leaf"></i> THE TIMUR</a>
+  <nav>
+    <a href="#about"   class="nl">About Us</a>
+    <a href="#menu"    class="nl">Our Menu</a>
+    <a href="#gallery" class="nl">Gallery</a>
+    <a href="#reviews" class="nl">Reviews</a>
+    <a href="#faqs"    class="nl">FAQs</a>
+    <a href="#location" class="nl">Location</a>
+    <a href="../../showroom.html" class="nsr"><i class="fa-solid fa-arrow-left" style="font-size:.6rem"></i>Showroom</a>
+  </nav>
+  <button onclick="openB()" class="bgold" style="font-size:.82rem;padding:.6rem 1.2rem"><i class="fa-solid fa-utensils"></i>Book a Table</button>
+</header>
 
-    <div class="sticky-action-bar" id="actions">
-        <a href="#booking" class="action-bar-btn btn-dark-cta"><i class="fa-solid fa-bag-shopping"></i> Order Takeaway</a>
-        <a href="#booking" class="action-bar-btn btn-gold-cta"><i class="fa-solid fa-utensils"></i> Book A Table</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-fp"></div>
+  <div class="hcon">
+    <div class="hbadge"><i class="fa-solid fa-leaf"></i> Authentic Nepalese &amp; Asian Cuisine &middot; Andover</div>
+    <h1 class="serif">Savour Premium Nepalese &amp; <span>Asian Masterpieces</span></h1>
+    <p>An exquisite culinary journey into traditional Himalayan spice heritage, served elegantly within Andover&rsquo;s finest modern dining environment.</p>
+    <div class="hbtns">
+      <button onclick="openB()" class="bgold"><i class="fa-solid fa-utensils"></i>Book a Table</button>
+      <a href="#menu" class="bghost"><i class="fa-solid fa-book-open"></i>Explore Our Menu</a>
     </div>
+    <div class="htrust">
+      <span class="htp"><i class="fa-solid fa-check"></i>Halal certified</span>
+      <span class="htp"><i class="fa-solid fa-check"></i>Freshly ground spices</span>
+      <span class="htp"><i class="fa-solid fa-check"></i>4.9 Google rating</span>
+      <span class="htp"><i class="fa-solid fa-check"></i>Free online booking</span>
+    </div>
+  </div>
+</section>
 
-    <section class="hero">
-        <h1 class="serif-display">Savour Premium Nepalese & <span>Asian Masterpieces</span></h1>
-        <p>An exquisite culinary journey deep into traditional Himalayan spice heritage, served elegantly within Andover's finest modern dining environment.</p>
-        <div class="hero-buttons">
-            <a href="#services" class="action-bar-btn btn-gold-cta" style="padding: 1rem 2.5rem; font-size: 1rem; max-width: 300px;">Explore Our Menu</a>
-        </div>
-    </section>
+<!-- METRICS RIBBON -->
+<div class="mrib rv">
+  <a href="#reviews" class="gbadge">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="26px" height="26px">
+      <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
+      <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
+      <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
+      <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
+    </svg>
+    <div style="font-size:.82rem;font-weight:700;display:flex;flex-direction:column;line-height:1.2">
+      <span>4.9 <span style="color:#fbbc05;font-size:.7rem">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+      <span style="font-size:.68rem;color:#64748b;font-weight:500">Google Rated Stars</span>
+    </div>
+  </a>
+  <div class="mn"><h4 class="serif">100%</h4><p>Freshly Ground Spices</p></div>
+  <div class="mn"><h4 class="serif">0%</h4><p>Hidden Booking Fees</p></div>
+  <div class="mn"><h4 class="serif">45 min</h4><p>Average Delivery Time</p></div>
+</div>
 
-    <section class="metrics-ribbon">
-        
-        <a href="#reviews" class="embedded-google-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="28px" height="28px">
-                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"/>
-                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"/>
-                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"/>
-                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
-            </svg>
-            <div style="font-size: 0.85rem; font-weight: 700; display: flex; flex-direction: column; line-height: 1.2; text-align: left;">
-                <span>4.9 <span style="color: #fbbc05; font-size: 0.75rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span></span>
-                <span style="font-size: 0.7rem; color: #64748b; font-weight: 500;">Google Rated Stars</span>
-            </div>
-        </a>
+<!-- BOOKING -->
+<section class="sw" id="booking">
+  <div class="bsec rv">
+    <div class="btext">
+      <span class="albl">Reserve Your Experience</span>
+      <h3 class="serif">Book Your <span>Table.</span></h3>
+      <div class="gl"></div>
+      <p>Avoid the busy phone lines during peak hours. Secure your dining experience instantly with our live online booking system. No fees. No fuss.</p>
+      <div class="tech-feat" style="display:flex;gap:1.1rem;margin-bottom:1.1rem;align-items:flex-start">
+        <div style="width:44px;height:44px;background:var(--gold-dim);border:1px solid rgba(245,158,11,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;flex-shrink:0"><i class="fa-solid fa-calendar-days"></i></div>
+        <div><h4 style="color:var(--text);margin-bottom:3px;font-size:.95rem">Live Availability</h4><p style="font-size:.85rem;color:var(--dim)">See real-time table availability and confirm instantly.</p></div>
+      </div>
+      <div class="tech-feat" style="display:flex;gap:1.1rem;align-items:flex-start">
+        <div style="width:44px;height:44px;background:var(--gold-dim);border:1px solid rgba(245,158,11,.2);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.2rem;flex-shrink:0"><i class="fa-solid fa-bag-shopping"></i></div>
+        <div><h4 style="color:var(--text);margin-bottom:3px;font-size:.95rem">Order Takeaway Too</h4><p style="font-size:.85rem;color:var(--dim)">Same system handles dine-in and collection orders seamlessly.</p></div>
+      </div>
+      <div class="ai-b" style="margin-top:1.5rem">
+        <div class="ai-av"><i class="fa-solid fa-headset"></i><img src="ai-receptionist.png" alt="Maya" onerror="this.style.display='none'"/></div>
+        <div><h4 style="color:var(--gold);font-size:.95rem;margin-bottom:2px">Maya &mdash; Your Virtual Host</h4><p style="font-size:.8rem;color:var(--dim)">Available 24/7 for large group reservations and menu questions.</p></div>
+      </div>
+    </div>
+    <div class="bdeck">
+      <h4 class="bdh serif">Number of Guests</h4>
+      <div class="covs">
+        <div class="cov on" onclick="selC(this)">1</div>
+        <div class="cov" onclick="selC(this)">2</div>
+        <div class="cov" onclick="selC(this)">4</div>
+        <div class="cov" onclick="selC(this)">6</div>
+        <div class="cov" onclick="selC(this)">8+</div>
+      </div>
+      <p class="bpref">Seating Preference</p>
+      <select class="bsel">
+        <option>Standard Dining Room</option>
+        <option>Quiet Corner Table</option>
+        <option>Himalayan VIP Suite</option>
+      </select>
+      <button onclick="openB()" class="bgold" style="width:100%;justify-content:center;padding:1rem">
+        <i class="fa-solid fa-utensils"></i>Secure My Table
+      </button>
+      <p style="font-size:.7rem;color:var(--dim);text-align:center;margin-top:.7rem">Free cancellation up to 2 hours before your reservation.</p>
+    </div>
+  </div>
+</section>
 
-        <div class="metric-node"><h4 class="serif-display">100%</h4><p>Freshly Ground Spices</p></div>
-        <div class="metric-node"><h4 class="serif-display">0%</h4><p>Hidden Booking Fees</p></div>
-    </section>
+<!-- ABOUT -->
+<section class="asec" id="about">
+  <div class="agrid">
+    <div class="aimg rl">
+      <div class="aim-ph"><i class="fa-solid fa-utensils"></i></div>
+      <img src="about-interior.jpg" alt="The Timur dining room" class="aim-main" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.style.display='none'"/>
+    </div>
+    <div class="rr">
+      <span class="albl">Our Story</span>
+      <h2 class="serif">Authentic Flavours<br>in Andover.</h2>
+      <div class="gl"></div>
+      <p>The Timur brings the rich, comforting tastes of authentic Asian and Nepalese flavours straight to your table. Our signature slow-cooked lamb and hand-ground spices are based on generations of family recipes, cooked with passion and care.</p>
+      <p>Every dish is cooked fresh to order in our kitchen, ensuring you get the very best quality whether you are dining in or eating at home.</p>
+      <ul style="list-style:none;margin-top:1.2rem">
+        <li style="display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.6rem;font-size:.95rem;font-weight:600;color:var(--text)"><i class="fa-solid fa-check-circle" style="color:var(--gold);margin-top:.2rem;flex-shrink:0"></i>Certified halal chicken and lamb throughout</li>
+        <li style="display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.6rem;font-size:.95rem;font-weight:600;color:var(--text)"><i class="fa-solid fa-check-circle" style="color:var(--gold);margin-top:.2rem;flex-shrink:0"></i>Hand-ground spices, freshly prepared daily</li>
+        <li style="display:flex;align-items:flex-start;gap:.7rem;font-size:.95rem;font-weight:600;color:var(--text)"><i class="fa-solid fa-check-circle" style="color:var(--gold);margin-top:.2rem;flex-shrink:0"></i>Delivery within 6 miles of central Andover</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" style="padding-top: 0;">
-        <div class="roi-tech-section" id="booking">
-            <div class="tech-pitch-content">
-                <h3 class="serif-display">Book Your <span>Table.</span></h3>
-                <p style="font-size: 1.05rem; color: var(--text-dim); margin-bottom: 1.5rem;">Avoid the busy phone lines during peak hours. Secure your table instantly with our live online booking system.</p>
-                
-                <div class="ai-avatar-badge">
-                    <img src="ai-receptionist.png" alt="Virtual Host Maya">
-                    <div>
-                        <h4 style="color: var(--accent-gold); font-weight:700;">Meet Maya, Your Virtual Host</h4>
-                        <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 2px;">Available 24/7 to help you book tables, handle large group reservations, and answer any menu questions.</p>
-                    </div>
-                </div>
-            </div>
+<!-- MENU -->
+<section class="msec" id="menu">
+  <div style="text-align:center;margin-bottom:3.5rem" class="rv">
+    <span class="albl">Signature Dishes</span>
+    <h2 class="serif" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">Our Menu</h2>
+    <div class="gl-c"></div>
+    <p style="color:var(--dim)">Explore some of the favourite dishes loved by our local diners.</p>
+  </div>
+  <div class="mgrid" style="max-width:1300px;margin:0 auto">
+    <div class="mc rv d1">
+      <div class="mc-ph" style="background:linear-gradient(135deg,#1e1b4b,#3d1a00)">🥟</div>
+      <img src="dish-momos.jpg" alt="Himalayan Momos" class="mc-img" style="position:absolute;top:0;left:0;width:100%;height:240px" onerror="this.style.display='none'"/>
+      <div class="mc-body">
+        <h3 class="serif">Himalayan Momos</h3>
+        <span class="mbadge">Starter</span>
+        <p>Spiced minced meat dumplings steamed freshly, served alongside our traditional charred sesame and tomato chutney.</p>
+        <p class="mprice">£8.95</p>
+      </div>
+    </div>
+    <div class="mc rv d2" style="position:relative">
+      <div class="mc-ph" style="background:linear-gradient(135deg,#3d1a00,#1e1b4b)">🍛</div>
+      <img src="dish-curry.jpg" alt="Signature Timur Lamb" class="mc-img" style="position:absolute;top:0;left:0;width:100%;height:240px" onerror="this.style.display='none'"/>
+      <div class="mc-body">
+        <h3 class="serif">Signature Timur Lamb</h3>
+        <span class="mbadge">Main Course</span>
+        <p>Tender Welsh lamb slow-simmered over iron embers with wild Himalayan Timur peppercorns, crushed garlic, and dark coriander seeds.</p>
+        <p class="mprice">£16.95</p>
+      </div>
+    </div>
+    <div class="mc rv d3" style="position:relative">
+      <div class="mc-ph" style="background:linear-gradient(135deg,#1e1b4b,#2d1a00)">🥭</div>
+      <img src="dish-dessert.jpg" alt="Cardamom Mango Dessert" class="mc-img" style="position:absolute;top:0;left:0;width:100%;height:240px" onerror="this.style.display='none'"/>
+      <div class="mc-body">
+        <h3 class="serif">Cardamom Mango Dessert</h3>
+        <span class="mbadge">Dessert</span>
+        <p>A light aromatic set custard infused with cracked green pods, real gold leaf flakes, and a fresh Alphonso mango glaze coating.</p>
+        <p class="mprice">£7.50</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="interactive-table-deck">
-                <h4 class="deck-header serif-display">Select Number of Guests</h4>
-                <div class="covers-selector">
-                    <div class="cover-bubble selected">1</div>
-                    <div class="cover-bubble">2</div>
-                    <div class="cover-bubble">4</div>
-                    <div class="cover-bubble">6</div>
-                </div>
-                <p style="font-size: 0.85rem; text-align: center; color: var(--text-dim); margin-bottom: 1rem; text-transform: uppercase; font-weight: 600;">Select Seating Preference:</p>
-                <select style="width: 100%; padding: 0.9rem; background: var(--bg-slate); border: 1px solid var(--border-faint); color: white; border-radius: 4px; outline: none; font-weight: 600;">
-                    <option>Standard Dining Room</option>
-                    <option>Quiet Corner Table</option>
-                </select>
-                <button style="width:100%; padding: 1.1rem; background: var(--accent-gold); color: var(--primary-dark); border: none; border-radius: 4px; margin-top: 1.5rem; font-weight: 700; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;" onmouseover="this.style.background='white'" onmouseout="this.style.background='var(--accent-gold)'" onclick="alert('System Ready: Checking table availability.')">Secure My Table</button>
-            </div>
-        </div>
-    </section>
+<!-- GALLERY -->
+<div class="gal-s" id="gallery">
+  <p class="gal-lbl">The Timur Experience</p>
+  <div class="gal-t">
+    <div class="gi"><i class="fa-solid fa-utensils"></i><img src="hero-dining.jpg" alt="Dining environment" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🥟</i><img src="dish-momos.jpg" alt="Momos" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-chair"></i><img src="about-interior.jpg" alt="Interior" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🍛</i><img src="dish-curry.jpg" alt="Timur lamb" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🥭</i><img src="dish-dessert.jpg" alt="Dessert" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-utensils"></i><img src="hero-dining.jpg" alt="Dining environment" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🥟</i><img src="dish-momos.jpg" alt="Momos" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-chair"></i><img src="about-interior.jpg" alt="Interior" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🍛</i><img src="dish-curry.jpg" alt="Timur lamb" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🥭</i><img src="dish-dessert.jpg" alt="Dessert" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i class="fa-solid fa-utensils"></i><img src="hero-dining.jpg" alt="Dining" onerror="this.style.display='none'"/></div>
+    <div class="gi"><i>🥟</i><img src="dish-momos.jpg" alt="Momos" onerror="this.style.display='none'"/></div>
+  </div>
+</div>
 
-    <section class="section-wrapper" id="about">
-        <div class="about-grid">
-            <div class="editorial-image-group">
-                <img src="about-interior.jpg" alt="The Timur Dining Room" class="editorial-main">
-            </div>
-            <div>
-                <span style="color:var(--accent-gold); font-size:0.85rem; text-transform:uppercase; font-weight:800; letter-spacing:1.5px;">Our Story</span>
-                <h2 class="serif-display" style="font-size: 2.8rem; color: var(--text-light); margin: 0.5rem 0 1.2rem; line-height: 1.15;">Authentic Flavours in Andover.</h2>
-                <p style="margin-bottom: 1.5rem; color: var(--text-dim); font-size: 1.05rem;">The Timur brings the rich, comforting tastes of authentic Asian and Nepalese flavours straight to your table. Our signature slow-cooked lamb and hand-ground spices are based on generations of family recipes, cooked with passion and care.</p>
-                <p style="margin-bottom: 2rem; color: var(--text-dim); font-size: 1.05rem;">Every dish is cooked fresh to order in our busy kitchen, ensuring you get the best tasting, high-quality food whether you are dining in or eating at home.</p>
-            </div>
-        </div>
-    </section>
+<!-- REVIEWS -->
+<section class="rsec" id="reviews">
+  <div class="sh rv"><span class="slbl">What Our Diners Say</span><h2 class="serif">Customer Reviews</h2><div class="gl-c"></div></div>
+  <div class="rg">
+    <div class="rc rv d1">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"The single best Nepalese food I have ever experienced outside of London. The Timur Lamb has an exceptional taste. Booking online took seconds on my phone."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="reviewer-1.jpg" alt="Emma Richardson" onerror="this.style.display='none'"/></div><div><h4>Emma Richardson</h4><span>Verified Diner, Andover</span></div></div>
+    </div>
+    <div class="rc rv d2">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"We use their online booking for takeaways every single Friday night. The checkout process is so easy, and the food arrives piping hot every single time."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i><img src="reviewer-2.jpg" alt="Marcus Vance" onerror="this.style.display='none'"/></div><div><h4>Marcus Vance</h4><span>Regular Customer</span></div></div>
+    </div>
+    <div class="rc rv d3">
+      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="rtxt">"Brought my whole family for a birthday dinner. The staff were incredibly attentive, the momos were extraordinary, and the dessert is something I still dream about."</p>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4"></i></div><div><h4>Anita Sharma</h4><span>Birthday Diner, Hampshire</span></div></div>
+    </div>
+  </div>
+</section>
 
-    <section class="section-wrapper" id="services" style="border-top: 1px solid var(--border-faint); border-bottom: 1px solid var(--border-faint);">
-        <div class="section-header">
-            <h2 class="serif-display">Our Menu</h2>
-            <p>Explore some of the favourite dishes loved by our local customers.</p>
-        </div>
-        
-        <div class="services-grid">
-            <div class="service-card">
-                <img src="dish-momos.jpg" alt="Himalayan Momos" class="service-img">
-                <div class="service-body">
-                    <h3 class="serif-display">Himalayan Momos</h3>
-                    <span class="service-badge">Starter</span>
-                    <p>Spiced minced meat dumplings steamed freshly, served alongside our traditional charred sesame and tomato chutney.</p>
-                    <p class="service-price">£8.95</p>
-                </div>
-            </div>
+<!-- FAQ ACCORDION -->
+<section class="sw" id="faqs">
+  <div class="sh rv">
+    <span class="slbl">Common Questions</span>
+    <h2 class="serif">Frequently Asked Questions</h2>
+    <div class="gl-c"></div>
+    <p>Everything you need to know about dining with us.</p>
+  </div>
+  <div class="fql rv">
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Are your dishes halal and nut-free?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">All our chicken and lamb are sourced from certified halal providers. We prepare nut-free dishes in a separate area, but please let our team know of any severe allergies when you book or order so we can take extra care.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Do you deliver takeaways?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes. We offer fast, direct delivery within a 6-mile radius of central Andover. Most orders arrive fresh to your door in approximately 45 minutes depending on demand.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Can I book for a large group or private event?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Absolutely. We accommodate groups of up to 40 guests for private dining events. Please contact us via WhatsApp or email to discuss a bespoke menu and reservation arrangement for your occasion.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Do you cater for vegetarian and vegan guests?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes. We have a dedicated selection of vegetarian and vegan dishes on our menu, all prepared with the same care and fresh spices as our meat dishes. Our team is happy to advise on suitable choices when you arrive.</div></div>
+    <div class="fi"><div class="fq" onclick="tF(this)"><span>Is there parking near the restaurant?</span><i class="fa-solid fa-plus fqi"></i></div><div class="fa">Yes. We are conveniently located in central Andover with easy parking available close by. Our team can give you specific directions when you call or message us ahead of your visit.</div></div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <img src="dish-curry.jpg" alt="Signature Timur Lamb" class="service-img">
-                <div class="service-body">
-                    <h3 class="serif-display">Signature Timur Lamb</h3>
-                    <span class="service-badge">Main Course</span>
-                    <p>Tender Welsh lamb slow-simmered over iron embers with wild Himalayan Timur peppercorns, crushed garlic, and dark coriander seeds.</p>
-                    <p class="service-price">£16.95</p>
-                </div>
-            </div>
+<!-- LOCATION -->
+<section class="sw" id="location" style="border-top:1px solid var(--border)">
+  <div class="sh rv">
+    <span class="slbl">Find Us</span>
+    <h2 class="serif">Visit The Timur</h2>
+    <div class="gl-c"></div>
+    <p>Conveniently located in central Andover with easy parking available right outside.</p>
+  </div>
+  <div class="cgrid">
+    <div class="mf rl">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen=""></iframe>
+    </div>
+    <div class="rr">
+      <p style="color:var(--dim);margin-bottom:1.4rem;font-size:.98rem">Open Tuesday to Sunday, 12pm to 2:30pm and 5pm to 10:30pm. Closed Mondays.</p>
+      <a href="https://wa.me/447474080809" target="_blank" class="cs">
+        <div class="cic"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i></div>
+        <div><div class="clbl">WhatsApp Us</div><div class="cval">Message for a Quick Booking</div></div>
+      </a>
+      <a href="mailto:hello@gochuchuro.com" class="cs">
+        <div class="cic"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="clbl">Email Us</div><div class="cval">Send a Booking Enquiry</div></div>
+      </a>
+      <button onclick="openB()" class="bgold" style="width:100%;justify-content:center;padding:1rem;margin-top:.4rem">
+        <i class="fa-solid fa-utensils"></i>Book Your Table Online
+      </button>
+    </div>
+  </div>
+</section>
 
-            <div class="service-card">
-                <img src="dish-dessert.jpg" alt="Cardamom Saffron Dessert" class="service-img">
-                <div class="service-body">
-                    <h3 class="serif-display">Cardamom Mango Dessert</h3>
-                    <span class="service-badge">Dessert</span>
-                    <p>A light aromatic set custard infused with cracked green pods, real gold leaf flakes, and a fresh Alphonso mango glaze coating.</p>
-                    <p class="service-price">£7.50</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer>
+  <div class="fbrand serif"><i class="fa-solid fa-leaf"></i> THE TIMUR</div>
+  <p style="font-size:.88rem;margin-bottom:.5rem">Delicious food and friendly service right here in Andover.</p>
+  <div class="socrow">
+    <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank" class="sc" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="sc" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="sc" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://wa.me/447474080809" target="_blank" class="sc" title="WhatsApp" style="color:#25D366"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+  <div class="flinks">
+    <a href="../../showroom.html">Back to Showroom</a>
+    <a href="../../index.html">GoChuchuro Home</a>
+    <a href="../../index.html#pricing">Pricing from £49/mo</a>
+    <a href="../../privacy.html">Privacy Policy</a>
+  </div>
+  <p style="font-size:.72rem;color:#374151;border-top:1px solid var(--border);padding-top:1.5rem;margin-top:.5rem">
+    &copy; 2026 The Timur &mdash; Nepalese &amp; Asian Dining, Andover. Website powered by
+    <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700">GoChuchuro</a>.
+  </p>
+</footer>
 
-    <section class="review-sector" id="reviews">
-        <div class="section-header">
-            <h2 class="serif-display" style="color: white;">Customer Reviews</h2>
-            <p>See what our diners in Andover have to say about us.</p>
-        </div>
-        <div class="testimonial-matrix">
-            <div class="review-envelope">
-                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"The single best Nepalese food I have ever experienced outside of London. The Timur Lamb has an exceptional taste. Booking online took seconds on my smartphone."</p>
-                <div class="client">
-                    <img src="reviewer-1.jpg" alt="Emma Richardson">
-                    <div>
-                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">Emma Richardson</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Verified Diner, Andover</span>
-                    </div>
-                </div>
-            </div>
+<!-- STICKY ACTION BAR -->
+<div class="abar">
+  <button onclick="openB()" class="ab ab-dark"><i class="fa-solid fa-bag-shopping"></i>Order Takeaway</button>
+  <button onclick="openB()" class="ab ab-gold"><i class="fa-solid fa-utensils"></i>Book a Table</button>
+</div>
 
-            <div class="review-envelope">
-                <div class="stars-row"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p>"We use their online booking for takeaways every single Friday night. The checkout process is so easy, and the food arrives piping hot every single time."</p>
-                <div class="client">
-                    <img src="reviewer-2.jpg" alt="Marcus Vance">
-                    <div>
-                        <h4 class="serif-display" style="font-size: 1.1rem; color: white;">Marcus Vance</h4>
-                        <span style="font-size: 0.85rem; color: var(--accent-gold); font-weight: 600;">Regular Customer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- GC BADGE -->
+<div class="gcb" id="gcb">
+  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">&times;</button>
+  <div class="gcbl">Powered by GoChuchuro</div>
+  <p><strong>Want this website</strong> for your restaurant?</p>
+  <a href="../../index.html" target="_blank"><i class="fa-regular fa-calendar"></i>Free Chat</a>
+</div>
 
-    <section class="section-wrapper" id="faqs">
-        <div class="section-header">
-            <h2 class="serif-display">Frequently Asked Questions</h2>
-            <p>Everything you need to know about dining with us.</p>
-        </div>
-        <div class="faq-grid">
-            <div class="faq-box">
-                <h4>Are your dishes halal and nut-free?</h4>
-                <p>All our chicken and lamb are sourced from certified halal providers. We prepare nut-free dishes in a separate area, but please let our team know if you have severe allergies when ordering.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Do you deliver takeaways?</h4>
-                <p>Yes, we offer fast, direct delivery within a 6-mile radius of central Andover. Most orders arrive fresh to your door in about 45 minutes.</p>
-            </div>
-        </div>
-    </section>
+<!-- BOOKING MODAL -->
+<div class="mo" id="bm">
+  <div class="mb">
+    <button class="mc2" onclick="closeB()"><i class="fa-solid fa-xmark"></i></button>
+    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" scrolling="yes"></iframe>
+  </div>
+</div>
 
-    <section class="section-wrapper" id="location" style="border-top: 1px solid var(--border-faint);">
-        <div class="section-header">
-            <h2 class="serif-display">Find Our Restaurant</h2>
-            <p>We are conveniently located in central Andover, with easy parking available right outside.</p>
-        </div>
-        
-        <div class="contact-layout">
-            <div class="map-frame">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80336.19503487059!2d-1.5645398701041926!3d51.20967332766861!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487400d4c9d784a9%3A0xc3c713b56f8f5370!2sAndover!5e0!3m2!1sen!2suk!4v1716480000000!5m2!1sen!2suk" 
-                    width="100%" 
-                    height="100%" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-
-            <div>
-                <a href="https://wa.me/447123456999" target="_blank" class="info-strip">
-                    <div class="info-strip-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <div class="info-strip-text">
-                        <h5>MESSAGE US ON WHATSAPP</h5>
-                        <p>+44 7123 456 999</p>
-                    </div>
-                </a>
-
-                <a href="mailto:bookings@thetimurandover.co.uk" class="info-strip">
-                    <div class="info-strip-icon"><i class="fa-solid fa-envelope"></i></div>
-                    <div class="info-strip-text">
-                        <h5>EMAIL US</h5>
-                        <p>bookings@thetimurandover.co.uk</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <a href="#booking" class="mini-ai-pill">
-        <img src="ai-receptionist.png" alt="Maya AI">
-        <div class="ai-pill-text" style="display: flex; flex-direction: column; justify-content: center;">
-            <p style="font-size: 0.95rem; font-weight: 800; color: #0f172a; margin: 0; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;">Maya (Virtual Host)</p>
-            <p style="font-size: 0.75rem; color: #64748b; margin: 0; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif;"><i class="fa-solid fa-circle" style="color: #f59e0b; font-size: 0.45rem; margin-right: 4px;"></i> Online. Namaste! 🙏</p>
-        </div>
-    </a>
-
-    <footer style="background-color: #06090e; padding: 5rem 5% 8rem; color: #94a3b8; text-align: center; border-top: 1px solid var(--border-faint);">
-        <h3 class="serif-display" style="color: white; margin-bottom: 1.5rem; font-size: 1.8rem; font-weight: 800;"><i class="fa-solid fa-leaf" style="color: var(--accent-gold);"></i> THE TIMUR</h3>
-        <p style="margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; font-size: 0.95rem;">Delicious food and friendly service right here in Andover.</p>
-        
-        <div class="social-circle-container">
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="#" class="social-circle-link"><i class="fa-brands fa-google"></i></a>
-        </div>
-
-        <p style="font-size: 0.85rem; border-top: 1px solid var(--border-faint); padding-top: 2rem;">© 2026 GoChuchuro Systems. All Rights Reserved.</p>
-    </footer>
-
+<script>
+  function openB(){document.getElementById('bm').classList.add('on');document.body.style.overflow='hidden'}
+  function closeB(){document.getElementById('bm').classList.remove('on');document.body.style.overflow=''}
+  document.getElementById('bm').addEventListener('click',function(e){if(e.target===this)closeB()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeB()});
+  function selC(el){document.querySelectorAll('.cov').forEach(c=>c.classList.remove('on'));el.classList.add('on')}
+  function tF(el){const it=el.parentElement,ans=it.querySelector('.fa'),op=it.classList.contains('open');document.querySelectorAll('.fi').forEach(i=>{i.classList.remove('open');i.querySelector('.fa').classList.remove('open')});if(!op){it.classList.add('open');ans.classList.add('open')}}
+  const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')})},{threshold:.08});
+  document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>
