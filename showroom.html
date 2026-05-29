@@ -32,10 +32,6 @@
       --alert-amber:      #f59e0b;
       --gradient-primary: linear-gradient(135deg, #00B5C8, #E5C158);
       --gradient-gold:    linear-gradient(135deg, #D4AF37, #E5C158, #D4AF37);
-      --shadow-drop:      14px 14px 35px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
-      --shadow-inner:     inset 6px 6px 18px rgba(0,0,0,0.85), inset -3px -3px 10px rgba(255,255,255,0.02);
-      --glow-teal:        0 0 30px rgba(0,181,200,0.25), 0 0 60px rgba(0,181,200,0.1);
-      --glow-gold:        0 0 30px rgba(212,175,55,0.3),  0 0 60px rgba(212,175,55,0.1);
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -46,22 +42,24 @@
       color: var(--text-main);
       font-family: 'Outfit', sans-serif;
       overflow-x: hidden;
-      cursor: none;
+      cursor: none; /* Hide default cursor */
     }
 
-    /* ---- CUSTOM CURSOR ---- */
+    /* ---- RESPONSIVE SMOOTH CUSTOM CURSOR ---- */
     .cursor-dot {
       width:8px; height:8px; background:var(--holo-teal);
       border-radius:50%; position:fixed; top:0; left:0;
-      pointer-events:none; z-index:99999; transform:translate(-50%,-50%);
-      transition:width .3s,height .3s,background .3s;
+      pointer-events:none; z-index:99999;
       box-shadow:0 0 10px var(--holo-teal);
+      will-change: transform;
+      transition: width 0.2s, height 0.2s, background 0.2s;
     }
     .cursor-ring {
       width:36px; height:36px; border:1.5px solid rgba(0,181,200,0.5);
       border-radius:50%; position:fixed; top:0; left:0;
-      pointer-events:none; z-index:99998; transform:translate(-50%,-50%);
-      transition:width .3s,height .3s,border-color .3s;
+      pointer-events:none; z-index:99998;
+      will-change: transform;
+      transition: width 0.3s, height 0.3s, border-color 0.3s;
     }
     body:has(a:hover) .cursor-dot,
     body:has(button:hover) .cursor-dot { background:var(--holo-gold); width:12px; height:12px; }
@@ -140,10 +138,6 @@
       background:var(--gradient-primary);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
-    .text-gold-gradient {
-      background:var(--gradient-gold);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    }
     .sr-hero p {
       font-size:1.1rem; color:var(--cool-silver);
       line-height:1.75; margin-bottom:.5rem;
@@ -165,63 +159,38 @@
       background:rgba(212,175,55,0.04);
       border-top:1px solid rgba(212,175,55,0.1);
       border-bottom:1px solid rgba(212,175,55,0.1);
-      padding:.7rem 5%;
-      text-align:center;
+      padding:.7rem 5%; text-align:center;
     }
-    .disclaimer-band p {
-      font-size:.75rem; color:#6b7280;
-      font-family:'Outfit',sans-serif; line-height:1.5;
-    }
-    .disclaimer-band p em {
-      color:rgba(212,175,55,0.6); font-style:normal; font-weight:700;
-    }
+    .disclaimer-band p { font-size:.75rem; color:#6b7280; line-height:1.5; }
+    .disclaimer-band p em { color:rgba(212,175,55,0.6); font-style:normal; font-weight:700; }
 
     /* ---- SECTION LABEL ---- */
-    .section-label {
-      text-align:center; padding:3rem 2rem 1.5rem;
-    }
-    .section-label h2 {
-      font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:white; margin-bottom:.5rem;
-    }
+    .section-label { text-align:center; padding:3rem 2rem 1.5rem; }
+    .section-label h2 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:white; margin-bottom:.5rem; }
     .section-label p { color:var(--text-dim); font-size:.95rem; }
 
     /* ---- TRADE GRID ---- */
     .trade-grid {
-      max-width:1360px; margin:0 auto;
-      padding:1rem 4% 5rem;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
-      gap:2.8rem;
+      max-width:1360px; margin:0 auto; padding:1rem 4% 5rem;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(310px,1fr)); gap:2.8rem;
     }
 
-    /* ---- TRADE CARD — ENHANCED 3D ---- */
+    /* ---- TRADE CARD ---- */
     .trade-card {
       background:linear-gradient(145deg, #0e1414, #0a0c0c);
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,0.04);
-      overflow:visible;
-      display:flex; flex-direction:column;
-      box-shadow:
-        20px 20px 50px rgba(0,0,0,0.9),
-        -5px -5px 16px rgba(255,255,255,0.015),
-        inset 0 1px 0 rgba(255,255,255,0.04);
+      border-radius:24px; border:1px solid rgba(255,255,255,0.04);
+      overflow:visible; display:flex; flex-direction:column;
+      box-shadow: 20px 20px 50px rgba(0,0,0,0.9), -5px -5px 16px rgba(255,255,255,0.015);
       transition:all .45s cubic-bezier(0.23,1,0.32,1);
-      opacity:0; transform:translateY(32px);
-      animation:cardIn .8s ease forwards;
-      position:relative;
+      opacity:0; transform:translateY(32px); animation:cardIn .8s ease forwards;
     }
     .trade-card::before {
-      content:'';
-      position:absolute; top:0; left:10%; right:10%; height:1px;
-      background:var(--gradient-primary); opacity:.4;
-      border-radius:100px;
+      content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+      background:var(--gradient-primary); opacity:.4; border-radius:100px;
     }
     .trade-card:hover {
       border-color:rgba(0,181,200,0.2);
-      box-shadow:
-        28px 28px 65px rgba(0,0,0,0.95),
-        0 0 50px rgba(0,181,200,0.1),
-        -5px -5px 16px rgba(255,255,255,0.02);
+      box-shadow: 28px 28px 65px rgba(0,0,0,0.95), 0 0 50px rgba(0,181,200,0.1);
       transform:translateY(-8px) !important;
     }
     .trade-card:nth-child(1){animation-delay:.1s;}
@@ -230,183 +199,87 @@
     .trade-card:nth-child(4){animation-delay:.4s;}
     .trade-card:nth-child(5){animation-delay:.5s;}
 
-    /* ---- PHONE MOCKUP PREVIEW ---- */
-    .phone-preview-wrap {
-      display:flex; justify-content:center; align-items:flex-end;
-      padding:2rem 1.5rem 0;
-      gap:1.5rem;
-      position:relative;
-      min-height:260px;
-      overflow:hidden;
-      border-radius:24px 24px 0 0;
+    /* ---- RESPONSIVE 3D DEVICE PADS (LAPTOP, IPAD, MOBILE) ---- */
+    .multi-device-wrap {
+      display: flex; justify-content: center; align-items: center;
+      position: relative; height: 260px; border-radius: 24px 24px 0 0;
+      perspective: 1200px; transform-style: preserve-3d;
+      overflow: hidden;
     }
 
-    /* Depth glow behind phones */
-    .phone-preview-wrap::before {
-      content:'';
-      position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-      width:80%; height:60%;
-      border-radius:50%;
-      pointer-events:none;
-      z-index:0;
+    /* Shared Mock Screen Styling */
+    .mock-screen {
+      position: absolute; inset: 4px; border-radius: 4px; overflow: hidden;
+      display: flex; flex-direction: column; gap: 4px; padding: 6px;
+    }
+    .mock-screen::before {
+      content:''; position:absolute; inset:0; z-index:0; opacity:.1;
+      background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
+    .mock-ui-header { height: 10px; background: rgba(255,255,255,0.15); border-radius:2px; z-index:1; }
+    .mock-ui-hero { height: 35px; background: rgba(255,255,255,0.08); border-radius:2px; z-index:1; }
+    .mock-ui-grid { display: flex; gap: 4px; flex: 1; z-index:1; }
+    .mock-ui-box { flex: 1; background: rgba(255,255,255,0.05); border-radius:2px; }
+
+    /* Laptop */
+    .mock-laptop {
+      width: 210px; height: 125px; background: #060c0c;
+      border: 2px solid rgba(255,255,255,0.08); border-radius: 8px 8px 0 0;
+      position: absolute; transform: translateZ(-40px) translateY(-15px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+      transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+    }
+    .mock-laptop-base {
+      position: absolute; bottom: -6px; left: -10px; right: -10px; height: 6px;
+      background: #111; border-radius: 0 0 6px 6px; border: 1px solid rgba(255,255,255,0.1);
     }
 
-    /* Phone shell */
-    .phone-shell {
-      width:110px;
-      border-radius:18px;
-      background:#060c0c;
-      border:2px solid rgba(255,255,255,0.12);
-      box-shadow:
-        8px 12px 30px rgba(0,0,0,0.9),
-        -3px -3px 10px rgba(255,255,255,0.03),
-        inset 0 0 0 1px rgba(255,255,255,0.04);
-      position:relative; z-index:2;
-      overflow:hidden;
-      flex-shrink:0;
-      transition:transform .4s cubic-bezier(0.23,1,0.32,1);
-    }
-    .phone-shell.main-phone {
-      width:128px;
-      transform:translateY(0) scale(1.06);
-      border-color:rgba(0,181,200,0.35);
-      box-shadow:
-        10px 16px 36px rgba(0,0,0,0.95),
-        0 0 30px rgba(0,181,200,0.12),
-        inset 0 0 0 1px rgba(0,181,200,0.1);
-      z-index:3;
-    }
-    .phone-shell.side-phone {
-      transform:translateY(16px) scale(0.9);
-      opacity:.65;
-      filter:brightness(0.7);
-    }
-    .trade-card:hover .phone-shell.main-phone {
-      transform:translateY(-8px) scale(1.08);
-      box-shadow:
-        12px 20px 45px rgba(0,0,0,0.95),
-        0 0 45px rgba(0,181,200,0.2),
-        inset 0 0 0 1px rgba(0,181,200,0.15);
-    }
-    .trade-card:hover .phone-shell.side-phone {
-      transform:translateY(8px) scale(0.92);
-      opacity:.8;
-      filter:brightness(0.85);
+    /* iPad / Tablet */
+    .mock-tablet {
+      width: 95px; height: 135px; background: #060c0c;
+      border: 2px solid rgba(255,255,255,0.15); border-radius: 6px;
+      position: absolute; transform: translateX(75px) translateZ(30px) translateY(15px);
+      box-shadow: -10px 15px 30px rgba(0,0,0,0.8);
+      transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
     }
 
-    /* Phone notch */
-    .phone-notch {
-      width:42px; height:10px;
-      background:#060c0c;
-      border-radius:0 0 7px 7px;
-      margin:0 auto;
-      border:1px solid rgba(255,255,255,0.05);
-      border-top:none;
-      position:relative; z-index:2;
+    /* Mobile */
+    .mock-phone {
+      width: 55px; height: 110px; background: #060c0c;
+      border: 2px solid rgba(0,181,200,0.3); border-radius: 8px;
+      position: absolute; transform: translateX(-85px) translateZ(80px) translateY(25px);
+      box-shadow: 10px 20px 40px rgba(0,0,0,0.9), 0 0 20px rgba(0,181,200,0.15);
+      transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
     }
 
-    /* Phone screen */
-    .phone-screen {
-      height:200px;
-      display:flex; flex-direction:column;
-      overflow:hidden;
-      position:relative;
+    /* 3D Hover Expansions */
+    .trade-card:hover .mock-laptop {
+      transform: translateZ(-10px) translateY(-25px) rotateX(4deg);
+      border-color: rgba(0,181,200,0.4);
+      box-shadow: 0 25px 50px rgba(0,181,200,0.2);
     }
-    .main-phone .phone-screen { height:216px; }
-
-    /* Screen backgrounds per trade */
-    .screen-plumbing {
-      background:linear-gradient(160deg,#071428 0%,#0a1e3d 55%,#062a4a 100%);
+    .trade-card:hover .mock-tablet {
+      transform: translateX(95px) translateZ(60px) translateY(5px) rotateY(-8deg);
+      border-color: rgba(212,175,55,0.5);
+      box-shadow: -15px 25px 40px rgba(212,175,55,0.2);
     }
-    .screen-restaurant {
-      background:linear-gradient(160deg,#150800 0%,#271200 55%,#1a0900 100%);
-    }
-    .screen-salon {
-      background:linear-gradient(160deg,#160810 0%,#290d1c 55%,#160a16 100%);
-    }
-    .screen-garage {
-      background:linear-gradient(160deg,#0e0900 0%,#1c1300 55%,#100e00 100%);
-    }
-    .screen-driving {
-      background:linear-gradient(160deg,#0a0010 0%,#170025 55%,#0d0016 100%);
+    .trade-card:hover .mock-phone {
+      transform: translateX(-105px) translateZ(120px) translateY(10px) rotateY(12deg);
+      border-color: rgba(0,181,200,0.6);
+      box-shadow: 15px 25px 45px rgba(0,181,200,0.3);
     }
 
-    /* Screen grid texture overlay */
-    .phone-screen::before {
-      content:'';
-      position:absolute; inset:0; z-index:0;
-      opacity:.08;
-      background-image:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size:10px 10px;
-    }
+    /* Screen Backgrounds per Trade */
+    .screen-plumbing { background: linear-gradient(160deg,#071428 0%,#0a1e3d 55%,#062a4a 100%); }
+    .screen-restaurant { background: linear-gradient(160deg,#150800 0%,#271200 55%,#1a0900 100%); }
+    .screen-salon { background: linear-gradient(160deg,#160810 0%,#290d1c 55%,#160a16 100%); }
+    .screen-garage { background: linear-gradient(160deg,#0e0900 0%,#1c1300 55%,#100e00 100%); }
+    .screen-driving { background: linear-gradient(160deg,#0a0010 0%,#170025 55%,#0d0016 100%); }
 
-    /* Screen UI elements */
-    .screen-nav {
-      position:relative; z-index:2;
-      background:rgba(0,0,0,0.45);
-      padding:.25rem .5rem;
-      display:flex; justify-content:space-between; align-items:center;
-      font-size:.38rem; font-weight:800; letter-spacing:.8px;
-      text-transform:uppercase;
-      border-bottom:1px solid rgba(255,255,255,0.05);
-    }
-    .screen-nav-logo { font-size:.42rem; font-weight:900; letter-spacing:1px; }
-    .screen-nav-dots { display:flex; gap:2px; }
-    .screen-nav-dot { width:3px; height:3px; border-radius:50%; opacity:.4; }
-
-    .screen-hero {
-      position:relative; z-index:2;
-      flex:1; padding:.5rem .5rem .3rem;
-      display:flex; flex-direction:column; justify-content:center;
-    }
-    .screen-label {
-      font-size:.32rem; font-weight:800; text-transform:uppercase;
-      letter-spacing:.6px; opacity:.6; margin-bottom:.2rem;
-    }
-    .screen-headline {
-      font-size:.58rem; font-weight:900; line-height:1.25;
-      margin-bottom:.3rem;
-    }
-    .screen-sub {
-      font-size:.33rem; opacity:.55; line-height:1.4; margin-bottom:.45rem;
-    }
-    .screen-btn {
-      display:inline-block; padding:.2rem .45rem;
-      border-radius:3px; font-size:.36rem; font-weight:900;
-      text-transform:uppercase; letter-spacing:.5px;
-      width:fit-content;
-    }
-
-    .screen-bottom {
-      position:relative; z-index:2;
-      padding:.3rem .5rem;
-      display:flex; gap:.3rem;
-      background:rgba(0,0,0,0.35);
-      border-top:1px solid rgba(255,255,255,0.05);
-    }
-    .screen-icon-btn {
-      flex:1; background:rgba(255,255,255,0.04); border-radius:3px;
-      padding:.2rem .1rem; text-align:center;
-      font-size:.28rem; font-weight:700; letter-spacing:.3px;
-      text-transform:uppercase; opacity:.6;
-    }
-
-    /* Phone bottom bar */
-    .phone-bar {
-      height:4px; background:rgba(255,255,255,0.06);
-      display:flex; justify-content:center; align-items:center;
-      padding:.15rem;
-    }
-    .phone-bar-pill {
-      width:28px; height:2px;
-      background:rgba(255,255,255,0.2); border-radius:1px;
-    }
-
-    /* 3D badge on preview */
+    /* 3D badge */
     .preview-3d-badge {
-      position:absolute; top:.8rem; right:.8rem; z-index:10;
+      position:absolute; top:1rem; right:1.2rem; z-index:10;
       background:rgba(0,181,200,0.12); border:1px solid rgba(0,181,200,0.4);
       border-radius:100px; padding:.2rem .6rem;
       font-size:.58rem; font-weight:800; color:var(--holo-teal);
@@ -419,197 +292,97 @@
     }
 
     /* ---- CARD BODY ---- */
-    .card-body {
-      padding:1.6rem 1.8rem 1.8rem; flex:1; display:flex; flex-direction:column;
-      border-top:1px solid rgba(255,255,255,0.04);
-    }
+    .card-body { padding:1.6rem 1.8rem 1.8rem; flex:1; display:flex; flex-direction:column; border-top:1px solid rgba(255,255,255,0.04); }
     .card-icon-row { display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
     .card-icon {
-      width:44px; height:44px; border-radius:12px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.3rem; flex-shrink:0;
-      box-shadow:0 0 16px rgba(0,0,0,0.5);
+      width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+      font-size:1.3rem; flex-shrink:0; box-shadow:0 0 16px rgba(0,0,0,0.5);
     }
     .card-title { font-size:1.1rem; font-weight:900; color:white; line-height:1.2; }
     .card-subtitle { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; margin-top:.1rem; }
     .card-story {
-      background:rgba(0,181,200,0.04); border:1px solid rgba(0,181,200,0.1);
-      border-radius:10px; padding:.7rem .9rem; margin-bottom:1rem;
-      font-size:.82rem; color:var(--cool-silver); line-height:1.65;
+      background:rgba(0,181,200,0.04); border:1px solid rgba(0,181,200,0.1); border-radius:10px;
+      padding:.7rem .9rem; margin-bottom:1rem; font-size:.82rem; color:var(--cool-silver); line-height:1.65;
     }
     .card-story em { color:var(--holo-teal); font-style:normal; font-weight:700; }
-    .card-desc {
-      font-size:.87rem; color:var(--text-dim); line-height:1.7;
-      margin-bottom:1.2rem; flex:1;
-    }
+    .card-desc { font-size:.87rem; color:var(--text-dim); line-height:1.7; margin-bottom:1.2rem; flex:1; }
 
     /* ---- BUTTONS ---- */
     .btn-group { display:flex; flex-direction:column; gap:.7rem; }
     .btn-primary {
       display:flex; align-items:center; justify-content:center; gap:.5rem;
-      background:var(--gradient-primary); color:#000;
-      padding:.85rem 1.2rem; border-radius:12px; font-weight:900;
-      text-decoration:none; font-size:.88rem; letter-spacing:.5px;
-      text-transform:uppercase; border:none;
-      box-shadow:0 0 20px rgba(0,181,200,0.25);
+      background:var(--gradient-primary); color:#000; padding:.85rem 1.2rem; border-radius:12px;
+      font-weight:900; text-decoration:none; font-size:.88rem; letter-spacing:.5px;
+      text-transform:uppercase; border:none; box-shadow:0 0 20px rgba(0,181,200,0.25);
       transition:all .3s; cursor:none;
     }
-    .btn-primary:hover {
-      transform:translateY(-3px);
-      box-shadow:0 0 40px rgba(0,181,200,0.5);
-      color:white;
-    }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 0 40px rgba(0,181,200,0.5); color:white; }
     .btn-secondary {
       display:flex; align-items:center; justify-content:center; gap:.5rem;
-      background:transparent; color:var(--cool-silver);
-      padding:.72rem 1.2rem; border-radius:12px; font-weight:700;
-      text-decoration:none; font-size:.82rem;
-      border:1px solid rgba(255,255,255,0.1);
+      background:transparent; color:var(--cool-silver); padding:.72rem 1.2rem; border-radius:12px;
+      font-weight:700; text-decoration:none; font-size:.82rem; border:1px solid rgba(255,255,255,0.1);
       transition:all .3s; cursor:none;
     }
-    .btn-secondary:hover {
-      color:white; border-color:rgba(255,255,255,0.3);
-      background:rgba(255,255,255,0.04);
-    }
+    .btn-secondary:hover { color:white; border-color:rgba(255,255,255,0.3); background:rgba(255,255,255,0.04); }
 
-    /* ---- FOUNDING CLIENT STRIP (replaces fake testimonials) ---- */
-    .founding-strip {
-      max-width:1100px; margin:0 auto 1rem;
-      padding:0 4%;
-    }
+    /* ---- SECTIONS: FOUNDING & TEASER ---- */
+    .founding-strip { max-width:1100px; margin:0 auto 1rem; padding:0 4%; }
     .founding-banner {
-      background:linear-gradient(145deg, #100d08, #0e0b05);
-      border:1px solid rgba(212,175,55,0.2);
-      border-radius:20px;
-      padding:2rem 2.5rem;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:1.5rem;
-      align-items:center;
-      box-shadow:16px 16px 40px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.04);
-      position:relative; overflow:hidden;
+      background:linear-gradient(145deg, #100d08, #0e0b05); border:1px solid rgba(212,175,55,0.2);
+      border-radius:20px; padding:2rem 2.5rem; display:grid; grid-template-columns:1fr auto; gap:1.5rem;
+      align-items:center; box-shadow:16px 16px 40px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.04); position:relative; overflow:hidden;
     }
-    .founding-banner::before {
-      content:'';
-      position:absolute; top:0; left:0; right:0; height:1px;
-      background:linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
-    }
-    .founding-banner-text h3 {
-      font-family:'Cormorant Garamond', serif;
-      font-size:1.4rem; font-weight:600; color:white; margin-bottom:.4rem;
-    }
-    .founding-banner-text p {
-      font-size:.85rem; color:#6b7280; line-height:1.6;
-    }
+    .founding-banner::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent); }
+    .founding-banner-text h3 { font-family:'Cormorant Garamond', serif; font-size:1.4rem; font-weight:600; color:white; margin-bottom:.4rem; }
+    .founding-banner-text p { font-size:.85rem; color:#6b7280; line-height:1.6; }
     .founding-banner-text p strong { color:var(--holo-bright-gold); }
     .founding-cta {
-      background:var(--gradient-primary); color:#000;
-      padding:.75rem 1.5rem; border-radius:12px; font-weight:900;
-      text-decoration:none; font-size:.85rem; text-transform:uppercase;
-      letter-spacing:.8px; white-space:nowrap;
-      display:inline-flex; align-items:center; gap:.4rem;
-      box-shadow:0 0 20px rgba(0,181,200,0.25);
-      transition:all .3s; cursor:none;
-      flex-shrink:0;
+      background:var(--gradient-primary); color:#000; padding:.75rem 1.5rem; border-radius:12px; font-weight:900;
+      text-decoration:none; font-size:.85rem; text-transform:uppercase; letter-spacing:.8px; white-space:nowrap;
+      display:inline-flex; align-items:center; gap:.4rem; box-shadow:0 0 20px rgba(0,181,200,0.25);
+      transition:all .3s; cursor:none; flex-shrink:0;
     }
-    .founding-cta:hover {
-      transform:translateY(-2px);
-      box-shadow:0 0 35px rgba(0,181,200,0.45);
-      color:white;
-    }
+    .founding-cta:hover { transform:translateY(-2px); box-shadow:0 0 35px rgba(0,181,200,0.45); color:white; }
 
-    /* ---- VTR FRAMEWORK TEASER ---- */
-    .vtr-teaser {
-      max-width:1100px; margin:0 auto 1.5rem;
-      padding:0 4%;
-    }
-    .vtr-teaser-inner {
-      background:rgba(0,181,200,0.03);
-      border:1px solid rgba(0,181,200,0.1);
-      border-radius:14px;
-      padding:1.2rem 2rem;
-      display:flex; align-items:center; justify-content:center;
-      flex-wrap:wrap; gap:1rem;
-      text-align:center;
-    }
-    .vtr-teaser-inner p {
-      font-size:.88rem; color:var(--text-dim); font-family:'Cormorant Garamond',serif;
-      font-size:1rem; line-height:1.5;
-    }
+    .vtr-teaser { max-width:1100px; margin:0 auto 1.5rem; padding:0 4%; }
+    .vtr-teaser-inner { background:rgba(0,181,200,0.03); border:1px solid rgba(0,181,200,0.1); border-radius:14px; padding:1.2rem 2rem; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:1rem; text-align:center; }
+    .vtr-teaser-inner p { font-size:1rem; color:var(--text-dim); font-family:'Cormorant Garamond',serif; line-height:1.5; }
     .vtr-teaser-inner p strong { color:white; }
     .vtr-teaser-inner p em { color:var(--holo-teal); font-style:normal; }
-    .vtr-pill {
-      display:inline-flex; align-items:center; gap:.4rem;
-      background:rgba(0,181,200,0.08); border:1px solid rgba(0,181,200,0.2);
-      border-radius:100px; padding:.3rem .9rem;
-      font-size:.75rem; font-weight:800; letter-spacing:.5px;
-      color:var(--holo-teal); text-transform:uppercase;
-    }
+    .vtr-pill { display:inline-flex; align-items:center; gap:.4rem; background:rgba(0,181,200,0.08); border:1px solid rgba(0,181,200,0.2); border-radius:100px; padding:.3rem .9rem; font-size:.75rem; font-weight:800; letter-spacing:.5px; color:var(--holo-teal); text-transform:uppercase; }
 
     /* ---- STICKY BOTTOM CTA ---- */
-    .sticky-cta {
-      position:fixed; bottom:0; left:0; width:100%; z-index:200;
-      background:rgba(8,14,14,0.96); backdrop-filter:blur(20px);
-      border-top:1px solid rgba(0,181,200,0.2);
-      padding:.9rem 5%;
-      display:flex; align-items:center; justify-content:space-between;
-      flex-wrap:wrap; gap:.8rem;
-      box-shadow:0 -10px 40px rgba(0,0,0,0.6);
-      transform:translateY(100%); transition:transform .5s ease;
-    }
+    .sticky-cta { position:fixed; bottom:0; left:0; width:100%; z-index:200; background:rgba(8,14,14,0.96); backdrop-filter:blur(20px); border-top:1px solid rgba(0,181,200,0.2); padding:.9rem 5%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.8rem; box-shadow:0 -10px 40px rgba(0,0,0,0.6); transform:translateY(100%); transition:transform .5s ease; }
     .sticky-cta.visible { transform:translateY(0); }
     .sticky-cta-text { font-size:.9rem; color:var(--cool-silver); font-weight:600; }
     .sticky-cta-text strong { color:white; }
     .sticky-cta-actions { display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
-    .sticky-btn-book {
-      background:var(--gradient-primary); color:#000;
-      padding:.65rem 1.4rem; border-radius:10px;
-      font-weight:900; font-size:.85rem; text-transform:uppercase;
-      letter-spacing:1px; border:none; cursor:none; transition:all .3s;
-      text-decoration:none; display:inline-flex; align-items:center; gap:.4rem;
-    }
+    .sticky-btn-book { background:var(--gradient-primary); color:#000; padding:.65rem 1.4rem; border-radius:10px; font-weight:900; font-size:.85rem; text-transform:uppercase; letter-spacing:1px; border:none; cursor:none; transition:all .3s; text-decoration:none; display:inline-flex; align-items:center; gap:.4rem; }
     .sticky-btn-book:hover { transform:translateY(-2px); box-shadow:0 0 25px rgba(0,181,200,0.4); color:white; }
     .sticky-btn-home { color:var(--text-dim); font-size:.82rem; font-weight:700; text-decoration:none; letter-spacing:.5px; transition:color .3s; }
     .sticky-btn-home:hover { color:var(--holo-teal); }
     .sticky-close { background:none; border:none; color:var(--text-dim); font-size:1rem; cursor:none; padding:.2rem; transition:color .3s; }
     .sticky-close:hover { color:white; }
 
-    /* ---- BOTTOM CTA SECTION ---- */
-    .bottom-cta-section {
-      background:rgba(0,181,200,0.04);
-      border-top:1px solid rgba(0,181,200,0.1);
-      border-bottom:1px solid rgba(0,181,200,0.1);
-      padding:4rem 5%; text-align:center; margin-bottom:0;
-    }
+    /* ---- BOTTOM CTA SECTION & FOOTER ---- */
+    .bottom-cta-section { background:rgba(0,181,200,0.04); border-top:1px solid rgba(0,181,200,0.1); border-bottom:1px solid rgba(0,181,200,0.1); padding:4rem 5%; text-align:center; margin-bottom:0; }
     .bottom-cta-inner { max-width:700px; margin:0 auto; }
-
-    /* ---- FOOTER ---- */
-    .sr-footer {
-      background:rgba(2,6,8,0.95);
-      border-top:1px solid rgba(255,255,255,0.05);
-      padding:2.5rem 5%; text-align:center;
-      padding-bottom:5rem;
-    }
+    .sr-footer { background:rgba(2,6,8,0.95); border-top:1px solid rgba(255,255,255,0.05); padding:2.5rem 5% 5rem; text-align:center; }
     .sr-footer-logo { font-family:'Outfit',sans-serif; font-size:1.1rem; font-weight:900; letter-spacing:2px; color:white; margin-bottom:.5rem; }
     .sr-footer-logo span { color:var(--holo-teal); }
     .footer-links { display:flex; justify-content:center; gap:1.5rem; margin-top:.8rem; flex-wrap:wrap; }
     .footer-links a { font-size:.78rem; color:#4b5563; text-decoration:none; font-weight:600; transition:color .3s; }
     .footer-links a:hover { color:var(--holo-teal); }
 
-    /* ---- SCROLLBAR ---- */
+    /* ---- SCROLLBAR & REVEAL ---- */
     ::-webkit-scrollbar { width:4px; }
     ::-webkit-scrollbar-track { background:var(--bg-deep); }
     ::-webkit-scrollbar-thumb { background:rgba(0,181,200,0.3); border-radius:2px; }
-
-    /* ---- SCROLL REVEAL ---- */
     .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
 
     /* ---- RESPONSIVE ---- */
-    @media(max-width:900px){
-      .founding-banner { grid-template-columns:1fr; text-align:center; }
-      .founding-cta { margin:0 auto; }
-    }
+    @media(max-width:900px){ .founding-banner { grid-template-columns:1fr; text-align:center; } .founding-cta { margin:0 auto; } }
     @media(max-width:768px){
       body { cursor:auto; }
       .cursor-dot,.cursor-ring { display:none; }
@@ -619,15 +392,8 @@
       .trust-item { font-size:.72rem; }
       .sticky-cta { padding:.8rem 1rem; }
       .founding-strip,.vtr-teaser { padding:0 1.2rem; }
-      .phone-preview-wrap { min-height:220px; }
-      .phone-shell.side-phone { display:none; }
-      .phone-shell.main-phone { width:140px; }
-      .main-phone .phone-screen { height:230px; }
     }
-    @media(max-width:480px){
-      .sr-hero h1 { font-size:2rem; }
-      .founding-banner { padding:1.4rem 1.2rem; }
-    }
+    @media(max-width:480px){ .sr-hero h1 { font-size:2rem; } .founding-banner { padding:1.4rem 1.2rem; } }
   </style>
 </head>
 <body>
@@ -638,19 +404,12 @@
 
   <div class="page-wrap">
 
-    <!-- HEADER -->
     <header class="sr-header">
-      <a href="index.html" class="back-btn">
-        <i class="fa-solid fa-arrow-left"></i> Back to GoChuchuro
-      </a>
+      <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to GoChuchuro</a>
       <a href="index.html" class="sr-logo">GOCHUCHURO<span>.</span></a>
-      <!-- CHANGE: price updated to £97 -->
-      <a href="index.html#pricing" class="back-btn" style="color:var(--holo-gold);">
-        <i class="fa-solid fa-tag"></i> From £97/mo
-      </a>
+      <a href="index.html#pricing" class="back-btn" style="color:var(--holo-gold);"><i class="fa-solid fa-tag"></i> From £97/mo</a>
     </header>
 
-    <!-- TRUST STRIP — price updated -->
     <div class="trust-strip">
       <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span><strong>Every template</strong> fully built for you</span></div>
       <div class="trust-item"><i class="fa-solid fa-bolt"></i><span>Live in <strong>5 working days</strong></span></div>
@@ -659,526 +418,252 @@
       <div class="trust-item"><i class="fa-solid fa-sterling-sign"></i><span>Plans <strong>from £97/mo</strong></span></div>
     </div>
 
-    <!-- HERO BANNER -->
     <section class="sr-hero">
-      <div class="sr-badge">
-        <i class="fa-solid fa-cube" style="font-size:.65rem;"></i>
-        2D &amp; 3D Template Showroom
-      </div>
+      <div class="sr-badge"><i class="fa-solid fa-cube" style="font-size:.65rem;"></i> 2D &amp; 3D Template Showroom</div>
       <h1>This could be<br><span class="text-gradient">your website.</span></h1>
       <p>Pick your trade below. See exactly what your business could look like online. Every design is fully built, automated, and ready to take bookings &mdash; handed over in 5 working days.</p>
       <p style="font-size:.88rem;margin-top:.4rem;">
-        All templates are shown as they appear on a customer's phone. <strong style="color:var(--holo-teal);">Tap "Experience 3D"</strong> for the immersive version, or <strong style="color:var(--cool-silver);">"View Standard"</strong> for the clean classic look.
+        All templates are shown as they appear on your customers' devices. <strong style="color:var(--holo-teal);">Tap "Experience 3D"</strong> for the immersive version, or <strong style="color:var(--cool-silver);">"View Standard"</strong> for the clean classic look.
       </p>
       <span class="tagline-script">"Reach Your Peak. Automate Your Growth."</span>
       <div class="glow-line"></div>
     </section>
 
-    <!-- DISCLAIMER BAND -->
     <div class="disclaimer-band">
-      <p>
-        <em>Demonstration designs only.</em>
-        All business names, characters, images, and content shown in the templates below are entirely fictional and created for illustrative purposes.
-        Any resemblance to real persons or businesses is coincidental.
-        Your finished website will feature your own brand, photos, and content.
-      </p>
+      <p><em>Demonstration designs only.</em> All business names, characters, images, and content shown in the templates below are entirely fictional and created for illustrative purposes. Any resemblance to real persons or businesses is coincidental. Your finished website will feature your own brand, photos, and content.</p>
     </div>
 
-    <!-- VTR FRAMEWORK TEASER -->
     <div class="vtr-teaser reveal">
       <div class="vtr-teaser-inner">
         <span class="vtr-pill"><i class="fa-solid fa-mountain-sun" style="font-size:.7rem;"></i> The VTR Profile</span>
         <p>Every website we build is designed to make your business <strong>Visible</strong>, build <strong>Trust</strong>, and keep customers <strong>Retained</strong>. That is the <em>GoChuchuro Growth System</em> &mdash; and it starts with how your site looks.</p>
-        <a href="GoChuchuro_Growth_Framework.pdf" target="_blank"
-           style="font-size:.78rem;color:var(--holo-gold);text-decoration:none;font-weight:700;white-space:nowrap;transition:color .3s;"
-           onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--holo-gold)'">
-          Read the Framework &rarr;
-        </a>
+        <a href="GoChuchuro_Growth_Framework.pdf" target="_blank" style="font-size:.78rem;color:var(--holo-gold);text-decoration:none;font-weight:700;white-space:nowrap;transition:color .3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--holo-gold)'">Read the Framework &rarr;</a>
       </div>
     </div>
 
-    <!-- FOUNDING CLIENT STRIP (replaces fake testimonials) -->
     <div class="founding-strip reveal">
       <div class="founding-banner">
         <div class="founding-banner-text">
           <h3>Be one of our founding clients.</h3>
-          <p>
-            We are currently onboarding our first clients. No reviews yet &mdash; because the system is brand new.
-            <strong>Founding clients receive our full attention, our best service, and our launch pricing.</strong>
-            When your results come in, your story becomes the proof that inspires the next business owner.
-          </p>
+          <p>We are currently onboarding our first clients. No reviews yet &mdash; because the system is brand new. <strong>Founding clients receive our full attention, our best service, and our launch pricing.</strong> When your results come in, your story becomes the proof that inspires the next business owner.</p>
         </div>
-        <a href="index.html" onclick="setTimeout(function(){var b=document.querySelector('.btn-scarcity');if(b)b.click();},400);" class="founding-cta">
-          <i class="fa-regular fa-calendar"></i> Book Free Chat
-        </a>
+        <a href="index.html" onclick="setTimeout(function(){var b=document.querySelector('.btn-scarcity');if(b)b.click();},400);" class="founding-cta"><i class="fa-regular fa-calendar"></i> Book Free Chat</a>
       </div>
     </div>
 
-    <!-- SECTION LABEL -->
     <div class="section-label">
       <h2>Choose your trade. See your future website.</h2>
       <p>Click <strong style="color:var(--holo-teal);">Experience 3D</strong> for our immersive design &mdash; or <strong style="color:var(--cool-silver);">View Standard</strong> for a clean, classic look.</p>
     </div>
 
-    <!-- TRADE CARDS GRID -->
     <main class="trade-grid">
 
-      <!-- ═══════ PLUMBING ═══════ -->
       <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
-
-        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(0,30,50,0.8),rgba(0,50,80,0.6));">
-          <div class="phone-preview-wrap::before" style="background:radial-gradient(ellipse,rgba(0,181,200,0.15) 0%,transparent 70%);"></div>
-
-          <!-- Side phone left -->
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-plumbing">
-              <div class="screen-nav" style="color:#00B5C8;">
-                <span class="screen-nav-logo">AquaFix</span>
-                <div class="screen-nav-dots">
-                  <div class="screen-nav-dot" style="background:#00B5C8;"></div>
-                  <div class="screen-nav-dot" style="background:#fff;"></div>
-                  <div class="screen-nav-dot" style="background:#fff;"></div>
-                </div>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#00B5C8;">Services</div>
-                <div class="screen-headline" style="color:white;">Boiler Installs &amp; Repairs</div>
-                <div class="screen-sub" style="color:#94a3b8;">Fast response. Fixed price quotes.</div>
-              </div>
-              <div class="screen-bottom">
-                <div class="screen-icon-btn" style="color:#00B5C8;">Book</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Call</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
-              </div>
+        <div class="multi-device-wrap" style="background:radial-gradient(circle at bottom, rgba(0,181,200,0.15) 0%, transparent 60%);">
+          <div class="mock-laptop">
+            <div class="mock-screen screen-plumbing">
+              <div class="mock-ui-header"></div><div class="mock-ui-hero"></div><div class="mock-ui-grid"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+            <div class="mock-laptop-base"></div>
           </div>
-
-          <!-- Main phone centre -->
-          <div class="phone-shell main-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-plumbing">
-              <div class="screen-nav" style="color:#00B5C8;">
-                <span class="screen-nav-logo" style="font-size:.48rem;">AquaFix Plumbing</span>
-                <div class="screen-nav-dots">
-                  <div class="screen-nav-dot" style="background:#00B5C8;opacity:.8;"></div>
-                </div>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#00B5C8;">Fast. Reliable.</div>
-                <div class="screen-headline" style="color:white;">Local Plumbing &amp; Heating.</div>
-                <div class="screen-sub" style="color:#94a3b8;">Emergency call-outs 24/7. Boiler installs. Bathroom fits.</div>
-                <span class="screen-btn" style="background:#00B5C8;color:#000;">Book Now &rarr;</span>
-              </div>
-              <div class="screen-bottom">
-                <div class="screen-icon-btn" style="color:#00B5C8;">Book</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Services</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Contact</div>
-              </div>
+          <div class="mock-tablet">
+            <div class="mock-screen screen-plumbing">
+              <div class="mock-ui-header" style="height:6px;"></div><div class="mock-ui-hero" style="height:40px;"></div><div class="mock-ui-grid" style="flex-direction:column;"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
-          <!-- Side phone right -->
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-plumbing">
-              <div class="screen-nav" style="color:#00B5C8;">
-                <span class="screen-nav-logo">Reviews</span>
-              </div>
-              <div class="screen-hero">
-                <div style="font-size:.55rem;color:#E5C158;letter-spacing:1px;margin-bottom:.3rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <div class="screen-headline" style="color:white;font-size:.48rem;">"Fast response, great price. Would use again."</div>
-                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">— Google Review, 2 days ago</div>
-              </div>
+          <div class="mock-phone">
+            <div class="mock-screen screen-plumbing">
+              <div class="mock-ui-header" style="height:4px;"></div><div class="mock-ui-hero" style="height:30px;"></div><div class="mock-ui-box" style="margin-top:4px;"></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
           <div class="preview-3d-badge">3D Ready</div>
         </div>
 
         <div class="card-body">
           <div class="card-icon-row">
-            <div class="card-icon" style="background:rgba(0,181,200,0.1);border:1px solid rgba(0,181,200,0.2);">
-              <i class="fa-solid fa-faucet-drip" style="color:#00B5C8;"></i>
-            </div>
+            <div class="card-icon" style="background:rgba(0,181,200,0.1);border:1px solid rgba(0,181,200,0.2);"><i class="fa-solid fa-faucet-drip" style="color:#00B5C8;"></i></div>
             <div>
               <div class="card-title">Plumbers &amp; Heating</div>
               <div class="card-subtitle" style="color:#00B5C8;">Trades &amp; Services</div>
             </div>
           </div>
-          <div class="card-story">
-            You are under a sink. Phone rings. You miss it. <em>GoChuchuro fires a text in 30 seconds.</em> Customer stays. Job saved.
-          </div>
+          <div class="card-story">You are under a sink. Phone rings. You miss it. <em>GoChuchuro fires a text in 30 seconds.</em> Customer stays. Job saved.</div>
           <p class="card-desc">Missed call text-back, 24/7 online booking, automated Google reviews, and a professional website that earns trust at first glance.</p>
           <div class="btn-group">
-            <a href="plumbing/3d/index.html" target="_blank" class="btn-primary">
-              <i class="fa-solid fa-cube"></i> Experience 3D Version
-            </a>
-            <a href="plumbing/2d/index.html" target="_blank" class="btn-secondary">
-              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
-            </a>
+            <a href="plumbing/3d/index.html" target="_blank" class="btn-primary"><i class="fa-solid fa-cube"></i> Experience 3D Version</a>
+            <a href="plumbing/2d/index.html" target="_blank" class="btn-secondary"><i class="fa-regular fa-window-maximize"></i> View Standard 2D</a>
           </div>
         </div>
       </div>
 
-      <!-- ═══════ RESTAURANT ═══════ -->
       <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
-
-        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(25,10,0,0.8),rgba(45,18,0,0.6));">
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-restaurant">
-              <div class="screen-nav" style="color:#D4AF37;">
-                <span class="screen-nav-logo">Menu</span>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#D4AF37;">Today's Special</div>
-                <div class="screen-headline" style="color:white;font-size:.5rem;">Lamb Rogan Josh</div>
-                <div class="screen-sub" style="color:#94a3b8;">Slow cooked. Served with naan.</div>
-              </div>
+        <div class="multi-device-wrap" style="background:radial-gradient(circle at bottom, rgba(212,175,55,0.15) 0%, transparent 60%);">
+          <div class="mock-laptop">
+            <div class="mock-screen screen-restaurant">
+              <div class="mock-ui-header"></div><div class="mock-ui-hero"></div><div class="mock-ui-grid"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+            <div class="mock-laptop-base"></div>
           </div>
-
-          <div class="phone-shell main-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-restaurant">
-              <div class="screen-nav" style="color:#D4AF37;">
-                <span class="screen-nav-logo" style="font-size:.46rem;">Spice Garden</span>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#D4AF37;">Authentic Flavours.</div>
-                <div class="screen-headline" style="color:white;">Book Your Table.</div>
-                <div class="screen-sub" style="color:#94a3b8;">Dine in &bull; Takeaway &bull; Private events &bull; 7 days</div>
-                <span class="screen-btn" style="background:#D4AF37;color:#000;">Reserve Now &rarr;</span>
-              </div>
-              <div class="screen-bottom">
-                <div class="screen-icon-btn" style="color:#D4AF37;">Book</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Menu</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Find Us</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
-              </div>
+          <div class="mock-tablet">
+            <div class="mock-screen screen-restaurant">
+              <div class="mock-ui-header" style="height:6px;"></div><div class="mock-ui-hero" style="height:40px;"></div><div class="mock-ui-grid" style="flex-direction:column;"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-restaurant">
-              <div class="screen-nav" style="color:#D4AF37;"><span class="screen-nav-logo">Loyalty</span></div>
-              <div class="screen-hero">
-                <div class="screen-headline" style="color:white;font-size:.46rem;">Kids Eat Free<br>This Tuesday!</div>
-                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">Book before 6pm. Show this message.</div>
-                <span class="screen-btn" style="background:#D4AF37;color:#000;margin-top:.2rem;">Book Now</span>
-              </div>
+          <div class="mock-phone">
+            <div class="mock-screen screen-restaurant">
+              <div class="mock-ui-header" style="height:4px;"></div><div class="mock-ui-hero" style="height:30px;"></div><div class="mock-ui-box" style="margin-top:4px;"></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
           <div class="preview-3d-badge">3D Ready</div>
         </div>
 
         <div class="card-body">
           <div class="card-icon-row">
-            <div class="card-icon" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);">
-              <i class="fa-solid fa-utensils" style="color:#D4AF37;"></i>
-            </div>
+            <div class="card-icon" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);"><i class="fa-solid fa-utensils" style="color:#D4AF37;"></i></div>
             <div>
               <div class="card-title">Dining &amp; Takeaway</div>
               <div class="card-subtitle" style="color:#D4AF37;">Restaurants &amp; Cafes</div>
             </div>
           </div>
-          <div class="card-story">
-            Quiet Tuesday. Text all 500 past customers: <em>"Kids eat free tonight &mdash; book your table."</em> Tables filled. Automatically.
-          </div>
+          <div class="card-story">Quiet Tuesday. Text all 500 past customers: <em>"Kids eat free tonight &mdash; book your table."</em> Tables filled. Automatically.</div>
           <p class="card-desc">SMS campaigns to fill slow nights, online table booking, loyalty automation, and Google review requests after every visit.</p>
           <div class="btn-group">
-            <a href="restaurant/3d/index.html" target="_blank" class="btn-primary">
-              <i class="fa-solid fa-cube"></i> Experience 3D Version
-            </a>
-            <a href="restaurant/2d/index.html" target="_blank" class="btn-secondary">
-              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
-            </a>
+            <a href="restaurant/3d/index.html" target="_blank" class="btn-primary"><i class="fa-solid fa-cube"></i> Experience 3D Version</a>
+            <a href="restaurant/2d/index.html" target="_blank" class="btn-secondary"><i class="fa-regular fa-window-maximize"></i> View Standard 2D</a>
           </div>
         </div>
       </div>
 
-      <!-- ═══════ SALON ═══════ -->
       <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
-
-        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(22,8,16,0.8),rgba(40,13,28,0.6));">
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-salon">
-              <div class="screen-nav" style="color:#f43f5e;"><span class="screen-nav-logo">Services</span></div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#f43f5e;">Colour</div>
-                <div class="screen-headline" style="color:white;font-size:.5rem;">Balayage from £85</div>
-                <div class="screen-sub" style="color:#94a3b8;">Full colour &bull; Highlights &bull; Toning</div>
-              </div>
+        <div class="multi-device-wrap" style="background:radial-gradient(circle at bottom, rgba(244,63,94,0.15) 0%, transparent 60%);">
+          <div class="mock-laptop">
+            <div class="mock-screen screen-salon">
+              <div class="mock-ui-header"></div><div class="mock-ui-hero"></div><div class="mock-ui-grid"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+            <div class="mock-laptop-base"></div>
           </div>
-
-          <div class="phone-shell main-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-salon">
-              <div class="screen-nav" style="color:#f43f5e;">
-                <span class="screen-nav-logo" style="font-size:.46rem;">Glow Studio</span>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#f43f5e;">Your Best Look.</div>
-                <div class="screen-headline" style="color:white;">Book Online Now.</div>
-                <div class="screen-sub" style="color:#94a3b8;">Hair cuts &bull; Colour &bull; Treatments &bull; Nails</div>
-                <span class="screen-btn" style="background:#f43f5e;color:#fff;">Book Appointment &rarr;</span>
-              </div>
-              <div class="screen-bottom">
-                <div class="screen-icon-btn" style="color:#f43f5e;">Book</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Services</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Team</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
-              </div>
+          <div class="mock-tablet">
+            <div class="mock-screen screen-salon">
+              <div class="mock-ui-header" style="height:6px;"></div><div class="mock-ui-hero" style="height:40px;"></div><div class="mock-ui-grid" style="flex-direction:column;"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-salon">
-              <div class="screen-nav" style="color:#f43f5e;"><span class="screen-nav-logo">Reminder</span></div>
-              <div class="screen-hero">
-                <div class="screen-headline" style="color:white;font-size:.46rem;">Time for a top-up?</div>
-                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">It has been 6 weeks since your last visit.</div>
-                <span class="screen-btn" style="background:#f43f5e;color:#fff;margin-top:.3rem;">Book Now</span>
-              </div>
+          <div class="mock-phone">
+            <div class="mock-screen screen-salon">
+              <div class="mock-ui-header" style="height:4px;"></div><div class="mock-ui-hero" style="height:30px;"></div><div class="mock-ui-box" style="margin-top:4px;"></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
           <div class="preview-3d-badge">3D Ready</div>
         </div>
 
         <div class="card-body">
           <div class="card-icon-row">
-            <div class="card-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);">
-              <i class="fa-solid fa-scissors" style="color:#f43f5e;"></i>
-            </div>
+            <div class="card-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);"><i class="fa-solid fa-scissors" style="color:#f43f5e;"></i></div>
             <div>
               <div class="card-title">Hair &amp; Beauty</div>
               <div class="card-subtitle" style="color:#f43f5e;">Salons &amp; Spas</div>
             </div>
           </div>
-          <div class="card-story">
-            Chair empty at 2pm. System texts a past client: <em>"Time for a top-up? Book your slot here."</em> Chair filled by 3pm.
-          </div>
+          <div class="card-story">Chair empty at 2pm. System texts a past client: <em>"Time for a top-up? Book your slot here."</em> Chair filled by 3pm.</div>
           <p class="card-desc">No-show reminders cut empty appointments by 60%. Automated re-booking fills the quiet slots. Birthday offers keep clients loyal.</p>
           <div class="btn-group">
-            <a href="salon/3d/index.html" target="_blank" class="btn-primary">
-              <i class="fa-solid fa-cube"></i> Experience 3D Version
-            </a>
-            <a href="salon/2d/index.html" target="_blank" class="btn-secondary">
-              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
-            </a>
+            <a href="salon/3d/index.html" target="_blank" class="btn-primary"><i class="fa-solid fa-cube"></i> Experience 3D Version</a>
+            <a href="salon/2d/index.html" target="_blank" class="btn-secondary"><i class="fa-regular fa-window-maximize"></i> View Standard 2D</a>
           </div>
         </div>
       </div>
 
-      <!-- ═══════ GARAGE ═══════ -->
       <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
-
-        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(15,9,0,0.8),rgba(28,20,0,0.6));">
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-garage">
-              <div class="screen-nav" style="color:#f87171;"><span class="screen-nav-logo">Services</span></div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#f87171;">MOT Testing</div>
-                <div class="screen-headline" style="color:white;font-size:.5rem;">From £54.85</div>
-                <div class="screen-sub" style="color:#94a3b8;">Class 4 &bull; Same day results</div>
-              </div>
+        <div class="multi-device-wrap" style="background:radial-gradient(circle at bottom, rgba(248,113,113,0.15) 0%, transparent 60%);">
+          <div class="mock-laptop">
+            <div class="mock-screen screen-garage">
+              <div class="mock-ui-header"></div><div class="mock-ui-hero"></div><div class="mock-ui-grid"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+            <div class="mock-laptop-base"></div>
           </div>
-
-          <div class="phone-shell main-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-garage">
-              <div class="screen-nav" style="color:#f87171;">
-                <span class="screen-nav-logo" style="font-size:.46rem;">FastFix Garage</span>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#f87171;">MOT &amp; Repairs.</div>
-                <div class="screen-headline" style="color:white;">Book in Seconds.</div>
-                <div class="screen-sub" style="color:#94a3b8;">MOT testing &bull; Servicing &bull; Tyres &bull; Air con</div>
-                <span class="screen-btn" style="background:#f87171;color:#000;">Book Your MOT &rarr;</span>
-              </div>
-              <div class="screen-bottom">
-                <div class="screen-icon-btn" style="color:#f87171;">Book</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Services</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Prices</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Find Us</div>
-              </div>
+          <div class="mock-tablet">
+            <div class="mock-screen screen-garage">
+              <div class="mock-ui-header" style="height:6px;"></div><div class="mock-ui-hero" style="height:40px;"></div><div class="mock-ui-grid" style="flex-direction:column;"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-garage">
-              <div class="screen-nav" style="color:#f87171;"><span class="screen-nav-logo">Reminder</span></div>
-              <div class="screen-hero">
-                <div class="screen-headline" style="color:white;font-size:.44rem;">Your MOT is due next month.</div>
-                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">Book now to secure your slot.</div>
-                <span class="screen-btn" style="background:#f87171;color:#000;margin-top:.3rem;">Book Online</span>
-              </div>
+          <div class="mock-phone">
+            <div class="mock-screen screen-garage">
+              <div class="mock-ui-header" style="height:4px;"></div><div class="mock-ui-hero" style="height:30px;"></div><div class="mock-ui-box" style="margin-top:4px;"></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
           <div class="preview-3d-badge">3D Ready</div>
         </div>
 
         <div class="card-body">
           <div class="card-icon-row">
-            <div class="card-icon" style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);">
-              <i class="fa-solid fa-screwdriver-wrench" style="color:#f87171;"></i>
-            </div>
+            <div class="card-icon" style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);"><i class="fa-solid fa-screwdriver-wrench" style="color:#f87171;"></i></div>
             <div>
               <div class="card-title">Car Garage &amp; MOT</div>
               <div class="card-subtitle" style="color:#f87171;">Auto &amp; Mechanics</div>
             </div>
           </div>
-          <div class="card-story">
-            MOT due next month. System sends every past customer a reminder. <em>They book online before calling a competitor.</em>
-          </div>
+          <div class="card-story">MOT due next month. System sends every past customer a reminder. <em>They book online before calling a competitor.</em></div>
           <p class="card-desc">MOT reminder automation, 24/7 online booking, digital job sign-offs, and a trusted local presence on Google Maps.</p>
           <div class="btn-group">
-            <a href="garage/3d/index.html" target="_blank" class="btn-primary">
-              <i class="fa-solid fa-cube"></i> Experience 3D Version
-            </a>
-            <a href="garage/2d/index.html" target="_blank" class="btn-secondary">
-              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
-            </a>
+            <a href="garage/3d/index.html" target="_blank" class="btn-primary"><i class="fa-solid fa-cube"></i> Experience 3D Version</a>
+            <a href="garage/2d/index.html" target="_blank" class="btn-secondary"><i class="fa-regular fa-window-maximize"></i> View Standard 2D</a>
           </div>
         </div>
       </div>
 
-      <!-- ═══════ DRIVING ═══════ -->
       <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
-
-        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(10,0,20,0.8),rgba(22,0,38,0.6));">
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-driving">
-              <div class="screen-nav" style="color:#a855f7;"><span class="screen-nav-logo">Prices</span></div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#a855f7;">Lessons</div>
-                <div class="screen-headline" style="color:white;font-size:.5rem;">From £35/hour</div>
-                <div class="screen-sub" style="color:#94a3b8;">Manual &bull; Automatic &bull; Block booking discounts</div>
-              </div>
+        <div class="multi-device-wrap" style="background:radial-gradient(circle at bottom, rgba(168,85,247,0.15) 0%, transparent 60%);">
+          <div class="mock-laptop">
+            <div class="mock-screen screen-driving">
+              <div class="mock-ui-header"></div><div class="mock-ui-hero"></div><div class="mock-ui-grid"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+            <div class="mock-laptop-base"></div>
           </div>
-
-          <div class="phone-shell main-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-driving">
-              <div class="screen-nav" style="color:#a855f7;">
-                <span class="screen-nav-logo" style="font-size:.44rem;">Pass First Time</span>
-              </div>
-              <div class="screen-hero">
-                <div class="screen-label" style="color:#a855f7;">Pass Your Test.</div>
-                <div class="screen-headline" style="color:white;">Book a Lesson.</div>
-                <div class="screen-sub" style="color:#94a3b8;">Manual &bull; Automatic &bull; Intensive &bull; Test routes</div>
-                <span class="screen-btn" style="background:#a855f7;color:#fff;">Book First Lesson &rarr;</span>
-              </div>
-              <div class="screen-bottom">
-                <div class="screen-icon-btn" style="color:#a855f7;">Book</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Lessons</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Prices</div>
-                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
-              </div>
+          <div class="mock-tablet">
+            <div class="mock-screen screen-driving">
+              <div class="mock-ui-header" style="height:6px;"></div><div class="mock-ui-hero" style="height:40px;"></div><div class="mock-ui-grid" style="flex-direction:column;"><div class="mock-ui-box"></div><div class="mock-ui-box"></div></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
-          <div class="phone-shell side-phone">
-            <div class="phone-notch"></div>
-            <div class="phone-screen screen-driving">
-              <div class="screen-nav" style="color:#a855f7;"><span class="screen-nav-logo">Referral</span></div>
-              <div class="screen-hero">
-                <div class="screen-headline" style="color:white;font-size:.44rem;">Refer a friend &amp; get a free lesson!</div>
-                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">Share your link. They book. You get credited.</div>
-                <span class="screen-btn" style="background:#a855f7;color:#fff;margin-top:.3rem;">Share Now</span>
-              </div>
+          <div class="mock-phone">
+            <div class="mock-screen screen-driving">
+              <div class="mock-ui-header" style="height:4px;"></div><div class="mock-ui-hero" style="height:30px;"></div><div class="mock-ui-box" style="margin-top:4px;"></div>
             </div>
-            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-
           <div class="preview-3d-badge">3D Ready</div>
         </div>
 
         <div class="card-body">
           <div class="card-icon-row">
-            <div class="card-icon" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);">
-              <i class="fa-solid fa-car-side" style="color:#a855f7;"></i>
-            </div>
+            <div class="card-icon" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);"><i class="fa-solid fa-car-side" style="color:#a855f7;"></i></div>
             <div>
               <div class="card-title">Driving Instructors</div>
               <div class="card-subtitle" style="color:#a855f7;">Lessons &amp; Courses</div>
             </div>
           </div>
-          <div class="card-story">
-            Learner visits your website at 10pm. <em>Books their first lesson online. Confirmation text sent instantly.</em> You wake up with a new student.
-          </div>
+          <div class="card-story">Learner visits your website at 10pm. <em>Books their first lesson online. Confirmation text sent instantly.</em> You wake up with a new student.</div>
           <p class="card-desc">24/7 lesson booking, automated lesson reminders, Google review requests after every pass, and student referral rewards on autopilot.</p>
           <div class="btn-group">
-            <a href="driving/3d/index.html" target="_blank" class="btn-primary">
-              <i class="fa-solid fa-cube"></i> Experience 3D Version
-            </a>
-            <a href="driving/2d/index.html" target="_blank" class="btn-secondary">
-              <i class="fa-regular fa-window-maximize"></i> View Standard 2D
-            </a>
+            <a href="driving/3d/index.html" target="_blank" class="btn-primary"><i class="fa-solid fa-cube"></i> Experience 3D Version</a>
+            <a href="driving/2d/index.html" target="_blank" class="btn-secondary"><i class="fa-regular fa-window-maximize"></i> View Standard 2D</a>
           </div>
         </div>
       </div>
 
     </main>
 
-    <!-- BOTTOM CTA -->
     <section class="bottom-cta-section">
       <div class="bottom-cta-inner">
         <div style="font-size:2.5rem;margin-bottom:1rem;">&#x2605;</div>
-        <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:1rem;">
-          Seen something you like?<br><span class="text-gradient">We build it for you.</span>
-        </h2>
-        <p style="color:var(--cool-silver);font-size:1rem;line-height:1.75;margin-bottom:.5rem;">
-          Every template above comes fully built, connected to your booking system, and automated. No tech skills needed. You just download one app.
-        </p>
-        <p style="font-family:'Dancing Script',cursive;color:var(--holo-bright-gold);font-size:1.2rem;margin-bottom:2rem;">
-          "Reach Your Peak. Automate Your Growth."
-        </p>
+        <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:1rem;">Seen something you like?<br><span class="text-gradient">We build it for you.</span></h2>
+        <p style="color:var(--cool-silver);font-size:1rem;line-height:1.75;margin-bottom:.5rem;">Every template above comes fully built, connected to your booking system, and automated. No tech skills needed. You just download one app.</p>
+        <p style="font-family:'Dancing Script',cursive;color:var(--holo-bright-gold);font-size:1.2rem;margin-bottom:2rem;">"Reach Your Peak. Automate Your Growth."</p>
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
-          <a href="index.html"
-             style="background:var(--gradient-primary);color:#000;padding:1.1rem 2.2rem;border-radius:14px;font-weight:900;text-decoration:none;font-size:.9rem;text-transform:uppercase;letter-spacing:1px;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 0 25px rgba(0,181,200,0.3);">
-            <i class="fa-regular fa-calendar"></i> Book Your Free 30-Min Chat
-          </a>
-          <a href="index.html#pricing"
-             style="background:transparent;color:var(--cool-silver);padding:1.1rem 2.2rem;border-radius:14px;font-weight:700;text-decoration:none;font-size:.88rem;border:1px solid rgba(255,255,255,0.12);display:inline-flex;align-items:center;gap:.5rem;">
-            <i class="fa-solid fa-tag"></i> See Pricing from £97/mo
-          </a>
+          <a href="index.html" style="background:var(--gradient-primary);color:#000;padding:1.1rem 2.2rem;border-radius:14px;font-weight:900;text-decoration:none;font-size:.9rem;text-transform:uppercase;letter-spacing:1px;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 0 25px rgba(0,181,200,0.3);"><i class="fa-regular fa-calendar"></i> Book Your Free 30-Min Chat</a>
+          <a href="index.html#pricing" style="background:transparent;color:var(--cool-silver);padding:1.1rem 2.2rem;border-radius:14px;font-weight:700;text-decoration:none;font-size:.88rem;border:1px solid rgba(255,255,255,0.12);display:inline-flex;align-items:center;gap:.5rem;"><i class="fa-solid fa-tag"></i> See Pricing from £97/mo</a>
         </div>
-        <p style="font-size:.78rem;color:var(--text-dim);margin-top:1.2rem;">
-          No commitment. No jargon. 30 minutes with Prakash &mdash; and you keep the advice either way.
-        </p>
+        <p style="font-size:.78rem;color:var(--text-dim);margin-top:1.2rem;">No commitment. No jargon. 30 minutes with Prakash &mdash; and you keep the advice either way.</p>
       </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="sr-footer">
       <div class="sr-footer-logo">GOCHUCHURO<span>.</span></div>
       <p style="font-family:'Dancing Script',cursive;color:var(--holo-bright-gold);font-size:1rem;margin:.3rem 0;">"Reach Your Peak. Automate Your Growth."</p>
@@ -1191,46 +676,45 @@
         <a href="terms.html">Terms</a>
       </div>
       <p style="margin-top:1rem;font-size:.75rem;color:#374151;">&copy; 2026 GoChuchuro. All rights reserved. Registered in England &amp; Wales.</p>
-      <p style="font-size:.7rem;color:#374151;margin-top:.5rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;">
-        All template designs, business names, characters and content shown in this showroom are for demonstration purposes only. They are entirely fictional and do not represent any real business or individual.
-      </p>
+      <p style="font-size:.7rem;color:#374151;margin-top:.5rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;">All template designs, business names, characters and content shown in this showroom are for demonstration purposes only. They are entirely fictional and do not represent any real business or individual.</p>
     </footer>
 
-  </div><!-- end page-wrap -->
-
-  <!-- STICKY BOTTOM CTA — price updated -->
-  <div class="sticky-cta" id="stickyCta">
-    <div class="sticky-cta-text">
-      <strong>Like what you see?</strong> We build it fully for you &mdash; from £97/mo.
-    </div>
+  </div><div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-text"><strong>Like what you see?</strong> We build it fully for you &mdash; from £97/mo.</div>
     <div class="sticky-cta-actions">
-      <a href="index.html" class="sticky-btn-book">
-        <i class="fa-regular fa-calendar"></i> Book Free Chat
-      </a>
+      <a href="index.html" class="sticky-btn-book"><i class="fa-regular fa-calendar"></i> Book Free Chat</a>
       <a href="index.html#pricing" class="sticky-btn-home">See pricing &rarr;</a>
-      <button class="sticky-close" onclick="document.getElementById('stickyCta').style.display='none'" aria-label="Dismiss">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <button class="sticky-close" onclick="document.getElementById('stickyCta').style.display='none'" aria-label="Dismiss"><i class="fa-solid fa-xmark"></i></button>
     </div>
   </div>
 
-  <!-- SCRIPTS -->
   <script>
-    /* ---- CURSOR ---- */
+    /* ---- SMOOTH, RESPONSIVE CURSOR (Translate3d Hardware Acceleration) ---- */
     const dot  = document.getElementById('cursorDot');
     const ring = document.getElementById('cursorRing');
-    let mX=0,mY=0,rX=0,rY=0;
-    document.addEventListener('mousemove', e=>{
-      mX=e.clientX; mY=e.clientY;
-      dot.style.left=mX+'px'; dot.style.top=mY+'px';
+    let mX = window.innerWidth/2, mY = window.innerHeight/2;
+    let dX = mX, dY = mY, rX = mX, rY = mY;
+
+    document.addEventListener('mousemove', e => {
+      mX = e.clientX;
+      mY = e.clientY;
     });
-    (function animRing(){
-      rX+=(mX-rX)*.12; rY+=(mY-rY)*.12;
-      ring.style.left=rX+'px'; ring.style.top=rY+'px';
-      requestAnimationFrame(animRing);
+
+    (function animCursor(){
+      // Fast, snappy dot
+      dX += (mX - dX) * 0.5;
+      dY += (mY - dY) * 0.5;
+      dot.style.transform = `translate3d(${dX}px, ${dY}px, 0) translate(-50%, -50%)`;
+
+      // Smooth trailing ring
+      rX += (mX - rX) * 0.25;
+      rY += (mY - rY) * 0.25;
+      ring.style.transform = `translate3d(${rX}px, ${rY}px, 0) translate(-50%, -50%)`;
+
+      requestAnimationFrame(animCursor);
     })();
 
-    /* ---- THREE.JS PARTICLE FIELD — enhanced depth ---- */
+    /* ---- THREE.JS: COLOURFUL 3D JELLY WAVE ---- */
     const canvas   = document.getElementById('showroom-canvas');
     const scene    = new THREE.Scene();
     const camera   = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -1238,93 +722,91 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Teal particles — foreground
-    const countA = 500;
-    const posA   = new Float32Array(countA*3);
-    for(let i=0;i<countA*3;i++) posA[i]=(Math.random()-.5)*28;
-    const geoA   = new THREE.BufferGeometry();
-    geoA.setAttribute('position', new THREE.BufferAttribute(posA,3));
-    const matA   = new THREE.PointsMaterial({size:.04,color:0x00B5C8,transparent:true,opacity:.4});
-    const meshA  = new THREE.Points(geoA,matA);
-    scene.add(meshA);
+    // Create the Wave Mesh
+    const geoWave = new THREE.PlaneGeometry(60, 40, 64, 64);
+    const matWave = new THREE.MeshStandardMaterial({
+      color: 0x00B5C8,
+      emissive: 0x021114,
+      roughness: 0.2,
+      metalness: 0.8,
+      wireframe: false,
+      transparent: true,
+      opacity: 0.65
+    });
+    
+    const waveMesh = new THREE.Mesh(geoWave, matWave);
+    waveMesh.rotation.x = -Math.PI / 2.2; // Tilt it flat to look like ground/ocean
+    waveMesh.position.y = -8;
+    waveMesh.position.z = -10;
+    scene.add(waveMesh);
 
-    // Gold particles — mid layer
-    const countB = 160;
-    const posB   = new Float32Array(countB*3);
-    for(let i=0;i<countB*3;i++) posB[i]=(Math.random()-.5)*32;
-    const geoB   = new THREE.BufferGeometry();
-    geoB.setAttribute('position', new THREE.BufferAttribute(posB,3));
-    const matB   = new THREE.PointsMaterial({size:.075,color:0xD4AF37,transparent:true,opacity:.25});
-    const meshB  = new THREE.Points(geoB,matB);
-    scene.add(meshB);
-
-    // Silver particles — background depth layer
-    const countC = 80;
-    const posC   = new Float32Array(countC*3);
-    for(let i=0;i<countC*3;i++) posC[i]=(Math.random()-.5)*40;
-    const geoC   = new THREE.BufferGeometry();
-    geoC.setAttribute('position', new THREE.BufferAttribute(posC,3));
-    const matC   = new THREE.PointsMaterial({size:.12,color:0xC8CDD6,transparent:true,opacity:.08});
-    const meshC  = new THREE.Points(geoC,matC);
-    scene.add(meshC);
+    // Add dual-tone lighting for the "jelly" reflection
+    const lightTeal = new THREE.PointLight(0x00B5C8, 3, 50);
+    lightTeal.position.set(10, 5, -5);
+    scene.add(lightTeal);
+    
+    const lightGold = new THREE.PointLight(0xE5C158, 2, 50);
+    lightGold.position.set(-10, 5, 5);
+    scene.add(lightGold);
 
     camera.position.z = 6;
-    let targetRX=0, targetRY=0;
+    let targetRX = 0, targetRY = 0;
 
-    document.addEventListener('mousemove', e=>{
-      targetRX = (e.clientY/window.innerHeight - .5) * .5;
-      targetRY = (e.clientX/window.innerWidth  - .5) * .5;
+    document.addEventListener('mousemove', e => {
+      targetRX = (e.clientY / window.innerHeight - 0.5) * 0.3;
+      targetRY = (e.clientX / window.innerWidth  - 0.5) * 0.3;
     });
 
     const clk = new THREE.Clock();
+    const posAttribute = geoWave.attributes.position;
+    
+    // Animation Loop
     (function animScene(){
       requestAnimationFrame(animScene);
       const t = clk.getElapsedTime();
 
-      // Teal rotates forward slowly
-      meshA.rotation.y += .0007;
-      meshA.rotation.x += .0002;
-      meshA.rotation.x += (targetRX - meshA.rotation.x) * .015;
-      meshA.rotation.y += (targetRY - meshA.rotation.y) * .015;
+      // Undulate the jelly wave (Cross pattern / Rolling mound)
+      for(let i=0; i < posAttribute.count; i++) {
+         const x = posAttribute.getX(i);
+         const y = posAttribute.getY(i);
+         // The math for a rolling mound jelly wave
+         const z = Math.sin(x * 0.3 + t * 1.2) * Math.cos(y * 0.3 + t * 1.2) * 2.5;
+         posAttribute.setZ(i, z);
+      }
+      posAttribute.needsUpdate = true;
 
-      // Gold rotates opposite direction
-      meshB.rotation.y -= .0004;
-      meshB.rotation.z += .0002;
+      // Gentle camera tilt based on mouse position
+      waveMesh.rotation.z += (targetRY - waveMesh.rotation.z) * 0.05;
+      waveMesh.rotation.x += ((-Math.PI / 2.2 + targetRX) - waveMesh.rotation.x) * 0.05;
 
-      // Silver very slow drift
-      meshC.rotation.x += .0001;
-      meshC.rotation.y -= .0002;
-
-      // Breathing
-      const s = 1 + Math.sin(t*.3)*.012;
-      meshA.scale.set(s,s,s);
-      const s2 = 1 + Math.sin(t*.2+1)*.02;
-      meshB.scale.set(s2,s2,s2);
+      // Pulse the lights slowly
+      lightTeal.intensity = 2 + Math.sin(t * 1.5);
+      lightGold.intensity = 1.5 + Math.cos(t * 1.2);
 
       renderer.render(scene, camera);
     })();
 
-    window.addEventListener('resize',()=>{
-      camera.aspect = window.innerWidth/window.innerHeight;
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
     /* ---- STICKY CTA ---- */
     const stickyCta = document.getElementById('stickyCta');
-    window.addEventListener('scroll', ()=>{
+    window.addEventListener('scroll', () => {
       if(window.scrollY > 400) stickyCta.classList.add('visible');
     }, { passive:true });
 
     /* ---- SCROLL REVEAL ---- */
-    const revObs = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold:.1 });
-    document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
     /* ---- VANILLA TILT ---- */
     VanillaTilt.init(document.querySelectorAll('.trade-card'), {
-      speed:400, glare:true, 'max-glare':.05, scale:1.02,
+      speed:400, glare:true, 'max-glare':0.05, scale:1.02,
     });
   </script>
 </body>
