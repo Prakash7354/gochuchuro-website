@@ -8,7 +8,6 @@
 
   <link rel="icon" type="image/png" href="favicon.png" sizes="32x32"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180"/>
-
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
@@ -17,9 +16,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
   <style>
-    /* =============================================
-       GOCHUCHURO SHOWROOM — BRAND DESIGN SYSTEM
-       ============================================= */
+    /* =====================================================
+       GOCHUCHURO SHOWROOM — ENHANCED DESIGN SYSTEM
+       ===================================================== */
     :root {
       --bg-emerald:       #0D1515;
       --bg-charcoal:      #111111;
@@ -31,17 +30,16 @@
       --text-main:        #f8fafc;
       --text-dim:         #94a3b8;
       --alert-amber:      #f59e0b;
-      --forest-olive:     #3D5A3E;
       --gradient-primary: linear-gradient(135deg, #00B5C8, #E5C158);
       --gradient-gold:    linear-gradient(135deg, #D4AF37, #E5C158, #D4AF37);
-      --shadow-drop:      12px 12px 30px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
+      --shadow-drop:      14px 14px 35px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
       --shadow-inner:     inset 6px 6px 18px rgba(0,0,0,0.85), inset -3px -3px 10px rgba(255,255,255,0.02);
       --glow-teal:        0 0 30px rgba(0,181,200,0.25), 0 0 60px rgba(0,181,200,0.1);
       --glow-gold:        0 0 30px rgba(212,175,55,0.3),  0 0 60px rgba(212,175,55,0.1);
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior:smooth; }
 
     body {
       background-color: var(--bg-emerald);
@@ -65,6 +63,10 @@
       pointer-events:none; z-index:99998; transform:translate(-50%,-50%);
       transition:width .3s,height .3s,border-color .3s;
     }
+    body:has(a:hover) .cursor-dot,
+    body:has(button:hover) .cursor-dot { background:var(--holo-gold); width:12px; height:12px; }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring { width:52px; height:52px; border-color:rgba(212,175,55,0.6); }
 
     /* ---- THREE.JS CANVAS ---- */
     #showroom-canvas {
@@ -76,16 +78,16 @@
 
     /* ---- HEADER ---- */
     .sr-header {
-      background:rgba(13,21,21,0.88); backdrop-filter:blur(20px);
+      background:rgba(13,21,21,0.92); backdrop-filter:blur(24px);
       padding:.9rem 5%; display:flex; justify-content:space-between; align-items:center;
       position:sticky; top:0; z-index:100;
-      border-bottom:1px solid rgba(0,181,200,0.08);
-      box-shadow:0 4px 30px rgba(0,0,0,0.4);
+      border-bottom:1px solid rgba(0,181,200,0.1);
+      box-shadow:0 4px 30px rgba(0,0,0,0.5);
     }
     .back-btn {
       display:flex; align-items:center; gap:.6rem;
       color:var(--cool-silver); text-decoration:none;
-      font-weight:700; font-size:.88rem; letter-spacing:.5px;
+      font-weight:700; font-size:.85rem; letter-spacing:.5px;
       text-transform:uppercase; transition:all .3s;
     }
     .back-btn:hover { color:var(--holo-teal); text-shadow:0 0 12px var(--holo-teal); }
@@ -106,8 +108,7 @@
     }
     .trust-item {
       display:flex; align-items:center; gap:.5rem;
-      font-size:.8rem; font-weight:700; color:var(--text-dim);
-      letter-spacing:.5px;
+      font-size:.8rem; font-weight:700; color:var(--text-dim); letter-spacing:.5px;
     }
     .trust-item i { color:var(--holo-teal); font-size:.85rem; }
     .trust-item strong { color:white; }
@@ -115,7 +116,7 @@
     /* ---- HERO BANNER ---- */
     .sr-hero {
       text-align:center; padding:5rem 2rem 3rem;
-      max-width:860px; margin:0 auto; position:relative;
+      max-width:900px; margin:0 auto; position:relative;
     }
     .sr-badge {
       display:inline-flex; align-items:center; gap:.5rem;
@@ -128,14 +129,19 @@
     @keyframes fadeInDown { from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:translateY(0);} }
     @keyframes fadeInUp   { from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);} }
     @keyframes fadeIn     { from{opacity:0;}to{opacity:1;} }
+    @keyframes cardIn     { to{opacity:1;transform:translateY(0);} }
 
     .sr-hero h1 {
-      font-size:clamp(2.2rem,5vw,4rem); font-weight:900;
+      font-size:clamp(2.2rem,5vw,4.2rem); font-weight:900;
       line-height:1.15; margin-bottom:1.2rem;
       animation:fadeInUp .9s ease .15s both;
     }
     .text-gradient {
       background:var(--gradient-primary);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    .text-gold-gradient {
+      background:var(--gradient-gold);
       -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     }
     .sr-hero p {
@@ -146,190 +152,298 @@
     .tagline-script {
       font-family:'Dancing Script',cursive;
       font-size:1.2rem; color:var(--holo-bright-gold);
-      animation:fadeIn 1.2s ease .5s both;
-      display:block; margin-bottom:2.5rem;
+      animation:fadeIn 1.2s ease .5s both; display:block; margin-bottom:2.5rem;
     }
-
-    /* ---- SECTION DIVIDER ---- */
     .glow-line {
       width:80px; height:2px; margin:1rem auto 0;
       background:var(--gradient-primary); border-radius:100px;
       box-shadow:0 0 12px rgba(0,181,200,0.4);
     }
 
-    /* ---- TRADE GRID ---- */
-    .trade-grid {
-      max-width:1320px; margin:0 auto;
-      padding:1rem 4% 5rem;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-      gap:2.5rem;
+    /* ---- DISCLAIMER BAND ---- */
+    .disclaimer-band {
+      background:rgba(212,175,55,0.04);
+      border-top:1px solid rgba(212,175,55,0.1);
+      border-bottom:1px solid rgba(212,175,55,0.1);
+      padding:.7rem 5%;
+      text-align:center;
+    }
+    .disclaimer-band p {
+      font-size:.75rem; color:#6b7280;
+      font-family:'Outfit',sans-serif; line-height:1.5;
+    }
+    .disclaimer-band p em {
+      color:rgba(212,175,55,0.6); font-style:normal; font-weight:700;
     }
 
-    /* ---- TRADE CARD ---- */
+    /* ---- SECTION LABEL ---- */
+    .section-label {
+      text-align:center; padding:3rem 2rem 1.5rem;
+    }
+    .section-label h2 {
+      font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900; color:white; margin-bottom:.5rem;
+    }
+    .section-label p { color:var(--text-dim); font-size:.95rem; }
+
+    /* ---- TRADE GRID ---- */
+    .trade-grid {
+      max-width:1360px; margin:0 auto;
+      padding:1rem 4% 5rem;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(310px,1fr));
+      gap:2.8rem;
+    }
+
+    /* ---- TRADE CARD — ENHANCED 3D ---- */
     .trade-card {
-      background:rgba(17,17,17,0.7);
-      backdrop-filter:blur(14px);
-      border-radius:20px;
-      border:1px solid rgba(255,255,255,0.05);
-      overflow:hidden;
+      background:linear-gradient(145deg, #0e1414, #0a0c0c);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,0.04);
+      overflow:visible;
       display:flex; flex-direction:column;
-      box-shadow:var(--shadow-drop);
-      transition:all .4s ease;
-      opacity:0; transform:translateY(30px);
-      animation:cardIn .7s ease forwards;
+      box-shadow:
+        20px 20px 50px rgba(0,0,0,0.9),
+        -5px -5px 16px rgba(255,255,255,0.015),
+        inset 0 1px 0 rgba(255,255,255,0.04);
+      transition:all .45s cubic-bezier(0.23,1,0.32,1);
+      opacity:0; transform:translateY(32px);
+      animation:cardIn .8s ease forwards;
+      position:relative;
+    }
+    .trade-card::before {
+      content:'';
+      position:absolute; top:0; left:10%; right:10%; height:1px;
+      background:var(--gradient-primary); opacity:.4;
+      border-radius:100px;
     }
     .trade-card:hover {
-      border-color:rgba(0,181,200,0.25);
-      box-shadow:0 0 40px rgba(0,181,200,0.12), var(--shadow-drop);
-      transform:translateY(-5px) !important;
+      border-color:rgba(0,181,200,0.2);
+      box-shadow:
+        28px 28px 65px rgba(0,0,0,0.95),
+        0 0 50px rgba(0,181,200,0.1),
+        -5px -5px 16px rgba(255,255,255,0.02);
+      transform:translateY(-8px) !important;
     }
-    @keyframes cardIn { to{opacity:1;transform:translateY(0);} }
     .trade-card:nth-child(1){animation-delay:.1s;}
     .trade-card:nth-child(2){animation-delay:.2s;}
     .trade-card:nth-child(3){animation-delay:.3s;}
     .trade-card:nth-child(4){animation-delay:.4s;}
     .trade-card:nth-child(5){animation-delay:.5s;}
 
-    /* ---- BROWSER MOCKUP ---- */
-    .browser-wrap {
-      position:relative; padding:1.2rem 1.2rem .6rem;
-      background:rgba(8,14,14,0.6);
-      border-bottom:1px solid rgba(255,255,255,0.04);
+    /* ---- PHONE MOCKUP PREVIEW ---- */
+    .phone-preview-wrap {
+      display:flex; justify-content:center; align-items:flex-end;
+      padding:2rem 1.5rem 0;
+      gap:1.5rem;
+      position:relative;
+      min-height:260px;
+      overflow:hidden;
+      border-radius:24px 24px 0 0;
     }
-    .browser-bar {
-      height:24px; background:rgba(255,255,255,0.04);
-      border-radius:8px; display:flex; align-items:center;
-      padding:0 .6rem; gap:.4rem; margin-bottom:.7rem;
+
+    /* Depth glow behind phones */
+    .phone-preview-wrap::before {
+      content:'';
+      position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+      width:80%; height:60%;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:0;
     }
-    .browser-dot {
-      width:7px; height:7px; border-radius:50%; flex-shrink:0;
+
+    /* Phone shell */
+    .phone-shell {
+      width:110px;
+      border-radius:18px;
+      background:#060c0c;
+      border:2px solid rgba(255,255,255,0.12);
+      box-shadow:
+        8px 12px 30px rgba(0,0,0,0.9),
+        -3px -3px 10px rgba(255,255,255,0.03),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+      position:relative; z-index:2;
+      overflow:hidden;
+      flex-shrink:0;
+      transition:transform .4s cubic-bezier(0.23,1,0.32,1);
     }
-    .browser-url {
-      flex:1; height:12px; background:rgba(255,255,255,0.05);
-      border-radius:4px; margin-left:.4rem;
+    .phone-shell.main-phone {
+      width:128px;
+      transform:translateY(0) scale(1.06);
+      border-color:rgba(0,181,200,0.35);
+      box-shadow:
+        10px 16px 36px rgba(0,0,0,0.95),
+        0 0 30px rgba(0,181,200,0.12),
+        inset 0 0 0 1px rgba(0,181,200,0.1);
+      z-index:3;
     }
-    .browser-screen {
-      border-radius:8px; overflow:hidden;
-      position:relative; height:160px;
+    .phone-shell.side-phone {
+      transform:translateY(16px) scale(0.9);
+      opacity:.65;
+      filter:brightness(0.7);
+    }
+    .trade-card:hover .phone-shell.main-phone {
+      transform:translateY(-8px) scale(1.08);
+      box-shadow:
+        12px 20px 45px rgba(0,0,0,0.95),
+        0 0 45px rgba(0,181,200,0.2),
+        inset 0 0 0 1px rgba(0,181,200,0.15);
+    }
+    .trade-card:hover .phone-shell.side-phone {
+      transform:translateY(8px) scale(0.92);
+      opacity:.8;
+      filter:brightness(0.85);
+    }
+
+    /* Phone notch */
+    .phone-notch {
+      width:42px; height:10px;
+      background:#060c0c;
+      border-radius:0 0 7px 7px;
+      margin:0 auto;
+      border:1px solid rgba(255,255,255,0.05);
+      border-top:none;
+      position:relative; z-index:2;
+    }
+
+    /* Phone screen */
+    .phone-screen {
+      height:200px;
       display:flex; flex-direction:column;
+      overflow:hidden;
+      position:relative;
+    }
+    .main-phone .phone-screen { height:216px; }
+
+    /* Screen backgrounds per trade */
+    .screen-plumbing {
+      background:linear-gradient(160deg,#071428 0%,#0a1e3d 55%,#062a4a 100%);
+    }
+    .screen-restaurant {
+      background:linear-gradient(160deg,#150800 0%,#271200 55%,#1a0900 100%);
+    }
+    .screen-salon {
+      background:linear-gradient(160deg,#160810 0%,#290d1c 55%,#160a16 100%);
+    }
+    .screen-garage {
+      background:linear-gradient(160deg,#0e0900 0%,#1c1300 55%,#100e00 100%);
+    }
+    .screen-driving {
+      background:linear-gradient(160deg,#0a0010 0%,#170025 55%,#0d0016 100%);
     }
 
-    /* ---- STYLISED WEBSITE PREVIEWS ---- */
-    /* Plumbing preview */
-    .preview-plumbing {
-      background:linear-gradient(160deg,#0a1628 0%,#0d2240 60%,#0a3050 100%);
-    }
-    .preview-plumbing::before {
-      content:''; position:absolute; inset:0;
-      background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2300B5C8' stroke-width='0.3' opacity='0.15'%3E%3Crect x='5' y='5' width='30' height='30' rx='2'/%3E%3Ccircle cx='20' cy='20' r='8'/%3E%3C/g%3E%3C/svg%3E");
-    }
-    /* Restaurant preview */
-    .preview-restaurant {
-      background:linear-gradient(160deg,#1a0a00 0%,#2d1200 50%,#1a0800 100%);
-    }
-    .preview-restaurant::before {
-      content:''; position:absolute; inset:0;
-      background:url("data:image/svg+xml,%3Csvg width='50' height='50' viewBox='0 0 50 50' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='25' cy='25' r='20' fill='none' stroke='%23D4AF37' stroke-width='0.3' opacity='0.2'/%3E%3C/svg%3E");
-    }
-    /* Salon preview */
-    .preview-salon {
-      background:linear-gradient(160deg,#1a0a14 0%,#2d1020 50%,#1a0a18 100%);
-    }
-    .preview-salon::before {
-      content:''; position:absolute; inset:0;
-      background:url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15 Q15 0 30 15 Q15 30 0 15' fill='none' stroke='%23f43f5e' stroke-width='0.3' opacity='0.2'/%3E%3C/svg%3E");
-    }
-    /* Garage preview */
-    .preview-garage {
-      background:linear-gradient(160deg,#0f0a00 0%,#1c1400 50%,#100e00 100%);
-    }
-    .preview-garage::before {
-      content:''; position:absolute; inset:0;
-      background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L40 40 M40 0 L0 40' stroke='%23f87171' stroke-width='0.3' opacity='0.15'/%3E%3C/svg%3E");
-    }
-    /* Driving preview */
-    .preview-driving {
-      background:linear-gradient(160deg,#0d0014 0%,#190028 50%,#0d0018 100%);
-    }
-    .preview-driving::before {
-      content:''; position:absolute; inset:0;
-      background:url("data:image/svg+xml,%3Csvg width='60' height='30' viewBox='0 0 60 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 15 Q30 0 60 15' fill='none' stroke='%23a855f7' stroke-width='0.4' opacity='0.2'/%3E%3C/svg%3E");
+    /* Screen grid texture overlay */
+    .phone-screen::before {
+      content:'';
+      position:absolute; inset:0; z-index:0;
+      opacity:.08;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size:10px 10px;
     }
 
-    /* Preview inner content elements */
-    .preview-nav {
+    /* Screen UI elements */
+    .screen-nav {
       position:relative; z-index:2;
+      background:rgba(0,0,0,0.45);
+      padding:.25rem .5rem;
       display:flex; justify-content:space-between; align-items:center;
-      padding:.5rem .8rem; background:rgba(0,0,0,0.35);
-      font-size:.5rem; font-weight:700; letter-spacing:1px;
+      font-size:.38rem; font-weight:800; letter-spacing:.8px;
       text-transform:uppercase;
+      border-bottom:1px solid rgba(255,255,255,0.05);
     }
-    .preview-hero-area {
+    .screen-nav-logo { font-size:.42rem; font-weight:900; letter-spacing:1px; }
+    .screen-nav-dots { display:flex; gap:2px; }
+    .screen-nav-dot { width:3px; height:3px; border-radius:50%; opacity:.4; }
+
+    .screen-hero {
       position:relative; z-index:2;
-      flex:1; display:flex; flex-direction:column;
-      justify-content:center; padding:.5rem .8rem;
+      flex:1; padding:.5rem .5rem .3rem;
+      display:flex; flex-direction:column; justify-content:center;
     }
-    .preview-headline {
-      font-size:.65rem; font-weight:900; margin-bottom:.3rem;
-      line-height:1.2;
+    .screen-label {
+      font-size:.32rem; font-weight:800; text-transform:uppercase;
+      letter-spacing:.6px; opacity:.6; margin-bottom:.2rem;
     }
-    .preview-sub {
-      font-size:.45rem; opacity:.6; margin-bottom:.5rem; line-height:1.4;
+    .screen-headline {
+      font-size:.58rem; font-weight:900; line-height:1.25;
+      margin-bottom:.3rem;
     }
-    .preview-btn {
-      display:inline-block; padding:.2rem .5rem;
-      border-radius:3px; font-size:.45rem; font-weight:800;
+    .screen-sub {
+      font-size:.33rem; opacity:.55; line-height:1.4; margin-bottom:.45rem;
+    }
+    .screen-btn {
+      display:inline-block; padding:.2rem .45rem;
+      border-radius:3px; font-size:.36rem; font-weight:900;
       text-transform:uppercase; letter-spacing:.5px;
+      width:fit-content;
     }
-    .preview-dots {
-      position:absolute; bottom:.4rem; right:.6rem; z-index:2;
-      display:flex; gap:.25rem;
+
+    .screen-bottom {
+      position:relative; z-index:2;
+      padding:.3rem .5rem;
+      display:flex; gap:.3rem;
+      background:rgba(0,0,0,0.35);
+      border-top:1px solid rgba(255,255,255,0.05);
     }
-    .preview-dot {
-      width:4px; height:4px; border-radius:50%; opacity:.4;
+    .screen-icon-btn {
+      flex:1; background:rgba(255,255,255,0.04); border-radius:3px;
+      padding:.2rem .1rem; text-align:center;
+      font-size:.28rem; font-weight:700; letter-spacing:.3px;
+      text-transform:uppercase; opacity:.6;
     }
-    /* 3D badge overlay on card hover */
-    .card-3d-badge {
-      position:absolute; top:.6rem; right:.6rem; z-index:3;
-      background:rgba(0,181,200,0.15); border:1px solid rgba(0,181,200,0.4);
-      border-radius:100px; padding:.2rem .5rem;
-      font-size:.55rem; font-weight:800; color:var(--holo-teal);
+
+    /* Phone bottom bar */
+    .phone-bar {
+      height:4px; background:rgba(255,255,255,0.06);
+      display:flex; justify-content:center; align-items:center;
+      padding:.15rem;
+    }
+    .phone-bar-pill {
+      width:28px; height:2px;
+      background:rgba(255,255,255,0.2); border-radius:1px;
+    }
+
+    /* 3D badge on preview */
+    .preview-3d-badge {
+      position:absolute; top:.8rem; right:.8rem; z-index:10;
+      background:rgba(0,181,200,0.12); border:1px solid rgba(0,181,200,0.4);
+      border-radius:100px; padding:.2rem .6rem;
+      font-size:.58rem; font-weight:800; color:var(--holo-teal);
       letter-spacing:.5px; text-transform:uppercase;
+      animation:badgePulse 3s ease infinite;
+    }
+    @keyframes badgePulse {
+      0%,100%{box-shadow:0 0 0 0 rgba(0,181,200,0.3);}
+      50%{box-shadow:0 0 0 6px rgba(0,181,200,0);}
     }
 
     /* ---- CARD BODY ---- */
-    .card-body { padding:1.5rem 1.8rem; flex:1; display:flex; flex-direction:column; }
-    .card-icon-row {
-      display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem;
+    .card-body {
+      padding:1.6rem 1.8rem 1.8rem; flex:1; display:flex; flex-direction:column;
+      border-top:1px solid rgba(255,255,255,0.04);
     }
+    .card-icon-row { display:flex; align-items:center; gap:.8rem; margin-bottom:.8rem; }
     .card-icon {
       width:44px; height:44px; border-radius:12px;
       display:flex; align-items:center; justify-content:center;
       font-size:1.3rem; flex-shrink:0;
-      box-shadow:0 0 16px rgba(0,0,0,0.4);
+      box-shadow:0 0 16px rgba(0,0,0,0.5);
     }
-    .card-title {
-      font-size:1.1rem; font-weight:900; color:white; line-height:1.2;
-    }
-    .card-subtitle {
-      font-size:.75rem; font-weight:700; text-transform:uppercase;
-      letter-spacing:.8px; margin-top:.1rem;
-    }
-    .card-desc {
-      font-size:.88rem; color:var(--text-dim); line-height:1.7;
-      margin-bottom:1rem; flex:1;
-    }
-
-    /* Pain + benefit micro-story */
+    .card-title { font-size:1.1rem; font-weight:900; color:white; line-height:1.2; }
+    .card-subtitle { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.8px; margin-top:.1rem; }
     .card-story {
       background:rgba(0,181,200,0.04); border:1px solid rgba(0,181,200,0.1);
-      border-radius:10px; padding:.7rem .9rem; margin-bottom:1.2rem;
-      font-size:.8rem; color:var(--cool-silver); line-height:1.6;
+      border-radius:10px; padding:.7rem .9rem; margin-bottom:1rem;
+      font-size:.82rem; color:var(--cool-silver); line-height:1.65;
     }
     .card-story em { color:var(--holo-teal); font-style:normal; font-weight:700; }
+    .card-desc {
+      font-size:.87rem; color:var(--text-dim); line-height:1.7;
+      margin-bottom:1.2rem; flex:1;
+    }
 
-    /* ---- BUTTON GROUP ---- */
+    /* ---- BUTTONS ---- */
     .btn-group { display:flex; flex-direction:column; gap:.7rem; }
     .btn-primary {
       display:flex; align-items:center; justify-content:center; gap:.5rem;
@@ -337,18 +451,18 @@
       padding:.85rem 1.2rem; border-radius:12px; font-weight:900;
       text-decoration:none; font-size:.88rem; letter-spacing:.5px;
       text-transform:uppercase; border:none;
-      box-shadow:0 0 20px rgba(0,181,200,0.3);
+      box-shadow:0 0 20px rgba(0,181,200,0.25);
       transition:all .3s; cursor:none;
     }
     .btn-primary:hover {
       transform:translateY(-3px);
-      box-shadow:0 0 35px rgba(0,181,200,0.5);
+      box-shadow:0 0 40px rgba(0,181,200,0.5);
       color:white;
     }
     .btn-secondary {
       display:flex; align-items:center; justify-content:center; gap:.5rem;
       background:transparent; color:var(--cool-silver);
-      padding:.7rem 1.2rem; border-radius:12px; font-weight:700;
+      padding:.72rem 1.2rem; border-radius:12px; font-weight:700;
       text-decoration:none; font-size:.82rem;
       border:1px solid rgba(255,255,255,0.1);
       transition:all .3s; cursor:none;
@@ -358,32 +472,79 @@
       background:rgba(255,255,255,0.04);
     }
 
-    /* ---- SOCIAL PROOF STRIP ---- */
-    .proof-strip {
+    /* ---- FOUNDING CLIENT STRIP (replaces fake testimonials) ---- */
+    .founding-strip {
       max-width:1100px; margin:0 auto 1rem;
       padding:0 4%;
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    }
+    .founding-banner {
+      background:linear-gradient(145deg, #100d08, #0e0b05);
+      border:1px solid rgba(212,175,55,0.2);
+      border-radius:20px;
+      padding:2rem 2.5rem;
+      display:grid;
+      grid-template-columns:1fr auto;
       gap:1.5rem;
+      align-items:center;
+      box-shadow:16px 16px 40px rgba(0,0,0,0.8), 0 0 30px rgba(212,175,55,0.04);
+      position:relative; overflow:hidden;
     }
-    .proof-card {
-      background:rgba(17,17,17,0.6); backdrop-filter:blur(10px);
-      border:1px solid rgba(255,255,255,0.05);
-      border-radius:14px; padding:1.2rem 1.4rem;
-      display:flex; align-items:flex-start; gap:.8rem;
-      opacity:0; animation:cardIn .7s ease forwards;
+    .founding-banner::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
     }
-    .proof-card:nth-child(1){animation-delay:.6s;}
-    .proof-card:nth-child(2){animation-delay:.7s;}
-    .proof-card:nth-child(3){animation-delay:.8s;}
-    .proof-avatar {
-      width:40px; height:40px; border-radius:50%; object-fit:cover;
-      object-position:top; border:2px solid rgba(0,181,200,0.35);
+    .founding-banner-text h3 {
+      font-family:'Cormorant Garamond', serif;
+      font-size:1.4rem; font-weight:600; color:white; margin-bottom:.4rem;
+    }
+    .founding-banner-text p {
+      font-size:.85rem; color:#6b7280; line-height:1.6;
+    }
+    .founding-banner-text p strong { color:var(--holo-bright-gold); }
+    .founding-cta {
+      background:var(--gradient-primary); color:#000;
+      padding:.75rem 1.5rem; border-radius:12px; font-weight:900;
+      text-decoration:none; font-size:.85rem; text-transform:uppercase;
+      letter-spacing:.8px; white-space:nowrap;
+      display:inline-flex; align-items:center; gap:.4rem;
+      box-shadow:0 0 20px rgba(0,181,200,0.25);
+      transition:all .3s; cursor:none;
       flex-shrink:0;
     }
-    .proof-stars { color:var(--holo-bright-gold); font-size:.75rem; letter-spacing:1px; margin-bottom:.25rem; }
-    .proof-quote { font-size:.78rem; color:var(--cool-silver); line-height:1.55; margin-bottom:.3rem; font-family:'Cormorant Garamond',serif; font-size:.9rem; }
-    .proof-name { font-size:.75rem; font-weight:800; color:white; font-family:'Outfit',sans-serif; }
-    .proof-role { font-size:.72rem; color:var(--text-dim); font-family:'Outfit',sans-serif; }
+    .founding-cta:hover {
+      transform:translateY(-2px);
+      box-shadow:0 0 35px rgba(0,181,200,0.45);
+      color:white;
+    }
+
+    /* ---- VTR FRAMEWORK TEASER ---- */
+    .vtr-teaser {
+      max-width:1100px; margin:0 auto 1.5rem;
+      padding:0 4%;
+    }
+    .vtr-teaser-inner {
+      background:rgba(0,181,200,0.03);
+      border:1px solid rgba(0,181,200,0.1);
+      border-radius:14px;
+      padding:1.2rem 2rem;
+      display:flex; align-items:center; justify-content:center;
+      flex-wrap:wrap; gap:1rem;
+      text-align:center;
+    }
+    .vtr-teaser-inner p {
+      font-size:.88rem; color:var(--text-dim); font-family:'Cormorant Garamond',serif;
+      font-size:1rem; line-height:1.5;
+    }
+    .vtr-teaser-inner p strong { color:white; }
+    .vtr-teaser-inner p em { color:var(--holo-teal); font-style:normal; }
+    .vtr-pill {
+      display:inline-flex; align-items:center; gap:.4rem;
+      background:rgba(0,181,200,0.08); border:1px solid rgba(0,181,200,0.2);
+      border-radius:100px; padding:.3rem .9rem;
+      font-size:.75rem; font-weight:800; letter-spacing:.5px;
+      color:var(--holo-teal); text-transform:uppercase;
+    }
 
     /* ---- STICKY BOTTOM CTA ---- */
     .sticky-cta {
@@ -394,13 +555,10 @@
       display:flex; align-items:center; justify-content:space-between;
       flex-wrap:wrap; gap:.8rem;
       box-shadow:0 -10px 40px rgba(0,0,0,0.6);
-      transform:translateY(100%);
-      transition:transform .5s ease;
+      transform:translateY(100%); transition:transform .5s ease;
     }
     .sticky-cta.visible { transform:translateY(0); }
-    .sticky-cta-text {
-      font-size:.9rem; color:var(--cool-silver); font-weight:600;
-    }
+    .sticky-cta-text { font-size:.9rem; color:var(--cool-silver); font-weight:600; }
     .sticky-cta-text strong { color:white; }
     .sticky-cta-actions { display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
     .sticky-btn-book {
@@ -411,44 +569,31 @@
       text-decoration:none; display:inline-flex; align-items:center; gap:.4rem;
     }
     .sticky-btn-book:hover { transform:translateY(-2px); box-shadow:0 0 25px rgba(0,181,200,0.4); color:white; }
-    .sticky-btn-home {
-      color:var(--text-dim); font-size:.82rem; font-weight:700;
-      text-decoration:none; letter-spacing:.5px; transition:color .3s;
-    }
+    .sticky-btn-home { color:var(--text-dim); font-size:.82rem; font-weight:700; text-decoration:none; letter-spacing:.5px; transition:color .3s; }
     .sticky-btn-home:hover { color:var(--holo-teal); }
-    .sticky-close {
-      background:none; border:none; color:var(--text-dim);
-      font-size:1rem; cursor:none; padding:.2rem; transition:color .3s;
-    }
+    .sticky-close { background:none; border:none; color:var(--text-dim); font-size:1rem; cursor:none; padding:.2rem; transition:color .3s; }
     .sticky-close:hover { color:white; }
 
-    /* ---- SECTION LABEL ---- */
-    .section-label {
-      text-align:center; padding:3rem 2rem 1.5rem; position:relative;
+    /* ---- BOTTOM CTA SECTION ---- */
+    .bottom-cta-section {
+      background:rgba(0,181,200,0.04);
+      border-top:1px solid rgba(0,181,200,0.1);
+      border-bottom:1px solid rgba(0,181,200,0.1);
+      padding:4rem 5%; text-align:center; margin-bottom:0;
     }
-    .section-label h2 {
-      font-size:clamp(1.6rem,3vw,2.4rem); font-weight:900;
-      color:white; margin-bottom:.5rem;
-    }
-    .section-label p { color:var(--text-dim); font-size:.95rem; }
+    .bottom-cta-inner { max-width:700px; margin:0 auto; }
 
     /* ---- FOOTER ---- */
     .sr-footer {
-      background:rgba(2,6,8,0.95); border-top:1px solid rgba(255,255,255,0.05);
+      background:rgba(2,6,8,0.95);
+      border-top:1px solid rgba(255,255,255,0.05);
       padding:2.5rem 5%; text-align:center;
-      padding-bottom:5rem; /* space for sticky CTA */
+      padding-bottom:5rem;
     }
-    .sr-footer-logo {
-      font-family:'Outfit',sans-serif; font-size:1.1rem;
-      font-weight:900; letter-spacing:2px; color:white; margin-bottom:.5rem;
-    }
+    .sr-footer-logo { font-family:'Outfit',sans-serif; font-size:1.1rem; font-weight:900; letter-spacing:2px; color:white; margin-bottom:.5rem; }
     .sr-footer-logo span { color:var(--holo-teal); }
-    .sr-footer p { font-size:.8rem; color:#374151; margin-top:.4rem; }
     .footer-links { display:flex; justify-content:center; gap:1.5rem; margin-top:.8rem; flex-wrap:wrap; }
-    .footer-links a {
-      font-size:.78rem; color:#4b5563; text-decoration:none;
-      font-weight:600; transition:color .3s;
-    }
+    .footer-links a { font-size:.78rem; color:#4b5563; text-decoration:none; font-weight:600; transition:color .3s; }
     .footer-links a:hover { color:var(--holo-teal); }
 
     /* ---- SCROLLBAR ---- */
@@ -456,18 +601,32 @@
     ::-webkit-scrollbar-track { background:var(--bg-deep); }
     ::-webkit-scrollbar-thumb { background:rgba(0,181,200,0.3); border-radius:2px; }
 
+    /* ---- SCROLL REVEAL ---- */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
     /* ---- RESPONSIVE ---- */
+    @media(max-width:900px){
+      .founding-banner { grid-template-columns:1fr; text-align:center; }
+      .founding-cta { margin:0 auto; }
+    }
     @media(max-width:768px){
       body { cursor:auto; }
       .cursor-dot,.cursor-ring { display:none; }
       .sr-hero { padding:3.5rem 1.2rem 2rem; }
-      .trade-grid { grid-template-columns:1fr; padding:1rem 1.2rem 5rem; gap:1.8rem; }
-      .proof-strip { grid-template-columns:1fr; padding:0 1.2rem; }
+      .trade-grid { grid-template-columns:1fr; padding:1rem 1.2rem 5rem; gap:2rem; }
       .trust-strip { gap:.8rem; padding:.6rem 1rem; }
       .trust-item { font-size:.72rem; }
       .sticky-cta { padding:.8rem 1rem; }
-      .sticky-cta-text { font-size:.8rem; }
-      .btn-group { flex-direction:column; }
+      .founding-strip,.vtr-teaser { padding:0 1.2rem; }
+      .phone-preview-wrap { min-height:220px; }
+      .phone-shell.side-phone { display:none; }
+      .phone-shell.main-phone { width:140px; }
+      .main-phone .phone-screen { height:230px; }
+    }
+    @media(max-width:480px){
+      .sr-hero h1 { font-size:2rem; }
+      .founding-banner { padding:1.4rem 1.2rem; }
     }
   </style>
 </head>
@@ -475,117 +634,172 @@
 
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
-
-  <!-- Three.js particle background -->
   <canvas id="showroom-canvas"></canvas>
 
   <div class="page-wrap">
 
-    <!-- ===================== HEADER ===================== -->
+    <!-- HEADER -->
     <header class="sr-header">
       <a href="index.html" class="back-btn">
         <i class="fa-solid fa-arrow-left"></i> Back to GoChuchuro
       </a>
       <a href="index.html" class="sr-logo">GOCHUCHURO<span>.</span></a>
+      <!-- CHANGE: price updated to £97 -->
       <a href="index.html#pricing" class="back-btn" style="color:var(--holo-gold);">
-        <i class="fa-solid fa-tag"></i> From £49/mo
+        <i class="fa-solid fa-tag"></i> From £97/mo
       </a>
     </header>
 
-    <!-- ===================== TRUST STRIP ===================== -->
+    <!-- TRUST STRIP — price updated -->
     <div class="trust-strip">
-      <div class="trust-item"><i class="fa-solid fa-circle-check"></i> <span><strong>Every template</strong> fully built for you</span></div>
-      <div class="trust-item"><i class="fa-solid fa-bolt"></i> <span>Live in <strong>5 working days</strong></span></div>
-      <div class="trust-item"><i class="fa-solid fa-rotate"></i> <span><strong>2D or 3D</strong> — your choice</span></div>
-      <div class="trust-item"><i class="fa-solid fa-graduation-cap"></i> <span><strong>Coaching included</strong> in every plan</span></div>
-      <div class="trust-item"><i class="fa-solid fa-sterling-sign"></i> <span>Plans <strong>from £49/mo</strong></span></div>
+      <div class="trust-item"><i class="fa-solid fa-circle-check"></i><span><strong>Every template</strong> fully built for you</span></div>
+      <div class="trust-item"><i class="fa-solid fa-bolt"></i><span>Live in <strong>5 working days</strong></span></div>
+      <div class="trust-item"><i class="fa-solid fa-rotate"></i><span><strong>2D or 3D</strong> &mdash; your choice</span></div>
+      <div class="trust-item"><i class="fa-solid fa-graduation-cap"></i><span><strong>Coaching included</strong> in every plan</span></div>
+      <div class="trust-item"><i class="fa-solid fa-sterling-sign"></i><span>Plans <strong>from £97/mo</strong></span></div>
     </div>
 
-    <!-- ===================== HERO BANNER ===================== -->
+    <!-- HERO BANNER -->
     <section class="sr-hero">
       <div class="sr-badge">
         <i class="fa-solid fa-cube" style="font-size:.65rem;"></i>
         2D &amp; 3D Template Showroom
       </div>
-      <h1>
-        This could be<br>
-        <span class="text-gradient">your website.</span>
-      </h1>
-      <p>Pick your trade below. See exactly what your business could look like online. Every design is fully built, automated, and ready to take bookings — handed over in 5 working days.</p>
+      <h1>This could be<br><span class="text-gradient">your website.</span></h1>
+      <p>Pick your trade below. See exactly what your business could look like online. Every design is fully built, automated, and ready to take bookings &mdash; handed over in 5 working days.</p>
+      <p style="font-size:.88rem;margin-top:.4rem;">
+        All templates are shown as they appear on a customer's phone. <strong style="color:var(--holo-teal);">Tap "Experience 3D"</strong> for the immersive version, or <strong style="color:var(--cool-silver);">"View Standard"</strong> for the clean classic look.
+      </p>
       <span class="tagline-script">"Reach Your Peak. Automate Your Growth."</span>
       <div class="glow-line"></div>
     </section>
 
-    <!-- ===================== SOCIAL PROOF ===================== -->
-    <div class="proof-strip">
-      <div class="proof-card">
-        <img src="kabir-rohan.png" alt="Kabir Rohan" class="proof-avatar"
-             onerror="this.style.display='none'"/>
-        <div>
-          <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="proof-quote">"Within the first week the text-back system saved three leads."</p>
-          <div class="proof-name">Kabir Rohan</div>
-          <div class="proof-role">Plumber, Manchester</div>
-        </div>
-      </div>
-      <div class="proof-card">
-        <img src="sunita-thapa.png" alt="Sunita Thapa" class="proof-avatar"
-             onerror="this.style.display='none'"/>
-        <div>
-          <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="proof-quote">"No-shows dropped dramatically. The system is so sajilo &mdash; easy."</p>
-          <div class="proof-name">Sunita Thapa</div>
-          <div class="proof-role">Salon Owner, Leicester</div>
-        </div>
-      </div>
-      <div class="proof-card">
-        <img src="daniel-ojasbi.jpeg" alt="Daniel Ojasbi" class="proof-avatar"
-             onerror="this.style.display='none'"/>
-        <div>
-          <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-          <p class="proof-quote">"The AI system handles enquiries while I focus on client cases."</p>
-          <div class="proof-name">Daniel Ojasbi</div>
-          <div class="proof-role">Mortgage Advisor, London</div>
-        </div>
+    <!-- DISCLAIMER BAND -->
+    <div class="disclaimer-band">
+      <p>
+        <em>Demonstration designs only.</em>
+        All business names, characters, images, and content shown in the templates below are entirely fictional and created for illustrative purposes.
+        Any resemblance to real persons or businesses is coincidental.
+        Your finished website will feature your own brand, photos, and content.
+      </p>
+    </div>
+
+    <!-- VTR FRAMEWORK TEASER -->
+    <div class="vtr-teaser reveal">
+      <div class="vtr-teaser-inner">
+        <span class="vtr-pill"><i class="fa-solid fa-mountain-sun" style="font-size:.7rem;"></i> The VTR Profile</span>
+        <p>Every website we build is designed to make your business <strong>Visible</strong>, build <strong>Trust</strong>, and keep customers <strong>Retained</strong>. That is the <em>GoChuchuro Growth System</em> &mdash; and it starts with how your site looks.</p>
+        <a href="GoChuchuro_Growth_Framework.pdf" target="_blank"
+           style="font-size:.78rem;color:var(--holo-gold);text-decoration:none;font-weight:700;white-space:nowrap;transition:color .3s;"
+           onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--holo-gold)'">
+          Read the Framework &rarr;
+        </a>
       </div>
     </div>
 
-    <!-- ===================== SECTION LABEL ===================== -->
+    <!-- FOUNDING CLIENT STRIP (replaces fake testimonials) -->
+    <div class="founding-strip reveal">
+      <div class="founding-banner">
+        <div class="founding-banner-text">
+          <h3>Be one of our founding clients.</h3>
+          <p>
+            We are currently onboarding our first clients. No reviews yet &mdash; because the system is brand new.
+            <strong>Founding clients receive our full attention, our best service, and our launch pricing.</strong>
+            When your results come in, your story becomes the proof that inspires the next business owner.
+          </p>
+        </div>
+        <a href="index.html" onclick="setTimeout(function(){var b=document.querySelector('.btn-scarcity');if(b)b.click();},400);" class="founding-cta">
+          <i class="fa-regular fa-calendar"></i> Book Free Chat
+        </a>
+      </div>
+    </div>
+
+    <!-- SECTION LABEL -->
     <div class="section-label">
       <h2>Choose your trade. See your future website.</h2>
       <p>Click <strong style="color:var(--holo-teal);">Experience 3D</strong> for our immersive design &mdash; or <strong style="color:var(--cool-silver);">View Standard</strong> for a clean, classic look.</p>
     </div>
 
-    <!-- ===================== TRADE CARDS GRID ===================== -->
+    <!-- TRADE CARDS GRID -->
     <main class="trade-grid">
 
-      <!-- PLUMBING -->
-      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
-        <div class="browser-wrap">
-          <div class="browser-bar">
-            <div class="browser-dot" style="background:#ef4444;"></div>
-            <div class="browser-dot" style="background:#f59e0b;"></div>
-            <div class="browser-dot" style="background:#10b981;"></div>
-            <div class="browser-url"></div>
+      <!-- ═══════ PLUMBING ═══════ -->
+      <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
+
+        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(0,30,50,0.8),rgba(0,50,80,0.6));">
+          <div class="phone-preview-wrap::before" style="background:radial-gradient(ellipse,rgba(0,181,200,0.15) 0%,transparent 70%);"></div>
+
+          <!-- Side phone left -->
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-plumbing">
+              <div class="screen-nav" style="color:#00B5C8;">
+                <span class="screen-nav-logo">AquaFix</span>
+                <div class="screen-nav-dots">
+                  <div class="screen-nav-dot" style="background:#00B5C8;"></div>
+                  <div class="screen-nav-dot" style="background:#fff;"></div>
+                  <div class="screen-nav-dot" style="background:#fff;"></div>
+                </div>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#00B5C8;">Services</div>
+                <div class="screen-headline" style="color:white;">Boiler Installs &amp; Repairs</div>
+                <div class="screen-sub" style="color:#94a3b8;">Fast response. Fixed price quotes.</div>
+              </div>
+              <div class="screen-bottom">
+                <div class="screen-icon-btn" style="color:#00B5C8;">Book</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Call</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="browser-screen preview-plumbing">
-            <div class="preview-nav" style="color:#00B5C8;">
-              <span>AquaFix Plumbing</span>
-              <span style="color:rgba(255,255,255,0.4);">Services &bull; Book &bull; Contact</span>
+
+          <!-- Main phone centre -->
+          <div class="phone-shell main-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-plumbing">
+              <div class="screen-nav" style="color:#00B5C8;">
+                <span class="screen-nav-logo" style="font-size:.48rem;">AquaFix Plumbing</span>
+                <div class="screen-nav-dots">
+                  <div class="screen-nav-dot" style="background:#00B5C8;opacity:.8;"></div>
+                </div>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#00B5C8;">Fast. Reliable.</div>
+                <div class="screen-headline" style="color:white;">Local Plumbing &amp; Heating.</div>
+                <div class="screen-sub" style="color:#94a3b8;">Emergency call-outs 24/7. Boiler installs. Bathroom fits.</div>
+                <span class="screen-btn" style="background:#00B5C8;color:#000;">Book Now &rarr;</span>
+              </div>
+              <div class="screen-bottom">
+                <div class="screen-icon-btn" style="color:#00B5C8;">Book</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Services</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Contact</div>
+              </div>
             </div>
-            <div class="preview-hero-area">
-              <div class="preview-headline" style="color:#00B5C8;">Fast. Reliable. <br>Local Plumbing.</div>
-              <div class="preview-sub">Emergency call-outs 24/7. Boiler installs. Bathroom fits.</div>
-              <span class="preview-btn" style="background:#00B5C8;color:#000;">Book Now &rarr;</span>
-            </div>
-            <div class="preview-dots">
-              <div class="preview-dot" style="background:#00B5C8;opacity:.8;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="card-3d-badge">3D Ready</div>
+
+          <!-- Side phone right -->
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-plumbing">
+              <div class="screen-nav" style="color:#00B5C8;">
+                <span class="screen-nav-logo">Reviews</span>
+              </div>
+              <div class="screen-hero">
+                <div style="font-size:.55rem;color:#E5C158;letter-spacing:1px;margin-bottom:.3rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <div class="screen-headline" style="color:white;font-size:.48rem;">"Fast response, great price. Would use again."</div>
+                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">— Google Review, 2 days ago</div>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+          </div>
+
+          <div class="preview-3d-badge">3D Ready</div>
         </div>
+
         <div class="card-body">
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(0,181,200,0.1);border:1px solid rgba(0,181,200,0.2);">
@@ -599,7 +813,7 @@
           <div class="card-story">
             You are under a sink. Phone rings. You miss it. <em>GoChuchuro fires a text in 30 seconds.</em> Customer stays. Job saved.
           </div>
-          <p class="card-desc">Missed call text-back, 24/7 online booking, Google review automation, and a professional website that earns trust at first glance.</p>
+          <p class="card-desc">Missed call text-back, 24/7 online booking, automated Google reviews, and a professional website that earns trust at first glance.</p>
           <div class="btn-group">
             <a href="plumbing/3d/index.html" target="_blank" class="btn-primary">
               <i class="fa-solid fa-cube"></i> Experience 3D Version
@@ -611,33 +825,63 @@
         </div>
       </div>
 
-      <!-- RESTAURANT -->
-      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
-        <div class="browser-wrap">
-          <div class="browser-bar">
-            <div class="browser-dot" style="background:#ef4444;"></div>
-            <div class="browser-dot" style="background:#f59e0b;"></div>
-            <div class="browser-dot" style="background:#10b981;"></div>
-            <div class="browser-url"></div>
+      <!-- ═══════ RESTAURANT ═══════ -->
+      <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
+
+        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(25,10,0,0.8),rgba(45,18,0,0.6));">
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-restaurant">
+              <div class="screen-nav" style="color:#D4AF37;">
+                <span class="screen-nav-logo">Menu</span>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#D4AF37;">Today's Special</div>
+                <div class="screen-headline" style="color:white;font-size:.5rem;">Lamb Rogan Josh</div>
+                <div class="screen-sub" style="color:#94a3b8;">Slow cooked. Served with naan.</div>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="browser-screen preview-restaurant">
-            <div class="preview-nav" style="color:#D4AF37;">
-              <span>Spice Garden</span>
-              <span style="color:rgba(255,255,255,0.4);">Menu &bull; Book &bull; Find Us</span>
+
+          <div class="phone-shell main-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-restaurant">
+              <div class="screen-nav" style="color:#D4AF37;">
+                <span class="screen-nav-logo" style="font-size:.46rem;">Spice Garden</span>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#D4AF37;">Authentic Flavours.</div>
+                <div class="screen-headline" style="color:white;">Book Your Table.</div>
+                <div class="screen-sub" style="color:#94a3b8;">Dine in &bull; Takeaway &bull; Private events &bull; 7 days</div>
+                <span class="screen-btn" style="background:#D4AF37;color:#000;">Reserve Now &rarr;</span>
+              </div>
+              <div class="screen-bottom">
+                <div class="screen-icon-btn" style="color:#D4AF37;">Book</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Menu</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Find Us</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
+              </div>
             </div>
-            <div class="preview-hero-area">
-              <div class="preview-headline" style="color:#E5C158;">Authentic Flavours.<br>Book Your Table.</div>
-              <div class="preview-sub">Dine in &bull; Takeaway &bull; Private Events &bull; Open 7 days</div>
-              <span class="preview-btn" style="background:#D4AF37;color:#000;">Reserve Now &rarr;</span>
-            </div>
-            <div class="preview-dots">
-              <div class="preview-dot" style="background:#D4AF37;opacity:.8;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="card-3d-badge">3D Ready</div>
+
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-restaurant">
+              <div class="screen-nav" style="color:#D4AF37;"><span class="screen-nav-logo">Loyalty</span></div>
+              <div class="screen-hero">
+                <div class="screen-headline" style="color:white;font-size:.46rem;">Kids Eat Free<br>This Tuesday!</div>
+                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">Book before 6pm. Show this message.</div>
+                <span class="screen-btn" style="background:#D4AF37;color:#000;margin-top:.2rem;">Book Now</span>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+          </div>
+
+          <div class="preview-3d-badge">3D Ready</div>
         </div>
+
         <div class="card-body">
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2);">
@@ -663,33 +907,61 @@
         </div>
       </div>
 
-      <!-- SALON -->
-      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
-        <div class="browser-wrap">
-          <div class="browser-bar">
-            <div class="browser-dot" style="background:#ef4444;"></div>
-            <div class="browser-dot" style="background:#f59e0b;"></div>
-            <div class="browser-dot" style="background:#10b981;"></div>
-            <div class="browser-url"></div>
+      <!-- ═══════ SALON ═══════ -->
+      <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
+
+        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(22,8,16,0.8),rgba(40,13,28,0.6));">
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-salon">
+              <div class="screen-nav" style="color:#f43f5e;"><span class="screen-nav-logo">Services</span></div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#f43f5e;">Colour</div>
+                <div class="screen-headline" style="color:white;font-size:.5rem;">Balayage from £85</div>
+                <div class="screen-sub" style="color:#94a3b8;">Full colour &bull; Highlights &bull; Toning</div>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="browser-screen preview-salon">
-            <div class="preview-nav" style="color:#f43f5e;">
-              <span>Glow Studio</span>
-              <span style="color:rgba(255,255,255,0.4);">Services &bull; Team &bull; Book</span>
+
+          <div class="phone-shell main-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-salon">
+              <div class="screen-nav" style="color:#f43f5e;">
+                <span class="screen-nav-logo" style="font-size:.46rem;">Glow Studio</span>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#f43f5e;">Your Best Look.</div>
+                <div class="screen-headline" style="color:white;">Book Online Now.</div>
+                <div class="screen-sub" style="color:#94a3b8;">Hair cuts &bull; Colour &bull; Treatments &bull; Nails</div>
+                <span class="screen-btn" style="background:#f43f5e;color:#fff;">Book Appointment &rarr;</span>
+              </div>
+              <div class="screen-bottom">
+                <div class="screen-icon-btn" style="color:#f43f5e;">Book</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Services</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Team</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
+              </div>
             </div>
-            <div class="preview-hero-area">
-              <div class="preview-headline" style="color:#f43f5e;">Your Best Look.<br>Book Online Now.</div>
-              <div class="preview-sub">Hair cuts &bull; Colour &bull; Treatments &bull; Nails</div>
-              <span class="preview-btn" style="background:#f43f5e;color:#fff;">Book Appointment &rarr;</span>
-            </div>
-            <div class="preview-dots">
-              <div class="preview-dot" style="background:#f43f5e;opacity:.8;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="card-3d-badge">3D Ready</div>
+
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-salon">
+              <div class="screen-nav" style="color:#f43f5e;"><span class="screen-nav-logo">Reminder</span></div>
+              <div class="screen-hero">
+                <div class="screen-headline" style="color:white;font-size:.46rem;">Time for a top-up?</div>
+                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">It has been 6 weeks since your last visit.</div>
+                <span class="screen-btn" style="background:#f43f5e;color:#fff;margin-top:.3rem;">Book Now</span>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+          </div>
+
+          <div class="preview-3d-badge">3D Ready</div>
         </div>
+
         <div class="card-body">
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);">
@@ -715,33 +987,61 @@
         </div>
       </div>
 
-      <!-- GARAGE -->
-      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
-        <div class="browser-wrap">
-          <div class="browser-bar">
-            <div class="browser-dot" style="background:#ef4444;"></div>
-            <div class="browser-dot" style="background:#f59e0b;"></div>
-            <div class="browser-dot" style="background:#10b981;"></div>
-            <div class="browser-url"></div>
+      <!-- ═══════ GARAGE ═══════ -->
+      <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
+
+        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(15,9,0,0.8),rgba(28,20,0,0.6));">
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-garage">
+              <div class="screen-nav" style="color:#f87171;"><span class="screen-nav-logo">Services</span></div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#f87171;">MOT Testing</div>
+                <div class="screen-headline" style="color:white;font-size:.5rem;">From £54.85</div>
+                <div class="screen-sub" style="color:#94a3b8;">Class 4 &bull; Same day results</div>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="browser-screen preview-garage">
-            <div class="preview-nav" style="color:#f87171;">
-              <span>FastFix Garage</span>
-              <span style="color:rgba(255,255,255,0.4);">Services &bull; MOT &bull; Book</span>
+
+          <div class="phone-shell main-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-garage">
+              <div class="screen-nav" style="color:#f87171;">
+                <span class="screen-nav-logo" style="font-size:.46rem;">FastFix Garage</span>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#f87171;">MOT &amp; Repairs.</div>
+                <div class="screen-headline" style="color:white;">Book in Seconds.</div>
+                <div class="screen-sub" style="color:#94a3b8;">MOT testing &bull; Servicing &bull; Tyres &bull; Air con</div>
+                <span class="screen-btn" style="background:#f87171;color:#000;">Book Your MOT &rarr;</span>
+              </div>
+              <div class="screen-bottom">
+                <div class="screen-icon-btn" style="color:#f87171;">Book</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Services</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Prices</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Find Us</div>
+              </div>
             </div>
-            <div class="preview-hero-area">
-              <div class="preview-headline" style="color:#f87171;">MOT &amp; Repairs.<br>Book in Seconds.</div>
-              <div class="preview-sub">MOT testing &bull; Servicing &bull; Tyres &bull; Air con regas</div>
-              <span class="preview-btn" style="background:#f87171;color:#000;">Book Your MOT &rarr;</span>
-            </div>
-            <div class="preview-dots">
-              <div class="preview-dot" style="background:#f87171;opacity:.8;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="card-3d-badge">3D Ready</div>
+
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-garage">
+              <div class="screen-nav" style="color:#f87171;"><span class="screen-nav-logo">Reminder</span></div>
+              <div class="screen-hero">
+                <div class="screen-headline" style="color:white;font-size:.44rem;">Your MOT is due next month.</div>
+                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">Book now to secure your slot.</div>
+                <span class="screen-btn" style="background:#f87171;color:#000;margin-top:.3rem;">Book Online</span>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+          </div>
+
+          <div class="preview-3d-badge">3D Ready</div>
         </div>
+
         <div class="card-body">
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.2);">
@@ -755,7 +1055,7 @@
           <div class="card-story">
             MOT due next month. System sends every past customer a reminder. <em>They book online before calling a competitor.</em>
           </div>
-          <p class="card-desc">MOT reminder automation, 24/7 online booking for services, digital job sign-offs, and a trusted local presence on Google Maps.</p>
+          <p class="card-desc">MOT reminder automation, 24/7 online booking, digital job sign-offs, and a trusted local presence on Google Maps.</p>
           <div class="btn-group">
             <a href="garage/3d/index.html" target="_blank" class="btn-primary">
               <i class="fa-solid fa-cube"></i> Experience 3D Version
@@ -767,33 +1067,61 @@
         </div>
       </div>
 
-      <!-- DRIVING -->
-      <div class="trade-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.06">
-        <div class="browser-wrap">
-          <div class="browser-bar">
-            <div class="browser-dot" style="background:#ef4444;"></div>
-            <div class="browser-dot" style="background:#f59e0b;"></div>
-            <div class="browser-dot" style="background:#10b981;"></div>
-            <div class="browser-url"></div>
+      <!-- ═══════ DRIVING ═══════ -->
+      <div class="trade-card" data-tilt data-tilt-max="4" data-tilt-glare data-tilt-max-glare="0.05">
+
+        <div class="phone-preview-wrap" style="background:linear-gradient(160deg,rgba(10,0,20,0.8),rgba(22,0,38,0.6));">
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-driving">
+              <div class="screen-nav" style="color:#a855f7;"><span class="screen-nav-logo">Prices</span></div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#a855f7;">Lessons</div>
+                <div class="screen-headline" style="color:white;font-size:.5rem;">From £35/hour</div>
+                <div class="screen-sub" style="color:#94a3b8;">Manual &bull; Automatic &bull; Block booking discounts</div>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="browser-screen preview-driving">
-            <div class="preview-nav" style="color:#a855f7;">
-              <span>Pass First Time</span>
-              <span style="color:rgba(255,255,255,0.4);">Lessons &bull; Prices &bull; Book</span>
+
+          <div class="phone-shell main-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-driving">
+              <div class="screen-nav" style="color:#a855f7;">
+                <span class="screen-nav-logo" style="font-size:.44rem;">Pass First Time</span>
+              </div>
+              <div class="screen-hero">
+                <div class="screen-label" style="color:#a855f7;">Pass Your Test.</div>
+                <div class="screen-headline" style="color:white;">Book a Lesson.</div>
+                <div class="screen-sub" style="color:#94a3b8;">Manual &bull; Automatic &bull; Intensive &bull; Test routes</div>
+                <span class="screen-btn" style="background:#a855f7;color:#fff;">Book First Lesson &rarr;</span>
+              </div>
+              <div class="screen-bottom">
+                <div class="screen-icon-btn" style="color:#a855f7;">Book</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Lessons</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Prices</div>
+                <div class="screen-icon-btn" style="color:#94a3b8;">Reviews</div>
+              </div>
             </div>
-            <div class="preview-hero-area">
-              <div class="preview-headline" style="color:#a855f7;">Pass Your Test.<br>Book a Lesson.</div>
-              <div class="preview-sub">Manual &bull; Automatic &bull; Intensive courses &bull; Test routes</div>
-              <span class="preview-btn" style="background:#a855f7;color:#fff;">Book First Lesson &rarr;</span>
-            </div>
-            <div class="preview-dots">
-              <div class="preview-dot" style="background:#a855f7;opacity:.8;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-              <div class="preview-dot" style="background:#fff;"></div>
-            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
           </div>
-          <div class="card-3d-badge">3D Ready</div>
+
+          <div class="phone-shell side-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-screen screen-driving">
+              <div class="screen-nav" style="color:#a855f7;"><span class="screen-nav-logo">Referral</span></div>
+              <div class="screen-hero">
+                <div class="screen-headline" style="color:white;font-size:.44rem;">Refer a friend &amp; get a free lesson!</div>
+                <div class="screen-sub" style="color:#94a3b8;font-size:.3rem;">Share your link. They book. You get credited.</div>
+                <span class="screen-btn" style="background:#a855f7;color:#fff;margin-top:.3rem;">Share Now</span>
+              </div>
+            </div>
+            <div class="phone-bar"><div class="phone-bar-pill"></div></div>
+          </div>
+
+          <div class="preview-3d-badge">3D Ready</div>
         </div>
+
         <div class="card-body">
           <div class="card-icon-row">
             <div class="card-icon" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.2);">
@@ -807,7 +1135,7 @@
           <div class="card-story">
             Learner visits your website at 10pm. <em>Books their first lesson online. Confirmation text sent instantly.</em> You wake up with a new student.
           </div>
-          <p class="card-desc">24/7 lesson booking, lesson reminder texts, Google review automation after every pass, and student referral rewards on autopilot.</p>
+          <p class="card-desc">24/7 lesson booking, automated lesson reminders, Google review requests after every pass, and student referral rewards on autopilot.</p>
           <div class="btn-group">
             <a href="driving/3d/index.html" target="_blank" class="btn-primary">
               <i class="fa-solid fa-cube"></i> Experience 3D Version
@@ -821,13 +1149,12 @@
 
     </main>
 
-    <!-- ===================== BOTTOM CTA SECTION ===================== -->
-    <section style="background:rgba(0,181,200,0.04);border-top:1px solid rgba(0,181,200,0.1);border-bottom:1px solid rgba(0,181,200,0.1);padding:3.5rem 5%;text-align:center;margin-bottom:0;">
-      <div style="max-width:700px;margin:0 auto;">
+    <!-- BOTTOM CTA -->
+    <section class="bottom-cta-section">
+      <div class="bottom-cta-inner">
         <div style="font-size:2.5rem;margin-bottom:1rem;">&#x2605;</div>
         <h2 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:1rem;">
-          Seen something you like?<br>
-          <span class="text-gradient">We build it for you.</span>
+          Seen something you like?<br><span class="text-gradient">We build it for you.</span>
         </h2>
         <p style="color:var(--cool-silver);font-size:1rem;line-height:1.75;margin-bottom:.5rem;">
           Every template above comes fully built, connected to your booking system, and automated. No tech skills needed. You just download one app.
@@ -836,26 +1163,26 @@
           "Reach Your Peak. Automate Your Growth."
         </p>
         <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;">
-          <a href="index.html" onclick="setTimeout(()=>document.querySelector('[onclick=openCalendar]')&&openCalendar&&openCalendar(),300);" 
+          <a href="index.html"
              style="background:var(--gradient-primary);color:#000;padding:1.1rem 2.2rem;border-radius:14px;font-weight:900;text-decoration:none;font-size:.9rem;text-transform:uppercase;letter-spacing:1px;display:inline-flex;align-items:center;gap:.5rem;box-shadow:0 0 25px rgba(0,181,200,0.3);">
             <i class="fa-regular fa-calendar"></i> Book Your Free 30-Min Chat
           </a>
           <a href="index.html#pricing"
-             style="background:transparent;color:var(--cool-silver);padding:1.1rem 2.2rem;border-radius:14px;font-weight:700;text-decoration:none;font-size:.88rem;border:1px solid rgba(255,255,255,0.12);display:inline-flex;align-items:center;gap:.5rem;transition:all .3s;">
-            <i class="fa-solid fa-tag"></i> See Pricing from £49/mo
+             style="background:transparent;color:var(--cool-silver);padding:1.1rem 2.2rem;border-radius:14px;font-weight:700;text-decoration:none;font-size:.88rem;border:1px solid rgba(255,255,255,0.12);display:inline-flex;align-items:center;gap:.5rem;">
+            <i class="fa-solid fa-tag"></i> See Pricing from £97/mo
           </a>
         </div>
         <p style="font-size:.78rem;color:var(--text-dim);margin-top:1.2rem;">
-          No commitment. No jargon. 30 minutes with Prakash — and you keep the advice either way.
+          No commitment. No jargon. 30 minutes with Prakash &mdash; and you keep the advice either way.
         </p>
       </div>
     </section>
 
-    <!-- ===================== FOOTER ===================== -->
+    <!-- FOOTER -->
     <footer class="sr-footer">
       <div class="sr-footer-logo">GOCHUCHURO<span>.</span></div>
       <p style="font-family:'Dancing Script',cursive;color:var(--holo-bright-gold);font-size:1rem;margin:.3rem 0;">"Reach Your Peak. Automate Your Growth."</p>
-      <p>Helping UK small businesses grow without the stress.</p>
+      <p style="font-size:.8rem;color:#374151;margin-top:.4rem;">Helping UK small businesses grow without the stress.</p>
       <div class="footer-links">
         <a href="index.html">Home</a>
         <a href="index.html#pricing">Pricing</a>
@@ -863,30 +1190,31 @@
         <a href="privacy.html">Privacy Policy</a>
         <a href="terms.html">Terms</a>
       </div>
-      <p style="margin-top:1rem;">&copy; 2026 GoChuchuro. All rights reserved. Registered in England &amp; Wales.</p>
+      <p style="margin-top:1rem;font-size:.75rem;color:#374151;">&copy; 2026 GoChuchuro. All rights reserved. Registered in England &amp; Wales.</p>
+      <p style="font-size:.7rem;color:#374151;margin-top:.5rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;">
+        All template designs, business names, characters and content shown in this showroom are for demonstration purposes only. They are entirely fictional and do not represent any real business or individual.
+      </p>
     </footer>
 
   </div><!-- end page-wrap -->
 
-  <!-- ===================== STICKY BOTTOM CTA ===================== -->
+  <!-- STICKY BOTTOM CTA — price updated -->
   <div class="sticky-cta" id="stickyCta">
     <div class="sticky-cta-text">
-      <strong>Like what you see?</strong> We build it fully for you &mdash; from £49/mo.
+      <strong>Like what you see?</strong> We build it fully for you &mdash; from £97/mo.
     </div>
     <div class="sticky-cta-actions">
       <a href="index.html" class="sticky-btn-book">
         <i class="fa-regular fa-calendar"></i> Book Free Chat
       </a>
-      <a href="index.html#pricing" class="sticky-btn-home">
-        See pricing &rarr;
-      </a>
+      <a href="index.html#pricing" class="sticky-btn-home">See pricing &rarr;</a>
       <button class="sticky-close" onclick="document.getElementById('stickyCta').style.display='none'" aria-label="Dismiss">
         <i class="fa-solid fa-xmark"></i>
       </button>
     </div>
   </div>
 
-  <!-- ===================== SCRIPTS ===================== -->
+  <!-- SCRIPTS -->
   <script>
     /* ---- CURSOR ---- */
     const dot  = document.getElementById('cursorDot');
@@ -902,7 +1230,7 @@
       requestAnimationFrame(animRing);
     })();
 
-    /* ---- THREE.JS PARTICLE FIELD — mouse-reactive ---- */
+    /* ---- THREE.JS PARTICLE FIELD — enhanced depth ---- */
     const canvas   = document.getElementById('showroom-canvas');
     const scene    = new THREE.Scene();
     const camera   = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -910,48 +1238,69 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    // Teal particles
-    const countA = 350;
+    // Teal particles — foreground
+    const countA = 500;
     const posA   = new Float32Array(countA*3);
-    for(let i=0;i<countA*3;i++) posA[i]=(Math.random()-.5)*22;
+    for(let i=0;i<countA*3;i++) posA[i]=(Math.random()-.5)*28;
     const geoA   = new THREE.BufferGeometry();
     geoA.setAttribute('position', new THREE.BufferAttribute(posA,3));
-    const matA   = new THREE.PointsMaterial({size:.045,color:0x00B5C8,transparent:true,opacity:.45});
+    const matA   = new THREE.PointsMaterial({size:.04,color:0x00B5C8,transparent:true,opacity:.4});
     const meshA  = new THREE.Points(geoA,matA);
     scene.add(meshA);
 
-    // Gold particles — slightly larger, sparser
-    const countB = 120;
+    // Gold particles — mid layer
+    const countB = 160;
     const posB   = new Float32Array(countB*3);
-    for(let i=0;i<countB*3;i++) posB[i]=(Math.random()-.5)*26;
+    for(let i=0;i<countB*3;i++) posB[i]=(Math.random()-.5)*32;
     const geoB   = new THREE.BufferGeometry();
     geoB.setAttribute('position', new THREE.BufferAttribute(posB,3));
-    const matB   = new THREE.PointsMaterial({size:.07,color:0xD4AF37,transparent:true,opacity:.3});
+    const matB   = new THREE.PointsMaterial({size:.075,color:0xD4AF37,transparent:true,opacity:.25});
     const meshB  = new THREE.Points(geoB,matB);
     scene.add(meshB);
 
-    camera.position.z = 5;
+    // Silver particles — background depth layer
+    const countC = 80;
+    const posC   = new Float32Array(countC*3);
+    for(let i=0;i<countC*3;i++) posC[i]=(Math.random()-.5)*40;
+    const geoC   = new THREE.BufferGeometry();
+    geoC.setAttribute('position', new THREE.BufferAttribute(posC,3));
+    const matC   = new THREE.PointsMaterial({size:.12,color:0xC8CDD6,transparent:true,opacity:.08});
+    const meshC  = new THREE.Points(geoC,matC);
+    scene.add(meshC);
+
+    camera.position.z = 6;
     let targetRX=0, targetRY=0;
 
     document.addEventListener('mousemove', e=>{
-      targetRX = (e.clientY/window.innerHeight - .5) * .4;
-      targetRY = (e.clientX/window.innerWidth  - .5) * .4;
+      targetRX = (e.clientY/window.innerHeight - .5) * .5;
+      targetRY = (e.clientX/window.innerWidth  - .5) * .5;
     });
 
     const clk = new THREE.Clock();
     (function animScene(){
       requestAnimationFrame(animScene);
       const t = clk.getElapsedTime();
-      meshA.rotation.y += .0008;
-      meshA.rotation.x += .0003;
-      // Mouse-responsive lean
-      meshA.rotation.x += (targetRX - meshA.rotation.x) * .02;
-      meshA.rotation.y += (targetRY - meshA.rotation.y) * .02;
-      meshB.rotation.y -= .0005;
-      meshB.rotation.x -= .0002;
-      // Gentle breathing scale
-      const s = 1 + Math.sin(t*.4)*.015;
+
+      // Teal rotates forward slowly
+      meshA.rotation.y += .0007;
+      meshA.rotation.x += .0002;
+      meshA.rotation.x += (targetRX - meshA.rotation.x) * .015;
+      meshA.rotation.y += (targetRY - meshA.rotation.y) * .015;
+
+      // Gold rotates opposite direction
+      meshB.rotation.y -= .0004;
+      meshB.rotation.z += .0002;
+
+      // Silver very slow drift
+      meshC.rotation.x += .0001;
+      meshC.rotation.y -= .0002;
+
+      // Breathing
+      const s = 1 + Math.sin(t*.3)*.012;
       meshA.scale.set(s,s,s);
+      const s2 = 1 + Math.sin(t*.2+1)*.02;
+      meshB.scale.set(s2,s2,s2);
+
       renderer.render(scene, camera);
     })();
 
@@ -961,15 +1310,21 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    /* ---- STICKY CTA — appears after scroll ---- */
+    /* ---- STICKY CTA ---- */
     const stickyCta = document.getElementById('stickyCta');
     window.addEventListener('scroll', ()=>{
       if(window.scrollY > 400) stickyCta.classList.add('visible');
     }, { passive:true });
 
+    /* ---- SCROLL REVEAL ---- */
+    const revObs = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold:.1 });
+    document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
     /* ---- VANILLA TILT ---- */
     VanillaTilt.init(document.querySelectorAll('.trade-card'), {
-      speed:400, glare:true, 'max-glare':.06, scale:1.02,
+      speed:400, glare:true, 'max-glare':.05, scale:1.02,
     });
   </script>
 </body>
