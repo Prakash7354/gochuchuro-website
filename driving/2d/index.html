@@ -74,7 +74,7 @@
 
     /* HERO */
     .hero{position:relative;min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:5rem 2rem 4rem;overflow:hidden;background:var(--slate)}
-    /* Neon road lines CSS — no image needed, pure CSS perspective grid */
+    /* Clean background image with dark overlay */
     .hero::before{
       content:'';position:absolute;inset:0;z-index:0;
       background:
@@ -83,24 +83,7 @@
     }
     /* Electric overlay — lime glow from bottom */
     .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;z-index:1;pointer-events:none;background:linear-gradient(transparent,rgba(16,185,129,0.08))}
-    /* Road lines — CSS perspective grid */
-    .road-lines{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-    .road-lines::before{
-      content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-      width:4px;height:60%;background:linear-gradient(transparent,rgba(16,185,129,.4));
-      box-shadow:0 0 20px rgba(16,185,129,.3);
-    }
-    .road-lines::after{
-      content:'';position:absolute;bottom:0;left:50%;
-      transform:translateX(-50%) perspective(600px) rotateX(75deg);
-      width:200%;height:200%;
-      background:
-        repeating-linear-gradient(90deg,transparent,transparent 48%,rgba(16,185,129,.08) 48%,rgba(16,185,129,.08) 52%),
-        repeating-linear-gradient(0deg,transparent,transparent 90px,rgba(16,185,129,.06) 90px,rgba(16,185,129,.06) 92px);
-      background-size:200px 100px,200px 100px;
-    }
-    /* Scanlines */
-    .hsl{position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(16,185,129,.015) 3px,rgba(16,185,129,.015) 4px)}
+    
     .hcon{position:relative;z-index:3;max-width:940px}
     .hbadge{display:inline-flex;align-items:center;gap:.5rem;background:white;color:var(--red);padding:.45rem 1.4rem;border-radius:50px;font-weight:800;font-size:.9rem;margin-bottom:1.8rem;box-shadow:var(--shadow-md);border:2px solid var(--red);animation:fid .8s ease both}
     .hbadge .l{font-size:1.3rem;font-weight:900;color:var(--red)}
@@ -270,7 +253,6 @@
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <a href="#" class="bname">Quick<span>Pass</span></a>
   <nav>
@@ -285,10 +267,7 @@
   <button onclick="openB()" class="bgreen" style="font-size:.82rem;padding:.6rem 1.2rem"><i class="fa-solid fa-car"></i>Book Lesson</button>
 </header>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="road-lines"></div>
-  <div class="hsl"></div>
   <div class="speedline sl-l"></div>
   <div class="speedline sl-r"></div>
   <div class="hcon">
@@ -301,14 +280,13 @@
     </div>
     <div class="htrust">
       <span class="htp"><i class="fa-solid fa-check"></i>DVSA approved</span>
-      <span class="htp"><i class="fa-solid fa-check"></i>Auto &amp; manual</span>
-      <span class="htp"><i class="fa-solid fa-check"></i>Male &amp; female tutors</span>
+      <span class="htp"><i class="fa-solid fa-check"></i>Auto & manual</span>
+      <span class="htp"><i class="fa-solid fa-check"></i>Male & female tutors</span>
       <span class="htp"><i class="fa-solid fa-check"></i>Pick up from home</span>
     </div>
   </div>
 </section>
 
-<!-- TRUST RIBBON -->
 <div class="trib rv">
   <a href="#reviews" class="gbadge">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="26px" height="26px">
@@ -318,17 +296,16 @@
       <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"/>
     </svg>
     <div style="font-size:.82rem;font-weight:700;display:flex;flex-direction:column;line-height:1.2">
-      <span>5.0 <span style="color:#fbbc05;font-size:.7rem">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+      <span>5.0 <span style="color:#fbbc05;font-size:.7rem">★★★★★</span></span>
       <span style="font-size:.68rem;color:#64748b;font-weight:500">Google Reviews</span>
     </div>
   </a>
   <div class="tn"><i class="fa-solid fa-percent"></i><h4 class="bold">High</h4><p>Pass Rate</p></div>
-  <div class="tn"><i class="fa-solid fa-user-group"></i><h4 class="bold">Male &amp; Female</h4><p>Instructors</p></div>
-  <div class="tn"><i class="fa-solid fa-car-side"></i><h4 class="bold">Auto &amp; Manual</h4><p>Dual Control</p></div>
+  <div class="tn"><i class="fa-solid fa-user-group"></i><h4 class="bold">Male & Female</h4><p>Instructors</p></div>
+  <div class="tn"><i class="fa-solid fa-car-side"></i><h4 class="bold">Auto & Manual</h4><p>Dual Control</p></div>
   <div class="tn"><i class="fa-solid fa-location-dot"></i><h4 class="bold">Pick Up</h4><p>From Home</p></div>
 </div>
 
-<!-- BOOKING -->
 <section class="sw" id="booking">
   <div class="bsec rv">
     <div class="bt">
@@ -367,7 +344,6 @@
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="sw" id="about">
   <div class="agrid">
     <div class="iimgs rl">
@@ -396,7 +372,6 @@
   </div>
 </section>
 
-<!-- CAR OPTIONS -->
 <section class="bg-light-s" id="cars">
   <div class="sw">
     <div class="sh rv">
@@ -440,7 +415,6 @@
   </div>
 </section>
 
-<!-- GALLERY — Recent Passes -->
 <section id="gallery">
   <div class="sh" style="margin-top:4rem;margin-bottom:2rem" class="rv">
     <span class="slbl" style="display:block;text-align:center">Recent Passes</span>
@@ -449,7 +423,7 @@
     <p style="text-align:center;color:var(--dim)">Hundreds of happy students who passed with QuickPass.</p>
   </div>
   <div class="gal-s">
-    <p class="gal-lbl">&#127881; Congratulations to all our recent passers</p>
+    <p class="gal-lbl">🎉 Congratulations to all our recent passers</p>
     <div class="gal-t">
       <div class="gi"><i class="fa-solid fa-star"></i><img src="driving-pass-1.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
       <div class="gi"><i class="fa-solid fa-star"></i><img src="test-pass-2.jpg" alt="Passed!" onerror="this.style.display='none'"/></div>
@@ -469,7 +443,6 @@
   </div>
 </section>
 
-<!-- REVIEWS — 3 reviewers -->
 <section class="rsec" id="reviews">
   <div class="sh rv" style="margin-bottom:3rem">
     <span class="slbl" style="color:var(--green2)">What Learners Say</span>
@@ -478,24 +451,23 @@
   </div>
   <div class="rg">
     <div class="rc rv d1">
-      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="rstars">★★★★★</div>
       <p class="rtxt">"I was so nervous to start driving, but my instructor was amazingly patient. We went at my pace, and I ended up passing first time with only 2 minor faults. Highly recommend the automatic lessons!"</p>
-      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4;color:white"></i><img src="female-reviewer-1.jpg" alt="Sarah Jenkins" onerror="this.style.display='none'"/></div><div><h4>Sarah Jenkins</h4><span>Passed First Time &#9989;</span></div></div>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4;color:white"></i><img src="female-reviewer-1.jpg" alt="Sarah Jenkins" onerror="this.style.display='none'"/></div><div><h4>Sarah Jenkins</h4><span>Passed First Time ✅</span></div></div>
     </div>
     <div class="rc rv d2">
-      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="rstars">★★★★★</div>
       <p class="rtxt">"Moved to QuickPass after a bad experience elsewhere. The difference was night and day. Super professional instructors, brand new cars, and I passed my manual test on the second attempt."</p>
-      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4;color:white"></i><img src="male-reviewer-1.jpg" alt="Tom Hardy" onerror="this.style.display='none'"/></div><div><h4>Tom Hardy</h4><span>Manual Lessons &#9989;</span></div></div>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4;color:white"></i><img src="male-reviewer-1.jpg" alt="Tom Hardy" onerror="this.style.display='none'"/></div><div><h4>Tom Hardy</h4><span>Manual Lessons ✅</span></div></div>
     </div>
     <div class="rc rv d3">
-      <div class="rstars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="rstars">★★★★★</div>
       <p class="rtxt">"Booked my automatic lessons through the website in literally two minutes. My instructor was brilliant, picked me up from college every week, and I passed on my very first attempt. So happy!"</p>
-      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4;color:white"></i><img src="female-reviewer-1.jpg" alt="Priya Sharma" onerror="this.style.display='none'"/></div><div><h4>Priya Sharma</h4><span>Automatic Lessons &#9989;</span></div></div>
+      <div class="rper"><div class="rav"><i class="fa-solid fa-user" style="opacity:.4;color:white"></i><img src="female-reviewer-1.jpg" alt="Priya Sharma" onerror="this.style.display='none'"/></div><div><h4>Priya Sharma</h4><span>Automatic Lessons ✅</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- FAQ ACCORDION -->
 <section class="sw" id="faqs">
   <div class="sh rv">
     <span class="slbl">Got Questions?</span>
@@ -511,7 +483,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="sw" id="contact" style="border-top:1px solid var(--border)">
   <div class="sh rv">
     <span class="slbl">Get In Touch</span>
@@ -541,7 +512,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="fbrand">Quick<span>Pass</span></div>
   <p style="font-size:.88rem;margin-bottom:.5rem">Helping Andover learn to drive safely and confidently.</p>
@@ -558,26 +528,23 @@
     <a href="../../privacy.html">Privacy Policy</a>
   </div>
   <p style="font-size:.72rem;color:#374151;border-top:1px solid rgba(255,255,255,.08);padding-top:1.5rem;margin-top:.5rem">
-    &copy; 2026 QuickPass Driving School, Andover. Website powered by
+    © 2026 QuickPass Driving School, Andover. Website powered by
     <a href="../../index.html" style="color:var(--gc-teal);text-decoration:none;font-weight:700">GoChuchuro</a>.
   </p>
 </footer>
 
-<!-- STICKY ACTION BAR -->
 <div class="abar">
   <a href="https://wa.me/447474080809" target="_blank" class="ab ab-out"><i class="fa-brands fa-whatsapp" style="color:#25D366"></i>WhatsApp</a>
   <button onclick="openB()" class="ab ab-fill"><i class="fa-solid fa-car"></i>Book a Lesson</button>
 </div>
 
-<!-- GC BADGE -->
 <div class="gcb" id="gcb">
-  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">&times;</button>
+  <button class="gcbc" onclick="document.getElementById('gcb').style.display='none'">×</button>
   <div class="gcbl">Powered by GoChuchuro</div>
   <p><strong>Want this website</strong> for your school?</p>
   <a href="../../index.html" target="_blank"><i class="fa-regular fa-calendar"></i>Free Chat</a>
 </div>
 
-<!-- BOOKING MODAL -->
 <div class="mo" id="bm">
   <div class="mb">
     <button class="mc" onclick="closeB()"><i class="fa-solid fa-xmark"></i></button>
