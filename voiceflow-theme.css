@@ -1,0 +1,49 @@
+/* ---- CUSTOM VOICEFLOW CHAT STYLES ---- */
+
+/* Main Chat Container Background */
+.vfrc-widget--chat {
+  background-color: #111111 !important;
+  border: 1px solid rgba(212,175,55,0.35) !important;
+  border-radius: 14px !important;
+  box-shadow: 12px 12px 30px rgba(0,0,0,0.85), 0 0 20px rgba(212,175,55,0.08) !important;
+}
+
+/* Chat Header */
+.vfrc-header {
+  background: linear-gradient(135deg, #111111, #0e1818) !important;
+  border-bottom: 1px solid rgba(0,181,200,0.4) !important;
+}
+
+/* Header Text (Title) */
+.vfrc-header--title {
+  font-family: 'Outfit', sans-serif !important;
+  color: #E5C158 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* User Message Bubbles */
+.vfrc-message--user {
+  background: linear-gradient(145deg, #0e1818, #111111) !important;
+  color: #C8CDD6 !important;
+  border: 1px solid rgba(0,181,200,0.4) !important;
+}
+
+/* AI Message Bubbles */
+.vfrc-message--system {
+  background-color: #1A1A1A !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(212,175,55,0.2) !important;
+}
+
+/* Input Area (Where the user types) */
+.vfrc-footer {
+  background-color: #0e1818 !important;
+  border-top: 1px solid rgba(0,181,200,0.4) !important;
+}
+
+/* Text input field */
+.vfrc-chat-input {
+  background-color: #111111 !important;
+  color: #ffffff !important;
+}
