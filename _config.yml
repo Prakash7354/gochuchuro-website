@@ -1,0 +1,12 @@
+title: GoChuchuro
+description: "Reach Your Peak. Automate Your Growth. Smart websites and automated systems for UK small businesses from £97/month."
+url: "https://gochuchuro.com"
+author: "Prakash Gurung"
+
+# Jekyll settings
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
