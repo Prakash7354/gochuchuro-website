@@ -1,117 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Automated SEO Tags -->
-    {% seo %}
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Dancing+Script:wght@600&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- 3D Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  <link rel="canonical" href="https://gochuchuro.com/" />
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  
+  {% seo %} <!-- GitHub auto-generates SEO here -->
 
-    <!-- SCHEMA MARKUP FOR AI & GOOGLE -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "GoChuchuro",
-      "image": "https://gochuchuro.com/logo-transparent.png",
-      "description": "UK Digital Growth Agency providing 3D websites and automated systems for small businesses.",
-      "url": "https://gochuchuro.com",
-      "priceRange": "££"
-    }
-    </script>
+  <!-- SCHEMA MARKUP FOR AI & GOOGLE -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "GoChuchuro",
+    "image": "https://gochuchuro.com/logo-transparent.png",
+    "description": "UK Digital Growth Agency providing 3D websites, AI automation, and coaching for trades and small businesses.",
+    "url": "https://gochuchuro.com",
+    "priceRange": "££"
+  }
+  </script>
 
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: { colors: { bgEmerald: '#0D1515', holoGold: '#D4AF37', holoTeal: '#00B5C8', textDim: '#94a3b8' } }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnightEmerald: '#0D1515', deepCharcoal: '#111111', antiqueGold: '#D4AF37', brightGold: '#E5C158',
+            auroraTeal: '#00B5C8', alertAmber: '#f59e0b', forestOlive: '#3D5A3E', deepGarnet: '#7D2E3A', coolSilver: '#C8CDD6',
+          },
+          fontFamily: {
+            display: ['Cormorant Garamond','serif'], body: ['Nunito Sans','sans-serif'],
+            header: ['Outfit','sans-serif'], script: ['Dancing Script','cursive'],
+          },
         }
       }
-    </script>
-    <style>
-        body { background-color: #0D1515; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .font-header { font-family: 'Outfit', sans-serif; }
-        .font-letter { font-family: 'Playfair Display', serif; }
-        .font-signature { font-family: 'Dancing Script', cursive; }
-        
-        /* 3D Glass Cards */
-        .panel-3d { background: #111111; border-radius: 20px; box-shadow: 12px 12px 25px rgba(0,0,0,0.9), -6px -6px 16px rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.04); }
-        .panel-inset { background: #0a0d0d; border-radius: 16px; box-shadow: inset 6px 6px 15px rgba(0,0,0,0.8), inset -4px -4px 12px rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.02); }
-        .text-gradient { background: linear-gradient(135deg, #00B5C8, #E5C158); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Buttons */
-        .btn-glow { background: linear-gradient(135deg, #00B5C8, #E5C158); color: #000; padding: 1.2rem 2.5rem; border-radius: 12px; font-weight: 800; display: inline-flex; justify-content: center; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; box-shadow: 0 0 20px rgba(0, 181, 200, 0.4); }
-        .btn-glow:hover { transform: translateY(-4px); box-shadow: 0 0 40px rgba(0, 181, 200, 0.6); color: white;}
-        .btn-outline { background: transparent; color: white; padding: 1rem 2rem; border-radius: 12px; font-weight: 800; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
-        .btn-outline:hover { border-color: #00B5C8; background: rgba(0, 181, 200, 0.1); }
-        
-        #global-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
-    </style>
+    }
+  </script>
+
+  <style>
+    /* ALL YOUR EXACT CSS KEPT HERE */
+    :root {
+      --bg-emerald: #0D1515; --bg-charcoal: #111111; --bg-deep: #080e0e;
+      --holo-teal: #00B5C8; --holo-gold: #D4AF37; --holo-bright-gold: #E5C158;
+      --alert-amber: #f59e0b; --text-main: #f8fafc; --text-dim: #94a3b8; --cool-silver: #C8CDD6;
+      --gradient-primary: linear-gradient(135deg, var(--holo-teal), var(--holo-bright-gold));
+      --gradient-gold: linear-gradient(135deg, #D4AF37, #E5C158, #D4AF37);
+      --shadow-drop: 12px 12px 30px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
+      --shadow-inner: inset 6px 6px 18px rgba(0,0,0,0.85), inset -3px -3px 10px rgba(255,255,255,0.02);
+      --glow-teal: 0 0 30px rgba(0,181,200,0.25), 0 0 60px rgba(0,181,200,0.1);
+      --glow-gold: 0 0 30px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.1);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--bg-emerald); color: var(--text-main); overflow-x: hidden; font-family: 'Nunito Sans', sans-serif; cursor: none; }
+
+    /* Custom Cursor */
+    .cursor-dot { width: 8px; height: 8px; background: var(--holo-teal); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s; box-shadow: 0 0 10px var(--holo-teal); }
+    .cursor-ring { width: 36px; height: 36px; border: 1.5px solid rgba(0,181,200,0.5); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s; }
+    body:has(a:hover) .cursor-dot, body:has(button:hover) .cursor-dot { background: var(--holo-gold); width: 12px; height: 12px; box-shadow: 0 0 16px var(--holo-gold); }
+    body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 52px; height: 52px; border-color: rgba(212,175,55,0.6); }
+
+    /* Layout & Utilities */
+    .panel-3d { background: var(--bg-charcoal); border-radius: 20px; box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.05); position: relative; }
+    .panel-inset { background: #0a0e0e; border-radius: 16px; box-shadow: var(--shadow-inner); border: 1px solid rgba(255,255,255,0.03); }
+    .panel-gold { border: 1px solid rgba(212,175,55,0.35) !important; }
+    .panel-teal { border: 1px solid rgba(0,181,200,0.35) !important; }
+    .font-display { font-family: 'Cormorant Garamond', serif; }
+    .font-header { font-family: 'Outfit', sans-serif; }
+    .font-script { font-family: 'Dancing Script', cursive; }
+    .text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .text-gold-gradient { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Buttons */
+    .btn-3d { background: var(--bg-charcoal); color: var(--text-main); padding: 1rem 2rem; border-radius: 14px; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; letter-spacing: 0.5px; box-shadow: var(--shadow-drop); border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; position: relative; overflow: hidden; font-family: 'Outfit', sans-serif; cursor: none; }
+    .btn-3d::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--gradient-primary); }
+    .btn-3d:hover { transform: translateY(-4px); box-shadow: 0 18px 35px rgba(0,0,0,0.9), 0 0 25px rgba(0,181,200,0.2); border-color: var(--holo-teal); }
+    .btn-glow { background: var(--gradient-primary); color: #000; padding: 1.2rem 2.6rem; border-radius: 14px; font-weight: 900; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; border: none; box-shadow: 0 0 25px rgba(0,181,200,0.4); transition: all 0.3s; cursor: none; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Outfit', sans-serif; font-size: 0.9rem; }
+    .btn-glow:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 0 50px rgba(0,181,200,0.65); color: white; }
+    .btn-scarcity { background: rgba(26,15,0,0.9); border: 1px solid var(--alert-amber); color: var(--alert-amber); padding: 0.6rem 1.3rem; border-radius: 10px; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; cursor: none; transition: all 0.3s; animation: borderPulse 2.5s infinite; box-shadow: 0 0 20px rgba(245,158,11,0.15); font-family: 'Outfit', sans-serif; }
+    .btn-scarcity:hover { background: var(--alert-amber); color: black; box-shadow: 0 0 35px rgba(245,158,11,0.5); }
+    @keyframes borderPulse { 0%,100%{border-color:var(--alert-amber);}50%{border-color:rgba(245,158,11,0.3);} }
+    .dot-pulse { width:8px; height:8px; background:var(--alert-amber); border-radius:50%; animation:blink 1.2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.25;} }
+
+    /* Header */
+    header { background: rgba(13,21,21,0.88); backdrop-filter: blur(20px); padding: 0.9rem 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; border-bottom: 1px solid rgba(0,181,200,0.08); box-shadow: 0 4px 30px rgba(0,0,0,0.4); }
+    .nav-link { color: var(--text-dim); text-decoration: none; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.2px; transition: all 0.3s; font-family: 'Outfit', sans-serif; }
+    .nav-link:hover { color: var(--holo-teal); text-shadow: 0 0 12px var(--holo-teal); }
+
+    /* Your Core Styles Kept Intact */
+    .section-dark { background: var(--bg-charcoal); } .section-emerald { background: var(--bg-emerald); }
+    .section-divider { height: 1px; width: 100%; background: linear-gradient(90deg, transparent, rgba(0,181,200,0.3), rgba(212,175,55,0.3), transparent); }
+    .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.75s ease, transform 0.75s ease; } .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity 0.75s ease, transform 0.75s ease; } .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity 0.75s ease, transform 0.75s ease; } .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    
+    /* Navigation Dropdowns & Mobile */
+    .nav-dropdown { position: absolute; top: calc(100% + 12px); left: 0; width: 240px; border-radius: 16px; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(8px); transition: all 0.3s ease; }
+    .nav-dropdown-wrap:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .nav-dropdown a { display: block; padding: 0.9rem 1.2rem; font-size: 0.88rem; font-weight: 600; color: var(--cool-silver); transition: all 0.2s; border-bottom: 1px solid rgba(255,255,255,0.04); font-family: 'Outfit', sans-serif; text-decoration: none; }
+    .nav-dropdown a:hover { color: white; background: rgba(255,255,255,0.04); padding-left: 1.5rem; }
+    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: rgba(0,181,200,0.08); border: 1px solid rgba(0,181,200,0.25); border-radius: 10px; cursor: pointer; transition: all 0.3s; flex-shrink: 0; }
+    .hamburger span { display: block; width: 20px; height: 2px; background: var(--holo-teal); border-radius: 2px; transition: all 0.35s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-nav { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(8,14,14,0.97); backdrop-filter: blur(20px); z-index: 999; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 0; opacity: 0; visibility: hidden; transform: translateY(-20px); transition: all 0.4s ease; }
+    .mobile-nav.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .mobile-nav-link { display: block; padding: 1.1rem 2rem; width: 100%; text-align: center; font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.04); transition: all 0.25s ease; }
+    .mobile-nav-close { position: absolute; top: 1.2rem; right: 1.2rem; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: white; cursor: pointer; }
+    
+    /* Common Elements */
+    .glow-line { width: 100px; height: 2px; margin: 1rem auto; background: var(--gradient-primary); border-radius: 100px; box-shadow: 0 0 12px rgba(0,181,200,0.4); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(8,14,14,0.92); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.35s ease; }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal-content { background: var(--bg-charcoal); width: 92%; max-width: 960px; height: 88vh; border-radius: 20px; position: relative; transform: translateY(30px); transition: transform 0.35s ease; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 30px 70px rgba(0,0,0,0.9); }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .close-btn { position: absolute; top: 14px; right: 16px; font-size: 1.5rem; color: white; cursor: none; z-index: 10; background: rgba(255,255,255,0.08); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+    
+    @media (max-width: 768px) {
+      .hamburger { display: flex; } body { cursor: auto; } .cursor-dot, .cursor-ring { display: none; }
+      .modal-content { height: 92vh; width: 96%; }
+    }
+  </style>
 </head>
 <body>
-    <div id="global-canvas"></div>
-    
-    <!-- HEADER -->
-    <header class="bg-[#0D1515]/90 backdrop-blur-md border-b border-white/10 p-4 sticky top-0 z-50 flex justify-between items-center">
-        <a href="{{ '/' | relative_url }}" class="font-header text-2xl font-black tracking-widest text-white">GOCHUCHURO<span class="text-holoTeal">.</span></a>
-        <nav class="hidden md:flex gap-6">
-            <a href="{{ '/' | relative_url }}#why-us" class="text-textDim hover:text-holoTeal font-bold uppercase text-sm">Why Us</a>
-            <a href="{{ '/' | relative_url }}#how-it-works" class="text-textDim hover:text-holoTeal font-bold uppercase text-sm">How It Works</a>
-            <a href="{{ '/showroom.html' | relative_url }}" class="text-textDim hover:text-holoTeal font-bold uppercase text-sm">Templates</a>
-            <a href="{{ '/insights.html' | relative_url }}" class="text-textDim hover:text-holoTeal font-bold uppercase text-sm">Insights</a>
-            <a href="{{ '/' | relative_url }}#pricing" class="text-textDim hover:text-holoTeal font-bold uppercase text-sm">Pricing</a>
-        </nav>
-        <button onclick="openCalendar()" class="bg-[#1a0f00] border border-[#f59e0b] text-[#f59e0b] px-4 py-2 rounded-lg font-bold text-sm hover:bg-[#f59e0b] hover:text-black transition">! Book Free Chat</button>
-    </header>
 
-    <!-- CONTENT INJECTION POINT -->
-    <main>
-        {{ content }}
-    </main>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#020408] border-t border-white/10 py-12 px-5 mt-24 text-center">
-        <h2 class="font-signature text-3xl text-holoGold mb-6">"Reach Your Peak. Automate Your Growth."</h2>
-        <p class="text-sm text-gray-500 mb-6">Helping UK small businesses grow without the stress. Smart websites, simple automation, and friendly coaching.</p>
-        <div class="flex justify-center gap-6 text-sm text-gray-400 mb-8">
-            <a href="#" class="hover:text-white">Privacy Policy</a>
-            <a href="#" class="hover:text-white">Terms & Conditions</a>
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-close" onclick="closeMobileNav()"><i class="fa-solid fa-xmark"></i></div>
+    <a href="{{ '/' | relative_url }}#why" class="mobile-nav-link" onclick="closeMobileNav()">Why GoChuchuro</a>
+    <a href="{{ '/' | relative_url }}#solutions" class="mobile-nav-link" onclick="closeMobileNav()">How It Works</a>
+    <a href="{{ '/showroom.html' | relative_url }}" class="mobile-nav-link highlight" onclick="closeMobileNav()"><i class="fa-solid fa-cube" style="margin-right:0.5rem;"></i>Templates</a>
+    <a href="{{ '/insights.html' | relative_url }}" class="mobile-nav-link" onclick="closeMobileNav()">Insights</a>
+    <a href="{{ '/' | relative_url }}#pricing" class="mobile-nav-link" onclick="closeMobileNav()">Pricing</a>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <a href="{{ '/' | relative_url }}" class="flex items-center gap-3 flex-shrink-0 no-underline group" style="text-decoration:none;">
+      <img src="logo-transparent.png" alt="GoChuchuro logo" class="h-9 w-auto" onerror="this.style.display='none';document.getElementById('svg-logo').style.display='block'"/>
+      <svg id="svg-logo" style="display:none;" width="36" height="30" viewBox="0 0 42 36" fill="none">
+        <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="font-header text-xl font-black tracking-widest text-white hidden sm:block">GOCHUCHURO<span style="color:var(--holo-teal)">.</span></span>
+    </a>
+    <nav class="hidden md:flex items-center gap-7">
+      <a href="{{ '/' | relative_url }}#why" class="nav-link">Why Us</a>
+      <a href="{{ '/' | relative_url }}#approach" class="nav-link">Our Approach</a>
+      <div class="nav-dropdown-wrap relative">
+        <a href="{{ '/showroom.html' | relative_url }}" class="nav-link flex items-center gap-1.5">Templates <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i></a>
+        <div class="nav-dropdown panel-3d">
+          <a href="/plumbing/3d/index.html" target="_blank">Plumbing &amp; Heating</a>
+          <a href="/restaurant/3d/index.html" target="_blank">Restaurants</a>
+          <a href="/salon/3d/index.html" target="_blank">Hair Salons</a>
+          <a href="/driving/3d/index.html" target="_blank">Driving Instructors</a>
         </div>
-        <p class="text-xs text-gray-600">Enterprise infrastructure. Small business simplicity. © 2026 GoChuchuro.</p>
-    </footer>
-
-    <!-- MODAL CALENDAR -->
-    <div id="calendarModal" class="fixed top-0 left-0 w-full h-full bg-black/90 backdrop-blur-sm z-[9999] hidden items-center justify-center">
-        <div class="panel-3d w-[90%] max-w-[900px] h-[85vh] relative">
-            <button onclick="closeCalendar()" class="absolute top-4 right-4 text-white text-2xl z-10 w-10 h-10 bg-white/10 rounded-full hover:bg-red-500">&times;</button>
-            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" class="w-full h-full border-none rounded-2xl bg-white"></iframe>
-        </div>
+      </div>
+      <a href="{{ '/insights.html' | relative_url }}" class="nav-link">Insights</a>
+      <a href="{{ '/' | relative_url }}#pricing" class="nav-link">Pricing</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button onclick="openCalendar()" class="btn-scarcity"><div class="dot-pulse"></div><span class="hidden sm:inline">Book Free Chat</span><span class="sm:hidden">Free Chat</span></button>
+      <button class="hamburger md:hidden" id="hamburgerBtn" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
     </div>
+  </header>
 
-    <!-- VOICEFLOW SCRIPT -->
-    <script type="text/javascript">
-      (function(d, t) {
-          var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-          v.onload = function() { window.voiceflow.chat.load({ verify: { projectID: 'YOUR_VOICEFLOW_PROJECT_ID' }, url: 'https://general-runtime.voiceflow.com', versionID: 'production' }); }
-          v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-      })(document, 'script');
-    </script>
+  <!-- DYNAMIC CONTENT INJECTION -->
+  <main>
+    {{ content }}
+  </main>
 
-    <!-- 3D BACKGROUND SCRIPT -->
-    <script>
-        function openCalendar() { document.getElementById('calendarModal').style.display = 'flex'; }
-        function closeCalendar() { document.getElementById('calendarModal').style.display = 'none'; }
-        const container = document.getElementById('global-canvas'); const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000); const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); renderer.setSize(window.innerWidth, window.innerHeight); container.appendChild(renderer.domElement);
-        const plane = new THREE.Mesh(new THREE.PlaneGeometry(35, 25, 45, 45), new THREE.MeshBasicMaterial({ color: 0x00B5C8, wireframe: true, transparent: true, opacity: 0.15 })); plane.rotation.x = -Math.PI / 2.5; plane.position.y = -4; plane.position.z = -5; scene.add(plane);
-        const positions = plane.geometry.attributes.position; const originalZ = new Float32Array(positions.count); for(let i=0; i<positions.count; i++) { originalZ[i] = positions.getZ(i); }
-        const clock = new THREE.Clock();
-        function animate() { requestAnimationFrame(animate); const time = clock.getElapsedTime(); for(let i=0; i<positions.count; i++) { positions.setZ(i, originalZ[i] + Math.sin(positions.getX(i)*0.5+time)*0.5 + Math.cos(positions.getY(i)*0.5+time)*0.5); } plane.geometry.attributes.position.needsUpdate = true; renderer.render(scene, camera); } animate();
-    </script>
+  <!-- FOOTER -->
+  <footer class="py-16 px-5 mt-0" style="background:#020408;border-top:1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden;">
+    <canvas id="footer-canvas" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0.7;"></canvas>
+    <div class="footer-content max-w-6xl mx-auto" style="position: relative; z-index: 2;">
+      <div class="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
+        <div>
+          <a href="#" class="flex items-center justify-center md:justify-start gap-3 mb-5" style="text-decoration:none;">
+            <span class="font-header text-xl font-black tracking-widest text-white">GOCHUCHURO<span style="color:var(--holo-teal);">.</span></span>
+          </a>
+          <p class="font-script text-2xl mb-4 text-holo-bright-gold">"Reach Your Peak. Automate Your Growth."</p>
+          <p style="font-size:0.88rem;color:#6b7280;max-width:380px;line-height:1.7;">Helping UK small businesses grow without the stress. Smart websites, simple automation, and friendly coaching.</p>
+        </div>
+        <div class="md:text-right">
+          <div class="flex justify-center md:justify-end gap-4 mb-8">
+            <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank" class="w-10 h-10 rounded-xl flex items-center justify-center panel-inset text-white hover:bg-holo-teal"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/gochuchuro/" target="_blank" class="w-10 h-10 rounded-xl flex items-center justify-center panel-inset text-white hover:bg-holo-teal"><i class="fa-brands fa-instagram"></i></a>
+          </div>
+          <nav class="flex flex-wrap justify-center md:justify-end gap-5">
+            <a href="{{ '/privacy.html' | relative_url }}" class="nav-link text-xs">Privacy Policy</a>
+            <a href="{{ '/terms.html' | relative_url }}" class="nav-link text-xs">Terms &amp; Conditions</a>
+          </nav>
+        </div>
+      </div>
+      <div class="pt-8 mt-8 text-xs flex flex-col md:flex-row justify-between items-center gap-3" style="border-top:1px solid rgba(255,255,255,0.04);color:#374151;">
+        <p>&copy; 2026 GoChuchuro. All rights reserved.</p>
+        <p>Enterprise infrastructure. <span style="color:var(--holo-teal);">Small business simplicity.</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOOKING MODAL -->
+  <div id="calendarModal" class="modal-overlay">
+    <div class="modal-content panel-3d">
+      <div class="close-btn" onclick="closeCalendar()"><i class="fa-solid fa-xmark"></i></div>
+      <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true" style="width:100%;height:100%;border:none;border-radius:16px;" scrolling="yes"></iframe>
+    </div>
+  </div>
+
+  <!-- ALL SCRIPTS (Cursor, Modals, Voiceflow, 3D) -->
+  <script>
+    // Cursor
+    const dot = document.getElementById('cursorDot'); const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    if(dot && ring) {
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px'; });
+        function animateRing() { ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12; ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px'; requestAnimationFrame(animateRing); }
+        animateRing();
+    }
+    
+    // Mobile Nav & Modals
+    function toggleMobileNav() { const nav = document.getElementById('mobileNav'); const btn = document.getElementById('hamburgerBtn'); const isOpen = nav.classList.contains('open'); if (isOpen) { closeMobileNav(); } else { nav.classList.add('open'); btn.classList.add('open'); document.body.style.overflow = 'hidden'; } }
+    function closeMobileNav() { document.getElementById('mobileNav').classList.remove('open'); document.getElementById('hamburgerBtn').classList.remove('open'); document.body.style.overflow = ''; }
+    function openCalendar() { document.getElementById('calendarModal').classList.add('active'); }
+    function closeCalendar() { document.getElementById('calendarModal').classList.remove('active'); }
+    document.getElementById('calendarModal').addEventListener('click', function(e) { if (e.target === this) closeCalendar(); });
+
+    // Scroll Reveal & Counters
+    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+    
+    function animateCounter(el) { const target = parseInt(el.dataset.target); if (!target) return; let current = 0; const step = Math.ceil(target / 50); const timer = setInterval(() => { current += step; if (current >= target) { el.textContent = target + '%'; clearInterval(timer); } else el.textContent = current + '%'; }, 30); }
+    const counterObserver = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObserver.unobserve(e.target); } }); }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+    
+    function showNiche(id) { document.querySelectorAll('.niche-tab').forEach(t => t.classList.remove('active')); document.querySelectorAll('.niche-content').forEach(c => { c.classList.remove('active'); c.style.display = 'none'; }); event.target.closest('.niche-tab').classList.add('active'); const el = document.getElementById('niche-' + id); if (el) { el.style.display = 'grid'; el.classList.add('active'); } }
+    function toggleFaq(el) { const item = el.parentElement; const answer = item.querySelector('.faq-answer'); const isOpen = item.classList.contains('open'); document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-answer').classList.remove('open'); }); if (!isOpen) { item.classList.add('open'); answer.classList.add('open'); } }
+
+    // Vanilla Tilt
+    VanillaTilt.init(document.querySelectorAll('[data-tilt]'), { speed: 400, glare: true, 'max-glare': 0.04 });
+
+    // 3D HERO SCRIPT (Wrapped in IF statement so it doesn't break other pages)
+    const hCanvas = document.getElementById('hero-canvas');
+    if(hCanvas) {
+        const scene = new THREE.Scene(); const heroSection = hCanvas.closest('section'); const camera = new THREE.PerspectiveCamera(70, heroSection.clientWidth / heroSection.clientHeight, 0.1, 1000); const renderer = new THREE.WebGLRenderer({ canvas: hCanvas, alpha: true, antialias: true });
+        function resizeHero() { renderer.setSize(heroSection.clientWidth, heroSection.clientHeight); camera.aspect = heroSection.clientWidth / heroSection.clientHeight; camera.updateProjectionMatrix(); } resizeHero();
+        const p1 = new THREE.Mesh(new THREE.PlaneGeometry(50, 35, 65, 65), new THREE.MeshBasicMaterial({ color: 0x00B5C8, wireframe: true, transparent: true, opacity: 0.09 })); p1.rotation.x = -Math.PI / 2.3; p1.position.set(0, -4, -5); scene.add(p1);
+        const pos1 = p1.geometry.attributes.position; const oz1 = new Float32Array(pos1.count); for(let i=0; i<pos1.count; i++) oz1[i] = pos1.getZ(i);
+        const clock = new THREE.Clock(); let hMx = 0, hMy = 0;
+        document.addEventListener('mousemove', e => { hMx = e.clientX - window.innerWidth/2; hMy = e.clientY - window.innerHeight/2; });
+        function animHero() { requestAnimationFrame(animHero); const t = clock.getElapsedTime(); for(let i=0; i<pos1.count; i++) { pos1.setZ(i, oz1[i] + Math.sin(pos1.getX(i)*0.42+t)*0.6 + Math.cos(pos1.getY(i)*0.42+t)*0.5); } pos1.needsUpdate = true; camera.position.x += (hMx*0.0014 - camera.position.x)*0.04; camera.position.y += (-hMy*0.0014 - camera.position.y)*0.04; camera.lookAt(scene.position); renderer.render(scene, camera); }
+        animHero(); window.addEventListener('resize', resizeHero);
+        // Parallax
+        window.addEventListener('scroll', () => { const s = window.scrollY; const f = document.getElementById('mountainFar'), m = document.getElementById('mountainMid'), n = document.getElementById('mountainNear'); if(f) f.style.transform = `translateY(${s*0.08}px)`; if(m) m.style.transform = `translateY(${s*0.16}px)`; if(n) n.style.transform = `translateY(${s*0.28}px)`; });
+    }
+
+    // 3D FOOTER SCRIPT
+    const fCanvas = document.getElementById('footer-canvas');
+    if(fCanvas) {
+        const fScene = new THREE.Scene(); const footerEl = fCanvas.closest('footer'); const fCamera = new THREE.PerspectiveCamera(70, footerEl.clientWidth / footerEl.clientHeight, 0.1, 500); const fRenderer = new THREE.WebGLRenderer({ canvas: fCanvas, alpha: true, antialias: true });
+        function resFoot() { fRenderer.setSize(footerEl.clientWidth, footerEl.clientHeight||400); fCamera.aspect = footerEl.clientWidth / (footerEl.clientHeight||400); fCamera.updateProjectionMatrix(); } resFoot();
+        const fP1 = new THREE.Mesh(new THREE.PlaneGeometry(45, 30, 40, 40), new THREE.MeshBasicMaterial({ color: 0x00B5C8, wireframe: true, transparent: true, opacity: 0.07 })); fP1.rotation.x = Math.PI/2.3; fP1.position.set(0, 4, -5); fScene.add(fP1);
+        const fPos = fP1.geometry.attributes.position; const fOz = new Float32Array(fPos.count); for(let i=0; i<fPos.count; i++) fOz[i] = fPos.getZ(i);
+        const fClock = new THREE.Clock();
+        function animFoot() { requestAnimationFrame(animFoot); const t = fClock.getElapsedTime(); for(let i=0; i<fPos.count; i++) { fPos.setZ(i, fOz[i] + Math.sin(fPos.getX(i)*0.4+t*0.7)*0.55); } fPos.needsUpdate = true; fRenderer.render(fScene, fCamera); }
+        animFoot(); window.addEventListener('resize', resFoot);
+    }
+  </script>
+
+  <!-- VOICEFLOW CHATBOT -->
+  <script type="text/javascript">
+    (function(d, t) {
+        var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        v.onload = function() { window.voiceflow.chat.load({ verify: { projectID: '6a0b7847ea0cd638a0e28920' }, url: 'https://general-runtime.voiceflow.com', voice: { url: "https://runtime-api.voiceflow.com" } }); }
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+    })(document, 'script');
+  </script>
 </body>
 </html>
