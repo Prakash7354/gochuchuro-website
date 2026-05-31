@@ -3,10 +3,11 @@ description: "Reach Your Peak. Automate Your Growth. Smart websites and automate
 url: "https://gochuchuro.com"
 author: "Prakash Gurung"
 
-# Jekyll settings
+# Jekyll Settings
 markdown: kramdown
 highlighter: rouge
 
+# Activate GitHub SEO Plugins
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
