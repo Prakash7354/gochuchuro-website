@@ -1,1 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="canonical" href="https://gochuchuro.com/" />
+  <link rel="icon" type="image/png" href="favicon.png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="GoChuchuro — Smart business systems for UK small businesses. Websites, automation, AI tools and coaching. Plans from £49/month. Book a free chat today."/>
+  <title>GoChuchuro | Reach Your Peak. Automate Your Growth.</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Nunito+Sans:wght@400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            midnightEmerald: '#0D1515',
+            deepCharcoal:    '#111111',
+            antiqueGold:     '#D4AF37',
+            brightGold:      '#E5C158',
+            auroraTeal:      '#00B5C8',
+            alertAmber:      '#f59e0b',
+            forestOlive:     '#3D5A3E',
+            deepGarnet:      '#7D2E3A',
+            coolSilver:      '#C8CDD6',
+          },
+          fontFamily: {
+            display:   ['Cormorant Garamond','serif'],
+            body:      ['Nunito Sans','sans-serif'],
+            header:    ['Outfit','sans-serif'],
+            script:    ['Dancing Script','cursive'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* =============================================
+       GOCHUCHURO — FULL IMMERSIVE 3D DESIGN SYSTEM
+       ============================================= */
+    :root {
+      --bg-emerald:       #0D1515;
+      --bg-charcoal:      #111111;
+      --bg-deep:          #080e0e;
+      --holo-teal:        #00B5C8;
+      --holo-teal-dim:    rgba(0,181,200,0.15);
+      --holo-gold:        #D4AF37;
+      --holo-bright-gold: #E5C158;
+      --forest-olive:     #3D5A3E;
+      --deep-garnet:      #7D2E3A;
+      --cool-silver:      #C8CDD6;
+      --alert-amber:      #f59e0b;
+      --text-main:        #f8fafc;
+      --text-dim:         #94a3b8;
+      --text-silver:      #C8CDD6;
+      --gradient-primary: linear-gradient(135deg, var(--holo-teal), var(--holo-bright-gold));
+      --gradient-gold:    linear-gradient(135deg, #D4AF37, #E5C158, #D4AF37);
+      --gradient-dark:    linear-gradient(180deg, var(--bg-emerald) 0%, var(--bg-deep) 100%);
+      --shadow-drop:      12px 12px 30px rgba(0,0,0,0.95), -4px -4px 14px rgba(255,255,255,0.02);
+      --shadow-inner:     inset 6px 6px 18px rgba(0,0,0,0.85), inset -3px -3px 10px rgba(255,255,255,0.02);
+      --glow-teal:        0 0 30px rgba(0,181,200,0.25), 0 0 60px rgba(0,181,200,0.1);
+      --glow-gold:        0 0 30px rgba(212,175,55,0.3), 0 0 60px rgba(212,175,55,0.1);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg-emerald);
+      color: var(--text-main);
+      overflow-x: hidden;
+      font-family: 'Nunito Sans', sans-serif;
+      cursor: none;
+    }
+
+    /* ---- CUSTOM CURSOR ---- */
+    .cursor-dot {
+      width: 8px; height: 8px;
+      background: var(--holo-teal);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 99999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.1s ease, width 0.3s, height 0.3s, background 0.3s;
+      box-shadow: 0 0 10px var(--holo-teal);
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid rgba(0,181,200,0.5);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 99998;
+      transform: translate(-50%,-50%);
+      transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
+    }
+    body:has(a:hover) .cursor-dot,
+    body:has(button:hover) .cursor-dot { background: var(--holo-gold); width: 12px; height: 12px; box-shadow: 0 0 16px var(--holo-gold); }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring { width: 52px; height: 52px; border-color: rgba(212,175,55,0.6); }
+
+    /* ---- PANEL SYSTEM ---- */
+    .panel-3d {
+      background: var(--bg-charcoal); border-radius: 20px;
+      box-shadow: var(--shadow-drop);
+      border: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+    }
+    .panel-inset {
+      background: #0a0e0e; border-radius: 16px;
+      box-shadow: var(--shadow-inner);
+      border: 1px solid rgba(255,255,255,0.03);
+    }
+    .panel-gold { border: 1px solid rgba(212,175,55,0.35) !important; }
+    .panel-teal { border: 1px solid rgba(0,181,200,0.35) !important; }
+    .panel-garnet { border: 1px solid rgba(125,46,58,0.5) !important; }
+
+    /* ---- TYPOGRAPHY ---- */
+    .font-display  { font-family: 'Cormorant Garamond', serif; }
+    .font-header   { font-family: 'Outfit', sans-serif; }
+    .font-script   { font-family: 'Dancing Script', cursive; }
+    .text-gradient { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .text-gold-gradient { background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* ---- BUTTONS ---- */
+    .btn-3d {
+      background: var(--bg-charcoal); color: var(--text-main);
+      padding: 1rem 2rem; border-radius: 14px; font-weight: 800;
+      text-decoration: none; display: inline-flex; align-items: center;
+      justify-content: center; gap: 0.5rem; letter-spacing: 0.5px;
+      box-shadow: var(--shadow-drop);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+      font-family: 'Outfit', sans-serif; cursor: none;
+    }
+    .btn-3d::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 100%; height: 2px; background: var(--gradient-primary);
+    }
+    .btn-3d:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 35px rgba(0,0,0,0.9), 0 0 25px rgba(0,181,200,0.2);
+      border-color: var(--holo-teal);
+    }
+    .btn-glow {
+      background: var(--gradient-primary); color: #000;
+      padding: 1.2rem 2.6rem; border-radius: 14px; font-weight: 900;
+      text-decoration: none; display: inline-flex; align-items: center;
+      justify-content: center; gap: 0.6rem; border: none;
+      box-shadow: 0 0 25px rgba(0,181,200,0.4);
+      transition: all 0.3s; cursor: none;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+    }
+    .btn-glow:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 50px rgba(0,181,200,0.65);
+      color: white;
+    }
+    .btn-scarcity {
+      background: rgba(26,15,0,0.9); border: 1px solid var(--alert-amber);
+      color: var(--alert-amber); padding: 0.6rem 1.3rem; border-radius: 10px;
+      font-weight: 800; font-size: 0.85rem; display: flex; align-items: center;
+      gap: 0.5rem; cursor: none; transition: all 0.3s;
+      animation: borderPulse 2.5s infinite;
+      box-shadow: 0 0 20px rgba(245,158,11,0.15);
+      font-family: 'Outfit', sans-serif;
+    }
+    .btn-scarcity:hover { background: var(--alert-amber); color: black; box-shadow: 0 0 35px rgba(245,158,11,0.5); }
+    @keyframes borderPulse { 0%,100%{border-color:var(--alert-amber);}50%{border-color:rgba(245,158,11,0.3);} }
+    .dot-pulse { width:8px; height:8px; background:var(--alert-amber); border-radius:50%; animation:blink 1.2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;}50%{opacity:0.25;} }
+
+    /* ---- HEADER ---- */
+    header {
+      background: rgba(13,21,21,0.88);
+      backdrop-filter: blur(20px);
+      padding: 0.9rem 5%; display: flex;
+      justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 1px solid rgba(0,181,200,0.08);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .nav-link {
+      color: var(--text-dim); text-decoration: none;
+      font-weight: 700; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      transition: all 0.3s; font-family: 'Outfit', sans-serif;
+    }
+    .nav-link:hover { color: var(--holo-teal); text-shadow: 0 0 12px var(--holo-teal); }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative; min-height: 95vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; padding: 5rem 2rem 4rem;
+      overflow: hidden;
+    }
+    #hero-canvas { position:absolute; inset:0; z-index:0; pointer-events:none; }
+    .hero-mountains {
+      position: absolute; bottom: 0; left: 0; width: 100%;
+      height: 55%; z-index: 1; pointer-events: none; opacity: 0.18;
+    }
+    .hero-content { position:relative; z-index:3; max-width: 1100px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,181,200,0.08); border: 1px solid rgba(0,181,200,0.3);
+      padding: 0.45rem 1.2rem; border-radius: 100px;
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--holo-teal);
+      margin-bottom: 1.8rem; font-family: 'Outfit', sans-serif;
+      animation: fadeInDown 0.8s ease both;
+    }
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeInUp   { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn     { from{opacity:0;}to{opacity:1;} }
+
+    /* ---- STAR PULSE ---- */
+    .star-burst {
+      position: relative; display: inline-block;
+    }
+    .star-burst::after {
+      content: '✦';
+      position: absolute; top: -12px; right: -20px;
+      color: var(--holo-bright-gold); font-size: 1rem;
+      animation: starPulse 2s ease infinite;
+    }
+    @keyframes starPulse { 0%,100%{opacity:1;transform:scale(1) rotate(0deg);}50%{opacity:0.5;transform:scale(1.4) rotate(20deg);} }
+
+    /* ---- SECTION SHARED ---- */
+    .section-dark { background: var(--bg-charcoal); }
+    .section-emerald { background: var(--bg-emerald); }
+    .section-deep { background: var(--bg-deep); }
+    .section-divider {
+      height: 1px; width: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0,181,200,0.3), rgba(212,175,55,0.3), transparent);
+    }
+
+    /* ---- SCROLL REVEAL ---- */
+    .reveal {
+      opacity: 0; transform: translateY(35px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-40px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+    .delay-500 { transition-delay: 0.5s; }
+
+    /* ---- COMPARISON SECTION ---- */
+    .compare-col-old {
+      filter: saturate(0.3) brightness(0.7);
+      transition: filter 1s ease;
+    }
+    .compare-col-old.visible { filter: saturate(0.4) brightness(0.75); }
+    .compare-col-new { transition: box-shadow 1s ease; }
+    .compare-col-new.visible { box-shadow: var(--glow-teal); }
+    .compare-list li {
+      display: flex; align-items: flex-start;
+      gap: 1rem; margin-bottom: 1.4rem;
+      color: var(--text-dim); font-size: 0.95rem; line-height: 1.6;
+    }
+    .compare-list i { margin-top: 0.25rem; font-size: 1.1rem; flex-shrink: 0; }
+    .icon-red   { color: #ef4444; text-shadow: 0 0 10px rgba(239,68,68,0.4); }
+    .icon-green { color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.4); }
+
+    /* ---- TOOL REPLACE TABLE ---- */
+    .tool-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.2s;
+    }
+    .tool-row:hover { background: rgba(0,181,200,0.04); }
+    .tool-row > div {
+      padding: 1rem 1.2rem; font-size: 0.88rem;
+      display: flex; align-items: center;
+    }
+    .tool-header {
+      font-size: 0.75rem; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--text-dim);
+      font-weight: 800; font-family: 'Outfit', sans-serif;
+    }
+    .savings-badge {
+      display: inline-block; padding: 0.2rem 0.7rem;
+      border-radius: 100px; font-size: 0.75rem;
+      font-weight: 800; letter-spacing: 0.5px;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* ---- STEPS / HOW IT WORKS ---- */
+    .step-icon-wrap {
+      width: 80px; height: 80px; border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 1.8rem; margin-bottom: 1.5rem;
+      border: 2px solid var(--holo-teal);
+      animation: iconGlow 3.5s infinite alternate;
+      background: var(--bg-charcoal); flex-shrink: 0;
+    }
+    @keyframes iconGlow {
+      0%  { box-shadow: 0 0 15px rgba(0,181,200,0.2); border-color: rgba(0,181,200,0.6); color: var(--holo-teal); }
+      100%{ box-shadow: 0 0 30px rgba(212,175,55,0.4); border-color: rgba(212,175,55,0.8); color: var(--holo-bright-gold); }
+    }
+
+    /* ---- NICHE TABS ---- */
+    .niche-tab {
+      padding: 0.6rem 1.4rem; border-radius: 100px; cursor: none;
+      font-weight: 700; font-size: 0.85rem; transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-dim); font-family: 'Outfit', sans-serif;
+      letter-spacing: 0.5px; background: transparent;
+    }
+    .niche-tab.active {
+      background: var(--gradient-primary); color: #000;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(0,181,200,0.3);
+    }
+    .niche-content { display: none; }
+    .niche-content.active { display: grid; }
+
+    /* ---- CUSTOMER JOURNEY TIMELINE ---- */
+    .journey-step {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; position: relative; flex: 1;
+    }
+    .journey-step::after {
+      content: ''; position: absolute; top: 28px; left: calc(50% + 24px);
+      width: calc(100% - 48px); height: 2px;
+      background: linear-gradient(90deg, var(--holo-teal), rgba(0,181,200,0.1));
+    }
+    .journey-step:last-child::after { display: none; }
+    .journey-node {
+      width: 52px; height: 52px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 1rem; border: 2px solid;
+      transition: all 0.4s; position: relative; z-index: 2;
+    }
+    .journey-step.old .journey-node {
+      border-color: rgba(239,68,68,0.4); background: rgba(239,68,68,0.05);
+      color: rgba(239,68,68,0.5);
+    }
+    .journey-step.new .journey-node {
+      border-color: var(--holo-teal); background: rgba(0,181,200,0.08);
+      color: var(--holo-teal);
+      animation: iconGlow 3s infinite alternate;
+    }
+
+    /* ---- PRICING ---- */
+    .price-card { padding: 2.8rem 2.4rem; display: flex; flex-direction: column; transition: all 0.4s; }
+    .price-card:hover { transform: translateY(-6px); }
+    .price-card.popular { border-color: rgba(212,175,55,0.5) !important; }
+    .price-card.popular:hover { box-shadow: var(--glow-gold); }
+    .feature-list { list-style: none; margin: 1.5rem 0; flex-grow: 1; }
+    .feature-list li {
+      margin-bottom: 0.9rem; display: flex;
+      align-items: flex-start; gap: 0.75rem;
+      font-size: 0.92rem; color: var(--text-main); line-height: 1.5;
+    }
+    .feature-list i { color: var(--holo-teal); margin-top: 0.2rem; flex-shrink: 0; font-size: 0.85rem; }
+    .feature-header {
+      font-size: 0.75rem; letter-spacing: 1.2px;
+      color: var(--text-dim); text-transform: uppercase;
+      margin: 1.4rem 0 0.8rem; font-weight: 800;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 0.5rem; font-family: 'Outfit', sans-serif;
+    }
+    .replaces-badge {
+      background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2);
+      color: #10b981; padding: 0.4rem 0.9rem;
+      border-radius: 100px; font-size: 0.75rem;
+      font-weight: 800; letter-spacing: 0.5px;
+      font-family: 'Outfit', sans-serif; display: inline-block; margin-bottom: 1rem;
+    }
+
+    /* ---- TESTIMONIAL ---- */
+    .testimonial-card {
+      background: rgba(125,46,58,0.06);
+      border: 1px solid rgba(125,46,58,0.2);
+      border-radius: 16px; padding: 2rem;
+    }
+    .stars { color: var(--holo-bright-gold); font-size: 1.1rem; letter-spacing: 2px; }
+
+    /* ---- MODAL CALENDAR ---- */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(8,14,14,0.92);
+      backdrop-filter: blur(12px); z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: all 0.35s ease;
+    }
+    .modal-overlay.active { opacity: 1; visibility: visible; }
+    .modal-content {
+      background: var(--bg-charcoal); width: 92%; max-width: 960px;
+      height: 88vh; border-radius: 20px; position: relative;
+      transform: translateY(30px); transition: transform 0.35s ease;
+      overflow: hidden; border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 70px rgba(0,0,0,0.9);
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0); }
+    .close-btn {
+      position: absolute; top: 14px; right: 16px;
+      font-size: 1.5rem; color: white; cursor: none; z-index: 10;
+      background: rgba(255,255,255,0.08); border-radius: 50%;
+      width: 40px; height: 40px; display: flex;
+      align-items: center; justify-content: center; transition: all 0.3s;
+    }
+    .close-btn:hover { background: var(--alert-amber); color: black; }
+
+    /* ---- FLOATING PHONE MOCKUP ---- */
+    .phone-mockup {
+      position: relative; display: inline-block;
+      animation: floatPhone 5s ease-in-out infinite;
+    }
+    @keyframes floatPhone {
+      0%,100%{ transform: translateY(0px) rotate(-3deg); }
+      50%    { transform: translateY(-16px) rotate(-1deg); }
+    }
+    .phone-shell {
+      width: 220px; border-radius: 36px;
+      background: #0a0d0d; border: 2px solid rgba(0,181,200,0.3);
+      box-shadow: 0 0 40px rgba(0,181,200,0.15), 0 30px 60px rgba(0,0,0,0.8);
+      overflow: hidden; position: relative;
+    }
+    .phone-notch {
+      width: 90px; height: 22px; background: #0a0d0d;
+      border-radius: 0 0 14px 14px; margin: 0 auto;
+      position: relative; z-index: 2;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .phone-screen {
+      background: #0e1414; padding: 0.5rem 0.75rem 1rem;
+    }
+    .phone-msg {
+      background: rgba(0,181,200,0.1); border: 1px solid rgba(0,181,200,0.2);
+      border-radius: 10px; padding: 0.5rem 0.65rem;
+      margin-bottom: 0.5rem; font-size: 0.65rem;
+      color: var(--cool-silver); line-height: 1.4;
+    }
+    .phone-msg.incoming {
+      background: rgba(212,175,55,0.08); border-color: rgba(212,175,55,0.2);
+      color: var(--holo-bright-gold); margin-left: 1rem;
+    }
+    .phone-notif {
+      display: flex; align-items: center; gap: 0.4rem;
+      background: rgba(16,185,129,0.1); border-radius: 8px;
+      padding: 0.4rem 0.6rem; margin-top: 0.5rem;
+      font-size: 0.6rem; color: #10b981;
+    }
+
+    /* ---- GLOW DIVIDER ---- */
+    .glow-line {
+      width: 100px; height: 2px; margin: 1rem auto;
+      background: var(--gradient-primary);
+      border-radius: 100px;
+      box-shadow: 0 0 12px rgba(0,181,200,0.4);
+    }
+
+    /* ---- FAQ ACCORDION ---- */
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .faq-question {
+      display: flex; justify-content: space-between;
+      align-items: center; padding: 1.4rem 0;
+      cursor: none; font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--holo-teal); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;
+    }
+    .faq-answer.open { max-height: 300px; padding-bottom: 1.4rem; }
+    .faq-icon { transition: transform 0.35s ease; color: var(--holo-teal); font-size: 0.85rem; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    /* ---- COUNTER ANIMATION ---- */
+    .stat-number {
+      font-size: 3.5rem; font-weight: 900;
+      font-family: 'Outfit', sans-serif;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 768px) {
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none; }
+
+      /* Hero */
+      .hero { padding: 5rem 1.2rem 3rem; min-height: 80vh; }
+      .hero h1 { font-size: 2.3rem; line-height: 1.2; }
+      .hero p  { font-size: 1rem; }
+      .hero-badge { font-size: 0.72rem; padding: 0.35rem 0.9rem; }
+
+      /* Tool table - collapse to 2 cols on mobile */
+      .tool-row { grid-template-columns: 1fr 1fr; }
+      .tool-row > div:nth-child(3),
+      .tool-row > div:nth-child(4) { display: none; }
+
+      /* Hide phone mockup on mobile */
+      .phone-mockup { display: none; }
+
+      /* Journey steps stack vertically */
+      .journey-step::after { display: none; }
+      .journey-step { flex-direction: row; text-align: left; gap: 1rem; flex: none; width: 100%; }
+
+      /* Stat numbers */
+      .stat-number { font-size: 2.5rem; }
+
+      /* Pricing cards */
+      .price-card { padding: 2rem 1.5rem; }
+      .price-card.popular { transform: scale(1) !important; }
+
+      /* Niche tabs - wrap and scroll friendly */
+      .niche-tab { font-size: 0.78rem; padding: 0.5rem 1rem; }
+
+      /* Sections padding */
+      section { padding-left: 1rem !important; padding-right: 1rem !important; }
+
+      /* Comparison grid stacks */
+      .compare-col-old,
+      .compare-col-new { padding: 1.5rem; }
+
+      /* Testimonial cards */
+      .testimonial-card { padding: 1.5rem; }
+
+      /* Buttons full width on small screens */
+      .btn-glow, .btn-3d { width: 100%; justify-content: center; }
+
+      /* Step icon wrap smaller */
+      .step-icon-wrap { width: 60px; height: 60px; font-size: 1.4rem; }
+
+      /* Modal */
+      .modal-content { height: 92vh; width: 96%; }
+
+      /* Footer */
+      footer { padding: 2.5rem 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.9rem; }
+      .tool-row { grid-template-columns: 1fr; }
+      .tool-row > div:nth-child(2),
+      .tool-row > div:nth-child(3),
+      .tool-row > div:nth-child(4) { display: none; }
+      .price-card { padding: 1.5rem 1.2rem; }
+    }
+
+    /* ---- DROPDOWN NAV ---- */
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 12px); left: 0;
+      width: 240px; border-radius: 16px; overflow: hidden;
+      opacity: 0; visibility: hidden; transform: translateY(8px);
+      transition: all 0.3s ease;
+    }
+    .nav-dropdown-wrap:hover .nav-dropdown {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+    .nav-dropdown a {
+      display: block; padding: 0.9rem 1.2rem;
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--cool-silver); transition: all 0.2s;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-family: 'Outfit', sans-serif; text-decoration: none;
+    }
+    .nav-dropdown a:last-child { border-bottom: none; }
+    .nav-dropdown a:hover { color: white; background: rgba(255,255,255,0.04); padding-left: 1.5rem; }
+
+    /* ---- PARALLAX MOUNTAIN BG ---- */
+    .parallax-layer {
+      position: absolute; pointer-events: none;
+      transform-style: preserve-3d;
+    }
+
+    /* ---- BADGE PULSE ---- */
+    @keyframes badgePulse { 0%,100%{box-shadow:0 0 0 0 rgba(212,175,55,0.4);}70%{box-shadow:0 0 0 10px rgba(212,175,55,0);} }
+    .badge-pulse { animation: badgePulse 2.5s infinite; }
+
+    /* ---- TAGLINE ---- */
+    .tagline-script {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem; color: var(--holo-bright-gold);
+    }
+
+    /* ---- HAMBURGER BUTTON ---- */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      align-items: center; gap: 5px; width: 40px; height: 40px;
+      background: rgba(0,181,200,0.08); border: 1px solid rgba(0,181,200,0.25);
+      border-radius: 10px; cursor: pointer; transition: all 0.3s; flex-shrink: 0;
+    }
+    .hamburger span {
+      display: block; width: 20px; height: 2px;
+      background: var(--holo-teal); border-radius: 2px;
+      transition: all 0.35s ease; transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .hamburger:hover { background: rgba(0,181,200,0.15); border-color: var(--holo-teal); }
+
+    /* ---- MOBILE NAV OVERLAY ---- */
+    .mobile-nav {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(8,14,14,0.97); backdrop-filter: blur(20px);
+      z-index: 999; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; gap: 0;
+      opacity: 0; visibility: hidden; transform: translateY(-20px);
+      transition: all 0.4s ease;
+    }
+    .mobile-nav.open {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+    .mobile-nav-link {
+      display: block; padding: 1.1rem 2rem; width: 100%; text-align: center;
+      font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--text-dim); text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: all 0.25s ease;
+    }
+    .mobile-nav-link:hover, .mobile-nav-link:active { color: var(--holo-teal); background: rgba(0,181,200,0.04); }
+    .mobile-nav-link.highlight { color: var(--holo-bright-gold); }
+    .mobile-nav-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: white; cursor: pointer; transition: all 0.3s;
+    }
+    .mobile-nav-close:hover { background: var(--alert-amber); color: black; }
+    .mobile-contact-strip {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+      padding: 1.2rem 1rem 0.5rem;
+    }
+    .mobile-contact-strip a {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--text-dim); text-decoration: none;
+      font-family: 'Outfit', sans-serif; font-weight: 600;
+      transition: color 0.2s;
+    }
+    .mobile-contact-strip a:hover { color: white; }
+
+    /* ---- HERO CANVAS full cover ---- */
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100% !important; height: 100% !important;
+      z-index: 0; pointer-events: none;
+    }
+
+    /* ---- FOOTER CANVAS ---- */
+    #footer-canvas {
+      position: absolute; inset: 0;
+      width: 100% !important; height: 100% !important;
+      pointer-events: none; z-index: 0; opacity: 0.7;
+    }
+    footer { position: relative; overflow: hidden; }
+    .footer-content { position: relative; z-index: 2; }
+
+    /* ---- CONTACT CTA STRIP ---- */
+    .contact-strip {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      align-items: center; gap: 1.5rem; padding: 1.2rem 2rem;
+      background: rgba(0,181,200,0.04);
+      border: 1px solid rgba(0,181,200,0.12); border-radius: 14px;
+      margin-top: 1.5rem;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'Outfit', sans-serif; font-size: 0.88rem;
+      font-weight: 700; color: var(--cool-silver); text-decoration: none;
+      transition: color 0.25s;
+    }
+    .contact-item:hover { color: white; }
+    .contact-item i { color: var(--holo-teal); font-size: 1rem; }
+
+    /* ---- TOOL TABLE MOBILE SCROLL ---- */
+    .tool-table-wrap {
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      border-radius: 20px;
+    }
+    .tool-table-inner { min-width: 600px; }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      body { cursor: auto; }
+      .cursor-dot, .cursor-ring { display: none; }
+      .hero { padding: 5rem 1.2rem 3rem; min-height: 80vh; }
+      .hero h1 { font-size: 2.3rem; line-height: 1.2; }
+      .hero p  { font-size: 1rem; }
+      .hero-badge { font-size: 0.72rem; padding: 0.35rem 0.9rem; }
+      .phone-mockup { display: none; }
+      .journey-step::after { display: none; }
+      .journey-step { flex-direction: row; text-align: left; gap: 1rem; flex: none; width: 100%; }
+      .stat-number { font-size: 2.5rem; }
+      .price-card { padding: 2rem 1.5rem; }
+      .price-card.popular { transform: scale(1) !important; }
+      .niche-tab { font-size: 0.78rem; padding: 0.5rem 1rem; }
+      section { padding-left: 1rem !important; padding-right: 1rem !important; }
+      .compare-col-old, .compare-col-new { padding: 1.5rem; }
+      .testimonial-card { padding: 1.5rem; }
+      .btn-glow, .btn-3d { width: 100%; justify-content: center; }
+      .step-icon-wrap { width: 60px; height: 60px; font-size: 1.4rem; }
+      .modal-content { height: 92vh; width: 96%; }
+      footer { padding: 2.5rem 1rem; }
+      .contact-strip { gap: 1rem; padding: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.9rem; }
+      .price-card { padding: 1.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ===================== MOBILE NAV OVERLAY ===================== -->
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-close" onclick="closeMobileNav()"><i class="fa-solid fa-xmark"></i></div>
+
+    <a href="#why"       class="mobile-nav-link" onclick="closeMobileNav()">Why GoChuchuro</a>
+    <a href="#solutions" class="mobile-nav-link" onclick="closeMobileNav()">How It Works</a>
+    <a href="#niches"    class="mobile-nav-link" onclick="closeMobileNav()">Your Trade</a>
+    <a href="showroom.html" class="mobile-nav-link highlight" onclick="closeMobileNav()">
+      <i class="fa-solid fa-cube" style="margin-right:0.5rem;"></i>Templates
+    </a>
+    <a href="#pricing"   class="mobile-nav-link" onclick="closeMobileNav()">Pricing</a>
+    <a href="#faqs"      class="mobile-nav-link" onclick="closeMobileNav()">FAQs</a>
+
+    <div class="mobile-contact-strip">
+      <a href="mailto:hello@gochuchuro.com">
+        <i class="fa-solid fa-envelope" style="color:var(--holo-teal);"></i> Email Us
+      </a>
+      <a href="https://wa.me/447474080809" target="_blank">
+        <i class="fa-brands fa-whatsapp" style="color:#25D366;"></i> WhatsApp Us
+      </a>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <button onclick="closeMobileNav();openCalendar();" class="btn-glow" style="font-size:0.9rem;padding:1rem 2rem;">
+        Book Free 30-Min Chat <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================== HEADER ===================== -->
+  <header>
+    <a href="#" class="flex items-center gap-3 flex-shrink-0 no-underline group" style="text-decoration:none;">
+      <img src="logo-transparent.png" alt="GoChuchuro logo" class="h-9 w-auto"
+           onerror="this.style.display='none';document.getElementById('svg-logo').style.display='block'"/>
+      <svg id="svg-logo" style="display:none;" width="36" height="30" viewBox="0 0 42 36" fill="none">
+        <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="font-header text-xl font-black tracking-widest text-white hidden sm:block">
+        GOCHUCHURO<span style="color:var(--holo-teal)">.</span>
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-7">
+      <a href="#why" class="nav-link">Why Us</a>
+      <a href="#solutions" class="nav-link">How It Works</a>
+      <a href="#niches" class="nav-link">Your Trade</a>
+      <div class="nav-dropdown-wrap relative">
+        <a href="showroom.html" class="nav-link flex items-center gap-1.5">
+          Templates <i class="fa-solid fa-chevron-down" style="font-size:9px;"></i>
+        </a>
+        <div class="nav-dropdown panel-3d">
+          <a href="plumbing/3d/index.html" target="_blank">Plumbing &amp; Heating</a>
+          <a href="restaurant/3d/index.html" target="_blank">Restaurants</a>
+          <a href="salon/3d/index.html" target="_blank">Hair Salons</a>
+          <a href="garage/3d/index.html" target="_blank">Car Garages</a>
+          <a href="driving/3d/index.html" target="_blank">Driving Instructors</a>
+        </div>
+      </div>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#faqs" class="nav-link">FAQs</a>
+    </nav>
+
+    <!-- Right side: CTA + hamburger -->
+    <div class="flex items-center gap-3">
+      <button onclick="openCalendar()" class="btn-scarcity">
+        <div class="dot-pulse"></div>
+        <span class="hidden sm:inline">Book Free Chat</span>
+        <span class="sm:hidden">Free Chat</span>
+      </button>
+      <!-- Hamburger — mobile only -->
+      <button class="hamburger md:hidden" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <!-- Full-cover Three.js canvas -->
+    <canvas id="hero-canvas"></canvas>
+
+    <!-- Parallax depth layer 1: far soft rolling hills — farthest horizon -->
+    <svg id="mountainFar" viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+         style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0.13;">
+      <defs>
+        <linearGradient id="mgFar" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00B5C8" stop-opacity="0.6"/>
+          <stop offset="50%" stop-color="#2A3D2B" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#D4AF37" stop-opacity="0.5"/>
+        </linearGradient>
+      </defs>
+      <!-- Smooth distant hills — very gentle undulation -->
+      <path d="M0,340 C120,300 240,360 380,290 C520,220 600,270 720,240 C840,210 960,260 1080,220 C1200,180 1320,230 1440,200 L1440,500 L0,500 Z"
+            fill="url(#mgFar)"/>
+    </svg>
+
+    <!-- Parallax depth layer 2: mid rolling hills — slightly more definition -->
+    <svg id="mountainMid" viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+         style="position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none;opacity:0.3;">
+      <!-- Fill -->
+      <path d="M0,380 C80,340 180,400 300,350 C420,300 500,360 640,310 C780,260 860,330 1000,280 C1140,230 1260,300 1440,260 L1440,500 L0,500 Z"
+            fill="#0D1515"/>
+      <!-- Soft teal edge glow on ridgeline -->
+      <path d="M0,380 C80,340 180,400 300,350 C420,300 500,360 640,310 C780,260 860,330 1000,280 C1140,230 1260,300 1440,260"
+            stroke="#00B5C8" stroke-width="0.9" fill="none" opacity="0.3"/>
+    </svg>
+
+    <!-- Parallax depth layer 3: near hills with brand double-peak and animated star -->
+    <svg id="mountainNear" viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"
+         style="position:absolute;bottom:0;left:0;width:100%;height:78%;z-index:3;pointer-events:none;">
+      <defs>
+        <linearGradient id="mgNearL" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stop-color="#0D1515"/>
+          <stop offset="100%" stop-color="#0D1515" stop-opacity="0.0"/>
+        </linearGradient>
+      </defs>
+      <!-- Near hillside fill — smooth broad curve grounding the scene -->
+      <path d="M0,500 C60,460 140,420 240,390 C340,360 420,380 520,340 C580,318 620,200 660,160 C700,120 740,105 780,130 C820,155 860,240 920,290 C980,340 1060,360 1160,370 C1260,380 1350,400 1440,420 L1440,500 Z"
+            fill="#0D1515" opacity="0.97"/>
+      <!-- Teal left ridge outline — gentle curve into left peak -->
+      <path d="M0,500 C60,460 140,420 240,390 C340,360 420,380 520,340 C580,318 620,200 660,160 C700,120 740,105 780,130"
+            stroke="#00B5C8" stroke-width="1.1" fill="none" opacity="0.55"/>
+      <!-- Gold right ridge outline — sweeps down from right peak -->
+      <path d="M780,130 C820,155 860,240 920,290 C980,340 1060,360 1160,370 C1260,380 1350,400 1440,420"
+            stroke="#D4AF37" stroke-width="1.1" fill="none" opacity="0.45"/>
+
+      <!-- Brand Chuchuro star at summit — unchanged, glowing -->
+      <circle cx="762" cy="107" r="2.5" fill="#E5C158" opacity="0.92">
+        <animate attributeName="r" values="2.5;7;2.5" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.92;0.25;0.92" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+      <line x1="762" y1="82" x2="762" y2="134" stroke="#E5C158" stroke-width="1.2" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.12;0.6" dur="2.8s" repeatCount="indefinite"/>
+      </line>
+      <line x1="737" y1="107" x2="787" y2="107" stroke="#E5C158" stroke-width="1.2" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.12;0.6" dur="2.8s" repeatCount="indefinite"/>
+      </line>
+      <line x1="744" y1="89" x2="780" y2="125" stroke="#E5C158" stroke-width="0.6" opacity="0.3"/>
+      <line x1="780" y1="89" x2="744" y2="125" stroke="#E5C158" stroke-width="0.6" opacity="0.3"/>
+      <!-- Expanding glow halo -->
+      <circle cx="762" cy="107" r="18" fill="none" stroke="#E5C158" stroke-width="0.5" opacity="0.1">
+        <animate attributeName="r" values="18;34;18" dur="2.8s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.1;0;0.1" dur="2.8s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-star" style="font-size:0.65rem;"></i>
+        UK Digital Growth Agency &nbsp;·&nbsp; Powered by GoHighLevel
+      </div>
+
+      <h1 class="font-header font-black tracking-tight leading-tight mb-6"
+          style="font-size: clamp(2.8rem, 7vw, 6rem); animation: fadeInUp 0.9s ease 0.2s both;">
+        Every missed call is a job<br>
+        <span class="text-gradient star-burst">going to your competitor.</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed mb-3"
+         style="color:var(--cool-silver); animation: fadeInUp 0.9s ease 0.4s both;">
+        You started your business for <strong style="color:white;">freedom</strong>, not to answer messages at midnight.
+        We build smart websites and automated systems that run your business 24/7 &mdash; whether you are starting out or scaling up.
+      </p>
+      <p class="tagline-script mb-10" style="animation: fadeIn 1.2s ease 0.6s both;">"Reach Your Peak. Automate Your Growth."</p>
+
+      <div class="flex flex-wrap justify-center gap-4 mt-2" style="animation: fadeInUp 0.9s ease 0.6s both;">
+        <button onclick="openCalendar()" class="btn-glow">
+          Book Your Free 30-Min Chat <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <a href="showroom.html" class="btn-3d">
+          <i class="fa-solid fa-cube"></i> View 3D Templates
+        </a>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 mt-10 text-sm font-bold" style="color:var(--text-dim); animation: fadeIn 1.2s ease 0.9s both;">
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> Starter or established &mdash; we fit your stage
+        </span>
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> No tech skills needed
+        </span>
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> Live and running in 5 working days
+        </span>
+        <span class="flex items-center gap-2">
+          <i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> Real coaching included in every plan
+        </span>
+      </div>
+    </div>
+
+    <!-- Floating phone mockup -->
+    <div class="phone-mockup absolute right-8 bottom-12 hidden lg:block" style="z-index:3;">
+      <div class="phone-shell">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div style="font-size:0.6rem;color:var(--text-dim);margin-bottom:0.5rem;font-family:'Outfit',sans-serif;letter-spacing:1px;text-transform:uppercase;">Your Inbox &mdash; Today</div>
+          <div class="phone-msg">
+            <strong style="color:var(--holo-teal);">Auto Text Sent</strong><br>
+            "Hi! Sorry I missed your call. How can I help?" &rarr; <em>Lead saved.</em>
+          </div>
+          <div class="phone-msg incoming">
+            <strong>New Booking &mdash; 10:30am</strong><br>
+            Sarah M. booked a consultation &mdash; while you slept.
+          </div>
+          <div class="phone-msg">
+            <strong style="color:var(--holo-teal);">Google Review Request</strong><br>
+            Sent to 3 customers after today's jobs.
+          </div>
+          <div class="phone-notif">
+            <i class="fa-solid fa-circle-check"></i>
+            2 new 5&#9733; reviews received today
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== STATS TRUST STRIP ===================== -->
+  <section class="section-dark py-14 px-5">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center reveal">
+      <div>
+        <div class="stat-number" data-target="98">0</div>
+        <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);font-family:'Outfit',sans-serif;font-weight:700;">% SMS Open Rate</div>
+      </div>
+      <div>
+        <div class="stat-number" data-target="60">0</div>
+        <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);font-family:'Outfit',sans-serif;font-weight:700;">% Fewer No-Shows</div>
+      </div>
+      <div>
+        <div class="stat-number" data-target="5">0</div>
+        <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);font-family:'Outfit',sans-serif;font-weight:700;">Days to Go Live</div>
+      </div>
+      <div>
+        <div class="stat-number">£700+</div>
+        <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);font-family:'Outfit',sans-serif;font-weight:700;">Saved vs Separate Tools</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== WHY SECTION ===================== -->
+  <section id="why" class="section-emerald py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header"
+              style="color:var(--holo-teal);border:1px solid rgba(0,181,200,0.3);background:rgba(0,181,200,0.06);">
+          The Honest Truth
+        </span>
+        <h2 class="font-header text-4xl md:text-5xl font-bold mb-5">Why the old way is costing you money.</h2>
+        <p style="color:var(--text-dim);font-size:1.1rem;">Whether you are just starting or already trading &mdash; the same leaks exist. Here is what we fix.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <!-- Old way - desaturated on reveal -->
+        <div class="panel-inset p-8 compare-col-old reveal-left">
+          <h3 class="font-header text-2xl font-bold mb-7 pb-4"
+              style="color:#6b7280;border-bottom:1px solid rgba(255,255,255,0.04);">
+            &#x26A0; The Old Way
+          </h3>
+          <ul class="compare-list">
+            <li>
+              <i class="fa-solid fa-xmark icon-red"></i>
+              <div><strong style="color:#9ca3af;">Static website, invisible on Google</strong><br>
+              Looks like everyone else. Customers scroll past you and call the next name.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark icon-red"></i>
+              <div><strong style="color:#9ca3af;">Missed call = missed job</strong><br>
+              You are on a job or driving. The phone rings. You miss it. That customer rings your competitor.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark icon-red"></i>
+              <div><strong style="color:#9ca3af;">Begging for Google reviews</strong><br>
+              You feel awkward asking. Customers mean to leave one and forget. Your rating sits at 3.8 stars.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark icon-red"></i>
+              <div><strong style="color:#9ca3af;">Five apps, all talking to each other</strong><br>
+              WhatsApp, Facebook, Instagram, email, and your booking system &mdash; none connected, all chaotic.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark icon-red"></i>
+              <div><strong style="color:#9ca3af;">Paying for tools that do not talk to each other</strong><br>
+              Mailchimp, Calendly, HubSpot, Hootsuite, Trustpilot. Separate bills. Separate logins. Separate headaches.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-xmark icon-red"></i>
+              <div><strong style="color:#9ca3af;">Existing custom software with gaps</strong><br>
+              You have built something. But it does not follow up automatically, send reviews, or answer the phone when you cannot.</div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- GoChuchuro way - glows on reveal -->
+        <div class="panel-3d p-8 compare-col-new reveal-right panel-teal">
+          <h3 class="font-header text-2xl font-bold mb-7 pb-4"
+              style="border-bottom:1px solid rgba(0,181,200,0.15);">
+            <span class="text-gradient">&#x2714; The GoChuchuro Way</span>
+          </h3>
+          <ul class="compare-list">
+            <li>
+              <i class="fa-solid fa-check icon-green"></i>
+              <div><strong style="color:white;">Immersive 2D or 3D website built for you</strong><br>
+              Choose your look from our Showroom. We build it in 5 days. You own a site that makes people stop scrolling.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-check icon-green"></i>
+              <div><strong style="color:white;">Instant text-back on every missed call</strong><br>
+              Phone rings. You cannot answer. The system fires a text: <em style="color:var(--holo-teal);">"Hi, sorry I missed you &mdash; how can I help?"</em> Lead saved.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-check icon-green"></i>
+              <div><strong style="color:white;">Automated review requests after every job</strong><br>
+              The moment a job is marked done, a review request goes out automatically. Your rating climbs while you drive home.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-check icon-green"></i>
+              <div><strong style="color:white;">One unified inbox for everything</strong><br>
+              Every message from Facebook, Instagram, Google, SMS and email lives in one simple app on your phone.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-check icon-green"></i>
+              <div><strong style="color:white;">Replaces up to £700+ of separate tools</strong><br>
+              One plan replaces Mailchimp, Calendly, HubSpot, Hootsuite, and Trustpilot. One login. One bill.</div>
+            </li>
+            <li>
+              <i class="fa-solid fa-check icon-green"></i>
+              <div><strong style="color:white;">Wraps around your existing software</strong><br>
+              Already have a custom system? We layer in the automation, AI receptionist and review tools on top &mdash; no replacement needed.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== TOOL REPLACEMENT TABLE ===================== -->
+  <section class="section-dark py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header"
+              style="color:var(--holo-gold);border:1px solid rgba(212,175,55,0.3);background:rgba(212,175,55,0.06);">
+          The Value Is Real
+        </span>
+        <h2 class="font-header text-4xl md:text-5xl font-bold mb-4">What GoChuchuro replaces &mdash; and what you save.</h2>
+        <p style="color:var(--text-dim);font-size:1.1rem;">Most businesses pay for all of these separately. We bundle them into one plan.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <div class="tool-table-wrap reveal">
+        <div class="tool-table-inner panel-3d overflow-hidden">
+        <!-- Header row -->
+        <div class="tool-row" style="background:rgba(0,181,200,0.04);border-bottom:1px solid rgba(0,181,200,0.15);">
+          <div class="tool-header" style="color:var(--holo-teal);">What You Currently Use</div>
+          <div class="tool-header">What It Does</div>
+          <div class="tool-header" style="color:#ef4444;">Typical UK Cost</div>
+          <div class="tool-header" style="color:var(--holo-bright-gold);">GoChuchuro Plan</div>
+        </div>
+        <!-- Rows -->
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">Wix / Squarespace</div>
+          <div style="color:var(--text-dim);">Website builder</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£17&ndash;£40/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:#10b981;">All Plans &#10003;</span></div>
+        </div>
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">Calendly / Acuity</div>
+          <div style="color:var(--text-dim);">Appointment booking</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£8&ndash;£15/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:#10b981;">All Plans &#10003;</span></div>
+        </div>
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">Mailchimp / Klaviyo</div>
+          <div style="color:var(--text-dim);">Email marketing</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£13&ndash;£100/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);color:var(--holo-bright-gold);">Plan B &amp; C &#10003;</span></div>
+        </div>
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">HubSpot / Pipedrive</div>
+          <div style="color:var(--text-dim);">CRM &amp; lead tracking</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£12&ndash;£80/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:#10b981;">All Plans &#10003;</span></div>
+        </div>
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">Hootsuite / Later</div>
+          <div style="color:var(--text-dim);">Social media scheduler</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£19&ndash;£99/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.25);color:var(--holo-bright-gold);">Plan B &amp; C &#10003;</span></div>
+        </div>
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">Trustpilot / Birdeye</div>
+          <div style="color:var(--text-dim);">Review &amp; reputation</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£50&ndash;£200/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);color:#10b981;">All Plans &#10003;</span></div>
+        </div>
+        <div class="tool-row">
+          <div style="color:white;font-weight:600;">Zapier / Make</div>
+          <div style="color:var(--text-dim);">App automation</div>
+          <div><span class="savings-badge" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#ef4444;">£20&ndash;£80/mo</span></div>
+          <div><span class="savings-badge" style="background:rgba(0,181,200,0.08);border:1px solid rgba(0,181,200,0.25);color:var(--holo-teal);">Plan C &#10003;</span></div>
+        </div>
+        <!-- Total row -->
+        <div class="tool-row" style="background:rgba(212,175,55,0.04);border-top:1px solid rgba(212,175,55,0.15);">
+          <div style="font-weight:900;font-family:'Outfit',sans-serif;color:white;">TOTAL (all separate)</div>
+          <div style="color:var(--text-dim);font-size:0.8rem;">Separate logins, separate bills</div>
+          <div><span style="font-size:1.2rem;font-weight:900;font-family:'Outfit',sans-serif;color:#ef4444;">£300&ndash;£700+</span><span style="font-size:0.75rem;color:var(--text-dim);">/mo</span></div>
+          <div>
+            <span style="font-size:1.1rem;font-weight:900;font-family:'Outfit',sans-serif;" class="text-gradient">From £49/mo</span>
+            <span style="font-size:0.7rem;color:var(--holo-bright-gold);display:block;margin-top:2px;font-family:'Outfit',sans-serif;">All in one. One login.</span>
+          </div>
+        </div>
+        </div><!-- end tool-table-inner -->
+      </div><!-- end tool-table-wrap -->
+    </div>
+  </section>
+  <section class="py-24 px-5" style="background:var(--bg-emerald);">
+    <div class="max-w-3xl mx-auto reveal">
+      <div class="panel-3d p-10 md:p-14 panel-gold" data-tilt data-tilt-max="2" data-tilt-glare data-tilt-max-glare="0.04">
+        <p class="font-script text-5xl mb-6" style="color:var(--holo-bright-gold);">Hello,</p>
+        <div class="font-display text-xl leading-relaxed space-y-5" style="color:#d1d5db;">
+          <p>Finding new customers is hard. Keeping them &mdash; and serving them well when you are busy &mdash; is the real challenge every business owner faces, whether they are just starting out or five years in.</p>
+          <p>I have spoken to hundreds of business owners just like you. Excellent at what they do. But exhausted. Spending evenings doing quotes, scrolling through missed WhatsApp messages, and trying to remember who to follow up with tomorrow.</p>
+          <p>We built GoChuchuro to solve the whole journey. Not just a nice website to <strong style="color:white;">FIND</strong> you customers. But the automation to <strong style="color:white;">MANAGE</strong> their bookings while you sleep. And the smart follow-up tools to <strong style="color:white;">KEEP</strong> them coming back for life.</p>
+          <p>Technology should give you your time back. If you already have a custom system, we build around it. If you are starting from scratch, we set up everything. Either way, you just download one app and we handle the rest.</p>
+          <p>Let us have a conversation. Thirty minutes. No pressure. Just clarity.</p>
+        </div>
+        <div class="mt-10 pt-8 border-t flex justify-between items-end flex-wrap gap-4" style="border-color:rgba(255,255,255,0.06);">
+          <div>
+            <p class="font-script text-4xl text-white mb-1">Prakash Gurung</p>
+            <p class="font-header text-xs font-bold uppercase tracking-widest" style="color:var(--holo-gold);">Founder, GoChuchuro &nbsp;&#183;&nbsp; Certified Business Growth Coach</p>
+          </div>
+          <button onclick="openCalendar()" class="btn-3d text-sm">
+            <i class="fa-regular fa-calendar"></i> Book Free Chat
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section id="solutions" class="section-dark py-24 px-5">
+    <div class="max-w-6xl mx-auto text-center">
+      <div class="reveal mb-16">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header"
+              style="color:var(--holo-teal);border:1px solid rgba(0,181,200,0.3);background:rgba(0,181,200,0.06);">
+          Simple Process
+        </span>
+        <h2 class="font-header text-4xl md:text-5xl font-bold mb-4">Four steps. Zero tech stress.</h2>
+        <p style="color:var(--text-dim);font-size:1.1rem;">We do all the heavy lifting. You just use the app.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="panel-inset p-8 text-center reveal delay-100" data-tilt data-tilt-max="6">
+          <div class="step-icon-wrap mx-auto"><i class="fa-solid fa-ear-listen"></i></div>
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-3" style="color:var(--text-dim);">Step 1</div>
+          <h3 class="font-header text-xl font-bold text-white mb-3">Understand</h3>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">We jump on a quick call and listen. No jargon. Just an honest look at where your business is losing time and money right now.</p>
+        </div>
+        <div class="panel-inset p-8 text-center reveal delay-200" data-tilt data-tilt-max="6">
+          <div class="step-icon-wrap mx-auto" style="animation-delay:0.5s;"><i class="fa-solid fa-eye"></i></div>
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-3" style="color:var(--text-dim);">Step 2</div>
+          <h3 class="font-header text-xl font-bold text-white mb-3">Show</h3>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">We show you exactly how the system will solve your problems. Live demo on your own phone number. You see it working before you spend a penny.</p>
+        </div>
+        <div class="panel-inset p-8 text-center reveal delay-300" data-tilt data-tilt-max="6">
+          <div class="step-icon-wrap mx-auto" style="animation-delay:1s;"><i class="fa-solid fa-rocket"></i></div>
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-3" style="color:var(--text-dim);">Step 3</div>
+          <h3 class="font-header text-xl font-bold text-white mb-3">Build</h3>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">We build your website and automation system. You send us your logo, a few photos, and your services list. We hand it all back, live, in 5 working days.</p>
+        </div>
+        <div class="panel-inset p-8 text-center reveal delay-400" data-tilt data-tilt-max="6">
+          <div class="step-icon-wrap mx-auto" style="animation-delay:1.5s;"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-3" style="color:var(--text-dim);">Step 4</div>
+          <h3 class="font-header text-xl font-bold text-white mb-3">Grow</h3>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">We do not leave you alone after that. Monthly coaching, progress reports, and support come with every plan. Your success is our success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== CUSTOMER JOURNEY ===================== -->
+  <section class="py-24 px-5" style="background:var(--bg-emerald);">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header"
+              style="color:var(--holo-gold);border:1px solid rgba(212,175,55,0.3);background:rgba(212,175,55,0.06);">
+          See It In Action
+        </span>
+        <h2 class="font-header text-4xl md:text-5xl font-bold mb-4">What your customer experiences &mdash; from first click to loyal fan.</h2>
+        <p style="color:var(--text-dim);font-size:1.1rem;">This is the journey GoChuchuro builds for your business, automatically.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <!-- Journey rows -->
+      <div class="space-y-5 reveal">
+        <!-- Row format: stage / without / with -->
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+          <div class="panel-inset p-4 text-center">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--text-dim);">Stage</div>
+            <div class="font-header font-bold text-white">Customer Calls</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">You are on a job. Phone rings.</div>
+          </div>
+          <div class="panel-inset p-4" style="border-color:rgba(239,68,68,0.15);">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:#ef4444;">Without GoChuchuro</div>
+            <div style="color:#9ca3af;font-size:0.9rem;">Rings out. Goes to voicemail. Customer dials the next plumber on Google. Job gone.</div>
+          </div>
+          <div class="panel-inset p-4 panel-teal">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--holo-teal);">With GoChuchuro</div>
+            <div style="color:white;font-size:0.9rem;">Within 30 seconds: <em style="color:var(--holo-teal);">"Hi! Sorry I missed your call &mdash; how can I help?"</em> Lead stays with you.</div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+          <div class="panel-inset p-4 text-center">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--text-dim);">Stage</div>
+            <div class="font-header font-bold text-white">Booking an Appointment</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">10pm on a Sunday. Customer is ready.</div>
+          </div>
+          <div class="panel-inset p-4" style="border-color:rgba(239,68,68,0.15);">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:#ef4444;">Without GoChuchuro</div>
+            <div style="color:#9ca3af;font-size:0.9rem;">No way to book. Means to call tomorrow. Forgets. Goes elsewhere.</div>
+          </div>
+          <div class="panel-inset p-4 panel-teal">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--holo-teal);">With GoChuchuro</div>
+            <div style="color:white;font-size:0.9rem;">Visits your website. Picks a time. Books instantly. Gets a confirmation text. You wake up with a new job.</div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+          <div class="panel-inset p-4 text-center">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--text-dim);">Stage</div>
+            <div class="font-header font-bold text-white">Asking for a Review</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">Job is done. You need that Google review.</div>
+          </div>
+          <div class="panel-inset p-4" style="border-color:rgba(239,68,68,0.15);">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:#ef4444;">Without GoChuchuro</div>
+            <div style="color:#9ca3af;font-size:0.9rem;">You feel awkward asking. Customer means to do it. Forgets. Your Google rating goes nowhere.</div>
+          </div>
+          <div class="panel-inset p-4 panel-teal">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--holo-teal);">With GoChuchuro</div>
+            <div style="color:white;font-size:0.9rem;">System sends a text: <em style="color:var(--holo-teal);">"How was the job? Leave us a quick Google review here."</em> One tap. Done.</div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 items-center">
+          <div class="panel-inset p-4 text-center">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--text-dim);">Stage</div>
+            <div class="font-header font-bold text-white">Bringing Them Back</div>
+            <div style="font-size:0.8rem;color:var(--text-dim);">A past customer has not visited in 3 months.</div>
+          </div>
+          <div class="panel-inset p-4" style="border-color:rgba(239,68,68,0.15);">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:#ef4444;">Without GoChuchuro</div>
+            <div style="color:#9ca3af;font-size:0.9rem;">You never follow up. They forget you exist. You start all over again finding new customers.</div>
+          </div>
+          <div class="panel-inset p-4 panel-teal">
+            <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--holo-teal);">With GoChuchuro</div>
+            <div style="color:white;font-size:0.9rem;">System sends: <em style="color:var(--holo-teal);">"We have not seen you in a while &mdash; here is 10% off your next visit."</em> They book again. Automatically.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== NICHE SECTION ===================== -->
+  <section id="niches" class="section-dark py-24 px-5">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header"
+              style="color:var(--holo-teal);border:1px solid rgba(0,181,200,0.3);background:rgba(0,181,200,0.06);">
+          Built For Your Trade
+        </span>
+        <h2 class="font-header text-4xl md:text-5xl font-bold mb-4">Which best describes your business?</h2>
+        <p style="color:var(--text-dim);font-size:1.1rem;">Every trade has its own problems. Select yours to see exactly how GoChuchuro solves them.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <!-- Tab buttons -->
+      <div class="flex flex-wrap justify-center gap-3 mb-10 reveal">
+        <button class="niche-tab active" onclick="showNiche('trades')"><i class="fa-solid fa-wrench mr-2"></i>Trades &amp; Services</button>
+        <button class="niche-tab" onclick="showNiche('salon')"><i class="fa-solid fa-scissors mr-2"></i>Salons &amp; Spas</button>
+        <button class="niche-tab" onclick="showNiche('restaurant')"><i class="fa-solid fa-utensils mr-2"></i>Restaurants &amp; Cafes</button>
+        <button class="niche-tab" onclick="showNiche('finance')"><i class="fa-solid fa-briefcase mr-2"></i>Finance &amp; Mortgage</button>
+        <button class="niche-tab" onclick="showNiche('starter')"><i class="fa-solid fa-seedling mr-2"></i>Starting a Business</button>
+      </div>
+
+      <!-- Trades content -->
+      <div id="niche-trades" class="niche-content active grid md:grid-cols-3 gap-6">
+        <div class="panel-inset p-6 reveal delay-100">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;"><i class="fa-solid fa-phone-slash"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Missed Call Text-Back</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">You are under a sink or on a roof. Phone rings. You miss it. The system fires a text in 30 seconds. No more lost jobs.</p>
+          <div class="replaces-badge mt-4">Plan A onwards</div>
+        </div>
+        <div class="panel-inset p-6 reveal delay-200">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:0.5s;"><i class="fa-solid fa-calendar-check"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">24/7 Online Booking</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Customers book a call-out or survey at midnight, from your website. No phone tag. You wake up with the diary filled.</p>
+          <div class="replaces-badge mt-4">Plan A onwards</div>
+        </div>
+        <div class="panel-inset p-6 reveal delay-300">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:1s;"><i class="fa-solid fa-star"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Automated Annual Service Reminders</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">For boiler engineers or electricians: the system texts your customer 11 months after their last service. They re-book without you lifting a finger.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+      </div>
+
+      <!-- Salon content -->
+      <div id="niche-salon" class="niche-content grid md:grid-cols-3 gap-6" style="display:none;">
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;"><i class="fa-solid fa-calendar-xmark"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Reduce No-Shows by Up to 60%</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Automated text reminders go out 24 hours and 2 hours before every appointment. Empty chairs cost you money. This stops that.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:0.5s;"><i class="fa-solid fa-rotate"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Automated Re-Booking</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Customer visited 6 weeks ago? The system texts them: <em style="color:var(--holo-teal);">"Time for a top-up? Book your next appointment here."</em> Fills the quiet Tuesdays automatically.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:1s;"><i class="fa-solid fa-gift"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Loyalty &amp; Birthday Offers</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">The system remembers birthdays and sends a personalised offer. It rewards loyal customers automatically, building the kind of relationship that keeps people coming back.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+      </div>
+
+      <!-- Restaurant content -->
+      <div id="niche-restaurant" class="niche-content grid md:grid-cols-3 gap-6" style="display:none;">
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;"><i class="fa-solid fa-mobile-screen"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">SMS Text Blast &mdash; Fill Tables Fast</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Quiet Tuesday? Text all 500 past customers: <em style="color:var(--holo-teal);">"Kids eat free tonight &mdash; book your table now."</em> SMS has a 98% open rate. Email has 20%.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:0.5s;"><i class="fa-solid fa-heart"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Loyalty Automation</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Customer has not visited in 4 weeks? The system sends: <em style="color:var(--holo-teal);">"We miss you &mdash; here is a free starter on your next visit."</em> They come back.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:1s;"><i class="fa-brands fa-google"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Automated Google Reviews</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Every customer who dines gets a review request automatically. Your rating climbs. Your restaurant appears higher on Google Maps. More walk-ins. No effort from you.</p>
+          <div class="replaces-badge mt-4">Plan A onwards</div>
+        </div>
+      </div>
+
+      <!-- Finance content -->
+      <div id="niche-finance" class="niche-content grid md:grid-cols-3 gap-6" style="display:none;">
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;"><i class="fa-solid fa-robot"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Long-Term Lead Nurture on Autopilot</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Mortgage cycles take 6 to 18 months. The system sends educational content to your prospects automatically over months. You stay top of mind without manual effort.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:0.5s;"><i class="fa-solid fa-lock"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Secure GDPR Data Vault</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Bank-grade encryption for client data. Required by UK GDPR law. Your clients see that their sensitive financial information is handled correctly. Essential for FCA-regulated advisors.</p>
+          <div class="replaces-badge mt-4">Plan C</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:1s;"><i class="fa-solid fa-file-signature"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Digital Document Signing</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Send engagement letters, fact-finds, and client agreements by text. They sign on their phone in one tap. No PDF email chains. No printing. Professional and fast.</p>
+          <div class="replaces-badge mt-4">Plan B onwards</div>
+        </div>
+      </div>
+
+      <!-- Starter content -->
+      <div id="niche-starter" class="niche-content grid md:grid-cols-3 gap-6" style="display:none;">
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;"><i class="fa-solid fa-seedling"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Professional Online Presence from Day One</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">You do not need six months to look credible. We build you a beautiful 5-page website in 5 days. Hosting, SSL security, and mobile-ready. You look established from the start.</p>
+          <div class="replaces-badge mt-4">Plan A &mdash; from £49/mo</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:0.5s;"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Coaching Built Into Every Plan</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Every GoChuchuro plan includes business coaching. Not just software. A monthly report, group seminars, and one-to-one sessions on higher plans. You grow with support, not alone.</p>
+          <div class="replaces-badge mt-4">All Plans</div>
+        </div>
+        <div class="panel-inset p-6">
+          <div class="step-icon-wrap mb-4" style="width:60px;height:60px;font-size:1.4rem;animation-delay:1s;"><i class="fa-solid fa-rocket"></i></div>
+          <h4 class="font-header text-lg font-bold text-white mb-2">Start Small. Scale When Ready.</h4>
+          <p style="color:var(--text-dim);font-size:0.9rem;line-height:1.7;">Begin with Plan A. After 90 days, we show you your results &mdash; leads saved, reviews gained, bookings made. Then upgrade when the data tells you to, not before.</p>
+          <div class="replaces-badge mt-4">Start with Plan A</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== PRICING ===================== -->
+  <section id="pricing" class="py-24 px-5" style="background:var(--bg-emerald);">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header badge-pulse"
+              style="color:var(--holo-gold);border:1px solid rgba(212,175,55,0.4);background:rgba(212,175,55,0.06);">
+          Honest Pricing
+        </span>
+        <h2 class="font-header text-4xl md:text-5xl font-bold mb-4">Simple plans. Nothing hidden.</h2>
+        <p style="color:var(--text-dim);font-size:1.1rem;">Technology powered by real coaching. Every plan includes support. No guessing what you are getting.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+
+        <!-- Plan A -->
+        <div class="price-card panel-inset reveal delay-100" data-tilt data-tilt-max="3">
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--text-dim);">Plan A &mdash; Essential</div>
+          <h3 class="font-header text-2xl font-bold text-white mb-2">Digital Foundation</h3>
+          <div class="replaces-badge">Replaces tools worth £200&ndash;£350/mo</div>
+          <div class="flex items-end gap-2 mb-1">
+            <span class="font-header font-bold line-through" style="font-size:1.8rem;color:#4b5563;">£97</span>
+            <span class="font-header font-bold" style="font-size:3.5rem;color:white;">£49</span>
+            <span style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0.5rem;">/mo</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:0.5rem;">+ one-off setup fee £149. Min. 3-month commitment.</p>
+          <div style="background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:0.6rem 0.8rem;margin-bottom:1rem;font-size:0.8rem;color:var(--alert-amber);font-family:'Outfit',sans-serif;line-height:1.5;">
+            &#x26A1; Perfect to get started. Most growing businesses upgrade to Plan B within 90 days for automation and coaching.
+          </div>
+
+          <div class="feature-header">&#x1F5A5;&#xFE0F; Your Digital Foundation</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-check"></i> <div>Choice of 2D or 3D Showroom website (5 pages, fully built for you)</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Secure hosting, SSL certificate &amp; mobile-friendly design</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Customer database (CRM) &mdash; every lead stored automatically</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>24/7 online booking calendar &mdash; customers book while you sleep</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Missed call instant text-back &mdash; lead saved in 30 seconds</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Automated Google review requests after every job</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Unified inbox (Facebook, Instagram, SMS, email &mdash; one place)</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Lead capture forms &amp; mobile app (LeadConnector)</div></li>
+          </ul>
+
+          <div class="feature-header">&#x1F393; Coaching &amp; Support</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-check"></i> <div>Automated monthly progress report</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Group business growth seminars</div></li>
+            <li><i class="fa-solid fa-check"></i> <div>Standard email support</div></li>
+          </ul>
+
+          <!-- What you don't get yet - upgrade nudge -->
+          <div style="background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.08);border-radius:10px;padding:0.75rem 1rem;margin-bottom:1.2rem;">
+            <div class="font-header" style="font-size:0.72rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;">Not included in this plan &mdash; available on Plan B:</div>
+            <div style="font-size:0.82rem;color:#4b5563;line-height:1.7;">
+              &#x2715; Automated follow-up workflows &nbsp;&bull;&nbsp; &#x2715; Email &amp; SMS campaigns &nbsp;&bull;&nbsp;
+              &#x2715; Social media planner &nbsp;&bull;&nbsp; &#x2715; No-show reminders &nbsp;&bull;&nbsp; &#x2715; 1:1 coaching sessions
+            </div>
+          </div>
+
+          <button onclick="openCalendar()" class="btn-3d w-full mt-auto">Start with Plan A</button>
+        </div>
+
+        <!-- Plan B POPULAR -->
+        <div class="price-card panel-3d popular reveal" style="transform:scale(1.03);z-index:10;" data-tilt data-tilt-max="3">
+          <div class="absolute top-0 right-0 font-header text-xs font-black px-4 py-2 rounded-bl-xl animate-pulse"
+               style="background:var(--holo-gold);color:black;letter-spacing:1px;">MOST POPULAR</div>
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--holo-gold);">Plan B &mdash; Growth</div>
+          <h3 class="font-header text-2xl font-bold text-white mb-2">Growth Autopilot</h3>
+          <div class="replaces-badge" style="background:rgba(212,175,55,0.08);border-color:rgba(212,175,55,0.2);color:var(--holo-bright-gold);">Replaces tools worth £400&ndash;£700/mo</div>
+          <div class="flex items-end gap-2 mb-1">
+            <span class="font-header font-bold line-through" style="font-size:1.8rem;color:#6b7280;">£247</span>
+            <span class="font-header font-bold" style="font-size:3.5rem;color:var(--holo-bright-gold);">£199</span>
+            <span style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0.5rem;">/mo</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1rem;">+ one-off setup fee £249. Min. 3-month commitment.</p>
+
+          <div class="feature-header" style="color:var(--holo-gold);">&#x1F5A5;&#xFE0F; Everything in Plan A, plus&hellip;</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Automated follow-up workflows &mdash; the system follows up so you do not have to</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Email newsletter &amp; campaign builder &mdash; re-activate old customers</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>SMS text broadcast &mdash; fill quiet days instantly (98% open rate)</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Social media planner (Facebook, Instagram, LinkedIn, TikTok, Google)</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Appointment reminders &mdash; reduces no-shows by up to 60%</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Call tracking &amp; recording &mdash; see every missed call, improve your service</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Reporting dashboard &mdash; know exactly where every lead comes from</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Customer feedback surveys &mdash; catch unhappy clients before a bad review</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Digital document signing &mdash; quotes, contracts signed on a phone in one tap</div></li>
+          </ul>
+
+          <div class="feature-header" style="color:var(--holo-gold);">&#x1F393; Coaching &amp; Support</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div>Monthly progress report + group seminars</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-gold);"></i> <div><strong>Monthly 1:1 coaching call (30 minutes)</strong></div></li>
+          </ul>
+
+          <button onclick="openCalendar()" class="btn-glow w-full mt-auto">Book Free Chat</button>
+        </div>
+
+        <!-- Plan C -->
+        <div class="price-card panel-inset reveal delay-200 panel-teal" data-tilt data-tilt-max="3">
+          <div class="font-header text-xs font-black uppercase tracking-widest mb-1" style="color:var(--holo-teal);">Plan C &mdash; Elite AI</div>
+          <h3 class="font-header text-2xl font-bold text-white mb-2">Your 24/7 AI Staff Member</h3>
+          <div class="replaces-badge" style="background:rgba(0,181,200,0.06);border-color:rgba(0,181,200,0.2);color:var(--holo-teal);">Replaces a receptionist worth £18,000&ndash;£22,000/yr</div>
+          <div class="flex items-end gap-2 mb-1">
+            <span class="font-header font-bold line-through" style="font-size:1.8rem;color:#4b5563;">£397</span>
+            <span class="font-header font-bold" style="font-size:3.5rem;color:white;">£299</span>
+            <span style="color:var(--text-dim);font-size:0.85rem;margin-bottom:0.5rem;">/mo</span>
+          </div>
+          <p style="font-size:0.82rem;color:var(--text-dim);margin-bottom:1rem;">+ one-off setup fee £499. Min. 3-month commitment.</p>
+
+          <div class="feature-header" style="color:var(--holo-teal);">&#x1F916; Everything in Plan B, plus&hellip;</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i>
+              <div><strong>AI Chatbot (24/7 text conversations)</strong><br>
+              <span style="font-size:0.82rem;color:var(--text-dim);">Answers questions, qualifies leads, and books appointments automatically &mdash; even at 2am.</span></div>
+            </li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i>
+              <div><strong>AI Voice Receptionist</strong><br>
+              <span style="font-size:0.82rem;color:var(--text-dim);">Answers the phone in a human-like voice. Books appointments. Works nights, weekends, and bank holidays. Available in 19 languages.</span></div>
+            </li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i>
+              <div><strong>AI Content Writer</strong><br>
+              <span style="font-size:0.82rem;color:var(--text-dim);">Writes social media posts, email campaigns, and ad copy on demand. Solves "I don't know what to post" for good.</span></div>
+            </li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> <div>Secure GDPR data vault &mdash; essential for finance, medical &amp; legal businesses</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> <div>Branded client portal &mdash; your own white-label dashboard</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> <div>Referral programme &mdash; automated word-of-mouth on autopilot</div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> <div>System integrations (Xero, QuickBooks, mortgage platforms &amp; more)</div></li>
+          </ul>
+
+          <div class="feature-header" style="color:var(--holo-teal);">&#x1F393; Coaching &amp; Support</div>
+          <ul class="feature-list">
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> <div><strong>Monthly 1:1 coaching (up to 2 hours)</strong></div></li>
+            <li><i class="fa-solid fa-check" style="color:var(--holo-teal);"></i> <div>Priority WhatsApp VIP access</div></li>
+          </ul>
+
+          <button onclick="openCalendar()" class="btn-3d w-full mt-auto" style="border-color:rgba(0,181,200,0.3);">Book Free Chat</button>
+        </div>
+
+      </div>
+
+      <!-- Showroom CTA -->
+      <div class="mt-12 panel-3d p-8 text-center reveal panel-gold">
+        <h3 class="font-header text-2xl font-bold text-white mb-3">Not sure what your website could look like?</h3>
+        <p style="color:var(--text-dim);margin-bottom:1.5rem;">Every plan includes your choice of a clean 2D design or a fully immersive 3D experience. Visit the Showroom to explore your trade.</p>
+        <a href="showroom.html" class="btn-glow">
+          <i class="fa-solid fa-cube"></i> Visit the Showroom
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== TESTIMONIALS ===================== -->
+  <section class="section-dark py-20 px-5">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12 reveal">
+        <h2 class="font-header text-3xl font-bold mb-3">What our clients say.</h2>
+        <div class="glow-line"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 reveal">
+
+        <div class="testimonial-card">
+          <div class="stars mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="font-display text-lg leading-relaxed mb-5" style="color:#d1d5db;">"I was missing calls every single day while out on jobs. Within the first week the text-back system saved three leads that would have just walked away to a competitor."</p>
+          <div class="flex items-center gap-3">
+            <img src="kabir-rohan.png"
+                 alt="Kabir Rohan"
+                 style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid rgba(0,181,200,0.4);"
+                 onerror="this.style.display='none'"/>
+            <div style="font-family:'Outfit',sans-serif;font-size:0.85rem;">
+              <strong style="color:white;display:block;">Kabir Rohan</strong>
+              <span style="color:var(--text-dim);">Plumber, Manchester</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="font-display text-lg leading-relaxed mb-5" style="color:#d1d5db;">"The appointment reminders alone paid for the plan in the first month. Our no-shows dropped dramatically. The system is incredibly sajilo &mdash; so easy to use."</p>
+          <div class="flex items-center gap-3">
+            <img src="sunita-thapa.png"
+                 alt="Sunita Thapa"
+                 style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid rgba(0,181,200,0.4);"
+                 onerror="this.style.display='none'"/>
+            <div style="font-family:'Outfit',sans-serif;font-size:0.85rem;">
+              <strong style="color:white;display:block;">Sunita Thapa</strong>
+              <span style="color:var(--text-dim);">Salon Owner, Leicester</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars mb-3">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="font-display text-lg leading-relaxed mb-5" style="color:#d1d5db;">"Prakash understood exactly what I needed. The coaching sessions helped me see my business differently. The AI system handles enquiries while I focus on client cases."</p>
+          <div class="flex items-center gap-3">
+            <img src="daniel-ojasbi.jpeg"
+                 alt="Daniel Ojasbi"
+                 style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:top;border:2px solid rgba(0,181,200,0.4);"
+                 onerror="this.style.display='none'"/>
+            <div style="font-family:'Outfit',sans-serif;font-size:0.85rem;">
+              <strong style="color:white;display:block;">Daniel Ojasbi</strong>
+              <span style="color:var(--text-dim);">Mortgage Advisor, London</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ===================== FAQs ===================== -->
+  <section id="faqs" class="py-24 px-5" style="background:var(--bg-emerald);">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14 reveal">
+        <span class="inline-block text-sm font-black tracking-widest uppercase px-4 py-1.5 rounded-full mb-5 font-header"
+              style="color:var(--holo-teal);border:1px solid rgba(0,181,200,0.3);background:rgba(0,181,200,0.06);">
+          Your Questions
+        </span>
+        <h2 class="font-header text-4xl font-bold mb-3">Answered honestly.</h2>
+        <p style="color:var(--text-dim);">Every question someone asks before they say yes.</p>
+        <div class="glow-line"></div>
+      </div>
+
+      <div class="panel-3d p-8 reveal">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What exactly is the free 30-minute chat?</span>
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </div>
+          <div class="faq-answer">It is a conversation with Prakash. No sales scripts. No pressure. We look at your business together, find out where you are losing time or money, and show you exactly how to fix it. If you want us to build it for you afterwards, brilliant. If not, you keep the advice at no cost.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How does the missed call text-back actually work?</span>
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </div>
+          <div class="faq-answer">When someone calls your business number and you do not answer, the system sends them a text within 30 seconds: <em>"Hi! Sorry I missed your call &mdash; how can I help?"</em> The conversation then lands in your unified inbox. The customer stays with you instead of calling your competitor.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>I already have my own website and software. Can GoChuchuro work with them?</span>
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </div>
+          <div class="faq-answer">Yes. We are not here to replace what is already working for you. Plan C includes full system integrations with tools like Xero, QuickBooks, and specialist industry platforms. We layer the automation, AI tools, and review systems on top of what you already have, filling the gaps rather than starting over.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Do I need to be good with technology to use this?</span>
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </div>
+          <div class="faq-answer">Not at all. That is the whole point. We build everything, test it, and hand it over fully working. You download one simple app called LeadConnector onto your phone. That is it. All your messages, bookings, and leads appear in one place. If anything needs changing, you message us and we sort it.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Am I locked into a long contract?</span>
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </div>
+          <div class="faq-answer">We ask for a minimum 3-month commitment. That is because your automated systems and Google ranking need time to show real results. After 3 months, it moves to a simple rolling 30-day arrangement. You stay because it works, not because you are locked in.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Is GoChuchuro right for someone just starting their business?</span>
+            <i class="fa-solid fa-plus faq-icon"></i>
+          </div>
+          <div class="faq-answer">Absolutely. Starting right is far cheaper than fixing things later. Plan A at £49 a month gives you a professional website, a booking system, and automated review tools from day one. You look established immediately. And because coaching is included in every plan, you have support as you grow &mdash; not just software.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="section-dark py-20 px-5 text-center">
+    <div class="max-w-3xl mx-auto reveal">
+      <div style="font-size:3rem;margin-bottom:1rem;">&#x2605;</div>
+      <h2 class="font-header text-4xl md:text-5xl font-bold mb-5">
+        Ready to <span class="text-gradient">reach your peak?</span>
+      </h2>
+      <p class="text-xl mb-3" style="color:var(--cool-silver);">Book a free 30-minute chat. No commitment. No tech jargon.</p>
+      <p class="tagline-script mb-8">"Reach Your Peak. Automate Your Growth."</p>
+      <button onclick="openCalendar()" class="btn-glow text-lg px-10 py-5">
+        Book My Free Chat <i class="fa-solid fa-arrow-right"></i>
+      </button>
+      <p style="font-size:0.82rem;color:var(--text-dim);margin-top:1.2rem;">Plumber, salon, restaurant, finance advisor, or brand-new starter &mdash; you are welcome here.</p>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="py-16 px-5 mt-0" style="background:#020408;border-top:1px solid rgba(255,255,255,0.06);">
+
+    <!-- Footer Three.js canvas — mirrors hero immersion -->
+    <canvas id="footer-canvas"></canvas>
+
+    <div class="footer-content max-w-6xl mx-auto">
+
+      <!-- Contact strip — icon + label only -->
+      <div class="contact-strip reveal mb-10">
+        <span class="font-header text-xs font-black uppercase tracking-widest" style="color:var(--text-dim);">Get in touch:</span>
+        <a href="mailto:hello@gochuchuro.com" class="contact-item">
+          <i class="fa-solid fa-envelope"></i> Email Us
+        </a>
+        <a href="https://wa.me/447474080809" target="_blank" class="contact-item">
+          <i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:1.1rem;"></i> WhatsApp Us
+        </a>
+        <button onclick="openCalendar()" class="btn-glow" style="font-size:0.82rem;padding:0.6rem 1.4rem;">
+          <i class="fa-regular fa-calendar"></i> Book Free Chat
+        </button>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-10 items-start text-center md:text-left">
+        <div>
+          <a href="#" class="flex items-center justify-center md:justify-start gap-3 mb-5" style="text-decoration:none;">
+            <img src="logo-transparent.png" alt="GoChuchuro logo" class="h-9 w-auto"
+                 onerror="this.style.display='none';document.getElementById('svg-logo-ft').style.display='block'"/>
+            <svg id="svg-logo-ft" style="display:none;" width="36" height="30" viewBox="0 0 42 36" fill="none">
+              <polyline points="2,34 10,9 18,23" stroke="#00B5C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="10,9 18,23 14,34" stroke="#00B5C8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="14,34 20,12 28,26" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="20,12 28,26 40,34" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="font-header text-xl font-black tracking-widest text-white">GOCHUCHURO<span style="color:var(--holo-teal);">.</span></span>
+          </a>
+          <p class="tagline-script mb-4" style="font-size:1.1rem;">"Reach Your Peak. Automate Your Growth."</p>
+          <p style="font-size:0.88rem;color:#6b7280;max-width:380px;line-height:1.7;">
+            Helping UK small businesses grow without the stress. Smart websites, simple automation, and friendly coaching. For starters and established entrepreneurs alike.
+          </p>
+        </div>
+
+        <div class="md:text-right">
+          <div class="flex justify-center md:justify-end gap-4 mb-8">
+            <a href="https://www.linkedin.com/in/prakash-gurung-64498055/" target="_blank"
+               class="w-12 h-12 rounded-xl flex items-center justify-center panel-inset transition text-xl"
+               style="color:white;" onmouseover="this.style.background='var(--holo-teal)'" onmouseout="this.style.background=''">
+              <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61589567215275" target="_blank"
+               class="w-12 h-12 rounded-xl flex items-center justify-center panel-inset transition text-xl"
+               style="color:white;" onmouseover="this.style.background='var(--holo-teal)'" onmouseout="this.style.background=''">
+              <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/gochuchuro/" target="_blank"
+               class="w-12 h-12 rounded-xl flex items-center justify-center panel-inset transition text-xl"
+               style="color:white;" onmouseover="this.style.background='var(--holo-teal)'" onmouseout="this.style.background=''">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+          </div>
+          <nav class="flex flex-wrap justify-center md:justify-end gap-5">
+            <a href="#why"      class="nav-link text-xs">Why GoChuchuro</a>
+            <a href="#niches"   class="nav-link text-xs">Your Trade</a>
+            <a href="#pricing"  class="nav-link text-xs">Pricing</a>
+            <a href="#faqs"     class="nav-link text-xs">FAQs</a>
+            <a href="privacy.html"  class="nav-link text-xs">Privacy Policy</a>
+            <a href="terms.html"    class="nav-link text-xs">Terms &amp; Conditions</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="pt-8 mt-8 text-xs flex flex-col md:flex-row justify-between items-center gap-3"
+           style="border-top:1px solid rgba(255,255,255,0.04);color:#374151;">
+        <p>&copy; 2026 GoChuchuro. All rights reserved. Registered in England &amp; Wales.</p>
+        <p>Powered by <span style="color:var(--holo-teal);">GoHighLevel</span> &mdash; the world&rsquo;s leading small business platform.</p>
+      </div>
+
+    </div><!-- end footer-content -->
+  </footer>
+
+  <!-- ===================== BOOKING MODAL ===================== -->
+  <div id="calendarModal" class="modal-overlay">
+    <div class="modal-content panel-3d">
+      <div class="close-btn" onclick="closeCalendar()"><i class="fa-solid fa-xmark"></i></div>
+      <iframe
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0RKvzTT9LyXNWBMkNRUJ7nCtxlcDknhVlEVZh2yny3XM2zallRNQWsuFhfH-uCkfYbm95cBGWO?gv=true"
+        style="width:100%;height:100%;border:none;border-radius:16px;"
+        scrolling="yes">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    /* ---- CURSOR ---- */
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top  = mouseY + 'px';
+    });
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    /* ---- HAMBURGER MOBILE NAV ---- */
+    function toggleMobileNav() {
+      const nav = document.getElementById('mobileNav');
+      const btn = document.getElementById('hamburgerBtn');
+      const isOpen = nav.classList.contains('open');
+      if (isOpen) { closeMobileNav(); }
+      else {
+        nav.classList.add('open');
+        btn.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+    function closeMobileNav() {
+      document.getElementById('mobileNav').classList.remove('open');
+      document.getElementById('hamburgerBtn').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    // Close on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+
+    /* ---- MODAL ---- */
+    function openCalendar()  { document.getElementById('calendarModal').classList.add('active'); }
+    function closeCalendar() { document.getElementById('calendarModal').classList.remove('active'); }
+    document.getElementById('calendarModal').addEventListener('click', function(e) {
+      if (e.target === this) closeCalendar();
+    });
+
+    /* ---- THREE.JS HERO — full-cover wave ---- */
+    const canvas   = document.getElementById('hero-canvas');
+    const scene    = new THREE.Scene();
+    const heroSection = canvas.closest('section') || canvas.parentElement;
+    const camera   = new THREE.PerspectiveCamera(70, heroSection.clientWidth / heroSection.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+
+    function resizeHeroCanvas() {
+      const w = heroSection.clientWidth;
+      const h = heroSection.clientHeight;
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resizeHeroCanvas();
+
+    // Teal wave — front, denser
+    const geo  = new THREE.PlaneGeometry(50, 35, 65, 65);
+    const mat  = new THREE.MeshBasicMaterial({ color: 0x00B5C8, wireframe: true, transparent: true, opacity: 0.09 });
+    const plane = new THREE.Mesh(geo, mat);
+    plane.rotation.x = -Math.PI / 2.3;
+    plane.position.set(0, -4, -5);
+    scene.add(plane);
+
+    // Gold wave — back, sparser
+    const geo2  = new THREE.PlaneGeometry(55, 38, 30, 30);
+    const mat2  = new THREE.MeshBasicMaterial({ color: 0xD4AF37, wireframe: true, transparent: true, opacity: 0.05 });
+    const plane2 = new THREE.Mesh(geo2, mat2);
+    plane2.rotation.x = -Math.PI / 2.3;
+    plane2.position.set(0, -9, -12);
+    scene.add(plane2);
+
+    // Emerald green accent wave — mid depth
+    const geo3  = new THREE.PlaneGeometry(45, 32, 20, 20);
+    const mat3  = new THREE.MeshBasicMaterial({ color: 0x2A3D2B, wireframe: true, transparent: true, opacity: 0.08 });
+    const plane3 = new THREE.Mesh(geo3, mat3);
+    plane3.rotation.x = -Math.PI / 2.1;
+    plane3.position.set(0, -6, -8);
+    scene.add(plane3);
+
+    const posA = plane.geometry.attributes.position;
+    const posB = plane2.geometry.attributes.position;
+    const posC = plane3.geometry.attributes.position;
+    const ozA = new Float32Array(posA.count);
+    const ozB = new Float32Array(posB.count);
+    const ozC = new Float32Array(posC.count);
+    for (let i = 0; i < posA.count; i++) ozA[i] = posA.getZ(i);
+    for (let i = 0; i < posB.count; i++) ozB[i] = posB.getZ(i);
+    for (let i = 0; i < posC.count; i++) ozC[i] = posC.getZ(i);
+
+    let mx = 0, my = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX - window.innerWidth  / 2;
+      my = e.clientY - window.innerHeight / 2;
+    });
+
+    const clock = new THREE.Clock();
+    function animateHero() {
+      requestAnimationFrame(animateHero);
+      const t = clock.getElapsedTime();
+      for (let i = 0; i < posA.count; i++) {
+        const x = posA.getX(i), y = posA.getY(i);
+        posA.setZ(i, ozA[i] + Math.sin(x * 0.42 + t) * 0.6 + Math.cos(y * 0.42 + t) * 0.5);
+      }
+      posA.needsUpdate = true;
+      for (let i = 0; i < posB.count; i++) {
+        const x = posB.getX(i), y = posB.getY(i);
+        posB.setZ(i, ozB[i] + Math.sin(x * 0.28 + t * 0.65) * 0.75 + Math.cos(y * 0.28 + t * 0.75) * 0.65);
+      }
+      posB.needsUpdate = true;
+      for (let i = 0; i < posC.count; i++) {
+        const x = posC.getX(i), y = posC.getY(i);
+        posC.setZ(i, ozC[i] + Math.sin(x * 0.35 + t * 0.5 + 1.2) * 0.55 + Math.cos(y * 0.35 + t * 0.6) * 0.5);
+      }
+      posC.needsUpdate = true;
+      camera.position.x += (mx * 0.0014 - camera.position.x) * 0.04;
+      camera.position.y += (-my * 0.0014 - camera.position.y) * 0.04;
+      camera.lookAt(scene.position);
+      renderer.render(scene, camera);
+    }
+    animateHero();
+    window.addEventListener('resize', resizeHeroCanvas);
+
+    /* ---- THREE.JS FOOTER CANVAS ---- */
+    const fCanvas   = document.getElementById('footer-canvas');
+    const fScene    = new THREE.Scene();
+    const footerEl  = fCanvas.closest('footer');
+    const fCamera   = new THREE.PerspectiveCamera(70, footerEl.clientWidth / footerEl.clientHeight, 0.1, 500);
+    const fRenderer = new THREE.WebGLRenderer({ canvas: fCanvas, alpha: true, antialias: true });
+
+    function resizeFooterCanvas() {
+      const w = footerEl.clientWidth;
+      const h = footerEl.clientHeight || 400;
+      fRenderer.setSize(w, h);
+      fRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      fCamera.aspect = w / h;
+      fCamera.updateProjectionMatrix();
+    }
+    resizeFooterCanvas();
+
+    // Mirrored teal wave — footer, inverted rotation
+    const fGeo  = new THREE.PlaneGeometry(45, 30, 40, 40);
+    const fMat  = new THREE.MeshBasicMaterial({ color: 0x00B5C8, wireframe: true, transparent: true, opacity: 0.07 });
+    const fPlane = new THREE.Mesh(fGeo, fMat);
+    fPlane.rotation.x = Math.PI / 2.3; // flipped — rises from bottom
+    fPlane.position.set(0, 4, -5);
+    fScene.add(fPlane);
+
+    // Gold accent wave
+    const fGeo2  = new THREE.PlaneGeometry(50, 35, 20, 20);
+    const fMat2  = new THREE.MeshBasicMaterial({ color: 0xD4AF37, wireframe: true, transparent: true, opacity: 0.04 });
+    const fPlane2 = new THREE.Mesh(fGeo2, fMat2);
+    fPlane2.rotation.x = Math.PI / 2.3;
+    fPlane2.position.set(0, 7, -9);
+    fScene.add(fPlane2);
+
+    const fPosA = fPlane.geometry.attributes.position;
+    const fPosB = fPlane2.geometry.attributes.position;
+    const fOzA  = new Float32Array(fPosA.count);
+    const fOzB  = new Float32Array(fPosB.count);
+    for (let i = 0; i < fPosA.count; i++) fOzA[i] = fPosA.getZ(i);
+    for (let i = 0; i < fPosB.count; i++) fOzB[i] = fPosB.getZ(i);
+
+    const fClock = new THREE.Clock();
+    function animateFooter() {
+      requestAnimationFrame(animateFooter);
+      const t = fClock.getElapsedTime();
+      for (let i = 0; i < fPosA.count; i++) {
+        const x = fPosA.getX(i), y = fPosA.getY(i);
+        fPosA.setZ(i, fOzA[i] + Math.sin(x * 0.4 + t * 0.7) * 0.55 + Math.cos(y * 0.4 + t * 0.8) * 0.45);
+      }
+      fPosA.needsUpdate = true;
+      for (let i = 0; i < fPosB.count; i++) {
+        const x = fPosB.getX(i), y = fPosB.getY(i);
+        fPosB.setZ(i, fOzB[i] + Math.sin(x * 0.25 + t * 0.5 + 0.8) * 0.65 + Math.cos(y * 0.25 + t * 0.6) * 0.55);
+      }
+      fPosB.needsUpdate = true;
+      fCamera.lookAt(fScene.position);
+      fRenderer.render(fScene, fCamera);
+    }
+    animateFooter();
+    window.addEventListener('resize', resizeFooterCanvas);
+
+    /* ---- MULTI-LAYER PARALLAX ON SCROLL ---- */
+    window.addEventListener('scroll', () => {
+      const s = window.scrollY;
+      const far  = document.getElementById('mountainFar');
+      const mid  = document.getElementById('mountainMid');
+      const near = document.getElementById('mountainNear');
+      if (far)  far.style.transform  = `translateY(${s * 0.08}px)`;
+      if (mid)  mid.style.transform  = `translateY(${s * 0.16}px)`;
+      if (near) near.style.transform = `translateY(${s * 0.28}px)`;
+    });
+
+    /* ---- SCROLL REVEAL ---- */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    /* ---- COUNTER ANIMATION ---- */
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      if (!target) return;
+      let current = 0;
+      const step = Math.ceil(target / 50);
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { el.textContent = target + '%'; clearInterval(timer); }
+        else el.textContent = current + '%';
+      }, 30);
+    }
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { animateCounter(e.target); counterObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+    /* ---- NICHE TABS ---- */
+    function showNiche(id) {
+      document.querySelectorAll('.niche-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.niche-content').forEach(c => {
+        c.classList.remove('active'); c.style.display = 'none';
+      });
+      event.target.closest('.niche-tab').classList.add('active');
+      const el = document.getElementById('niche-' + id);
+      if (el) { el.style.display = 'grid'; el.classList.add('active'); }
+    }
+
+    /* ---- FAQ ACCORDION ---- */
+    function toggleFaq(el) {
+      const item   = el.parentElement;
+      const answer = item.querySelector('.faq-answer');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-answer').classList.remove('open');
+      });
+      if (!isOpen) { item.classList.add('open'); answer.classList.add('open'); }
+    }
+
+    /* ---- VANILLA TILT ---- */
+    VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+      speed: 400, glare: true, 'max-glare': 0.04,
+    });
+  </script>
+</body>
+</html>
 
