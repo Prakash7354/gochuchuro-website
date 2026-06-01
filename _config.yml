@@ -1,1 +1,9 @@
-
+title: GoChuchuro
+description: "Reach Your Peak. Automate Your Growth. Smart business systems for UK small businesses."
+url: "https://gochuchuro.com"
+author: "Prakash Gurung"
+markdown: kramdown
+highlighter: rouge
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
